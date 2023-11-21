@@ -41,6 +41,12 @@
       "pre-push": "npm test"
     }
   },
+  "engines": {
+    "node": "v20.9.0"
+  },
+  "volta": {
+    "node": "v20.9.0"
+  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix"
