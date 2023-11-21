@@ -2,41 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 200 20% 98%;
-    --btn-background: 200 10% 91%;
-    --btn-background-hover: 200 10% 89%;
-    --foreground: 200 50% 3%;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: 200 50% 3%;
-      --btn-background: 200 10% 9%;
-      --btn-background-hover: 200 10% 12%;
-      --foreground: 200 20% 96%;
-    }
-  }
+/* Global Styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  @apply font-barlow;
 }
 
-@layer base {
-  * {
-    @apply border-foreground/20;
-  }
+body {
+  @apply font-inter bg-background;
 }
 
-.animate-in {
-  animation: animateIn 0.3s ease 0.15s both;
+/* Universal component classes*/
+
+.button {
+  @apply bg-primaryGreen px-4 py-1 font-semibold shadow-md  cursor-pointer relative;
 }
 
-@keyframes animateIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.button:hover{
+  @apply bg-hoverGreen outline-none;
+}
+
+.button:active {
+  top: 0.1rem;
+}
+
+.button-rounded {
+  @apply rounded-md;
+}
+
+.button-pill {
+  @apply rounded-2xl
 }

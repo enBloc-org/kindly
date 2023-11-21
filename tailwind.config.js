@@ -7,12 +7,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        btn: {
-          background: "hsl(var(--btn-background))",
-          "background-hover": "hsl(var(--btn-background-hover))",
-        },
+        background: "#D9D9D9",
+        primaryGreen: "#BBE3C3",
+        hoverGreen: '#B2DBBA',
+        secondaryGreen:"#008000",
+        primaryGray:"#57666D",
+        secondaryGray:"#D9D9D9",
+        primaryOrange:"#FF9E5E",
+      },
+      fontFamily: {
+        barlow: ['Barlow Semi Condensed', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
       },
     },
   },
