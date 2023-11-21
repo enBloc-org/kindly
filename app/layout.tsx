@@ -2,7 +2,6 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import React from "react";
 
-
 const defaultUrl = "http://localhost:3000";
 
 export const metadata = {
