@@ -2,7 +2,11 @@ import Link from 'next/link';
 import { headers, cookies } from 'next/headers';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-import AuthButton from '@/components/AuthButton';
+import AddRowToSupabase from '@/utils/supabase/AddRowToSupabase';
+import { useState } from 'react';
+import { useEffect } from 'react';
+
+// const [signedUp, setSignedUp] = useState(false);
 
 export default function Login({
   searchParams,
@@ -17,15 +21,6 @@ export default function Login({
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    const id = user?.id;
-    const user_email = user?.email;
-
-    console.log(id, user_email);
-
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -35,6 +30,7 @@ export default function Login({
       return redirect('/login?message=Could not authenticate user');
     }
 
+    console.log('Running');
     return redirect('/');
   };
 
@@ -58,6 +54,24 @@ export default function Login({
     if (error) {
       return redirect('/login?message=Could not authenticate user');
     }
+
+    // useEffect(() => {
+    //   if (signedUp) {
+    //     const {
+    //       data: { user },
+    //     } = await supabase.auth.getUser();
+
+    //     const userId = user?.id;
+    //     const userEmail = user?.email;
+
+    //     console.log('User ID: ' + userId);
+
+    //     AddRowToSupabase('profiles', {
+    //       id: userId,
+    //       email: userEmail,
+    //     });
+    //   }
+    // });
 
     return redirect('/login?message=Check email to continue sign in process');
   };
