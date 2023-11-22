@@ -1,11 +1,12 @@
 import React from 'react';
+import Header from '@/components/Header';
 
 const LandingPage = () => {
-  const clickHandler = () => {
-    console.log('hi');
-  };
-
-  return <div>Landing page</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 };
 
 export default LandingPage;

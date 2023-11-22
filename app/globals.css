@@ -34,3 +34,8 @@ body {
 .button-pill {
   @apply rounded-2xl
 }
+
+.active-link {
+  fill: #FF9E5E;
+  border-color: #FF9E5E;
+}
