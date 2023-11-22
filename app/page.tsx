@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import React from "react";
 import { RetreiveFromSupabase } from "@/utils/supabase/RetreiveFromSupabase";
 
-
 export default async function Index() {
   const cookieStore = cookies();
 
@@ -27,6 +26,7 @@ export default async function Index() {
     <div>
       <h1>Kindly</h1>
       <h1>Testing deployment</h1>
+      {items?.map((item) => <p key={item.brand}>{item.brand}</p>)}
     </div>
   );
 }
