@@ -1,5 +1,4 @@
 import React from 'react';
-import '@radix-ui/themes/styles.css';
 import './globals.css';
 
 
@@ -10,7 +9,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Kindly",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  description: "Give Kindly",
 };
 
 export default function RootLayout({

@@ -10,21 +10,17 @@ h4,
 h5,
 h6,
 button {
-  @apply font-barlow;
+  @apply font-barlow text-primaryGray;
 }
 
 body {
-  @apply font-inter bg-background;
+  @apply font-inter text-primaryGray bg-background;
 }
 
 /* Universal component classes*/
 
 .button {
-  @apply bg-primaryGreen px-4 py-1 font-semibold shadow-md  cursor-pointer relative;
-}
-
-.button:hover{
-  @apply bg-hoverGreen outline-none;
+  @apply bg-primaryGreen text-background text-sm tracking-wider px-4 py-1.5 font-semibold shadow-md  cursor-pointer relative max-w-xs;
 }
 
 .button:active {

@@ -1,6 +1,7 @@
 'use client';
 import ButtonPill from '@/components/ButtonPill';
 import ButtonRounded from '@/components/ButtonRounded';
+import ItemCard from '@/components/ItemCard';
 import React from 'react';
 
 const LandingPage = () => {
@@ -8,11 +9,7 @@ const LandingPage = () => {
     console.log('hi');
   };
 
-  return (
-    <div className='m-16'>
-      <ButtonRounded clickHandler={clickHandler}>Click me</ButtonRounded>
-    </div>
-  );
+  return <div>Landing page</div>;
 };
 
 export default LandingPage;
