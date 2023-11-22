@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 type ItemCardPropType = {
+  img: string;
+  title: string;
   size: string;
   donor: string;
   location: string;
@@ -11,6 +13,8 @@ type ItemCardPropType = {
 };
 
 const ItemCard: React.FC<ItemCardPropType> = ({
+  img,
+  title,
   size,
   donor,
   location,
@@ -20,11 +24,11 @@ const ItemCard: React.FC<ItemCardPropType> = ({
   return (
     <Link href={link}>
       <div className='bg-white shadow-sm px-3 mx-3 rounded-lg max-w-40'>
-        <h2 className='font-light p-3'>White Jumper</h2>
+        <h2 className='font-light p-3'>{title}</h2>
         <div className='flex gap-3'>
           <div className='pb-5'>
             <Image
-              src={'/white-jumper.jpg'}
+              src={img}
               alt='Jumper'
               width={200}
               height={250}
