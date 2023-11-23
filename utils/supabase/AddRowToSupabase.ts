@@ -1,8 +1,8 @@
-import newClient from "../../config/supabaseclient";
+import newClient from '../../config/supabaseclient';
 
 export default async function AddRowToSupabase(
   table: string,
-  InsertValues: any,
+  InsertValues: any
 ) {
   try {
     // setSubmitting(true);
@@ -16,8 +16,14 @@ export default async function AddRowToSupabase(
         //   pet_friendly: selectedAmenities.includes('pet-friendly')}
       ])
       .select();
+    // TO BE DELETED AT THE END OF PROJECT
+    if (error) {
+      console.error('Supabase insert error:', error);
+    } else {
+      console.log('Supabase insert success:', data);
+    }
   } catch (error) {
     // setSubmitting(false);
-    console.log("An unexpected error occurred");
+    console.log('An unexpected error occurred');
   }
 }
