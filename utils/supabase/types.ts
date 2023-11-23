@@ -4,6 +4,7 @@ export type item = {
   size: String;
   brand: String;
   condition: String;
+  item_name: String;
   item_type: String;
   item_subtype: String;
   item_descritpion: String;
