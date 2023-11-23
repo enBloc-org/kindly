@@ -5,10 +5,9 @@ import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
-    <header className='flex justify-between py-2 px-4 shadow-sm min-h-30'>
+    <header className='sticky top-0 bg-background flex justify-between py-2 px-4 shadow-sm min-h-30'>
       <div
         className={`flex items-center border-4 rounded-full ${
           pathname === '/search'
@@ -19,8 +18,8 @@ export default function Header() {
         <Link href='/search' className='p-2'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            width='40'
-            height='40'
+            width='30'
+            height='30'
             viewBox='0 0 16 16'
           >
             <path
