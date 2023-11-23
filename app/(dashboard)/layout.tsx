@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
 import Header from '@/components/Header';
+import MobileNavbar from '@/components/MobileNavbar';
 
 export default function DashBoardLayout({
   children,
@@ -10,6 +10,7 @@ export default function DashBoardLayout({
     <>
       <Header />
       {children}
+      <MobileNavbar />
     </>
   );
 }
