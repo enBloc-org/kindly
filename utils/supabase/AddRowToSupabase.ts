@@ -16,6 +16,7 @@ export default async function AddRowToSupabase(
         //   pet_friendly: selectedAmenities.includes('pet-friendly')}
       ])
       .select();
+    // TO BE DELETED AT THE END OF PROJECT
     if (error) {
       console.error('Supabase insert error:', error);
     } else {
