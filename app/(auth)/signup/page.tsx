@@ -68,6 +68,7 @@ export default function SignUp({
         onSubmit={signUp}
         buttonText='REGISTER'
         searchParams={searchParams}
+        isSignUp={true}
       />
     </div>
   );

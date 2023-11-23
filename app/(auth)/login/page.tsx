@@ -55,6 +55,7 @@ export default function Login({
         onSubmit={signIn}
         buttonText='LOG IN'
         searchParams={searchParams}
+        isSignUp={false}
       />
     </div>
   );
