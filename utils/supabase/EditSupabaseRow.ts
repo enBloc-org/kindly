@@ -1,11 +1,12 @@
 import newClient from '@/config/supabaseclient';
 import { isJSDocThisTag } from 'typescript';
+import { item, profile } from './types';
 
 export default async function EditSupabaseRow(
   table: string,
-  EditValues: any,
+  EditValues: item | profile,
   TargetRowBy: string,
-  TargetRowByValue: any
+  TargetRowByValue: string | number | string[] | number[] | boolean
 ) {
   const supabase = newClient();
   await supabase
