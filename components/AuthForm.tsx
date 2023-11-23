@@ -6,12 +6,14 @@ type AuthFormProps = {
   onSubmit: (formData: FormData) => Promise<void>;
   buttonText: string;
   searchParams: { message: string };
+  isSignUp: boolean;
 };
 
 const AuthForm: React.FC<AuthFormProps> = ({
   onSubmit,
   buttonText,
   searchParams,
+  isSignUp,
 }) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -32,6 +34,20 @@ const AuthForm: React.FC<AuthFormProps> = ({
       className='animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground'
       onSubmit={handleSubmit}
     >
+      {' '}
+      {isSignUp && (
+        <>
+          <label className='text-md' htmlFor='user_name'>
+            Username
+          </label>
+          <input
+            className='rounded-md px-4 py-2 bg-inherit border mb-6'
+            name='user_name'
+            placeholder='Your Username'
+            required
+          />
+        </>
+      )}
       <label className='text-md' htmlFor='email'>
         Email
       </label>
@@ -41,6 +57,19 @@ const AuthForm: React.FC<AuthFormProps> = ({
         placeholder='you@example.com'
         required
       />
+      {isSignUp && (
+        <>
+          <label className='text-md' htmlFor='postcode'>
+            Postcode
+          </label>
+          <input
+            className='rounded-md px-4 py-2 bg-inherit border mb-6'
+            name='postcode'
+            placeholder='Insert only first half'
+            required
+          />
+        </>
+      )}
       <label className='text-md' htmlFor='password'>
         Password
       </label>
@@ -54,7 +83,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
       <button className='bg-green-700 rounded-md px-4 py-2 text-foreground mb-2'>
         {buttonText}
       </button>
-
       {searchParams?.message && (
         <p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>
           {searchParams.message}
@@ -73,6 +101,7 @@ AuthForm.propTypes = {
   searchParams: PropTypes.shape({
     message: PropTypes.string.isRequired,
   }).isRequired,
+  isSignUp: PropTypes.bool.isRequired,
 };
 
 export default AuthForm;
