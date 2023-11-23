@@ -2,6 +2,8 @@ import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { RetreiveFromSupabase } from "@/utils/supabase/RetreiveFromSupabase";
 
+
+
 export default async function Index() {
   const cookieStore = cookies();
   const canInitSupabaseClient = () => {
@@ -18,8 +20,8 @@ export default async function Index() {
   const isSupabaseConnected = canInitSupabaseClient();
 
   // Example to retrieve Items Brand
-  const items = await RetreiveFromSupabase("items", "brand", "", "");
-  console.log("Table test", items);
+  const items = await RetreiveFromSupabase('items', 'brand', '', '');
+
   return (
     <div>
       <h1>Kindly</h1>
