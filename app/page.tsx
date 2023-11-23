@@ -1,6 +1,9 @@
+
+
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { RetreiveFromSupabase } from "@/utils/supabase/RetreiveFromSupabase";
+
 
 
 
@@ -21,6 +24,7 @@ export default async function Index() {
 
   // Example to retrieve Items Brand
   const items = await RetreiveFromSupabase('items', 'brand', '', '');
+
 
   return (
     <div>

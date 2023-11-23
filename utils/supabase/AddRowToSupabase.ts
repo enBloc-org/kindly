@@ -1,20 +1,18 @@
-import newClient from '../../config/supabaseclient';
 
+import newClient from '../../config/supabaseclient';
+import { item, profile } from './types';
+import { profile } from 'console';
 export default async function AddRowToSupabase(
   table: string,
-  InsertValues: any
+  InsertValues: item | profile
+
 ) {
   try {
     // setSubmitting(true);
     const supabase = newClient();
     const { data, error } = await supabase
       .from(table)
-      .insert([
-        InsertValues,
-        // example formating for InsertValues
-        //   {city: getCityId(selectedCity),
-        //   pet_friendly: selectedAmenities.includes('pet-friendly')}
-      ])
+      .insert(InsertValues)
       .select();
     // TO BE DELETED AT THE END OF PROJECT
     if (error) {
