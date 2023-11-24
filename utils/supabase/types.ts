@@ -11,7 +11,7 @@ export type item = {
   postcode: String;
   donated_by: String;
   reserved_by: String;
-  image: String;
+  image: String | null;
   postable: boolean;
   collectible: boolean;
   requestedToReserve: String[];

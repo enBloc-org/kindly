@@ -1,8 +1,8 @@
 'use client';
-import { useState } from 'react';
 import ButtonRounded from '@/components/ButtonRounded';
+import AddRowToSupabase from '@/utils/supabase/AddRowToSupabase';
 import { useForm } from 'react-hook-form';
-import { data } from 'autoprefixer';
+import { PartialItem } from '@/utils/supabase/types';
 
 const AddItemPage = () => {
   const {
@@ -15,13 +15,23 @@ const AddItemPage = () => {
       item_name: '',
       item_description: '',
       postcode: '',
-      condition: 'good',
-      item_type: 'clothing',
+      condition: '',
+      item_type: '',
       size: '',
-      sub_type: 'women',
+      item_subtype: '',
       image: null,
     },
   });
+
+  const onSubmit = async (data: PartialItem) => {
+    try {
+      console.log(data);
+
+      await AddRowToSupabase('items', data);
+    } catch (error) {
+      console.error('Error adding item to Supabase:', error);
+    }
+  };
 
   const category = watch('item_type');
 
@@ -30,9 +40,7 @@ const AddItemPage = () => {
       <h2 className='font-bold'>Add your item</h2>
 
       <form
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
-        })}
+        onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col items-center gap-5'
       >
         <label
@@ -86,29 +94,46 @@ const AddItemPage = () => {
             className='flex flex-col gap-1 items-center font-light'
           >
             Condition
-            <select {...register('condition')} className='input-text '>
+            <select
+              {...register('condition', { required: 'Required' })}
+              className='input-text '
+            >
+              <option value='' disabled hidden>
+                Select one
+              </option>
               <option value={'good'}>Good</option>
               <option value={'fair'}>Fair</option>
               <option value={'poor'}>Poor</option>
               <option value={'new'}>New</option>
             </select>
+            <p className='italic font-extralight text-primaryOrange'>
+              {errors.condition?.message}
+            </p>
           </label>
-
           <label
             htmlFor='item_type'
             className='flex flex-col gap-1 items-center font-light'
           >
             Categories
-            <select {...register('item_type')} className='input-text '>
+            <select
+              {...register('item_type', { required: 'Required' })}
+              className='input-text '
+            >
+              <option value='' disabled hidden>
+                Select one
+              </option>
               <option value={'clothing'}>Clothing</option>
               <option value={'shoes'}>Shoes</option>
               <option value={'toys'}>Toys</option>
               <option value={'books'}>Books</option>
               <option value={'household'}>Household</option>
             </select>
+            <p className='italic font-extralight text-primaryOrange'>
+              {errors.item_type?.message}
+            </p>
           </label>
         </div>
-        {category === 'clothing' && (
+        {(category === 'clothing' || category === 'shoes') && (
           <div className='flex items-center justify-center gap-5'>
             <label
               htmlFor='size'
@@ -127,7 +152,10 @@ const AddItemPage = () => {
               className='flex flex-col gap-1 items-center font-light'
             >
               Gender
-              <select {...register('sub_type')} className='input-text '>
+              <select {...register('item_subtype')} className='input-text '>
+                <option value='' disabled hidden>
+                  Select one
+                </option>
                 <option value={'women'}>Women</option>
                 <option value={'men'}>Men</option>
                 <option value={'girl'}>Girl</option>
@@ -137,21 +165,23 @@ const AddItemPage = () => {
             </label>{' '}
           </div>
         )}
-        <label
-          htmlFor='item_type'
-          className='flex flex-col gap-1 items-center font-light'
-        >
-          Age
-          <select {...register('sub_type')} className='input-text '>
-            <option value={'adult'}>Adult</option>
-            <option value={'children'}>Children</option>
-          </select>
-        </label>
+        {category === 'books' && (
+          <label
+            htmlFor='item_type'
+            className='flex flex-col gap-1 items-center font-light'
+          >
+            Age
+            <select {...register('item_subtype')} className='input-text '>
+              <option value={'adult'}>Adult</option>
+              <option value={'children'}>Children</option>
+            </select>
+          </label>
+        )}
         <div className='flex flex-col items-center mt-10 font-light gap-5'>
           <label htmlFor='image'>Upload an image:</label>
           <input
             type='file'
-            {...register('image', { required: 'This field is required' })}
+            {...register('image')}
             accept='image/*'
             className='ml-5'
           />
