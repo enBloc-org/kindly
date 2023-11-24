@@ -16,6 +16,8 @@ export default function SignUp({
     const origin = headers().get('origin');
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
+    const username = formData.get('user_name') as string;
+    const postcode = formData.get('postcode') as string;
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
 
@@ -32,10 +34,12 @@ export default function SignUp({
     }
 
     // Get userId and insert it as ID in Profiles table
-    const userId = data?.user?.id;
+    const userId = data?.user?.id as string;
     AddRowToSupabase('profiles', {
       id: userId,
       email: email,
+      postcode: postcode,
+      username: username,
     });
 
     return redirect('/login?message=Check email to continue sign in process');
