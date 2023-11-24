@@ -12,17 +12,17 @@ export type item = {
   donated_by: String;
   reserved_by: String;
   image: String;
-  postable: Boolean;
-  collectible: Boolean;
-  requestedToReserve: string[];
+  postable: boolean;
+  collectible: boolean;
+  requestedToReserve: String[];
 };
 
 export type profile = {
   id: String;
   email: String;
-  items_added: Number[];
-  reserved_items: Number[];
-  refugee: Boolean;
+  items_added: number[];
+  reserved_items: number[];
+  refugee: boolean;
   image: String;
   username: String;
   postcode: String;

@@ -35,9 +35,9 @@ export default function SignUp({
     }
 
     // Get userId and insert it as ID in Profiles table
-    const userId = data?.user?.id as string;
+    const userId = data?.user?.id as string | null;
     AddRowToSupabase('profiles', {
-      id: userId,
+      id: userId && userId,
       email: email,
       postcode: postcode,
       username: username,

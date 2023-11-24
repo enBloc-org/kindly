@@ -1,13 +1,13 @@
-import newClient from "../../config/supabaseclient";
+import newClient from '../../config/supabaseclient';
 
 export async function RetreiveFromSupabase(
   callFrom: string,
   selectThis: string,
   columnName: string,
-  columnCriteria: any,
+  columnCriteria: string | number | string[] | number[] | boolean
 ) {
-  columnName = columnName ? columnName : "";
-  columnCriteria = columnCriteria ? columnCriteria : "";
+  columnName = columnName ? columnName : '';
+  columnCriteria = columnCriteria ? columnCriteria : '';
 
   let fetchError: string | null = null;
   const supabase = newClient();
