@@ -1,38 +1,38 @@
 'use client';
 
 import Search from '@/components/form/Search';
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-
+import searchItem from '@/utils/supabase/searchByName';
+import { useState } from 'react';
 export default function SearchItem() {
-  const [searchResults, setSearchResults] = useState<ItemWithImage[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [searchResults, setSearchResults] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
   async function handleSearch(term: string) {
     const items = await searchItem(term);
 
-    await Promise.all(
-      items.map(async (item) => {
-        item.image = await fetchImage(item.image_id);
-      })
-    );
+    // await Promise.all(
+    //   items.map(async (item) => {
+    //     item.image = await fetchImage(item.image_id);
+    //   })
+    // );
 
     setSearchResults(items);
   }
 
-  async function fetchCategoriesData() {
-    const categoriesData = await fetchCategories();
-    setCategories(categoriesData);
-  }
+  console.log(searchResults);
+  // async function fetchCategoriesData() {
+  //   const categoriesData = await fetchCategories();
+  //   setCategories(categoriesData);
+  // }
 
-  useEffect(() => {
-    fetchCategoriesData();
-  }, []);
+  // useEffect(() => {
+  //   fetchCategoriesData();
+  // }, []);
 
   return (
     <>
       <Search onSearch={handleSearch} />{' '}
-      {searchResults.length === 0 && (
+      {/* {searchResults.length === 0 && (
         <div className='grid grid-cols-2 gap-4'>
           {categories.map((category) => (
             <div
@@ -45,20 +45,15 @@ export default function SearchItem() {
             </div>
           ))}
         </div>
-      )}
+      )} */}
       <div className='mt-4'>
         {searchResults.map((result) => (
-          <Link href={`item/${result.item_id}`} key={result.id}>
-            <div className='bg-white p-2 border rounded shadow mb-2'>
-              <h2>{result.name}</h2>
-              <p>£{result.price}</p>
-              <img
-                src={result.image}
-                alt={result.name}
-                className='w-32 h-32 object-contain'
-              />
-            </div>
-          </Link>
+          <div
+            className='bg-white p-2 border rounded shadow mb-2'
+            key={result.id}
+          >
+            <img src='tobe added' alt={} className='w-32 h-32 object-contain' />
+          </div>
         ))}
       </div>
     </>
