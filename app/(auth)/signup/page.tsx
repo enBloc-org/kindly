@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import AddRowToSupabase from '@/utils/supabase/AddRowToSupabase';
 import AuthForm from '@/components/AuthForm';
 import { headers, cookies } from 'next/headers';
+import { PartialProfile } from '@/utils/supabase/types';
 
 export default function SignUp({
   searchParams,
@@ -34,13 +35,13 @@ export default function SignUp({
     }
 
     // Get userId and insert it as ID in Profiles table
-    const userId = data?.user?.id as string;
+    const userId = data?.user?.id as string | null;
     AddRowToSupabase('profiles', {
-      id: userId,
+      id: userId && userId,
       email: email,
       postcode: postcode,
       username: username,
-    });
+    } as PartialProfile);
 
     return redirect('/login?message=Check email to continue sign in process');
   };

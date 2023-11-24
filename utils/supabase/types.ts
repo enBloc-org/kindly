@@ -7,21 +7,27 @@ export type item = {
   item_name: String;
   item_type: String;
   item_subtype: String;
-  item_descritpion: String;
+  item_description: String;
   postcode: String;
   donated_by: String;
   reserved_by: String;
   image: String;
-  postable: Boolean;
-  collectible: Boolean;
-  requestedToReserve: string[];
+  postable: boolean;
+  collectible: boolean;
+  requestedToReserve: String[];
 };
 
 export type profile = {
-  id: string;
-  email: string;
-  items_added: Number[];
-  reserved_items: Number[];
-  refugee: Boolean;
+  id: String;
+  email: String;
+  items_added: number[];
+  reserved_items: number[];
+  refugee: boolean;
   image: String;
+  username: String;
+  postcode: String;
 };
+
+// Make all fields in item and profile optional
+export type PartialItem = Partial<item>;
+export type PartialProfile = Partial<profile>;
