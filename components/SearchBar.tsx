@@ -2,13 +2,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-// const terms = ['Apple', "Banana", "Books"];
-type Items = string[];
+const terms = ['Apple', 'Banana', 'Books'];
 
-export const SearchBar: React.FC<{ terms: Items }> = ({ terms }) => {
+export const SearchBar: React.FC = async () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const router = useRouter();
+
+  // need to get the items name form the db
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
