@@ -24,14 +24,18 @@ const AuthForm: React.FC<AuthFormProps> = ({
     try {
       setErrorMessage(null);
       await onSubmit(formData);
-    } catch (error: any) {
-      setErrorMessage(error.message || 'An unexpected error occurred');
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('An unexpected error occurred');
+      }
     }
   };
 
   return (
     <form
-      className='animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground'
+      className=' flex-1 flex flex-col w-full justify-center gap-2 text-foreground'
       onSubmit={handleSubmit}
     >
       {' '}
@@ -41,9 +45,18 @@ const AuthForm: React.FC<AuthFormProps> = ({
             Username
           </label>
           <input
-            className='rounded-md px-4 py-2 bg-inherit border mb-6'
+            className='bg-white p-2 border border-primaryGreen rounded shadow mb-2'
             name='user_name'
             placeholder='Your Username'
+            required
+          />
+          <label className='text-md' htmlFor='postcode'>
+            Postcode
+          </label>
+          <input
+            className='bg-white p-2 border border-primaryGreen  rounded shadow mb-2'
+            name='postcode'
+            placeholder='Insert only first half'
             required
           />
         </>
@@ -52,29 +65,16 @@ const AuthForm: React.FC<AuthFormProps> = ({
         Email
       </label>
       <input
-        className='rounded-md px-4 py-2 bg-inherit border mb-6'
+        className='bg-white p-2 border border-primaryGreen rounded shadow mb-2'
         name='email'
         placeholder='you@example.com'
         required
       />
-      {isSignUp && (
-        <>
-          <label className='text-md' htmlFor='postcode'>
-            Postcode
-          </label>
-          <input
-            className='rounded-md px-4 py-2 bg-inherit border mb-6'
-            name='postcode'
-            placeholder='Insert only first half'
-            required
-          />
-        </>
-      )}
       <label className='text-md' htmlFor='password'>
         Password
       </label>
       <input
-        className='rounded-md px-4 py-2 bg-inherit border mb-6'
+        className='bg-white p-2 border border-primaryGreen rounded shadow mb-2'
         type='password'
         name='password'
         placeholder='••••••••'
