@@ -1,13 +1,13 @@
 export type item = {
-  id: Number;
-  reserved: Boolean;
+  id: number;
+  reserved: boolean;
   size: String;
   brand: String;
   condition: String;
   item_name: String;
   item_type: String;
   item_subtype: String;
-  item_descritpion: String;
+  item_description: String;
   postcode: String;
   donated_by: String;
   reserved_by: String;
