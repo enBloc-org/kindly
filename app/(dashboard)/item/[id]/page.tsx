@@ -1,6 +1,6 @@
+import ItemCard from '@/components/ItemCard';
 import { createClient } from '@/utils/supabase/server';
 import { cookies } from 'next/headers';
-import React from 'react';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const cookieStore = cookies();
@@ -15,10 +15,23 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
     if (error || !data || data.length === 0) {
       throw new Error('Error fetching data');
     } else {
-      console.log(data[0]);
+      const itemData = data[0];
+      console.log(itemData);
+      return (
+        <>
+          <ItemCard
+            img='/TO BE ADDED'
+            title={itemData.item_name}
+            size={itemData.size}
+            donor={itemData.donated_by}
+            location={itemData.postcode}
+            postageCovered={itemData.postable}
+            link='TO BE ADDED'
+          />
+        </>
+      );
     }
   } catch {}
-  return <div>DisplayItemDetails</div>;
 };
 
 export default DisplayItemDetails;
