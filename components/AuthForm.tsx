@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 type AuthFormProps = {
   onSubmit: (formData: FormData) => Promise<void>;
   buttonText: string;
-  searchParams: { message: string };
+  searchParams?: { message: string };
   isSignUp: boolean;
 };
 
@@ -35,7 +35,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
 
   return (
     <form
-      className=' flex-1 flex flex-col w-full justify-center gap-2 text-foreground'
+      className=' flex-1 flex flex-col w-full items-center  justify-center gap-2 text-foreground'
       onSubmit={handleSubmit}
     >
       {' '}
@@ -100,7 +100,7 @@ AuthForm.propTypes = {
   buttonText: PropTypes.string.isRequired,
   searchParams: PropTypes.shape({
     message: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
   isSignUp: PropTypes.bool.isRequired,
 };
 
