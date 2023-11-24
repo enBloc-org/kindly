@@ -2,9 +2,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const terms = ['Apple'];
+// const terms = ['Apple', "Banana", "Books"];
+type Items = string[];
 
-export const SearchBar: React.FC = () => {
+export const SearchBar: React.FC<{ terms: Items }> = ({ terms }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const router = useRouter();
