@@ -2,12 +2,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const terms = ['Apple'];
+const terms = ['Apple', 'Banana', 'Books'];
 
-export const SearchBar: React.FC = () => {
+export const SearchBar: React.FC = async () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const router = useRouter();
+
+  // need to get the items name form the db
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -46,7 +48,7 @@ export const SearchBar: React.FC = () => {
             value={searchTerm}
             className='bg-primaryLight p-2 rounded-l-md shadow-sm mh-10 outline-none'
             type='text'
-            placeholder='Find a crop...'
+            placeholder='Find an item...'
             required
             onChange={handleInputChange}
           />
