@@ -46,7 +46,7 @@ export const SearchBar: React.FC = () => {
             value={searchTerm}
             className='bg-primaryLight p-2 rounded-l-md shadow-sm mh-10 outline-none'
             type='text'
-            placeholder='Find a crop...'
+            placeholder='Find an item...'
             required
             onChange={handleInputChange}
           />
