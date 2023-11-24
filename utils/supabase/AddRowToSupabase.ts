@@ -1,8 +1,8 @@
 import newClient from '../../config/supabaseclient';
-import { item, profile } from './types';
+import { item, profile, PartialProfile } from './types';
 export default async function AddRowToSupabase(
   table: string,
-  InsertValues: item | profile
+  InsertValues: item | PartialProfile
 ) {
   try {
     // setSubmitting(true);
