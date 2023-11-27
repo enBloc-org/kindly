@@ -30,7 +30,7 @@ export default function SignUp({
     });
 
     if (error) {
-      return redirect('/login?message=Could not authenticate user');
+      return redirect('/signup?message=Could not authenticate user');
     }
 
     // Get userId and insert it as ID in Profiles table
