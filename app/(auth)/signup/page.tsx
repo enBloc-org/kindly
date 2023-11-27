@@ -42,17 +42,6 @@ export default function SignUp({
       username: username,
     } as PartialProfile);
 
-    // ALTERNATIVE
-    //     const userId = data?.user?.id;
-    // const id = userId ? String(userId) : undefined;
-
-    // AddRowToSupabase('profiles', {
-    //   id: id,
-    //   email: email,
-    //   postcode: postcode,
-    //   username: username,
-    // } as PartialProfile);
-
     return redirect('/login?message=Check email to continue sign in process');
   };
 
