@@ -1,28 +1,42 @@
-import React from 'react';
-// import ItemCard from '@/components/ItemCard';
+'use client';
+import React, { useEffect, useState } from 'react';
 import { RetreiveItemsFromSupabase } from '@/utils/supabase/RetreiveFromSupabase';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import ItemCard from '@/components/ItemCard';
 
-const MyItemsPage = async () => {
-  const supabase = createServerComponentClient({ cookies });
-  const { data } = await supabase.auth.getSession();
+const MyItemsPage = () => {
+  const [items, setItems] = useState([]);
 
-  const currentUser = data.session?.user.id;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const supabase = createClientComponentClient();
+        const { data } = await supabase.auth.getSession();
 
-  if (!currentUser) {
-    // Handle the case where the user ID is not available
-    console.error('User ID not available');
-    return <div>Error loading items</div>;
-  }
+        const currentUserId = data.session?.user.id;
 
-  const items = await RetreiveItemsFromSupabase(
-    'items',
-    '',
-    'donated_by',
-    currentUser
-  );
+        if (!currentUserId) {
+          // Handle the case where the user ID is not available
+          console.error('User ID not available');
+          return <div>Error loading items</div>;
+        } else {
+          console.log(currentUserId);
+
+          const fetchedItems = await RetreiveItemsFromSupabase(
+            'items',
+            '',
+            'donated_by',
+            currentUserId
+          );
+          console.log(fetchedItems);
+          setItems(fetchedItems);
+        }
+      } catch (error) {
+        console.error('Error loading items', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <ul>
