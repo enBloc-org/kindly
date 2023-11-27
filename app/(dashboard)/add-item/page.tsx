@@ -19,14 +19,15 @@ const AddItemPage = () => {
       item_type: '',
       size: '',
       item_subtype: '',
+      postable: false,
+      collectible: false,
+      postage_covered: false,
       image: null,
     },
   });
 
   const onSubmit = async (data: PartialItem) => {
     try {
-      console.log(data);
-
       await AddRowToSupabase('items', data);
     } catch (error) {
       console.error('Error adding item to Supabase:', error);
@@ -34,6 +35,8 @@ const AddItemPage = () => {
   };
 
   const category = watch('item_type');
+  const isWillingToPostChecked = watch('postable');
+  const isPickUpChecked = watch('collectible');
 
   return (
     <div className='flex flex-col items-center gap-3 my-5'>
@@ -176,6 +179,33 @@ const AddItemPage = () => {
               <option value={'children'}>Children</option>
             </select>
           </label>
+        )}
+        <div className='flex flex-col gap-3 mt-5'>
+          <label className='flex items-center gap-2 font-light'>
+            <input type='checkbox' {...register('postable')} className='mr-2' />
+            Willing to Post
+          </label>
+          <label className='flex items-center gap-2 font-light'>
+            <input
+              type='checkbox'
+              {...register('collectible')}
+              className='mr-2'
+            />
+            Pick Up
+          </label>
+          <label className='flex items-center justify-center gap-2 font-light'>
+            <input
+              type='checkbox'
+              {...register('postage_covered')}
+              className='mr-2'
+            />
+            Postage Covered
+          </label>
+        </div>
+        {!isPickUpChecked && !isWillingToPostChecked && (
+          <p className='italic font-extralight text-primaryOrange'>
+            Select at least one option{' '}
+          </p>
         )}
         <div className='flex flex-col items-center mt-10 font-light gap-5'>
           <label htmlFor='image'>Upload an image:</label>
