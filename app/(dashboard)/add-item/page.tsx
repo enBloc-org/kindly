@@ -3,8 +3,14 @@ import ButtonRounded from '@/components/ButtonRounded';
 import AddRowToSupabase from '@/utils/supabase/AddRowToSupabase';
 import { useForm } from 'react-hook-form';
 import { PartialItem } from '@/utils/supabase/types';
+import UploadImageInput from '@/components/form/UploadImageInput';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useEffect, useState } from 'react';
 
 const AddItemPage = () => {
+  const [userId, setUserId] = useState('');
+  const [imgSrc, setImageSrc] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -22,16 +28,31 @@ const AddItemPage = () => {
       postable: false,
       collectible: false,
       postage_covered: false,
-      image: null,
     },
   });
 
+  useEffect(() => {
+    const getUserId = async () => {
+      const supabase = createClientComponentClient();
+      const { data: userData } = await supabase.auth.getSession();
+      const user = userData.session?.user.id;
+      if (user) {
+        setUserId(user);
+      }
+    };
+    getUserId();
+  }, []);
+
   const onSubmit = async (data: PartialItem) => {
-    try {
-      await AddRowToSupabase('items', data);
-    } catch (error) {
-      console.error('Error adding item to Supabase:', error);
-    }
+    console.log(userId);
+
+    const data1 = {
+      image: imgSrc,
+      donated_by: userId,
+      ...data,
+    };
+
+    await AddRowToSupabase('items', data1);
   };
 
   const category = watch('item_type');
@@ -207,15 +228,8 @@ const AddItemPage = () => {
             Select at least one option{' '}
           </p>
         )}
-        <div className='flex flex-col items-center mt-10 font-light gap-5'>
-          <label htmlFor='image'>Upload an image:</label>
-          <input
-            type='file'
-            {...register('image')}
-            accept='image/*'
-            className='ml-5'
-          />
-        </div>
+
+        <UploadImageInput setImageSrc={setImageSrc} />
         <ButtonRounded type='submit'>ADD YOUR ITEM</ButtonRounded>
       </form>
     </div>
