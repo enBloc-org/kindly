@@ -27,7 +27,7 @@ export default function SearchItem() {
                 <p>{result.brand}</p>
                 <p>{result.condition}</p>
                 <img
-                  src='tobe added'
+                  src={result.image}
                   alt='picture'
                   className='w-32 h-32 object-contain'
                 />
