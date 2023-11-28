@@ -27,7 +27,7 @@ export default function SearchItem() {
                 <p>{result.brand}</p>
                 <p>{result.condition}</p>
                 <img
-                  src={result.image}
+                  src={result.imageSrc ? result.imageSrc : ''}
                   alt='picture'
                   className='w-32 h-32 object-contain'
                 />
