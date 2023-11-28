@@ -6,6 +6,7 @@ import Image from 'next/image';
 import ItemDetails from '@/components/ItemDetails';
 import ButtonRounded from '@/components/ButtonRounded';
 import PostageOptionDisplay from '@/components/PostageOptionDisplay';
+import BackButton from '@/components/BackButton';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const supabase = createServerComponentClient({ cookies });
@@ -27,36 +28,41 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       throw new Error('Error fetching data');
     } else {
       return (
-        <div className='flex flex-col items-center gap-10 mt-20'>
-          <Image
-            src={`${item.imageSrc}`}
-            alt={`${item.item_name}`}
-            width={350}
-            height={200}
-            className='shadow-md'
-          />
-          <PostageOptionDisplay
-            collectible={item.collectible}
-            postable={item.postable}
-            postage_covered={item.postage_covered}
-          />
+        <>
+          <BackButton />
+          <div className='flex flex-col items-center gap-10 mt-2'>
+            <Image
+              src={`${item.imageSrc}`}
+              alt={`${item.item_name}`}
+              width={350}
+              height={200}
+              className='shadow-md'
+            />
+            <PostageOptionDisplay
+              collectible={item.collectible}
+              postable={item.postable}
+              postage_covered={item.postage_covered}
+            />
 
-          <div className='bg-secondaryGray w-full min-h-40 '>
-            <h2 className='italic text-xl pl-8 pt-5'>{item.item_name}</h2>
-            <h3 className='font-light pl-8 pt-3'>Description:</h3>
-            <p className='text-center p-4'>{item.item_description}</p>
+            <div className='bg-secondaryGray w-full min-h-40 '>
+              <h2 className='italic text-xl pl-8 pt-5'>{item.item_name}</h2>
+              <h3 className='font-light pl-8 pt-3'>Description:</h3>
+              <p className='text-center p-4'>{item.item_description}</p>
+            </div>
+            <ItemDetails
+              condition={item.condition}
+              donated_by={profile.username}
+              postcode={item.postcode}
+              fontSize='text-lg'
+            />
+            <ButtonRounded type='button'>ENQUIRE</ButtonRounded>
           </div>
-          <ItemDetails
-            condition={item.condition}
-            donated_by={profile.username}
-            postcode={item.postcode}
-            fontSize='text-lg'
-          />
-          <ButtonRounded type='button'>ENQUIRE</ButtonRounded>
-        </div>
+        </>
       );
     }
-  } catch {}
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export default DisplayItemDetails;
