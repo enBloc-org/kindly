@@ -1,20 +1,20 @@
 export type item = {
   id: number;
   reserved: boolean;
-  size: String;
-  brand: String;
-  condition: String;
-  item_name: String;
-  item_type: String;
-  item_subtype: String;
-  item_description: String;
-  postcode: String;
-  donated_by: String;
-  reserved_by: String;
-  image: String | null;
+  size: string; // Change 'String' to 'string'
+  brand: string;
+  condition: string;
+  item_name: string;
+  item_type: string;
+  item_subtype: string;
+  item_description: string;
+  postcode: string;
+  donated_by: string;
+  reserved_by: string;
   postable: boolean;
   collectible: boolean;
-  requestedToReserve: String[];
+  requestedToReserve: string[];
+  imageSrc: string;
 };
 
 export type profile = {

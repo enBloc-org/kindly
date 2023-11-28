@@ -44,13 +44,13 @@ const AddItemPage = () => {
   }, []);
 
   const onSubmit = async (data: PartialItem) => {
-    const data1 = {
-      image: imgSrc,
+    const dataItem: PartialItem = {
+      imageSrc: imgSrc,
       donated_by: userId,
       ...data,
     };
 
-    await AddRowToSupabase('items', data1);
+    await AddRowToSupabase('items', dataItem);
   };
 
   const category = watch('item_type');
