@@ -1,11 +1,11 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { RetreiveItemsFromSupabase } from '@/utils/supabase/RetreiveFromSupabase';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import ItemCard from '@/components/ItemCard';
+// import ItemCard from '@/components/ItemCard';
 
 const MyItemsPage = () => {
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +29,6 @@ const MyItemsPage = () => {
             currentUserId
           );
           console.log(fetchedItems);
-          setItems(fetchedItems);
         }
       } catch (error) {
         console.error('Error loading items', error);
@@ -39,21 +38,22 @@ const MyItemsPage = () => {
   }, []);
 
   return (
-    <ul>
-      {items?.map((item) => (
-        <li key={item.id}>
-          <ItemCard
-            img={item.image}
-            title={item.item_name}
-            size={item.size}
-            donor={item.donated_by}
-            location={item.postcode}
-            postageCovered={item.postable}
-            link={item.item_description}
-          ></ItemCard>
-        </li>
-      ))}
-    </ul>
+    <div>Items</div>
+    // <ul>
+    //   {items?.map((item) => (
+    //     <li key={item.id}>
+    //       <ItemCard
+    //         img={item.image}
+    //         title={item.item_name}
+    //         size={item.size}
+    //         donor={item.donated_by}
+    //         location={item.postcode}
+    //         postageCovered={item.postable}
+    //         link={item.item_description}
+    //       ></ItemCard>
+    //     </li>
+    //   ))}
+    // </ul>
   );
 };
 
