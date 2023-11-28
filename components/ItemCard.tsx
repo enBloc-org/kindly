@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ItemDetails from './ItemDetails';
 
 type ItemCardPropType = {
   imageSrc?: string;
@@ -34,29 +35,13 @@ const ItemCard: React.FC<ItemCardPropType> = ({
               height={200}
             />
           </div>
-          <div className='flex flex-col justify-center'>
-            <p className='text-xs'>
-              <span className='text-primaryOrange font-light text-xs mr-2'>
-                Condition:
-              </span>
-              {condition}
-            </p>
-            <p className='text-xs'>
-              <span className='text-primaryOrange font-light text-xs mr-2'>
-                Donor:
-              </span>
-              {donated_by}
-            </p>
-            <p className='text-xs'>
-              <span className='text-primaryOrange font-light text-xs mr-2'>
-                Location:
-              </span>
-              {postcode}
-            </p>
-            {postable && (
-              <p className='text-xs text-center italic mt-5'>Postage covered</p>
-            )}
-          </div>
+          <ItemDetails
+            condition={condition}
+            donated_by={donated_by}
+            postcode={postcode}
+            postable={postable}
+            fontSize='text-xs'
+          />
         </div>
       </div>
     </Link>
