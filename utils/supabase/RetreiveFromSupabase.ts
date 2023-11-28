@@ -1,10 +1,11 @@
 import newClient from '../../config/supabaseclient';
 import { PartialItem } from './types';
+
 export async function RetreiveItemsFromSupabase(
   callFrom: string,
   selectThis: string,
   columnName: string,
-  columnCriteria: string | number | string[] | number[] | boolean
+  columnCriteria: string | number | string[] | number[] | boolean | undefined
 ) {
   columnName = columnName ? columnName : '';
   columnCriteria = columnCriteria ? columnCriteria : '';
