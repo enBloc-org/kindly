@@ -22,22 +22,23 @@ const MyItemsPage = async () => {
   }
 
   return (
-    // <div>Items</div>
-    <ul>
-      {fetchedItems?.map((item) => (
-        <li key={item.id}>
-          <ItemCard
-            img={item.image}
-            title={item.item_name}
-            size={item.size}
-            donor={item.donated_by}
-            location={item.postcode}
-            postageCovered={item.postable}
-            link={item.id}
-          ></ItemCard>
-        </li>
-      ))}
-    </ul>
+    <div className='mt-10'>
+      <ul>
+        {fetchedItems?.map((item) => (
+          <li key={item.id}>
+            <ItemCard
+              imageSrc={item.imageSrc}
+              title={item.item_name}
+              condition={item.condition}
+              donated_by={item.donated_by}
+              postcode={item.postcode}
+              postable={item.postable}
+              link={item.id}
+            ></ItemCard>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

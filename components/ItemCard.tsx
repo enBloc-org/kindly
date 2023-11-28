@@ -3,52 +3,57 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 type ItemCardPropType = {
-  img: string;
-  title: string;
-  size: string;
-  donor: string;
-  location: string;
-  postageCovered: boolean;
+  imageSrc: string;
+  item_name: string;
+  condition: string;
+  donated_by: string;
+  postcode: string;
+  postable: boolean;
   link: string;
 };
 
 const ItemCard: React.FC<ItemCardPropType> = ({
-  img,
-  title,
-  size,
-  donor,
-  location,
-  postageCovered,
+  imageSrc,
+  item_name,
+  condition,
+  donated_by,
+  postcode,
+  postable,
   link,
 }) => {
   return (
     <Link href={`${link}`}>
       <div className='bg-white shadow-sm px-3 mx-3 rounded-lg max-w-40'>
-        <h2 className='font-light p-3'>{title}</h2>
+        <h2 className='font-light p-3'>{item_name}</h2>
         <div className='flex gap-3'>
           <div className='pb-5'>
-            <Image src={`${img}`} alt='Jumper' width={200} height={250} />
+            <Image
+              src={`${imageSrc}`}
+              alt={`${item_name}`}
+              width={350}
+              height={200}
+            />
           </div>
           <div className='flex flex-col justify-center'>
             <p className='text-xs'>
               <span className='text-primaryOrange font-light text-xs mr-2'>
-                Size:
+                Condition:
               </span>
-              {size}
+              {condition}
             </p>
             <p className='text-xs'>
               <span className='text-primaryOrange font-light text-xs mr-2'>
                 Donor:
               </span>
-              {donor}
+              {donated_by}
             </p>
             <p className='text-xs'>
               <span className='text-primaryOrange font-light text-xs mr-2'>
                 Location:
               </span>
-              {location}
+              {postcode}
             </p>
-            {postageCovered && (
+            {postable && (
               <p className='text-xs text-center italic mt-5'>Postage covered</p>
             )}
           </div>
