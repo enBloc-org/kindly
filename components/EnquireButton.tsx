@@ -1,5 +1,7 @@
 'use client';
 
+import { SyntheticEvent } from 'react';
+
 export default function EnquireButton() {
   const subject = 'test sub';
   const message = 'test mes';
