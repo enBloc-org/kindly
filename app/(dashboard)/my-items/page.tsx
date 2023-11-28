@@ -28,7 +28,7 @@ const MyItemsPage = async () => {
           <li key={item.id}>
             <ItemCard
               imageSrc={item.imageSrc}
-              title={item.item_name}
+              item_name={item.item_name}
               condition={item.condition}
               donated_by={item.donated_by}
               postcode={item.postcode}
