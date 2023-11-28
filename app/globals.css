@@ -33,7 +33,7 @@ body {
 }
 
 .button-pill {
-  @apply rounded-2xl
+  @apply rounded-2xl text-xs
 }
 
 .active-link {

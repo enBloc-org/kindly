@@ -1,6 +1,6 @@
 import newClient from '../../config/supabaseclient';
-
-export async function RetreiveFromSupabase(
+import { PartialItem } from './types';
+export async function RetreiveItemsFromSupabase(
   callFrom: string,
   selectThis: string,
   columnName: string,
@@ -15,10 +15,10 @@ export async function RetreiveFromSupabase(
     .from(callFrom)
     .select(selectThis)
     .eq(columnName, columnCriteria);
-  if (error) {
+  if (fetchError) {
     fetchError = `Could not fetch the ${callFrom}`;
     console.log(error);
     return null;
   }
-  return data as any[];
+  return data as PartialItem[];
 }
