@@ -14,6 +14,7 @@ export type item = {
   postable: boolean;
   collectible: boolean;
   requestedToReserve: string[];
+  postage_covered: string;
   imageSrc: string;
 };
 
