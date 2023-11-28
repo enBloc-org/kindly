@@ -3,13 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 type ItemCardPropType = {
-  imageSrc: string;
-  item_name: string;
-  condition: string;
-  donated_by: string;
-  postcode: string;
-  postable: boolean;
-  link: string;
+  imageSrc?: string;
+  item_name?: string;
+  condition?: string;
+  donated_by?: string;
+  postcode?: string;
+  postable?: boolean;
+  itemId?: number;
 };
 
 const ItemCard: React.FC<ItemCardPropType> = ({
@@ -19,10 +19,10 @@ const ItemCard: React.FC<ItemCardPropType> = ({
   donated_by,
   postcode,
   postable,
-  link,
+  itemId,
 }) => {
   return (
-    <Link href={`${link}`}>
+    <Link href={`/item/${itemId}`}>
       <div className='bg-white shadow-sm px-3 mx-3 rounded-lg max-w-40'>
         <h2 className='font-light p-3'>{item_name}</h2>
         <div className='flex gap-3'>
