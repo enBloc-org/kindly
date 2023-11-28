@@ -24,26 +24,28 @@ const ProfilePage = async () => {
       return <div>Error User profile not found or username is missing</div>;
     }
     return (
-      <div className='flex justify-between items-center'>
-        <div className='py-2 px-5'>
-          <h1 className='text-2xl pl-3'>Profile</h1>
-          <div className='flex gap-3 mt-2'>
-            <h2 className='italic'>{userProfile.data.username}</h2>
-            <LogOutButton>LOG OUT</LogOutButton>
+      <>
+        <div className='flex justify-between items-center'>
+          <div className='py-2 px-5'>
+            <h1 className='text-2xl pl-3'>Profile</h1>
+            <div className='flex gap-3 mt-2'>
+              <h2 className='italic'>{userProfile.data.username}</h2>
+              <LogOutButton>LOG OUT</LogOutButton>
+            </div>
+          </div>
+          <div className='flex flex-col px-4'>
+            <Image
+              src={'/default-profile.png'}
+              alt='User avatar'
+              width={100}
+              height={100}
+            />
+            <div className='flex justify-center'>
+              <ButtonPill>EDIT</ButtonPill>
+            </div>
           </div>
         </div>
-        <div className='flex flex-col px-4'>
-          <Image
-            src={'/default-profile.png'}
-            alt='User avatar'
-            width={100}
-            height={100}
-          />
-          <div className='flex justify-center'>
-            <ButtonPill>EDIT</ButtonPill>
-          </div>
-        </div>
-      </div>
+      </>
     );
   } catch (error) {
     return <div>An error has occured</div>;

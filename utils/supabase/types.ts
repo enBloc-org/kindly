@@ -26,6 +26,7 @@ export type profile = {
   image: String;
   username: String;
   postcode: String;
+  imageSrc: string;
 };
 
 // Make all fields in item and profile optional
