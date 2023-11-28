@@ -6,15 +6,18 @@ import { PartialItem } from '@/utils/supabase/types';
 import UploadImageInput from '@/components/form/UploadImageInput';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 const AddItemPage = () => {
   const [userId, setUserId] = useState('');
   const [imgSrc, setImageSrc] = useState('');
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -51,6 +54,8 @@ const AddItemPage = () => {
     };
 
     await AddRowToSupabase('items', dataItem);
+    reset();
+    await router.push('/success');
   };
 
   const category = watch('item_type');
