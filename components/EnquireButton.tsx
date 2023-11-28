@@ -1,8 +1,12 @@
 'use client';
 
+export interface EnquireButtonProps {
+  email: string | undefined;
+}
+
 import { SyntheticEvent } from 'react';
 
-export default function EnquireButton() {
+export default async function EnquireButton({ email }: EnquireButtonProps) {
   const subject = 'test sub';
   const message = 'test mes';
 
@@ -17,6 +21,7 @@ export default function EnquireButton() {
       body: JSON.stringify({
         subject,
         message,
+        email,
       }),
     });
     console.log(await response.json());

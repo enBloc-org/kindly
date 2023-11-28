@@ -1,3 +1,4 @@
+import EnquireButton from '@/components/EnquireButton';
 import ItemCard from '@/components/ItemCard';
 import { createClient } from '@/utils/supabase/server';
 import { cookies } from 'next/headers';
@@ -5,7 +6,9 @@ import { cookies } from 'next/headers';
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
-
+  const { data } = await supabase.auth.getSession();
+  const email = data.session?.user.email;
+  console.log('Email', email);
   try {
     const { data, error } = await supabase
       .from('items')
@@ -28,6 +31,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
             postageCovered={itemData.postable}
             link='TO BE ADDED'
           />
+          <EnquireButton email={email} />
         </>
       );
     }

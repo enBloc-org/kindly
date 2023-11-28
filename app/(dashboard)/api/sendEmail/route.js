@@ -8,7 +8,7 @@ export async function POST(request) {
   };
 
   try {
-    const { subject, message } = await request.json();
+    const { subject, message, email } = await request.json();
 
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
@@ -20,7 +20,7 @@ export async function POST(request) {
 
     const mailOption = {
       from: 'kindlylinking@gmail.com',
-      to: 'anderssji94@gmail.com',
+      to: email,
       subject: 'Send Email Tutorial',
       html: `
         <h3>Hello Shaughn</h3>
