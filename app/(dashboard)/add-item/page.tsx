@@ -44,8 +44,6 @@ const AddItemPage = () => {
   }, []);
 
   const onSubmit = async (data: PartialItem) => {
-    console.log(userId);
-
     const data1 = {
       image: imgSrc,
       donated_by: userId,

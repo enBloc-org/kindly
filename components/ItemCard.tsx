@@ -22,17 +22,12 @@ const ItemCard: React.FC<ItemCardPropType> = ({
   link,
 }) => {
   return (
-    <Link href={link}>
+    <Link href={`${link}`}>
       <div className='bg-white shadow-sm px-3 mx-3 rounded-lg max-w-40'>
         <h2 className='font-light p-3'>{title}</h2>
         <div className='flex gap-3'>
           <div className='pb-5'>
-            <Image
-              src={img}
-              alt='Jumper'
-              width={200}
-              height={250}
-            />
+            <Image src={`${img}`} alt='Jumper' width={200} height={250} />
           </div>
           <div className='flex flex-col justify-center'>
             <p className='text-xs'>
