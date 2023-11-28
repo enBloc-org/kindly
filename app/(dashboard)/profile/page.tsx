@@ -3,9 +3,9 @@ import { cookies } from 'next/headers';
 
 //Components
 import Image from 'next/image';
-import ButtonPill from '@/components/ButtonPill';
 import { GetProfileFromSupabase } from '@/utils/supabase/GetProfileFromSupabase';
 import LogOutButton from '@/components/LogOutButton';
+import { ProfileEdit } from '@/components/form/ProfileEdit';
 
 const ProfilePage = async () => {
   const supabase = createServerComponentClient({ cookies });
@@ -40,9 +40,7 @@ const ProfilePage = async () => {
               width={100}
               height={100}
             />
-            <div className='flex justify-center'>
-              <ButtonPill>EDIT</ButtonPill>
-            </div>
+            <ProfileEdit />
           </div>
         </div>
       </>
