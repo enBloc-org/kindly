@@ -4,7 +4,13 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['undfcbmldjkujposixvn.supabase.co'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'undfcbmldjkujposixvn\\.supabase\\.co',
+        pathname: '/storage/v1/object/public/images/**',
+      },
+    ],
   },
 };
 
