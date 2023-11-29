@@ -66,7 +66,7 @@ Install dependencies:
 
 Add env variable:
 
-- Create an .env file in the root directory of your project and add the environment variables.
+Create an .env file in the root directory of your project and add the environment variables from supabase (https://supabase.com/docs/guides/functions/secrets).
 
 Running the app:
 
