@@ -7,31 +7,20 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const { data } = await supabase.auth.getSession();
-  const email = data.session?.user.email;
-  console.log('Email', email);
+  const userEmail = data.session?.user.email;
   try {
     const { data, error } = await supabase
       .from('items')
-      .select()
+      .select('*,profiles(*)')
       .eq('id', params.id);
-
-    // const { data, error } = await supabase
-    // .from('items')
-    // .select('*,profiles(*)')
-    // .eq('id', params.id);
-
-    // if (error || !data || data.length === 0) {
-    //   throw new Error('Error fetching data');
-    // } else {
-    //   const itemData = data[0];
-    //   const donorEmail = itemData.profiles.email
-    //   const title = itemData.item
 
     if (error || !data || data.length === 0) {
       throw new Error('Error fetching data');
     } else {
       const itemData = data[0];
-      console.log(itemData);
+      const donorEmail = itemData.profiles.email;
+      const title = itemData.item_name;
+
       return (
         <>
           <ItemCard
@@ -43,7 +32,11 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
             postageCovered={itemData.postable}
             link='TO BE ADDED'
           />
-          <EnquireButton email={email} />
+          <EnquireButton
+            donorEmail={donorEmail}
+            userEmail={userEmail !== undefined ? userEmail : ''}
+            title={title}
+          />
         </>
       );
     }

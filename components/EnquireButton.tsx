@@ -1,14 +1,20 @@
 'use client';
 
 export interface EnquireButtonProps {
-  email: string | undefined;
+  donorEmail: string;
+  userEmail: string;
+  title: string;
 }
 
 import { SyntheticEvent } from 'react';
 
-export default async function EnquireButton({ email }: EnquireButtonProps) {
-  const subject = 'test sub';
-  const message = 'test mes';
+export default async function EnquireButton({
+  donorEmail,
+  userEmail,
+  title,
+}: EnquireButtonProps) {
+  const subject = title;
+  const message = `a user with email ${userEmail} is interested in your item`;
 
   const sendMail = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -21,18 +27,18 @@ export default async function EnquireButton({ email }: EnquireButtonProps) {
       body: JSON.stringify({
         subject,
         message,
-        email,
+        donorEmail,
       }),
     });
-    console.log(await response.json());
+    if (!response.ok) {
+      // Check for non-2xx HTTP status codes
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
   };
   return (
-    <form onSubmit={sendMail} className='h-full w-1/3 space-y-6'>
-      <button
-        type='submit'
-        className='ml-auto flex w-1/2 items-center justify-center space-x-3 rounded-lg bg-blue-600 p-2 text-white shadow-blue-500 hover:bg-blue-700 hover:shadow-md'
-      >
-        <span>Send Message</span>
+    <form onSubmit={sendMail}>
+      <button type='submit' className='button button-rounded'>
+        <span>SEND MESSAGE</span>
       </button>
     </form>
   );
