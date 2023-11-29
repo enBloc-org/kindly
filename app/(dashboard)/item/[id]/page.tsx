@@ -1,32 +1,39 @@
+
+import EnquireButton from '@/components/EnquireButton';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
 //Components
 import Image from 'next/image';
 import ItemDetails from '@/components/ItemDetails';
-import ButtonRounded from '@/components/ButtonRounded';
 import PostageOptionDisplay from '@/components/PostageOptionDisplay';
 import BackButton from '@/components/BackButton';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const supabase = createServerComponentClient({ cookies });
+  const { data } = await supabase.auth.getSession();
+  const userEmail = data.session?.user.email;
 
   try {
     const { data: item } = await supabase
       .from('items')
-      .select()
-      .eq('id', params.id)
+      .select('*,profiles(*)')
+      .eq('id', params.id);
       .single();
 
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('username')
-      .eq('id', item.donated_by)
-      .single();
+
 
     if (!item || !profile) {
       throw new Error('Error fetching data');
     } else {
+
+      
+      const donorEmail = item.profiles.email;
+      const title = item.item_name;
+
+      
+
+
       return (
         <>
           <BackButton />
@@ -55,8 +62,12 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               postcode={item.postcode}
               fontSize='text-lg'
             />
-            <ButtonRounded type='button'>ENQUIRE</ButtonRounded>
-          </div>
+<EnquireButton
+            donorEmail={donorEmail}
+            userEmail={userEmail !== undefined ? userEmail : ''}
+            title={title}
+          />          </div>
+
         </>
       );
     }
