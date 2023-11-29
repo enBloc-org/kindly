@@ -6,15 +6,18 @@ import { PartialItem } from '@/utils/supabase/types';
 import UploadImageInput from '@/components/form/UploadImageInput';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const AddItemPage = () => {
   const [userId, setUserId] = useState('');
   const [imgSrc, setImageSrc] = useState('');
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -51,6 +54,8 @@ const AddItemPage = () => {
     };
 
     await AddRowToSupabase('items', dataItem);
+    reset();
+    router.push('/add-item/success');
   };
 
   const category = watch('item_type');
@@ -123,10 +128,10 @@ const AddItemPage = () => {
               <option value='' disabled hidden>
                 Select one
               </option>
-              <option value={'good'}>Good</option>
-              <option value={'fair'}>Fair</option>
-              <option value={'poor'}>Poor</option>
-              <option value={'new'}>New</option>
+              <option value={'Good'}>Good</option>
+              <option value={'Fair'}>Fair</option>
+              <option value={'Poor'}>Poor</option>
+              <option value={'New'}>New</option>
             </select>
             <p className='italic font-extralight text-primaryOrange'>
               {errors.condition?.message}

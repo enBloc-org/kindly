@@ -1,46 +1,79 @@
+
 import EnquireButton from '@/components/EnquireButton';
-import ItemCard from '@/components/ItemCard';
-import { createClient } from '@/utils/supabase/server';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
+//Components
+import Image from 'next/image';
+import ItemDetails from '@/components/ItemDetails';
+import PostageOptionDisplay from '@/components/PostageOptionDisplay';
+import BackButton from '@/components/BackButton';
+
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getSession();
   const userEmail = data.session?.user.email;
+
   try {
-    const { data, error } = await supabase
+    const { data: item } = await supabase
       .from('items')
       .select('*,profiles(*)')
       .eq('id', params.id);
+      .single();
 
-    if (error || !data || data.length === 0) {
+
+
+    if (!item || !profile) {
       throw new Error('Error fetching data');
     } else {
-      const itemData = data[0];
-      const donorEmail = itemData.profiles.email;
-      const title = itemData.item_name;
+
+      
+      const donorEmail = item.profiles.email;
+      const title = item.item_name;
+
+      
+
 
       return (
         <>
-          <ItemCard
-            img='/TO BE ADDED'
-            title={itemData.item_name}
-            size={itemData.size}
-            donor={itemData.donated_by}
-            location={itemData.postcode}
-            postageCovered={itemData.postable}
-            link='TO BE ADDED'
-          />
-          <EnquireButton
+          <BackButton />
+          <div className='flex flex-col items-center gap-10 mt-2'>
+            <Image
+              src={`${item.imageSrc}`}
+              alt={`${item.item_name}`}
+              width={350}
+              height={200}
+              className='shadow-md'
+            />
+            <PostageOptionDisplay
+              collectible={item.collectible}
+              postable={item.postable}
+              postage_covered={item.postage_covered}
+            />
+
+            <div className='bg-secondaryGray w-full min-h-40 '>
+              <h2 className='italic text-xl pl-8 pt-5'>{item.item_name}</h2>
+              <h3 className='font-light pl-8 pt-3'>Description:</h3>
+              <p className='text-center p-4'>{item.item_description}</p>
+            </div>
+            <ItemDetails
+              condition={item.condition}
+              donated_by={profile.username}
+              postcode={item.postcode}
+              fontSize='text-lg'
+            />
+<EnquireButton
             donorEmail={donorEmail}
             userEmail={userEmail !== undefined ? userEmail : ''}
             title={title}
-          />
+          />          </div>
+
         </>
       );
     }
-  } catch {}
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export default DisplayItemDetails;

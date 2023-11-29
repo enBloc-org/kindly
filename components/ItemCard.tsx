@@ -1,62 +1,47 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ItemDetails from './ItemDetails';
 
 type ItemCardPropType = {
-  img: string;
-  title: string;
-  size: string;
-  donor: string;
-  location: string;
-  postageCovered: boolean;
-  link: string;
+  imageSrc?: string;
+  item_name?: string;
+  condition?: string;
+  donated_by?: string;
+  postcode?: string;
+  postable?: boolean;
+  itemId?: number;
 };
 
 const ItemCard: React.FC<ItemCardPropType> = ({
-  img,
-  title,
-  size,
-  donor,
-  location,
-  postageCovered,
-  link,
+  imageSrc,
+  item_name,
+  condition,
+  donated_by,
+  postcode,
+  postable,
+  itemId,
 }) => {
   return (
-    <Link href={link}>
+    <Link href={`/item/${itemId}`}>
       <div className='bg-white shadow-sm px-3 mx-3 rounded-lg max-w-40'>
-        <h2 className='font-light p-3'>{title}</h2>
+        <h2 className='font-light p-3'>{item_name}</h2>
         <div className='flex gap-3'>
           <div className='pb-5'>
             <Image
-              src={img}
-              alt='Jumper'
-              width={200}
-              height={250}
+              src={`${imageSrc}`}
+              alt={`${item_name}`}
+              width={350}
+              height={200}
             />
           </div>
-          <div className='flex flex-col justify-center'>
-            <p className='text-xs'>
-              <span className='text-primaryOrange font-light text-xs mr-2'>
-                Size:
-              </span>
-              {size}
-            </p>
-            <p className='text-xs'>
-              <span className='text-primaryOrange font-light text-xs mr-2'>
-                Donor:
-              </span>
-              {donor}
-            </p>
-            <p className='text-xs'>
-              <span className='text-primaryOrange font-light text-xs mr-2'>
-                Location:
-              </span>
-              {location}
-            </p>
-            {postageCovered && (
-              <p className='text-xs text-center italic mt-5'>Postage covered</p>
-            )}
-          </div>
+          <ItemDetails
+            condition={condition}
+            donated_by={donated_by}
+            postcode={postcode}
+            postable={postable}
+            fontSize='text-xs'
+          />
         </div>
       </div>
     </Link>
