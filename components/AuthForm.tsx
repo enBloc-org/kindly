@@ -80,9 +80,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         placeholder='••••••••'
         required
       />
-      <button className='bg-green-700 rounded-md px-4 py-2 text-foreground mb-2'>
-        {buttonText}
-      </button>
+      <button className='button button-rounded'>{buttonText}</button>
       {searchParams?.message && (
         <p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>
           {searchParams.message}
