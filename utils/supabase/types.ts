@@ -24,11 +24,16 @@ export type profile = {
   reserved_items: number[];
   refugee: boolean;
   image: String;
-  username: String;
+  username: String | undefined;
   postcode: String;
   imageSrc: string;
+  avatar: string | undefined;
 };
 
+export type editProfile = {
+  avatar: string;
+  username: string | undefined;
+};
 // Make all fields in item and profile optional
 export type PartialItem = Partial<item>;
 export type PartialProfile = Partial<profile>;

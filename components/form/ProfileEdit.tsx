@@ -1,14 +1,15 @@
 'use client';
 import { useState } from 'react';
 import ButtonPill from '../ButtonPill';
-import { useForm } from 'react-hook-form';
-import { PartialProfile } from '@/utils/supabase/types';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { editProfile } from '@/utils/supabase/types';
 import UploadImageInput from './UploadImageInput';
 import ButtonRounded from '../ButtonRounded';
+import EditSupabaseRow from '@/utils/supabase/EditSupabaseRow';
 
-export const ProfileEdit = () => {
+export const ProfileEdit = ({ userId }: { userId: string }) => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const [imgSrc, setImageSrc] = useState('');
+  const [imgAvatar, setImgAvatar] = useState('');
 
   const {
     register,
@@ -20,13 +21,19 @@ export const ProfileEdit = () => {
     },
   });
 
-  const onSubmit = async (data: PartialProfile) => {
-    const dataItem: PartialProfile = {
-      imageSrc: imgSrc,
-      ...data,
+  const onSubmit: SubmitHandler<{ username: string }> = async (data) => {
+    const dataItem: editProfile = {
+      avatar: imgAvatar,
+      username: data.username,
     };
     console.log(dataItem);
-    // await EditSupabaseRow('profiles', dataItem);
+
+    await EditSupabaseRow(
+      'profiles',
+      { username: dataItem.username, avatar: dataItem.avatar },
+      'id',
+      userId
+    );
   };
   const handleEditButtonClick = () => {
     setIsEditMode(!isEditMode);
@@ -55,7 +62,7 @@ export const ProfileEdit = () => {
           <p className='italic font-extralight text-primaryOrange'>
             {errors.username?.message}
           </p>
-          <UploadImageInput setImageSrc={setImageSrc} />
+          <UploadImageInput setImageSrc={setImgAvatar} />
           <ButtonRounded type='submit'>EDIT PROFILE</ButtonRounded>
         </form>
       )}

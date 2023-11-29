@@ -40,7 +40,7 @@ const ProfilePage = async () => {
               width={100}
               height={100}
             />
-            <ProfileEdit />
+            <ProfileEdit userId={userId!} />
           </div>
         </div>
       </>
