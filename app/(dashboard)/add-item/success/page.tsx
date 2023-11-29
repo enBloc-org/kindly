@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import ButtonRounded from '@/components/ButtonRounded';
+import ButtonRounded from '@/components/buttons/ButtonRounded';
 
 const SuccessPage = () => {
   return (

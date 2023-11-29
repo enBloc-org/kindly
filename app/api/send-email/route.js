@@ -23,8 +23,8 @@ export async function POST(request) {
       to: donorEmail,
       subject: 'Send Email Tutorial',
       html: `
-        <h2>Hello</h2>
-        <h3>title: ${subject}</h3>
+        <h2>Hello Kindly user,</h2>
+        <h3>Name of item: ${subject}</h3>
         <p>${message}</p> 
         `,
     };

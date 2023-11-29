@@ -1,5 +1,5 @@
 'use client';
-import ButtonRounded from '@/components/ButtonRounded';
+import ButtonRounded from '@/components/buttons/ButtonRounded';
 import AddRowToSupabase from '@/utils/supabase/AddRowToSupabase';
 import { useForm } from 'react-hook-form';
 import { PartialItem } from '@/utils/supabase/types';

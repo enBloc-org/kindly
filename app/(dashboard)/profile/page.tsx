@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 
 //Components
 import Image from 'next/image';
-import ButtonPill from '@/components/ButtonPill';
+import ButtonPill from '@/components/buttons/ButtonPill';
 import { GetProfileFromSupabase } from '@/utils/supabase/GetProfileFromSupabase';
 import LogOutButton from '@/components/LogOutButton';
 

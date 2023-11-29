@@ -17,13 +17,13 @@ export default function EnquireButton({
   const [error, setError] = useState(false);
 
   const subject = title;
-  const message = `a user with email ${userEmail} is interested in your item`;
+  const message = `${userEmail} is interested in your item. Please send them an email to get the conversation started.`;
 
   useEffect(() => {
     if (isDisabled) {
       const sendMail = async () => {
         try {
-          const response = await fetch('/api/sendEmail', {
+          const response = await fetch('/api/send-email', {
             method: 'POST',
             headers: {
               'content-type': 'application/json',
@@ -61,12 +61,18 @@ export default function EnquireButton({
         className='button button-rounded disabled:bg-primaryGray'
         disabled={isDisabled}
       >
-        <span>{messageSuccess ? 'MESSAGE SENT' : 'SEND MESSAGE'}</span>
+        <span>EQUIRE</span>
       </button>
       {error && (
         <div className='text-primaryOrange text-center'>
           <p>There has been an error sending you message.</p>
           <p>Please try again.</p>
+        </div>
+      )}
+      {messageSuccess && (
+        <div className='text-center text-sm px-3'>
+          <p>Your registered email address has been sent to this user.</p>
+          <p>Please look out for a response.</p>
         </div>
       )}
     </form>
