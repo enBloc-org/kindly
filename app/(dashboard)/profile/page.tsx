@@ -2,8 +2,6 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
 //Components
-import Image from 'next/image';
-import ButtonPill from '@/components/buttons/ButtonPill';
 import { GetProfileFromSupabase } from '@/utils/supabase/GetProfileFromSupabase';
 import LogOutButton from '@/components/LogOutButton';
 import { ProfileEdit } from '@/components/form/ProfileEdit';
@@ -27,7 +25,7 @@ const ProfilePage = async () => {
     }
     return (
       <>
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center mt-10'>
           <div className='py-2 px-5'>
             <h1 className='text-2xl pl-3'>Profile</h1>
             <div className='flex gap-3 mt-2'>
@@ -35,13 +33,14 @@ const ProfilePage = async () => {
               <LogOutButton>LOG OUT</LogOutButton>
             </div>
           </div>
-          <div className='flex flex-col px-4'>
+          <div className='flex flex-col px-4 gap-4'>
             {userProfile.data.avatar ? (
               <img
                 src={userProfile.data.avatar}
                 alt='User avatar'
                 width={100}
                 height={100}
+                className='rounded-full'
               />
             ) : (
               <img
@@ -49,6 +48,7 @@ const ProfilePage = async () => {
                 alt='Default avatar'
                 width={100}
                 height={100}
+                className='rounded-full'
               />
             )}
             <ProfileEdit userId={userId!} />

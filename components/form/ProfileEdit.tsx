@@ -3,8 +3,8 @@ import EditSupabaseRow from '@/utils/supabase/EditSupabaseRow';
 import { editProfile } from '@/utils/supabase/types';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import ButtonPill from '../ButtonPill';
-import ButtonRounded from '../ButtonRounded';
+import ButtonPill from '../buttons/ButtonPill';
+import ButtonRounded from '../buttons/ButtonRounded';
 import UploadImageInput from './UploadImageInput';
 
 export const ProfileEdit = ({ userId }: { userId: string }) => {
