@@ -1,11 +1,11 @@
 import newClient from '@/config/supabaseclient';
-import { item, profile } from './types';
+import { editProfile, item, profile } from './types';
 
 export default async function EditSupabaseRow(
   table: string,
-  EditValues: item | profile,
+  EditValues: item | profile | editProfile,
   columnName: string,
-  columnCriteria: string | number | string[] | number[] | boolean
+  columnCriteria: string | number | string[] | number[] | boolean | undefined
 ) {
   const supabase = newClient();
   await supabase.from(table).update(EditValues).eq(columnName, columnCriteria);
