@@ -25,22 +25,50 @@ const MyItemsPage = async () => {
     <div className='mt-10'>
       <h1 className='text-lg font-thin m-5'>My donated items:</h1>
       <ul className='flex flex-col gap-5'>
-        {fetchedItems?.map((item) => (
-          <li key={item.id}>
-            <ItemCard
-              imageSrc={item.imageSrc}
-              item_name={item.item_name}
-              condition={item.condition}
-              donated_by={profile?.username}
-              postcode={item.postcode}
-              postable={item.postable}
-              itemId={item.id}
-            ></ItemCard>
-            <DeleteButton></DeleteButton>
-          </li>
-        ))}
+        {fetchedItems?.map((item) => {
+          console.log('Item ID:', item.id);
+          console.log('Profile Username:', profile?.username);
+
+          return (
+            <li key={item.id}>
+              <ItemCard
+                imageSrc={item.imageSrc}
+                item_name={item.item_name}
+                condition={item.condition}
+                donated_by={profile?.username}
+                postcode={item.postcode}
+                postable={item.postable}
+                itemId={item.id}
+              ></ItemCard>
+              <DeleteButton itemId={item?.id}></DeleteButton>
+            </li>
+          );
+        })}
       </ul>
     </div>
+
+    // <div className='mt-10'>
+    //   <h1 className='text-lg font-thin m-5'>My donated items:</h1>
+    //   <ul className='flex flex-col gap-5'>
+    //     {fetchedItems?.map((item) => (
+    //       <li key={item.id}>
+    //         <ItemCard
+    //           imageSrc={item.imageSrc}
+    //           item_name={item.item_name}
+    //           condition={item.condition}
+    //           donated_by={profile?.username}
+    //           postcode={item.postcode}
+    //           postable={item.postable}
+    //           itemId={item.id}
+    //         ></ItemCard>
+    //         <DeleteButton
+    //           itemId={item?.id}
+    //           userId={profile?.username}
+    //         ></DeleteButton>
+    //       </li>
+    //     ))}
+    //   </ul>
+    // </div>
   );
 };
 
