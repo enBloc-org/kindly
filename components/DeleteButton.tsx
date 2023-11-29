@@ -10,8 +10,11 @@ export default function DeleteButton({ itemId }: DeleteButtonProps) {
   // Get id of items you want to delete from database and refresh page
   const router = useRouter();
   return (
-    <button onClick={() => deleteItem(itemId).then(router.refresh)}>
-      Delete
+    <button
+      className='button button-rounded '
+      onClick={() => deleteItem(itemId).then(router.refresh)}
+    >
+      Delete item
     </button>
   );
 }
