@@ -66,7 +66,7 @@ Running the app:
 
 ## Credits
 
-Scrum: <a href="https://github.com/benante">Tommaso Orlandi</a> <br>
 DevOps: <a href="https://github.com/cazanelena">Elena Cazan</a> <br>
 Ux/UI: <a href="https://github.com/nichgalzin">Nich Galzin</a> <br>
 QA: <a href="https://github.com/ShaughnAnderson94">Shaughn Anderson</a>
+Scrum: <a href="https://github.com/benante">Tommaso Orlandi</a> <br>
