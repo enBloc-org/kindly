@@ -33,6 +33,7 @@ export const ProfileEdit = ({ userId }: { userId: string }) => {
       'id',
       userId
     );
+    window.location.reload();
   };
   const handleEditButtonClick = () => {
     setIsEditMode(!isEditMode);
