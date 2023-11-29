@@ -1,6 +1,10 @@
 # Kindly - Supporting Ukrainian Refugees in London
 Kindly is a web application dedicated to assisting Ukrainian refugees in London by facilitating the donation of clothes and essential items. Individuals can contribute items at no cost to provide much-needed support to those in need.
 
+## Deployed Website
+
+The deployed website can be accessed at [https://main.d3jctbf9vvjj3q.amplifyapp.com/](https://main.d3jctbf9vvjj3q.amplifyapp.com/).
+
 ## How It Works
 Explore Categories:
 
@@ -57,6 +61,10 @@ Install dependencies:
 ```bash
   npm install
 ```
+
+Add env variable:
+
+- Create an .env file in the root directory of your project and add the environment variables.
 
 Running the app:
 
