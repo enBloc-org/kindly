@@ -7,10 +7,7 @@ export default async function deleteItem(
 ) {
   try {
     const supabase = newClient();
-    const { error } = await supabase
-      .from('items')
-      .delete()
-      .eq(columnName, columnCriteria);
+    await supabase.from('items').delete().eq(columnName, columnCriteria);
   } catch (error) {
     console.log(error);
   }
