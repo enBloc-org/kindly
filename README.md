@@ -36,5 +36,37 @@ Leveraging PostgreSQL for the database, Supabase streamlines backend development
 **Nodemailer:**
 A Node.js library for sending emails programmatically, Nodemailer enhances communication within the application, facilitating notifications and updates.
 
+## Installation
 
+To run the Kindly application locally:
 
+Clone the project:
+
+```bash
+  git clone https://github.com/fac28/kindly.git
+```
+
+Go to the project directory:
+
+```bash
+  cd kindly
+```
+
+Install dependencies:
+
+```bash
+  npm install
+```
+
+Running the app:
+
+```bash
+  npm run dev
+```
+
+## Credits
+
+Scrum: <a href="https://github.com/benante">Tommaso Orlandi</a> <br>
+DevOps: <a href="https://github.com/cazanelena">Elena Cazan</a> <br>
+Ux/UI: <a href="https://github.com/nichgalzin">Nich Galzin</a> <br>
+QA: <a href="https://github.com/ShaughnAnderson94">Shaughn Anderson</a>
