@@ -1,4 +1,4 @@
-import EnquireButton from '@/components/EnquireButton';
+import EnquireButton from '@/components/buttons/EnquireButton';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
@@ -6,7 +6,7 @@ import { cookies } from 'next/headers';
 import Image from 'next/image';
 import ItemDetails from '@/components/ItemDetails';
 import PostageOptionDisplay from '@/components/PostageOptionDisplay';
-import BackButton from '@/components/BackButton';
+import BackButton from '@/components/buttons/BackButton';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const supabase = createServerComponentClient({ cookies });
