@@ -1,11 +1,11 @@
 'use client';
-import { useState } from 'react';
-import ButtonPill from '../ButtonPill';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { editProfile } from '@/utils/supabase/types';
-import UploadImageInput from './UploadImageInput';
-import ButtonRounded from '../ButtonRounded';
 import EditSupabaseRow from '@/utils/supabase/EditSupabaseRow';
+import { editProfile } from '@/utils/supabase/types';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import ButtonPill from '../ButtonPill';
+import ButtonRounded from '../ButtonRounded';
+import UploadImageInput from './UploadImageInput';
 
 export const ProfileEdit = ({ userId }: { userId: string }) => {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -26,7 +26,6 @@ export const ProfileEdit = ({ userId }: { userId: string }) => {
       avatar: imgAvatar,
       username: data.username,
     };
-    console.log(dataItem);
 
     await EditSupabaseRow(
       'profiles',

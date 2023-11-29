@@ -2,7 +2,6 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
 //Components
-import Image from 'next/image';
 import { GetProfileFromSupabase } from '@/utils/supabase/GetProfileFromSupabase';
 import LogOutButton from '@/components/LogOutButton';
 import { ProfileEdit } from '@/components/form/ProfileEdit';
@@ -19,6 +18,7 @@ const ProfilePage = async () => {
     const userId = data.session?.user.id;
 
     const userProfile = await GetProfileFromSupabase(supabase, userId);
+    console.log('This is the profile', userProfile);
 
     if (!userProfile.data || !userProfile.data.username) {
       return <div>Error User profile not found or username is missing</div>;
@@ -34,12 +34,21 @@ const ProfilePage = async () => {
             </div>
           </div>
           <div className='flex flex-col px-4'>
-            <Image
-              src={'/default-profile.png'}
-              alt='User avatar'
-              width={100}
-              height={100}
-            />
+            {userProfile.data.avatar ? (
+              <img
+                src={userProfile.data.avatar}
+                alt='User avatar'
+                width={100}
+                height={100}
+              />
+            ) : (
+              <img
+                src='/default-profile.png'
+                alt='Default avatar'
+                width={100}
+                height={100}
+              />
+            )}
             <ProfileEdit userId={userId!} />
           </div>
         </div>
