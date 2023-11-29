@@ -12,3 +12,29 @@ Send Enquiries:
 
 Communicate with donors by sending messages to inquire about specific items.
 
+## Technologies Used
+
+### Frontend: React and Next.js
+
+**React:**
+A JavaScript library for building interactive user interfaces, React's component-based architecture simplifies development and enhances code reusability.
+
+**Next.js:**
+A React framework that facilitates server-side rendering, automatic code splitting, and straightforward deployment, optimizing the performance of our application.
+
+### Backend: Supabase
+
+**Supabase:**
+Leveraging PostgreSQL for the database, Supabase streamlines backend development with real-time capabilities, authentication services, and serverless functions.
+
+- **Database:** Offers scalability and real-time updates, essential for live data applications.
+- **Authentication:** Provides secure user authentication with seamless integration for frontend frameworks like React.
+- **Serverless Functions:** Enables scalable and cost-effective backend operations without managing servers.
+
+### Other: Nodemailer
+
+**Nodemailer:**
+A Node.js library for sending emails programmatically, Nodemailer enhances communication within the application, facilitating notifications and updates.
+
+
+
