@@ -1,6 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import Link from 'next/link';
+import FAQItem from '@/components/FAQcard';
+import questionsAndAnswers from '@/utils/faqsArray';
 
 const HomePage = () => {
   return (
@@ -44,6 +46,11 @@ const HomePage = () => {
         KINDLY, spread some kindness, and help the planet! Thank you KINDLY{' '}
       </div>
       <h1 className='font-extrabold text-4xl text-center'>FAQs</h1>
+      <div>
+        {questionsAndAnswers.map((faq, index) => (
+          <FAQItem key={index} {...faq}></FAQItem>
+        ))}
+      </div>
     </div>
   );
 };
