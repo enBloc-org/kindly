@@ -15,15 +15,10 @@ const MyItemsPage = async () => {
     'donated_by',
     currentUserId
   );
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('username')
-    .eq('id', currentUserId)
-    .single();
 
   return (
     <div className='mt-10'>
-      <h1 className='text-lg font-thin m-5'>My donated items:</h1>
+      <h1 className='text-lg font-thin m-5'>My dontated items:</h1>
       <ul className='flex flex-col gap-5'>
         {fetchedItems?.map((item) => (
           <li key={item.id}>
@@ -31,7 +26,7 @@ const MyItemsPage = async () => {
               imageSrc={item.imageSrc}
               item_name={item.item_name}
               condition={item.condition}
-              donated_by={profile?.username}
+              item_type={item.item_type}
               postcode={item.postcode}
               postable={item.postable}
               itemId={item.id}
