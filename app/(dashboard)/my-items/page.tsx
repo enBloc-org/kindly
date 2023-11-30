@@ -36,7 +36,7 @@ const MyItemsPage = async () => {
               postable={item.postable}
               itemId={item.id}
             ></ItemCard>
-            <DeleteButton itemId={item?.id} userId={profile?.username} />
+            <DeleteButton itemId={item?.id} />
           </li>
         ))}
       </ul>
