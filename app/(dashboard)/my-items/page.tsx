@@ -2,6 +2,7 @@ import { RetreiveItemsFromSupabase } from '@/utils/supabase/RetreiveFromSupabase
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import ItemCard from '@/components/ItemCard';
+import DeleteButton from '@/components/DeleteButton';
 
 const MyItemsPage = async () => {
   const supabase = createServerComponentClient({ cookies });
@@ -30,6 +31,7 @@ const MyItemsPage = async () => {
               postable={item.postable}
               itemId={item.id}
             ></ItemCard>
+            <DeleteButton itemId={item?.id} />
           </li>
         ))}
       </ul>

@@ -61,7 +61,7 @@ export default function EnquireButton({
         className='button button-rounded disabled:bg-primaryGray'
         disabled={isDisabled}
       >
-        <span>EQUIRE</span>
+        <span>ENQUIRE</span>
       </button>
       {error && (
         <div className='text-primaryOrange text-center'>
