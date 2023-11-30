@@ -1,9 +1,9 @@
-import { createClient } from '@/utils/supabase/server';
-import { redirect } from 'next/navigation';
-import AddRowToSupabase from '@/utils/supabase/AddRowToSupabase';
 import AuthForm from '@/components/AuthForm';
-import { headers, cookies } from 'next/headers';
+import AddRowToSupabase from '@/utils/supabase/AddRowToSupabase';
+import { createClient } from '@/utils/supabase/server';
 import { PartialProfile } from '@/utils/supabase/types';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export default function SignUp({
   searchParams,
@@ -13,7 +13,6 @@ export default function SignUp({
   const signUp = async (formData: FormData) => {
     'use server';
 
-    const origin = headers().get('origin');
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const username = formData.get('user_name') as string;
@@ -25,7 +24,7 @@ export default function SignUp({
       email,
       password,
       options: {
-        emailRedirectTo: `${origin}/auth/callback`,
+        emailRedirectTo: process.env.AWS_AMPLIFY,
       },
     });
 
