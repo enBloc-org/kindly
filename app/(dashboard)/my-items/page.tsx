@@ -24,22 +24,27 @@ const MyItemsPage = async () => {
   return (
     <div className='mt-10'>
       <h1 className='text-lg font-thin m-5'>My donated items:</h1>
-      <ul className='flex flex-col gap-5'>
-        {fetchedItems?.map((item) => (
-          <li key={item.id}>
-            <ItemCard
-              imageSrc={item.imageSrc}
-              item_name={item.item_name}
-              condition={item.condition}
-              donated_by={profile?.username}
-              postcode={item.postcode}
-              postable={item.postable}
-              itemId={item.id}
-            ></ItemCard>
-            <DeleteButton itemId={item?.id} />
-          </li>
-        ))}
-      </ul>
+
+      {fetchedItems && fetchedItems.length > 0 ? (
+        <ul className='flex flex-col gap-5'>
+          {fetchedItems.map((item) => (
+            <li key={item.id}>
+              <ItemCard
+                imageSrc={item.imageSrc}
+                item_name={item.item_name}
+                condition={item.condition}
+                donated_by={profile?.username}
+                postcode={item.postcode}
+                postable={item.postable}
+                itemId={item.id}
+              />
+              <DeleteButton itemId={item?.id} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className='text-lg font-thin m-5'>You have not donated any items.</p>
+      )}
     </div>
   );
 };
