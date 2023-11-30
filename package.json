@@ -8,7 +8,10 @@
     "lint": "next lint",
     "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss}\"",
     "format": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "npx playwright test"
+
+
   },
   "dependencies": {
     "@next/font": "^14.0.3",
