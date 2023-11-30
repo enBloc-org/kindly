@@ -2,7 +2,7 @@
 import { cookies } from 'next/headers';
 import { createClient } from '@/utils/supabase/server';
 
-export default async function searchItem(name: string) {
+export default async function searchByName(name: string) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 

@@ -7,7 +7,7 @@ type ItemCardPropType = {
   imageSrc?: string;
   item_name?: string;
   condition?: string;
-  donated_by?: string;
+  item_type?: string;
   postcode?: string;
   postable?: boolean;
   itemId?: number;
@@ -17,7 +17,7 @@ const ItemCard: React.FC<ItemCardPropType> = ({
   imageSrc,
   item_name,
   condition,
-  donated_by,
+  item_type,
   postcode,
   postable,
   itemId,
@@ -37,7 +37,7 @@ const ItemCard: React.FC<ItemCardPropType> = ({
           </div>
           <ItemDetails
             condition={condition}
-            donated_by={donated_by}
+            item_type={item_type}
             postcode={postcode}
             postable={postable}
             fontSize='text-xs'
