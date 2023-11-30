@@ -18,10 +18,15 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
     .map((item, index) => <p key={index}>{item.trim()}</p>);
 
   return (
-    <div className={`faq-item ${isOpen ? 'open' : ''}`} onClick={handleToggle}>
-      <div className='question'>{question}</div>
+    <div
+      className={`my-4 p-1 cursor-pointer border-2 rounded-md ${
+        isOpen ? 'open' : ''
+      }`}
+      onClick={handleToggle}
+    >
+      <div className='font-extrabold'>{question}</div>
       {isOpen && (
-        <div className='answer' style={{ whiteSpace: 'pre-line' }}>
+        <div className='my-2' style={{ whiteSpace: 'pre-line' }}>
           {formattedAnswer}
         </div>
       )}
