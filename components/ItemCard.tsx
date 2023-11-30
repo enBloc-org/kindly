@@ -24,13 +24,13 @@ const ItemCard: React.FC<ItemCardPropType> = ({
 }) => {
   return (
     <Link href={`/item/${itemId}`}>
-      <div className='bg-white shadow-sm px-3 mx-3 rounded-lg max-w-40'>
+      <button className='bg-white shadow-sm px-3 mx-3 rounded-lg max-w-40'>
         <h2 className='font-light p-3'>{item_name}</h2>
         <div className='flex gap-3'>
           <div className='pb-5'>
             <Image
               src={`${imageSrc}`}
-              alt={`${item_name}`}
+              alt={`Image of ${item_name}`}
               width={350}
               height={200}
             />
@@ -43,7 +43,7 @@ const ItemCard: React.FC<ItemCardPropType> = ({
             fontSize='text-xs'
           />
         </div>
-      </div>
+      </button>
     </Link>
   );
 };

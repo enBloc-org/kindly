@@ -1,7 +1,7 @@
 import React from 'react';
 
 const QuickBrowse = () => {
-  return <div>QuickBrowse</div>;
+  return <div></div>;
 };
 
 export default QuickBrowse;
