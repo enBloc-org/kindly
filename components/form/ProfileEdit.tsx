@@ -1,27 +1,31 @@
 'use client';
 import EditSupabaseRow from '@/utils/supabase/EditSupabaseRow';
-import { editProfile } from '@/utils/supabase/types';
-import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { PartialItem, editProfile } from '@/utils/supabase/types';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import ButtonPill from '../buttons/ButtonPill';
 import ButtonRounded from '../buttons/ButtonRounded';
 import UploadImageInput from './UploadImageInput';
 
-export const ProfileEdit = ({ userId }: { userId: string }) => {
+export const ProfileEdit = ({
+  userId,
+  user,
+}: {
+  userId: string;
+  user: string;
+}) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [imgAvatar, setImgAvatar] = useState('');
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      username: '',
-    },
-  });
+  } = useForm();
 
-  const onSubmit: SubmitHandler<{ username: string }> = async (data) => {
+  const onSubmit = async (data: PartialItem) => {
+    console.log('This is data', data);
     const dataItem: editProfile = {
       avatar: imgAvatar,
       username: data.username,
@@ -38,6 +42,10 @@ export const ProfileEdit = ({ userId }: { userId: string }) => {
   const handleEditButtonClick = () => {
     setIsEditMode(!isEditMode);
   };
+  useEffect(() => {
+    setValue('username', isEditMode ? user : '');
+  }, [isEditMode, user, setValue]);
+
   return (
     <div>
       <div className='flex justify-center'>
@@ -62,7 +70,7 @@ export const ProfileEdit = ({ userId }: { userId: string }) => {
             />
           </label>
           <p className='italic font-extralight text-primaryOrange'>
-            {errors.username?.message}
+            {errors.username?.message as string}
           </p>
           <UploadImageInput setImageSrc={setImgAvatar} />
           <ButtonRounded type='submit'>EDIT PROFILE</ButtonRounded>
