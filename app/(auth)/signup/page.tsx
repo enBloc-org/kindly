@@ -23,9 +23,6 @@ export default function SignUp({
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        emailRedirectTo: process.env.AWS_AMPLIFY,
-      },
     });
 
     if (error) {
