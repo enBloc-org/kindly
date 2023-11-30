@@ -4,9 +4,9 @@ import Link from 'next/link';
 
 const HomePage = () => {
   return (
-    <div>
-      <h1>What do we do?</h1>
-      <div>
+    <div className='p-6'>
+      <h1 className='font-extrabold text-4xl text-center'>What do we do?</h1>
+      <div className='my-5 text-justify'>
         Welcome to KINDLY, the giving platform where compassion meets
         sustainability! Please help us in our mission supplying clothes and
         other personal items to Ukrainian refugees. By donating you won’t just
@@ -17,23 +17,33 @@ const HomePage = () => {
         declutter your life, and work toward a more mindful and eco-conscious
         future. Together, let's weave a tapestry of kindness and sustainability!
       </div>
-      <h1>Blog</h1>
-      <div>
+      <h1 className='font-extrabold text-4xl text-center'>Blog</h1>
+      <div className='my-5 text-justify'>
         Hello and welcome! We’re very excited to be launching KINDLY, a platform
         which lets you donate unwanted items to Ukrainian refugees. In the
         future we hope to expand KINDLY to serve the wider refugee community.
         KINDLY is a sister project to{' '}
-        <Link href='https://linktr.ee/trafalgargirls'>Trafalgar Girls</Link>, a
-        volunteer initiative that’s helped thousands of Ukrainian refugees since
-        the war began in February 2022. The KINDLY site was created through the{' '}
-        <Link href='https://www.foundersandcoders.com/tech-for-better/'>
-          Tech for Better programme
+        <Link
+          className='text-primaryOrange font-extrabold'
+          href='https://linktr.ee/trafalgargirls'
+        >
+          Trafalgar Girls
         </Link>
-        by Founders and Coders. So let the KINDLY journey begin! Do you have
-        unwanted clothes or shoes (adults and kids sizes), toys, books, or
-        household items? Upload the details to KINDLY, spread some kindness, and
-        help the planet! Thank you KINDLY{' '}
+        , a volunteer initiative that’s helped thousands of Ukrainian refugees
+        since the war began in February 2022. The KINDLY site was created
+        through the{' '}
+        <Link
+          className='text-primaryOrange font-extrabold'
+          href='https://www.foundersandcoders.com/tech-for-better/'
+        >
+          Tech for Better programme
+        </Link>{' '}
+        by <span className='font-extrabold'>Founders and Coders</span>. So let
+        the KINDLY journey begin! Do you have unwanted clothes or shoes (adults
+        and kids sizes), toys, books, or household items? Upload the details to
+        KINDLY, spread some kindness, and help the planet! Thank you KINDLY{' '}
       </div>
+      <h1 className='font-extrabold text-4xl text-center'>FAQs</h1>
     </div>
   );
 };
