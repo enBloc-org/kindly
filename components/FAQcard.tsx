@@ -5,7 +5,6 @@ interface FAQItemProps {
   question: string;
   answer: string;
 }
-
 const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -13,10 +12,19 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
     setIsOpen(!isOpen);
   };
 
+  const formattedAnswer = answer
+    .split('•')
+    .filter(Boolean)
+    .map((item, index) => <p key={index}>{item.trim()}</p>);
+
   return (
-    <div className={` ${isOpen ? 'open' : ''}`} onClick={handleToggle}>
+    <div className={`faq-item ${isOpen ? 'open' : ''}`} onClick={handleToggle}>
       <div className='question'>{question}</div>
-      {isOpen && <div className='answer'>{answer}</div>}
+      {isOpen && (
+        <div className='answer' style={{ whiteSpace: 'pre-line' }}>
+          {formattedAnswer}
+        </div>
+      )}
     </div>
   );
 };
