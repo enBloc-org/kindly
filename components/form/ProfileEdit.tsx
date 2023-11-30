@@ -41,7 +41,9 @@ export const ProfileEdit = ({ userId }: { userId: string }) => {
   return (
     <div>
       <div className='flex justify-center'>
-        <ButtonPill clickHandler={handleEditButtonClick}>EDIT</ButtonPill>
+        <ButtonPill clickHandler={handleEditButtonClick}>
+          {isEditMode ? 'CLOSE' : 'EDIT'}
+        </ButtonPill>
       </div>
       {isEditMode && (
         <form
