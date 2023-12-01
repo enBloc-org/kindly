@@ -28,7 +28,6 @@ const MyItemsPage = async () => {
                 imageSrc={item.imageSrc}
                 item_name={item.item_name}
                 condition={item.condition}
-                donated_by={profile?.username}
                 postcode={item.postcode}
                 postable={item.postable}
                 itemId={item.id}
@@ -41,7 +40,7 @@ const MyItemsPage = async () => {
         <h2 className='text-lg font-thin m-5'>
           You have not donated any items.
         </h2>
-      )}      
+      )}
     </div>
   );
 };
