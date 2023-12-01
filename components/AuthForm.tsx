@@ -16,12 +16,19 @@ const AuthForm: React.FC<AuthFormProps> = ({
 }) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isEmailAgreed, setIsEmailAgreed] = useState(false);
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!isEmailAgreed) {
       setErrorMessage('Please agree to share your email address.');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords don't match");
       return;
     }
 
@@ -84,20 +91,34 @@ const AuthForm: React.FC<AuthFormProps> = ({
         type='password'
         name='password'
         placeholder='••••••••'
+        onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <div>
-        <input
-          type='checkbox'
-          id='agreeCheckbox'
-          checked={isEmailAgreed}
-          onChange={() => setIsEmailAgreed(!isEmailAgreed)}
-          required
-        />
-        <label htmlFor='agreeCheckbox' className='ml-2'>
-          I agree to share my email address with the donors from this app.
-        </label>
-      </div>
+      {isSignUp && (
+        <>
+          <label className='text-md' htmlFor='confirmPassword'>
+            Confirm Password
+          </label>
+          <input
+            className='bg-white p-2 border border-primaryGreen rounded shadow mb-2'
+            type='password'
+            name='password'
+            placeholder='••••••••'
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          <input
+            type='checkbox'
+            id='agreeCheckbox'
+            checked={isEmailAgreed}
+            onChange={() => setIsEmailAgreed(!isEmailAgreed)}
+            required
+          />
+          <label htmlFor='agreeCheckbox' className='ml-2'>
+            I agree to share my email address with the donors from this app.
+          </label>
+        </>
+      )}
       <button className='button button-rounded'>{buttonText}</button>
       {searchParams?.message && (
         <p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>
