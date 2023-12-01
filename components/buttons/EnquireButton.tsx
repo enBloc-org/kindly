@@ -1,16 +1,21 @@
 'use client';
+import EditSupabaseRow from '@/utils/supabase/EditSupabaseRow';
 import { SyntheticEvent, useEffect, useState } from 'react';
 
 export interface EnquireButtonProps {
   donorEmail: string;
   userEmail: string;
   title: string;
+  item_id: string;
+  user_id: string;
 }
 
 export default function EnquireButton({
   donorEmail,
   userEmail,
   title,
+  item_id,
+  user_id,
 }: EnquireButtonProps) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [messageSuccess, setMessageSuccess] = useState(false);
@@ -41,6 +46,12 @@ export default function EnquireButton({
           }
           setMessageSuccess(true);
           setError(false);
+          await EditSupabaseRow(
+            'items',
+            { reserved: true, reserved_by: user_id },
+            'id',
+            item_id
+          );
         } catch (error) {
           console.error(error);
         }

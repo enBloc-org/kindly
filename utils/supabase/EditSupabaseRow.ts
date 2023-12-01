@@ -1,9 +1,9 @@
 import newClient from '@/config/supabaseclient';
-import { editProfile, item, profile } from './types';
+import { editProfile, item, profile, updateReserved } from './types';
 
 export default async function EditSupabaseRow(
   table: string,
-  EditValues: item | profile | editProfile,
+  EditValues: item | profile | editProfile | updateReserved,
   columnName: string,
   columnCriteria: string | number | string[] | number[] | boolean | undefined
 ) {
