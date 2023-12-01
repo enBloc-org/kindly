@@ -36,6 +36,10 @@ export type editProfile = {
   avatar: string;
   username: string | undefined;
 };
+export type updateReserved = {
+  reserved: boolean;
+  reserved_by: string;
+};
 
 // Make all fields in item and profile optional
 export type PartialItem = Partial<item>;

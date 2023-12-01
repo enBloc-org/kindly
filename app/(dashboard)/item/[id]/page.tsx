@@ -19,7 +19,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       .select('*,profiles(*)')
       .eq('id', params.id)
       .single();
-
+    console.log(item);
     if (!item || !item.profiles) {
       throw new Error('Error fetching data');
     } else {
@@ -57,6 +57,8 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               donorEmail={donorEmail}
               userEmail={userEmail !== undefined ? userEmail : ''}
               title={title}
+              item_id={item.id}
+              user_id={data.session!.user.id}
             />{' '}
           </div>
         </>
