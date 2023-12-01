@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 
 type AuthFormProps = {
   onSubmit: (formData: FormData) => Promise<void>;
@@ -16,9 +15,16 @@ const AuthForm: React.FC<AuthFormProps> = ({
   isSignUp,
 }) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isEmailAgreed, setIsEmailAgreed] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!isEmailAgreed) {
+      setErrorMessage('Please agree to share your email address.');
+      return;
+    }
+
     const formData = new FormData(e.target as HTMLFormElement);
 
     try {
@@ -80,6 +86,18 @@ const AuthForm: React.FC<AuthFormProps> = ({
         placeholder='••••••••'
         required
       />
+      <div>
+        <input
+          type='checkbox'
+          id='agreeCheckbox'
+          checked={isEmailAgreed}
+          onChange={() => setIsEmailAgreed(!isEmailAgreed)}
+          required
+        />
+        <label htmlFor='agreeCheckbox' className='ml-2'>
+          I agree to share my email address with the donors from this app.
+        </label>
+      </div>
       <button className='button button-rounded'>{buttonText}</button>
       {searchParams?.message && (
         <p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>
@@ -91,15 +109,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
       )}
     </form>
   );
-};
-
-AuthForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  buttonText: PropTypes.string.isRequired,
-  searchParams: PropTypes.shape({
-    message: PropTypes.string.isRequired,
-  }),
-  isSignUp: PropTypes.bool.isRequired,
 };
 
 export default AuthForm;
