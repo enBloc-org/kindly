@@ -43,7 +43,9 @@ const MyItemsPage = async () => {
           ))}
         </ul>
       ) : (
-        <p className='text-lg font-thin m-5'>You have not donated any items.</p>
+        <h2 className='text-lg font-thin m-5'>
+          You have not donated any items.
+        </h2>
       )}
     </div>
   );
