@@ -51,7 +51,7 @@ const ProfilePage = async () => {
                 className='rounded-full'
               />
             )}
-            <ProfileEdit userId={userId!} />
+            <ProfileEdit userId={userId!} user={userProfile.data.username} />
           </div>
         </div>
       </>

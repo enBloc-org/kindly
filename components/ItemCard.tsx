@@ -7,7 +7,7 @@ type ItemCardPropType = {
   imageSrc?: string;
   item_name?: string;
   condition?: string;
-  donated_by?: string;
+  item_type?: string;
   postcode?: string;
   postable?: boolean;
   itemId?: number;
@@ -17,33 +17,33 @@ const ItemCard: React.FC<ItemCardPropType> = ({
   imageSrc,
   item_name,
   condition,
-  donated_by,
+  item_type,
   postcode,
   postable,
   itemId,
 }) => {
   return (
     <Link href={`/item/${itemId}`}>
-      <div className='bg-white shadow-sm px-3 mx-3 rounded-lg max-w-40'>
+      <button className='bg-white shadow-sm px-3 mx-3 rounded-lg max-w-40'>
         <h2 className='font-light p-3'>{item_name}</h2>
         <div className='flex gap-3'>
           <div className='pb-5'>
             <Image
               src={`${imageSrc}`}
-              alt={`${item_name}`}
+              alt={`Image of ${item_name}`}
               width={350}
               height={200}
             />
           </div>
           <ItemDetails
             condition={condition}
-            donated_by={donated_by}
+            item_type={item_type}
             postcode={postcode}
             postable={postable}
             fontSize='text-xs'
           />
         </div>
-      </div>
+      </button>
     </Link>
   );
 };

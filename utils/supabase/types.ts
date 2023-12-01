@@ -16,6 +16,7 @@ export type item = {
   requestedToReserve: string[];
   postage_covered: boolean;
   imageSrc: string;
+  username: string;
 };
 
 export type profile = {
@@ -35,6 +36,7 @@ export type editProfile = {
   avatar: string;
   username: string | undefined;
 };
+
 // Make all fields in item and profile optional
 export type PartialItem = Partial<item>;
 export type PartialProfile = Partial<profile>;

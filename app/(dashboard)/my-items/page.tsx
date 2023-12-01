@@ -15,11 +15,6 @@ const MyItemsPage = async () => {
     'donated_by',
     currentUserId
   );
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('username')
-    .eq('id', currentUserId)
-    .single();
 
   return (
     <div className='mt-10'>
@@ -46,7 +41,7 @@ const MyItemsPage = async () => {
         <h2 className='text-lg font-thin m-5'>
           You have not donated any items.
         </h2>
-      )}
+      )}      
     </div>
   );
 };

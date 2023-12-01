@@ -2,34 +2,13 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const terms = ['Apple', 'Banana', 'Books'];
-
-export const SearchBar: React.FC = async () => {
+export const SearchBar: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState<string[]>([]);
   const router = useRouter();
 
-  // need to get the items name form the db
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-
-    if (value.length > 0) {
-      setSearchTerm(value);
-
-      const matchingTerms = terms.filter((term) =>
-        term.toLowerCase().includes(value.toLowerCase())
-      );
-      setSuggestions(matchingTerms);
-    } else {
-      setSuggestions([]);
-      setSearchTerm('');
-    }
-  };
-
-  const handleSuggestionClick = (term: string) => {
-    setSearchTerm(term);
-    setSuggestions([]);
+    setSearchTerm(e.target.value);
+    console.log(searchTerm);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,7 +17,7 @@ export const SearchBar: React.FC = async () => {
   };
 
   return (
-    <div className='flex justify-center searchmargintop'>
+    <div className='flex justify-center items-center searchmargintop'>
       <form
         onSubmit={handleSubmit}
         className='flex opacity-70 transition-opacity duration-200 focus-within:opacity-90'
@@ -52,24 +31,9 @@ export const SearchBar: React.FC = async () => {
             required
             onChange={handleInputChange}
           />
-          <div className=' bg-white text-primaryLight bg-opacity-10 rounded '>
-            {suggestions.length > 0 && (
-              <ul>
-                {suggestions.map((term, index) => (
-                  <li
-                    className='cursor-pointer pl-2 hover:bg-black'
-                    key={index}
-                    onClick={() => handleSuggestionClick(term)}
-                  >
-                    {term}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
         </div>
         <button
-          className='flex-shrink-0 flex-grow-0 max-h-10 bg-primaryLight py-2 px-3 rounded-r-md '
+          className='flex-shrink-0 flex-grow-0 max-h-10 bg-secondaryGray py-2 px-3 rounded-r-md '
           type='submit'
         >
           <svg
