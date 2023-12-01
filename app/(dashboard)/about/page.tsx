@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { FaInstagramSquare, FaTwitter } from 'react-icons/fa';
 import { FaSquareThreads } from 'react-icons/fa6';
+import FAQItem from '@/components/FAQcard';
+import questionsAndAnswers from '@/utils/faqsArray';
 
 const AboutPage = () => {
   return (
@@ -44,6 +46,11 @@ const AboutPage = () => {
             <FaTwitter />
           </Link>
         </div>
+      </div>
+      <div>
+        {questionsAndAnswers.map((faq, index) => (
+          <FAQItem key={index} {...faq}></FAQItem>
+        ))}
       </div>
     </div>
   );
