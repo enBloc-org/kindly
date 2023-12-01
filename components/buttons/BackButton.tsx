@@ -4,7 +4,12 @@ import { useRouter } from 'next/navigation';
 const BackButton = () => {
   const router = useRouter();
   return (
-    <button className='rounded-full my-5 mx-3' onClick={router.back}>
+    <button
+      className='rounded-full my-5 mx-3'
+      role='button'
+      aria-label='back button'
+      onClick={router.back}
+    >
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='40'
