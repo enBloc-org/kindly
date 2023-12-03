@@ -17,7 +17,7 @@ const CategoryButton: React.FC<CategoryButtonPropsType> = ({
   return (
     <button
       role='button'
-      aria-label='Browse clothing'
+      aria-label={`${category}`}
       className={`flex flex-col gap-2 p-2 items-center ${
         category === option ? 'bg-backgroundHighlight rounded-lg' : ''
       }`}
