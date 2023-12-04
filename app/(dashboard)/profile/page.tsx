@@ -18,14 +18,13 @@ const ProfilePage = async () => {
     const userId = data.session?.user.id;
 
     const userProfile = await GetProfileFromSupabase(supabase, userId);
-    console.log('This is the profile', userProfile);
 
     if (!userProfile.data || !userProfile.data.username) {
       return <div>Error User profile not found or username is missing</div>;
     }
     return (
       <>
-        <div className='flex justify-between items-center mt-10'>
+        <div className='flex flex-col justify-between items-center mt-10'>
           <div className='py-2 px-5'>
             <h1 className='text-2xl pl-3'>Profile</h1>
             <div className='flex gap-3 mt-2'>
@@ -33,7 +32,7 @@ const ProfilePage = async () => {
               <LogOutButton>LOG OUT</LogOutButton>
             </div>
           </div>
-          <div className='flex flex-col px-4 gap-4'>
+          <div className='flex flex-col px-4 gap-4 justify-between items-center mt-10'>
             {userProfile.data.avatar ? (
               <img
                 src={userProfile.data.avatar}
