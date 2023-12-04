@@ -1,4 +1,5 @@
 import { IconPropType } from '../filter/QuickBrowse';
+
 const BookIcon: React.FC<IconPropType> = ({ category }) => {
   return (
     <svg

@@ -8,9 +8,11 @@ import ShoeIcon from '../icons/ShoeIcon';
 import ToyIcon from '../icons/ToyIcon';
 import BookIcon from '../icons/BookIcon';
 import HomeIcon from '../icons/HomeIcon';
+import BooksSubcatergory from './BooksSubcatergory';
 
 export type IconPropType = {
   category?: string;
+  subcategory?: string;
 };
 
 const QuickBrowse = () => {
@@ -19,11 +21,17 @@ const QuickBrowse = () => {
   const router = useRouter();
 
   const handleButtonClick = (value: string) => {
-    setCategory(value);
+    if (category === value) {
+      setCategory('');
+    } else {
+      setCategory(value);
+    }
   };
 
   const onSearchHandler = () => {
-    router.push(`/search/?category=${category}&subcategory=${subcategory}`);
+    router.push(
+      `/search/results/?category=${category}&subcategory=${subcategory}`
+    );
     setCategory('');
     setSubcategory('');
   };
@@ -74,21 +82,30 @@ const QuickBrowse = () => {
           <HomeIcon category={category} />
         </CategoryButton>
       </div>
-      {category === 'clothing' && (
+      {['shoes', 'clothing'].includes(category) && (
         <ApparelSubcategory
           setSubcategory={setSubcategory}
           subcategory={subcategory}
         />
       )}
+      {category === 'books' && (
+        <BooksSubcatergory
+          subcategory={subcategory}
+          setSubcategory={setSubcategory}
+        />
+      )}
+
       {category.length > 0 && (
-        <button
-          className='button button-rounded'
-          type='button'
-          aria-label='See results'
-          onClick={onSearchHandler}
-        >
-          SEE RESULTS
-        </button>
+        <div className='flex justify-center mt-10'>
+          <button
+            className='button button-rounded'
+            type='button'
+            aria-label='See results'
+            onClick={onSearchHandler}
+          >
+            SEE RESULTS
+          </button>
+        </div>
       )}
     </div>
   );
