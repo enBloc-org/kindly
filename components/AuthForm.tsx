@@ -33,6 +33,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
     }
 
     const formData = new FormData(e.target as HTMLFormElement);
+    const userName = formData.get('user_name') as string;
+
+    if (userName.length >= 25) {
+      setErrorMessage('Username must be less than 5 characters long.');
+      return;
+    }
 
     try {
       setErrorMessage(null);
@@ -62,6 +68,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             name='user_name'
             placeholder='Your Username'
             required
+            maxLength={25}
           />
           <label className='text-md' htmlFor='postcode'>
             Postcode
@@ -71,6 +78,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
             name='postcode'
             placeholder='Insert only first half'
             required
+            pattern='^[A-Za-z]{1,2}\d{1,2}$'
+            title='Please enter a valid UK postcode (one or two letters followed by one or two digits).'
           />
         </>
       )}
@@ -107,16 +116,18 @@ const AuthForm: React.FC<AuthFormProps> = ({
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          <input
-            type='checkbox'
-            id='agreeCheckbox'
-            checked={isEmailAgreed}
-            onChange={() => setIsEmailAgreed(!isEmailAgreed)}
-            required
-          />
-          <label htmlFor='agreeCheckbox' className='ml-2'>
-            I agree to share my email address with the donors from this app.
-          </label>
+          <div>
+            <input
+              type='checkbox'
+              id='agreeCheckbox'
+              checked={isEmailAgreed}
+              onChange={() => setIsEmailAgreed(!isEmailAgreed)}
+              required
+            />
+            <label htmlFor='agreeCheckbox' className='ml-2'>
+              I agree to share my email address with the donors from this app.
+            </label>
+          </div>
         </>
       )}
       {isSignUp && (
