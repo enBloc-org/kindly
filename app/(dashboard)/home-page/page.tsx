@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import Link from 'next/link';
-
 import Image from 'next/image';
 import giveKindly from '../../../public/giveKindly.png';
 

@@ -16,12 +16,19 @@ const AuthForm: React.FC<AuthFormProps> = ({
 }) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isEmailAgreed, setIsEmailAgreed] = useState(false);
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (isSignUp && !isEmailAgreed) {
       setErrorMessage('Please agree to share your email address.');
+      return;
+    }
+
+    if (isSignUp && password !== confirmPassword) {
+      setErrorMessage("Passwords don't match");
       return;
     }
 
@@ -41,9 +48,10 @@ const AuthForm: React.FC<AuthFormProps> = ({
 
   return (
     <form
-      className='flex-1 flex flex-col w-full items-center justify-center gap-2 text-foreground'
+      className=' flex-1 flex flex-col w-full items-center  justify-center gap-2 text-foreground'
       onSubmit={handleSubmit}
     >
+      {' '}
       {isSignUp && (
         <>
           <label className='text-md' htmlFor='user_name'>
@@ -59,14 +67,13 @@ const AuthForm: React.FC<AuthFormProps> = ({
             Postcode
           </label>
           <input
-            className='bg-white p-2 border border-primaryGreen rounded shadow mb-2'
+            className='bg-white p-2 border border-primaryGreen  rounded shadow mb-2'
             name='postcode'
             placeholder='Insert only first half'
             required
           />
         </>
       )}
-
       <label className='text-md' htmlFor='email'>
         Email
       </label>
@@ -76,7 +83,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
         placeholder='you@example.com'
         required
       />
-
       <label className='text-md' htmlFor='password'>
         Password
       </label>
@@ -85,11 +91,22 @@ const AuthForm: React.FC<AuthFormProps> = ({
         type='password'
         name='password'
         placeholder='••••••••'
+        onChange={(e) => setPassword(e.target.value)}
         required
       />
-
       {isSignUp && (
-        <div>
+        <>
+          <label className='text-md' htmlFor='confirmPassword'>
+            Confirm Password
+          </label>
+          <input
+            className='bg-white p-2 border border-primaryGreen rounded shadow mb-2'
+            type='password'
+            name='password'
+            placeholder='••••••••'
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
           <input
             type='checkbox'
             id='agreeCheckbox'
@@ -100,7 +117,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           <label htmlFor='agreeCheckbox' className='ml-2'>
             I agree to share my email address with the donors from this app.
           </label>
-        </div>
+        </>
       )}
       {isSignUp && (
         <div>
@@ -110,15 +127,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
           </label>
         </div>
       )}
-
       <button className='button button-rounded'>{buttonText}</button>
-
       {searchParams?.message && (
         <p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>
           {searchParams.message}
         </p>
       )}
-
       {errorMessage && (
         <p className='text-red-500 text-sm mt-2'>{errorMessage}</p>
       )}
