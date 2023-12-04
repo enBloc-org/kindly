@@ -1,11 +1,14 @@
 import ItemCard from '@/components/ItemCard';
 import BackButton from '@/components/buttons/BackButton';
+import { RetreiveItemsFromSupabase } from '@/utils/supabase/RetreiveFromSupabase';
+import filterItems from '@/utils/supabase/filterItems';
 import searchByName from '@/utils/supabase/searchByName';
+import { PartialItem } from '@/utils/supabase/types';
 
 type ParamsType = {
   query: string;
   category: string;
-  subCategory: string;
+  subcategory: string;
 };
 
 const SearchResulsPage = async ({
@@ -14,14 +17,32 @@ const SearchResulsPage = async ({
   searchParams: ParamsType;
 }) => {
   console.log(searchParams);
+  let searchResults: PartialItem[] = [];
 
-  const searchResults = await searchByName(searchParams.query);
-
+  if (Object.keys(searchParams).some((key) => key === 'query')) {
+    searchResults = await searchByName(searchParams.query);
+  } else {
+    searchResults = await RetreiveItemsFromSupabase(
+      'items',
+      '*',
+      'item_type',
+      searchParams.category
+    );
+    if (searchParams.subcategory) {
+      searchResults = filterItems(searchResults, searchParams.subcategory);
+    }
+  }
+  console.log(searchResults);
   return (
     <div>
       <BackButton />
       <h2 className='m-5 font-semibold italic'>
-        Search for: <span className='font-normal'>{searchParams.query}</span>
+        Search for:{' '}
+        <span className='font-normal'>
+          {searchParams.query && searchParams.query}
+          {searchParams.category && searchParams.category}
+          {searchParams.subcategory && ' & ' + searchParams.subcategory}
+        </span>
       </h2>
       {searchResults.length > 0 ? (
         searchResults.map((result) => (
