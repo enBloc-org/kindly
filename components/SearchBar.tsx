@@ -35,6 +35,7 @@ export const SearchBar: React.FC = () => {
         <button
           className='flex-shrink-0 flex-grow-0 max-h-10 bg-secondaryGray py-2 px-3 rounded-r-md '
           type='submit'
+          aria-label='Search for item'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'

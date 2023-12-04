@@ -13,8 +13,6 @@ const SearchResulsPage = async ({
 }: {
   searchParams: ParamsType;
 }) => {
-  console.log(searchParams);
-
   const searchResults = await searchByName(searchParams.query);
 
   return (
