@@ -38,6 +38,13 @@ export const ProfileEdit = ({
         });
         return;
       }
+      if (dataItem.username.length > 25) {
+        setError('username', {
+          type: 'manual',
+          message: 'Username cannot exceed 10 characters',
+        });
+        return;
+      }
 
       await EditSupabaseRow(
         'profiles',
@@ -79,7 +86,13 @@ export const ProfileEdit = ({
             <input
               type='text'
               className='input-text mt-2 mb-4'
-              {...register('username', { required: 'Username is required' })}
+              {...register('username', {
+                required: 'Username is required',
+                maxLength: {
+                  value: 25,
+                  message: 'Username cannot exceed 25 characters',
+                },
+              })}
             />
           </label>
           <p className='italic font-extralight text-primaryOrange'>
