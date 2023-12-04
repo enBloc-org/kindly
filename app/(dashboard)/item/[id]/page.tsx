@@ -7,12 +7,16 @@ import Image from 'next/image';
 import ItemDetails from '@/components/ItemDetails';
 import PostageOptionDisplay from '@/components/PostageOptionDisplay';
 import BackButton from '@/components/buttons/BackButton';
+import { GetProfileFromSupabase } from '@/utils/supabase/GetProfileFromSupabase';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getSession();
   const userEmail = data.session?.user.email;
+  const userId = data.session?.user.id;
 
+  const userProfile = await GetProfileFromSupabase(supabase, userId);
+  console.log('This is the profile', userProfile);
   try {
     const { data: item } = await supabase
       .from('items')
@@ -53,13 +57,16 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               postcode={item.postcode}
               fontSize='text-lg'
             />
-            <EnquireButton
-              donorEmail={donorEmail}
-              userEmail={userEmail !== undefined ? userEmail : ''}
-              title={title}
-              item_id={item.id}
-              user_id={data.session!.user.id}
-            />{' '}
+            {userProfile.data.refugee && (
+              <EnquireButton
+                donorEmail={donorEmail}
+                userEmail={userEmail !== undefined ? userEmail : ''}
+                title={title}
+                item_id={item.id}
+                user_id={data.session!.user.id}
+                // isUserRefugee = {item.profiles.refugee}
+              />
+            )}{' '}
           </div>
         </>
       );

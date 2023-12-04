@@ -13,7 +13,7 @@ export const SearchBar: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push(`/search/${searchTerm}`);
+    router.push(`/search/results/?query=${searchTerm}`);
   };
 
   return (

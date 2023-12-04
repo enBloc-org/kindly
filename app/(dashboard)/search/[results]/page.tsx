@@ -2,18 +2,26 @@ import ItemCard from '@/components/ItemCard';
 import BackButton from '@/components/buttons/BackButton';
 import searchByName from '@/utils/supabase/searchByName';
 
-type Params = {
-  term: string;
+type ParamsType = {
+  query: string;
+  category: string;
+  subCategory: string;
 };
 
-const SearchResulsPage = async ({ params }: { params: Params }) => {
-  const searchResults = await searchByName(params.term);
+const SearchResulsPage = async ({
+  searchParams,
+}: {
+  searchParams: ParamsType;
+}) => {
+  console.log(searchParams);
+
+  const searchResults = await searchByName(searchParams.query);
 
   return (
     <div>
       <BackButton />
       <h2 className='m-5 font-semibold italic'>
-        Search for: <span className='font-normal'>{params.term}</span>
+        Search for: <span className='font-normal'>{searchParams.query}</span>
       </h2>
       {searchResults.length > 0 ? (
         searchResults.map((result) => (

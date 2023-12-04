@@ -17,9 +17,16 @@ export default function SignUp({
     const password = formData.get('password') as string;
     const username = formData.get('user_name') as string;
     const postcode = formData.get('postcode') as string;
+    const refugee = formData.get('refugee') as string;
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
+    let refugeeBool: boolean = true;
 
+    if (refugee === 'true') {
+      refugeeBool = true;
+    } else {
+      refugeeBool = false;
+    }
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -36,6 +43,7 @@ export default function SignUp({
       email: email,
       postcode: postcode,
       username: username,
+      refugee: refugeeBool,
     } as PartialProfile);
 
     return redirect('/login?message=Check email to continue sign in process');
