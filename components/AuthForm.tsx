@@ -98,6 +98,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
           I agree to share my email address with the donors from this app.
         </label>
       </div>
+      <div>
+        <input type='checkbox' id='isRefugee' name='refugee' value='true' />
+        <label htmlFor='isRefugee' className='ml-2'>
+          If you are a refugee wishing to receive items check here
+        </label>
+      </div>
       <button className='button button-rounded'>{buttonText}</button>
       {searchParams?.message && (
         <p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>
