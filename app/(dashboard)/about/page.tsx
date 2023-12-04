@@ -48,6 +48,7 @@ const AboutPage = () => {
         </div>
       </div>
       <div>
+        <h1 className='font-extrabold text-4xl text-center'>FAQs</h1>
         {questionsAndAnswers.map((faq, index) => (
           <FAQItem key={index} {...faq}></FAQItem>
         ))}
