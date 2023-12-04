@@ -25,7 +25,6 @@ export const ProfileEdit = ({
   } = useForm();
 
   const onSubmit = async (data: PartialItem) => {
-    console.log('This is data', data);
     const dataItem: editProfile = {
       avatar: imgAvatar,
       username: data.username,
@@ -47,25 +46,25 @@ export const ProfileEdit = ({
   }, [isEditMode, user, setValue]);
 
   return (
-    <div>
-      <div className='flex justify-center'>
+    <div className='flex flex-col'>
+      <div className='mb-5 flex flex-col justify-between items-center '>
         <ButtonPill clickHandler={handleEditButtonClick}>
           {isEditMode ? 'CLOSE' : 'EDIT'}
         </ButtonPill>
       </div>
       {isEditMode && (
         <form
-          className='flex flex-col items-center gap-5'
+          className='flex flex-col items-center gap-2'
           onSubmit={handleSubmit(onSubmit)}
         >
           <label
             htmlFor='username'
-            className='flex flex-col gap-2 items-center font-light'
+            className='flex flex-col items-center font-light'
           >
             Username
             <input
               type='text'
-              className='input-text'
+              className='input-text mt-2 mb-4'
               {...register('username', { required: 'Username is required' })}
             />
           </label>
@@ -73,7 +72,9 @@ export const ProfileEdit = ({
             {errors.username?.message as string}
           </p>
           <UploadImageInput setImageSrc={setImgAvatar} />
-          <ButtonRounded type='submit'>EDIT PROFILE</ButtonRounded>
+          <div className='mt-4'>
+            <ButtonRounded type='submit'>EDIT PROFILE</ButtonRounded>
+          </div>
         </form>
       )}
     </div>
