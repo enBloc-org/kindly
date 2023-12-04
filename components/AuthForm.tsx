@@ -71,6 +71,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
             name='postcode'
             placeholder='Insert only first half'
             required
+            pattern='^[A-Za-z]{1,2}\d{1,2}$'
+            title='Please enter a valid UK postcode (one or two letters followed by one or two digits).'
           />
         </>
       )}
