@@ -21,26 +21,40 @@ export const ProfileEdit = ({
     register,
     handleSubmit,
     setValue,
+    setError,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data: PartialItem) => {
-    const dataItem: editProfile = {
-      avatar: imgAvatar,
-      username: data.username,
-    };
+    try {
+      const dataItem: editProfile = {
+        avatar: imgAvatar,
+        username: data.username,
+      };
+      if (!dataItem.username) {
+        setError('username', {
+          type: 'manual',
+          message: 'Username is required',
+        });
+        return;
+      }
 
-    await EditSupabaseRow(
-      'profiles',
-      { username: dataItem.username, avatar: dataItem.avatar },
-      'id',
-      userId
-    );
-    window.location.reload();
+      await EditSupabaseRow(
+        'profiles',
+        { username: dataItem.username, avatar: dataItem.avatar },
+        'id',
+        userId
+      );
+      window.location.reload();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   };
+
   const handleEditButtonClick = () => {
     setIsEditMode(!isEditMode);
   };
+
   useEffect(() => {
     setValue('username', isEditMode ? user : '');
   }, [isEditMode, user, setValue]);
