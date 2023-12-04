@@ -102,6 +102,14 @@ const AuthForm: React.FC<AuthFormProps> = ({
           </label>
         </div>
       )}
+      {isSignUp && (
+        <div>
+          <input type='checkbox' id='isRefugee' name='refugee' value='true' />
+          <label htmlFor='isRefugee' className='ml-2'>
+            If you are a refugee wishing to receive items check here
+          </label>
+        </div>
+      )}
 
       <button className='button button-rounded'>{buttonText}</button>
 
