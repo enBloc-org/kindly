@@ -1,12 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import Link from 'next/link';
-import FAQItem from '@/components/FAQcard';
-import questionsAndAnswers from '@/utils/faqsArray';
+
+import Image from 'next/image';
+import giveKindly from '../../../public/giveKindly.png';
 
 const HomePage = () => {
   return (
     <div className='p-6'>
+      <Image alt='give kindly image' src={giveKindly} />
       <h1 className='font-extrabold text-4xl text-center'>What do we do?</h1>
       <div className='my-5 text-justify'>
         Welcome to KINDLY, the giving platform where compassion meets
@@ -44,12 +46,6 @@ const HomePage = () => {
         the KINDLY journey begin! Do you have unwanted clothes or shoes (adults
         and kids sizes), toys, books, or household items? Upload the details to
         KINDLY, spread some kindness, and help the planet! Thank you KINDLY{' '}
-      </div>
-      <h1 className='font-extrabold text-4xl text-center'>FAQs</h1>
-      <div>
-        {questionsAndAnswers.map((faq, index) => (
-          <FAQItem key={index} {...faq}></FAQItem>
-        ))}
       </div>
     </div>
   );
