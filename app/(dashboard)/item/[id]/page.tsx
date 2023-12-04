@@ -14,7 +14,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const { data } = await supabase.auth.getSession();
   const userEmail = data.session?.user.email;
   const userId = data.session?.user.id;
-
+  let EnqButtConditions: boolean = true;
   const userProfile = await GetProfileFromSupabase(supabase, userId);
   console.log('This is the profile', userProfile);
   try {
@@ -29,6 +29,13 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
     } else {
       const donorEmail = item.profiles.email;
       const title = item.item_name;
+      if (
+        userProfile.data.refugee === false ||
+        data.session?.user.id == item.profiles.id
+      ) {
+        EnqButtConditions = false;
+      }
+      console.log(EnqButtConditions);
 
       return (
         <>
@@ -57,7 +64,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               postcode={item.postcode}
               fontSize='text-lg'
             />
-            {userProfile.data.refugee && (
+            {EnqButtConditions && (
               <EnquireButton
                 donorEmail={donorEmail}
                 userEmail={userEmail !== undefined ? userEmail : ''}
