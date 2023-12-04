@@ -22,12 +22,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!isEmailAgreed) {
+    if (isSignUp && !isEmailAgreed) {
       setErrorMessage('Please agree to share your email address.');
       return;
     }
 
-    if (password !== confirmPassword) {
+    if (isSignUp && password !== confirmPassword) {
       setErrorMessage("Passwords don't match");
       return;
     }
