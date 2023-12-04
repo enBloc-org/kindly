@@ -153,7 +153,7 @@ const AddItemPage = () => {
               <option value={'shoes'}>Shoes</option>
               <option value={'toys'}>Toys</option>
               <option value={'books'}>Books</option>
-              <option value={'household'}>Household</option>
+              <option value={'household'}>Home</option>
             </select>
             <p className='italic font-extralight text-primaryOrange'>
               {errors.item_type?.message}
