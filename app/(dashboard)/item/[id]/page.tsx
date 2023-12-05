@@ -37,23 +37,25 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       return (
         <>
           <BackButton />
-          <div className='flex flex-col items-center gap-10 mt-2 mb-10'>
-            <Image
-              src={`${item.imageSrc}`}
-              alt={`${item.item_name}`}
-              width={350}
-              height={200}
-              className='shadow-md'
-            />
+          <div className='flex flex-col items-center gap-14 mt-2 mb-10'>
+            <div className='relative w-72 h-52 md:h-72 md:w-96'>
+              <Image
+                src={`${item.imageSrc}`}
+                alt={`${item.item_name}`}
+                layout='fill'
+                objectFit='cover'
+                className='shadow-md'
+              />
+            </div>
             <PostageOptionDisplay
               collectible={item.collectible}
               postable={item.postable}
               postage_covered={item.postage_covered}
             />
-            <div className='bg-secondaryGray w-full min-h-40 '>
-              <h2 className='italic text-xl pl-8 pt-5'>{item.item_name}</h2>
-              <h3 className='font-light pl-8 pt-3'>Description:</h3>
-              <p className='text-center p-4'>{item.item_description}</p>
+            <div className='bg-secondaryGray p-10 w-full min-h-40 md:w-1/2 md:rounded-lg'>
+              <h2 className='italic text-xl'>{item.item_name}</h2>
+              <h3 className='font-light pt-3'>Description:</h3>
+              <p className='text-center pt-2'>{item.item_description}</p>
             </div>
             <ItemDetails
               condition={item.condition}
@@ -70,7 +72,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
                 user_id={data.session!.user.id}
                 // isUserRefugee = {item.profiles.refugee}
               />
-            )}{' '}
+            )}
           </div>
         </>
       );
