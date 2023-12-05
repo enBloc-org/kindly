@@ -18,6 +18,11 @@ const AuthForm: React.FC<AuthFormProps> = ({
   const [isEmailAgreed, setIsEmailAgreed] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,14 +82,23 @@ const AuthForm: React.FC<AuthFormProps> = ({
       <label className='text-md' htmlFor='password'>
         Password
       </label>
-      <input
-        className='bg-white p-2 border border-primaryGreen rounded shadow mb-2'
-        type='password'
-        name='password'
-        placeholder='••••••••'
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+      <div className='relative'>
+        <input
+          className='bg-white p-2 border border-primaryGreen rounded shadow mb-2'
+          type={showPassword ? 'text' : 'password'}
+          name='password'
+          placeholder='••••••••'
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button
+          type='button'
+          className='absolute top-2 right-2'
+          onClick={handleTogglePassword}
+        >
+          {showPassword ? 'Hide' : 'Show'}
+        </button>
+      </div>
       {isSignUp && (
         <>
           <label className='text-md' htmlFor='confirmPassword'>
