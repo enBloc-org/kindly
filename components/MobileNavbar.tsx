@@ -73,25 +73,26 @@ const MobileNavbar = () => {
         </Link>
         <Link href='/my-items' aria-label='My items'>
           <div
-            className={`flex items-center p-1 border-4 rounded-full ${
-              pathname === '/my-items'
+            className={`flex items-center border-4 rounded-full ${
+              pathname === '/search'
                 ? 'border-primaryOrange'
                 : 'border-primaryGreen'
             }`}
           >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='38'
-              height='38'
-              viewBox='0 0 24 24'
-            >
-              <path
-                fill='none'
-                stroke={pathname === '/my-items' ? '#FF9E5E' : '#54BB89'}
-                d='M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z'
-              />
-            </svg>
-          </div>
+            <Link href='/search' className='p-2' aria-label='Search page'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='30'
+                height='30'
+                viewBox='0 0 16 16'
+              >
+                <path
+                  fill={pathname === '/search' ? '#FF9E5E' : '#54BB89'}
+                  d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0'
+                />
+              </svg>{' '}
+            </Link>
+          </div>{' '}
         </Link>
         <Link href='/profile' aria-label='My profile'>
           <div

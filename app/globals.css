@@ -44,5 +44,5 @@ body {
 /* Form classes*/
 
 .input-text {
-  @apply bg-background py-3 px-5 rounded-3xl border border-primaryGreen text-sm
+  @apply bg-background py-3 px-5 rounded-3xl border border-primaryGreen text-sm md:w-80
 }
