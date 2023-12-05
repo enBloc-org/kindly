@@ -15,7 +15,6 @@ export default async function searchByName(name: string): Promise<item[]> {
   if (!data || error) {
     return [];
   }
-  console.log('Data from search by name', data);
 
   return data as item[];
 }
