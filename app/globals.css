@@ -10,6 +10,7 @@ h4,
 h5,
 h6,
 button,
+a,
 label {
   @apply font-barlow text-primaryGray;
 }

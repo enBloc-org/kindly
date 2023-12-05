@@ -35,7 +35,7 @@ const ProfilePage = async () => {
     }
     return (
       <>
-        <div className='flex justify-between items-center mt-10 md:px-20 lg:px-40'>
+        <div className='flex justify-between items-center mt-10 px-5 md:px-20 lg:px-40'>
           <div className='py-2 px-5'>
             <h1 className='text-2xl pl-3'>Profile</h1>
             <div className='flex gap-3 mt-2'>
@@ -64,13 +64,13 @@ const ProfilePage = async () => {
             <ProfileEdit userId={userId!} user={userProfile.data.username} />
           </div>
         </div>
-        <div className='mt-10'>
+        <div className='mt-10 w-5/6 m-auto'>
           <h1 className='text-lg font-thin m-5 md:pl-20 lg:pl-40'>
             My donated items:
           </h1>
 
           {fetchedItems && fetchedItems.length > 0 ? (
-            <ul className='flex flex-col items-center gap-5'>
+            <ul className='flex flex-col items-center gap-10'>
               {fetchedItems.map((item) => (
                 <li key={item.id}>
                   <ItemCard

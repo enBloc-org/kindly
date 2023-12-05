@@ -1,8 +1,8 @@
 import Header from '@/components/Header';
-import MobileNavbar from '@/components/MobileNavbar';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
+import Footer from '@/components/Footer';
 
 export default async function DashBoardLayout({
   children,
@@ -20,7 +20,7 @@ export default async function DashBoardLayout({
       <main>
         <div className='min-h-screen'>{children}</div>
       </main>
-      <MobileNavbar />
+      <Footer />
     </>
   );
 }
