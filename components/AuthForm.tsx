@@ -33,12 +33,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
     }
 
     const formData = new FormData(e.target as HTMLFormElement);
-    // const userName = formData.get('user_name') as string;
-
-    // if (userName.length >= 25) {
-    //   setErrorMessage('Username must be less than 5 characters long.');
-    //   return;
-    // }
 
     try {
       setErrorMessage(null);
@@ -68,18 +62,18 @@ const AuthForm: React.FC<AuthFormProps> = ({
             name='user_name'
             placeholder='Your Username'
             required
-            // maxLength={25}
+
           />
           <label className='text-md' htmlFor='postcode'>
-            Postcode
+            First Half of Your Postcode
           </label>
           <input
             className='bg-white p-2 border border-primaryGreen  rounded shadow mb-2'
             name='postcode'
             placeholder='Insert only first half'
             required
-            // pattern='^[A-Za-z]{1,2}\d{1,2}$'
-            // title='Please enter a valid UK postcode (one or two letters followed by one or two digits).'
+            pattern='^[A-Za-z]{1,2}\d{1,2}$'
+            title='Please enter a valid UK first half of postcode (one or two letters followed by one or two digits only).'
           />
         </>
       )}
