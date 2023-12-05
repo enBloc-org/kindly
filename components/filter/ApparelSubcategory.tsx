@@ -29,7 +29,7 @@ const ApparelSubcategory: React.FC<CategoryProp> = ({
         category={subcategory}
         option='women'
       >
-        Women:
+        Women
         <WomanIcon subcategory={subcategory} />
       </CategoryButton>
       <CategoryButton
@@ -37,7 +37,7 @@ const ApparelSubcategory: React.FC<CategoryProp> = ({
         category={subcategory}
         option='men'
       >
-        Men:
+        Men
         <ManIcon subcategory={subcategory} />
       </CategoryButton>
       <CategoryButton
@@ -45,7 +45,7 @@ const ApparelSubcategory: React.FC<CategoryProp> = ({
         category={subcategory}
         option='girls'
       >
-        Girls:
+        Girls
         <GirlIcon subcategory={subcategory} />
       </CategoryButton>
       <CategoryButton
@@ -53,7 +53,7 @@ const ApparelSubcategory: React.FC<CategoryProp> = ({
         category={subcategory}
         option='boys'
       >
-        Boys:
+        Boys
         <BoyIcon subcategory={subcategory} />
       </CategoryButton>
     </div>
