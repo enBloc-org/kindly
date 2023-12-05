@@ -3,8 +3,12 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import giveKindly from '../../../public/giveKindly.png';
+import { retrieveLastItems } from '@/utils/supabase/retrieveLastItems';
 
-const HomePage = () => {
+const HomePage = async () => {
+  const lastItems = await retrieveLastItems();
+  console.log(lastItems);
+
   return (
     <div className='p-6'>
       <Image alt='give kindly image' src={giveKindly} />
