@@ -1,7 +1,7 @@
 export type item = {
   id: number;
   reserved: boolean;
-  size: string; // Change 'String' to 'string'
+  size: string;
   brand: string;
   condition: string;
   item_name: string;

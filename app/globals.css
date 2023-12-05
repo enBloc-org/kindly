@@ -34,12 +34,12 @@ body {
 }
 
 .button-pill {
-  @apply rounded-2xl text-xs
+  @apply rounded-2xl text-xs;
 }
 
 .active-link {
-  fill: #FF9E5E;
-  border-color: #FF9E5E;
+  fill: #ff9e5e;
+  border-color: #ff9e5e;
 }
 
 /* Form classes*/
@@ -47,3 +47,4 @@ body {
 .input-text {
   @apply bg-background py-3 px-5 rounded-3xl border border-primaryGreen text-sm md:w-80
 }
+

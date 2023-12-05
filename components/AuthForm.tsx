@@ -62,15 +62,18 @@ const AuthForm: React.FC<AuthFormProps> = ({
             name='user_name'
             placeholder='Your Username'
             required
+
           />
           <label className='text-md' htmlFor='postcode'>
-            Postcode
+            First Half of Your Postcode
           </label>
           <input
             className='bg-white p-2 border border-primaryGreen  rounded shadow mb-2'
             name='postcode'
             placeholder='Insert only first half'
             required
+            pattern='^[A-Za-z]{1,2}\d{1,2}$'
+            title='Please enter a valid UK first half of postcode (one or two letters followed by one or two digits only).'
           />
         </>
       )}
@@ -107,16 +110,18 @@ const AuthForm: React.FC<AuthFormProps> = ({
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          <input
-            type='checkbox'
-            id='agreeCheckbox'
-            checked={isEmailAgreed}
-            onChange={() => setIsEmailAgreed(!isEmailAgreed)}
-            required
-          />
-          <label htmlFor='agreeCheckbox' className='ml-2'>
-            I agree to share my email address with the donors from this app.
-          </label>
+          <div>
+            <input
+              type='checkbox'
+              id='agreeCheckbox'
+              checked={isEmailAgreed}
+              onChange={() => setIsEmailAgreed(!isEmailAgreed)}
+              required
+            />
+            <label htmlFor='agreeCheckbox' className='ml-2'>
+              I agree to share my email address with the donors from this app.
+            </label>
+          </div>
         </>
       )}
       {isSignUp && (
