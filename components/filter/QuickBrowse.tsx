@@ -37,7 +37,7 @@ const QuickBrowse = () => {
   };
 
   return (
-    <div>
+    <div className='max-w-xl m-auto'>
       <h1 className='font-semibold italic ml-4 mt-16'>Quick search:</h1>
       <div className='flex justify-between gap-1 px-2 mt-10 text-sm'>
         <CategoryButton
