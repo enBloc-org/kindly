@@ -23,7 +23,7 @@ const ApparelSubcategory: React.FC<CategoryProp> = ({
   };
 
   return (
-    <div className='flex justify-center gap-2 mt-10 text-sm'>
+    <div className='flex justify-center gap-2 mt-10 text-sm md:gap-10'>
       <CategoryButton
         handleButtonClick={handleButtonClick}
         category={subcategory}
