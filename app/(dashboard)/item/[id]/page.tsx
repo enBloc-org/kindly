@@ -16,14 +16,12 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const userId = data.session?.user.id;
   let EnqButtConditions: boolean = true;
   const userProfile = await GetProfileFromSupabase(supabase, userId);
-  console.log('This is the profile', userProfile);
   try {
     const { data: item } = await supabase
       .from('items')
       .select('*,profiles(*)')
       .eq('id', params.id)
       .single();
-    console.log(item);
     if (!item || !item.profiles) {
       throw new Error('Error fetching data');
     } else {
@@ -35,7 +33,6 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       ) {
         EnqButtConditions = false;
       }
-      console.log(EnqButtConditions);
 
       return (
         <>
