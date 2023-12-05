@@ -8,7 +8,6 @@ export const SearchBar: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-    console.log(searchTerm);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

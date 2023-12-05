@@ -63,8 +63,8 @@ const AddItemPage = () => {
   const isPickUpChecked = watch('collectible');
 
   return (
-    <div className='flex flex-col items-center gap-3 my-5'>
-      <h2 className='font-bold'>Add your item</h2>
+    <div className='flex flex-col items-center gap-3 my-20'>
+      <h2 className='font-bold mb-10'>Add your item</h2>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -102,6 +102,7 @@ const AddItemPage = () => {
           Postcode <span className='text-xs italic'>First half</span>
           <input
             type='text'
+            maxLength={5}
             {...register('postcode', {
               required: 'This field is required',
               maxLength: {
