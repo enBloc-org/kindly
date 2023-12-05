@@ -45,7 +45,7 @@ const QuickBrowse = () => {
           category={category}
           option='clothing'
         >
-          Clothing:
+          Clothing
           <ShirtIcon category={category} />
         </CategoryButton>
         <CategoryButton
@@ -53,7 +53,7 @@ const QuickBrowse = () => {
           category={category}
           option='shoes'
         >
-          Shoes:
+          Shoes
           <ShoeIcon category={category} />
         </CategoryButton>
 
@@ -62,7 +62,7 @@ const QuickBrowse = () => {
           category={category}
           option='toys'
         >
-          Toys:
+          Toys
           <ToyIcon category={category} />
         </CategoryButton>
         <CategoryButton
@@ -70,7 +70,7 @@ const QuickBrowse = () => {
           category={category}
           option='books'
         >
-          Books:
+          Books
           <BookIcon category={category} />
         </CategoryButton>
         <CategoryButton
@@ -78,7 +78,7 @@ const QuickBrowse = () => {
           category={category}
           option='household'
         >
-          Home:
+          Home
           <HomeIcon category={category} />
         </CategoryButton>
       </div>

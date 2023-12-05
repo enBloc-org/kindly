@@ -34,11 +34,11 @@ const SearchResulsPage = async ({
       searchResults = filterItems(searchResults, searchParams.subcategory);
     }
   }
-  
+
   return (
-    <div>
+    <div className='m-auto mt-5 lg:w-5/6 lg-px-20'>
       <BackButton />
-      <h2 className='m-5 font-semibold italic'>
+      <h2 className='mx-5 font-semibold italic'>
         Search for:{' '}
         <span className='font-normal'>
           {searchParams.query && searchParams.query}
@@ -46,22 +46,24 @@ const SearchResulsPage = async ({
           {searchParams.subcategory && ' & ' + searchParams.subcategory}
         </span>
       </h2>
-      {searchResults.length > 0 ? (
-        searchResults.map((result) => (
-          <ItemCard
-            key={result.id}
-            imageSrc={result.imageSrc}
-            item_name={result.item_name}
-            condition={result.condition}
-            item_type={result.item_type}
-            postcode={result.postcode}
-            postable={result.postable}
-            itemId={result.id}
-          />
-        ))
-      ) : (
-        <p className='text-center'>No results found.</p>
-      )}
+      <div className='flex flex-col items-center gap-5 mt-10'>
+        {searchResults.length > 0 ? (
+          searchResults.map((result) => (
+            <ItemCard
+              key={result.id}
+              imageSrc={result.imageSrc}
+              item_name={result.item_name}
+              condition={result.condition}
+              item_type={result.item_type}
+              postcode={result.postcode}
+              postable={result.postable}
+              itemId={result.id}
+            />
+          ))
+        ) : (
+          <p className='text-center'>No results found.</p>
+        )}
+      </div>
     </div>
   );
 };

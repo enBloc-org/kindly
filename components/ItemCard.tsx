@@ -23,27 +23,28 @@ const ItemCard: React.FC<ItemCardPropType> = ({
   itemId,
 }) => {
   return (
-    <Link href={`/item/${itemId}`}>
-      <button className='bg-white shadow-sm px-3 mx-3 rounded-lg max-w-40'>
-        <h2 className='font-light p-3'>{item_name}</h2>
-        <div className='flex gap-3'>
-          <div className='pb-5'>
-            <Image
-              src={imageSrc ? `${imageSrc}` : '/default-item-img.png'}
-              alt={`Image of ${item_name}`}
-              width={350}
-              height={200}
-            />
-          </div>
-          <ItemDetails
-            condition={condition}
-            item_type={item_type}
-            postcode={postcode}
-            postable={postable}
-            fontSize='text-xs'
+    <Link
+      href={`/item/${itemId}`}
+      className='bg-white shadow-sm relative px-8 pb-5 mx-3 rounded-lg lg:text-lg'
+    >
+      <h2 className='font-light p-4'>{item_name}</h2>
+      <div className='flex gap-3'>
+        <div className='relative w-48 h-36 shadow-md md:w-64 md:h-52'>
+          <Image
+            src={`${imageSrc}`}
+            alt={`Image of ${item_name}`}
+            layout='fill'
+            objectFit='cover'
           />
         </div>
-      </button>
+        <ItemDetails
+          condition={condition}
+          item_type={item_type}
+          postcode={postcode}
+          postable={postable}
+          fontSize='text-sm'
+        />
+      </div>
     </Link>
   );
 };

@@ -25,7 +25,7 @@ const BooksSubcatergory: React.FC<CategoryProp> = ({
         category={subcategory}
         option='women'
       >
-        Adult:
+        Adults
         <WomanIcon subcategory={subcategory} />
       </CategoryButton>
       <CategoryButton
@@ -33,7 +33,7 @@ const BooksSubcatergory: React.FC<CategoryProp> = ({
         category={subcategory}
         option='girls'
       >
-        Children:
+        Children
         <GirlIcon subcategory={subcategory} />
       </CategoryButton>
     </div>
