@@ -15,7 +15,7 @@ export default function Header() {
             : 'border-primaryGreen'
         }`}
       >
-        <Link href='/search' className='p-2'>
+        <Link href='/search' className='p-2' aria-label='Search page'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='30'
@@ -30,7 +30,7 @@ export default function Header() {
         </Link>
       </div>
       <div className='flex items-center'>
-        <Link href='/home-page'>
+        <Link href='/home-page' aria-label='Home page'>
           <Image
             src='/KINDLY_LOGO.png'
             alt='Kindly Logo'

@@ -16,7 +16,6 @@ const SearchResulsPage = async ({
 }: {
   searchParams: ParamsType;
 }) => {
-  console.log(searchParams);
   let searchResults: PartialItem[] | null = [];
 
   if (Object.keys(searchParams).some((key) => key === 'query')) {
@@ -35,8 +34,7 @@ const SearchResulsPage = async ({
       searchResults = filterItems(searchResults, searchParams.subcategory);
     }
   }
-
-  console.log(searchResults);
+  
   return (
     <div>
       <BackButton />

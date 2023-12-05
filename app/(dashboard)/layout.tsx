@@ -17,7 +17,9 @@ export default async function DashBoardLayout({
   return (
     <>
       <Header />
-      <div className='min-h-screen'>{children}</div>
+      <main>
+        <div className='min-h-screen'>{children}</div>
+      </main>
       <MobileNavbar />
     </>
   );

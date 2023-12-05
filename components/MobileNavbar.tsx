@@ -7,8 +7,8 @@ const MobileNavbar = () => {
 
   return (
     <footer className='sticky bottom-0 bg-background py-1'>
-      <nav className='flex items-center justify-between px-1'>
-        <Link href='/home-page'>
+      <nav className='flex items-center justify-between px-1' role='navigation'>
+        <Link href='/home-page' aria-label='Home page'>
           <div
             className={`flex items-center p-1 border-4 rounded-full ${
               pathname === '/home-page'
@@ -29,7 +29,7 @@ const MobileNavbar = () => {
             </svg>
           </div>
         </Link>
-        <Link href='/about'>
+        <Link href='/about' aria-label='About page'>
           <div
             className={`flex items-center p-1 border-4 rounded-full ${
               pathname === '/about'
@@ -50,7 +50,7 @@ const MobileNavbar = () => {
             </svg>
           </div>
         </Link>
-        <Link href='/add-item'>
+        <Link href='/add-item' aria-label='Add an item'>
           <div
             className={`flex items-center border-4 rounded-full ${
               pathname === '/add-item'
@@ -71,7 +71,7 @@ const MobileNavbar = () => {
             </svg>
           </div>
         </Link>
-        <Link href='/my-items'>
+        <Link href='/my-items' aria-label='My items'>
           <div
             className={`flex items-center p-1 border-4 rounded-full ${
               pathname === '/my-items'
@@ -93,7 +93,7 @@ const MobileNavbar = () => {
             </svg>
           </div>
         </Link>
-        <Link href='/profile'>
+        <Link href='/profile' aria-label='My profile'>
           <div
             className={`flex items-center p-1 border-4 rounded-full ${
               pathname === '/profile'
