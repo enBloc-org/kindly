@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import giveKindly from '../../../public/giveKindly.png';
 import { retrieveLastItems } from '@/utils/supabase/retrieveLastItems';
+import ItemCard from '@/components/ItemCard';
 
 const HomePage = async () => {
   const lastItems = await retrieveLastItems();
@@ -24,7 +25,20 @@ const HomePage = async () => {
         declutter your life, and work toward a more mindful and eco-conscious
         future. Together, let's weave a tapestry of kindness and sustainability!
       </div>
-      <h1 className='font-extrabold text-4xl text-center'>Blog</h1>
+      <h2>Last available items</h2>
+      <div className='lastItems'>
+        {lastItems && (
+          <ul>
+            {' '}
+            {lastItems.map((item) => (
+              <li key={item.id}>
+                <ItemCard imageSrc={item.imageSrc} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <h2 className='font-extrabold text-4xl text-center'>Blog</h2>
       <div className='my-5 text-justify'>
         Hello and welcome! We’re very excited to be launching KINDLY, a platform
         which lets you donate unwanted items to Ukrainian refugees. In the
