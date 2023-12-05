@@ -29,7 +29,7 @@ const ItemCard: React.FC<ItemCardPropType> = ({
         <div className='flex gap-3'>
           <div className='pb-5'>
             <Image
-              src={`${imageSrc}`}
+              src={imageSrc ? `${imageSrc}` : '/default-item-img.png'}
               alt={`Image of ${item_name}`}
               width={350}
               height={200}
