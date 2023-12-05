@@ -81,7 +81,7 @@ const ProfilePage = async () => {
                     postable={item.postable}
                     itemId={item.id}
                   />
-                  <DeleteButton itemId={item?.id} />
+                  <DeleteButton title='Delete Item' itemId={item?.id} />
                 </li>
               ))}
             </ul>

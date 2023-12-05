@@ -1,13 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+
 import giveKindly from '../../../public/giveKindly.png';
 import { retrieveLastItems } from '@/utils/supabase/retrieveLastItems';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const HomePage = async () => {
   const lastItems = await retrieveLastItems();
-  console.log(lastItems);
 
   return (
     <>
@@ -39,6 +39,31 @@ const HomePage = async () => {
             let's weave a tapestry of kindness and sustainability!
           </p>
         </div>
+        <div className='flex flex-col gap-8 lg:px-10'>
+          <h2 className='font-extrabold text-4xl text-center'>
+            Donated this week
+          </h2>
+          <div className='lastItems'>
+            {lastItems && (
+              <ul className='flex flex-row gap-2 md:flex-col items-center'>
+                {' '}
+                {lastItems.map((item) => (
+                  <li key={item.id}>
+                    <Link href={`/item/${item.id}`}>
+                      <Image
+                        alt={`Image of ${item.item_name}`}
+                        src={item.imageSrc}
+                        width={400}
+                        height={100}
+                      />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+
         <div className='flex flex-col gap-8 lg:px-10'>
           <h2 className='font-extrabold text-4xl text-center'>Blog</h2>
           <p className='mt-5 md:px-16 lg:px-0'>
