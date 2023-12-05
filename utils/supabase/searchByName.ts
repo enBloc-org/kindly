@@ -1,8 +1,9 @@
 'use server';
 import { cookies } from 'next/headers';
 import { createClient } from '@/utils/supabase/server';
+import { item } from './types';
 
-export default async function searchByName(name: string) {
+export default async function searchByName(name: string): Promise<item[]> {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -14,6 +15,7 @@ export default async function searchByName(name: string) {
   if (!data || error) {
     return [];
   }
+  console.log('Data from search by name', data);
 
-  return data;
+  return data as item[];
 }
