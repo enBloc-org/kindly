@@ -17,7 +17,7 @@ const SearchResulsPage = async ({
   searchParams: ParamsType;
 }) => {
   console.log(searchParams);
-  let searchResults: PartialItem[] = [];
+  let searchResults: PartialItem[] | null = [];
 
   if (Object.keys(searchParams).some((key) => key === 'query')) {
     searchResults = await searchByName(searchParams.query);
@@ -28,10 +28,14 @@ const SearchResulsPage = async ({
       'item_type',
       searchParams.category
     );
-    if (searchParams.subcategory) {
+    if (!searchResults) {
+      return 'supabase request fialed';
+    }
+    if (searchParams.subcategory && searchResults) {
       searchResults = filterItems(searchResults, searchParams.subcategory);
     }
   }
+
   console.log(searchResults);
   return (
     <div>
