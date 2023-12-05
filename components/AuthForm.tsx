@@ -62,6 +62,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             name='user_name'
             placeholder='Your Username'
             required
+
           />
           <label className='text-md' htmlFor='postcode'>
             First Half of Your Postcode
