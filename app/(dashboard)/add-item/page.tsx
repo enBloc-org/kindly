@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 const AddItemPage = () => {
   const [userId, setUserId] = useState('');
   const [imgSrc, setImageSrc] = useState('');
+  const [generalError, setGeneralError] = useState('');
   const router = useRouter();
 
   const {
@@ -233,7 +234,16 @@ const AddItemPage = () => {
           </p>
         )}
 
-        <UploadImageInput setImageSrc={setImageSrc} />
+        <UploadImageInput
+          setImageSrc={setImageSrc}
+          setError={setGeneralError}
+        />
+        {generalError && (
+          <p className='italic font-extralight text-primaryOrange'>
+            {generalError}
+          </p>
+        )}
+
         <ButtonRounded type='submit'>ADD YOUR ITEM</ButtonRounded>
       </form>
     </div>

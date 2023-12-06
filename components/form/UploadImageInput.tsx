@@ -6,14 +6,19 @@ import { v4 as uuidv4 } from 'uuid';
 
 type UploadImageProps = {
   setImageSrc: (src: string) => void;
+  setError: (error: string) => void;
 };
 
 const CDN =
   'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/';
 
-const UploadImageInput: React.FC<UploadImageProps> = ({ setImageSrc }) => {
+const UploadImageInput: React.FC<UploadImageProps> = ({
+  setImageSrc,
+  setError,
+}) => {
   const supabase = createClientComponentClient();
   const [userId, setUserId] = useState('');
+  const [isImageUploaded, setIsImageUploaded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +48,9 @@ const UploadImageInput: React.FC<UploadImageProps> = ({ setImageSrc }) => {
         const imagePath = CDN + userId + '/' + imageName;
 
         setImageSrc(imagePath);
+        setIsImageUploaded(true);
+        setError('');
+
         const { error } = await supabase.storage
           .from('images')
           .upload(userId + '/' + imageName, file);
@@ -66,6 +74,11 @@ const UploadImageInput: React.FC<UploadImageProps> = ({ setImageSrc }) => {
         onChange={(e) => imageFileUpload(e)}
         required
       />
+      {!isImageUploaded && (
+        <p className='italic font-extralight text-primaryOrange'>
+          Image is required
+        </p>
+      )}
     </div>
   );
 };
