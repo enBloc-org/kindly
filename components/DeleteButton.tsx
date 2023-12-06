@@ -3,7 +3,7 @@ import deleteItem from '@/utils/supabase/DeleteItem';
 import { useRouter } from 'next/navigation';
 
 interface DeleteButtonProps {
-  itemId?: number;
+  itemId: number;
   title: string;
 }
 
