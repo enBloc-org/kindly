@@ -29,7 +29,7 @@ const ItemCard: React.FC<ItemCardPropType> = ({
         <div className='flex gap-3'>
           <div className='relative w-48 h-36 shadow-md md:w-64 md:h-52'>
             <Image
-              src={`${imageSrc}`}
+              src={imageSrc ? `${imageSrc}` : '/default-item-img.png'}
               alt={`Image of ${item_name}`}
               layout='fill'
               objectFit='cover'
