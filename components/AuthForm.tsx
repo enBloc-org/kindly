@@ -53,7 +53,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
 
   return (
     <form
-      className=' flex-1 flex flex-col w-full items-center  justify-center gap-2 text-foreground'
+      className=' flex-1 flex flex-col  items-center  justify-center gap-4 text-foreground'
       onSubmit={handleSubmit}
     >
       {' '}
@@ -134,7 +134,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           </label>
         </div>
       )}
-      <button className='button button-rounded'>{buttonText}</button>
+      <button className='button button-rounded mt-1'>{buttonText}</button>
       {searchParams?.message && (
         <p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>
           {searchParams.message}

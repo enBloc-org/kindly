@@ -1,10 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import giveKindly from '../../../public/giveKindly.png';
 
-const HomePage = () => {
+import giveKindly from '../../../public/giveKindly.png';
+import { retrieveLastItems } from '@/utils/supabase/retrieveLastItems';
+import Image from 'next/image';
+import Link from 'next/link';
+
+const HomePage = async () => {
+  const lastItems = await retrieveLastItems();
+
   return (
     <>
       <div className='max-w-lg m-auto'>
@@ -15,7 +19,7 @@ const HomePage = () => {
           className='m-auto'
         />
       </div>
-      <div className='grid gap-10 px-12 mt-16 md:px-40 xl:grid-cols-2 lg:p-20 lg:gap-20'>
+      <div className='grid gap-10 px-12 mt-16 md:px-40 xl:grid-cols-2 lg:p-20 lg:gap-30'>
         <div className='flex flex-col gap-8 lg:px-10'>
           <h1 className='font-extrabold text-4xl text-center'>
             What do we do?
@@ -36,6 +40,34 @@ const HomePage = () => {
           </p>
         </div>
         <div className='flex flex-col gap-8 lg:px-10'>
+          <h2 className='font-extrabold text-4xl text-center'>
+            Added this week
+          </h2>
+          <div className='lastItems'>
+            {lastItems && (
+              <ul className='flex flex-wrap gap-10 justify-center items-center'>
+                {' '}
+                {lastItems.map((item) => (
+                  <li key={item.id}>
+                    <Link href={`/item/${item.id}`}>
+                      <div className='relative w-28 h-36 shadow-md'>
+                        <Image
+                          alt={`Image of ${item.item_name}`}
+                          src={item.imageSrc}
+                          fill={true}
+                          objectFit='cover'
+                          className='rounded-lg'
+                        />
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-8 lg:px-60 xl:col-span-2 xl:mt-20'>
           <h2 className='font-extrabold text-4xl text-center'>Blog</h2>
           <p className='mt-5 md:px-16 lg:px-0'>
             Hello and welcome! We’re very excited to be launching KINDLY, a
