@@ -2,8 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { FaInstagramSquare, FaTwitter } from 'react-icons/fa';
 import { FaSquareThreads } from 'react-icons/fa6';
-import FAQItem from '@/components/FAQcard';
 import questionsAndAnswers from '@/utils/faqsArray';
+import AccordionItem from '@/components/accordian/AccordionItem';
 
 const AboutPage = () => {
   return (
@@ -48,9 +48,9 @@ const AboutPage = () => {
         </Link>
       </div>
       <div>
-        <h2 className='font-extrabold text-4xl text-center mt-8'>FAQs</h2>
+        <h2 className='font-extrabold text-4xl text-center my-8'>FAQs</h2>
         {questionsAndAnswers.map((faq, index) => (
-          <FAQItem key={index} {...faq}></FAQItem>
+          <AccordionItem key={index} {...faq} />
         ))}
       </div>
     </div>
