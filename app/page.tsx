@@ -13,7 +13,7 @@ export default async function Index() {
         />
       </header>
       <main
-        className='min-h-screen p-4 grid items-center justify-items-center'
+        className='p-4 grid gap-5 items-center justify-items-center'
         role='main'
       >
         <h1 className='italic'>A place to support Ukrainian refugees</h1>

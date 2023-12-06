@@ -22,7 +22,7 @@ body {
 /* Universal component classes*/
 
 .button {
-  @apply bg-primaryGreen text-background text-sm tracking-wider px-4 py-1.5 font-semibold shadow-md  cursor-pointer relative max-w-xs;
+  @apply bg-primaryGreen text-background text-sm font-semibold tracking-wider px-4 py-1.5  shadow-md  cursor-pointer relative max-w-xs;
 }
 
 .button:active {
