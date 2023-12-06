@@ -4,8 +4,7 @@ import { RetreiveItemsFromSupabase } from '@/utils/supabase/RetreiveFromSupabase
 
 //Components
 import ItemCard from '@/components/ItemCard';
-import DeleteButton from '@/components/DeleteButton';
-
+import Modal from '@/components/Modal';
 //Components
 import { GetProfileFromSupabase } from '@/utils/supabase/GetProfileFromSupabase';
 import LogOutButton from '@/components/LogOutButton';
@@ -81,7 +80,11 @@ const ProfilePage = async () => {
                     postable={item.postable}
                     itemId={item.id}
                   />
-                  <DeleteButton title='Delete item' itemId={item?.id} />
+                  <Modal
+                    name='Delete Item'
+                    itemId={item.id}
+                    message='By pressing "confirm" you will delete this item'
+                  />
                 </li>
               ))}
             </ul>
