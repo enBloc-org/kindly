@@ -25,13 +25,13 @@ const Modal = ({ name, itemId, message }: ModalProps) => {
       )}
       {modal && (
         <div className='modal my-2'>
-          <div className='rounded-t bg-slate-200'>
-            <h1>Warning</h1>
+          <div className='rounded-t bg-backgroundHighlight p-2'>
+            <h1 className='font-semibold text-primaryOrange'>Warning</h1>
             <p>{message}</p>
           </div>
           <DeleteButton itemId={itemId} title='Confirm' />
           <button
-            className='button button-rounded mx-2 my-1'
+            className='button button-rounded mx-2 my-2'
             onClick={toggleModal}
           >
             Cancel

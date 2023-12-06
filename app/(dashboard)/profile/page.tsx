@@ -64,7 +64,7 @@ const ProfilePage = async () => {
           </div>
         </div>
         <div className='mt-10 w-5/6 m-auto'>
-          <h1 className='text-lg font-thin m-5 md:pl-20 lg:pl-40'>
+          <h1 className='text-lg font-medium m-5 md:pl-20 lg:pl-40'>
             My donated items:
           </h1>
 
@@ -83,7 +83,7 @@ const ProfilePage = async () => {
                   <Modal
                     name='Delete Item'
                     itemId={item.id}
-                    message='By pressing "confirm" you will delete this item'
+                    message='By pressing Confirm you will delete this item'
                   />
                 </li>
               ))}
