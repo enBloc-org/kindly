@@ -187,8 +187,8 @@ const AddItemPage = () => {
                 </option>
                 <option value={'women'}>Women</option>
                 <option value={'men'}>Men</option>
-                <option value={'girl'}>Girl</option>
-                <option value={'boy'}>Boy</option>
+                <option value={'girls'}>Girls</option>
+                <option value={'boys'}>Boys</option>
                 <option value={'unisex'}>Unisex</option>
               </select>
             </label>{' '}
