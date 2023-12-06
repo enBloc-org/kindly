@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 type UploadImageProps = {
   setImageSrc: (src: string) => void;
-  setError: (error: string) => void;
+  setError?: (error: string) => void;
 };
 
 const CDN =
@@ -49,7 +49,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 
         setImageSrc(imagePath);
         setIsImageUploaded(true);
-        setError('');
+        setError?.('');
 
         const { error } = await supabase.storage
           .from('images')

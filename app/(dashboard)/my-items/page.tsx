@@ -2,7 +2,6 @@ import { RetreiveItemsFromSupabase } from '@/utils/supabase/RetreiveFromSupabase
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import ItemCard from '@/components/ItemCard';
-// import DeleteButton from '@/components/DeleteButton';
 
 import Modal from '@/components/Modal';
 
