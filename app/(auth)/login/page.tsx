@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import AuthForm from '../../../components/AuthForm';
 import { cookies } from 'next/headers';
+import Link from 'next/link';
 
 export default function Login({
   searchParams,
@@ -28,13 +29,19 @@ export default function Login({
   };
 
   return (
-    <div className='flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2'>
+    <div className='flex flex-col  px-8  items-center'>
       <AuthForm
         onSubmit={signIn}
         buttonText='LOG IN'
         searchParams={searchParams}
         isSignUp={false}
       />
+      <p className='text-md mt-5'>
+        Not a member yet sign up{' '}
+        <Link href='/signup'>
+          <span className='text-primaryGreen'>here</span>
+        </Link>
+      </p>
     </div>
   );
 }
