@@ -5,7 +5,7 @@ import DeleteButton from './DeleteButton';
 
 interface ModalProps {
   name: string;
-  itemId: number;
+  itemId?: number;
   message: string;
 }
 

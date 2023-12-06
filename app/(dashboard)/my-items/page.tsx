@@ -36,7 +36,7 @@ const MyItemsPage = async () => {
               />
               <Modal
                 name='Delete Item'
-                itemId={item.id!}
+                itemId={item.id}
                 message='By pressing "confirm" you will delete this item'
               />
             </li>
