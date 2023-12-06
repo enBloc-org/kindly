@@ -1,4 +1,5 @@
 'use client';
+
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -11,7 +12,7 @@ const MobileNavbar = () => {
         <div
           className={`flex items-center p-1 border-4 rounded-full ${
             pathname === '/home-page'
-              ? 'border-primaryOrange'
+              ? 'border-primaryOrange bg-backgroundHighlight'
               : 'border-primaryGreen'
           }`}
         >
@@ -32,7 +33,7 @@ const MobileNavbar = () => {
         <div
           className={`flex items-center p-1 border-4 rounded-full ${
             pathname === '/about'
-              ? 'border-primaryOrange'
+              ? 'border-primaryOrange bg-backgroundHighlight'
               : 'border-primaryGreen'
           }`}
         >
@@ -53,7 +54,7 @@ const MobileNavbar = () => {
         <div
           className={`flex items-center border-4 rounded-full ${
             pathname === '/add-item'
-              ? 'border-primaryOrange'
+              ? 'border-primaryOrange bg-backgroundHighlight'
               : 'border-primaryGreen'
           }`}
         >
@@ -70,34 +71,32 @@ const MobileNavbar = () => {
           </svg>
         </div>
       </Link>
-      <Link href='/my-items' aria-label='My items'>
+      <Link href='/search' aria-label='Search page'>
         <div
-          className={`flex items-center border-4 rounded-full ${
+          className={`flex items-center p-2 border-4 rounded-full ${
             pathname === '/search'
-              ? 'border-primaryOrange'
+              ? 'border-primaryOrange bg-backgroundHighlight'
               : 'border-primaryGreen'
           }`}
         >
-          <Link href='/search' className='p-2' aria-label='Search page'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='30'
-              height='30'
-              viewBox='0 0 16 16'
-            >
-              <path
-                fill={pathname === '/search' ? '#FF9E5E' : '#54BB89'}
-                d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0'
-              />
-            </svg>{' '}
-          </Link>
-        </div>{' '}
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='30'
+            height='30'
+            viewBox='0 0 16 16'
+          >
+            <path
+              fill={pathname === '/search' ? '#FF9E5E' : '#54BB89'}
+              d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0'
+            />
+          </svg>
+        </div>
       </Link>
       <Link href='/profile' aria-label='My profile'>
         <div
           className={`flex items-center p-1 border-4 rounded-full ${
             pathname === '/profile'
-              ? 'border-primaryOrange'
+              ? 'border-primaryOrange bg-backgroundHighlight'
               : 'border-primaryGreen'
           }`}
         >
