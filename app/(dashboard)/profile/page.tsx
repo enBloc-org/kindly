@@ -4,8 +4,7 @@ import { RetreiveItemsFromSupabase } from '@/utils/supabase/RetreiveFromSupabase
 
 //Components
 import ItemCard from '@/components/ItemCard';
-import DeleteButton from '@/components/DeleteButton';
-
+import Modal from '@/components/Modal';
 //Components
 import { GetProfileFromSupabase } from '@/utils/supabase/GetProfileFromSupabase';
 import LogOutButton from '@/components/LogOutButton';
@@ -65,7 +64,7 @@ const ProfilePage = async () => {
           </div>
         </div>
         <div className='mt-10 w-5/6 m-auto'>
-          <h1 className='text-lg font-thin m-5 md:pl-20 lg:pl-40'>
+          <h1 className='text-lg font-medium m-5 md:pl-20 lg:pl-40'>
             My donated items:
           </h1>
 
@@ -81,7 +80,11 @@ const ProfilePage = async () => {
                     postable={item.postable}
                     itemId={item.id}
                   />
-                  <DeleteButton title='Delete Item' itemId={item?.id} />
+                  <Modal
+                    name='Delete Item'
+                    itemId={item.id}
+                    message='By pressing Confirm you will delete this item'
+                  />
                 </li>
               ))}
             </ul>
