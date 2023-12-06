@@ -64,6 +64,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({ setImageSrc }) => {
         type='file'
         name='image'
         onChange={(e) => imageFileUpload(e)}
+        required
       />
     </div>
   );
