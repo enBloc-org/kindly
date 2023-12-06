@@ -200,7 +200,7 @@ const AddItemPage = () => {
           >
             Age
             <select {...register('item_subtype')} className='input-text '>
-              <option value={'adult'}>Adult</option>
+              <option value={'adults'}>Adult</option>
               <option value={'children'}>Children</option>
             </select>
           </label>
