@@ -40,7 +40,7 @@ const HomePage = async () => {
           </p>
         </div>
         <div className='flex flex-col gap-8 lg:px-10'>
-          <h2 className='font-extrabold text-4xl text-center'>
+          <h2 className='font-extrabold text-4xl mt-10 text-center'>
             Added this week
           </h2>
           <div className='lastItems'>
@@ -68,7 +68,7 @@ const HomePage = async () => {
         </div>
 
         <div className='flex flex-col gap-8 lg:px-60 xl:col-span-2 xl:mt-20'>
-          <h2 className='font-extrabold text-4xl text-center'>Blog</h2>
+          <h2 className='font-extrabold text-4xl text-center mt-10'>Blog</h2>
           <p className='mt-5 md:px-16 lg:px-0'>
             Hello and welcome! We’re very excited to be launching KINDLY, a
             platform which lets you donate unwanted items to Ukrainian refugees.
