@@ -45,6 +45,11 @@ body {
 /* Form classes*/
 
 .input-text {
-  @apply bg-background py-3 px-5 rounded-3xl border border-primaryGreen text-sm md:w-80
+  @apply bg-background py-3 px-5 rounded-3xl border border-primaryGreen text-sm md:w-80;
 }
 
+/*  Card hover animation */
+
+.card {
+  @apply bg-white shadow-sm px-8 pb-5  rounded-lg overflow-hidden lg:text-lg hover:scale-95 hover:shadow-lg transition-all;
+}
