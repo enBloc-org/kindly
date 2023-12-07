@@ -1,0 +1,31 @@
+# Style guide for KINDLY
+
+## Colours and Fonts
+### Headings, buttons, links and form labels:
+Barlow Semi Condensed - various weights
+
+### Paragraphs and the rest
+Inter - various weights
+
+### Colours Theme
+
+background: '#F0EFED',
+backgroundHighlight: '#E0DFDE',
+primaryGreen: '#54BB89',
+hoverGreen: '#4EA37A',
+secondaryGreen: '#008000',
+primaryGray: '#57666D',
+secondaryGray: '#D9D9D9',
+primaryOrange: '#FF9E5E',
+
+*All colours and fonts defined in the tailwind config file.*
+
+
+## Styling
+As the main bulk of the site is styled with inline Tailwind css very few custom classes were used to avoid naming conflicts. The few custom classes were did create where related to base UI elemets and to avoid repitiion. They were still composed of Tailwind utility classes. For example:
+
+```
+.button {
+  @apply bg-primaryGreen text-background text-sm tracking-wider px-4 py-1.5 font-semibold shadow-md  cursor-pointer relative max-w-xs;
+}
+```
