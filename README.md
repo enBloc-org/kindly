@@ -3,7 +3,7 @@ Kindly is a web application dedicated to assisting Ukrainian refugees in London 
 
 ## Deployed Website
 
-The deployed website can be accessed at [https://main.d3jctbf9vvjj3q.amplifyapp.com/](https://main.d3jctbf9vvjj3q.amplifyapp.com/).
+The deployed website can be accessed at [https://main.d3jctbf9vvjj3q.amplifyapp.com/]([https://main.d3jctbf9vvjj3q.amplifyapp.com/](https://kindly-v2zt.vercel.app/)).
 Site style guide can be found at [https://github.com/fac28/kindly/blob/main/style-guide]
 
 ## How It Works
