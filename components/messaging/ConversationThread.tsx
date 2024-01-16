@@ -24,14 +24,14 @@ const ConversationThread: React.FC<ConversationThreadProps> = ({
 
   return (
     <Link href={`/conversations/${conversationId}`}>
-      <div className='m-2 flex max-h-28 rounded-lg bg-gray-300 p-4'>
+      <div className='m-2 flex max-h-28 justify-between rounded-lg bg-gray-300 p-4'>
         <div>
           <h2 className='font-bold'>{sentBy}</h2>
           <p className='mt-1 overflow-hidden font-light italic'>
             {shortenedText} ...
           </p>
         </div>
-        <div className='flex flex-col items-end justify-between'>
+        <div className='flex flex-col items-end justify-between gap-1 py-2'>
           <p>{dateSent}</p>
           <TickIcon read={read} />
         </div>
