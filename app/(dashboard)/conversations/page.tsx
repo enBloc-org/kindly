@@ -18,7 +18,7 @@ const data = [
       "Hi I'm interested in you item, can you tell me when I can pick it up? I live in Hackney and I can travel anywhere east.",
     time_stamp: '12/1/23',
     read: true,
-    conversation_id: 43,
+    conversation_id: 42,
   },
 ];
 
@@ -42,6 +42,7 @@ const Conversations = () => {
               lastMessage={thread.last_message}
               dateSent={thread.time_stamp}
               read={thread.read}
+              conversationId={thread.conversation_id}
             />
           );
         })}
