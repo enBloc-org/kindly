@@ -8,6 +8,7 @@ import ItemDetails from '@/components/ItemDetails';
 import PostageOptionDisplay from '@/components/PostageOptionDisplay';
 import BackButton from '@/components/buttons/BackButton';
 import { GetProfileFromSupabase } from '@/utils/supabase/GetProfileFromSupabase';
+import NewConversationButton from '@/components/buttons/NewConversationButton';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const supabase = createServerComponentClient({ cookies });
@@ -73,6 +74,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
                 // isUserRefugee = {item.profiles.refugee}
               />
             )}
+            <NewConversationButton />
           </div>
         </>
       );
