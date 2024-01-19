@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+import MessageCard from '@/components/messaging/MessageCard';
+
 export default async function Index() {
   return (
     <>
@@ -71,6 +73,15 @@ export default async function Index() {
             Log in
           </Link>
         </div>
+
+        <MessageCard 
+          id={1}
+          created_at={new Date()}
+          conversation_id={666}
+          sender_id={'testUser'}
+          message_text={'Hi! Can I have your stuff please? I really like it alot.'}
+          is_read={true}
+        />
       </main>
     </>
   );

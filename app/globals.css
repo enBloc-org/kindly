@@ -53,3 +53,11 @@ body {
 .card {
   @apply bg-white shadow-sm px-8 pb-5  rounded-lg overflow-hidden lg:text-lg hover:scale-95 hover:shadow-lg transition-all;
 }
+
+.message-card__self {
+  @apply min-h-max w-96 bg-white shadow-sm px-8 pb-5 text-black rounded-lg overflow-hidden lg:text-lg shadow-lg transition-all pt-12 relative;
+}
+
+.message-card__other {
+  @apply min-h-max w-96 bg-primaryGreen shadow-sm px-8 pb-5 text-black rounded-lg overflow-hidden lg:text-lg shadow-lg transition-all pt-12 relative;
+}
