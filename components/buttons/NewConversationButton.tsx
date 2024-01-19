@@ -9,6 +9,11 @@ export default function NewConversationButton({
   donorId: string;
 }) {
   return (
-    <button onClick={() => newConvoStart(userId, donorId)}>message </button>
+    <button
+      className='button button-rounded disabled:bg-primaryGray'
+      onClick={() => newConvoStart(userId, donorId)}
+    >
+      MESSAGE{' '}
+    </button>
   );
 }
