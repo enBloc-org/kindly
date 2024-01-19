@@ -27,6 +27,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       throw new Error('Error fetching data');
     } else {
       const donorEmail = item.profiles.email;
+      const donerId: string | undefined = item.profiles.id;
       const title = item.item_name;
       if (
         userProfile.data.refugee === false ||
@@ -74,7 +75,12 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
                 // isUserRefugee = {item.profiles.refugee}
               />
             )}
-            <NewConversationButton />
+            {EnqButtConditions && (
+              <NewConversationButton
+                userId={userId as string}
+                donorId={donerId as string}
+              />
+            )}
           </div>
         </>
       );
