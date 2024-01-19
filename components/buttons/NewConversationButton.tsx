@@ -5,8 +5,8 @@ export default function NewConversationButton({
   userId,
   donorId,
 }: {
-  userId: string;
-  donorId: string;
+  userId: string | undefined;
+  donorId: string | undefined;
 }) {
   return (
     <button

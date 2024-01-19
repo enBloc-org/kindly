@@ -31,7 +31,8 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       // const title = item.item_name;
       if (
         userProfile.data.refugee === false ||
-        data.session?.user.id == item.profiles.id
+        data.session?.user.id == item.profiles.id ||
+        data.session == undefined
       ) {
         EnqButtConditions = false;
       }
@@ -76,10 +77,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               />
             )} */}
             {EnqButtConditions && (
-              <NewConversationButton
-                userId={userId as string}
-                donorId={donerId as string}
-              />
+              <NewConversationButton userId={userId} donorId={donerId} />
             )}
           </div>
         </>
