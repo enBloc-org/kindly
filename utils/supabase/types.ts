@@ -41,28 +41,26 @@ export type updateReserved = {
   reserved_by: string;
 };
 
-export type conversation ={
-id:number;
-created_at: Date;
-
-}
+export type conversation = {
+  id: number;
+  created_at: Date;
+};
 
 export type user_conversation = {
-  id: number;
-  joined_at: Date;
+  id?: number;
+  joined_at?: Date;
   conversation_id: number;
   user_id: string;
-}
+};
 
-export type message ={
+export type message = {
   id: number;
   created_at: Date;
   conversation_id: number;
   sender_id: string;
   message_text: string;
   is_read: boolean;
-  
-}
+};
 
 // Make all fields in item and profile optional
 export type PartialItem = Partial<item>;
