@@ -5,8 +5,10 @@ import giveKindly from '../../../public/giveKindly.png';
 import { retrieveLastItems } from '@/utils/supabase/retrieveLastItems';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getMessages } from '@/utils/supabase/getMessages';
 
 const HomePage = async () => {
+  await getMessages()
   const lastItems = await retrieveLastItems();
 
   return (
