@@ -5,7 +5,6 @@ export async function getMessages() {
   const supabase = newClient();
   const { data, error } = await supabase.from('messages').select('*');
   data as message[];
-  console.log(data);
   if (error) {
     console.log(error);
     return;
