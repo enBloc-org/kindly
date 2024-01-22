@@ -1,4 +1,4 @@
-import EnquireButton from '@/components/buttons/EnquireButton';
+// import EnquireButton from '@/components/buttons/EnquireButton';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
@@ -8,11 +8,12 @@ import ItemDetails from '@/components/ItemDetails';
 import PostageOptionDisplay from '@/components/PostageOptionDisplay';
 import BackButton from '@/components/buttons/BackButton';
 import { GetProfileFromSupabase } from '@/utils/supabase/GetProfileFromSupabase';
+import NewConversationButton from '@/components/buttons/NewConversationButton';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getSession();
-  const userEmail = data.session?.user.email;
+  // const userEmail = data.session?.user.email;
   const userId = data.session?.user.id;
   let EnqButtConditions: boolean = true;
   const userProfile = await GetProfileFromSupabase(supabase, userId);
@@ -25,11 +26,13 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
     if (!item || !item.profiles) {
       throw new Error('Error fetching data');
     } else {
-      const donorEmail = item.profiles.email;
-      const title = item.item_name;
+      // const donorEmail = item.profiles.email;
+      const donerId: string | undefined = item.profiles.id;
+      // const title = item.item_name;
       if (
         userProfile.data.refugee === false ||
-        data.session?.user.id == item.profiles.id
+        data.session?.user.id == item.profiles.id ||
+        data.session == undefined
       ) {
         EnqButtConditions = false;
       }
@@ -37,8 +40,8 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       return (
         <>
           <BackButton />
-          <div className='flex flex-col items-center gap-14 mt-2 mb-10'>
-            <div className='relative w-72 h-52 md:h-72 md:w-96'>
+          <div className='mb-10 mt-2 flex flex-col items-center gap-14'>
+            <div className='relative h-52 w-72 md:h-72 md:w-96'>
               <Image
                 src={`${item.imageSrc}`}
                 alt={`${item.item_name}`}
@@ -52,10 +55,10 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               postable={item.postable}
               postage_covered={item.postage_covered}
             />
-            <div className='bg-secondaryGray p-10 w-full min-h-40 md:w-1/2 md:rounded-lg'>
-              <h2 className='italic text-xl'>{item.item_name}</h2>
-              <h3 className='font-light pt-3'>Description:</h3>
-              <p className='text-center pt-2'>{item.item_description}</p>
+            <div className='min-h-40 w-full bg-secondaryGray p-10 md:w-1/2 md:rounded-lg'>
+              <h2 className='text-xl italic'>{item.item_name}</h2>
+              <h3 className='pt-3 font-light'>Description:</h3>
+              <p className='pt-2 text-center'>{item.item_description}</p>
             </div>
             <ItemDetails
               condition={item.condition}
@@ -63,7 +66,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               postcode={item.postcode}
               fontSize='text-lg'
             />
-            {EnqButtConditions && (
+            {/* {EnqButtConditions && (
               <EnquireButton
                 donorEmail={donorEmail}
                 userEmail={userEmail !== undefined ? userEmail : ''}
@@ -72,6 +75,9 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
                 user_id={data.session!.user.id}
                 // isUserRefugee = {item.profiles.refugee}
               />
+            )} */}
+            {EnqButtConditions && (
+              <NewConversationButton userId={userId} donorId={donerId} />
             )}
           </div>
         </>

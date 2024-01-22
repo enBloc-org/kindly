@@ -1,33 +1,36 @@
 'use client';
 import React from 'react';
 
-// refactor to import from supabase types
+import TickIcon from '../icons/tickIcon';
+
 type MessageCardProps = {
+  sent_by: number;
   created_at: Date;
-  sender_id: string;
+  // conversation_id: string;
   message_text: string;
   is_read: boolean;
+  currentUser: number;
 };
 
-const MessageCard: React.FC<MessageCardProps> = ({
+const MessageCard: React.FC<MessageCardProps> = async ({
+  sent_by,
   created_at,
-  sender_id,
   message_text,
   is_read,
+  currentUser,
 }) => {
+  const isCurrentUser = sent_by === currentUser;
+
   return (
-    <div className='message-card__self'>
-      <div className='absolute top-2 left-3'>
-        <p>{sender_id}</p>
+    <div className={`message-card${isCurrentUser ? '__self' : '__other'}`}>
+      <div className='m-1'>
+        <p className='m-1'>{message_text}</p>
       </div>
-      <div className='text-wrap mb-5'>
-        <p>{message_text}</p>
-      </div>
-      <div className='flex justify-between'>
-        <p>{`${created_at.getDate()}/${created_at.getMonth()}/${created_at.getFullYear()}`}</p>
-        <span className={is_read ? 'text-secondaryGreen' : 'text-slate-500'}>
-          {is_read ? '\u2713\u2713' : '\u2713'}
-        </span>
+      <div
+        className={`flex ${isCurrentUser ? 'justify-between' : 'float-right'}`}
+      >
+        <p className='text-slate-600'>{`${created_at.getDate()}/${created_at.getMonth()}/${created_at.getFullYear()}`}</p>
+        {isCurrentUser && <TickIcon read={is_read} />}
       </div>
     </div>
   );

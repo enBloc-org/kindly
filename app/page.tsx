@@ -1,12 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import MessageCard from '@/components/messaging/MessageCard';
-
 export default async function Index() {
   return (
     <>
-      <header className=' bg-background flex justify-center py-2' role='banner'>
+      <header className=' flex justify-center bg-background py-2' role='banner'>
         <Image
           src='/KINDLY_LOGO.png'
           alt='Kindly clothes donations'
@@ -15,7 +13,7 @@ export default async function Index() {
         />
       </header>
       <main
-        className='p-4 grid gap-5 items-center justify-items-center'
+        className='grid items-center justify-items-center gap-5 p-4'
         role='main'
       >
         <h1 className='italic'>A place to support Ukrainian refugees</h1>
@@ -41,7 +39,7 @@ export default async function Index() {
         </div>
         <Link
           href='/signup'
-          className='font-extrabold text-3xl italic text-primaryOrange'
+          className='text-3xl font-extrabold italic text-primaryOrange'
         >
           Register here
         </Link>
@@ -63,7 +61,7 @@ export default async function Index() {
               fill='#BBE3C3'
             />
           </svg>
-          <p className='font-extrabold text-center'>
+          <p className='text-center font-extrabold'>
             I’m a Ukrainian refugee and I would like to receive or donate items
           </p>
         </div>
@@ -73,15 +71,6 @@ export default async function Index() {
             Log in
           </Link>
         </div>
-
-        <MessageCard 
-          id={1}
-          created_at={new Date()}
-          conversation_id={666}
-          sender_id={'testUser'}
-          message_text={'Hi! Can I have your stuff please? I really like it alot.'}
-          is_read={true}
-        />
       </main>
     </>
   );
