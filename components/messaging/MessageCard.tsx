@@ -6,7 +6,6 @@ import TickIcon from '../icons/tickIcon';
 type MessageCardProps = {
   sent_by: number;
   created_at: Date;
-  // conversation_id: string;
   message_text: string;
   is_read: boolean;
   currentUser: number;
