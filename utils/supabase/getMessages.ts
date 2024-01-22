@@ -10,7 +10,7 @@ export async function getMessages() {
     return;
   }
   const processedData = data.map((msg) => ({
-    sent_by: 'Peter',
+    sent_by: msg.sender_id,
     last_message: msg.message_text,
     time_stamp: msg.created_at,
     read: msg.is_read,
