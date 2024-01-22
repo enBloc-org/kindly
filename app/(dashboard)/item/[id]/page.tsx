@@ -40,8 +40,8 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       return (
         <>
           <BackButton />
-          <div className='flex flex-col items-center gap-14 mt-2 mb-10'>
-            <div className='relative w-72 h-52 md:h-72 md:w-96'>
+          <div className='mb-10 mt-2 flex flex-col items-center gap-14'>
+            <div className='relative h-52 w-72 md:h-72 md:w-96'>
               <Image
                 src={`${item.imageSrc}`}
                 alt={`${item.item_name}`}
@@ -55,10 +55,10 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               postable={item.postable}
               postage_covered={item.postage_covered}
             />
-            <div className='bg-secondaryGray p-10 w-full min-h-40 md:w-1/2 md:rounded-lg'>
-              <h2 className='italic text-xl'>{item.item_name}</h2>
-              <h3 className='font-light pt-3'>Description:</h3>
-              <p className='text-center pt-2'>{item.item_description}</p>
+            <div className='min-h-40 w-full bg-secondaryGray p-10 md:w-1/2 md:rounded-lg'>
+              <h2 className='text-xl italic'>{item.item_name}</h2>
+              <h3 className='pt-3 font-light'>Description:</h3>
+              <p className='pt-2 text-center'>{item.item_description}</p>
             </div>
             <ItemDetails
               condition={item.condition}
