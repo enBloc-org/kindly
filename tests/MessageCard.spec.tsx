@@ -1,30 +1,27 @@
 import { test, expect } from '@playwright/experimental-ct-react';
 
-import MessageCard from '@/components/messaging/MessageCard';
+import MessageCard from '../components/messaging/MessageCard';
 
-const testMessage = {
-  id: 1,
-  created_at: new Date(),
-  conversation_id: 45,
-  sender_id: '666',
-  message_text:
-    'Hi! I really like your stuff and I would like to have it please!',
-  is_read: false,
-};
-
-test.describe('MessageCard component', () => {
+test.describe('MessageCard', async () => {
   test('renders', async ({ mount }) => {
+    const testMessage = {
+      sent_by: 1,
+      created_at: new Date(),
+      message_text: 'This is a test message',
+      is_read: true,
+      currentUser: 1,
+    };
+
     const component = await mount(
       <MessageCard
-        id={testMessage.id}
+        sent_by={testMessage.sent_by}
         created_at={testMessage.created_at}
-        conversation_id={testMessage.conversation_id}
-        sender_id={testMessage.sender_id}
         message_text={testMessage.message_text}
         is_read={testMessage.is_read}
+        currentUser={1}
       />
     );
 
-    await expect(component).toContainText(testMessage.message_text);
+    await expect(component).toContainText('This is a test message');
   });
 });
