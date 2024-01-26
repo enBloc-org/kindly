@@ -10,7 +10,7 @@ export type OpenConversationProps = {
   user_id: string;
   conversations: {
     id?: number;
-    messages?: message[];
+    messages: message[];
     created_at?: string;
   };
 };
