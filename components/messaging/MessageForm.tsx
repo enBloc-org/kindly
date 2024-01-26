@@ -1,19 +1,19 @@
 'use client';
 import React, { FormEvent, useState } from 'react';
-
 import insertMessage from '@/utils/supabase/insertMessage';
 
-const MessageForm = ({ user_id, conversation_id }) => {
-  // useEffect(() => {
-  //   const supabase = createClientComponentClient()
-  // })
+type MessageFormProps = {
+  user_id: string;
+  conversation_id: number | undefined;
+};
 
-  const handleSubmit = (e: FormEvent) => {
+const MessageForm: React.FC<MessageFormProps> = ({
+  user_id,
+  conversation_id,
+}) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault;
-
-    insertMessage(user_id, conversation_id, message);
-
-    console.log(message);
+    await insertMessage(user_id, conversation_id, message);
     setMessage('');
   };
   const [message, setMessage] = useState<string>('');

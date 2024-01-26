@@ -21,7 +21,9 @@ const OpenConversation: React.FC<OpenConversationProps> = ({
   conversations,
   user_id,
 }) => {
-  return conversation_id ? (
+  console.log(conversations);
+
+  return (
     <div className='flex w-2/4 flex-col'>
       {conversations?.messages?.map((message: message) => (
         <div key={`${conversation_id}-${message.created_at}`}>
@@ -39,8 +41,6 @@ const OpenConversation: React.FC<OpenConversationProps> = ({
         conversation_id={conversation_id}
       ></MessageForm>
     </div>
-  ) : (
-    <p>you do not have any conversations</p>
   );
 };
 
