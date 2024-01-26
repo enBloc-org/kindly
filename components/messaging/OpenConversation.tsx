@@ -8,7 +8,7 @@ export type OpenConversationProps = {
   joined_at?: string;
   conversation_id: number;
   user_id: string;
-  messages: {
+  conversations: {
     id?: number;
     messages: message[];
     created_at?: string;
@@ -17,12 +17,12 @@ export type OpenConversationProps = {
 
 const OpenConversation: React.FC<OpenConversationProps> = ({
   conversation_id,
-  messages,
+  conversations,
   user_id,
 }) => {
   return (
     <div className='flex w-2/4 flex-col'>
-      {messages.map((message) => (
+      {conversations.messages.map((message: message) => (
         <div key={`${conversation_id}-${message.created_at}`}>
           <MessageCard
             sender_id={message.sender_id}
