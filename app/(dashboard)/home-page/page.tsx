@@ -5,14 +5,14 @@ import giveKindly from '../../../public/giveKindly.png';
 import { retrieveLastItems } from '@/utils/supabase/retrieveLastItems';
 import Image from 'next/image';
 import Link from 'next/link';
-import NewMesssage from '@/components/messaging/NewMessage';
+import MessageForm from '@/components/messaging/MessageForm';
 
 const HomePage = async () => {
   const lastItems = await retrieveLastItems();
 
   return (
     <>
-        <NewMesssage></NewMesssage>
+        <MessageForm></MessageForm>
       <div className='max-w-lg m-auto'>
         <Image
           alt='give kindly image'
