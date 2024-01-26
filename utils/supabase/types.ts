@@ -55,11 +55,11 @@ export type user_conversation = {
 
 export type message = {
   id: number;
-  created_at: Date;
-  conversation_id: number;
-  sender_id: string;
-  message_text: string;
   is_read: boolean;
+  sender_id: string;
+  created_at: string;
+  message_text: string;
+  conversation_id: number;
 };
 
 // Make all fields in item and profile optional
