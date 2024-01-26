@@ -1,15 +1,16 @@
 import newClient from '../../config/supabaseclient';
-// import message from './types';
 
-export default async function insertMessage(message: string) {
+export default async function insertMessage(
+  message: string,
+  user_id,
+  conversation_id
+) {
   const supabase = newClient();
-  const { data } = await supabase.auth.getSession();
-  const userId = data.session?.user.id;
   await supabase.from('messages').insert([
     {
       created_at: '*',
-      conversation_id: '*', // from conversations?
-      sender_id: userId,
+      conversation_id: conversation_id, // from conversations?
+      sender_id: user_id,
       message_text: message,
       is_read: true,
     },

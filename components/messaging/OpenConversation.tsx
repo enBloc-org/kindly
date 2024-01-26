@@ -2,6 +2,7 @@
 
 import { message } from '@/utils/supabase/types';
 import MessageCard from './MessageCard';
+import MessageForm from './MessageForm';
 
 export type OpenConversationProps = {
   id?: number;
@@ -33,6 +34,10 @@ const OpenConversation: React.FC<OpenConversationProps> = ({
           />
         </div>
       ))}
+      <MessageForm
+        user_id={user_id}
+        conversation_id={conversation_id}
+      ></MessageForm>
     </div>
   );
 };
