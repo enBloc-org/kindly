@@ -22,6 +22,9 @@ const MessageCard: React.FC<MessageCardProps> = async ({
 
   return (
     <div className={`message-card${isCurrentUser ? '__self' : '__other'}`}>
+      <div>
+        <p>{isCurrentUser ? 'me' : sender_id}</p>
+      </div>
       <div className='m-1'>
         <p className='m-1'>{message_text}</p>
       </div>

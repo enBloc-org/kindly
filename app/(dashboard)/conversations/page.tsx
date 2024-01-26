@@ -45,11 +45,9 @@ const Conversations = async () => {
         </button>
       </div>
       <div className='mt-4'>
-        return (
         {allConversations && (
           <ConversationPage allConversations={allConversations} />
         )}
-        );
       </div>
     </>
   );
