@@ -8,7 +8,6 @@ import Link from 'next/link';
 
 const HomePage = async () => {
   const lastItems = await retrieveLastItems();
-
   return (
     <>
       <div className='max-w-lg m-auto'>

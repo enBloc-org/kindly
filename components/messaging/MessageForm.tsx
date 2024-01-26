@@ -1,5 +1,5 @@
 'use client';
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useState } from 'react';
 
 import insertMessage from '@/utils/supabase/insertMessage';
 
