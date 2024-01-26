@@ -7,7 +7,7 @@ import MessageForm from './MessageForm';
 export type OpenConversationProps = {
   id?: number;
   joined_at?: string;
-  conversation_id: number;
+  conversation_id: number | undefined;
   user_id: string;
   conversations: {
     id?: number;
@@ -21,7 +21,7 @@ const OpenConversation: React.FC<OpenConversationProps> = ({
   conversations,
   user_id,
 }) => {
-  return (
+  return conversation_id ? (
     <div className='flex w-2/4 flex-col'>
       {conversations?.messages?.map((message: message) => (
         <div key={`${conversation_id}-${message.created_at}`}>
@@ -39,6 +39,8 @@ const OpenConversation: React.FC<OpenConversationProps> = ({
         conversation_id={conversation_id}
       ></MessageForm>
     </div>
+  ) : (
+    <p>you do not have any conversations</p>
   );
 };
 

@@ -2,8 +2,8 @@ import newClient from '../../config/supabaseclient';
 
 export default async function insertMessage(
   message: string,
-  user_id,
-  conversation_id
+  user_id: number,
+  conversation_id: number
 ) {
   const supabase = newClient();
   await supabase.from('messages').insert([

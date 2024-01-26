@@ -9,7 +9,7 @@ import { OpenConversationProps } from './OpenConversation';
 export type ConversationsListProps = {
   id?: number;
   joined_at: string;
-  conversation_id?: number;
+  conversation_id?: number | undefined;
   user_id: string;
   conversations: OpenConversationProps;
 };

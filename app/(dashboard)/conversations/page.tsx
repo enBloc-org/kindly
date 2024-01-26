@@ -26,8 +26,12 @@ const Conversations = async () => {
         </button>
       </div>
       <div className='mt-4'>
-        {allConversations && (
-          <ConversationStateHandler allConversations={allConversations} />
+        {!allConversations.conversations ? (
+          <p>you do not any conversations</p>
+        ) : (
+          allConversations && (
+            <ConversationStateHandler allConversations={allConversations} />
+          )
         )}
       </div>
     </>
