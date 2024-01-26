@@ -5,12 +5,12 @@ import { ConversationsListProps } from './ConversationsList';
 import ConversationsList from './ConversationsList';
 import OpenConversation from './OpenConversation';
 
-export type ConversationPageProps = ConversationsListProps[];
+export type ConversationStateHandlerProps = ConversationsListProps[];
 
 const ConversationStateHandler = ({
   allConversations,
 }: {
-  allConversations: ConversationPageProps;
+  allConversations: ConversationStateHandlerProps;
 }) => {
   const [openConvo] = useState<ConversationsListProps>(allConversations[0]);
 
