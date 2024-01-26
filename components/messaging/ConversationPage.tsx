@@ -31,7 +31,7 @@ const ConversationPage = ({
       <OpenConversation
         conversation_id={openConvo.conversation_id as number}
         user_id={openConvo.user_id}
-        conversations={openConvo.conversations.conversations}
+        conversations={openConvo.conversations}
       />
     </>
   );
