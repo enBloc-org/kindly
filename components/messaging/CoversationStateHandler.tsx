@@ -12,21 +12,37 @@ const ConversationStateHandler = ({
 }: {
   allConversations: ConversationStateHandlerProps;
 }) => {
-  const [openConvo] = useState<ConversationsListProps>(allConversations[0]);
+  const [openConvo, setOpenConvo] = useState<ConversationsListProps>(
+    allConversations[0]
+  );
+
+  const updateOpenConvo = (i: number) => {
+    setOpenConvo(allConversations[i]);
+    console.log(openConvo);
+  };
 
   return (
     <>
-      {allConversations.map((conversation: ConversationsListProps) => (
-        <div key={conversation.id}>
-          <ConversationsList
-            id={conversation.conversation_id}
-            joined_at={conversation.joined_at}
-            conversation_id={conversation.conversation_id}
-            user_id={conversation.user_id}
-            conversations={conversation.conversations}
-          />
-        </div>
-      ))}
+      {allConversations.map(
+        (conversation: ConversationsListProps, index: number) => (
+          <div key={`${conversation.id}-${index}`}>
+            <button
+              type='button'
+              onClick={() => {
+                updateOpenConvo(index);
+              }}
+            >
+              <ConversationsList
+                id={conversation.conversation_id}
+                joined_at={conversation.joined_at}
+                conversation_id={conversation.conversation_id}
+                user_id={conversation.user_id}
+                conversations={conversation.conversations}
+              />
+            </button>
+          </div>
+        )
+      )}
 
       <OpenConversation
         conversation_id={openConvo.conversation_id as number}
