@@ -4,21 +4,21 @@ import React from 'react';
 import TickIcon from '../icons/tickIcon';
 
 type MessageCardProps = {
-  sent_by: number;
-  created_at: Date;
+  sender_id: string;
+  created_at: string;
   message_text: string;
   is_read: boolean;
-  currentUser: number;
+  currentUser: string;
 };
 
 const MessageCard: React.FC<MessageCardProps> = async ({
-  sent_by,
+  sender_id,
   created_at,
   message_text,
   is_read,
   currentUser,
 }) => {
-  const isCurrentUser = sent_by === currentUser;
+  const isCurrentUser = sender_id === currentUser;
 
   return (
     <div className={`message-card${isCurrentUser ? '__self' : '__other'}`}>
@@ -28,7 +28,7 @@ const MessageCard: React.FC<MessageCardProps> = async ({
       <div
         className={`flex ${isCurrentUser ? 'justify-between' : 'float-right'}`}
       >
-        <p className='text-slate-600'>{`${created_at.getDate()}/${created_at.getMonth()}/${created_at.getFullYear()}`}</p>
+        <p className='text-slate-600'>{created_at}</p>
         {isCurrentUser && <TickIcon read={is_read} />}
       </div>
     </div>

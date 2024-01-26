@@ -46,7 +46,9 @@ const Conversations = async () => {
       </div>
       <div className='mt-4'>
         return (
-        {userId && <ConversationPage allConversations={allConversations} />}
+        {allConversations && (
+          <ConversationPage allConversations={allConversations} />
+        )}
         );
       </div>
     </>
