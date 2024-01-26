@@ -1,24 +1,24 @@
 'use client';
 
 import { useState } from 'react';
-import { ConversationThreadProps } from './ConversationThread';
-import ConversationThread from './ConversationThread';
+import { ConversationsListProps } from './ConversationsList';
+import ConversationsList from './ConversationsList';
 import OpenConversation from './OpenConversation';
 
-export type ConversationPageProps = ConversationThreadProps[];
+export type ConversationPageProps = ConversationsListProps[];
 
-const ConversationPage = ({
+const ConversationStateHandler = ({
   allConversations,
 }: {
   allConversations: ConversationPageProps;
 }) => {
-  const [openConvo] = useState<ConversationThreadProps>(allConversations[0]);
+  const [openConvo] = useState<ConversationsListProps>(allConversations[0]);
 
   return (
     <>
-      {allConversations.map((conversation: ConversationThreadProps) => (
+      {allConversations.map((conversation: ConversationsListProps) => (
         <div key={conversation.id}>
-          <ConversationThread
+          <ConversationsList
             id={conversation.conversation_id}
             joined_at={conversation.joined_at}
             conversation_id={conversation.conversation_id}
@@ -37,4 +37,4 @@ const ConversationPage = ({
   );
 };
 
-export default ConversationPage;
+export default ConversationStateHandler;

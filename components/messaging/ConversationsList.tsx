@@ -6,7 +6,7 @@ import { OpenConversationProps } from './OpenConversation';
 //   return text.length > n ? text.substring(0, n) : text;
 // };
 
-export type ConversationThreadProps = {
+export type ConversationsListProps = {
   id?: number;
   joined_at: string;
   conversation_id?: number;
@@ -14,7 +14,7 @@ export type ConversationThreadProps = {
   conversations: OpenConversationProps;
 };
 
-const ConversationThread: React.FC<ConversationThreadProps> = ({
+const ConversationsList: React.FC<ConversationsListProps> = ({
   joined_at,
   user_id,
   conversations,
@@ -37,4 +37,4 @@ const ConversationThread: React.FC<ConversationThreadProps> = ({
   );
 };
 
-export default ConversationThread;
+export default ConversationsList;
