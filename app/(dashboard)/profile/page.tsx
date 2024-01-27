@@ -1,6 +1,6 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import { RetreiveItemsFromSupabase } from '@/utils/supabase/RetreiveFromSupabase';
+import { getItems } from '@/utils/supabase/getItems';
 
 //Components
 import ItemCard from '@/components/ItemCard';
@@ -22,12 +22,7 @@ const ProfilePage = async () => {
     const userId = data.session?.user.id;
 
     const userProfile = await getProfile(supabase, userId);
-    const fetchedItems = await RetreiveItemsFromSupabase(
-      'items',
-      '',
-      'donated_by',
-      userId
-    );
+    const fetchedItems = await getItems('items', '', 'donated_by', userId);
 
     if (!userProfile.data || !userProfile.data.username) {
       return <div>Error User profile not found or username is missing</div>;

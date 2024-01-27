@@ -1,6 +1,6 @@
 import ItemCard from '@/components/ItemCard';
 import BackButton from '@/components/buttons/BackButton';
-import { RetreiveItemsFromSupabase } from '@/utils/supabase/RetreiveFromSupabase';
+import { getItems } from '@/utils/supabase/getItems';
 import filterItems from '@/utils/supabase/filterItems';
 import searchByName from '@/utils/supabase/searchByName';
 import { PartialItem } from '@/utils/supabase/types';
@@ -21,7 +21,7 @@ const SearchResulsPage = async ({
   if (Object.keys(searchParams).some((key) => key === 'query')) {
     searchResults = await searchByName(searchParams.query);
   } else {
-    searchResults = await RetreiveItemsFromSupabase(
+    searchResults = await getItems(
       'items',
       '*',
       'item_type',
@@ -36,7 +36,7 @@ const SearchResulsPage = async ({
   }
 
   return (
-    <div className='m-auto mt-5 lg:w-5/6 lg-px-20'>
+    <div className='lg-px-20 m-auto mt-5 lg:w-5/6'>
       <BackButton />
       <h2 className='mx-5 font-semibold italic'>
         Search for:{' '}
@@ -46,7 +46,7 @@ const SearchResulsPage = async ({
           {searchParams.subcategory && ' & ' + searchParams.subcategory}
         </span>
       </h2>
-      <div className='flex flex-col items-center gap-5 mt-10'>
+      <div className='mt-10 flex flex-col items-center gap-5'>
         {searchResults.length > 0 ? (
           searchResults.map((result) => (
             <ItemCard
