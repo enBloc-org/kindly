@@ -7,7 +7,7 @@ import Image from 'next/image';
 import ItemDetails from '@/components/ItemDetails';
 import PostageOptionDisplay from '@/components/PostageOptionDisplay';
 import BackButton from '@/components/buttons/BackButton';
-import { GetProfileFromSupabase } from '@/utils/supabase/GetProfileFromSupabase';
+import { getProfile } from '@/utils/supabase/getProfile';
 import NewConversationButton from '@/components/buttons/NewConversationButton';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
@@ -16,7 +16,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   // const userEmail = data.session?.user.email;
   const userId = data.session?.user.id;
   let EnqButtConditions: boolean = true;
-  const userProfile = await GetProfileFromSupabase(supabase, userId);
+  const userProfile = await getProfile(supabase, userId);
   try {
     const { data: item } = await supabase
       .from('items')
