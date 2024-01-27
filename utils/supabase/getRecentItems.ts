@@ -1,6 +1,6 @@
 import newClient from '@/config/supabaseclient';
 
-export async function retrieveLastItems() {
+export async function getRecentItems() {
   const supabase = newClient();
   const { data, error } = await supabase
     .from('items')
