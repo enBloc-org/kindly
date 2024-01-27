@@ -1,5 +1,5 @@
 import AuthForm from '@/components/AuthForm';
-import AddRowToSupabase from '@/utils/supabase/AddRowToSupabase';
+import insertRow from '@/utils/supabase/insertRow';
 import { createClient } from '@/utils/supabase/server';
 import { PartialProfile } from '@/utils/supabase/types';
 import { cookies } from 'next/headers';
@@ -38,7 +38,7 @@ export default function SignUp({
 
     // Get userId and insert it as ID in Profiles table
     const userId = data?.user?.id as string | number;
-    AddRowToSupabase('profiles', {
+    insertRow('profiles', {
       id: userId && userId,
       email: email,
       postcode: postcode,
@@ -50,7 +50,7 @@ export default function SignUp({
   };
 
   return (
-    <div className=' flex flex-col  px-8  items-center  '>
+    <div className=' flex flex-col  items-center  px-8  '>
       <AuthForm
         onSubmit={signUp}
         buttonText='REGISTER'

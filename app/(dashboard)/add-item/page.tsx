@@ -1,6 +1,6 @@
 'use client';
 import ButtonRounded from '@/components/buttons/ButtonRounded';
-import AddRowToSupabase from '@/utils/supabase/AddRowToSupabase';
+import insertRow from '@/utils/supabase/insertRow';
 import { useForm } from 'react-hook-form';
 import { PartialItem } from '@/utils/supabase/types';
 import UploadImageInput from '@/components/form/UploadImageInput';
@@ -54,7 +54,7 @@ const AddItemPage = () => {
       ...data,
     };
 
-    await AddRowToSupabase('items', dataItem);
+    await insertRow('items', dataItem);
     reset();
     router.push('/add-item/success');
   };
@@ -64,8 +64,8 @@ const AddItemPage = () => {
   const isPickUpChecked = watch('collectible');
 
   return (
-    <div className='flex flex-col items-center gap-3 my-20'>
-      <h2 className='font-bold mb-10'>Add your item</h2>
+    <div className='my-20 flex flex-col items-center gap-3'>
+      <h2 className='mb-10 font-bold'>Add your item</h2>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -73,7 +73,7 @@ const AddItemPage = () => {
       >
         <label
           htmlFor='item_name'
-          className='flex flex-col gap-2 items-center font-light'
+          className='flex flex-col items-center gap-2 font-light'
         >
           Item Name
           <input
@@ -82,12 +82,12 @@ const AddItemPage = () => {
             {...register('item_name', { required: 'This field is required' })}
           />
         </label>
-        <p className='italic font-extralight text-primaryOrange'>
+        <p className='font-extralight italic text-primaryOrange'>
           {errors.item_name?.message}
         </p>
         <label
           htmlFor='item_description'
-          className='flex flex-col gap-1 items-center font-light'
+          className='flex flex-col items-center gap-1 font-light'
         >
           Description
           <textarea
@@ -98,7 +98,7 @@ const AddItemPage = () => {
         </label>
         <label
           htmlFor='postcode'
-          className='flex flex-col gap-1 items-center font-light'
+          className='flex flex-col items-center gap-1 font-light'
         >
           Postcode <span className='text-xs italic'>First half</span>
           <input
@@ -114,13 +114,13 @@ const AddItemPage = () => {
             className='input-text w-24 text-center'
           />
         </label>
-        <p className='italic font-extralight text-primaryOrange'>
+        <p className='font-extralight italic text-primaryOrange'>
           {errors.postcode?.message}
         </p>
-        <div className='flex items-center justify-center gap-5 mt-2'>
+        <div className='mt-2 flex items-center justify-center gap-5'>
           <label
             htmlFor='condition'
-            className='flex flex-col gap-1 items-center font-light'
+            className='flex flex-col items-center gap-1 font-light'
           >
             Condition
             <select
@@ -135,13 +135,13 @@ const AddItemPage = () => {
               <option value={'Poor'}>Poor</option>
               <option value={'New'}>New</option>
             </select>
-            <p className='italic font-extralight text-primaryOrange'>
+            <p className='font-extralight italic text-primaryOrange'>
               {errors.condition?.message}
             </p>
           </label>
           <label
             htmlFor='item_type'
-            className='flex flex-col gap-1 items-center font-light'
+            className='flex flex-col items-center gap-1 font-light'
           >
             Categories
             <select
@@ -157,7 +157,7 @@ const AddItemPage = () => {
               <option value={'books'}>Books</option>
               <option value={'household'}>Home</option>
             </select>
-            <p className='italic font-extralight text-primaryOrange'>
+            <p className='font-extralight italic text-primaryOrange'>
               {errors.item_type?.message}
             </p>
           </label>
@@ -166,7 +166,7 @@ const AddItemPage = () => {
           <div className='flex items-center justify-center gap-5'>
             <label
               htmlFor='size'
-              className='flex flex-col gap-2 items-center font-light'
+              className='flex flex-col items-center gap-2 font-light'
             >
               Size
               <input
@@ -178,7 +178,7 @@ const AddItemPage = () => {
             </label>
             <label
               htmlFor='item_type'
-              className='flex flex-col gap-1 items-center font-light'
+              className='flex flex-col items-center gap-1 font-light'
             >
               Gender
               <select {...register('item_subtype')} className='input-text '>
@@ -197,7 +197,7 @@ const AddItemPage = () => {
         {category === 'books' && (
           <label
             htmlFor='item_type'
-            className='flex flex-col gap-1 items-center font-light'
+            className='flex flex-col items-center gap-1 font-light'
           >
             Age
             <select {...register('item_subtype')} className='input-text '>
@@ -206,7 +206,7 @@ const AddItemPage = () => {
             </select>
           </label>
         )}
-        <div className='flex flex-col gap-3 mt-5'>
+        <div className='mt-5 flex flex-col gap-3'>
           <label className='flex items-center gap-2 font-light'>
             <input type='checkbox' {...register('postable')} className='mr-2' />
             Willing to Post
@@ -229,7 +229,7 @@ const AddItemPage = () => {
           </label>
         </div>
         {!isPickUpChecked && !isWillingToPostChecked && (
-          <p className='italic font-extralight text-primaryOrange'>
+          <p className='font-extralight italic text-primaryOrange'>
             Select at least one option{' '}
           </p>
         )}
@@ -239,7 +239,7 @@ const AddItemPage = () => {
           setError={setGeneralError}
         />
         {generalError && (
-          <p className='italic font-extralight text-primaryOrange'>
+          <p className='font-extralight italic text-primaryOrange'>
             {generalError}
           </p>
         )}
