@@ -1,5 +1,5 @@
 'use client';
-import EditSupabaseRow from '@/utils/supabase/EditSupabaseRow';
+import editRow from '@/utils/supabase/editRow';
 import { PartialItem, editProfile } from '@/utils/supabase/types';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -46,7 +46,7 @@ export const ProfileEdit = ({
         return;
       }
 
-      await EditSupabaseRow(
+      await editRow(
         'profiles',
         { username: dataItem.username, avatar: dataItem.avatar },
         'id',
@@ -68,7 +68,7 @@ export const ProfileEdit = ({
 
   return (
     <div className='flex flex-col'>
-      <div className='mb-5 flex flex-col justify-between items-center '>
+      <div className='mb-5 flex flex-col items-center justify-between '>
         <ButtonPill clickHandler={handleEditButtonClick}>
           {isEditMode ? 'CLOSE' : 'EDIT'}
         </ButtonPill>
@@ -85,7 +85,7 @@ export const ProfileEdit = ({
             Username
             <input
               type='text'
-              className='input-text mt-2 mb-4'
+              className='input-text mb-4 mt-2'
               {...register('username', {
                 required: 'Username is required',
                 maxLength: {
@@ -95,7 +95,7 @@ export const ProfileEdit = ({
               })}
             />
           </label>
-          <p className='italic font-extralight text-primaryOrange'>
+          <p className='font-extralight italic text-primaryOrange'>
             {errors.username?.message as string}
           </p>
           <UploadImageInput setImageSrc={setImgAvatar} />

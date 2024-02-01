@@ -1,4 +1,4 @@
-import { RetreiveItemsFromSupabase } from '@/utils/supabase/RetreiveFromSupabase';
+import { getItems } from '@/utils/supabase/getItems';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import ItemCard from '@/components/ItemCard';
@@ -10,16 +10,11 @@ const MyItemsPage = async () => {
   const { data } = await supabase.auth.getSession();
 
   const currentUserId = data.session?.user.id;
-  const fetchedItems = await RetreiveItemsFromSupabase(
-    'items',
-    '',
-    'donated_by',
-    currentUserId
-  );
+  const fetchedItems = await getItems('items', '', 'donated_by', currentUserId);
 
   return (
     <div className='mt-10'>
-      <h1 className='text-lg font-thin m-5'>My donated items:</h1>
+      <h1 className='m-5 text-lg font-thin'>My donated items:</h1>
 
       {fetchedItems && fetchedItems.length > 0 ? (
         <ul className='flex flex-col gap-5'>
@@ -42,7 +37,7 @@ const MyItemsPage = async () => {
           ))}
         </ul>
       ) : (
-        <h2 className='text-lg font-thin m-5'>
+        <h2 className='m-5 text-lg font-thin'>
           You have not donated any items.
         </h2>
       )}

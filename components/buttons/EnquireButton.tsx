@@ -1,5 +1,5 @@
 'use client';
-import EditSupabaseRow from '@/utils/supabase/EditSupabaseRow';
+import editRow from '@/utils/supabase/editRow';
 import { SyntheticEvent, useEffect, useState } from 'react';
 
 export interface EnquireButtonProps {
@@ -46,7 +46,7 @@ export default function EnquireButton({
           }
           setMessageSuccess(true);
           setError(false);
-          await EditSupabaseRow(
+          await editRow(
             'items',
             { reserved: true, reserved_by: user_id },
             'id',
@@ -75,13 +75,13 @@ export default function EnquireButton({
         <span>ENQUIRE</span>
       </button>
       {error && (
-        <div className='text-primaryOrange text-center'>
+        <div className='text-center text-primaryOrange'>
           <p>There has been an error sending you message.</p>
           <p>Please try again.</p>
         </div>
       )}
       {messageSuccess && (
-        <div className='text-center text-sm px-3'>
+        <div className='px-3 text-center text-sm'>
           <p>Your registered email address has been sent to this user.</p>
           <p>Please look out for a response.</p>
         </div>

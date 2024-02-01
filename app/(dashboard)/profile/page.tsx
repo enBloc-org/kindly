@@ -1,12 +1,12 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import { RetreiveItemsFromSupabase } from '@/utils/supabase/RetreiveFromSupabase';
+import { getItems } from '@/utils/supabase/getItems';
 
 //Components
 import ItemCard from '@/components/ItemCard';
 import Modal from '@/components/Modal';
 //Components
-import { GetProfileFromSupabase } from '@/utils/supabase/GetProfileFromSupabase';
+import { getProfile } from '@/utils/supabase/getProfile';
 import LogOutButton from '@/components/LogOutButton';
 import { ProfileEdit } from '@/components/form/ProfileEdit';
 
@@ -21,28 +21,23 @@ const ProfilePage = async () => {
 
     const userId = data.session?.user.id;
 
-    const userProfile = await GetProfileFromSupabase(supabase, userId);
-    const fetchedItems = await RetreiveItemsFromSupabase(
-      'items',
-      '',
-      'donated_by',
-      userId
-    );
+    const userProfile = await getProfile(supabase, userId);
+    const fetchedItems = await getItems('items', '', 'donated_by', userId);
 
     if (!userProfile.data || !userProfile.data.username) {
       return <div>Error User profile not found or username is missing</div>;
     }
     return (
       <>
-        <div className='flex justify-between items-center mt-10 px-5 md:px-20 lg:px-40'>
-          <div className='py-2 px-5'>
-            <h1 className='text-2xl pl-3'>Profile</h1>
-            <div className='flex gap-3 mt-2'>
+        <div className='mt-10 flex items-center justify-between px-5 md:px-20 lg:px-40'>
+          <div className='px-5 py-2'>
+            <h1 className='pl-3 text-2xl'>Profile</h1>
+            <div className='mt-2 flex gap-3'>
               <h2 className='italic'>{userProfile.data.username}</h2>
               <LogOutButton>LOG OUT</LogOutButton>
             </div>
           </div>
-          <div className='flex flex-col px-4 gap-4 justify-between items-center mt-10'>
+          <div className='mt-10 flex flex-col items-center justify-between gap-4 px-4'>
             {userProfile.data.avatar ? (
               <img
                 src={userProfile.data.avatar}
@@ -63,8 +58,8 @@ const ProfilePage = async () => {
             <ProfileEdit userId={userId!} user={userProfile.data.username} />
           </div>
         </div>
-        <div className='mt-10 w-5/6 m-auto'>
-          <h1 className='text-lg font-medium m-5 md:pl-20 lg:pl-40'>
+        <div className='m-auto mt-10 w-5/6'>
+          <h1 className='m-5 text-lg font-medium md:pl-20 lg:pl-40'>
             My donated items:
           </h1>
 
@@ -89,7 +84,7 @@ const ProfilePage = async () => {
               ))}
             </ul>
           ) : (
-            <h2 className='text-lg font-thin m-5'>
+            <h2 className='m-5 text-lg font-thin'>
               You have not donated any items.
             </h2>
           )}
