@@ -16,13 +16,15 @@ label {
 }
 
 body {
-  @apply font-inter text-primaryGray bg-background;
+  @apply bg-background font-inter text-primaryGray;
 }
 
 /* Universal component classes*/
 
 .button {
-  @apply bg-primaryGreen text-background text-sm font-semibold tracking-wider px-4 py-1.5  shadow-md  cursor-pointer relative max-w-xs;
+  @apply relative max-w-xs cursor-pointer bg-primaryGreen 
+  px-4 py-1.5 text-sm  font-semibold  tracking-wider text-background 
+  shadow-md;
 }
 
 .button:active {
@@ -45,19 +47,19 @@ body {
 /* Form classes*/
 
 .input-text {
-  @apply bg-background py-3 px-5 rounded-3xl border border-primaryGreen text-sm md:w-80;
+  @apply rounded-3xl border border-primaryGreen bg-background px-5 py-3 text-sm md:w-80;
 }
 
 /*  Card hover animation */
 
 .card {
-  @apply bg-white shadow-sm px-8 pb-5  rounded-lg overflow-hidden lg:text-lg hover:scale-95 hover:shadow-lg transition-all;
+  @apply overflow-hidden rounded-lg bg-white px-8  pb-5 shadow-sm transition-all hover:scale-95 hover:shadow-lg lg:text-lg;
 }
 
 .message-card__self {
-  @apply m-2 float-right min-h-max w-5/6 sm:w-96 bg-white shadow-sm px-8 pb-5 text-black rounded-lg overflow-hidden lg:text-lg shadow-lg transition-all pt-3 pb-1 pl-3 pr-3 relative;
+  @apply relative float-right m-2 min-h-max w-5/6 overflow-hidden rounded-lg bg-white px-8 pb-1 pb-5 pl-3 pr-3 pt-3 text-black shadow-lg shadow-sm transition-all sm:w-96 lg:text-lg;
 }
 
 .message-card__other {
-  @apply m-2 min-h-max w-5/6 sm:w-96 bg-primaryGreen shadow-sm px-8 pb-5 text-black rounded-lg overflow-hidden lg:text-lg shadow-lg transition-all pt-3 pb-1 pl-3 pr-3 relative;
+  @apply relative m-2 min-h-max w-5/6 overflow-hidden rounded-lg bg-primaryGreen px-8 pb-1 pb-5 pl-3 pr-3 pt-3 text-black shadow-lg shadow-sm transition-all sm:w-96 lg:text-lg;
 }
