@@ -1,5 +1,5 @@
 'use client';
-import deleteItem from '@/utils/supabase/DeleteItem';
+import deleteItems from '@/utils/supabase/deleteItems';
 import { useRouter } from 'next/navigation';
 
 interface DeleteButtonProps {
@@ -17,7 +17,7 @@ export default function DeleteButton({ itemId, title }: DeleteButtonProps) {
   return (
     <button
       className='button button-rounded '
-      onClick={() => deleteItem(itemId).then(router.refresh)}
+      onClick={() => deleteItems(itemId).then(router.refresh)}
     >
       {title}
     </button>

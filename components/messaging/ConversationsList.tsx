@@ -1,17 +1,21 @@
 import TickIcon from '../icons/tickIcon';
 
-import { OpenConversationProps } from './OpenConversation';
+import { message } from '@/utils/supabase/types';
 
-// const cutAfterNCharacters = (text: string, n: number): string => {
-//   return text.length > n ? text.substring(0, n) : text;
-// };
+const cutAfterNCharacters = (text: string, n: number): string => {
+  return text.length > n ? text.substring(0, n) : text;
+};
 
 export type ConversationsListProps = {
   id?: number;
   joined_at: string;
   conversation_id?: number;
   user_id: string;
-  conversations: OpenConversationProps;
+  conversations: {
+    id: number;
+    messages: message[];
+    created_at: string;
+  };
 };
 
 const ConversationsList: React.FC<ConversationsListProps> = ({
@@ -19,14 +23,17 @@ const ConversationsList: React.FC<ConversationsListProps> = ({
   user_id,
   conversations,
 }) => {
-  // const shortenedText = cutAfterNCharacters(lastMessage, 50);
+  const lastMessage =
+    conversations.messages[conversations.messages.length - 1]?.message_text ||
+    'No messages yet';
+  const shortenedText = cutAfterNCharacters(lastMessage, 50);
 
   return (
     <div className='m-2 flex max-h-28 justify-between rounded-lg bg-gray-300 p-4'>
       <div>
         <h2 className='font-bold'>{user_id}</h2>
         <p className='mt-1 overflow-hidden font-light italic'>
-          {conversations.conversation_id} ...
+          {shortenedText} ...
         </p>
       </div>
       <div className='flex flex-col items-end justify-between gap-1 py-2'>

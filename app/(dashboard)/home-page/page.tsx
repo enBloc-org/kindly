@@ -2,16 +2,15 @@
 import React from 'react';
 
 import giveKindly from '../../../public/giveKindly.png';
-import { retrieveLastItems } from '@/utils/supabase/retrieveLastItems';
+import { getRecentItems } from '@/utils/supabase/getRecentItems';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const HomePage = async () => {
-  const lastItems = await retrieveLastItems();
-
+  const lastItems = await getRecentItems();
   return (
     <>
-      <div className='max-w-lg m-auto'>
+      <div className='m-auto max-w-lg'>
         <Image
           alt='give kindly image'
           src={giveKindly}
@@ -19,9 +18,9 @@ const HomePage = async () => {
           className='m-auto'
         />
       </div>
-      <div className='grid gap-10 px-12 mt-16 md:px-40 xl:grid-cols-2 lg:p-20 lg:gap-30'>
+      <div className='lg:gap-30 mt-16 grid gap-10 px-12 md:px-40 lg:p-20 xl:grid-cols-2'>
         <div className='flex flex-col gap-8 lg:px-10'>
-          <h1 className='font-extrabold text-4xl text-center'>
+          <h1 className='text-center text-4xl font-extrabold'>
             What do we do?
           </h1>
           <p className='mt-5 md:px-16 lg:px-0'>
@@ -40,17 +39,17 @@ const HomePage = async () => {
           </p>
         </div>
         <div className='flex flex-col gap-8 lg:px-10'>
-          <h2 className='font-extrabold text-4xl mt-10 text-center'>
+          <h2 className='mt-10 text-center text-4xl font-extrabold'>
             Added this week
           </h2>
           <div className='lastItems'>
             {lastItems && (
-              <ul className='flex flex-wrap gap-10 justify-center items-center'>
+              <ul className='flex flex-wrap items-center justify-center gap-10'>
                 {' '}
                 {lastItems.map((item) => (
                   <li key={item.id}>
                     <Link href={`/item/${item.id}`}>
-                      <div className='relative w-28 h-36 shadow-md'>
+                      <div className='relative h-36 w-28 shadow-md'>
                         <Image
                           alt={`Image of ${item.item_name}`}
                           src={item.imageSrc}
@@ -68,7 +67,7 @@ const HomePage = async () => {
         </div>
 
         <div className='flex flex-col gap-8 lg:px-60 xl:col-span-2 xl:mt-20'>
-          <h2 className='font-extrabold text-4xl text-center mt-10'>Blog</h2>
+          <h2 className='mt-10 text-center text-4xl font-extrabold'>Blog</h2>
           <p className='mt-5 md:px-16 lg:px-0'>
             Hello and welcome! We’re very excited to be launching KINDLY, a
             platform which lets you donate unwanted items to Ukrainian refugees.
@@ -78,7 +77,7 @@ const HomePage = async () => {
           <p className='mt-5 md:px-16 lg:px-0'>
             KINDLY is a sister project to{' '}
             <Link
-              className='text-primaryOrange font-extrabold'
+              className='font-extrabold text-primaryOrange'
               href='https://linktr.ee/trafalgargirls'
             >
               Trafalgar Girls
@@ -87,7 +86,7 @@ const HomePage = async () => {
             refugees since the war began in February 2022. The KINDLY site was
             created through the{' '}
             <Link
-              className='text-primaryOrange font-extrabold'
+              className='font-extrabold text-primaryOrange'
               href='https://www.foundersandcoders.com/tech-for-better/'
             >
               Tech for Better programme

@@ -43,9 +43,8 @@ const ConversationStateHandler = ({
           </div>
         )
       )}
-
       <OpenConversation
-        conversation_id={openConvo.conversation_id as number}
+        conversation_id={openConvo.conversation_id}
         user_id={openConvo.user_id}
         conversations={openConvo.conversations}
       />

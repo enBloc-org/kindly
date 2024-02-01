@@ -1,7 +1,9 @@
 //Components
 import MeatballIcon from '@/components/icons/MeatballIcon';
 import PlusIcon from '@/components/icons/PlusIcon';
-import ConversationStateHandler from '@/components/messaging/CoversationStateHandler';
+import ConversationStateHandler, {
+  ConversationStateHandlerProps,
+} from '@/components/messaging/CoversationStateHandler';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
@@ -26,8 +28,15 @@ const Conversations = async () => {
         </button>
       </div>
       <div className='mt-4'>
-        {allConversations && (
-          <ConversationStateHandler allConversations={allConversations} />
+        {allConversations?.length === 0 ? (
+          <p className='p-10 italic'>
+            {' '}
+            You do not have any conversations active{' '}
+          </p>
+        ) : (
+          <ConversationStateHandler
+            allConversations={allConversations as ConversationStateHandlerProps}
+          />
         )}
       </div>
     </>
