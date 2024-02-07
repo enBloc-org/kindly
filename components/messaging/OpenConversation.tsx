@@ -1,6 +1,6 @@
 'use client';
 
-import { message } from '@/utils/supabase/types';
+import { MessageType } from '@/utils/messaging/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 
@@ -9,7 +9,7 @@ export type OpenConversationProps = {
   conversation_id: number;
   conversations: {
     id: number;
-    messages: message[];
+    messages: MessageType[];
     created_at: string;
   };
 };
@@ -21,7 +21,7 @@ const OpenConversation: React.FC<OpenConversationProps> = ({
 }) => {
   return (
     <div className='flex w-2/4 flex-col'>
-      {conversations?.messages?.map((message: message) => (
+      {conversations?.messages?.map((message: MessageType) => (
         <div key={`${conversations.id}-${message.created_at}`}>
           <MessageCard
             sender_id={message.sender_id}
