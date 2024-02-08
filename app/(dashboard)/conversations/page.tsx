@@ -1,6 +1,7 @@
 //Components
 import MeatballIcon from '@/components/icons/MeatballIcon';
 import PlusIcon from '@/components/icons/PlusIcon';
+import ConversationProvider from '@/components/messaging/ConversationProvider';
 import ConversationStateHandler from '@/components/messaging/CoversationStateHandler';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
@@ -16,7 +17,7 @@ const Conversations = async () => {
     .eq('user_id', userId);
 
   return (
-    <>
+    <ConversationProvider>
       <div className='mt-4 flex justify-between px-3 '>
         <button>
           <PlusIcon width={45} height={45} />
@@ -32,7 +33,7 @@ const Conversations = async () => {
           <p> You do not have any conversations active </p>
         )}
       </div>
-    </>
+    </ConversationProvider>
   );
 };
 

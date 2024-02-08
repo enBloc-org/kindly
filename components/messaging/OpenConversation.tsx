@@ -3,6 +3,8 @@
 import { MessageType } from '@/utils/messaging/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
+import ConversationProvider from './ConversationProvider';
+import { useContext } from 'react';
 
 export type OpenConversationProps = {
   user_id: string;
@@ -19,9 +21,11 @@ const OpenConversation: React.FC<OpenConversationProps> = ({
   user_id,
   conversation_id,
 }) => {
+  const { allConversations } = useContext(ConversationProvider);
+
   return (
     <div className='flex w-2/4 flex-col'>
-      {conversations?.messages?.map((message: MessageType) => (
+      {allConversations?.messages?.map((message: MessageType) => (
         <div key={`${conversations.id}-${message.created_at}`}>
           <MessageCard
             sender_id={message.sender_id}
