@@ -1,9 +1,9 @@
 import { ConversationCardType } from '@/utils/messaging/messagingTypes';
 import TickIcon from '../icons/tickIcon';
 
-const cutAfterNCharacters = (text: string, n: number): string => {
-  return text.length > n ? text.substring(0, n) : text;
-};
+// const cutAfterNCharacters = (text: string, n: number): string => {
+//   return text.length > n ? text.substring(0, n) : text;
+// };
 
 type ConversationCardProps = ConversationCardType & {
   clickHandler: () => void;
@@ -12,14 +12,14 @@ type ConversationCardProps = ConversationCardType & {
 const ConversationCard: React.FC<ConversationCardProps> = ({
   joined_at,
   user_id,
-  conversations,
+  // conversations,
   clickHandler,
 }) => {
-  const lastMessage =
-    conversations.messages[conversations.messages.length - 1]?.message_text ||
-    'No messages yet';
+  // const lastMessage =
+  //   conversations.messages[conversations.messages.length - 1]?.message_text ||
+  //   'No messages yet';
 
-  const shortenedText = cutAfterNCharacters(lastMessage, 50);
+  // const shortenedText = cutAfterNCharacters(lastMessage, 50);
 
   return (
     <button type='button' onClick={clickHandler}>
@@ -27,7 +27,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
         <div>
           <h2 className='font-bold'>{user_id}</h2>
           <p className='mt-1 overflow-hidden font-light italic'>
-            {shortenedText} ...
+            {/* {shortenedText} ... */}
           </p>
         </div>
         <div className='flex flex-col items-end justify-between gap-1 py-2'>
