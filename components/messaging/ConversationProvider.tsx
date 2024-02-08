@@ -1,28 +1,38 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
+import {
+  AllConversationsType,
+  ConversationCardType,
+} from '@/utils/messaging/messagingTypes';
 
-type ContextProviderProps = {
-  allConversations: ConversationType[],
-  setAllConversations: React.Dispatch<React.SetStateAction<ConversationType[]>>,
-  openConversation: ConversationType,
-  setOpenConversation: React.Dispatch<React.SetStateAction<ConversationType>>,
-}
+type ConversationProviderProps = {
+  allConversations: AllConversationsType;
+  setAllConversations: React.SetStateAction<AllConversationsType>;
+  openConversation: ConversationCardType | null;
+  setOpenConversation: React.Dispatch<
+    React.SetStateAction<ConversationCardType>
+  >;
+};
 
-const defaultContext:ContextProviderProps = {
-  allConversations: any[] | null,
+const defaultContext: ConversationProviderProps = {
+  allConversations: [],
   setAllConversations: () => [],
-  openConversation: {} | null,
+  openConversation: null,
   setOpenConversation: () => {},
 };
 
 const ConversationContext = createContext(defaultContext);
 
-const ConversationProvider: React.FC<ConversationProviderProps> = ({
+const ConversationProvider = ({
   children,
-}) => {
-  const [allConversations, setAllConversations] = useState([]);
-  const [openConversation, setOpenConversation] = useState();
+}: {
+  children: React.FC;
+}): React.FC => {
+  const [allConversations, setAllConversations] =
+    useState<AllConversationsType>([]);
+  const [openConversation, setOpenConversation] =
+    useState<ConversationCardType>();
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -36,13 +46,16 @@ const ConversationProvider: React.FC<ConversationProviderProps> = ({
           .select('*, conversations(*, messages(*))')
           .eq('user_id', userId);
 
-        setAllConversations(fetchedConversations);
+        setAllConversations(fetchedConversations ?? []);
+        setOpenConversation(allConversations[0]);
       } catch (error) {
         console.error(`Failed to fetch conversations from database: ${error}`);
         throw error;
       }
     };
-  });
+
+    fetchConversations();
+  }, []);
 
   return (
     <ConversationContext.Provider
