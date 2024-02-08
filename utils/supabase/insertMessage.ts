@@ -6,14 +6,12 @@ export default async function insertMessage(
   message: string
 ) {
   const supabase = newClient();
-  await supabase
-    .from('messages')
-    .insert([
-      {
-        conversation_id: conversation_id,
-        sender_id: user_id,
-        message_text: message,
-        is_read: true,
-      },
-    ]);
+  await supabase.from('messages').insert([
+    {
+      conversation_id: conversation_id,
+      sender_id: user_id,
+      message_text: message,
+      is_read: false,
+    },
+  ]);
 }

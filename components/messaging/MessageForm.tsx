@@ -4,7 +4,7 @@ import insertMessage from '@/utils/supabase/insertMessage';
 
 type MessageFormProps = {
   user_id: string;
-  conversation_id: number | undefined;
+  conversation_id: number;
 };
 
 const MessageForm: React.FC<MessageFormProps> = ({
@@ -12,7 +12,9 @@ const MessageForm: React.FC<MessageFormProps> = ({
   conversation_id,
 }) => {
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault;
+    e.preventDefault();
+    console.log({ user_id, conversation_id });
+
     await insertMessage(user_id, conversation_id, message);
     setMessage('');
   };
