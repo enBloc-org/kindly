@@ -1,3 +1,4 @@
+'use client';
 import ConversationCard from './ConversationCard';
 import { useContext } from 'react';
 import { ConversationContext } from './ConversationProvider';

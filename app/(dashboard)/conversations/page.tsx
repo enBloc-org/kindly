@@ -2,7 +2,8 @@
 import MeatballIcon from '@/components/icons/MeatballIcon';
 import PlusIcon from '@/components/icons/PlusIcon';
 import ConversationProvider from '@/components/messaging/ConversationProvider';
-import ConversationStateHandler from '@/components/messaging/CoversationStateHandler';
+import ConversationsList from '@/components/messaging/ConversationsList';
+import OpenConversation from '@/components/messaging/OpenConversation';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
@@ -23,7 +24,8 @@ const Conversations = async () => {
           </button>
         </div>
         <div className='mt-4'>
-          <ConversationStateHandler />
+          <ConversationsList />
+          <OpenConversation />
         </div>
       </ConversationProvider>
     )
