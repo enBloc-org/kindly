@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
+import { ConversationContext } from './ConversationProvider';
 
 //Types
 import { AllConversationsType } from '@/utils/messaging/messagingTypes';
@@ -11,25 +12,26 @@ import OpenConversation from './OpenConversation';
 
 export type ConversationStateHandlerProps = AllConversationsType;
 
-const ConversationStateHandler = ({
-  allConversations,
-}: {
-  allConversations: ConversationStateHandlerProps;
-}) => {
-  const [openConvo, setOpenConvo] = useState(allConversations[0]);
+const ConversationStateHandler = () => {
+  const { allConversations, openConversation, setOpenConversation } =
+    useContext(ConversationContext);
 
-  useEffect(() => {});
+  useEffect(() => {
+    setOpenConversation && setOpenConversation(allConversations[0]);
+  }, []);
 
   return (
     <>
-      <ConversationsList
-        allConversations={allConversations}
-        setOpenConvo={setOpenConvo}
-      />
+      {allConversations.length > 0 ? (
+        <ConversationsList />
+      ) : (
+        <p>There are no active conversations</p>
+      )}
+
       <OpenConversation
-        conversation_id={openConvo.conversation_id}
-        user_id={openConvo.user_id}
-        conversations={openConvo.conversations}
+        conversation_id={openConversation?.conversation_id}
+        user_id={openConversation?.user_id}
+        conversations={openConversation?.conversations}
       />
     </>
   );

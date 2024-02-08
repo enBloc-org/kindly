@@ -1,17 +1,17 @@
+'use client';
 import React, { ReactNode, createContext, useEffect, useState } from 'react';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
 import {
   AllConversationsType,
   ConversationCardType,
 } from '@/utils/messaging/messagingTypes';
+import newClient from '@/config/supabaseclient';
 
 type ConversationProviderProps = {
   allConversations: AllConversationsType;
   setAllConversations: React.Dispatch<
     React.SetStateAction<AllConversationsType>
   >;
-  openConversation: ConversationCardType | undefined;
+  openConversation: ConversationCardType;
   setOpenConversation: React.Dispatch<
     React.SetStateAction<ConversationCardType>
   > | null;
@@ -20,13 +20,28 @@ type ConversationProviderProps = {
 const defaultContext: ConversationProviderProps = {
   allConversations: [],
   setAllConversations: () => [],
-  openConversation: undefined,
+  openConversation: {
+    joined_at: new Date().toString(),
+    conversation_id: 2,
+    user_id: 'default',
+    conversations: {
+      id: 1,
+      messages: [],
+      created_at: new Date().toString(),
+    },
+  },
   setOpenConversation: () => null,
 };
 
-const ConversationContext = createContext(defaultContext);
+export const ConversationContext = createContext(defaultContext);
 
-const ConversationProvider = ({ children }: { children: ReactNode }) => {
+const ConversationProvider = ({
+  children,
+  userId,
+}: {
+  children: ReactNode;
+  userId: string;
+}) => {
   const [allConversations, setAllConversations] =
     useState<AllConversationsType>([]);
   const [openConversation, setOpenConversation] =
@@ -35,10 +50,7 @@ const ConversationProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const fetchConversations = async () => {
       try {
-        const supabase = createServerComponentClient({ cookies });
-        const { data } = await supabase.auth.getSession();
-        const userId = data.session?.user.id;
-
+        const supabase = newClient();
         const { data: fetchedConversations } = await supabase
           .from('user_conversations')
           .select('*, conversations(*, messages(*))')
