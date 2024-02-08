@@ -3,21 +3,25 @@
 import { useContext, useEffect } from 'react';
 import { ConversationContext } from './ConversationProvider';
 
-//Types
-import { AllConversationsType } from '@/utils/messaging/messagingTypes';
-
 //Components
-import ConversationsList from './ConversationList';
+import ConversationsList from './ConversationsList';
 import OpenConversation from './OpenConversation';
-
-export type ConversationStateHandlerProps = AllConversationsType;
 
 const ConversationStateHandler = () => {
   const { allConversations, openConversation, setOpenConversation } =
     useContext(ConversationContext);
 
   useEffect(() => {
-    setOpenConversation && setOpenConversation(allConversations[0]);
+    const highestId = Math.max(
+      ...allConversations.map((conversation) => conversation.conversation_id)
+    );
+
+    setOpenConversation &&
+      setOpenConversation(
+        allConversations?.filter(
+          (conversation) => conversation.conversation_id === highestId
+        )[0]
+      );
   }, []);
 
   return (

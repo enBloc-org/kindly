@@ -6,11 +6,11 @@ const ConversationsList: React.FC = () => {
   const { allConversations, setOpenConversation } =
     useContext(ConversationContext);
 
-  const updateOpenConvo = async (id: number) => {
+  const updateOpenConvo = async (givenId: number) => {
     setOpenConversation &&
       setOpenConversation(
         allConversations?.filter(
-          (conversations) => conversations.conversation_id === id
+          (conversations) => conversations.conversation_id === givenId
         )[0]
       );
   };
@@ -32,4 +32,5 @@ const ConversationsList: React.FC = () => {
     </>
   );
 };
+
 export default ConversationsList;

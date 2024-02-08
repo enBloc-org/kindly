@@ -1,20 +1,13 @@
 'use client';
 
-import { MessageType } from '@/utils/messaging/messagingTypes';
+import {
+  ConversationCardType,
+  MessageType,
+} from '@/utils/messaging/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 
-export type OpenConversationProps = {
-  user_id: string;
-  conversation_id: number;
-  conversations: {
-    id: number;
-    messages: MessageType[];
-    created_at: string;
-  };
-};
-
-const OpenConversation: React.FC<OpenConversationProps> = ({
+const OpenConversation: React.FC<ConversationCardType> = ({
   conversations,
   user_id,
   conversation_id,

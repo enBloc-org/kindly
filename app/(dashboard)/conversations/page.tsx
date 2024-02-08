@@ -9,22 +9,24 @@ import { cookies } from 'next/headers';
 const Conversations = async () => {
   const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getSession();
-  const userId = data.session?.user.id ?? '';
+  const userId = data.session?.user.id;
 
   return (
-    <ConversationProvider userId={userId}>
-      <div className='mt-4 flex justify-between px-3 '>
-        <button>
-          <PlusIcon width={45} height={45} />
-        </button>
-        <button>
-          <MeatballIcon width={35} height={35} />
-        </button>
-      </div>
-      <div className='mt-4'>
-        <ConversationStateHandler />
-      </div>
-    </ConversationProvider>
+    userId && (
+      <ConversationProvider userId={userId}>
+        <div className='mt-4 flex justify-between px-3 '>
+          <button>
+            <PlusIcon width={45} height={45} />
+          </button>
+          <button>
+            <MeatballIcon width={35} height={35} />
+          </button>
+        </div>
+        <div className='mt-4'>
+          <ConversationStateHandler />
+        </div>
+      </ConversationProvider>
+    )
   );
 };
 
