@@ -14,9 +14,11 @@ export type ConversationCardType = {
   joined_at: string;
   conversation_id: number;
   user_id: string;
-  conversations: {
-    id: number;
-    messages: MessageType[];
-    created_at: string;
-  };
+  conversations: conversation[];
+};
+
+export type conversation = {
+  id: number;
+  messages: MessageType[];
+  created_at: string;
 };
