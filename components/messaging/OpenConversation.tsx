@@ -34,7 +34,7 @@ const OpenConversation: React.FC<OpenConversationProps> = ({
       ))}
       <MessageForm
         user_id={user_id}
-        conversation_id={conversations}
+        conversation_id={conversation_id}
       ></MessageForm>
     </div>
   );
