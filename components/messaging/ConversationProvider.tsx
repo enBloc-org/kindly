@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { ReactNode, createContext, useEffect, useState } from 'react';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import {
@@ -8,31 +8,29 @@ import {
 
 type ConversationProviderProps = {
   allConversations: AllConversationsType;
-  setAllConversations: React.SetStateAction<AllConversationsType>;
-  openConversation: ConversationCardType | null;
+  setAllConversations: React.Dispatch<
+    React.SetStateAction<AllConversationsType>
+  >;
+  openConversation: ConversationCardType | undefined;
   setOpenConversation: React.Dispatch<
     React.SetStateAction<ConversationCardType>
-  >;
+  > | null;
 };
 
 const defaultContext: ConversationProviderProps = {
   allConversations: [],
   setAllConversations: () => [],
-  openConversation: null,
-  setOpenConversation: () => {},
+  openConversation: undefined,
+  setOpenConversation: () => null,
 };
 
 const ConversationContext = createContext(defaultContext);
 
-const ConversationProvider = ({
-  children,
-}: {
-  children: React.FC;
-}): React.FC => {
+const ConversationProvider = ({ children }: { children: ReactNode }) => {
   const [allConversations, setAllConversations] =
     useState<AllConversationsType>([]);
   const [openConversation, setOpenConversation] =
-    useState<ConversationCardType>();
+    useState<ConversationCardType>(null);
 
   useEffect(() => {
     const fetchConversations = async () => {
