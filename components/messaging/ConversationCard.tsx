@@ -11,6 +11,7 @@ type ConversationCardProps = ConversationCardType & {
 
 const ConversationCard: React.FC<ConversationCardProps> = ({
   user_id,
+  joined_at,
   conversations,
   clickHandler,
 }) => {
@@ -28,6 +29,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           <p className='mt-1 overflow-hidden font-light italic'>
             {shortenedText} ...
           </p>
+          <p>{joined_at}</p>
         </div>
         <div className='flex flex-col items-end justify-between gap-1 py-2'>
           <TickIcon read={true} />
