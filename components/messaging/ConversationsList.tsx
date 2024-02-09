@@ -1,10 +1,14 @@
 'use client';
 import ConversationCard from './ConversationCard';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import useConversation from './app/(dashboard)/conversations/useContext';
+import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
+import { ConversationCardType } from '@/utils/messaging/messagingTypes';
 
 const ConversationsList: React.FC = () => {
-  const { allConversations, setOpenConversation } = useContext(useConversation);
+  const { allConversations, setAllConversations, setOpenConversation } =
+    useContext(useConversation);
+  const supabase = createSupabaseClient;
 
   const updateOpenConvo = async (givenId: number) => {
     setOpenConversation &&
@@ -14,6 +18,30 @@ const ConversationsList: React.FC = () => {
         )[0]
       );
   };
+
+  useEffect(() => {
+    const channel = supabase
+      .channel('realtime conversations')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'user_conversations',
+        },
+        (payload) => {
+          setAllConversations([
+            ...allConversations,
+            payload.new as ConversationCardType,
+          ]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [supabase, allConversations, setAllConversations]);
 
   return (
     <>
