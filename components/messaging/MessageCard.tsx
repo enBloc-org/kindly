@@ -11,7 +11,7 @@ type MessageCardProps = {
   currentUser: string;
 };
 
-const MessageCard: React.FC<MessageCardProps> = async ({
+const MessageCard: React.FC<MessageCardProps> = ({
   sender_id,
   created_at,
   message_text,
