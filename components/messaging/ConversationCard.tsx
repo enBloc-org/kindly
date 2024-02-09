@@ -26,7 +26,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
       <div className='m-2 flex max-h-28 justify-between rounded-lg bg-gray-300 p-4'>
         <div>
           <h2 className='font-bold'>{user_id}</h2>
-          <p className='mt-1 overflow-hidden font-light italic'>
+          <p className='mt-1 overflow-hidden text-ellipsis font-light italic'>
             {shortenedText} ...
           </p>
         </div>

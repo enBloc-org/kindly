@@ -4,7 +4,7 @@ import {
   AllConversationsType,
   ConversationCardType,
 } from '@/utils/messaging/messagingTypes';
-import useConversation from './app/(dashboard)/conversations/useContext';
+import useConversation from '../../app/(dashboard)/conversations/useConversation';
 import newClient from '@/config/supabaseclient';
 
 const ConversationProvider = ({

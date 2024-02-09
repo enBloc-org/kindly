@@ -4,7 +4,7 @@ import { MessageType } from '@/utils/messaging/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { useContext, useEffect } from 'react';
-import useConversation from './app/(dashboard)/conversations/useContext';
+import useConversation from '../../app/(dashboard)/conversations/useConversation';
 
 const OpenConversation: React.FC = () => {
   const { allConversations, openConversation, setOpenConversation } =

@@ -1,7 +1,7 @@
 'use client';
 import ConversationCard from './ConversationCard';
 import { useContext, useEffect } from 'react';
-import useConversation from './app/(dashboard)/conversations/useContext';
+import useConversation from '../../app/(dashboard)/conversations/useConversation';
 import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
 import { ConversationCardType } from '@/utils/messaging/messagingTypes';
 
