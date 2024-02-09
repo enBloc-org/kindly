@@ -10,8 +10,7 @@ type ConversationCardProps = ConversationCardType & {
 };
 
 const ConversationCard: React.FC<ConversationCardProps> = ({
-  joined_at,
-  user_id,
+  senderUsername,
   // conversations,
   clickHandler,
 }) => {
@@ -25,13 +24,12 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
     <button type='button' onClick={clickHandler}>
       <div className='m-2 flex max-h-28 justify-between rounded-lg bg-gray-300 p-4'>
         <div>
-          <h2 className='font-bold'>{user_id}</h2>
+          <h2 className='font-bold'>{senderUsername}</h2>
           <p className='mt-1 overflow-hidden font-light italic'>
             {/* {shortenedText} ... */}
           </p>
         </div>
         <div className='flex flex-col items-end justify-between gap-1 py-2'>
-          <p>{joined_at}</p>
           <TickIcon read={true} />
         </div>
       </div>

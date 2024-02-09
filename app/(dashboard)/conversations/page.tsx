@@ -17,16 +17,12 @@ const Conversations = async () => {
         .from('user_conversations')
         .select(
           `
-        id,
-        joined_at,
+        joined_at,  
         conversation_id,
-        conversations (
-          messages (
-            id,
-            created_at,
-            message_text,
-            sender_id,
-            profiles: sender_id(username)
+        user_id,
+        conversations!inner (
+          user_conversations (
+            profiles (username)
           )
         )
       `
@@ -57,8 +53,7 @@ const Conversations = async () => {
   const allConversations = await getConversationList();
   // const lastMessage = await getLastMessage();
 
-  console.log({ allConversations });
-
+  console.log(JSON.stringify(allConversations, null, 2));
   return (
     <>
       <div className='mt-4 flex justify-between px-3 '>
