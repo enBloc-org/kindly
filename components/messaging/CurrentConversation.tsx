@@ -6,8 +6,8 @@ import MessageForm from './MessageForm';
 import { useContext, useEffect } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
 
-const OpenConversation: React.FC = () => {
-  const { allConversations, openConversation, setOpenConversation } =
+const CurrentConversation: React.FC = () => {
+  const { allConversations, currentConversation, setCurrentConversation } =
     useContext(useConversation);
 
   useEffect(() => {
@@ -15,8 +15,8 @@ const OpenConversation: React.FC = () => {
       ...allConversations.map((conversation) => conversation.conversation_id)
     );
 
-    setOpenConversation &&
-      setOpenConversation(
+    setCurrentConversation &&
+      setCurrentConversation(
         allConversations?.filter(
           (conversation) => conversation.conversation_id === highestId
         )[0]
@@ -25,27 +25,27 @@ const OpenConversation: React.FC = () => {
 
   return (
     <div className='flex w-2/4 flex-col'>
-      {openConversation?.conversations?.messages?.map(
+      {currentConversation?.conversations?.messages?.map(
         (message: MessageType) => (
           <div
-            key={`${openConversation.conversations.id}-${message.created_at}`}
+            key={`${currentConversation.conversations.id}-${message.created_at}`}
           >
             <MessageCard
               sender_id={message.sender_id}
               created_at={message.created_at}
               message_text={message.message_text}
               is_read={message.is_read}
-              currentUser={openConversation.user_id}
+              currentUser={currentConversation.user_id}
             />
           </div>
         )
       )}
       <MessageForm
-        user_id={openConversation?.user_id}
-        conversation_id={openConversation?.conversation_id}
+        user_id={currentConversation?.user_id}
+        conversation_id={currentConversation?.conversation_id}
       ></MessageForm>
     </div>
   );
 };
 
-export default OpenConversation;
+export default CurrentConversation;
