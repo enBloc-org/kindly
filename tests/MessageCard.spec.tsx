@@ -26,4 +26,18 @@ test.describe('MessageCard component', () => {
 
     await expect(component).toContainText(testMessage.message_text);
   });
+
+  test('displays read receipts', async ({ mount }) => {
+    const component = await mount(
+      <MessageCard
+        sender_id={testMessage.sender_id}
+        created_at={testMessage.created_at}
+        message_text={testMessage.message_text}
+        is_read={testMessage.is_read}
+        currentUser={testMessage.currentUser}
+      />
+    );
+
+    await expect(component.getByTestId('tick-icon')).toBeVisible();
+  });
 });
