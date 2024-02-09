@@ -54,10 +54,11 @@ const ConversationsList: React.FC<ConversationsListProps> = ({
       {conversationsList.map((conversation, index) => (
         <div key={`${conversation.id}-${index}`}>
           <ConversationCard
-            senderUsername={
-              conversation.conversations.user_conversations[1].profiles.username
-            }
-            // conversations={conversation.conversations}
+            id={conversation.conversation_id}
+            joined_at={conversation.joined_at}
+            conversation_id={conversation.conversation_id}
+            user_id={conversation.user_id}
+            conversations={conversation.conversations}
             clickHandler={() => updateOpenConvo(index)}
           />
         </div>
