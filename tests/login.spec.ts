@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test } from '@playwright/experimental-ct-react';
 
 test('test', async ({ page }) => {
   await page.goto('http://localhost:3000/login');
