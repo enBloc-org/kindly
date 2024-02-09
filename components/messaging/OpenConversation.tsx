@@ -4,11 +4,11 @@ import { MessageType } from '@/utils/messaging/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { useContext, useEffect } from 'react';
-import { ConversationContext } from './ConversationProvider';
+import useConversation from './app/(dashboard)/conversations/useContext';
 
 const OpenConversation: React.FC = () => {
   const { allConversations, openConversation, setOpenConversation } =
-    useContext(ConversationContext);
+    useContext(useConversation);
 
   useEffect(() => {
     const highestId = Math.max(
