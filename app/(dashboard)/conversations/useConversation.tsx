@@ -9,8 +9,8 @@ type ConversationProviderProps = {
   setAllConversations: React.Dispatch<
     React.SetStateAction<AllConversationsType>
   >;
-  openConversation: ConversationCardType;
-  setOpenConversation: React.Dispatch<
+  currentConversation: ConversationCardType;
+  setCurrentConversation: React.Dispatch<
     React.SetStateAction<ConversationCardType>
   > | null;
 };
@@ -18,7 +18,7 @@ type ConversationProviderProps = {
 const defaultContext: ConversationProviderProps = {
   allConversations: [],
   setAllConversations: () => [],
-  openConversation: {
+  currentConversation: {
     joined_at: new Date().toString(),
     conversation_id: 2,
     user_id: 'default',
@@ -28,7 +28,7 @@ const defaultContext: ConversationProviderProps = {
       created_at: new Date().toString(),
     },
   },
-  setOpenConversation: () => null,
+  setCurrentConversation: () => null,
 };
 
 const useConversation = createContext(defaultContext);

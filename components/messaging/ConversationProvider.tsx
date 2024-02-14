@@ -16,7 +16,7 @@ const ConversationProvider = ({
 }) => {
   const [allConversations, setAllConversations] =
     useState<AllConversationsType>([]);
-  const [openConversation, setOpenConversation] =
+  const [currentConversation, setCurrentConversation] =
     useState<ConversationCardType>({
       joined_at: new Date().toString(),
       conversation_id: 2,
@@ -38,7 +38,7 @@ const ConversationProvider = ({
           .eq('user_id', userId);
 
         setAllConversations(fetchedConversations ?? []);
-        setOpenConversation && setOpenConversation(allConversations[0]);
+        setCurrentConversation && setCurrentConversation(allConversations[0]);
       } catch (error) {
         console.error(`Failed to fetch conversations from database: ${error}`);
         throw error;
@@ -53,8 +53,8 @@ const ConversationProvider = ({
       value={{
         allConversations,
         setAllConversations,
-        openConversation,
-        setOpenConversation,
+        currentConversation,
+        setCurrentConversation,
       }}
     >
       {children}

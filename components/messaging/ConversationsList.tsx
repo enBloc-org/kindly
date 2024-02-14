@@ -6,13 +6,13 @@ import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
 import { ConversationCardType } from '@/utils/messaging/messagingTypes';
 
 const ConversationsList: React.FC = () => {
-  const { allConversations, setAllConversations, setOpenConversation } =
+  const { allConversations, setAllConversations, setCurrentConversation } =
     useContext(useConversation);
   const supabase = createSupabaseClient;
 
   const updateOpenConvo = async (givenId: number) => {
-    setOpenConversation &&
-      setOpenConversation(
+    setCurrentConversation &&
+      setCurrentConversation(
         allConversations?.filter(
           (conversations) => conversations.conversation_id === givenId
         )[0]
