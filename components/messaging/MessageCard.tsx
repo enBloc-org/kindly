@@ -22,16 +22,22 @@ const MessageCard: React.FC<MessageCardProps> = ({
   const dateStamp = created_at.slice(0, 10).replaceAll('-', ' ');
 
   return (
-    <div className={`message-card ${isCurrentUser ? 'self' : ''}`}>
+    <div
+      className={`message-card ${isCurrentUser ? 'float-right' : 'float-left'}`}
+    >
       <p
-        className={`text-lg text-slate-500 ${isCurrentUser ? 'text-right' : 'text-left'}`}
+        className={`text-lg text-slate-500 ${isCurrentUser ? 'mr-2 text-right' : 'ml-2 text-left'}`}
       >
         {dateStamp}
       </p>
-      <div className='m-1'>
-        <p className='green-border-card m-1'>{message_text}</p>
+      <div>
+        <p className='green-border-card'>{message_text}</p>
       </div>
-      <TickIcon read={is_read} />
+      {isCurrentUser && (
+        <div className='relative float-right mr-4'>
+          <TickIcon read={is_read} />
+        </div>
+      )}
     </div>
   );
 };
