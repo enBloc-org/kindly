@@ -11,7 +11,7 @@ export type AllConversationsType = ConversationCardType[];
 
 export type ConversationCardType = {
   id?: number;
-  joined_at: string;
+  joined_at?: string;
   conversation_id: number;
   user_id: string;
   conversations: {
