@@ -23,6 +23,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
   return (
     <form onSubmit={handleSubmit}>
       <textarea
+        className='green-border-card'
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder='Type your message here'
