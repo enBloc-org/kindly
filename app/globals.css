@@ -63,7 +63,3 @@ body {
 .green-border-card {
   @apply rounded-xl border-2 border-solid border-primaryGreen p-4;
 }
-
-.self {
-  @apply float-right;
-}
