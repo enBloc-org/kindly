@@ -1,4 +1,3 @@
-// import EnquireButton from '@/components/buttons/EnquireButton';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
@@ -13,7 +12,6 @@ import NewConversationButton from '@/components/buttons/NewConversationButton';
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getSession();
-  // const userEmail = data.session?.user.email;
   const userId = data.session?.user.id;
   let EnqButtConditions: boolean = true;
   const userProfile = await getProfile(supabase, userId);
@@ -26,9 +24,9 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
     if (!item || !item.profiles) {
       throw new Error('Error fetching data');
     } else {
-      // const donorEmail = item.profiles.email;
+      const donorEmail = item.profiles.email;
       const donerId: string | undefined = item.profiles.id;
-      // const title = item.item_name;
+      const title = item.item_name;
       if (
         userProfile.data.refugee === false ||
         data.session?.user.id == item.profiles.id ||
@@ -66,18 +64,15 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               postcode={item.postcode}
               fontSize='text-lg'
             />
-            {/* {EnqButtConditions && (
-              <EnquireButton
+
+            {EnqButtConditions && (
+              <NewConversationButton
+                userId={userId}
+                donorId={donerId}
                 donorEmail={donorEmail}
-                userEmail={userEmail !== undefined ? userEmail : ''}
                 title={title}
                 item_id={item.id}
-                user_id={data.session!.user.id}
-                // isUserRefugee = {item.profiles.refugee}
               />
-            )} */}
-            {EnqButtConditions && (
-              <NewConversationButton userId={userId} donorId={donerId} />
             )}
           </div>
         </>
