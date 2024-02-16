@@ -37,6 +37,21 @@ const ConversationsList: React.FC = () => {
           ]);
         }
       )
+      .on(
+        'postgres_changes',
+        {
+          event: 'DELETE',
+          schema: 'public',
+          table: 'user_conversations',
+        },
+        (payload) => {
+          setAllConversations([
+            ...allConversations.filter(
+              (conversation) => conversation.id !== payload.old.id
+            ),
+          ]);
+        }
+      )
       .subscribe();
 
     return () => {
