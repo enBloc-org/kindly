@@ -20,7 +20,7 @@ const OpenConversation: React.FC<OpenConversationProps> = ({
   conversation_id,
 }) => {
   return (
-    <div className='flex w-2/4 flex-col'>
+    <div className='flex flex-col'>
       {conversations?.messages?.map((message: MessageType) => (
         <div key={`${conversations.id}-${message.created_at}`}>
           <MessageCard
