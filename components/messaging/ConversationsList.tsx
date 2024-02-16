@@ -4,6 +4,7 @@ import { useContext, useEffect } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
 import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
 import { ConversationCardType } from '@/utils/messaging/messagingTypes';
+import DeleteConvoModal from '../DeleteConvoModal';
 
 const ConversationsList: React.FC = () => {
   const { allConversations, setAllConversations, setCurrentConversation } =
@@ -36,6 +37,21 @@ const ConversationsList: React.FC = () => {
           ]);
         }
       )
+      .on(
+        'postgres_changes',
+        {
+          event: 'DELETE',
+          schema: 'public',
+          table: 'user_conversations',
+        },
+        (payload) => {
+          setAllConversations([
+            ...allConversations.filter(
+              (conversation) => conversation.id !== payload.old.id
+            ),
+          ]);
+        }
+      )
       .subscribe();
 
     return () => {
@@ -55,6 +71,11 @@ const ConversationsList: React.FC = () => {
               user_id={conversation.user_id}
               conversations={conversation.conversations}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
+            />
+            <DeleteConvoModal
+              name='X'
+              convoId={conversation.conversation_id}
+              message='By pressing "confirm" you will delete this conversation'
             />
           </div>
         ))
