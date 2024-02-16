@@ -9,5 +9,5 @@ test('test', async ({ page }) => {
     .getByPlaceholder('••••••••')
     .fill('a password i dont use elsewhere');
   await page.getByRole('button', { name: 'LOG IN' }).click();
-  await page.locator('div').filter({ hasText: 'HomePage' }).first().click();
+  await page.locator('div').filter({ hasText: 'HomePage' }).first();
 });

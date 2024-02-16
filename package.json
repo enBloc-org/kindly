@@ -9,8 +9,8 @@
     "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss}\"",
     "format": "prettier --write .",
     "prepare": "husky install",
-    "test": "npx playwright test",
-    "test-ct": "playwright test -c playwright-ct.config.ts"
+    "test": "playwright test -c playwright-ct.config.ts",
+    "ci": "next build && start-server-and-test http://localhost:3000 test"
   },
   "dependencies": {
     "@next/font": "^14.0.3",
@@ -49,7 +49,8 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
     "prettier": "^3.2.2",
-    "prettier-plugin-tailwindcss": "^0.5.11"
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "start-server-and-test": "^2.0.3"
   },
   "husky": {
     "hooks": {
