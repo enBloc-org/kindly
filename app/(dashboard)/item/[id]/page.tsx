@@ -13,7 +13,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getSession();
   const userId = data.session?.user.id;
-  let EnqButtConditions: boolean = true;
+  let canMessage: boolean = true;
   const userProfile = await getProfile(supabase, userId);
   try {
     const { data: item } = await supabase
@@ -25,14 +25,14 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       throw new Error('Error fetching data');
     } else {
       const donorEmail = item.profiles.email;
-      const donerId: string | undefined = item.profiles.id;
+      const donerId: string = item.profiles?.id;
       const title = item.item_name;
       if (
         userProfile.data.refugee === false ||
         data.session?.user.id == item.profiles.id ||
         data.session == undefined
       ) {
-        EnqButtConditions = false;
+        canMessage = false;
       }
 
       return (
@@ -65,7 +65,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               fontSize='text-lg'
             />
 
-            {EnqButtConditions && (
+            {canMessage && (
               <NewConversationButton
                 userId={userId}
                 donorId={donerId}
