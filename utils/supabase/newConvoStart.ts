@@ -1,7 +1,7 @@
 import newClient from '../../config/supabaseclient';
 
 export default async function newConvoStart(
-  userID: string,
+  userID: string | undefined,
   donorID: string,
   itemID: string
 ) {

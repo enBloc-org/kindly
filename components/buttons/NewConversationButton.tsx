@@ -13,7 +13,7 @@ export default function NewConversationButton({
   item_id,
 }: {
   userId: string | undefined;
-  donorId: string | undefined;
+  donorId: string;
   donorEmail: string;
   title: string;
   item_id: string;
