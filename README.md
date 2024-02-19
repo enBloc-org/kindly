@@ -71,9 +71,9 @@ Install dependencies:
   npm install
 ```
 
-Add env variable:
+Add env variables:
 
-Create an .env file in the root directory of your project and add the environment variables from supabase (https://supabase.com/docs/guides/functions/secrets).
+The .env.example file in the root directory shows what variables you will need. For Gmail app and AWS amplify variables you will need contact the Product Owner. For Supabase variables you will need to have access to the project within Supabase (https://supabase.com/docs/guides/functions/secrets).
 
 Running the app:
 
