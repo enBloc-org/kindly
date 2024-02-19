@@ -3,7 +3,7 @@
 import { MessageType } from '@/utils/messaging/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
 import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
 
@@ -12,6 +12,9 @@ const CurrentConversation: React.FC = () => {
 
   const { allConversations, currentConversation, setCurrentConversation } =
     useContext(useConversation);
+  const [currentMessages, setCurrentMessages] = useState<MessageType[] | []>(
+    []
+  );
 
   useEffect(() => {
     const highestId = Math.max(
@@ -27,6 +30,25 @@ const CurrentConversation: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    const fetchMessagesForCurrentConversation = async () => {
+      try {
+        const { data: fetchedMessages } = await supabase
+          .from('messages')
+          .select('*')
+          .eq('conversation_id', currentConversation.conversation_id);
+
+        if (fetchedMessages === null) return;
+        setCurrentMessages(fetchedMessages);
+      } catch (error) {
+        console.error(`Failed to fetch messages from database: ${error}`);
+        throw error;
+      }
+    };
+
+    fetchMessagesForCurrentConversation();
+  }, []);
+
+  useEffect(() => {
     const channel = supabase
       .channel('realtime messages')
       .on(
@@ -37,11 +59,10 @@ const CurrentConversation: React.FC = () => {
           table: 'messages',
         },
         (payload) => {
-          // setCurrentConversation(curr[
-          //   ...currentConversation,
-          //   payload.new as MessageType,
-          // ]);
-          console.log(payload.new);
+          setCurrentMessages((prevMessages) => [
+            ...prevMessages,
+            payload.new as MessageType,
+          ]);
         }
       )
       .subscribe();
@@ -53,21 +74,17 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='flex w-2/4 flex-col'>
-      {currentConversation?.conversations?.messages?.map(
-        (message: MessageType) => (
-          <div
-            key={`${currentConversation.conversations.id}-${message.created_at}`}
-          >
-            <MessageCard
-              sender_id={message.sender_id}
-              created_at={message.created_at}
-              message_text={message.message_text}
-              is_read={message.is_read}
-              currentUser={currentConversation.user_id}
-            />
-          </div>
-        )
-      )}
+      {currentMessages.map((message: MessageType) => (
+        <div key={`${message.id}-${message.created_at}`}>
+          <MessageCard
+            sender_id={message.sender_id}
+            created_at={message.created_at}
+            message_text={message.message_text}
+            is_read={message.is_read}
+            currentUser={currentConversation.user_id}
+          />
+        </div>
+      ))}
       <MessageForm
         user_id={currentConversation?.user_id}
         conversation_id={currentConversation?.conversation_id}

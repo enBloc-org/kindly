@@ -30,8 +30,8 @@ const ConversationsList: React.FC = () => {
           table: 'user_conversations',
         },
         (payload) => {
-          setAllConversations([
-            ...allConversations,
+          setAllConversations((prevConversations) => [
+            ...prevConversations,
             payload.new as ConversationCardType,
           ]);
         }
