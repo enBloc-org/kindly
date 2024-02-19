@@ -64,7 +64,7 @@ export default function NewConversationButton({
       setIsDisabled(true);
       setErrorMessage('');
       setError(false);
-      await newConvoStart(userId, donorId);
+      await newConvoStart(userId, donorId, item_id);
       await router.push('/conversations');
     } catch (error) {
       console.log(error);
