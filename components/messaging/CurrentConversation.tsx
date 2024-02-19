@@ -5,11 +5,9 @@ import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { useContext, useEffect, useState } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
-import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
+import { createSupabaseClient as supabase } from '@/utils/supabase/supabaseClient';
 
 const CurrentConversation: React.FC = () => {
-  const supabase = createSupabaseClient;
-
   const { allConversations, currentConversation, setCurrentConversation } =
     useContext(useConversation);
   const [currentMessages, setCurrentMessages] = useState<MessageType[] | []>(
@@ -46,7 +44,7 @@ const CurrentConversation: React.FC = () => {
     };
 
     fetchMessagesForCurrentConversation();
-  }, []);
+  }, [currentConversation]);
 
   useEffect(() => {
     const channel = supabase
@@ -70,7 +68,7 @@ const CurrentConversation: React.FC = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [supabase]);
+  }, [supabase, currentMessages, setCurrentMessages]);
 
   return (
     <div className='flex w-2/4 flex-col'>
