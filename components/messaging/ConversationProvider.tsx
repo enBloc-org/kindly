@@ -21,6 +21,7 @@ const ConversationProvider = ({
       joined_at: new Date().toString(),
       conversation_id: 2,
       user_id: 'default',
+      item_id: 'default',
       conversations: {
         id: 1,
         messages: [],
