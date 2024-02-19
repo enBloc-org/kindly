@@ -2,13 +2,12 @@
 import ConversationCard from './ConversationCard';
 import { useContext, useEffect } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
-import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
+import { createSupabaseClient as supabase } from '@/utils/supabase/supabaseClient';
 import { ConversationCardType } from '@/utils/messaging/messagingTypes';
 
 const ConversationsList: React.FC = () => {
   const { allConversations, setAllConversations, setCurrentConversation } =
     useContext(useConversation);
-  const supabase = createSupabaseClient;
 
   const updateOpenConvo = async (givenId: number) => {
     setCurrentConversation &&

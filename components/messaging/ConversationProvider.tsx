@@ -5,7 +5,7 @@ import {
   ConversationCardType,
 } from '@/utils/messaging/messagingTypes';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
-import newClient from '@/config/supabaseclient';
+import { createSupabaseClient as supabase } from '@/utils/supabase/supabaseClient';
 
 const ConversationProvider = ({
   children,
@@ -31,7 +31,6 @@ const ConversationProvider = ({
   useEffect(() => {
     const fetchConversations = async () => {
       try {
-        const supabase = newClient();
         const { data: fetchedConversations } = await supabase
           .from('user_conversations')
           .select('*, conversations(*, messages(*))')
