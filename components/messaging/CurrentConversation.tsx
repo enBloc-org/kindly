@@ -14,7 +14,7 @@ const CurrentConversation: React.FC = () => {
 
   useEffect(() => {
     setCurrentConversation && setCurrentConversation(allConversations[0]);
-  }, [allConversations]);
+  }, [allConversations, setCurrentConversation]);
 
   useEffect(() => {
     const fetchMessagesForCurrentConversation = async () => {
@@ -22,7 +22,7 @@ const CurrentConversation: React.FC = () => {
         const { data: fetchedMessages } = await supabase
           .from('messages')
           .select('*')
-          .eq('conversation_id', currentConversation.conversation_id);
+          .eq('conversation_id', currentConversation?.conversation_id);
 
         setCurrentMessages(fetchedMessages ?? []);
       } catch (error) {
@@ -32,7 +32,7 @@ const CurrentConversation: React.FC = () => {
     };
 
     fetchMessagesForCurrentConversation();
-  }, [currentConversation]);
+  }, [currentConversation, setCurrentMessages]);
 
   useEffect(() => {
     const channel = supabase
@@ -67,7 +67,7 @@ const CurrentConversation: React.FC = () => {
             created_at={message.created_at}
             message_text={message.message_text}
             is_read={message.is_read}
-            currentUser={currentConversation.user_id}
+            currentUser={currentConversation?.user_id}
           />
         </div>
       ))}
