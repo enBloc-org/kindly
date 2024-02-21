@@ -5,6 +5,7 @@ import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { useContext, useEffect } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
+import BackButton from '../buttons/BackButton';
 
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =
@@ -25,6 +26,7 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='flex flex-col'>
+      <BackButton></BackButton>
       {currentConversation?.conversations?.messages?.map(
         (message: MessageType) => (
           <div
