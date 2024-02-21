@@ -59,7 +59,7 @@ const ConversationsList: React.FC = () => {
   }, [supabase, allConversations, setAllConversations]);
 
   return (
-    <>
+    <div className='col-span-1 col-start-1'>
       {allConversations.length > 0 ? (
         allConversations.map((conversation, index) => (
           <div key={`${conversation.id}-${index}`}>
@@ -81,7 +81,7 @@ const ConversationsList: React.FC = () => {
       ) : (
         <p>There are no active conversations</p>
       )}
-    </>
+    </div>
   );
 };
 

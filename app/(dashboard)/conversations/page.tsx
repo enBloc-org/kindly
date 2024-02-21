@@ -23,7 +23,7 @@ const Conversations = async () => {
             <MeatballIcon width={35} height={35} />
           </button>
         </div>
-        <div className='mt-4'>
+        <div className='grid-col-2 mt-4 grid'>
           <ConversationsList />
           <CurrentConversation />
         </div>
