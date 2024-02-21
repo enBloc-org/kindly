@@ -10,9 +10,7 @@ import { createSupabaseClient as supabase } from '@/utils/supabase/supabaseClien
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =
     useContext(useConversation);
-  const [currentMessages, setCurrentMessages] = useState<MessageType[] | []>(
-    []
-  );
+  const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
 
   useEffect(() => {
     const highestId = Math.max(
@@ -35,8 +33,7 @@ const CurrentConversation: React.FC = () => {
           .select('*')
           .eq('conversation_id', currentConversation.conversation_id);
 
-        if (fetchedMessages === null) return;
-        setCurrentMessages(fetchedMessages);
+        setCurrentMessages(fetchedMessages ?? []);
       } catch (error) {
         console.error(`Failed to fetch messages from database: ${error}`);
         throw error;
