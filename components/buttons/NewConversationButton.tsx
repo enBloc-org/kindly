@@ -13,7 +13,7 @@ export default function NewConversationButton({
   item_id,
 }: {
   userId: string | undefined;
-  donorId: string | undefined;
+  donorId: string;
   donorEmail: string;
   title: string;
   item_id: string;
@@ -64,7 +64,7 @@ export default function NewConversationButton({
       setIsDisabled(true);
       setErrorMessage('');
       setError(false);
-      await newConvoStart(userId, donorId);
+      await newConvoStart(userId, donorId, item_id);
       await router.push('/conversations');
     } catch (error) {
       console.log(error);
