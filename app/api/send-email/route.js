@@ -21,7 +21,7 @@ export async function POST(request) {
     const mailOption = {
       from: 'kindlylinking@gmail.com',
       to: donorEmail,
-      subject: 'Send Email Tutorial',
+      subject: 'New Kindly Message',
       html: `
         <h2>Hello Kindly user,</h2>
         <h3>Name of item: ${subject}</h3>

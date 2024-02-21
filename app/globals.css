@@ -56,10 +56,10 @@ body {
   @apply overflow-hidden rounded-lg bg-white px-8  pb-5 shadow-sm transition-all hover:scale-95 hover:shadow-lg lg:text-lg;
 }
 
-.message-card__self {
-  @apply relative float-right m-2 min-h-max w-5/6 overflow-hidden rounded-lg bg-white px-8 pb-1 pb-5 pl-3 pr-3 pt-3 text-black shadow-lg shadow-sm transition-all sm:w-96 lg:text-lg;
+.message-card {
+  @apply relative min-h-max w-5/6 overflow-hidden rounded-lg bg-background px-4 py-2 text-black transition-all sm:w-96 lg:text-lg;
 }
 
-.message-card__other {
-  @apply relative m-2 min-h-max w-5/6 overflow-hidden rounded-lg bg-primaryGreen px-8 pb-1 pb-5 pl-3 pr-3 pt-3 text-black shadow-lg shadow-sm transition-all sm:w-96 lg:text-lg;
+.green-border-card {
+  @apply rounded-xl border-2 border-solid border-primaryGreen p-4;
 }
