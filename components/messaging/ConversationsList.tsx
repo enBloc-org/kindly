@@ -2,14 +2,13 @@
 import ConversationCard from './ConversationCard';
 import { useContext, useEffect } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
-import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
+import { createSupabaseClient as supabase } from '@/utils/supabase/supabaseClient';
 import { ConversationCardType } from '@/utils/messaging/messagingTypes';
 import DeleteConvoModal from '../DeleteConvoModal';
 
 const ConversationsList: React.FC = () => {
   const { allConversations, setAllConversations, setCurrentConversation } =
     useContext(useConversation);
-  const supabase = createSupabaseClient;
 
   const updateOpenConvo = async (givenId: number) => {
     setCurrentConversation &&
@@ -31,8 +30,8 @@ const ConversationsList: React.FC = () => {
           table: 'user_conversations',
         },
         (payload) => {
-          setAllConversations([
-            ...allConversations,
+          setAllConversations((prevConversations) => [
+            ...prevConversations,
             payload.new as ConversationCardType,
           ]);
         }
