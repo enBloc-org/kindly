@@ -21,7 +21,7 @@ const CurrentConversation: React.FC = () => {
           (conversation) => conversation.conversation_id === highestId
         )[0]
       );
-  }, []);
+  }, [allConversations]);
 
   return (
     <div className='flex w-2/4 flex-col'>
