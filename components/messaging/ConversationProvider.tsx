@@ -1,21 +1,22 @@
 'use client';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import {
   AllConversationsType,
   ConversationCardType,
 } from '@/utils/messaging/messagingTypes';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
-import { createSupabaseClient as supabase } from '@/utils/supabase/supabaseClient';
 
 const ConversationProvider = ({
   children,
-  userId,
+  conversations,
 }: {
   children: ReactNode;
   userId: string;
+  conversations: AllConversationsType;
 }) => {
   const [allConversations, setAllConversations] =
-    useState<AllConversationsType>([]);
+    useState<AllConversationsType>(conversations);
+
   const [currentConversation, setCurrentConversation] =
     useState<ConversationCardType>({
       joined_at: new Date().toString(),
@@ -28,25 +29,6 @@ const ConversationProvider = ({
         created_at: new Date().toString(),
       },
     });
-
-  useEffect(() => {
-    const fetchConversations = async () => {
-      try {
-        const { data: fetchedConversations } = await supabase
-          .from('user_conversations')
-          .select('*, conversations(*, messages(*))')
-          .eq('user_id', userId);
-
-        setAllConversations(fetchedConversations ?? []);
-        setCurrentConversation && setCurrentConversation(allConversations[0]);
-      } catch (error) {
-        console.error(`Failed to fetch conversations from database: ${error}`);
-        throw error;
-      }
-    };
-
-    fetchConversations();
-  }, []);
 
   return (
     <useConversation.Provider
