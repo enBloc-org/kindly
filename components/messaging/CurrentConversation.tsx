@@ -24,7 +24,7 @@ const CurrentConversation: React.FC = () => {
   }, []);
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex w-2/4 flex-col'>
       {currentConversation?.conversations?.messages?.map(
         (message: MessageType) => (
           <div
