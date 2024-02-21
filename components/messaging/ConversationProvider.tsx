@@ -37,7 +37,7 @@ const ConversationProvider = ({
           .select('*, conversations(*, messages(*))')
           .eq('user_id', userId);
 
-        fetchedConversations && setAllConversations(fetchedConversations);
+        setAllConversations(fetchedConversations ?? []);
         setCurrentConversation && setCurrentConversation(allConversations[0]);
       } catch (error) {
         console.error(`Failed to fetch conversations from database: ${error}`);

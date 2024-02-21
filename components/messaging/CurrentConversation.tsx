@@ -11,16 +11,7 @@ const CurrentConversation: React.FC = () => {
     useContext(useConversation);
 
   useEffect(() => {
-    const highestId = Math.max(
-      ...allConversations.map((conversation) => conversation.conversation_id)
-    );
-
-    setCurrentConversation &&
-      setCurrentConversation(
-        allConversations?.filter(
-          (conversation) => conversation.conversation_id === highestId
-        )[0]
-      );
+    setCurrentConversation && setCurrentConversation(allConversations[0]);
   }, [allConversations]);
 
   return (

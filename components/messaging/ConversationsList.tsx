@@ -5,10 +5,9 @@ import useConversation from '../../app/(dashboard)/conversations/useConversation
 import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
 import { ConversationCardType } from '@/utils/messaging/messagingTypes';
 import DeleteConvoModal from '../DeleteConvoModal';
-import CurrentConversation from './CurrentConversation';
 
 const ConversationsList: React.FC = () => {
-  const { allConversations, setAllConversations, setCurrentConversation, currentConversation } =
+  const { allConversations, setAllConversations, setCurrentConversation } =
     useContext(useConversation);
   const supabase = createSupabaseClient;
 
