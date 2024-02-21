@@ -1,12 +1,12 @@
 'use client';
 import ConversationCard from './ConversationCard';
-import { useContext, useEffect} from 'react';
+import { useContext, useEffect } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
 import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
 import { ConversationCardType } from '@/utils/messaging/messagingTypes';
 import DeleteConvoModal from '../DeleteConvoModal';
 
-const ConversationsList: React.FC = () => {
+const ConversationsList: React.FC = ({ setShowConversationsList }) => {
   const { allConversations, setAllConversations, setCurrentConversation } =
     useContext(useConversation);
   const supabase = createSupabaseClient;
@@ -18,8 +18,9 @@ const ConversationsList: React.FC = () => {
           (conversations) => conversations.conversation_id === givenId
         )[0]
       );
-  };
 
+    setShowConversationsList(false);
+  };
 
   useEffect(() => {
     const channel = supabase

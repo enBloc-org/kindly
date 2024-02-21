@@ -1,14 +1,13 @@
 'use client';
 
-import { useContext } from 'react';
-import useConversation from '../../app/(dashboard)/conversations/useConversation';
+import { useState } from 'react';
 import MeatballIcon from '../icons/MeatballIcon';
 import PlusIcon from '../icons/PlusIcon';
 import ConversationsList from './ConversationsList';
 import CurrentConversation from './CurrentConversation';
 
 const ConversationWrapper: React.FC = () => {
-  const { currentConversation } = useContext(useConversation);
+  const [showConversationsList, setShowConversationsList] = useState(false);
   return (
     <>
       <div className='mt-4 flex justify-between px-3 '>
@@ -20,10 +19,15 @@ const ConversationWrapper: React.FC = () => {
         </button>
       </div>
       <div className='mt-4'>
-        {currentConversation === null ? (
-          <ConversationsList />
+        {showConversationsList === true ? (
+          <ConversationsList
+            setShowConversationsList={setShowConversationsList}
+          />
         ) : (
-          <CurrentConversation />
+          <>
+            <button onClick={() => setShowConversationsList(true)}>back</button>
+            <CurrentConversation />
+          </>
         )}
       </div>
     </>
