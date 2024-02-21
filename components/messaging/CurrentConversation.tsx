@@ -69,17 +69,19 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='col-start-2 flex w-2/4 flex-col'>
-      {currentMessages.map((message: MessageType) => (
-        <div key={`${message.id}-${message.created_at}`}>
-          <MessageCard
-            sender_id={message.sender_id}
-            created_at={message.created_at}
-            message_text={message.message_text}
-            is_read={message.is_read}
-            currentUser={currentConversation.user_id}
-          />
-        </div>
-      ))}
+      <div className='h-3/4 overflow-auto'>
+        {currentMessages.map((message: MessageType) => (
+          <div key={`${message.id}-${message.created_at}`}>
+            <MessageCard
+              sender_id={message.sender_id}
+              created_at={message.created_at}
+              message_text={message.message_text}
+              is_read={message.is_read}
+              currentUser={currentConversation.user_id}
+            />
+          </div>
+        ))}
+      </div>
       <MessageForm
         user_id={currentConversation?.user_id}
         conversation_id={currentConversation?.conversation_id}

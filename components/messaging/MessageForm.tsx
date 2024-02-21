@@ -24,7 +24,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className='m-2 flex justify-between text-black'
+      className='absolute bottom-0 m-2 flex h-1/4 justify-between text-black'
     >
       <button type='submit'>
         <div className='m-2 flex h-10 w-10 items-center gap-1 rounded-full border-2 border-solid border-primaryGreen p-2 '>

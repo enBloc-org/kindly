@@ -15,7 +15,7 @@ const Conversations = async () => {
   return (
     userId && (
       <ConversationProvider userId={userId}>
-        <div className='mt-4 flex justify-between px-3 '>
+        <div className='mt-4 flex h-full justify-between px-3'>
           <button>
             <PlusIcon width={45} height={45} />
           </button>
