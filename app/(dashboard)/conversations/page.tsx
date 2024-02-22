@@ -17,8 +17,7 @@ const Conversations = async () => {
     supabase,
     userId
   );
-  console.log({ conversations });
-
+  
   return (
     userId && (
       <ConversationProvider conversations={conversations} userId={userId}>

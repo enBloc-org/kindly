@@ -58,8 +58,6 @@ const ConversationsList: React.FC = () => {
     };
   }, [supabase, allConversations, setAllConversations]);
 
-  console.log(JSON.stringify(allConversations, null, 2));
-
   return (
     <>
       {allConversations.length > 0 ? (
