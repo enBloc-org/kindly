@@ -2,7 +2,7 @@
 import ConversationCard from './ConversationCard';
 import { useContext, useEffect } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
-import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
+import { createSupabaseClient as supabase } from '@/utils/supabase/supabaseClient';
 import { ConversationCardType } from '@/utils/messaging/messagingTypes';
 import DeleteConvoModal from '../DeleteConvoModal';
 
@@ -13,7 +13,6 @@ const ConversationsList: React.FC = () => {
     setCurrentConversation,
     setShowConversationList,
   } = useContext(useConversation);
-  const supabase = createSupabaseClient;
 
   const updateOpenConvo = async (givenId: number) => {
     console.log('update conversation');
@@ -38,8 +37,8 @@ const ConversationsList: React.FC = () => {
           table: 'user_conversations',
         },
         (payload) => {
-          setAllConversations([
-            ...allConversations,
+          setAllConversations((prevConversations) => [
+            ...prevConversations,
             payload.new as ConversationCardType,
           ]);
         }
@@ -76,6 +75,7 @@ const ConversationsList: React.FC = () => {
               joined_at={conversation.joined_at}
               conversation_id={conversation.conversation_id}
               user_id={conversation.user_id}
+              item_id={conversation.item_id}
               conversations={conversation.conversations}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
             />
