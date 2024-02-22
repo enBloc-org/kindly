@@ -30,7 +30,10 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
         <div className='relative h-[65px] w-[65px]'>
           <Image src={imageSrc} fill className='rounded-full' alt={itemName} />
         </div>
-        <h2 className='font-bold'>{formatString(itemName)}</h2>
+        <div className='pl-4 text-left'>
+          <h2 className='text-lg font-bold'>{formatString(itemName)}</h2>
+          <p className='text-sm font-light italic'>This will be a message...</p>
+        </div>
         <div className='ml-auto flex flex-col items-center justify-center  gap-1 pl-8 pr-2'>
           <p className='font-light italic'>{joinedAt?.slice(5, 10)}</p>
           <TickIcon read={true} />
