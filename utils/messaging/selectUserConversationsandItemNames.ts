@@ -1,9 +1,6 @@
-import { SupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createSupabaseClient as supabase } from '../supabase/createSupabaseClient';
 
-const selectUserConversationsandItemNames = async (
-  supabase: SupabaseClient,
-  userId?: string
-) => {
+const selectUserConversationsandItemNames = async (userId?: string) => {
   try {
     const { data: allConversations } = await supabase
       .from('user_conversations')

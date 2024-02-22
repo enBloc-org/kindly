@@ -5,7 +5,7 @@ import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { useContext, useEffect, useState } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
-import { createSupabaseClient as supabase } from '@/utils/supabase/supabaseClient';
+import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
 
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =
