@@ -32,7 +32,7 @@ const ConversationWrapper: React.FC = () => {
       )}
       {isBreakpoint && (
         <div className='mt-4'>
-          {showConversationList === true ? (
+          {showConversationList ? (
             <ConversationsList />
           ) : (
             <>

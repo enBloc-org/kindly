@@ -16,18 +16,22 @@ const ConversationProvider = ({
 }) => {
   const [allConversations, setAllConversations] =
     useState<AllConversationsType>([]);
-  const [currentConversation, setCurrentConversation] =
-    useState<ConversationCardType>({
-      joined_at: new Date().toString(),
-      conversation_id: 2,
-      user_id: 'default',
-      item_id: 'default',
-      conversations: {
-        id: 1,
-        messages: [],
-        created_at: new Date().toString(),
-      },
-    });
+  const [currentConversation, setCurrentConversation] = useState<
+    ConversationCardType | {}
+  >(
+    {}
+    //   {
+    //   joined_at: new Date().toString(),
+    //   conversation_id: 2,
+    //   user_id: 'default',
+    //   item_id: 'default',
+    //   conversations: {
+    //     id: 1,
+    //     messages: [],
+    //     created_at: new Date().toString(),
+    //   },
+    // }
+  );
   const [showConversationList, setShowConversationList] = useState(false);
 
   useEffect(() => {

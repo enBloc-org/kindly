@@ -9,10 +9,10 @@ type ConversationProviderProps = {
   setAllConversations: React.Dispatch<
     React.SetStateAction<AllConversationsType>
   >;
-  currentConversation: ConversationCardType;
+  currentConversation: ConversationCardType | null;
   setCurrentConversation: React.Dispatch<
-    React.SetStateAction<ConversationCardType>
-  > | null;
+    React.SetStateAction<ConversationCardType | null>
+  >;
   showConversationList: boolean;
   setShowConversationList: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -20,17 +20,18 @@ type ConversationProviderProps = {
 const defaultContext: ConversationProviderProps = {
   allConversations: [],
   setAllConversations: () => [],
-  currentConversation: {
-    joined_at: new Date().toString(),
-    conversation_id: 2,
-    user_id: 'default',
-    item_id: 'default',
-    conversations: {
-      id: 1,
-      messages: [],
-      created_at: new Date().toString(),
-    },
-  },
+  currentConversation: null,
+  // {
+  //   joined_at: new Date().toString(),
+  //   conversation_id: 2,
+  //   user_id: 'default',
+  //   item_id: 'default',
+  //   conversations: {
+  //     id: 1,
+  //     messages: [],
+  //     created_at: new Date().toString(),
+  //   },
+  // },
   setCurrentConversation: () => null,
   showConversationList: false,
   setShowConversationList: () => true,
