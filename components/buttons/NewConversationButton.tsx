@@ -65,7 +65,7 @@ export default function NewConversationButton({
       setErrorMessage('');
       setError(false);
       await newConvoStart(userId, donorId, item_id);
-      await router.push('/conversations');
+      router.push('/conversations');
     } catch (error) {
       console.log(error);
       setErrorMessage('Failed to start a new conversation. Please try again.');
