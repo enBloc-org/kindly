@@ -9,8 +9,6 @@ import useConversation from '../../app/(dashboard)/conversations/useConversation
 const CurrentConversation: React.FC = () => {
   const { currentConversation } = useContext(useConversation);
 
-  console.log('conversation: ', currentConversation?.conversations?.messages);
-
   return (
     <div className='flex w-2/4 flex-col'>
       {currentConversation?.conversations?.messages?.map(
