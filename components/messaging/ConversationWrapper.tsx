@@ -26,7 +26,6 @@ const ConversationWrapper: React.FC = () => {
         <div className='mt-4'>
           <ConversationsList />
           <>
-            <button onClick={() => setShowConversationList(true)}>back</button>
             <CurrentConversation />
           </>
         </div>
