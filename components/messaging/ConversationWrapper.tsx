@@ -22,17 +22,9 @@ const ConversationWrapper: React.FC = () => {
           <MeatballIcon width={35} height={35} />
         </button>
       </div>
-      {!isBreakpoint && (
+      {isBreakpoint ? (
         <div className='mt-4'>
-          <ConversationsList />
-          <>
-            <CurrentConversation />
-          </>
-        </div>
-      )}
-      {isBreakpoint && (
-        <div className='mt-4'>
-          {showConversationList === true ? (
+          {showConversationList ? (
             <ConversationsList />
           ) : (
             <>
@@ -42,6 +34,11 @@ const ConversationWrapper: React.FC = () => {
               <CurrentConversation />
             </>
           )}
+        </div>
+      ) : (
+        <div className='mt-4'>
+          <ConversationsList />
+          <CurrentConversation />
         </div>
       )}
     </>
