@@ -13,17 +13,8 @@ const CurrentConversation: React.FC = () => {
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
 
   useEffect(() => {
-    const highestId = Math.max(
-      ...allConversations.map((conversation) => conversation.conversation_id)
-    );
-
-    setCurrentConversation &&
-      setCurrentConversation(
-        allConversations?.filter(
-          (conversation) => conversation.conversation_id === highestId
-        )[0]
-      );
-  }, []);
+    setCurrentConversation && setCurrentConversation(allConversations[0]);
+  }, [allConversations, setCurrentConversation]);
 
   useEffect(() => {
     const fetchMessagesForCurrentConversation = async () => {
@@ -31,7 +22,7 @@ const CurrentConversation: React.FC = () => {
         const { data: fetchedMessages } = await supabase
           .from('messages')
           .select('*')
-          .eq('conversation_id', currentConversation.conversation_id);
+          .eq('conversation_id', currentConversation?.conversation_id);
 
         setCurrentMessages(fetchedMessages ?? []);
       } catch (error) {
@@ -41,7 +32,7 @@ const CurrentConversation: React.FC = () => {
     };
 
     fetchMessagesForCurrentConversation();
-  }, [currentConversation]);
+  }, [currentConversation, setCurrentMessages]);
 
   useEffect(() => {
     const channel = supabase
@@ -76,7 +67,7 @@ const CurrentConversation: React.FC = () => {
             created_at={message.created_at}
             message_text={message.message_text}
             is_read={message.is_read}
-            currentUser={currentConversation.user_id}
+            currentUser={currentConversation?.user_id}
           />
         </div>
       ))}
