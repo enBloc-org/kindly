@@ -19,14 +19,14 @@ const ConversationProvider = ({
 
   const [currentConversation, setCurrentConversation] =
     useState<ConversationCardType>({
+      id: 2,
       joined_at: new Date().toString(),
       conversation_id: 2,
       user_id: 'default',
-      item_id: 'default',
-      conversations: {
-        id: 1,
-        messages: [],
-        created_at: new Date().toString(),
+      item_id: 2,
+      items: {
+        imageSrc: 'default',
+        item_name: 'default',
       },
     });
 

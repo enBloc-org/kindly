@@ -10,14 +10,13 @@ export type MessageType = {
 export type AllConversationsType = ConversationCardType[];
 
 export type ConversationCardType = {
-  id?: number;
-  joined_at?: string;
+  id: number;
+  joined_at: string;
   conversation_id: number;
   user_id: string;
-  item_id: string;
-  conversations: {
-    id: number;
-    messages: MessageType[];
-    created_at: string;
+  item_id: number;
+  items: {
+    imageSrc: string;
+    item_name: string;
   };
 };

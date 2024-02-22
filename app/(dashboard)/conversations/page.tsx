@@ -4,7 +4,7 @@ import PlusIcon from '@/components/icons/PlusIcon';
 import ConversationProvider from '@/components/messaging/ConversationProvider';
 import ConversationsList from '@/components/messaging/ConversationsList';
 import CurrentConversation from '@/components/messaging/CurrentConversation';
-import selectUserConversationsandItemNames from '@/utils/messaging/selectUserConversations';
+import selectUserConversationsandItemNames from '@/utils/messaging/selectUserConversationsandItemNames';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
@@ -17,6 +17,7 @@ const Conversations = async () => {
     supabase,
     userId
   );
+  console.log({ conversations });
 
   return (
     userId && (

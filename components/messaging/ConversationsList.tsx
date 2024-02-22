@@ -58,18 +58,17 @@ const ConversationsList: React.FC = () => {
     };
   }, [supabase, allConversations, setAllConversations]);
 
+  console.log(JSON.stringify(allConversations, null, 2));
+
   return (
     <>
       {allConversations.length > 0 ? (
         allConversations.map((conversation, index) => (
           <div key={`${conversation.id}-${index}`}>
             <ConversationCard
-              id={conversation.conversation_id}
-              joined_at={conversation.joined_at}
-              conversation_id={conversation.conversation_id}
-              user_id={conversation.user_id}
-              item_id={conversation.item_id}
-              conversations={conversation.conversations}
+              joinedAt={conversation.joined_at}
+              itemName={conversation.items.item_name}
+              imageSrc={conversation.items.imageSrc}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
             />
             <DeleteConvoModal

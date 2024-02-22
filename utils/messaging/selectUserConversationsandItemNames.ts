@@ -7,7 +7,16 @@ const selectUserConversationsandItemNames = async (
   try {
     const { data: allConversations } = await supabase
       .from('user_conversations')
-      .select('*')
+      .select(
+        `
+      id, 
+      joined_at, 
+      conversation_id,
+      user_id,
+      item_id,
+      items!inner(item_name, imageSrc)
+    `
+      )
       .eq('user_id', userId);
 
     return allConversations ?? [];
