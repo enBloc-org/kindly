@@ -3,25 +3,13 @@
 import { MessageType } from '@/utils/messaging/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
 
 const CurrentConversation: React.FC = () => {
-  const { allConversations, currentConversation, setCurrentConversation } =
-    useContext(useConversation);
+  const { currentConversation } = useContext(useConversation);
 
-  useEffect(() => {
-    const highestId = Math.max(
-      ...allConversations.map((conversation) => conversation.conversation_id)
-    );
-
-    setCurrentConversation &&
-      setCurrentConversation(
-        allConversations?.filter(
-          (conversation) => conversation.conversation_id === highestId
-        )[0]
-      );
-  }, []);
+  console.log('conversation: ', currentConversation?.conversations?.messages);
 
   return (
     <div className='flex w-2/4 flex-col'>

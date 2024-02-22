@@ -1,7 +1,7 @@
 //Components
 
 import ConversationProvider from '@/components/messaging/ConversationProvider';
-import ConversationWrapper from '@/components/messaging/ConversationWrapper';
+import ConversationsWrapper from '@/components/messaging/ConversationWrapper';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
@@ -13,7 +13,7 @@ const Conversations = async () => {
   return (
     userId && (
       <ConversationProvider userId={userId}>
-        <ConversationWrapper />
+        <ConversationsWrapper></ConversationsWrapper>
       </ConversationProvider>
     )
   );

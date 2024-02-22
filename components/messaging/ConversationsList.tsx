@@ -6,12 +6,17 @@ import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
 import { ConversationCardType } from '@/utils/messaging/messagingTypes';
 import DeleteConvoModal from '../DeleteConvoModal';
 
-const ConversationsList: React.FC = ({ setShowConversationsList }) => {
-  const { allConversations, setAllConversations, setCurrentConversation } =
-    useContext(useConversation);
+const ConversationsList: React.FC = () => {
+  const {
+    allConversations,
+    setAllConversations,
+    setCurrentConversation,
+    setShowConversationList,
+  } = useContext(useConversation);
   const supabase = createSupabaseClient;
 
   const updateOpenConvo = async (givenId: number) => {
+    console.log('update conversation');
     setCurrentConversation &&
       setCurrentConversation(
         allConversations?.filter(
@@ -19,7 +24,7 @@ const ConversationsList: React.FC = ({ setShowConversationsList }) => {
         )[0]
       );
 
-    setShowConversationsList(false);
+    setShowConversationList(false);
   };
 
   useEffect(() => {
