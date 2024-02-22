@@ -15,7 +15,6 @@ const ConversationsList: React.FC = () => {
   } = useContext(useConversation);
 
   const updateOpenConvo = async (givenId: number) => {
-    console.log('update conversation');
     setCurrentConversation &&
       setCurrentConversation(
         allConversations?.filter(
