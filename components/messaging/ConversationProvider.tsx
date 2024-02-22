@@ -28,7 +28,7 @@ const ConversationProvider = ({
         created_at: new Date().toString(),
       },
     });
-  const [showConversationList, setShowConversationList] = useState(false);
+  const [showConversationsList, setShowConversationsList] = useState(false);
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -56,8 +56,8 @@ const ConversationProvider = ({
         setAllConversations,
         currentConversation,
         setCurrentConversation,
-        showConversationList,
-        setShowConversationList,
+        showConversationsList,
+        setShowConversationsList,
       }}
     >
       {children}

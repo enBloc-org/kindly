@@ -13,8 +13,8 @@ type ConversationProviderProps = {
   setCurrentConversation: React.Dispatch<
     React.SetStateAction<ConversationCardType>
   > | null;
-  showConversationList: boolean;
-  setShowConversationList: React.Dispatch<React.SetStateAction<boolean>>;
+  showConversationsList: boolean;
+  setShowConversationsList: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const defaultContext: ConversationProviderProps = {
@@ -32,8 +32,8 @@ const defaultContext: ConversationProviderProps = {
     },
   },
   setCurrentConversation: () => null,
-  showConversationList: false,
-  setShowConversationList: () => true,
+  showConversationsList: false,
+  setShowConversationsList: () => true,
 };
 
 const useConversation = createContext(defaultContext);

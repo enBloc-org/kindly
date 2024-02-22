@@ -10,7 +10,7 @@ import useMediaQuery from '../hooks/useMediaQuery';
 
 const ConversationWrapper: React.FC = () => {
   const isBreakpoint = useMediaQuery(1000);
-  const { showConversationList, setShowConversationList } =
+  const { showConversationsList, setShowConversationsList } =
     useContext(useConversation);
   return (
     <>
@@ -24,11 +24,11 @@ const ConversationWrapper: React.FC = () => {
       </div>
       {isBreakpoint ? (
         <div className='mt-4'>
-          {showConversationList ? (
+          {showConversationsList ? (
             <ConversationsList />
           ) : (
             <>
-              <button onClick={() => setShowConversationList(true)}>
+              <button onClick={() => setShowConversationsList(true)}>
                 back
               </button>
               <CurrentConversation />

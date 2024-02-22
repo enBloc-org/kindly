@@ -11,7 +11,7 @@ const ConversationsList: React.FC = () => {
     allConversations,
     setAllConversations,
     setCurrentConversation,
-    setShowConversationList,
+    setShowConversationsList,
   } = useContext(useConversation);
 
   const updateOpenConvo = async (givenId: number) => {
@@ -22,7 +22,7 @@ const ConversationsList: React.FC = () => {
         )[0]
       );
 
-    setShowConversationList(false);
+    setShowConversationsList(false);
   };
 
   useEffect(() => {
