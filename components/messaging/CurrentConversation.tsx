@@ -10,7 +10,7 @@ const CurrentConversation: React.FC = () => {
   const { currentConversation } = useContext(useConversation);
 
   return (
-    <div className='flex w-2/4 flex-col'>
+    <div className='flex flex-col'>
       {currentConversation?.conversations?.messages?.map(
         (message: MessageType) => (
           <div
