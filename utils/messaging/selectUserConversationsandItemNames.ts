@@ -19,18 +19,9 @@ const selectUserConversationsandItemNames = async (
       )
       .eq('user_id', userId);
 
-    const cleanData = allConversations?.map((conversation) => {
-      return {
-        ...conversation,
-        items: {
-          ...conversation.items,
-        },
-      };
-    });
+    const conversations = allConversations as unknown as AllConversationsType;
 
-    console.log({ cleanData });
-
-    return cleanData ?? [];
+    return conversations ?? [];
   } catch (error) {
     console.error(`Failed to fetch conversations from database: ${error}`);
     throw error;
