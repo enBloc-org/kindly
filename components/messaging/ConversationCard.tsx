@@ -24,6 +24,12 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   imageSrc,
   clickHandler,
 }) => {
+  joined_at,
+  user_id,
+  item_id,
+  clickHandler,
+}) => {
+
   return (
     <button type='button' onClick={clickHandler}>
       <div className='m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 shadow-md'>
