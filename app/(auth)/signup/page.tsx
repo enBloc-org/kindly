@@ -27,14 +27,13 @@ export default function SignUp({
     } else {
       refugeeBool = false;
     }
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
 
-    if (error) {
-      return redirect('/signup?message=Could not authenticate user');
-    }
+    error && redirect(`/signup?message=${error.message}`);
 
     // Get userId and insert it as ID in Profiles table
     const userId = data?.user?.id as string | number;
