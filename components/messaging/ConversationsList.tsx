@@ -7,8 +7,12 @@ import { ConversationCardType } from '@/utils/messaging/messagingTypes';
 import DeleteConvoModal from '../DeleteConvoModal';
 
 const ConversationsList: React.FC = () => {
-  const { allConversations, setAllConversations, setCurrentConversation } =
-    useContext(useConversation);
+  const {
+    allConversations,
+    setAllConversations,
+    setCurrentConversation,
+    setShowConversationsList,
+  } = useContext(useConversation);
 
   const updateOpenConvo = async (givenId: number) => {
     setCurrentConversation &&
@@ -17,6 +21,8 @@ const ConversationsList: React.FC = () => {
           (conversations) => conversations.conversation_id === givenId
         )[0]
       );
+
+    setShowConversationsList(false);
   };
 
   useEffect(() => {
