@@ -23,7 +23,6 @@ const MessageForm: React.FC<MessageFormProps> = ({
 
   return (
     <div>
-      {/* <div className='fixed inset-x-0 bottom-0'> */}
       <form onSubmit={handleSubmit} className='m-2 flex justify-between'>
         <textarea
           className='green-border-card h-20 min-h-max w-5/6 bg-stone-50 px-4 py-2 text-black'
