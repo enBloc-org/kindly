@@ -15,7 +15,7 @@ export type ConversationCardType = {
   conversation_id: number;
   user_id: string;
   item_id: number;
-  items: ItemType | ItemType[];
+  items: ItemType;
 };
 
 type ItemType = {

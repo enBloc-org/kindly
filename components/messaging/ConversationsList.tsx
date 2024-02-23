@@ -44,8 +44,8 @@ const ConversationsList: React.FC = () => {
           table: 'user_conversations',
         },
         (payload) => {
-          setAllConversations([
-            ...allConversations.filter(
+          setAllConversations((prevConversations) => [
+            ...prevConversations.filter(
               (conversation) => conversation.id !== payload.old.id
             ),
           ]);
