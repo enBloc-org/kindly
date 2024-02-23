@@ -36,13 +36,12 @@ const ConversationWrapper: React.FC = () => {
           )}
         </div>
       ) : (
-        <div className='p2 mt-4 border-2 border-black flex flex-row justify-between'>
+        <div className='p2 mt-4 flex flex-row justify-between'>
           <ConversationsList />
           <CurrentConversation />
         </div>
       )}
-      </>
-  
+    </>
   );
 };
 
