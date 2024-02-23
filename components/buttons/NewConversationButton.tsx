@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import newConvoStart from '@/utils/supabase/newConvoStart';
+import newConvoStart from '@/utils/messaging/newConvoStart';
 import { useEffect } from 'react';
 import editRow from '@/utils/supabase/editRow';
 

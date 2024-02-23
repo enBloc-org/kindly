@@ -3,8 +3,8 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import {
   AllConversationsType,
   ConversationCardType,
-} from '@/utils/messaging/messagingTypes';
-import selectUserConversationsandItemNames from '@/utils/messaging/selectUserConversationsandItemNames';
+} from '@/types/messagingTypes';
+import getUserConversationsandItemNames from '@/utils/messaging/getUserConversationsandItemNames';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
 
 const ConversationProvider = ({
@@ -33,7 +33,7 @@ const ConversationProvider = ({
   useEffect(() => {
     const fetchConversations = async () => {
       const fetchedConversations =
-        await selectUserConversationsandItemNames(userId);
+        await getUserConversationsandItemNames(userId);
 
       setAllConversations(fetchedConversations);
     };

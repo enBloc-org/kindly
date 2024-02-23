@@ -1,7 +1,7 @@
 import { createSupabaseClient as supabase } from '../supabase/createSupabaseClient';
-import { AllConversationsType } from './messagingTypes';
+import { AllConversationsType } from '../../types/messagingTypes';
 
-const selectUserConversationsandItemNames = async (
+const getUserConversationsandItemNames = async (
   userId?: string
 ): Promise<AllConversationsType> => {
   try {
@@ -28,4 +28,4 @@ const selectUserConversationsandItemNames = async (
   }
 };
 
-export default selectUserConversationsandItemNames;
+export default getUserConversationsandItemNames;

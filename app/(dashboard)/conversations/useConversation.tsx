@@ -2,7 +2,7 @@ import { createContext } from 'react';
 import {
   AllConversationsType,
   ConversationCardType,
-} from '@/utils/messaging/messagingTypes';
+} from '@/types/messagingTypes';
 
 type ConversationProviderProps = {
   allConversations: AllConversationsType;
