@@ -33,7 +33,13 @@ export default function SignUp({
       password,
     });
 
-    error && redirect(`/signup?message=${error.message}`);
+    if (error) {
+      error.message === 'User already registered'
+        ? redirect(
+            '/login?message=User already registered. Please try logging in instead.'
+          )
+        : redirect('/signup?message=Could not authenticate user.');
+    }
 
     // Get userId and insert it as ID in Profiles table
     const userId = data?.user?.id as string | number;
