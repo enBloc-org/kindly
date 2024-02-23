@@ -26,11 +26,6 @@ const MessageForm: React.FC<MessageFormProps> = ({
       onSubmit={handleSubmit}
       className='m-2 flex justify-between text-black'
     >
-      <button type='submit'>
-        <div className='m-2 flex h-10 w-10 items-center gap-1 rounded-full border-2 border-solid border-primaryGreen p-2 '>
-          <PaperPlaneIcon></PaperPlaneIcon>
-        </div>
-      </button>
       <textarea
         className='green-border-card input-text min-h-max w-5/6 px-4 py-2 text-black'
         value={message}
@@ -38,6 +33,11 @@ const MessageForm: React.FC<MessageFormProps> = ({
         placeholder='Type your message here'
         rows={10}
       />
+      <button type='submit'>
+        <div className='m-2 flex h-10 w-10 items-center gap-1 rounded-full border-2 border-solid border-primaryGreen p-2 '>
+          <PaperPlaneIcon></PaperPlaneIcon>
+        </div>
+      </button>
     </form>
   );
 };
