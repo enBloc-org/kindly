@@ -33,6 +33,14 @@ export default function SignUp({
       password,
     });
 
+    if (data.user?.role === '') {
+      redirect(
+        '/login?message=User already registered. Please try logging in instead.'
+      );
+    }
+
+    console.log({ data }, { error });
+
     if (error) {
       error.message === 'User already registered'
         ? redirect(
