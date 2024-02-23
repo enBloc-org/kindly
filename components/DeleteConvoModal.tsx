@@ -17,7 +17,7 @@ const DeleteConvoModal = ({ name, convoId, message }: ModalProps) => {
   };
 
   return (
-    <>
+    <div className='absolute m-3'>
       {!modal && (
         <button className='button button-rounded my-2' onClick={toggleModal}>
           {name}
@@ -30,15 +30,12 @@ const DeleteConvoModal = ({ name, convoId, message }: ModalProps) => {
             <p>{message}</p>
           </div>
           <DeleteConvoButton convoId={convoId} title='Confirm' />
-          <button
-            className='button button-rounded mx-2 my-2 border-2 border-black'
-            onClick={toggleModal}
-          >
+          <button className='button button-rounded m-2' onClick={toggleModal}>
             Cancel
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
