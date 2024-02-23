@@ -65,11 +65,11 @@ const ConversationsList: React.FC = () => {
   }, [supabase, allConversations, setAllConversations]);
 
   return (
-<div className="border-2 border-red-500 m-4">
+    <div className='m-4'>
       {allConversations.length > 0 ? (
         allConversations.map((conversation, index) => (
           <div key={`${conversation.id}-${index}`}>
-                        <DeleteConvoModal
+            <DeleteConvoModal
               name='X'
               convoId={conversation.conversation_id}
               message='By pressing "confirm" you will delete this conversation'
@@ -88,7 +88,7 @@ const ConversationsList: React.FC = () => {
       ) : (
         <p>There are no active conversations</p>
       )}
- </div>
+    </div>
   );
 };
 

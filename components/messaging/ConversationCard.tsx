@@ -23,7 +23,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   const shortenedText = cutAfterNCharacters(lastMessage, 50);
 
   return (
-    <button type='button' onClick={clickHandler} className="border-blue-500 border-2">
+    <button type='button' onClick={clickHandler}>
       <div className='m-2 flex max-h-28 flex-col justify-between rounded-lg bg-gray-300 p-4'>
         <div className='flex flex-row items-end justify-between gap-1'>
           <h2 className='font-bold'>{item_id}</h2>
