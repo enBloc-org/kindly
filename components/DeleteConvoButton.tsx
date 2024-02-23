@@ -17,7 +17,7 @@ export default function DeleteConvoButton({
 
   return (
     <button
-      className='button button-rounded '
+      className='button button-rounded'
       onClick={() => deleteConversation(convoId)}
     >
       {title}

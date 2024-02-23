@@ -65,10 +65,15 @@ const ConversationsList: React.FC = () => {
   }, [supabase, allConversations, setAllConversations]);
 
   return (
-    <>
+<div className="m-4">
       {allConversations.length > 0 ? (
         allConversations.map((conversation, index) => (
           <div key={`${conversation.id}-${index}`}>
+                        <DeleteConvoModal
+              name='X'
+              convoId={conversation.conversation_id}
+              message='By pressing "confirm" you will delete this conversation'
+            />
             <ConversationCard
               id={conversation.conversation_id}
               joined_at={conversation.joined_at}
@@ -78,17 +83,12 @@ const ConversationsList: React.FC = () => {
               conversations={conversation.conversations}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
             />
-            <DeleteConvoModal
-              name='X'
-              convoId={conversation.conversation_id}
-              message='By pressing "confirm" you will delete this conversation'
-            />
           </div>
         ))
       ) : (
         <p>There are no active conversations</p>
       )}
-    </>
+ </div>
   );
 };
 

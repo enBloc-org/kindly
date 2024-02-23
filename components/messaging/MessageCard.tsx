@@ -23,7 +23,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
 
   return (
     <div
-      className={`message-card ${isCurrentUser ? 'float-right' : 'float-left'}`}
+      className={`message-card ${isCurrentUser ? 'float-right' : 'float-left'} my-2`}
     >
       <p
         className={`text-lg text-slate-500 ${isCurrentUser ? 'mr-2 text-right' : 'ml-2 text-left'}`}

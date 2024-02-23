@@ -23,7 +23,7 @@ const ConversationWrapper: React.FC = () => {
         </button>
       </div>
       {isBreakpoint ? (
-        <div className='mt-4'>
+        <div className='mt-4 p-2'>
           {showConversationsList ? (
             <ConversationsList />
           ) : (
@@ -36,7 +36,7 @@ const ConversationWrapper: React.FC = () => {
           )}
         </div>
       ) : (
-        <div className='mt-4'>
+        <div className='p2 mt-4 flex flex-row justify-between'>
           <ConversationsList />
           <CurrentConversation />
         </div>
