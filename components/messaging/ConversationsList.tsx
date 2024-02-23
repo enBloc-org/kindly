@@ -7,8 +7,12 @@ import { ConversationCardType } from '@/types/messagingTypes';
 import DeleteConvoModal from '../DeleteConvoModal';
 
 const ConversationsList: React.FC = () => {
-  const { allConversations, setAllConversations, setCurrentConversation } =
-    useContext(useConversation);
+  const {
+    allConversations,
+    setAllConversations,
+    setCurrentConversation,
+    setShowConversationsList,
+  } = useContext(useConversation);
 
   const updateOpenConvo = async (givenId: number) => {
     setCurrentConversation &&
@@ -17,6 +21,8 @@ const ConversationsList: React.FC = () => {
           (conversations) => conversations.conversation_id === givenId
         )[0]
       );
+
+    setShowConversationsList(false);
   };
 
   useEffect(() => {
@@ -59,27 +65,27 @@ const ConversationsList: React.FC = () => {
   }, [supabase, allConversations, setAllConversations]);
 
   return (
-    <>
+<div className="m-4">
       {allConversations.length > 0 ? (
         allConversations.map((conversation, index) => (
           <div key={`${conversation.id}-${index}`}>
+                        <DeleteConvoModal
+              name='X'
+              convoId={conversation.conversation_id}
+              message='By pressing "confirm" you will delete this conversation'
+            />
             <ConversationCard
               joinedAt={conversation.joined_at}
               itemName={conversation.items.item_name}
               imageSrc={conversation.items.imageSrc}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
             />
-            <DeleteConvoModal
-              name='X'
-              convoId={conversation.conversation_id}
-              message='By pressing "confirm" you will delete this conversation'
-            />
           </div>
         ))
       ) : (
         <p>There are no active conversations</p>
       )}
-    </>
+ </div>
   );
 };
 

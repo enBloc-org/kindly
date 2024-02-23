@@ -13,17 +13,8 @@ const CurrentConversation: React.FC = () => {
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
 
   useEffect(() => {
-    const highestId = Math.max(
-      ...allConversations.map((conversation) => conversation.conversation_id)
-    );
-
-    setCurrentConversation &&
-      setCurrentConversation(
-        allConversations?.filter(
-          (conversation) => conversation.conversation_id === highestId
-        )[0]
-      );
-  }, []);
+    setCurrentConversation && setCurrentConversation(allConversations[0]);
+  }, [allConversations, setCurrentConversation]);
 
   useEffect(() => {
     const fetchMessagesForCurrentConversation = async () => {
@@ -31,7 +22,7 @@ const CurrentConversation: React.FC = () => {
         const { data: fetchedMessages } = await supabase
           .from('messages')
           .select('*')
-          .eq('conversation_id', currentConversation.conversation_id);
+          .eq('conversation_id', currentConversation?.conversation_id);
 
         setCurrentMessages(fetchedMessages ?? []);
       } catch (error) {
@@ -41,7 +32,7 @@ const CurrentConversation: React.FC = () => {
     };
 
     fetchMessagesForCurrentConversation();
-  }, [currentConversation]);
+  }, [currentConversation, setCurrentMessages]);
 
   useEffect(() => {
     const channel = supabase
@@ -68,18 +59,20 @@ const CurrentConversation: React.FC = () => {
   }, [supabase, currentMessages, setCurrentMessages]);
 
   return (
-    <div className='flex w-2/4 flex-col'>
-      {currentMessages.map((message: MessageType) => (
-        <div key={`${message.id}-${message.created_at}`}>
-          <MessageCard
-            sender_id={message.sender_id}
-            created_at={message.created_at}
-            message_text={message.message_text}
-            is_read={message.is_read}
-            currentUser={currentConversation.user_id}
-          />
-        </div>
-      ))}
+    <div className='mb-10 flex h-screen flex-1 flex-col justify-end'>
+      <div className='flex flex-col-reverse overflow-y-auto bg-stone-50'>
+        {currentMessages.map((message: MessageType) => (
+          <div key={`${message.id}-${message.created_at}`}>
+            <MessageCard
+              sender_id={message.sender_id}
+              created_at={message.created_at}
+              message_text={message.message_text}
+              is_read={message.is_read}
+              currentUser={currentConversation?.user_id}
+            />
+          </div>
+        ))}
+      </div>
       <MessageForm
         user_id={currentConversation?.user_id}
         conversation_id={currentConversation?.conversation_id}
