@@ -61,7 +61,7 @@ const CurrentConversation: React.FC = () => {
   return (
     <div className='mb-10 flex h-screen flex-1 flex-col justify-end'>
       <div className='flex flex-col-reverse overflow-y-auto bg-stone-50'>
-        {[...currentMessages].reverse().map((message: MessageType) => (
+        {currentMessages.map((message: MessageType) => (
           <div key={`${message.id}-${message.created_at}`}>
             <MessageCard
               sender_id={message.sender_id}
