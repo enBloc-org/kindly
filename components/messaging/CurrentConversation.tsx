@@ -60,9 +60,15 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='mb-10 flex h-screen flex-1 flex-col justify-end'>
-      <div className='flex flex-col-reverse overflow-y-auto bg-stone-50'>
-        {currentMessages.map((message: MessageType) => (
+      <div className='relative flex flex-col overflow-y-auto bg-stone-50'>
+        {currentMessages.map((message: MessageType, index: number) => (
           <div key={`${message.id}-${message.created_at}`}>
+            {message.created_at.slice(0, 10) !==
+              currentMessages[index - 1]?.created_at.slice(0, 10) && (
+              <span className='absolute right-2/4 rounded-xl bg-primaryGreen p-1 text-center text-white'>
+                {message.created_at.slice(0, 10)}
+              </span>
+            )}
             <MessageCard
               sender_id={message.sender_id}
               created_at={message.created_at}
