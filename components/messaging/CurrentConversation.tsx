@@ -66,7 +66,7 @@ const CurrentConversation: React.FC = () => {
 
       const debounce = setTimeout(() => {
         setIsScrolling(false);
-      }, 2000);
+      }, 3000);
 
       return () => clearTimeout(debounce);
     };
