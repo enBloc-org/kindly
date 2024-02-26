@@ -65,9 +65,9 @@ const CurrentConversation: React.FC = () => {
           <div key={`${message.id}-${message.created_at}`}>
             {message.created_at.slice(0, 10) !==
               currentMessages[index - 1]?.created_at.slice(0, 10) && (
-              <span className='absolute right-2/4 rounded-xl bg-primaryGreen p-1 text-center text-white'>
+              <div className='sticky top-4 z-10 ml-[calc((100%_-_92px)/2)] w-[92px] rounded-xl bg-primaryGreen object-center p-1 text-center text-white'>
                 {message.created_at.slice(0, 10)}
-              </span>
+              </div>
             )}
             <MessageCard
               sender_id={message.sender_id}
