@@ -19,21 +19,25 @@ const MessageCard: React.FC<MessageCardProps> = ({
   currentUser,
 }) => {
   const isCurrentUser = sender_id === currentUser;
+  const dateStamp = created_at.slice(0, 10).replaceAll('-', ' ');
 
   return (
-    <div className={`message-card${isCurrentUser ? '__self' : '__other'}`}>
-      <div>
-        <p>{isCurrentUser ? 'me' : sender_id}</p>
-      </div>
-      <div className='m-1'>
-        <p className='m-1'>{message_text}</p>
-      </div>
-      <div
-        className={`flex ${isCurrentUser ? 'justify-between' : 'float-right'}`}
+    <div
+      className={`message-card ${isCurrentUser ? 'float-right' : 'float-left'} my-2`}
+    >
+      <p
+        className={`text-lg text-slate-500 ${isCurrentUser ? 'mr-2 text-right' : 'ml-2 text-left'}`}
       >
-        <p className='text-slate-600'>{created_at}</p>
-        {isCurrentUser && <TickIcon read={is_read} />}
+        {dateStamp}
+      </p>
+      <div>
+        <p className='green-border-card'>{message_text}</p>
       </div>
+      {isCurrentUser && (
+        <div className='relative float-right mr-4'>
+          <TickIcon read={is_read} />
+        </div>
+      )}
     </div>
   );
 };

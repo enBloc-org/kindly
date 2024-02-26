@@ -39,6 +39,11 @@ Leveraging PostgreSQL for the database, Supabase streamlines backend development
 - **Authentication:** Provides secure user authentication with seamless integration for frontend frameworks like React.
 - **Serverless Functions:** Enables scalable and cost-effective backend operations without managing servers.
 
+### Testing
+Tests for this codebase use Playwright. You can run all tests using the command `npm run ci`
+
+This command has been set up with `start-server-and-test` npm package to spin up the local server ahead of running end-to-end tests. Unit tets for components are also run in the same script by using the experimental playwright-ct package.
+
 ### Other: Nodemailer
 
 **Nodemailer:**
@@ -66,9 +71,9 @@ Install dependencies:
   npm install
 ```
 
-Add env variable:
+Add env variables:
 
-Create an .env file in the root directory of your project and add the environment variables from supabase (https://supabase.com/docs/guides/functions/secrets).
+The .env.example file in the root directory shows what variables you will need. For Gmail app and AWS amplify variables you will need contact the Product Owner. For Supabase variables you will need to have access to the project within Supabase (https://supabase.com/docs/guides/functions/secrets).
 
 Running the app:
 

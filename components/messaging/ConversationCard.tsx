@@ -1,37 +1,41 @@
-import { ConversationCardType } from '@/utils/messaging/messagingTypes';
 import TickIcon from '../icons/tickIcon';
+import Image from 'next/image';
 
-const cutAfterNCharacters = (text: string, n: number): string => {
-  return text.length > n ? text.substring(0, n) : text;
-};
-
-type ConversationCardProps = ConversationCardType & {
+type ConversationCardProps = {
+  joinedAt: string;
+  itemName: string;
+  imageSrc: string;
   clickHandler: () => void;
 };
 
+const formatString = (input: string) => {
+  const capitalized = input.charAt(0).toUpperCase() + input.slice(1);
+  const cappedLength =
+    capitalized.length > 15
+      ? capitalized.substring(0, 15) + '...'
+      : capitalized;
+
+  return cappedLength;
+};
+
 const ConversationCard: React.FC<ConversationCardProps> = ({
-  joined_at,
-  user_id,
-  conversations,
+  joinedAt,
+  itemName,
+  imageSrc,
   clickHandler,
 }) => {
-  const lastMessage =
-    conversations.messages[conversations.messages.length - 1]?.message_text ||
-    'No messages yet';
-
-  const shortenedText = cutAfterNCharacters(lastMessage, 50);
-
   return (
     <button type='button' onClick={clickHandler}>
-      <div className='m-2 flex max-h-28 justify-between rounded-lg bg-gray-300 p-4'>
-        <div>
-          <h2 className='font-bold'>{user_id}</h2>
-          <p className='mt-1 overflow-hidden text-ellipsis font-light italic'>
-            {shortenedText} ...
-          </p>
+      <div className='m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 shadow-md'>
+        <div className='relative h-[65px] w-[65px]'>
+          <Image src={imageSrc} fill className='rounded-full' alt={itemName} />
         </div>
-        <div className='flex flex-col items-end justify-between gap-1 py-2'>
-          <p>{joined_at}</p>
+        <div className='pl-4 text-left'>
+          <h2 className='text-lg font-bold'>{formatString(itemName)}</h2>
+          <p className='text-sm font-light italic'>This will be a message...</p>
+        </div>
+        <div className='ml-auto flex flex-col items-center justify-center  gap-1 pl-8 pr-2'>
+          <p className='font-light italic'>{joinedAt?.slice(5, 10)}</p>
           <TickIcon read={true} />
         </div>
       </div>

@@ -1,27 +1,71 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import newConvoStart from '@/utils/supabase/newConvoStart';
+import newConvoStart from '@/utils/messaging/newConvoStart';
+import { useEffect } from 'react';
+import editRow from '@/utils/supabase/editRow';
 
 export default function NewConversationButton({
   userId,
   donorId,
+  donorEmail,
+  title,
+  item_id,
 }: {
   userId: string | undefined;
-  donorId: string | undefined;
+  donorId: string;
+  donorEmail: string;
+  title: string;
+  item_id: string;
 }) {
+  const subject = title;
+  const message = `Someone is interested in your item. Please check your messages to get the conversation started.`;
   const [isDisabled, setIsDisabled] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
-
+  useEffect(() => {
+    if (isDisabled) {
+      const sendMail = async () => {
+        try {
+          const response = await fetch('/api/send-email', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+              subject,
+              message,
+              donorEmail,
+            }),
+          });
+          if (!response.ok) {
+            setIsDisabled(false);
+            setError(true);
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          setError(false);
+          await editRow(
+            'items',
+            { reserved: true, reserved_by: userId ?? '' },
+            'id',
+            item_id
+          );
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      console.log('effect ran');
+      sendMail();
+    }
+  }, [isDisabled]);
   const clickHandler = async () => {
     try {
       setIsDisabled(true);
       setErrorMessage('');
       setError(false);
-      await newConvoStart(userId, donorId);
-      await router.push('/conversations');
+      await newConvoStart(userId, donorId, item_id);
+      router.push('/conversations');
     } catch (error) {
       console.log(error);
       setErrorMessage('Failed to start a new conversation. Please try again.');

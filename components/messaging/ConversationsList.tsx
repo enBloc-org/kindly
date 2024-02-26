@@ -2,21 +2,27 @@
 import ConversationCard from './ConversationCard';
 import { useContext, useEffect } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
-import { createSupabaseClient } from '@/utils/supabase/supabaseClient';
-import { ConversationCardType } from '@/utils/messaging/messagingTypes';
+import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
+import { ConversationCardType } from '@/types/messagingTypes';
+import DeleteConvoModal from '../DeleteConvoModal';
 
 const ConversationsList: React.FC = () => {
-  const { allConversations, setAllConversations, setOpenConversation } =
-    useContext(useConversation);
-  const supabase = createSupabaseClient;
+  const {
+    allConversations,
+    setAllConversations,
+    setCurrentConversation,
+    setShowConversationsList,
+  } = useContext(useConversation);
 
   const updateOpenConvo = async (givenId: number) => {
-    setOpenConversation &&
-      setOpenConversation(
+    setCurrentConversation &&
+      setCurrentConversation(
         allConversations?.filter(
           (conversations) => conversations.conversation_id === givenId
         )[0]
       );
+
+    setShowConversationsList(false);
   };
 
   useEffect(() => {
@@ -30,9 +36,24 @@ const ConversationsList: React.FC = () => {
           table: 'user_conversations',
         },
         (payload) => {
-          setAllConversations([
-            ...allConversations,
+          setAllConversations((prevConversations) => [
+            ...prevConversations,
             payload.new as ConversationCardType,
+          ]);
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: 'DELETE',
+          schema: 'public',
+          table: 'user_conversations',
+        },
+        (payload) => {
+          setAllConversations((prevConversations) => [
+            ...prevConversations.filter(
+              (conversation) => conversation.id !== payload.old.id
+            ),
           ]);
         }
       )
@@ -44,16 +65,19 @@ const ConversationsList: React.FC = () => {
   }, [supabase, allConversations, setAllConversations]);
 
   return (
-    <>
+<div className="m-4">
       {allConversations.length > 0 ? (
         allConversations.map((conversation, index) => (
           <div key={`${conversation.id}-${index}`}>
+                        <DeleteConvoModal
+              name='X'
+              convoId={conversation.conversation_id}
+              message='By pressing "confirm" you will delete this conversation'
+            />
             <ConversationCard
-              id={conversation.conversation_id}
-              joined_at={conversation.joined_at}
-              conversation_id={conversation.conversation_id}
-              user_id={conversation.user_id}
-              conversations={conversation.conversations}
+              joinedAt={conversation.joined_at}
+              itemName={conversation.items.item_name}
+              imageSrc={conversation.items.imageSrc}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
             />
           </div>
@@ -61,7 +85,7 @@ const ConversationsList: React.FC = () => {
       ) : (
         <p>There are no active conversations</p>
       )}
-    </>
+ </div>
   );
 };
 
