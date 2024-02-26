@@ -66,7 +66,7 @@ const CurrentConversation: React.FC = () => {
 
       const debounce = setTimeout(() => {
         setIsScrolling(false);
-      }, 3000);
+      }, 2000);
 
       return () => clearTimeout(debounce);
     };
@@ -91,7 +91,7 @@ const CurrentConversation: React.FC = () => {
             {message.created_at.slice(0, 10) !==
               currentMessages[index - 1]?.created_at.slice(0, 10) && (
               <div
-                className={`${!isScrolling && 'hidden'} sticky top-4 z-10 ml-[calc((100%_-_92px)/2)] w-[92px] rounded-xl bg-primaryGreen object-center p-1 text-center text-white`}
+                className={`${isScrolling ? 'opacity-100' : 'opacity-0'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_92px)/2)] h-[30px] w-[92px] rounded-xl bg-primaryGreen object-center p-1 text-center text-white transition transition-opacity ease-in-out`}
               >
                 {message.created_at.slice(0, 10)}
               </div>
