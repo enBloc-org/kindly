@@ -22,13 +22,13 @@ export default function SignUp({
     });
 
     if (data.user?.role === '') {
-      redirect(
+      return redirect(
         '/login?message=User already registered. Please try logging in instead.'
       );
     }
 
     if (error) {
-      redirect('/signup?message=Could not authenticate user.');
+      return redirect('/signup?message=Could not authenticate user.');
     }
 
     // Get userId and insert it as ID in Profiles table
