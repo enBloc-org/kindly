@@ -39,14 +39,8 @@ export default function SignUp({
       );
     }
 
-    console.log({ data }, { error });
-
     if (error) {
-      error.message === 'User already registered'
-        ? redirect(
-            '/login?message=User already registered. Please try logging in instead.'
-          )
-        : redirect('/signup?message=Could not authenticate user.');
+      redirect('/signup?message=Could not authenticate user.');
     }
 
     // Get userId and insert it as ID in Profiles table
