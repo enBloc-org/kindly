@@ -1,4 +1,4 @@
-import { PartialItem } from './types';
+import { PartialItem } from '../../types/types';
 
 //returns new arrary of objects filtered to only include items with correct subtype
 
