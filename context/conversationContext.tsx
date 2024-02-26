@@ -7,7 +7,7 @@ import {
   useContext,
   useState,
 } from 'react';
-import { AllConversationsType } from '@/utils/messaging/messagingTypes';
+import { AllConversationsType } from '@/types/messagingTypes';
 
 type ConverstaionContextProviderProps = {
   children: React.ReactNode;

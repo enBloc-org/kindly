@@ -1,19 +1,12 @@
 'use client';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import {
   AllConversationsType,
   ConversationCardType,
 } from '@/types/messagingTypes';
-import getUserConversationsandItemNames from '@/utils/messaging/getUserConversationsandItemNames';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
 
-const ConversationProvider = ({
-  children,
-  userId,
-}: {
-  children: ReactNode;
-  userId: string;
-}) => {
+const ConversationProvider = ({ children }: { children: ReactNode }) => {
   const [allConversations, setAllConversations] =
     useState<AllConversationsType>([]);
 
@@ -30,16 +23,6 @@ const ConversationProvider = ({
       },
     });
   const [showConversationsList, setShowConversationsList] = useState(false);
-
-  useEffect(() => {
-    const fetchConversations = async () => {
-      const fetchedConversations =
-        await getUserConversationsandItemNames(userId);
-
-      setAllConversations(fetchedConversations);
-    };
-    fetchConversations();
-  }, []);
 
   return (
     <useConversation.Provider

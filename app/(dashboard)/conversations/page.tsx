@@ -12,8 +12,8 @@ const Conversations = async () => {
 
   return (
     userId && (
-      <ConversationProvider userId={userId}>
-        <ConversationsWrapper />
+      <ConversationProvider>
+        <ConversationsWrapper userId={userId} />
       </ConversationProvider>
     )
   );
