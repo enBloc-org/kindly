@@ -2,7 +2,7 @@
 import ButtonRounded from '@/components/buttons/ButtonRounded';
 import insertRow from '@/utils/supabase/insertRow';
 import { useForm } from 'react-hook-form';
-import { PartialItem } from '@/utils/supabase/types';
+import { PartialItem } from '@/types/types';
 import UploadImageInput from '@/components/form/UploadImageInput';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useEffect, useState } from 'react';

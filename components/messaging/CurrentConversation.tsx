@@ -1,11 +1,11 @@
 'use client';
 
-import { MessageType } from '@/utils/messaging/messagingTypes';
+import { MessageType } from '@/types/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { useContext, useEffect, useState } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
-import { createSupabaseClient as supabase } from '@/utils/supabase/supabaseClient';
+import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
 
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =
@@ -59,18 +59,20 @@ const CurrentConversation: React.FC = () => {
   }, [supabase, currentMessages, setCurrentMessages]);
 
   return (
-    <div className='flex w-2/4 flex-col'>
-      {currentMessages.map((message: MessageType) => (
-        <div key={`${message.id}-${message.created_at}`}>
-          <MessageCard
-            sender_id={message.sender_id}
-            created_at={message.created_at}
-            message_text={message.message_text}
-            is_read={message.is_read}
-            currentUser={currentConversation?.user_id}
-          />
-        </div>
-      ))}
+    <div className='mb-10 flex h-screen flex-1 flex-col justify-end'>
+      <div className='flex flex-col-reverse overflow-y-auto bg-stone-50'>
+        {currentMessages.map((message: MessageType) => (
+          <div key={`${message.id}-${message.created_at}`}>
+            <MessageCard
+              sender_id={message.sender_id}
+              created_at={message.created_at}
+              message_text={message.message_text}
+              is_read={message.is_read}
+              currentUser={currentConversation?.user_id}
+            />
+          </div>
+        ))}
+      </div>
       <MessageForm
         user_id={currentConversation?.user_id}
         conversation_id={currentConversation?.conversation_id}
