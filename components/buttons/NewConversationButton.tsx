@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import newConvoStart from '@/utils/messaging/newConvoStart';
+import newConvoStart from '@/utils/supabase/newConvoStart';
 import { useEffect } from 'react';
 import editRow from '@/utils/supabase/editRow';
 
@@ -65,7 +65,7 @@ export default function NewConversationButton({
       setErrorMessage('');
       setError(false);
       await newConvoStart(userId, donorId, item_id);
-      router.push('/conversations');
+      await router.push('/conversations');
     } catch (error) {
       console.log(error);
       setErrorMessage('Failed to start a new conversation. Please try again.');
