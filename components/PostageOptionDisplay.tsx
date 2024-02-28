@@ -1,4 +1,4 @@
-import { PartialItem } from '@/types/types';
+import { PartialItem } from '@/utils/supabase/types';
 
 const PostageOptionDisplay: React.FC<PartialItem> = ({
   collectible,

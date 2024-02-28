@@ -1,6 +1,6 @@
 'use client';
 import React, { FormEvent, useState } from 'react';
-import insertMessage from '@/utils/messaging/insertMessage';
+import insertMessage from '@/utils/supabase/insertMessage';
 import PaperPlaneIcon from '../icons/PaperPlaneIcon';
 
 type MessageFormProps = {

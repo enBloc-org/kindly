@@ -1,6 +1,6 @@
 'use client';
 
-import { MessageType } from '@/types/messagingTypes';
+import { MessageType } from '@/utils/messaging/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 

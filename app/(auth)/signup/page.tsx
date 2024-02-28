@@ -1,7 +1,7 @@
 import AuthForm from '@/components/AuthForm';
 import insertRow from '@/utils/supabase/insertRow';
 import { createClient } from '@/utils/supabase/server';
-import { PartialProfile } from '@/types/types';
+import { PartialProfile } from '@/utils/supabase/types';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
