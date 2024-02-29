@@ -19,8 +19,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
   currentUser,
 }) => {
   const isCurrentUser = sender_id === currentUser;
-  const dateStamp = created_at.slice(0, 10).replaceAll('-', ' ');
-
+  const dateStamp = created_at;
   return (
     <div
       className={`message-card ${isCurrentUser ? 'float-right' : 'float-left'} my-2`}

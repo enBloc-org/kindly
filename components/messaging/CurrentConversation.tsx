@@ -7,6 +7,48 @@ import { useContext, useEffect, useState, useRef } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
 import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
 
+/**
+ *
+ * @param givenString expects a date format string or timestamptz type from supabase
+ * @param length will be considered 'long' by default or can be set to 'short' when calling the function
+ * @returns a formatted date stamp in long form by default (i.e.: 01 Januaray 2000) or short form if the second parameter is fed (i.e.: 01 01 2000)
+ */
+const formatDate = (givenString: string, length: string = 'long'): string => {
+  try {
+    const givenDate: Date = new Date(givenString);
+    const monthsArray = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+
+    if (length === 'short') {
+      return givenDate.getDate() === new Date().getDate() &&
+        givenDate.getUTCMonth() === new Date().getUTCMonth() &&
+        givenDate.getFullYear() === new Date().getFullYear()
+        ? 'today'
+        : `${givenDate.getUTCDate()} ${givenDate.getUTCMonth() + 1} ${givenDate.getFullYear()}`;
+    } else if (length !== 'long') {
+      throw new Error(
+        'The length parameter can only be set to "short" or the default value "long"'
+      );
+    }
+
+    return `${givenDate.getUTCDate()} ${monthsArray[givenDate.getMonth()]} ${givenDate.getFullYear()}`;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =
     useContext(useConversation);
@@ -88,17 +130,17 @@ const CurrentConversation: React.FC = () => {
       >
         {currentMessages.map((message: MessageType, index: number) => (
           <div key={`${message.id}-${message.created_at}`}>
-            {message.created_at.slice(0, 10) !==
-              currentMessages[index - 1]?.created_at.slice(0, 10) && (
+            {formatDate(message.created_at) !==
+              formatDate(currentMessages[index - 1]?.created_at) && (
               <div
                 className={`${isScrolling ? 'opacity-100' : 'opacity-0'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_92px)/2)] h-[30px] w-[92px] rounded-xl bg-primaryGreen object-center p-1 text-center text-white transition transition-opacity ease-in-out`}
               >
-                {message.created_at.slice(0, 10)}
+                {formatDate(message.created_at, 'short')}
               </div>
             )}
             <MessageCard
               sender_id={message.sender_id}
-              created_at={message.created_at}
+              created_at={formatDate(message.created_at)}
               message_text={message.message_text}
               is_read={message.is_read}
               currentUser={currentConversation?.user_id}
