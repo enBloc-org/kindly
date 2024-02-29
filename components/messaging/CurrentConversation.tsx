@@ -31,10 +31,11 @@ const formatDate = (givenString: string, length: string = 'long'): string => {
       'December',
     ];
 
+    const currentDate = new Date();
     if (length === 'short') {
-      return givenDate.getDate() === new Date().getDate() &&
-        givenDate.getUTCMonth() === new Date().getUTCMonth() &&
-        givenDate.getFullYear() === new Date().getFullYear()
+      return givenDate.getDate() === currentDate.getDate() &&
+        givenDate.getUTCMonth() === currentDate.getUTCMonth() &&
+        givenDate.getFullYear() === currentDate.getFullYear()
         ? 'today'
         : `${givenDate.getUTCDate()} ${givenDate.getUTCMonth() + 1} ${givenDate.getFullYear()}`;
     } else if (length !== 'long') {
