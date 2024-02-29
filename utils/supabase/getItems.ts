@@ -1,5 +1,5 @@
 import newClient from '../../config/supabaseclient';
-import { PartialItem } from './types';
+import { PartialItem } from '../../types/types';
 
 export async function getItems(
   callFrom: string,
