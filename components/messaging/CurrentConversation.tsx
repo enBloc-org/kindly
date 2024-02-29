@@ -134,7 +134,7 @@ const CurrentConversation: React.FC = () => {
             {formatDate(message.created_at) !==
               formatDate(currentMessages[index - 1]?.created_at) && (
               <div
-                className={`${isScrolling ? 'opacity-100' : 'opacity-0'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_92px)/2)] h-[30px] w-[92px] rounded-xl bg-primaryGreen object-center p-1 text-center text-white transition transition-opacity ease-in-out`}
+                className={`${isScrolling ? 'opacity-100' : 'opacity-100'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_92px)/2)] h-[30px] w-[92px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition transition-opacity ease-in-out`}
               >
                 {formatDate(message.created_at, 'short')}
               </div>
