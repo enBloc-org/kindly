@@ -1,7 +1,7 @@
 import TickIcon from '../icons/tickIcon';
 import Image from 'next/image';
 
-type ConversationCardProps = {
+export type ConversationCardProps = {
   joinedAt: string;
   itemName: string;
   imageSrc: string;
