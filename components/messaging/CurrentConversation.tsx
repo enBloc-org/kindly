@@ -37,7 +37,7 @@ const formatDate = (givenString: string, length: string = 'long'): string => {
         givenDate.getUTCMonth() === currentDate.getUTCMonth() &&
         givenDate.getFullYear() === currentDate.getFullYear()
         ? 'today'
-        : `${givenDate.getUTCDate()} ${givenDate.getUTCMonth() + 1} ${givenDate.getFullYear()}`;
+        : `${givenDate.getUTCDate()} ${monthsArray[givenDate.getMonth()]}`;
     } else if (length !== 'long') {
       throw new Error(
         'The length parameter can only be set to "short" or the default value "long"'
@@ -126,7 +126,7 @@ const CurrentConversation: React.FC = () => {
   return (
     <div className='mb-10 flex h-screen flex-1 flex-col justify-end'>
       <div
-        className='relative flex flex-col overflow-y-auto bg-stone-50'
+        className='relative flex flex-col-reverse overflow-y-auto bg-stone-50'
         ref={chatWindowRef}
       >
         {currentMessages.map((message: MessageType, index: number) => (
@@ -134,7 +134,7 @@ const CurrentConversation: React.FC = () => {
             {formatDate(message.created_at) !==
               formatDate(currentMessages[index - 1]?.created_at) && (
               <div
-                className={`${isScrolling ? 'opacity-100' : 'opacity-100'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_92px)/2)] h-[30px] w-[92px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition transition-opacity ease-in-out`}
+                className={`${isScrolling ? 'opacity-100' : 'opacity-100'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition transition-opacity ease-in-out`}
               >
                 {formatDate(message.created_at, 'short')}
               </div>
