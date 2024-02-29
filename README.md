@@ -44,6 +44,8 @@ Tests for this codebase use Playwright. You can run all tests using the command 
 
 This command has been set up with `start-server-and-test` npm package to spin up the local server ahead of running end-to-end tests. Unit tets for components are also run in the same script by using the experimental playwright-ct package.
 
+Individual tests can be run using `npx playwright test /pathToTestFile`
+
 ### Other: Nodemailer
 
 **Nodemailer:**
