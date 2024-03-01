@@ -6,49 +6,10 @@ import MessageForm from './MessageForm';
 import { useContext, useEffect, useState, useRef } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
 import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
-
-/**
- *
- * @param givenString expects a date format string or timestamptz type from supabase
- * @param length will be considered 'long' by default or can be set to 'short' when calling the function
- * @returns a formatted date stamp in long form by default (i.e.: 01 Januaray 2000) or short form if the second parameter is fed (i.e.: 01 01 2000)
- */
-const formatDate = (givenString: string, length: string = 'long'): string => {
-  try {
-    const givenDate: Date = new Date(givenString);
-    const monthsArray = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-
-    const currentDate = new Date();
-    if (length === 'short') {
-      return givenDate.getDate() === currentDate.getDate() &&
-        givenDate.getUTCMonth() === currentDate.getUTCMonth() &&
-        givenDate.getFullYear() === currentDate.getFullYear()
-        ? 'today'
-        : `${givenDate.getUTCDate()} ${monthsArray[givenDate.getMonth()]}`;
-    } else if (length !== 'long') {
-      throw new Error(
-        'The length parameter can only be set to "short" or the default value "long"'
-      );
-    }
-
-    return `${givenDate.getUTCDate()} ${monthsArray[givenDate.getMonth()]} ${givenDate.getFullYear()}`;
-  } catch (error) {
-    throw error;
-  }
-};
+import {
+  createTimeMarker,
+  createDateMarker,
+} from '@/utils/messaging/formatTimeStamp';
 
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =
@@ -131,17 +92,17 @@ const CurrentConversation: React.FC = () => {
       >
         {currentMessages.map((message: MessageType, index: number) => (
           <div key={`${message.id}-${message.created_at}`}>
-            {formatDate(message.created_at) !==
-              formatDate(currentMessages[index - 1]?.created_at) && (
+            {createDateMarker(message.created_at) !==
+              createDateMarker(currentMessages[index - 1]?.created_at) && (
               <div
                 className={`${isScrolling ? 'opacity-100' : 'opacity-100'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition transition-opacity ease-in-out`}
               >
-                {formatDate(message.created_at, 'short')}
+                {createDateMarker(message.created_at)}
               </div>
             )}
             <MessageCard
               sender_id={message.sender_id}
-              created_at={formatDate(message.created_at)}
+              created_at={createTimeMarker(message.created_at)}
               message_text={message.message_text}
               is_read={message.is_read}
               currentUser={currentConversation?.user_id}
