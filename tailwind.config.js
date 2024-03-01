@@ -11,9 +11,9 @@ module.exports = {
         backgroundHighlight: '#E0DFDE',
         primaryGreen: '#54BB89',
         hoverGreen: '#4EA37A',
-        secondaryGreen: '#008000',
+        secondaryGreen: '#B6DFB6',
         primaryGray: '#57666D',
-        secondaryGray: '#D9D9D9',
+        secondaryGray: '#DCDCDC',
         primaryOrange: '#FF9E5E',
       },
       fontFamily: {
