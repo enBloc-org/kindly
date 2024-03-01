@@ -7,7 +7,7 @@ import ConversationCard, {
 const testConversation: ConversationCardProps = {
   joinedAt: new Date().toString(),
   itemName: 'Test Item',
-  imageSrc: 'xyz',
+  imageSrc: 'Test image src',
   clickHandler: () => {},
 };
 
@@ -26,7 +26,7 @@ test.describe('ConversationCard component', () => {
   });
 
   test('is clickable', async ({ mount }) => {
-    let isClicked = 0;
+    let isClicked;
 
     const component = await mount(
       <ConversationCard
