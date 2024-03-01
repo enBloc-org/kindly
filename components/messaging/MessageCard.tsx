@@ -19,7 +19,6 @@ const MessageCard: React.FC<MessageCardProps> = ({
   currentUser,
 }) => {
   const isCurrentUser = sender_id === currentUser;
-  const dateStamp = created_at.slice(0, 10).replaceAll('-', ' ');
 
   return (
     <div
@@ -28,7 +27,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
       <p
         className={`text-lg text-slate-500 ${isCurrentUser ? 'mr-2 text-right' : 'ml-2 text-left'}`}
       >
-        {dateStamp}
+        {created_at}
       </p>
       <div>
         <p className='green-border-card'>{message_text}</p>
