@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-
 import TickIcon from '../icons/tickIcon';
+import '../../app/styles/messaging-styles.css'
 
 type MessageCardProps = {
   sender_id: string;
