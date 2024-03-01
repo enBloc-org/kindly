@@ -19,6 +19,8 @@ const MessageCard: React.FC<MessageCardProps> = ({
   currentUser,
 }) => {
   const isCurrentUser = sender_id === currentUser;
+
+  // This need to be fixed and removed with changes from #77/date-markers
   console.log(created_at);
 
   return (

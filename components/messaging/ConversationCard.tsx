@@ -26,7 +26,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
 }) => {
   return (
     <button type='button' onClick={clickHandler}>
-      <div className='m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 shadow-md'>
+      <div className='m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 shadow-md hover:shadow-lg'>
         <div className='relative h-[65px] w-[65px]'>
           <Image src={imageSrc} fill className='rounded-full' alt={itemName} />
         </div>

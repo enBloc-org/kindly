@@ -82,9 +82,7 @@ const AddItemPage = () => {
             {...register('item_name', { required: 'This field is required' })}
           />
         </label>
-        <p className='font-extralight italic text-primaryOrange'>
-          {errors.item_name?.message}
-        </p>
+        <p className='error-message'>{errors.item_name?.message}</p>
         <label
           htmlFor='item_description'
           className='flex flex-col items-center gap-1 font-light'
@@ -114,9 +112,7 @@ const AddItemPage = () => {
             className='input-text w-24 text-center'
           />
         </label>
-        <p className='font-extralight italic text-primaryOrange'>
-          {errors.postcode?.message}
-        </p>
+        <p className='error-message'>{errors.postcode?.message}</p>
         <div className='mt-2 flex items-center justify-center gap-5'>
           <label
             htmlFor='condition'
@@ -135,9 +131,7 @@ const AddItemPage = () => {
               <option value={'Poor'}>Poor</option>
               <option value={'New'}>New</option>
             </select>
-            <p className='font-extralight italic text-primaryOrange'>
-              {errors.condition?.message}
-            </p>
+            <p className='error-message'>{errors.condition?.message}</p>
           </label>
           <label
             htmlFor='item_type'
@@ -157,9 +151,7 @@ const AddItemPage = () => {
               <option value={'books'}>Books</option>
               <option value={'household'}>Home</option>
             </select>
-            <p className='font-extralight italic text-primaryOrange'>
-              {errors.item_type?.message}
-            </p>
+            <p className='error-message'>{errors.item_type?.message}</p>
           </label>
         </div>
         {(category === 'clothing' || category === 'shoes') && (
@@ -229,20 +221,14 @@ const AddItemPage = () => {
           </label>
         </div>
         {!isPickUpChecked && !isWillingToPostChecked && (
-          <p className='font-extralight italic text-primaryOrange'>
-            Select at least one option{' '}
-          </p>
+          <p className='error-message'>Select at least one option </p>
         )}
 
         <UploadImageInput
           setImageSrc={setImageSrc}
           setError={setGeneralError}
         />
-        {generalError && (
-          <p className='font-extralight italic text-primaryOrange'>
-            {generalError}
-          </p>
-        )}
+        {generalError && <p className='error-message'>{generalError}</p>}
 
         <ButtonRounded type='submit'>ADD YOUR ITEM</ButtonRounded>
       </form>
