@@ -59,8 +59,8 @@ const CurrentConversation: React.FC = () => {
   }, [supabase, currentMessages, setCurrentMessages]);
 
   return (
-    <div className='conversation-height mb-10 flex flex-1 flex-col justify-between'>
-      <div className='flex flex-col overflow-y-auto'>
+    <div className='conversation-height mb-10 flex flex-1 flex-col justify-between shadow-inner'>
+      <div className='flex flex-col overflow-y-auto overflow-x-hidden'>
         {currentMessages.map((message: MessageType) => (
           <div key={`${message.id}-${message.created_at}`}>
             <MessageCard
