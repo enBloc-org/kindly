@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import TickIcon from '../icons/tickIcon';
-import '../../app/styles/messaging-styles.css'
+import '../../app/styles/messaging-styles.css';
 
 type MessageCardProps = {
   sender_id: string;
@@ -31,7 +31,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
         {dateStamp}
       </p>
       <div>
-        <p className='green-border-card'>{message_text}</p>
+        <p>{message_text}</p>
       </div>
       {isCurrentUser && (
         <div className='relative float-right mr-4'>

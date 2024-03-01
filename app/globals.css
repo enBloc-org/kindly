@@ -55,23 +55,3 @@ body {
 .card {
   @apply overflow-hidden rounded-lg bg-white px-8  pb-5 shadow-sm transition-all hover:scale-95 hover:shadow-lg lg:text-lg;
 }
-
-.message-card {
-  @apply relative min-h-max w-5/6 overflow-hidden rounded-lg px-4 py-2 sm:w-96 lg:text-lg;
-}
-
-.green-border-card {
-  @apply rounded-xl border-2 border-solid border-primaryGreen p-4;
-}
-
-.conversation-height {
-  height: calc(100vh - 225px);
-  border: solid 2px red;
-}
-
-@media screen and (min-width: 1000px) {
-  .conversation-height {
-    height: calc(100vh - 155px);
-    border: solid 2px red;
-  }
-}
