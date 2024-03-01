@@ -6,7 +6,17 @@
 export const createTimeMarker = (givenString: string): string => {
   const givenDate: Date = new Date(givenString);
 
-  return `${givenDate.getHours().toString()}:${givenDate.getMinutes().toString()}`;
+  const hoursValue =
+    givenDate.getHours().toString().split('').length < 2
+      ? '0' + givenDate.getHours().toString()
+      : givenDate.getHours().toString();
+
+  const minutesValue =
+    givenDate.getMinutes().toString().split('').length < 2
+      ? '0' + givenDate.getMinutes().toString()
+      : givenDate.getMinutes().toString();
+
+  return `${hoursValue}:${minutesValue}`;
 };
 
 /**
