@@ -3,7 +3,7 @@
  * @param givenString expects a date format string or timestamptz value from supabase
  * @returns a formatted string displaying the hour and minute stamp passed i.e.: 13:32
  */
-export const createTimeMarker = (givenString: string): string => {
+export const formatTimeMarker = (givenString: string): string => {
   const givenDate: Date = new Date(givenString);
 
   const hoursValue =
@@ -24,7 +24,7 @@ export const createTimeMarker = (givenString: string): string => {
  * @param givenString expects a date format string or timestamptz type from supabase
  * @returns a string formatted to match our date stamps (i.e.: 01 Januaray) or the string 'today' if the given date matches the current date
  */
-export const createDateMarker = (givenString: string): string => {
+export const formatDateMarker = (givenString: string): string => {
   try {
     const givenDate: Date = new Date(givenString);
     const monthsArray = [

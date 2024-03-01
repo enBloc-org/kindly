@@ -7,8 +7,8 @@ import { useContext, useEffect, useState, useRef } from 'react';
 import useConversation from '../../app/(dashboard)/conversations/useConversation';
 import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
 import {
-  createTimeMarker,
-  createDateMarker,
+  formatTimeMarker,
+  formatDateMarker,
 } from '@/utils/messaging/formatTimeStamp';
 
 const CurrentConversation: React.FC = () => {
@@ -92,17 +92,17 @@ const CurrentConversation: React.FC = () => {
       >
         {currentMessages.map((message: MessageType, index: number) => (
           <div key={`${message.id}-${message.created_at}`}>
-            {createDateMarker(message.created_at) !==
-              createDateMarker(currentMessages[index - 1]?.created_at) && (
+            {formatDateMarker(message.created_at) !==
+              formatDateMarker(currentMessages[index - 1]?.created_at) && (
               <div
                 className={`${isScrolling ? 'opacity-100' : 'opacity-100'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition transition-opacity ease-in-out`}
               >
-                {createDateMarker(message.created_at)}
+                {formatDateMarker(message.created_at)}
               </div>
             )}
             <MessageCard
               sender_id={message.sender_id}
-              created_at={createTimeMarker(message.created_at)}
+              created_at={formatTimeMarker(message.created_at)}
               message_text={message.message_text}
               is_read={message.is_read}
               currentUser={currentConversation?.user_id}
