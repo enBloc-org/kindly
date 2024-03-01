@@ -44,6 +44,10 @@ body {
   border-color: #ff9e5e;
 }
 
+.error-message {
+  @apply text-lg font-bold italic text-primaryOrange;
+}
+
 /* Form classes*/
 
 .input-text {

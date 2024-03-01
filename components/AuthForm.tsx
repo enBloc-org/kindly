@@ -53,7 +53,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
 
   return (
     <form
-      className=' flex-1 flex flex-col  items-center  justify-center gap-4 text-foreground'
+      className=' text-foreground flex flex-1  flex-col  items-center justify-center gap-4'
       onSubmit={handleSubmit}
     >
       {' '}
@@ -63,7 +63,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             Username
           </label>
           <input
-            className='bg-white p-2 border border-primaryGreen rounded shadow mb-2'
+            className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
             name='user_name'
             placeholder='Your Username'
             required
@@ -74,7 +74,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         Email
       </label>
       <input
-        className='bg-white p-2 border border-primaryGreen rounded shadow mb-2'
+        className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
         name='email'
         placeholder='you@example.com'
         required
@@ -84,7 +84,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
       </label>
       <div className='relative'>
         <input
-          className='bg-white p-2 border border-primaryGreen rounded shadow mb-2'
+          className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
           type={showPassword ? 'text' : 'password'}
           name='password'
           placeholder='••••••••'
@@ -93,7 +93,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         />
         <button
           type='button'
-          className='absolute top-2 right-2'
+          className='absolute right-2 top-2'
           onClick={handleTogglePassword}
         >
           {showPassword ? 'Hide' : 'Show'}
@@ -105,7 +105,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             Confirm Password
           </label>
           <input
-            className='bg-white p-2 border border-primaryGreen rounded shadow mb-2'
+            className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
             type='password'
             name='password'
             placeholder='••••••••'
@@ -136,12 +136,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
       )}
       <button className='button button-rounded mt-1'>{buttonText}</button>
       {searchParams?.message && (
-        <p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>
+        <p className='error-message mt-4 p-4 text-center'>
           {searchParams.message}
         </p>
       )}
       {errorMessage && (
-        <p className='text-red-500 text-sm mt-2'>{errorMessage}</p>
+        <p className='mt-2 text-sm text-red-500'>{errorMessage}</p>
       )}
     </form>
   );
