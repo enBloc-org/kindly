@@ -20,9 +20,6 @@ const MessageCard: React.FC<MessageCardProps> = ({
 }) => {
   const isCurrentUser = sender_id === currentUser;
 
-  // This need to be fixed and removed with changes from #77/date-markers
-  console.log(created_at);
-
   return (
     <div
       className={`message-card ${isCurrentUser ? 'float-right bg-secondaryGray lg:left-24' : 'float-left bg-secondaryGreen lg:right-10'} my-2`}
@@ -37,7 +34,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
       <div
         className={`flex flex-1 flex-col items-end justify-between gap-2 ${isCurrentUser && 'lg:mr-24'}`}
       >
-        <p className='text-sm font-light lg:text-base'>13:40</p>
+        <p className='text-sm font-light lg:text-base'>{created_at}</p>
         {isCurrentUser && <TickIcon read={is_read} />}
       </div>
     </div>
