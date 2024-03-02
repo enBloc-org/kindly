@@ -54,16 +54,8 @@ body {
   @apply rounded-3xl border border-primaryGreen bg-background px-5 py-3 text-sm md:w-80;
 }
 
-/*  Card hover animation */
+/*  Cards */
 
 .card {
   @apply overflow-hidden rounded-lg bg-white px-8  pb-5 shadow-sm transition-all hover:scale-95 hover:shadow-lg lg:text-lg;
-}
-
-.message-card {
-  @apply relative min-h-max w-5/6 overflow-hidden rounded-lg bg-background px-4 py-2 text-black transition-all sm:w-96 lg:text-lg;
-}
-
-.green-border-card {
-  @apply rounded-xl border-2 border-solid border-primaryGreen p-4;
 }

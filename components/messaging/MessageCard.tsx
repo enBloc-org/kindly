@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-
 import TickIcon from '../icons/tickIcon';
+import '../../app/styles/messaging-styles.css';
 
 type MessageCardProps = {
   sender_id: string;
@@ -22,21 +22,21 @@ const MessageCard: React.FC<MessageCardProps> = ({
 
   return (
     <div
-      className={`message-card ${isCurrentUser ? 'float-right' : 'float-left'} my-2`}
+      className={`message-card ${isCurrentUser ? 'float-right bg-secondaryGray lg:left-24' : 'float-left bg-secondaryGreen lg:right-10'} my-2`}
     >
-      <p
-        className={`text-lg text-slate-500 ${isCurrentUser ? 'mr-2 text-right' : 'ml-2 text-left'}`}
-      >
-        {created_at}
-      </p>
-      <div>
-        <p className='green-border-card'>{message_text}</p>
+      <div className='mx-2 flex items-center justify-center'>
+        <p
+          className={`px-2 py-2 text-lg ${message_text.length > 50 && 'md:px-4'} lg:ml-10`}
+        >
+          {message_text}
+        </p>
       </div>
-      {isCurrentUser && (
-        <div className='relative float-right mr-4'>
-          <TickIcon read={is_read} />
-        </div>
-      )}
+      <div
+        className={`flex flex-1 flex-col items-end justify-between gap-2 ${isCurrentUser && 'lg:mr-24'}`}
+      >
+        <p className='text-sm font-light lg:text-base'>{created_at}</p>
+        {isCurrentUser && <TickIcon read={is_read} />}
+      </div>
     </div>
   );
 };
