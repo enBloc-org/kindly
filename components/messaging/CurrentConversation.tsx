@@ -86,13 +86,16 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
-      <div className='flex flex-col overflow-y-auto overflow-x-hidden'>
+      <div
+        className='relative flex flex-col overflow-y-auto overflow-x-hidden'
+        ref={chatWindowRef}
+      >
         {currentMessages.map((message: MessageType, index: number) => (
           <div key={`${message.id}-${message.created_at}`}>
             {formatDateMarker(message.created_at) !==
               formatDateMarker(currentMessages[index - 1]?.created_at) && (
               <div
-                className={`${isScrolling ? 'opacity-100' : 'opacity-100'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition transition-opacity ease-in-out`}
+                className={`${isScrolling ? 'opacity-100' : 'opacity-0'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition transition-opacity ease-in-out`}
               >
                 {formatDateMarker(message.created_at)}
               </div>
