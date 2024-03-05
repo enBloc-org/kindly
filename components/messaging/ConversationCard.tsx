@@ -1,4 +1,3 @@
-import TickIcon from '../icons/tickIcon';
 import Image from 'next/image';
 
 export type ConversationCardProps = {
@@ -36,7 +35,6 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
         </div>
         <div className='ml-auto flex flex-col items-center justify-center  gap-1 pl-8 pr-2'>
           <p className='font-light italic'>{joinedAt?.slice(5, 10)}</p>
-          <TickIcon read={true} />
         </div>
       </div>
     </button>

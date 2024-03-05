@@ -3,7 +3,7 @@ import ConversationCard from './ConversationCard';
 import { useEffect } from 'react';
 import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
 import { ConversationCardType } from '@/types/messagingTypes';
-import DeleteConvoModal from '../DeleteConvoModal';
+import DeleteConvoModal from './DeleteConvoModal';
 import { useConversationContext } from '@/context/conversationContext';
 
 const ConversationsList: React.FC = () => {
