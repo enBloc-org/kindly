@@ -3,7 +3,7 @@ import { useState } from 'react';
 import MeatballIcon from '../icons/MeatballIcon';
 
 type CardMenuType = {
-  toggleModal: () => void;
+  toggleModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const CardMenu: React.FC<CardMenuType> = ({ toggleModal }) => {

@@ -15,7 +15,10 @@ interface ModalProps {
 const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const toggleModalClickHandler = () => {
+  const toggleModalClickHandler = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.stopPropagation();
     setModalOpen((prevState: boolean) => !prevState);
   };
 
