@@ -29,7 +29,7 @@ const DeleteConvoModal = ({ name, convoId, message }: ModalProps) => {
             <h1 className='font-semibold text-primaryOrange'>Warning</h1>
             <p>{message}</p>
           </div>
-          <DeleteConvoButton convoId={convoId} title='Confirm' />
+          <DeleteConvoButton conversationId={convoId} title='Confirm' />
           <button className='button button-rounded m-2' onClick={toggleModal}>
             Cancel
           </button>
