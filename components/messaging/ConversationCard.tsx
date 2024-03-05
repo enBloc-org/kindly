@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import CardMenu from './CardMenu';
+import ConversationCardModal from './ConversationCardModal';
 
 export type ConversationCardProps = {
   joinedAt: string;
@@ -37,7 +37,10 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           <p className='text-sm font-light italic'>This will be a message...</p>
         </div>
         <div className='ml-auto flex flex-col items-center gap-4 pl-8 pr-2'>
-          <CardMenu conversationId={conversationId} />
+          <ConversationCardModal
+            conversationId={conversationId}
+            message='Are you sure you want to delete this conversation?'
+          />
           <p className='font-light italic'>{joinedAt?.slice(5, 10)}</p>
         </div>
       </div>

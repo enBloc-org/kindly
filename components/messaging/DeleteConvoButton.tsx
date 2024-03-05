@@ -14,10 +14,10 @@ export default function DeleteConvoButton({
 
   return (
     <button
-      className='text-sm'
+      className='button button-rounded'
       onClick={() => deleteConversation(conversationId)}
     >
-      Delete conversation
+      Delete
     </button>
   );
 }
