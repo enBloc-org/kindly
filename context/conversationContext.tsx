@@ -7,7 +7,10 @@ import {
   useContext,
   useState,
 } from 'react';
-import { AllConversationsType } from '@/types/messagingTypes';
+import {
+  AllConversationsType,
+  ConversationCardType,
+} from '@/types/messagingTypes';
 
 type ConverstaionContextProviderProps = {
   children: React.ReactNode;
@@ -16,8 +19,12 @@ type ConverstaionContextProviderProps = {
 type ConversationContext = {
   allConversations: AllConversationsType;
   setAllConversations: Dispatch<SetStateAction<AllConversationsType>>;
-  openConversation: number | undefined;
-  setOpenConversation: Dispatch<SetStateAction<number | undefined>>;
+  currentConversation: ConversationCardType | undefined;
+  setCurrentConversation: Dispatch<
+    SetStateAction<ConversationCardType | undefined>
+  >;
+  showConversationsList: boolean;
+  setShowConversationsList: Dispatch<SetStateAction<boolean>>;
 };
 
 export const ConversationContext = createContext<ConversationContext | null>(
@@ -30,17 +37,21 @@ export default function ConversationContextProvider({
   const [allConversations, setAllConversations] =
     useState<AllConversationsType>([]);
 
-  const [openConversation, setOpenConversation] = useState<number | undefined>(
-    undefined
-  );
+  const [currentConversation, setCurrentConversation] = useState<
+    ConversationCardType | undefined
+  >(undefined);
+
+  const [showConversationsList, setShowConversationsList] = useState(false);
 
   return (
     <ConversationContext.Provider
       value={{
         allConversations,
         setAllConversations,
-        openConversation,
-        setOpenConversation,
+        currentConversation,
+        setCurrentConversation,
+        showConversationsList,
+        setShowConversationsList,
       }}
     >
       {children}

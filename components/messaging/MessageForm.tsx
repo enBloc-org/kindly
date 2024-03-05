@@ -4,8 +4,8 @@ import insertMessage from '@/utils/messaging/insertMessage';
 import PaperPlaneIcon from '../icons/PaperPlaneIcon';
 
 type MessageFormProps = {
-  user_id: string;
-  conversation_id: number;
+  user_id: string | undefined;
+  conversation_id: number | undefined;
 };
 
 const MessageForm: React.FC<MessageFormProps> = ({
@@ -14,10 +14,14 @@ const MessageForm: React.FC<MessageFormProps> = ({
 }) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log({ user_id, conversation_id });
 
-    await insertMessage(user_id, conversation_id, message);
-    setMessage('');
+    try {
+      await insertMessage(user_id, conversation_id, message);
+      setMessage('');
+    } catch (error) {
+      console.error(`Failed to fetch messages from database: ${error}`);
+      throw error;
+    }
   };
   const [message, setMessage] = useState<string>('');
 

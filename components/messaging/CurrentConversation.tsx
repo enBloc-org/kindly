@@ -3,9 +3,9 @@
 import { MessageType } from '@/types/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
-import { useContext, useEffect, useState, useRef } from 'react';
-import useConversation from '../../app/(dashboard)/conversations/useConversation';
+import { useEffect, useState, useRef } from 'react';
 import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
+import { useConversationContext } from '@/context/conversationContext';
 import {
   formatTimeMarker,
   formatDateMarker,
@@ -13,7 +13,7 @@ import {
 
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =
-    useContext(useConversation);
+    useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);

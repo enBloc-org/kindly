@@ -1,11 +1,11 @@
 'use client';
 
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import ConversationsList from './ConversationsList';
 import CurrentConversation from './CurrentConversation';
-import useConversation from '@/app/(dashboard)/conversations/useConversation';
 import useMediaQuery from '../hooks/useMediaQuery';
 import getUserConversationsandItemNames from '@/utils/messaging/getUserConversationsandItemNames';
+import { useConversationContext } from '@/context/conversationContext';
 
 type ConversationWrapperType = {
   userId: string;
@@ -17,7 +17,7 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
     showConversationsList,
     setShowConversationsList,
     setAllConversations,
-  } = useContext(useConversation);
+  } = useConversationContext();
 
   useEffect(() => {
     const fetchConversations = async () => {
