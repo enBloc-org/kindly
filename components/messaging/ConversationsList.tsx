@@ -3,7 +3,6 @@ import ConversationCard from './ConversationCard';
 import { useEffect } from 'react';
 import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
 import { ConversationCardType } from '@/types/messagingTypes';
-import DeleteConvoModal from './DeleteConvoModal';
 import { useConversationContext } from '@/context/conversationContext';
 
 const ConversationsList: React.FC = () => {
@@ -69,15 +68,11 @@ const ConversationsList: React.FC = () => {
       {allConversations.length > 0 ? (
         allConversations.map((conversation, index) => (
           <div key={`${conversation.id}-${index}`}>
-            <DeleteConvoModal
-              name='X'
-              convoId={conversation.conversation_id}
-              message='By pressing "confirm" you will delete this conversation'
-            />
             <ConversationCard
               joinedAt={conversation.joined_at}
               itemName={conversation.items.item_name}
               imageSrc={conversation.items.imageSrc}
+              conversationId={conversation.id}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
             />
           </div>

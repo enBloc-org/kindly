@@ -1,9 +1,11 @@
 import Image from 'next/image';
+import CardMenu from './CardMenu';
 
 export type ConversationCardProps = {
   joinedAt: string;
   itemName: string;
   imageSrc: string;
+  conversationId: number;
   clickHandler: () => void;
 };
 
@@ -21,6 +23,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   joinedAt,
   itemName,
   imageSrc,
+  conversationId,
   clickHandler,
 }) => {
   return (
@@ -33,7 +36,8 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           <h2 className='text-lg font-bold'>{formatString(itemName)}</h2>
           <p className='text-sm font-light italic'>This will be a message...</p>
         </div>
-        <div className='ml-auto flex flex-col items-center justify-center  gap-1 pl-8 pr-2'>
+        <div className='ml-auto flex flex-col items-center gap-4 pl-8 pr-2'>
+          <CardMenu conversationId={conversationId} />
           <p className='font-light italic'>{joinedAt?.slice(5, 10)}</p>
         </div>
       </div>
