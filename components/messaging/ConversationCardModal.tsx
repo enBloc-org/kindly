@@ -15,6 +15,8 @@ interface ModalProps {
 
 const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [error, setError] = useState('');
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const toggleModalClickHandler = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -23,11 +25,23 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
     setModalOpen((prevState: boolean) => !prevState);
   };
 
-  const deleteConversationClickHandler = () => {
+  const deleteConversationClickHandler = async () => {
     if (typeof conversationId === 'undefined') {
       throw new Error('item is undefined');
     }
-    deleteConversation(conversationId);
+    try {
+      setIsDisabled(true);
+      console.log({ conversationId });
+
+      deleteConversation(conversationId);
+      setModalOpen(false);
+      setError('');
+      setIsDisabled(false);
+    } catch (error) {
+      console.log(`Error: ${error}`);
+      setError(`There was an error: ${error}`);
+      setIsDisabled(false);
+    }
   };
 
   return (
@@ -42,6 +56,7 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
               <ButtonRounded
                 type='button'
                 clickHandler={deleteConversationClickHandler}
+                isDisabled={isDisabled}
               >
                 Delete
               </ButtonRounded>
@@ -52,6 +67,7 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
                 Cancel
               </ButtonRounded>
             </div>
+            {error && <p className='error-message mt-4'>{error}</p>}
           </div>
         </div>
       )}
