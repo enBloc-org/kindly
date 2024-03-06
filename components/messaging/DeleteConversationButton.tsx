@@ -1,13 +1,13 @@
 'use client';
 import deleteConversation from '@/utils/messaging/deleteConversation';
 
-interface DeleteButtonProps {
-  conversationId?: number;
+interface DeleteConversationButtonProps {
+  deleteConversation: () => void;
 }
 
-export default function DeleteConvoButton({
+export default function DeleteConversationButton({
   conversationId,
-}: DeleteButtonProps) {
+}: DeleteConversationButtonProps) {
   if (typeof conversationId === 'undefined') {
     throw new Error('item is undefined');
   }

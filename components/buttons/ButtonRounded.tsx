@@ -4,7 +4,7 @@ import React from 'react';
 type ButtonRoundedPropTypes = {
   children: string;
   type: 'button' | 'submit' | 'reset';
-  clickHandler?: () => void;
+  clickHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const ButtonRounded: React.FC<ButtonRoundedPropTypes> = ({
@@ -15,7 +15,7 @@ const ButtonRounded: React.FC<ButtonRoundedPropTypes> = ({
   return (
     <button
       className='button button-rounded'
-      onClick={() => clickHandler}
+      onClick={clickHandler}
       role='button'
       type={type}
       aria-label={`${children}`}
