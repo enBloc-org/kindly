@@ -1,10 +1,10 @@
 'use client';
 import ConversationCard from './ConversationCard';
-import { useContext, useEffect } from 'react';
-import useConversation from '../../app/(dashboard)/conversations/useConversation';
+import { useEffect } from 'react';
 import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
 import { ConversationCardType } from '@/types/messagingTypes';
 import DeleteConvoModal from '../DeleteConvoModal';
+import { useConversationContext } from '@/context/conversationContext';
 
 const ConversationsList: React.FC = () => {
   const {
@@ -12,7 +12,7 @@ const ConversationsList: React.FC = () => {
     setAllConversations,
     setCurrentConversation,
     setShowConversationsList,
-  } = useContext(useConversation);
+  } = useConversationContext();
 
   const updateOpenConvo = async (givenId: number) => {
     setCurrentConversation &&
@@ -65,11 +65,11 @@ const ConversationsList: React.FC = () => {
   }, [supabase, allConversations, setAllConversations]);
 
   return (
-<div className="m-4">
+    <div className='m-4'>
       {allConversations.length > 0 ? (
         allConversations.map((conversation, index) => (
           <div key={`${conversation.id}-${index}`}>
-                        <DeleteConvoModal
+            <DeleteConvoModal
               name='X'
               convoId={conversation.conversation_id}
               message='By pressing "confirm" you will delete this conversation'
@@ -85,7 +85,7 @@ const ConversationsList: React.FC = () => {
       ) : (
         <p>There are no active conversations</p>
       )}
- </div>
+    </div>
   );
 };
 

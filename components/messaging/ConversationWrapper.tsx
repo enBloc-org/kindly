@@ -1,19 +1,36 @@
 'use client';
 
-import { useContext } from 'react';
+import { useEffect } from 'react';
 import ConversationsList from './ConversationsList';
 import CurrentConversation from './CurrentConversation';
-import useConversation from '@/app/(dashboard)/conversations/useConversation';
 import useMediaQuery from '../hooks/useMediaQuery';
+import getUserConversationsandItemNames from '@/utils/messaging/getUserConversationsandItemNames';
+import { useConversationContext } from '@/context/conversationContext';
 
-const ConversationWrapper: React.FC = () => {
+type ConversationWrapperType = {
+  userId: string;
+};
+
+const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
   const isBreakpoint = useMediaQuery(1000);
-  const { showConversationsList, setShowConversationsList } =
-    useContext(useConversation);
+  const {
+    showConversationsList,
+    setShowConversationsList,
+    setAllConversations,
+  } = useConversationContext();
+
+  useEffect(() => {
+    const fetchConversations = async () => {
+      const fetchedConversations =
+        await getUserConversationsandItemNames(userId);
+
+      setAllConversations(fetchedConversations);
+    };
+    fetchConversations();
+  }, []);
   return (
     <>
-      <div className='mt-4 flex justify-between px-3 '>
-      </div>
+      <div className='mt-4 flex justify-between px-3 '></div>
       {isBreakpoint ? (
         <div className='mt-4 p-2'>
           {showConversationsList ? (
