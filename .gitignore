@@ -8,6 +8,8 @@
 
 # testing
 /coverage
+playwright/.auth/user.json
+tests/auth.setup.ts
 
 # next.js
 /.next/
