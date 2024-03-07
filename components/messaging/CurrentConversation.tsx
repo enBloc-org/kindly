@@ -23,6 +23,23 @@ const CurrentConversation: React.FC = () => {
   }, [allConversations, setCurrentConversation]);
 
   useEffect(() => {
+    const fetchItemDonor = async () => {
+      try {
+        const { data: itemDonor } = await supabase
+          .from('items')
+          .select('profiles(username)')
+          .eq('id', currentConversation?.item_id);
+
+        // console.log(currentConversation?.item_id)
+
+        console.log(itemDonor);
+      } catch (error) {
+        console.error(`Failed to fetch item donor from database: ${error}`);
+        throw error;
+      }
+    };
+    fetchItemDonor();
+
     const fetchMessagesForCurrentConversation = async () => {
       try {
         const { data: fetchedMessages } = await supabase

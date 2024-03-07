@@ -1,0 +1,15 @@
+{
+  "cookies": [
+    {
+      "name": "sb-undfcbmldjkujposixvn-auth-token",
+      "value": "%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6Im1mNXFjZHNwbk5pdU9WcTEiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzA5ODE2MzgxLCJpYXQiOjE3MDk4MTI3ODEsImlzcyI6Imh0dHBzOi8vdW5kZmNibWxkamt1anBvc2l4dm4uc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6Ijg1ZjMxOGIzLTZmMDYtNDZiNS04YTkzLTU5NDgyZGUxNjBjZSIsImVtYWlsIjoiYmV0aEBmb3VuZGVyc2FuZGNvZGVycy5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7fSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTcwOTgxMjc4MX1dLCJzZXNzaW9uX2lkIjoiZDkxMTZkOTUtOTE0OC00OWFmLTk5MDctMjM0YjJjNTQyMzk1In0.bbOF8Q5JjXQ22bD4XXzSKnYI0J6_tNOR4BTABM6rOG8%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1709816381%2C%22refresh_token%22%3A%22WlGMzxjPAv5Eonbdu6A-Zw%22%2C%22user%22%3A%7B%22id%22%3A%2285f318b3-6f06-46b5-8a93-59482de160ce%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22beth%40foundersandcoders.com%22%2C%22email_confirmed_at%22%3A%222024-01-19T15%3A58%3A55.090244Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222024-01-19T15%3A58%3A37.020114Z%22%2C%22confirmed_at%22%3A%222024-01-19T15%3A58%3A55.090244Z%22%2C%22last_sign_in_at%22%3A%222024-03-07T11%3A59%3A41.281442408Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%2274b6be6e-153f-48f9-946e-f6929c73ce8f%22%2C%22id%22%3A%2285f318b3-6f06-46b5-8a93-59482de160ce%22%2C%22user_id%22%3A%2285f318b3-6f06-46b5-8a93-59482de160ce%22%2C%22identity_data%22%3A%7B%22email%22%3A%22beth%40foundersandcoders.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2285f318b3-6f06-46b5-8a93-59482de160ce%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222024-01-19T15%3A58%3A37.014765Z%22%2C%22created_at%22%3A%222024-01-19T15%3A58%3A37.014819Z%22%2C%22updated_at%22%3A%222024-01-19T15%3A58%3A37.014819Z%22%2C%22email%22%3A%22beth%40foundersandcoders.com%22%7D%5D%2C%22created_at%22%3A%222024-01-19T15%3A58%3A37.009952Z%22%2C%22updated_at%22%3A%222024-03-07T11%3A59%3A41.28324Z%22%7D%7D",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1744372783.901235,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}
