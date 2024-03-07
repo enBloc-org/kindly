@@ -12,6 +12,7 @@ import {
 } from '@/utils/messaging/formatTimeStamp';
 
 const CurrentConversation: React.FC = () => {
+  const [itemDonor, setItemDonor] = useState('');
   const { allConversations, currentConversation, setCurrentConversation } =
     useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
@@ -25,14 +26,14 @@ const CurrentConversation: React.FC = () => {
   useEffect(() => {
     const fetchItemDonor = async () => {
       try {
-        const { data: itemDonor } = await supabase
+        const { data: fetchedItemDonor } = await supabase
           .from('items')
           .select('profiles(username)')
           .eq('id', currentConversation?.item_id);
 
-        // console.log(currentConversation?.item_id)
+        setItemDonor(fetchedItemDonor[0].profiles.username);
 
-        console.log(itemDonor);
+        // console.log(fetchedItemDonor[0].profiles.username);
       } catch (error) {
         console.error(`Failed to fetch item donor from database: ${error}`);
         throw error;
@@ -103,6 +104,7 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
+      <p>{itemDonor}</p>
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}
