@@ -16,7 +16,7 @@ type ItemDonorType = {
 };
 
 const CurrentConversation: React.FC = () => {
-  const [itemDonor, setItemDonor] = useState<ItemDonorType[] | undefined>([]);
+  const [itemDonor, setItemDonor] = useState<ItemDonorType | undefined>();
   const { allConversations, currentConversation, setCurrentConversation } =
     useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
@@ -37,7 +37,10 @@ const CurrentConversation: React.FC = () => {
 
         console.log(fetchedItemDonor);
 
-        fetchedItemDonor && setItemDonor(fetchedItemDonor[0].profiles);
+        fetchedItemDonor &&
+          setItemDonor(
+            fetchedItemDonor[0].profiles as unknown as ItemDonorType
+          );
       } catch (error) {
         console.error(`Failed to fetch item donor from database: ${error}`);
         throw error;
