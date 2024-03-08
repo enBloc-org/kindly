@@ -35,8 +35,6 @@ const CurrentConversation: React.FC = () => {
           .select('profiles(username)')
           .eq('id', currentConversation?.item_id);
 
-        console.log(fetchedItemDonor);
-
         fetchedItemDonor &&
           setItemDonor(
             fetchedItemDonor[0].profiles as unknown as ItemDonorType
