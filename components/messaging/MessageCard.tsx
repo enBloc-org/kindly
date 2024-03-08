@@ -8,7 +8,7 @@ type MessageCardProps = {
   created_at: string;
   message_text: string;
   is_read: boolean;
-  currentUser: string;
+  currentUser: string | undefined;
 };
 
 const MessageCard: React.FC<MessageCardProps> = ({

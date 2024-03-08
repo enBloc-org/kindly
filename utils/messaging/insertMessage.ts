@@ -1,7 +1,7 @@
 import newClient from '../../config/supabaseclient';
 
 export default async function insertMessage(
-  user_id: string,
+  user_id: string | undefined,
   conversation_id: number | undefined,
   message: string
 ) {
