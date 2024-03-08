@@ -16,7 +16,9 @@ Please describe the behaviour you are expecting
 What is the current behaviour?
 
 <hr>
-# Failure Information (for bugs 🪲)
+(only complete the following if reporting a bug 🪲 - delete otherwise)
+
+# Failure Information
 
 Please help provide information about the failure if this is a bug. If it is not a bug, please remove the rest of this template.
 

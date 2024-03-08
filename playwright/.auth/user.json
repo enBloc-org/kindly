@@ -1,0 +1,15 @@
+{
+  "cookies": [
+    {
+      "name": "sb-undfcbmldjkujposixvn-auth-token",
+      "value": "%7B%22access_token%22%3A%22eyJhbGciOiJIUzI1NiIsImtpZCI6Im1mNXFjZHNwbk5pdU9WcTEiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzA5OTAwMTA0LCJpYXQiOjE3MDk4OTY1MDQsImlzcyI6Imh0dHBzOi8vdW5kZmNibWxkamt1anBvc2l4dm4uc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjQ1NzM5OTgwLWRlNmEtNDc4My1iNDIwLTZjYzc1MGQ2YzQ1YiIsImVtYWlsIjoiYWxwaG9uc29AZm91bmRlcnNhbmRjb2RlcnMuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6e30sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE3MDk4OTY1MDR9XSwic2Vzc2lvbl9pZCI6IjU0MDRhMGVhLTlhOTItNDViMC1iMTI2LTRjNjVhM2I1ZDRmNSJ9.YlX29WMY80MThYx6GapidttbtEUMzHMa9e70qOK_hdY%22%2C%22token_type%22%3A%22bearer%22%2C%22expires_in%22%3A3600%2C%22expires_at%22%3A1709900104%2C%22refresh_token%22%3A%22kuz7l8MwE6jbfDIaHz3XNQ%22%2C%22user%22%3A%7B%22id%22%3A%2245739980-de6a-4783-b420-6cc750d6c45b%22%2C%22aud%22%3A%22authenticated%22%2C%22role%22%3A%22authenticated%22%2C%22email%22%3A%22alphonso%40foundersandcoders.com%22%2C%22email_confirmed_at%22%3A%222024-01-22T12%3A26%3A42.733375Z%22%2C%22phone%22%3A%22%22%2C%22confirmation_sent_at%22%3A%222024-01-22T12%3A26%3A28.774939Z%22%2C%22confirmed_at%22%3A%222024-01-22T12%3A26%3A42.733375Z%22%2C%22last_sign_in_at%22%3A%222024-03-08T11%3A15%3A04.594902252Z%22%2C%22app_metadata%22%3A%7B%22provider%22%3A%22email%22%2C%22providers%22%3A%5B%22email%22%5D%7D%2C%22user_metadata%22%3A%7B%7D%2C%22identities%22%3A%5B%7B%22identity_id%22%3A%22917f970e-ac96-4e89-b2e1-abb7e16ee1e4%22%2C%22id%22%3A%2245739980-de6a-4783-b420-6cc750d6c45b%22%2C%22user_id%22%3A%2245739980-de6a-4783-b420-6cc750d6c45b%22%2C%22identity_data%22%3A%7B%22email%22%3A%22alphonso%40foundersandcoders.com%22%2C%22email_verified%22%3Afalse%2C%22phone_verified%22%3Afalse%2C%22sub%22%3A%2245739980-de6a-4783-b420-6cc750d6c45b%22%7D%2C%22provider%22%3A%22email%22%2C%22last_sign_in_at%22%3A%222024-01-22T12%3A26%3A28.772506Z%22%2C%22created_at%22%3A%222024-01-22T12%3A26%3A28.772553Z%22%2C%22updated_at%22%3A%222024-01-22T12%3A26%3A28.772553Z%22%2C%22email%22%3A%22alphonso%40foundersandcoders.com%22%7D%5D%2C%22created_at%22%3A%222024-01-22T12%3A26%3A28.769631Z%22%2C%22updated_at%22%3A%222024-03-08T11%3A15%3A04.596557Z%22%7D%7D",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1744456504.774212,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}
