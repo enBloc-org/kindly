@@ -12,7 +12,7 @@ import {
 } from '@/utils/messaging/formatTimeStamp';
 
 const CurrentConversation: React.FC = () => {
-  const [itemDonor, setItemDonor] = useState('');
+  const [itemDonor, setItemDonor] = useState();
   const { allConversations, currentConversation, setCurrentConversation } =
     useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
