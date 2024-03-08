@@ -25,7 +25,10 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
     setModalOpen((prevState: boolean) => !prevState);
   };
 
-  const deleteConversationClickHandler = async () => {
+  const deleteConversationClickHandler = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.stopPropagation();
     if (typeof conversationId === 'undefined') {
       throw new Error('item is undefined');
     }
