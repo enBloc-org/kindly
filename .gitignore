@@ -10,6 +10,7 @@
 /coverage
 playwright/.auth/user.json
 tests/auth.setup.ts
+tests/example.auth.setup.ts
 
 # next.js
 /.next/
