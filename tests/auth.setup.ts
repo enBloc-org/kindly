@@ -8,11 +8,11 @@ test('authenticate', async ({ page }) => {
   await page.getByPlaceholder('you@example.com').click();
   await page
     .getByPlaceholder('you@example.com')
-    .fill(process.env.TEST_USER_EMAIL as string); // enter your pre-created user here
+    .fill(process.env.TEST_USER_EMAIL as string);
   await page.getByPlaceholder('••••••••').click();
   await page
     .getByPlaceholder('••••••••')
-    .fill(process.env.TEST_USER_PASSWORD as string); // enter your pre-created password here
+    .fill(process.env.TEST_USER_PASSWORD as string);
   await page.getByRole('button', { name: 'LOG IN' }).click();
   await page.waitForURL('**/home-page');
   await page.context().storageState({ path: authFile });
