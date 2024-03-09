@@ -45,7 +45,7 @@ Before running tests you will need to set up your authentication. An `example.au
 
 Open this file and follow the indications in comments. You must have signed up to Kindly with a test account before this, as you will need to fill in your credentials.
 
-Remove 'example' from the file name and you now have a `auth.setup.ts` file. This will be run as a dependency for all other tests - meaning that all tests will run already authenticated for the test account you created.
+Add your test user details to your `.env` variables. These are described in the `.env.example`.
 <hr>
 
 Tests for this codebase use Playwright. Once fully set up, you can run all tests using the command `npm run ci`
