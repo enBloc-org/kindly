@@ -40,7 +40,15 @@ Leveraging PostgreSQL for the database, Supabase streamlines backend development
 - **Serverless Functions:** Enables scalable and cost-effective backend operations without managing servers.
 
 ### Testing
-Tests for this codebase use Playwright. You can run all tests using the command `npm run ci`
+**Set Up**
+Before running tests you will need to set up your authentication. An `example.auth.setup.ts` file is provided in the repo.
+
+Open this file and follow the indications in comments. You must have signed up to Kindly with a test account before this, as you will need to fill in your credentials.
+
+Remove 'example' from the file name and you now have a `auth.setup.ts` file. This will be run as a dependency for all other tests - meaning that all tests will run already authenticated for the test account you created.
+<hr>
+
+Tests for this codebase use Playwright. Once fully set up, you can run all tests using the command `npm run ci`
 
 This command has been set up with `start-server-and-test` npm package to spin up the local server ahead of running end-to-end tests. Unit tets for components are also run in the same script by using the experimental playwright-ct package.
 
