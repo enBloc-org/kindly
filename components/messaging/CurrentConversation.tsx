@@ -4,12 +4,12 @@ import { MessageType } from '@/types/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { useEffect, useState, useRef } from 'react';
-import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
-import { useConversationContext } from '@/context/conversationContext';
+import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
+import { useConversationContext } from '../../context/conversationContext';
 import {
   formatTimeMarker,
   formatDateMarker,
-} from '@/utils/messaging/formatTimeStamp';
+} from '../../utils/messaging/formatTimeStamp';
 
 type ItemDonorType = {
   username: string;
