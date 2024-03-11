@@ -19,7 +19,7 @@ const BooksSubcatergory: React.FC<CategoryProp> = ({
   };
 
   return (
-    <div className='flex justify-center gap-2 mt-10 text-sm'>
+    <div className='mt-10 flex justify-center gap-2 text-sm'>
       <CategoryButton
         handleButtonClick={handleButtonClick}
         category={subcategory}

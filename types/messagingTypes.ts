@@ -22,4 +22,3 @@ type ItemType = {
   imageSrc: string;
   item_name: string;
 };
-

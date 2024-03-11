@@ -7,12 +7,12 @@ const DesktopNav = () => {
 
   return (
     <nav
-      className='flex items-center justify-center gap-4 px-1 text-xs text-center font-light'
+      className='flex items-center justify-center gap-4 px-1 text-center text-xs font-light'
       role='navigation'
     >
       <Link href='/home-page' aria-label='Home page'>
         <div
-          className={`rounded-lg p-2 flex flex-col gap-1 items-center ${
+          className={`flex flex-col items-center gap-1 rounded-lg p-2 ${
             pathname === '/home-page' ? ' bg-backgroundHighlight' : ''
           }`}
         >
@@ -32,7 +32,7 @@ const DesktopNav = () => {
       </Link>
       <Link href='/about' aria-label='About page'>
         <div
-          className={`rounded-lg p-2 flex flex-col gap-1 items-center ${
+          className={`flex flex-col items-center gap-1 rounded-lg p-2 ${
             pathname === '/about' ? ' bg-backgroundHighlight' : ''
           }`}
         >
@@ -52,7 +52,7 @@ const DesktopNav = () => {
       </Link>
       <Link href='/add-item' aria-label='Add an item'>
         <div
-          className={`rounded-lg p-2 flex flex-col gap-1 items-center ${
+          className={`flex flex-col items-center gap-1 rounded-lg p-2 ${
             pathname === '/add-item' ? ' bg-backgroundHighlight' : ''
           }`}
         >
@@ -72,7 +72,7 @@ const DesktopNav = () => {
       </Link>
       <Link href='/search' className='p-2' aria-label='Search page'>
         <div
-          className={`rounded-lg p-2 flex flex-col gap-1 items-center ${
+          className={`flex flex-col items-center gap-1 rounded-lg p-2 ${
             pathname === '/search' ? ' bg-backgroundHighlight' : ''
           }`}
         >
@@ -92,7 +92,7 @@ const DesktopNav = () => {
       </Link>
       <Link href='/profile' aria-label='My profile'>
         <div
-          className={`rounded-lg p-2 flex flex-col gap-1 items-center ${
+          className={`flex flex-col items-center gap-1 rounded-lg p-2 ${
             pathname === '/profile' ? ' bg-backgroundHighlight' : ''
           }`}
         >
