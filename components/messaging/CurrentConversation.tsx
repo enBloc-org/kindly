@@ -13,6 +13,7 @@ import {
 
 type ItemDonorType = {
   username: string;
+  avatar: string;
 };
 
 const CurrentConversation: React.FC = () => {
@@ -32,7 +33,7 @@ const CurrentConversation: React.FC = () => {
       try {
         const { data: fetchedItemDonor } = await supabase
           .from('items')
-          .select('profiles(username)')
+          .select('profiles(username, avatar)')
           .eq('id', currentConversation?.item_id);
 
         console.log(fetchedItemDonor);
@@ -111,7 +112,18 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
-      <p data-testid='item-donor'>{itemDonor && itemDonor.username}</p>
+      <p className='p-5' data-testid='item-donor'>
+        <b>From: </b>
+        {itemDonor && itemDonor.username}
+      </p>
+      {itemDonor && (
+        <img
+          alt='user logo'
+          width='30'
+          height='40'
+          src={itemDonor.avatar}
+        ></img>
+      )}
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}
