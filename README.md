@@ -48,7 +48,8 @@ Open this file and follow the indications in comments. You must have signed up t
 Add your test user details to your `.env` variables. These are described in the `.env.example`.
 <hr>
 
-Tests for this codebase use Playwright. Once fully set up, you can run all tests using the command `npm run ci`
+Tests for this codebase use Playwright. Once fully set up, you can run all tests using the command `npm run test:all`
+Alternatively, you may run tests only for any files edited in your current branch. To do this you can run the script `npm run test:changed`
 
 This command has been set up with `start-server-and-test` npm package to spin up the local server ahead of running end-to-end tests. Unit tets for components are also run in the same script by using the experimental playwright-ct package.
 
