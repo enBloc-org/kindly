@@ -11,10 +11,8 @@
     "prepare": "husky install",
     "test": "playwright test -c playwright-ct.config.ts",
     "changed": "CHANGED_FILES=$(git diff --name-only HEAD^) && [ -n \"$CHANGED_FILES\" ] && npm run test -- $CHANGED_FILES || (echo '\\033[1;31mThere are no tests associated with your changes\\033[0m' && exit 0)",
-    "single": "playwright test -c playwright-ct.config.ts --grep",
     "test:all": "next build && start-server-and-test http://localhost:3654 test",
-    "test:changed": "next build && start-server-and-test http://localhost:3654 staged",
-    "test:single": "next build && start-server-and-test http://localhost:3654 single"
+    "test:changed": "next build && start-server-and-test http://localhost:3654 changed"   
   },
   "dependencies": {
     "@next/font": "^14.0.3",
