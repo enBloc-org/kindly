@@ -10,7 +10,7 @@
     "format": "prettier --write .",
     "prepare": "husky install",
     "test": "playwright test -c playwright-ct.config.ts",
-    "ci": "next build && start-server-and-test http://localhost:3000 test"
+    "ci": "next build && start-server-and-test http://localhost:3000/ test"
   },
   "dependencies": {
     "@next/font": "^14.0.3",
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@iconify-icon/react": "^1.0.8",
-    "@playwright/experimental-ct-react": "^1.41.2",
+    "@playwright/experimental-ct-react": "^1.42.1",
     "@playwright/test": "^1.40.1",
     "@types/node": "20.3.1",
     "@types/nodemailer": "^6.4.14",

@@ -111,7 +111,7 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
-      <p>{itemDonor && itemDonor.username}</p>
+      <p data-testid='item-donor'>{itemDonor && itemDonor.username}</p>
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}
