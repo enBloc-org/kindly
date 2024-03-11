@@ -29,41 +29,39 @@ const CurrentConversation: React.FC = () => {
   }, [allConversations, setCurrentConversation]);
 
   useEffect(() => {
-    const fetchItemDonor = async () => {
+    const getItemDonor = async () => {
       try {
-        const { data: fetchedItemDonor } = await supabase
+        const { data: itemDonorData } = await supabase
           .from('items')
           .select('profiles(username, avatar)')
           .eq('id', currentConversation?.item_id);
 
-        console.log(fetchedItemDonor);
+        console.log(itemDonorData);
 
-        fetchedItemDonor &&
-          setItemDonor(
-            fetchedItemDonor[0].profiles as unknown as ItemDonorType
-          );
+        itemDonorData &&
+          setItemDonor(itemDonorData[0].profiles as unknown as ItemDonorType);
       } catch (error) {
-        console.error(`Failed to fetch item donor from database: ${error}`);
+        console.error(`Failed to get item donor from database: ${error}`);
         throw error;
       }
     };
-    fetchItemDonor();
+    getItemDonor();
 
-    const fetchMessagesForCurrentConversation = async () => {
+    const getMessagesForCurrentConversation = async () => {
       try {
-        const { data: fetchedMessages } = await supabase
+        const { data: messageData } = await supabase
           .from('messages')
           .select('*')
           .eq('conversation_id', currentConversation?.conversation_id);
 
-        setCurrentMessages(fetchedMessages ?? []);
+        setCurrentMessages(messageData ?? []);
       } catch (error) {
-        console.error(`Failed to fetch messages from database: ${error}`);
+        console.error(`Failed to get messages from database: ${error}`);
         throw error;
       }
     };
 
-    fetchMessagesForCurrentConversation();
+    getMessagesForCurrentConversation();
   }, [currentConversation, setCurrentMessages]);
 
   useEffect(() => {
