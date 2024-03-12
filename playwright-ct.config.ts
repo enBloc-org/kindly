@@ -26,6 +26,7 @@ export default defineConfig({
 
     /* Port to use for Playwright component endpoint. */
     ctPort: 3100,
+    baseURL: 'http://localhost:3654',
   },
 
   /* Configure projects for major browsers */
