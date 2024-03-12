@@ -36,8 +36,6 @@ const CurrentConversation: React.FC = () => {
           .select('profiles(username, avatar)')
           .eq('id', currentConversation?.item_id);
 
-        console.log(itemDonorData);
-
         itemDonorData &&
           setItemDonor(itemDonorData[0].profiles as unknown as ItemDonorType);
       } catch (error) {
@@ -110,18 +108,20 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
-      <p className='p-5' data-testid='item-donor'>
-        <b>From: </b>
-        {itemDonor && itemDonor.username}
-      </p>
-      {itemDonor && (
-        <img
-          alt='user logo'
-          width='30'
-          height='40'
-          src={itemDonor.avatar}
-        ></img>
-      )}
+      <div className='flex flex-row p-5'>
+        <p data-testid='item-donor'>
+          <b>From: </b>
+          {itemDonor && itemDonor.username}
+        </p>
+        {itemDonor && (
+          <img
+            className='ml-2'
+            alt='user logo'
+            width='25'
+            src={itemDonor.avatar}
+          ></img>
+        )}
+      </div>
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}
