@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { MessageType } from '@/types/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
@@ -114,12 +115,13 @@ const CurrentConversation: React.FC = () => {
           {itemDonor && itemDonor.username}
         </p>
         {itemDonor && (
-          <img
+          <Image
             className='ml-2'
             alt='user logo'
             width='25'
-            src={itemDonor.avatar}
-          ></img>
+            height='35'
+            src={itemDonor.avatar ?? '/default-profile.png'}
+          />
         )}
       </div>
       <div
