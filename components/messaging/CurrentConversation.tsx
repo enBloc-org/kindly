@@ -6,6 +6,7 @@ import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { useEffect, useState, useRef } from 'react';
 import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
+import { getProfile } from '@/utils/supabase/getProfile';
 import { useConversationContext } from '../../context/conversationContext';
 import {
   formatTimeMarker,
@@ -52,8 +53,24 @@ const CurrentConversation: React.FC = () => {
           .from('messages')
           .select('*')
           .eq('conversation_id', currentConversation?.conversation_id);
-
         setCurrentMessages(messageData ?? []);
+
+        // ALTERNATIVE SENDER DATA (TO REPLACE DONOR DATA)
+        const { data: senderData } = await supabase
+          .from('user_conversations')
+          .select('*')
+          .eq('conversation_id', messageData[0].conversation_id);
+
+        console.log(senderData[0].user_id, senderData[1].user_id);
+
+        const sender1 = await getProfile(supabase, senderData[0].user_id);
+        const sender2 = await getProfile(supabase, senderData[1].user_id);
+
+        console.log({ sender1 });
+
+        console.log({ sender2 });
+
+        // compare the senders with the authenticated user. Whichever doesn't match can be displayed
       } catch (error) {
         console.error(`Failed to get messages from database: ${error}`);
         throw error;
