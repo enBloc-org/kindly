@@ -10,7 +10,7 @@ Check the backlog for any duplicates - it's possible that someone has already su
 
 Once you reach the **Issues** tab on the Kindly repo and create a new Issue you will be prompted with a template in the **New Issue Description** - please stick to this format and fill in as much detail as possible where prompted.
 
-**If** your Issue is **not a bug** - delete everything in the template from this line:
+**If** your Issue is **not a bug** delete everything in the template from this line:
 
 ```markdown
 <hr>
@@ -19,7 +19,10 @@ Once you reach the **Issues** tab on the Kindly repo and create a new Issue you 
 
 ## Reporting a Bug
 
-Include a clear example of the bug with (as far as possible): - A way to reproduce the problem - Screenshots of the behaviour - Information on any triage you've attempted
+Include a clear example of the bug with (as far as possible): 
+- A way to reproduce the problem 
+- Screenshots of the behaviour 
+- Information on any triage you've attempted
 
 Apply the `bug` label to your Issue.
 
@@ -40,7 +43,7 @@ The `Issues` tab is a working tool for the active development of Kindly, so it s
 
 If you have a question related to Trafalgar Girls, Kindly or the community at large:
 
-- Check the documentation first - there's a chance your doubt can be answered by reading the `README` file
+- Check the documentation first - there's a chance your doubt can be answered by reading the [README](../README.md) file
 - Reach out on [Discord](link to join the server)
 
 <hr>
