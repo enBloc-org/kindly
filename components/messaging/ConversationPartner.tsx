@@ -23,6 +23,7 @@ export const ConversationPartner: React.FC<ConversationCardProps> = ({
         width='25'
         height='35'
         src={conversation_partner.avatar ?? '/default-profile.png'}
+        style={{ width: 'auto', height: 'auto' }}
       />
     </div>
   );
