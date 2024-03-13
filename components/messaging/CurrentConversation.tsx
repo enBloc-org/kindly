@@ -19,7 +19,9 @@ type ItemDonorType = {
 };
 
 const CurrentConversation: React.FC = () => {
-  const [itemDonor, setItemDonor] = useState<ItemDonorType | undefined>();
+  const [conversationPartner, setConversationPartner] = useState<
+    ItemDonorType | undefined
+  >();
   const { allConversations, currentConversation, setCurrentConversation } =
     useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
@@ -31,22 +33,6 @@ const CurrentConversation: React.FC = () => {
   }, [allConversations, setCurrentConversation]);
 
   useEffect(() => {
-    const getItemDonor = async () => {
-      try {
-        const { data: itemDonorData } = await supabase
-          .from('items')
-          .select('profiles(username, avatar)')
-          .eq('id', currentConversation?.item_id);
-
-        itemDonorData &&
-          setItemDonor(itemDonorData[0].profiles as unknown as ItemDonorType);
-      } catch (error) {
-        console.error(`Failed to get item donor from database: ${error}`);
-        throw error;
-      }
-    };
-    getItemDonor();
-
     const getMessagesForCurrentConversation = async () => {
       try {
         const { data: messageData } = await supabase
@@ -55,22 +41,18 @@ const CurrentConversation: React.FC = () => {
           .eq('conversation_id', currentConversation?.conversation_id);
         setCurrentMessages(messageData ?? []);
 
-        // ALTERNATIVE SENDER DATA (TO REPLACE DONOR DATA)
-        const { data: senderData } = await supabase
-          .from('user_conversations')
-          .select('*')
-          .eq('conversation_id', messageData[0].conversation_id);
+        // NEW SENDER DATA (TO REPLACE DONOR DATA)
 
-        console.log(senderData[0].user_id, senderData[1].user_id);
+        const conversationPartnerSet =
+          messageData &&
+          new Set(messageData.map((message) => message.sender_id)); // retrieve the two sender ids involved in the conversation
+        const conversationPartnerArr = Array.from(conversationPartnerSet);
+        const otherSenderId = conversationPartnerArr.find(
+          (id) => id !== currentConversation?.user_id
+        );
 
-        const sender1 = await getProfile(supabase, senderData[0].user_id);
-        const sender2 = await getProfile(supabase, senderData[1].user_id);
-
-        console.log({ sender1 });
-
-        console.log({ sender2 });
-
-        // compare the senders with the authenticated user. Whichever doesn't match can be displayed
+        const user1 = await getProfile(supabase, otherSenderId); // use getProfile to get the usernames as these are not in the messages table
+        setConversationPartner(user1.data);
       } catch (error) {
         console.error(`Failed to get messages from database: ${error}`);
         throw error;
@@ -129,17 +111,16 @@ const CurrentConversation: React.FC = () => {
       <div className='flex flex-row p-5'>
         <p data-testid='item-donor'>
           <b>From: </b>
-          {itemDonor && itemDonor.username}
+          {conversationPartner.username}
         </p>
-        {itemDonor && (
-          <Image
-            className='ml-2'
-            alt='user logo'
-            width='25'
-            height='35'
-            src={itemDonor.avatar ?? '/default-profile.png'}
-          />
-        )}
+
+        <Image
+          className='ml-2'
+          alt='user logo'
+          width='25'
+          height='35'
+          src={conversationPartner.avatar ?? '/default-profile.png'}
+        />
       </div>
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
