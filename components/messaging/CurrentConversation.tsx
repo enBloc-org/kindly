@@ -41,21 +41,17 @@ const CurrentConversation: React.FC = () => {
           .eq('conversation_id', currentConversation?.conversation_id);
         setCurrentMessages(messageData ?? []);
 
-        // NEW SENDER DATA (TO REPLACE DONOR DATA)
-
         const conversationPartnerSet =
           messageData &&
-          new Set(messageData.map((message) => message.sender_id)); // retrieve the two sender ids involved in the conversation
-        const conversationPartnerArr =
-          conversationPartnerSet && Array.from(conversationPartnerSet);
-        const otherSenderId =
-          conversationPartnerArr &&
-          conversationPartnerArr.find(
+          new Set(messageData.map((message) => message.sender_id));
+        const conversationPartnerID =
+          conversationPartnerSet &&
+          Array.from(conversationPartnerSet).find(
             (id) => id !== currentConversation?.user_id
           );
 
-        const user1 = await getProfile(supabase, otherSenderId); // use getProfile to get the usernames as these are not in the messages table
-        setConversationPartner(user1.data);
+        const senderProfile = await getProfile(supabase, conversationPartnerID);
+        setConversationPartner(senderProfile.data);
       } catch (error) {
         console.error(`Failed to get messages from database: ${error}`);
         throw error;
