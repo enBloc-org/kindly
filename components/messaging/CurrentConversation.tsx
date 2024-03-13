@@ -1,9 +1,9 @@
 'use client';
 
-import Image from 'next/image';
 import { MessageType } from '@/types/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
+import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
 import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
 import { getProfile } from '@/utils/supabase/getProfile';
@@ -13,14 +13,14 @@ import {
   formatDateMarker,
 } from '../../utils/messaging/formatTimeStamp';
 
-type ItemDonorType = {
+type ConversationPartnerType = {
   username: string;
   avatar: string;
 };
 
 const CurrentConversation: React.FC = () => {
   const [conversationPartner, setConversationPartner] = useState<
-    ItemDonorType | undefined
+    ConversationPartnerType | undefined
   >();
   const { allConversations, currentConversation, setCurrentConversation } =
     useConversationContext();
@@ -46,10 +46,13 @@ const CurrentConversation: React.FC = () => {
         const conversationPartnerSet =
           messageData &&
           new Set(messageData.map((message) => message.sender_id)); // retrieve the two sender ids involved in the conversation
-        const conversationPartnerArr = Array.from(conversationPartnerSet);
-        const otherSenderId = conversationPartnerArr.find(
-          (id) => id !== currentConversation?.user_id
-        );
+        const conversationPartnerArr =
+          conversationPartnerSet && Array.from(conversationPartnerSet);
+        const otherSenderId =
+          conversationPartnerArr &&
+          conversationPartnerArr.find(
+            (id) => id !== currentConversation?.user_id
+          );
 
         const user1 = await getProfile(supabase, otherSenderId); // use getProfile to get the usernames as these are not in the messages table
         setConversationPartner(user1.data);
@@ -108,20 +111,9 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
-      <div className='flex flex-row p-5'>
-        <p data-testid='item-donor'>
-          <b>From: </b>
-          {conversationPartner.username}
-        </p>
-
-        <Image
-          className='ml-2'
-          alt='user logo'
-          width='25'
-          height='35'
-          src={conversationPartner.avatar ?? '/default-profile.png'}
-        />
-      </div>
+      {conversationPartner && (
+        <ConversationPartner conversation_partner={conversationPartner} />
+      )}
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}
