@@ -39,19 +39,36 @@ const CurrentConversation: React.FC = () => {
           .from('messages')
           .select('*')
           .eq('conversation_id', currentConversation?.conversation_id);
+
         setCurrentMessages(messageData ?? []);
 
         const conversationPartnerSet =
           messageData &&
           new Set(messageData.map((message) => message.sender_id));
-        const conversationPartnerID =
-          conversationPartnerSet &&
-          Array.from(conversationPartnerSet).find(
-            (id) => id !== currentConversation?.user_id
-          );
 
-        const senderProfile = await getProfile(supabase, conversationPartnerID);
-        setConversationPartner(senderProfile.data);
+        const calculateID = (isCurrentUser: boolean) => {
+          return (
+            conversationPartnerSet &&
+            Array.from(conversationPartnerSet).find((id) =>
+              isCurrentUser
+                ? id === currentConversation?.user_id
+                : id !== currentConversation?.user_id
+            )
+          );
+        };
+
+        const conversationDonorID = calculateID(true);
+        const conversationPartnerID = calculateID(false);
+
+        let partnerProfile;
+
+        if (conversationPartnerID !== undefined) {
+          partnerProfile = await getProfile(supabase, conversationPartnerID);
+        }
+
+        await getProfile(supabase, conversationDonorID);
+
+        partnerProfile && setConversationPartner(partnerProfile.data);
       } catch (error) {
         console.error(`Failed to get messages from database: ${error}`);
         throw error;
