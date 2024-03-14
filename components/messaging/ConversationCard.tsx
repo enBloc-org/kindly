@@ -1,7 +1,9 @@
 import TickIcon from '../icons/tickIcon';
 import Image from 'next/image';
+import { useConversationContext } from '@/context/conversationContext';
 
 export type ConversationCardProps = {
+  conversationId: number;
   joinedAt: string;
   itemName: string;
   imageSrc: string;
@@ -19,14 +21,19 @@ const formatString = (input: string) => {
 };
 
 const ConversationCard: React.FC<ConversationCardProps> = ({
+  conversationId,
   joinedAt,
   itemName,
   imageSrc,
   clickHandler,
 }) => {
+  const { currentConversation } = useConversationContext();
+
   return (
     <button type='button' onClick={clickHandler}>
-      <div className='m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 shadow-md hover:shadow-lg'>
+      <div
+        className={`m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 shadow-md hover:shadow-lg ${currentConversation?.conversation_id === conversationId && 'shadow-xl'}`}
+      >
         <div className='relative h-[65px] w-[65px]'>
           <Image src={imageSrc} fill className='rounded-full' alt={itemName} />
         </div>

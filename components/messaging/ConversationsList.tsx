@@ -75,6 +75,7 @@ const ConversationsList: React.FC = () => {
               message='By pressing "confirm" you will delete this conversation'
             />
             <ConversationCard
+              conversationId={conversation.conversation_id}
               joinedAt={conversation.joined_at}
               itemName={conversation.items.item_name}
               imageSrc={conversation.items.imageSrc}
