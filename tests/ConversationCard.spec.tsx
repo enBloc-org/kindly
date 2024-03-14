@@ -5,6 +5,7 @@ import ConversationCard, {
 } from '../components/messaging/ConversationCard.jsx';
 
 const testConversation: ConversationCardProps = {
+  conversationId: 1,
   joinedAt: new Date().toString(),
   itemName: 'Test Item',
   imageSrc: 'Test image src',
@@ -15,6 +16,7 @@ test.describe('ConversationCard component', () => {
   test('renders last message', async ({ mount }) => {
     const component = await mount(
       <ConversationCard
+        conversationId={testConversation.conversationId}
         joinedAt={testConversation.joinedAt}
         itemName={testConversation.itemName}
         imageSrc={testConversation.imageSrc}
@@ -22,6 +24,7 @@ test.describe('ConversationCard component', () => {
       />
     );
 
+    await page.screenshot({ path: 'ConversationCard.png' });
     await expect(component).toContainText('This will be a message..');
   });
 
@@ -30,6 +33,7 @@ test.describe('ConversationCard component', () => {
 
     const component = await mount(
       <ConversationCard
+        conversationId={testConversation.conversationId}
         joinedAt={testConversation.joinedAt}
         itemName={testConversation.itemName}
         imageSrc={testConversation.imageSrc}

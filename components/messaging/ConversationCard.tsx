@@ -1,6 +1,6 @@
 import TickIcon from '../icons/tickIcon';
 import Image from 'next/image';
-import { useConversationContext } from '@/context/conversationContext';
+import { useConversationContext } from '../../context/conversationContext';
 
 export type ConversationCardProps = {
   conversationId: number;
