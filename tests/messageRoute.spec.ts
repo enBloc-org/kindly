@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/experimental-ct-react';
 
 test('message route', async ({ page }) => {
   await page.goto('http://localhost:3000/home-page');
