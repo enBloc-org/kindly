@@ -27,7 +27,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   clickHandler,
 }) => {
   return (
-    <button type='button' onClick={clickHandler}>
+    <div tabIndex={0} aria-label='button' onClick={clickHandler}>
       <div className='relative m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 shadow-md hover:shadow-lg'>
         <div className='relative h-[65px] w-[65px]'>
           <Image src={imageSrc} fill className='rounded-full' alt={itemName} />
@@ -44,7 +44,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           <p className='font-light italic'>{joinedAt?.slice(5, 10)}</p>
         </div>
       </div>
-    </button>
+    </div>
   );
 };
 

@@ -18,15 +18,23 @@ const CardMenu: React.FC<CardMenuType> = ({ toggleModal }) => {
 
   return (
     <>
-      <button onClick={toggleMenuClickHandler}>
+      <button
+        onClick={toggleMenuClickHandler}
+        className='rounded-md p-[.05rem] hover:bg-gray-200 hover:bg-opacity-50'
+      >
         <MeatballIcon width={25} height={25} />
       </button>
       {menuOpen && (
-        <div className='absolute right-0 top-10 z-20 w-40 rounded-lg bg-secondaryGreen py-2 shadow-md'>
-          <button className='text-sm' onClick={toggleModal}>
+        <div className='absolute right-0 top-10 z-20 flex w-40 flex-col gap-2 rounded-lg bg-secondaryGreen py-2 shadow-md'>
+          <button
+            className='py-[.15rem] text-sm hover:bg-gray-200 hover:bg-opacity-50'
+            onClick={toggleModal}
+          >
             Delete Conversation
           </button>
-          <button className='mt-2 font-inter text-sm'>Mark unread</button>
+          <button className='py-[.15rem] text-sm hover:bg-gray-200 hover:bg-opacity-50'>
+            Mark unread
+          </button>
         </div>
       )}
     </>
