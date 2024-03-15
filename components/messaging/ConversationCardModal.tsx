@@ -8,13 +8,13 @@ import deleteConversation from '@/utils/messaging/deleteConversation';
 import CardMenu from '../menus/EllipsisMenu';
 import ButtonRounded from '../buttons/ButtonRounded';
 
-interface ModalProps {
+type ModalProps = {
   conversationId?: number;
   message: string;
-}
+};
 
 const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -22,7 +22,7 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.stopPropagation();
-    setModalOpen((prevState: boolean) => !prevState);
+    setIsModalOpen((prevState: boolean) => !prevState);
   };
 
   const deleteConversationClickHandler = async (
@@ -37,7 +37,7 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
       console.log({ conversationId });
 
       deleteConversation(conversationId);
-      setModalOpen(false);
+      setIsModalOpen(false);
       setError('');
       setIsDisabled(false);
     } catch (error) {
@@ -49,8 +49,19 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
 
   return (
     <>
-      <CardMenu toggleModal={toggleModalClickHandler} />
-      {modalOpen && (
+      <CardMenu
+        menuOptions={[
+          {
+            buttonMessage: 'Delete Conversation',
+            clickHandler: toggleModalClickHandler,
+          },
+          {
+            buttonMessage: 'Mark Unread',
+            clickHandler: () => console.log('Log'),
+          },
+        ]}
+      />
+      {isModalOpen && (
         <div className='overlay'>
           <div className='flex flex-col items-center justify-center gap-3 rounded-lg bg-backgroundHighlight p-6 shadow-md'>
             <h1 className='font-semibold text-primaryOrange'>Warning!</h1>
