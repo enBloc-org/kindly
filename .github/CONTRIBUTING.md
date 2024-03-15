@@ -19,9 +19,10 @@ Once you reach the **Issues** tab on the Kindly repo and create a new Issue you 
 
 ## Reporting a Bug
 
-Include a clear example of the bug with (as far as possible): 
-- A way to reproduce the problem 
-- Screenshots of the behaviour 
+Include a clear example of the bug with (as far as possible):
+
+- A way to reproduce the problem
+- Screenshots of the behaviour
 - Information on any triage you've attempted
 
 Apply the `bug` label to your Issue.
@@ -43,8 +44,8 @@ The `Issues` tab is a working tool for the active development of Kindly, so it s
 
 If you have a question related to Trafalgar Girls, Kindly or the community at large:
 
-- Check the documentation first - there's a chance your doubt can be answered by reading the [README](../README.md) file
-- Reach out on [Discord](link to join the server)
+- Check the documentation first - there's a chance your question can be answered by reading the [README](../README.md) file
+- Reach out on [Discord](https://discord.gg/Chkx4GeZ)
 
 <hr>
 
@@ -58,11 +59,11 @@ However, before you set out to submit code, please review our [best practices](l
 
 ### As a newcomer
 
-If it's your first time submitting code to Kindly and/or you are looking to get acquainted with anyone part of our tech stack or code base, we recommending finding an Issue labeled `Good first issue`. You can filter for these.
+If it's your first time submitting code to Kindly and/or you are looking to get acquainted with any one part of our tech stack or code base, we recommending finding an Issue labeled `Good first issue`. You can filter for these.
 
 ### As a senior
 
-If you've been contributing to Kindly for a while (Thanks ! ✨) and are quite comfortable with the tech stack and code base:
+If you've been contributing to Kindly for a while (Thanks! ✨) and are quite comfortable with the tech stack and code base:
 
 - Check first for any Issues with the status `Blocked`
 - If you have been given access along with the core team, help the development by reviewing any pending Pull Requests before starting a new Issue
