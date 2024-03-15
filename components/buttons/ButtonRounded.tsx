@@ -4,7 +4,7 @@ import React from 'react';
 type ButtonRoundedPropTypes = {
   children: string;
   type: 'button' | 'submit' | 'reset';
-  isDisabled?: boolean | undefined;
+  isDisabled?: boolean;
   clickHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
