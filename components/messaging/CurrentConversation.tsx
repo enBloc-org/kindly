@@ -51,10 +51,14 @@ const CurrentConversation: React.FC = () => {
           table: 'messages',
         },
         (payload) => {
-          setCurrentMessages((prevMessages) => [
-            ...prevMessages,
-            payload.new as MessageType,
-          ]);
+          if (
+            payload.new.conversation_id === currentConversation?.conversation_id
+          ) {
+            setCurrentMessages((prevMessages) => [
+              ...prevMessages,
+              payload.new as MessageType,
+            ]);
+          }
         }
       )
       .subscribe();
@@ -96,7 +100,7 @@ const CurrentConversation: React.FC = () => {
               {formatDateMarker(message.created_at) !==
                 formatDateMarker(currentMessages[index - 1]?.created_at) && (
                 <div
-                  className={`${isScrolling ? 'opacity-100' : 'opacity-0'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition transition-opacity ease-in-out`}
+                  className={`${isScrolling ? 'opacity-100' : 'opacity-0'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition-opacity ease-in-out`}
                 >
                   {formatDateMarker(message.created_at)}
                 </div>
@@ -105,7 +109,6 @@ const CurrentConversation: React.FC = () => {
                 sender_id={message.sender_id}
                 created_at={formatTimeMarker(message.created_at)}
                 message_text={message.message_text}
-                is_read={message.is_read}
                 currentUser={currentConversation?.user_id}
               />
             </div>

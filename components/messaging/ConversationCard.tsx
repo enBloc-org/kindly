@@ -1,12 +1,12 @@
-import TickIcon from '../icons/tickIcon';
 import Image from 'next/image';
+import ConversationCardModal from './ConversationCardModal';
 import { useConversationContext } from '../../context/conversationContext';
 
 export type ConversationCardProps = {
-  conversationId: number;
   joinedAt: string;
   itemName: string;
   imageSrc: string;
+  conversationId: number;
   clickHandler: () => void;
 };
 
@@ -25,14 +25,15 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   joinedAt,
   itemName,
   imageSrc,
+  conversationId,
   clickHandler,
 }) => {
   const { currentConversation } = useConversationContext();
 
   return (
-    <button type='button' onClick={clickHandler}>
+    <div tabIndex={0} aria-label='button' onClick={clickHandler}>
       <div
-        className={`m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 hover:bg-secondaryGray ${currentConversation?.conversation_id === conversationId ? 'shadow-3xl' : 'shadow-md'}`}
+        className={`relative m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 hover:bg-secondaryGray ${currentConversation?.conversation_id === conversationId ? 'shadow-3xl' : 'shadow-md'}`}
       >
         <div className='relative h-[65px] w-[65px]'>
           <Image src={imageSrc} fill className='rounded-full' alt={itemName} />
@@ -41,12 +42,15 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           <h2 className='text-lg font-bold'>{formatString(itemName)}</h2>
           <p className='text-sm font-light italic'>This will be a message...</p>
         </div>
-        <div className='ml-auto flex flex-col items-center justify-center  gap-1 pl-8 pr-2'>
+        <div className='ml-auto flex flex-col items-center gap-4 pl-8 pr-2'>
+          <ConversationCardModal
+            conversationId={conversationId}
+            message='Are you sure you want to delete this conversation?'
+          />
           <p className='font-light italic'>{joinedAt?.slice(5, 10)}</p>
-          <TickIcon read={true} />
         </div>
       </div>
-    </button>
+    </div>
   );
 };
 
