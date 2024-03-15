@@ -6,22 +6,13 @@ import MessageForm from './MessageForm';
 import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
 import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
-import { getProfile } from '@/utils/supabase/getProfile';
 import { useConversationContext } from '../../context/conversationContext';
 import {
   formatTimeMarker,
   formatDateMarker,
 } from '../../utils/messaging/formatTimeStamp';
 
-type ConversationPartnerType = {
-  username: string;
-  avatar: string;
-};
-
 const CurrentConversation: React.FC = () => {
-  const [conversationPartner, setConversationPartner] = useState<
-    ConversationPartnerType | undefined
-  >();
   const { allConversations, currentConversation, setCurrentConversation } =
     useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
@@ -41,49 +32,6 @@ const CurrentConversation: React.FC = () => {
           .eq('conversation_id', currentConversation?.conversation_id);
 
         setCurrentMessages(messageData ?? []);
-
-        const conversationPartnerSet =
-          messageData &&
-          new Set(messageData.map((message) => message.sender_id)); // set from conversation contributors
-
-        if (
-          conversationPartnerSet?.size !== 0 &&
-          conversationPartnerSet?.size !== 1
-        ) {
-          console.log(conversationPartnerSet);
-          console.log("we're good");
-
-          const calculateID = (isCurrentUser: boolean) => {
-            return (
-              conversationPartnerSet &&
-              Array.from(conversationPartnerSet).find((id) =>
-                isCurrentUser
-                  ? id === currentConversation?.user_id
-                  : id !== currentConversation?.user_id
-              )
-            );
-          };
-
-          const conversationDonorID = calculateID(true);
-          const conversationPartnerID = calculateID(false);
-
-          let partnerProfile;
-
-          if (conversationPartnerID !== undefined) {
-            partnerProfile = await getProfile(supabase, conversationPartnerID);
-          }
-
-          await getProfile(supabase, conversationDonorID);
-
-          partnerProfile && setConversationPartner(partnerProfile.data);
-        } else {
-          const { data: fetchedItemDonor } = await supabase
-            .from('items')
-            .select('profiles(username, avatar)')
-            .eq('id', currentConversation?.item_id);
-
-          setConversationPartner(fetchedItemDonor[0].profiles);
-        }
       } catch (error) {
         console.error(`Failed to get messages from database: ${error}`);
         throw error;
@@ -143,9 +91,7 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
-      {conversationPartner && (
-        <ConversationPartner conversation_partner={conversationPartner} />
-      )}
+      <ConversationPartner message_data={currentMessages} />
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}
