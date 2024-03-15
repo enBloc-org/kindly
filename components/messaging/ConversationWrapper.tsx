@@ -30,9 +30,9 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
   }, []);
   return (
     <>
-      <div className='mt-4 flex justify-between px-3 '></div>
+      <div className='flex justify-between px-3 '></div>
       {isBreakpoint ? (
-        <div className='mt-4 p-2'>
+        <div className='p-2'>
           {showConversationsList ? (
             <ConversationsList />
           ) : (
@@ -45,7 +45,7 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
           )}
         </div>
       ) : (
-        <div className='p2 mt-4 flex flex-row justify-between'>
+        <div className='p2 flex flex-row justify-between'>
           <ConversationsList />
           <CurrentConversation />
         </div>

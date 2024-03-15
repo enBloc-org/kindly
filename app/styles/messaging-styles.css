@@ -4,7 +4,12 @@
 }
 
 .conversation-height {
-  height: calc(100vh - 225px);
+  height: calc(100vh - 203px);
+}
+
+.message-components-focus {
+  @apply outline-none ring-gray-400 
+  focus:ring-2;
 }
 
 /*------- Media Queries ---------*/
