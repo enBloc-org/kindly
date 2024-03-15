@@ -21,7 +21,6 @@ const formatString = (input: string) => {
 };
 
 const ConversationCard: React.FC<ConversationCardProps> = ({
-  conversationId,
   joinedAt,
   itemName,
   imageSrc,
