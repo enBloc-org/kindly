@@ -44,31 +44,46 @@ const CurrentConversation: React.FC = () => {
 
         const conversationPartnerSet =
           messageData &&
-          new Set(messageData.map((message) => message.sender_id));
+          new Set(messageData.map((message) => message.sender_id)); // set from conversation contributors
 
-        const calculateID = (isCurrentUser: boolean) => {
-          return (
-            conversationPartnerSet &&
-            Array.from(conversationPartnerSet).find((id) =>
-              isCurrentUser
-                ? id === currentConversation?.user_id
-                : id !== currentConversation?.user_id
-            )
-          );
-        };
+        if (
+          conversationPartnerSet?.size !== 0 &&
+          conversationPartnerSet?.size !== 1
+        ) {
+          console.log(conversationPartnerSet);
+          console.log("we're good");
 
-        const conversationDonorID = calculateID(true);
-        const conversationPartnerID = calculateID(false);
+          const calculateID = (isCurrentUser: boolean) => {
+            return (
+              conversationPartnerSet &&
+              Array.from(conversationPartnerSet).find((id) =>
+                isCurrentUser
+                  ? id === currentConversation?.user_id
+                  : id !== currentConversation?.user_id
+              )
+            );
+          };
 
-        let partnerProfile;
+          const conversationDonorID = calculateID(true);
+          const conversationPartnerID = calculateID(false);
 
-        if (conversationPartnerID !== undefined) {
-          partnerProfile = await getProfile(supabase, conversationPartnerID);
+          let partnerProfile;
+
+          if (conversationPartnerID !== undefined) {
+            partnerProfile = await getProfile(supabase, conversationPartnerID);
+          }
+
+          await getProfile(supabase, conversationDonorID);
+
+          partnerProfile && setConversationPartner(partnerProfile.data);
+        } else {
+          const { data: fetchedItemDonor } = await supabase
+            .from('items')
+            .select('profiles(username, avatar)')
+            .eq('id', currentConversation?.item_id);
+
+          setConversationPartner(fetchedItemDonor[0].profiles);
         }
-
-        await getProfile(supabase, conversationDonorID);
-
-        partnerProfile && setConversationPartner(partnerProfile.data);
       } catch (error) {
         console.error(`Failed to get messages from database: ${error}`);
         throw error;
