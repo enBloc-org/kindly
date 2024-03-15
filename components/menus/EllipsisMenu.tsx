@@ -1,12 +1,12 @@
 'use client';
 import { useState } from 'react';
-import MeatballIcon from '../icons/MeatballIcon';
+import EllipsisIcon from '../icons/EllipsisIcon';
 
-type CardMenuType = {
+type EllipsisMenuType = {
   toggleModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const CardMenu: React.FC<CardMenuType> = ({ toggleModal }) => {
+const EllipsisMenu: React.FC<EllipsisMenuType> = ({ toggleModal }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenuClickHandler = (
@@ -22,7 +22,7 @@ const CardMenu: React.FC<CardMenuType> = ({ toggleModal }) => {
         onClick={toggleMenuClickHandler}
         className='rounded-md p-[.05rem] hover:bg-gray-200 hover:bg-opacity-50'
       >
-        <MeatballIcon width={25} height={25} />
+        <EllipsisIcon width={25} height={25} />
       </button>
       {menuOpen && (
         <div className='absolute right-0 top-10 z-20 flex w-40 flex-col gap-2 rounded-lg bg-secondaryGreen py-2 shadow-md'>
@@ -41,4 +41,4 @@ const CardMenu: React.FC<CardMenuType> = ({ toggleModal }) => {
   );
 };
 
-export default CardMenu;
+export default EllipsisMenu;

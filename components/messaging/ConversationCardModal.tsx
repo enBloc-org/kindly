@@ -5,7 +5,7 @@ import '../../app/styles/messaging-styles.css';
 import deleteConversation from '@/utils/messaging/deleteConversation';
 
 //Components
-import CardMenu from './CardMenu';
+import CardMenu from '../menus/EllipsisMenu';
 import ButtonRounded from '../buttons/ButtonRounded';
 
 interface ModalProps {
