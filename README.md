@@ -39,7 +39,7 @@ Leveraging PostgreSQL for the database, Supabase streamlines backend development
 - **Authentication:** Provides secure user authentication with seamless integration for frontend frameworks like React.
 - **Serverless Functions:** Enables scalable and cost-effective backend operations without managing servers.
 
-### Other: Nodemailer
+### Other
 
 **Nodemailer:**
 A Node.js library for sending emails programmatically, Nodemailer enhances communication within the application, facilitating notifications and updates.
