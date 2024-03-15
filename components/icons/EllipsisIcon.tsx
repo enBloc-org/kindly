@@ -1,8 +1,8 @@
-type MeatballIconProps = {
+type EllipsisIconProps = {
   width: number;
   height: number;
 };
-const MeatballIcon: React.FC<MeatballIconProps> = ({ width, height }) => {
+const EllipsisIcon: React.FC<EllipsisIconProps> = ({ width, height }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -25,4 +25,4 @@ const MeatballIcon: React.FC<MeatballIconProps> = ({ width, height }) => {
   );
 };
 
-export default MeatballIcon;
+export default EllipsisIcon;
