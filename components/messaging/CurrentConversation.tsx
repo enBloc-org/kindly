@@ -89,10 +89,14 @@ const CurrentConversation: React.FC = () => {
           table: 'messages',
         },
         (payload) => {
-          setCurrentMessages((prevMessages) => [
-            ...prevMessages,
-            payload.new as MessageType,
-          ]);
+          if (
+            payload.new.conversation_id === currentConversation?.conversation_id
+          ) {
+            setCurrentMessages((prevMessages) => [
+              ...prevMessages,
+              payload.new as MessageType,
+            ]);
+          }
         }
       )
       .subscribe();
