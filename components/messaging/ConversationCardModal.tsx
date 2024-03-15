@@ -5,7 +5,7 @@ import '../../app/styles/messaging-styles.css';
 import deleteConversation from '@/utils/messaging/deleteConversation';
 
 //Components
-import CardMenu from '../menus/EllipsisMenu';
+import ElipsisMenu from '../menus/EllipsisMenu';
 import ButtonRounded from '../buttons/ButtonRounded';
 
 type ModalProps = {
@@ -49,7 +49,7 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
 
   return (
     <>
-      <CardMenu
+      <ElipsisMenu
         menuOptions={[
           {
             buttonMessage: 'Delete Conversation',
