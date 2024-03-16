@@ -4,19 +4,24 @@ import { getProfile } from '@/utils/supabase/getProfile';
 import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
 import { useConversationContext } from '@/context/conversationContext';
 
-// type ConversationCardProps = {
-//   conversation_partner: {
-//     username: string;
-//     avatar: string;
-//   };
-// };
+type ConversationPartnerProps = {
+  message_data: {
+    map(
+      arg0: (message: { sender_id: string }) => string
+    ): Iterable<unknown> | null | undefined;
+    username: string;
+    avatar: string;
+  };
+};
 
 type ConversationPartnerType = {
   username: string;
   avatar: string;
 };
 
-export const ConversationPartner: React.FC = ({ message_data }) => {
+export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
+  message_data,
+}) => {
   const [conversationPartner, setConversationPartner] = useState<
     ConversationPartnerType | undefined
   >();
@@ -24,9 +29,9 @@ export const ConversationPartner: React.FC = ({ message_data }) => {
 
   useEffect(() => {
     const getConversationPartner = async () => {
-      const conversationPartnerSet =
-        message_data &&
-        new Set(message_data.map((message) => message.sender_id)); // set from conversation contributors
+      const conversationPartnerSet = new Set(
+        message_data?.map((message: { sender_id: string }) => message.sender_id)
+      );
 
       if (
         conversationPartnerSet?.size !== 0 &&
@@ -48,11 +53,12 @@ export const ConversationPartner: React.FC = ({ message_data }) => {
 
         let partnerProfile;
 
-        if (conversationPartnerID !== undefined) {
+        if (conversationPartnerID && conversationPartnerID !== undefined) {
           partnerProfile = await getProfile(supabase, conversationPartnerID);
         }
 
-        await getProfile(supabase, conversationDonorID);
+        conversationDonorID &&
+          (await getProfile(supabase, conversationDonorID));
 
         partnerProfile && setConversationPartner(partnerProfile.data);
       } else {
@@ -65,7 +71,8 @@ export const ConversationPartner: React.FC = ({ message_data }) => {
       }
     };
     getConversationPartner();
-  });
+  }, [currentConversation?.id]);
+
   return (
     <div className='flex flex-row items-center p-5'>
       <p data-testid='item-donor'>
