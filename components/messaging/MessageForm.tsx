@@ -28,7 +28,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className='m-2 flex justify-between items-center p-3 bg-gray-200'
+      className='mt-2 flex items-center justify-center gap-6 bg-gray-200 p-4'
     >
       <textarea
         className='message-components-focus h-20 min-h-max w-5/6 resize-none rounded-lg border-2
@@ -43,7 +43,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
         className='message-components-focus m-2 flex h-10 w-10 items-center gap-1 rounded-full 
           border-2 border-solid border-primaryGreen p-2'
       >
-        <PaperPlaneIcon></PaperPlaneIcon>
+        <PaperPlaneIcon />
       </button>
     </form>
   );
