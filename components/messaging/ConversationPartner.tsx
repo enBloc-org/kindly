@@ -3,15 +3,10 @@ import { useEffect, useState } from 'react';
 import { getProfile } from '@/utils/supabase/getProfile';
 import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
 import { useConversationContext } from '@/context/conversationContext';
+import { MessageType } from '@/types/messagingTypes';
 
 type ConversationPartnerProps = {
-  message_data: {
-    map(
-      arg0: (message: { sender_id: string }) => string
-    ): Iterable<unknown> | null | undefined;
-    username: string;
-    avatar: string;
-  };
+  message_data: MessageType[];
 };
 
 type ConversationPartnerType = {
@@ -67,7 +62,8 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
           .select('profiles(username, avatar)')
           .eq('id', currentConversation?.item_id);
 
-        setConversationPartner(fetchedItemDonor[0].profiles);
+        fetchedItemDonor &&
+          setConversationPartner(fetchedItemDonor[0].profiles);
       }
     };
     getConversationPartner();
