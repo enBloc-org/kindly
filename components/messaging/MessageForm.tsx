@@ -40,10 +40,10 @@ const MessageForm: React.FC<MessageFormProps> = ({
       />
       <button
         type='submit'
-        className='message-components-focus m-2 flex h-10 w-10 items-center gap-1 rounded-full 
-          border-2 border-solid border-primaryGreen p-2'
+        className='message-components-focus flex items-center justify-center rounded-full border-2 
+          border-solid border-primaryGreen p-3'
       >
-        <PaperPlaneIcon />
+        <PaperPlaneIcon width={30} height={30} />
       </button>
     </form>
   );
