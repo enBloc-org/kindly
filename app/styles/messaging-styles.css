@@ -4,7 +4,7 @@
 }
 
 .conversation-height {
-  height: calc(100vh - 203px);
+  height: calc(100vh - 175px);
 }
 
 .message-components-focus {
@@ -16,7 +16,7 @@
 
 @media screen and (min-width: 1000px) {
   .conversation-height {
-    height: calc(100vh - 155px);
+    height: calc(100vh - 105px);
   }
 
   /* .message-card{ 
