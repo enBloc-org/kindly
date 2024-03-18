@@ -18,7 +18,7 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
   message_data,
 }) => {
   const [conversationPartner, setConversationPartner] = useState<
-    ConversationPartnerType | undefined
+    ConversationPartnerType[] | undefined
   >();
   const { currentConversation } = useConversationContext();
 
@@ -73,7 +73,7 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
     <div className='flex flex-row items-center p-5'>
       <p data-testid='item-donor'>
         <b>From: </b>
-        {conversationPartner?.username}
+        {conversationPartner?.[0]?.username}
       </p>
 
       <Image
@@ -81,7 +81,7 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
         alt='user logo'
         width='25'
         height='35'
-        src={conversationPartner?.avatar ?? '/default-profile.png'}
+        src={conversationPartner?.[0]?.avatar ?? '/default-profile.png'}
         style={{ width: 'auto', height: 'auto' }}
       />
     </div>
