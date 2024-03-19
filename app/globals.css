@@ -19,6 +19,11 @@ body {
   @apply bg-background font-inter text-primaryGray;
 }
 
+*:focus {
+  outline: 2px solid #FF9E5E; /* Custom color */
+  outline-offset: 2px;
+}
+
 /* Universal component classes*/
 
 .button {

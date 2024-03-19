@@ -47,7 +47,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
       className='mt-2 flex items-center justify-center gap-6 bg-gray-200 p-4'
     >
       <textarea
-        className='message-components-focus h-[65px] w-5/6 resize-none overflow-hidden rounded-lg
+        className='h-[65px] w-5/6 resize-none overflow-hidden rounded-lg
            border-2 border-gray-300 bg-white px-4 py-2 pt-5 text-black shadow-inner'
         value={message}
         ref={textareaRef}
@@ -56,7 +56,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
       />
       <button
         type='submit'
-        className='message-components-focus flex items-center justify-center rounded-full border-2 
+        className='flex items-center justify-center rounded-full border-2 
           border-solid border-primaryGreen p-3'
       >
         <PaperPlaneIcon width={30} height={30} />
