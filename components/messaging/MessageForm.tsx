@@ -1,5 +1,7 @@
 'use client';
-import React, { FormEvent, useState } from 'react';
+import { FormEvent, useState, useRef } from 'react';
+
+// Components
 import insertMessage from '@/utils/messaging/insertMessage';
 import PaperPlaneIcon from '../icons/PaperPlaneIcon';
 
@@ -12,18 +14,32 @@ const MessageForm: React.FC<MessageFormProps> = ({
   user_id,
   conversation_id,
 }) => {
+  const [message, setMessage] = useState<string>('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
       await insertMessage(user_id, conversation_id, message);
       setMessage('');
+      if (textareaRef.current) {
+        textareaRef.current.style.height = '65px';
+      }
     } catch (error) {
       console.error(`Failed to fetch messages from database: ${error}`);
       throw error;
     }
   };
-  const [message, setMessage] = useState<string>('');
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.target.value);
+
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  };
 
   return (
     <form
@@ -31,12 +47,12 @@ const MessageForm: React.FC<MessageFormProps> = ({
       className='mt-2 flex items-center justify-center gap-6 bg-gray-200 p-4'
     >
       <textarea
-        className='message-components-focus h-20 min-h-max w-5/6 resize-none rounded-lg border-2
-           border-gray-300 bg-white px-4 py-2 text-black shadow-inner'
+        className='message-components-focus h-[65px] w-5/6 resize-none overflow-hidden rounded-lg
+           border-2 border-gray-300 bg-white px-4 py-2 pt-5 text-black shadow-inner'
         value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        ref={textareaRef}
+        onChange={onChangeHandler}
         placeholder='Type your message here'
-        rows={10}
       />
       <button
         type='submit'

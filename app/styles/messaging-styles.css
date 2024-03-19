@@ -8,7 +8,7 @@
 }
 
 .message-components-focus {
-  @apply outline-none ring-gray-400 
+  @apply outline-none ring-primaryOrange   
   focus:ring-2;
 }
 
