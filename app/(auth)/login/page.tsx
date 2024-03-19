@@ -29,7 +29,7 @@ export default function Login({
   };
 
   return (
-    <div className='flex flex-col  px-8  items-center'>
+    <div className='flex flex-col  items-center  px-8'>
       <AuthForm
         onSubmit={signIn}
         buttonText='LOG IN'

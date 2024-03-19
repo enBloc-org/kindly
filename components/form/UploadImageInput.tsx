@@ -65,7 +65,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
   };
 
   return (
-    <div className='flex flex-col items-center gap-4 my-3'>
+    <div className='my-3 flex flex-col items-center gap-4'>
       <label htmlFor='image'>Upload an image:</label>
       <input
         className='pl-14'
@@ -75,7 +75,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
         required
       />
       {!isImageUploaded && (
-        <p className='italic font-extralight text-primaryOrange'>
+        <p className='font-extralight italic text-primaryOrange'>
           Image is required
         </p>
       )}

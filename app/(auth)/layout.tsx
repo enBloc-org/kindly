@@ -9,7 +9,7 @@ export default function AuthLayout({
 }) {
   return (
     <>
-      <header className=' bg-background flex justify-end py-2   '>
+      <header className=' flex justify-end bg-background py-2   '>
         <Image
           src='/KINDLY_LOGO.png'
           alt='Kindly Logo'
