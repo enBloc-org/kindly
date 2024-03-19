@@ -10,7 +10,7 @@ const MobileNavbar = () => {
     <nav className='flex items-center justify-between px-1' role='navigation'>
       <Link href='/home-page' aria-label='Home page'>
         <div
-          className={`flex items-center p-1 border-4 rounded-full ${
+          className={`flex items-center rounded-full border-4 p-1 ${
             pathname === '/home-page'
               ? 'border-primaryOrange bg-backgroundHighlight'
               : 'border-primaryGreen'
@@ -31,7 +31,7 @@ const MobileNavbar = () => {
       </Link>
       <Link href='/search' aria-label='Search page'>
         <div
-          className={`flex items-center p-2 border-4 rounded-full ${
+          className={`flex items-center rounded-full border-4 p-2 ${
             pathname === '/search'
               ? 'border-primaryOrange bg-backgroundHighlight'
               : 'border-primaryGreen'
@@ -53,7 +53,7 @@ const MobileNavbar = () => {
 
       <Link href='/add-item' aria-label='Add an item'>
         <div
-          className={`flex items-center border-4 rounded-full ${
+          className={`flex items-center rounded-full border-4 ${
             pathname === '/add-item'
               ? 'border-primaryOrange bg-backgroundHighlight'
               : 'border-primaryGreen'
@@ -74,7 +74,7 @@ const MobileNavbar = () => {
       </Link>
       <Link href='/about' aria-label='About page'>
         <div
-          className={`flex items-center p-1 border-4 rounded-full ${
+          className={`flex items-center rounded-full border-4 p-1 ${
             pathname === '/about'
               ? 'border-primaryOrange bg-backgroundHighlight'
               : 'border-primaryGreen'
@@ -95,7 +95,7 @@ const MobileNavbar = () => {
       </Link>
       <Link href='/profile' aria-label='My profile'>
         <div
-          className={`flex items-center p-1 border-4 rounded-full ${
+          className={`flex items-center rounded-full border-4 p-1 ${
             pathname === '/profile'
               ? 'border-primaryOrange bg-backgroundHighlight'
               : 'border-primaryGreen'

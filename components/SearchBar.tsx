@@ -16,7 +16,7 @@ export const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className='flex justify-center items-center searchmargintop'>
+    <div className='searchmargintop flex items-center justify-center'>
       <form
         onSubmit={handleSubmit}
         className='flex opacity-70 transition-opacity duration-200 focus-within:opacity-90'
@@ -24,7 +24,7 @@ export const SearchBar: React.FC = () => {
         <div>
           <input
             value={searchTerm}
-            className='bg-primaryLight p-2 rounded-l-md shadow-sm mh-10 outline-none'
+            className='bg-primaryLight mh-10 rounded-l-md p-2 shadow-sm outline-none'
             type='text'
             placeholder='Find an item...'
             required
@@ -32,7 +32,7 @@ export const SearchBar: React.FC = () => {
           />
         </div>
         <button
-          className='flex-shrink-0 flex-grow-0 max-h-10 bg-secondaryGray py-2 px-3 rounded-r-md '
+          className='max-h-10 flex-shrink-0 flex-grow-0 rounded-r-md bg-secondaryGray px-3 py-2 '
           type='submit'
           aria-label='Search for item'
         >

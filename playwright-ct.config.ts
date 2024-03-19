@@ -1,5 +1,4 @@
 import { defineConfig, devices } from '@playwright/experimental-ct-react';
-
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -23,9 +22,9 @@ export default defineConfig({
   use: {
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-
     /* Port to use for Playwright component endpoint. */
     ctPort: 3100,
+    baseURL: 'http://localhost:3654',
   },
 
   /* Configure projects for major browsers */

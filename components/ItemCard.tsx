@@ -25,9 +25,9 @@ const ItemCard: React.FC<ItemCardPropType> = ({
   return (
     <div className='card'>
       <Link href={`/item/${itemId}`} className=''>
-        <h2 className='font-semibold  p-4'>{item_name}</h2>
+        <h2 className='p-4  font-semibold'>{item_name}</h2>
         <div className='flex gap-3'>
-          <div className='relative w-48 h-36 md:w-64 md:h-52'>
+          <div className='relative h-36 w-48 md:h-52 md:w-64'>
             <Image
               src={imageSrc ? `${imageSrc}` : '/default-item-img.png'}
               alt={`Image of ${item_name}`}

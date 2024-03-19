@@ -4,7 +4,7 @@ import 'dotenv/config';
 const authFile = 'playwright/.auth/user.json';
 
 test('authenticate', async ({ page }) => {
-  await page.goto('http://localhost:3000/login');
+  await page.goto('/login');
   await page.getByPlaceholder('you@example.com').click();
   await page
     .getByPlaceholder('you@example.com')

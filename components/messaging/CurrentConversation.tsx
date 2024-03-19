@@ -3,13 +3,14 @@
 import { MessageType } from '@/types/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
+import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
-import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
-import { useConversationContext } from '@/context/conversationContext';
+import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
+import { useConversationContext } from '../../context/conversationContext';
 import {
   formatTimeMarker,
   formatDateMarker,
-} from '@/utils/messaging/formatTimeStamp';
+} from '../../utils/messaging/formatTimeStamp';
 
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =
@@ -23,21 +24,21 @@ const CurrentConversation: React.FC = () => {
   }, [allConversations, setCurrentConversation]);
 
   useEffect(() => {
-    const fetchMessagesForCurrentConversation = async () => {
+    const getMessagesForCurrentConversation = async () => {
       try {
-        const { data: fetchedMessages } = await supabase
+        const { data: messageData } = await supabase
           .from('messages')
           .select('*')
           .eq('conversation_id', currentConversation?.conversation_id);
 
-        setCurrentMessages(fetchedMessages ?? []);
+        setCurrentMessages(messageData ?? []);
       } catch (error) {
-        console.error(`Failed to fetch messages from database: ${error}`);
+        console.error(`Failed to get messages from database: ${error}`);
         throw error;
       }
     };
 
-    fetchMessagesForCurrentConversation();
+    getMessagesForCurrentConversation();
   }, [currentConversation, setCurrentMessages]);
 
   useEffect(() => {
@@ -51,10 +52,14 @@ const CurrentConversation: React.FC = () => {
           table: 'messages',
         },
         (payload) => {
-          setCurrentMessages((prevMessages) => [
-            ...prevMessages,
-            payload.new as MessageType,
-          ]);
+          if (
+            payload.new.conversation_id === currentConversation?.conversation_id
+          ) {
+            setCurrentMessages((prevMessages) => [
+              ...prevMessages,
+              payload.new as MessageType,
+            ]);
+          }
         }
       )
       .subscribe();
@@ -86,6 +91,7 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
+      <ConversationPartner message_data={currentMessages} />
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}
@@ -96,7 +102,7 @@ const CurrentConversation: React.FC = () => {
               {formatDateMarker(message.created_at) !==
                 formatDateMarker(currentMessages[index - 1]?.created_at) && (
                 <div
-                  className={`${isScrolling ? 'opacity-100' : 'opacity-0'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition transition-opacity ease-in-out`}
+                  className={`${isScrolling ? 'opacity-100' : 'opacity-0'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition-opacity ease-in-out`}
                 >
                   {formatDateMarker(message.created_at)}
                 </div>
@@ -105,7 +111,6 @@ const CurrentConversation: React.FC = () => {
                 sender_id={message.sender_id}
                 created_at={formatTimeMarker(message.created_at)}
                 message_text={message.message_text}
-                is_read={message.is_read}
                 currentUser={currentConversation?.user_id}
               />
             </div>
