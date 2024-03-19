@@ -73,10 +73,7 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
 
   return (
     <div className='flex flex-row items-center p-5'>
-      <p data-testid='item-donor'>
-        <b>From: </b>
-        {conversationPartner?.username}
-      </p>
+      <p data-testid='item-donor'>{conversationPartner?.username}</p>
 
       <Image
         className='ml-2 rounded-full'
