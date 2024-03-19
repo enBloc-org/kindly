@@ -3,6 +3,7 @@
 import { MessageType } from '@/types/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
+import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
 import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
 import { useConversationContext } from '../../context/conversationContext';
@@ -11,13 +12,7 @@ import {
   formatDateMarker,
 } from '../../utils/messaging/formatTimeStamp';
 
-type ItemDonorType = {
-  username: string;
-  avatar: string;
-};
-
 const CurrentConversation: React.FC = () => {
-  const [itemDonor, setItemDonor] = useState<ItemDonorType | undefined>();
   const { allConversations, currentConversation, setCurrentConversation } =
     useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
@@ -29,22 +24,6 @@ const CurrentConversation: React.FC = () => {
   }, [allConversations, setCurrentConversation]);
 
   useEffect(() => {
-    const getItemDonor = async () => {
-      try {
-        const { data: itemDonorData } = await supabase
-          .from('items')
-          .select('profiles(username, avatar)')
-          .eq('id', currentConversation?.item_id);
-
-        itemDonorData &&
-          setItemDonor(itemDonorData[0].profiles as unknown as ItemDonorType);
-      } catch (error) {
-        console.error(`Failed to get item donor from database: ${error}`);
-        throw error;
-      }
-    };
-    getItemDonor();
-
     const getMessagesForCurrentConversation = async () => {
       try {
         const { data: messageData } = await supabase
@@ -73,10 +52,14 @@ const CurrentConversation: React.FC = () => {
           table: 'messages',
         },
         (payload) => {
-          setCurrentMessages((prevMessages) => [
-            ...prevMessages,
-            payload.new as MessageType,
-          ]);
+          if (
+            payload.new.conversation_id === currentConversation?.conversation_id
+          ) {
+            setCurrentMessages((prevMessages) => [
+              ...prevMessages,
+              payload.new as MessageType,
+            ]);
+          }
         }
       )
       .subscribe();
@@ -108,20 +91,7 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
-      <div className='flex flex-row p-5'>
-        <p data-testid='item-donor'>
-          <b>From: </b>
-          {itemDonor && itemDonor.username}
-        </p>
-        {itemDonor && (
-          <img
-            className='ml-2'
-            alt='user logo'
-            width='25'
-            src={itemDonor.avatar}
-          ></img>
-        )}
-      </div>
+      <ConversationPartner message_data={currentMessages} />
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}
@@ -132,7 +102,7 @@ const CurrentConversation: React.FC = () => {
               {formatDateMarker(message.created_at) !==
                 formatDateMarker(currentMessages[index - 1]?.created_at) && (
                 <div
-                  className={`${isScrolling ? 'opacity-100' : 'opacity-0'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition transition-opacity ease-in-out`}
+                  className={`${isScrolling ? 'opacity-100' : 'opacity-0'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition-opacity ease-in-out`}
                 >
                   {formatDateMarker(message.created_at)}
                 </div>
@@ -141,7 +111,6 @@ const CurrentConversation: React.FC = () => {
                 sender_id={message.sender_id}
                 created_at={formatTimeMarker(message.created_at)}
                 message_text={message.message_text}
-                is_read={message.is_read}
                 currentUser={currentConversation?.user_id}
               />
             </div>
