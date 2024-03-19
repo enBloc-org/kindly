@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState } from 'react';
 import '../../app/styles/messaging-styles.css';
-import deleteConversation from '@/utils/messaging/deleteConversation';
+import deleteConversation from '../../utils/messaging/deleteConversation';
 
 //Components
 import ElipsisMenu from '../menus/EllipsisMenu';

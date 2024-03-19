@@ -3,13 +3,14 @@
 import { MessageType } from '@/types/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
+import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
-import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
-import { useConversationContext } from '@/context/conversationContext';
+import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
+import { useConversationContext } from '../../context/conversationContext';
 import {
   formatTimeMarker,
   formatDateMarker,
-} from '@/utils/messaging/formatTimeStamp';
+} from '../../utils/messaging/formatTimeStamp';
 
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =
@@ -23,21 +24,21 @@ const CurrentConversation: React.FC = () => {
   }, [allConversations, setCurrentConversation]);
 
   useEffect(() => {
-    const fetchMessagesForCurrentConversation = async () => {
+    const getMessagesForCurrentConversation = async () => {
       try {
-        const { data: fetchedMessages } = await supabase
+        const { data: messageData } = await supabase
           .from('messages')
           .select('*')
           .eq('conversation_id', currentConversation?.conversation_id);
 
-        setCurrentMessages(fetchedMessages ?? []);
+        setCurrentMessages(messageData ?? []);
       } catch (error) {
-        console.error(`Failed to fetch messages from database: ${error}`);
+        console.error(`Failed to get messages from database: ${error}`);
         throw error;
       }
     };
 
-    fetchMessagesForCurrentConversation();
+    getMessagesForCurrentConversation();
   }, [currentConversation, setCurrentMessages]);
 
   useEffect(() => {
@@ -89,7 +90,8 @@ const CurrentConversation: React.FC = () => {
   }, [isScrolling, setIsScrolling]);
 
   return (
-    <div className='conversation-height flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
+    <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
+      <ConversationPartner message_data={currentMessages} />
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}

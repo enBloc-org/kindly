@@ -37,9 +37,9 @@ const QuickBrowse = () => {
   };
 
   return (
-    <div className='max-w-xl m-auto'>
-      <h1 className='font-semibold italic ml-4 mt-16'>Quick search:</h1>
-      <div className='flex justify-between gap-1 px-2 mt-10 text-sm'>
+    <div className='m-auto max-w-xl'>
+      <h1 className='ml-4 mt-16 font-semibold italic'>Quick search:</h1>
+      <div className='mt-10 flex justify-between gap-1 px-2 text-sm'>
         <CategoryButton
           handleButtonClick={handleButtonClick}
           category={category}
@@ -96,7 +96,7 @@ const QuickBrowse = () => {
       )}
 
       {category.length > 0 && (
-        <div className='flex justify-center mt-10'>
+        <div className='mt-10 flex justify-center'>
           <button
             className='button button-rounded'
             type='button'
