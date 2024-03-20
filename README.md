@@ -2,11 +2,11 @@
 
 Supporting Ukrainian Refugees in London
 
-Kindly is an open source web application designed to facilitate the donation of clothes and essential items. Individuals can contribute items at no cost to provide much-needed support to members of the Ukrainian refugee community.
+Kindly is an open source web application created by Trafalgar Girls and enBloc. Individuals can contribute items at no cost to provide much-needed support to members of the Ukrainian refugee community.
 
 ## Trafalgar Girls
  
-Trafalgar Girls is a volunteer projecte dedicated to assisting Ukrainian refugees in London. 
+Trafalgar Girls is a volunteer project providing informational, practical and emotional support to Ukrainian Refugees living in Great Britain and beyond. 
 
 ## enBloc
 
