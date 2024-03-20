@@ -1,29 +1,35 @@
-# Kindly - Supporting Ukrainian Refugees in London
-Kindly is a web application dedicated to assisting Ukrainian refugees in London by facilitating the donation of clothes and essential items. Individuals can contribute items at no cost to provide much-needed support to those in need.
+# Kindly 
 
-## Deployed Website
+Supporting Ukrainian Refugees in London
 
-The deployed website can be accessed at (https://kindly-v2zt.vercel.app/).
+Kindly is an open source web application created by Trafalgar Girls and enBloc. Individuals can contribute items at no cost to provide much-needed support to members of the Ukrainian refugee community.
 
-Site style guide can be found at [https://github.com/fac28/kindly/blob/main/style-guide]
+## Trafalgar Girls
+ 
+Trafalgar Girls is a volunteer project providing informational, practical and emotional support to Ukrainian Refugees living in Great Britain and beyond. 
 
-## How It Works
-**Explore Categories**:
+## enBloc
 
-Browse through different categories of items to find what suits your preferences using an intuitive filtering system.
-
-**Select Items**:
-
-Easily select the items you need from the available options.
-
-**Send Enquiries**:
-
-Communicate with donors by sending messages to inquire about specific items.
+enBloc is a web agency born from the ever growing Founders and Coders alumni community and a creator of open source tools. Our ethos is simple: inspire, collaborate, and grow together.
 
 
-## Credits
+## Contributing
 
-DevOps: <a href="https://github.com/cazanelena">Elena Cazan</a> <br>
-Ux/UI: <a href="https://github.com/nichgalzin">Nich Galzin</a> <br>
-QA: <a href="https://github.com/ShaughnAnderson94">Shaughn Anderson</a> <br>
-Scrum: <a href="https://github.com/benante">Tommaso Orlandi</a> <br>
+
+- [BEFORE YOUR FIRST ISSUE]()
+- [CONTRIBUTING](https://github.com/enBloc-org/kindly/blob/dev/.github/CONTRIBUTING.md)
+- [TESTING](https://github.com/enBloc-org/kindly/blob/dev/.github/TESTING.md)
+
+
+*IMPORTANT*
+- All PR's must request a merge to the 
+  
+  base repository: ```enBloc-org/kindly``` 
+  
+  base: ```dev``` 
+
+
+
+- The enBloc team will be reviewing issues and PRs weekly on Friday mornings
+
+
