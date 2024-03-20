@@ -9,22 +9,22 @@ interface FAQItemProps {
 const AccordionItem: React.FC<FAQItemProps> = ({ question, answers }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className='border-4 max-w-xl'>
+    <div className='max-w-xl border-4'>
       <div
-        className='flex items-center gap-5 justify-between p-4 cursor-pointer'
+        className='flex cursor-pointer items-center justify-between gap-5 p-4'
         onClick={() => setIsOpen(!isOpen)}
       >
         <div>{question}</div>
-        <div className='font-bold text-xl'>{isOpen ? '-' : '+'}</div>
+        <div className='text-xl font-bold'>{isOpen ? '-' : '+'}</div>
       </div>
       {isOpen && (
         <div
-          className={`p-4 overflow-hidden ${isOpen ? 'max-h-fit' : 'max-h-0'}`}
+          className={`overflow-hidden p-4 ${isOpen ? 'max-h-fit' : 'max-h-0'}`}
         >
           <ul>
             {answers.map((answer, index) => {
               return (
-                <li key={index} className='list-disc p-2 ml-3 font-light'>
+                <li key={index} className='ml-3 list-disc p-2 font-light'>
                   {answer}
                 </li>
               );
