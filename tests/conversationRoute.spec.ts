@@ -1,14 +1,13 @@
 import { test, expect } from '@playwright/experimental-ct-react';
 
 test.describe('/conversations', () => {
-  //     test('can be reached from /home-page', async ({ page }) => {
-  //       await page.goto('/home-page');
-  //       await page.getByTestId('div[data-testid="item-div"]').first().click(); // ?
-  //       await page.getByRole('button', { name: 'MESSAGE' }).click();
-  //       await expect(
-  //         page.locator('.conversation-height > div:nth-child(3)')
-  //       ).toBeVisible();
-  //     });
+  test('can be created via Item', async ({ page }) => {
+    await page.goto('/item/97');
+    await page.getByRole('button', { name: 'MESSAGE' }).click();
+    await expect(
+      page.locator('.conversation-height > div:nth-child(3)')
+    ).toBeVisible();
+  });
 
   test('sends message', async ({ page }) => {
     await page.goto('/conversations');
@@ -36,6 +35,7 @@ test.describe('/conversations', () => {
 
   // test('deletes an existing conversation', async ({page})=>{
   //   await page.goto('/conversations');
+  // delete conversations 97
   //   await page.locator('div:nth-child(16) > div').first().click();
   //   await page.locator('div:nth-child(16) > div > div > .ml-auto > .rounded-md').click();
   //   await page.getByRole('button', { name: 'Delete Conversation' }).click();
