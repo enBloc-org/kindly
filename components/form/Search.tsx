@@ -16,13 +16,13 @@ export default function Search({
   };
 
   return (
-    <div className='flex justify-center searchmargintop'>
+    <div className='searchmargintop flex justify-center'>
       <label htmlFor='search' className='sr-only'>
         Search
       </label>
       <input
         value={searchTerm}
-        className='bg-primaryLight p-2 rounded-l-md shadow-sm mh-10 outline-none'
+        className='bg-primaryLight mh-10 rounded-l-md p-2 shadow-sm outline-none'
         type='text'
         id='search'
         required
@@ -30,7 +30,7 @@ export default function Search({
         placeholder='Find an item...'
       />
       <button
-        className='flex-shrink-0 flex-grow-0 max-h-10 bg-primaryLight py-2 px-3 rounded-r-md '
+        className='bg-primaryLight max-h-10 flex-shrink-0 flex-grow-0 rounded-r-md px-3 py-2 '
         type='submit'
       >
         <svg

@@ -17,8 +17,8 @@ const CategoryButton: React.FC<CategoryButtonPropsType> = ({
   return (
     <button
       role='button'
-      className={`flex flex-col gap-2 p-2 items-center ${
-        category === option ? 'bg-backgroundHighlight rounded-lg' : ''
+      className={`flex flex-col items-center gap-2 p-2 ${
+        category === option ? 'rounded-lg bg-backgroundHighlight' : ''
       }`}
       onClick={() => handleButtonClick(option)}
     >

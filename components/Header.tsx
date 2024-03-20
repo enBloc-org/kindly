@@ -7,7 +7,7 @@ import useMediaQuery from './hooks/useMediaQuery';
 export default function Header() {
   const isBreakpoint = useMediaQuery(1000);
   return (
-    <header className='sticky top-0 bg-background flex justify-between py-2 px-4 z-10 shadow-sm min-h-30'>
+    <header className='min-h-30 sticky top-0 z-10 flex justify-between bg-background px-4 py-2 shadow-sm'>
       <div className='flex items-center'>
         <Link href='/home-page' aria-label='Home page'>
           <Image
