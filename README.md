@@ -21,6 +21,13 @@ enBloc is a web agency born from the ever growing Founders and Coders alumni com
 - [TESTING](https://github.com/enBloc-org/kindly/blob/dev/.github/TESTING.md)
 
 *IMPORTANT*
-- All PR's must request a merge to the ```dev``` and NOT the ```main``` branch
+- All PR's must request a merge to the 
+  
+  base repository: ```enBloc-org/kindly``` 
+  
+  base: ```dev``` 
+
+
+
 - The enBloc team will be reviewing issues and PRs weekly on Friday mornings
 
