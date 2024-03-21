@@ -19,9 +19,8 @@ body {
   @apply bg-background font-inter text-primaryGray;
 }
 
-*:focus {
-  outline: 2px solid #FF9E5E; /* Custom color */
-  outline-offset: 2px;
+:focus-visible {
+  outline: 3px solid #ff9e5e;
 }
 
 /* Universal component classes*/
@@ -79,4 +78,3 @@ body {
   align-items: center;
   z-index: 100;
 }
-
