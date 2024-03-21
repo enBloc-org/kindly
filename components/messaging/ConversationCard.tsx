@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import ConversationCardModal from './ConversationCardModal';
+import { useConversationContext } from '../../context/conversationContext';
 
 export type ConversationCardProps = {
   joinedAt: string;
@@ -26,9 +27,13 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   conversationId,
   clickHandler,
 }) => {
+  const { currentConversation } = useConversationContext();
+
   return (
     <div tabIndex={0} aria-label='button' onClick={clickHandler}>
-      <div className='relative m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 shadow-md hover:shadow-lg'>
+      <div
+        className={`relative m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 hover:bg-secondaryGray ${currentConversation?.conversation_id === conversationId ? 'shadow-3xl' : 'shadow-md'}`}
+      >
         <div className='relative h-[65px] w-[65px]'>
           <Image src={imageSrc} fill className='rounded-full' alt={itemName} />
         </div>
