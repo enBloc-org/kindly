@@ -44,7 +44,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className='mt-2 flex items-center justify-center gap-6 bg-gray-200 p-4'
+      className='flex items-center justify-center gap-6 border-t-2 border-gray-300 bg-gray-200 p-4'
     >
       <textarea
         className='h-[65px] w-5/6 resize-none overflow-hidden rounded-lg
