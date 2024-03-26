@@ -19,6 +19,10 @@ body {
   @apply bg-background font-inter text-primaryGray;
 }
 
+/* * {
+  border: 1px solid red;
+} */
+
 :focus-visible {
   outline: 3px solid #ff9e5e;
 }

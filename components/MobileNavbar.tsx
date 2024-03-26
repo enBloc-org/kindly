@@ -7,7 +7,7 @@ const MobileNavbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className='flex items-center justify-between px-1' role='navigation'>
+    <nav className='flex items-center justify-around' role='navigation'>
       <Link href='/home-page' aria-label='Home page'>
         <div
           className={`flex items-center rounded-full border-4 p-1 ${
@@ -18,8 +18,8 @@ const MobileNavbar = () => {
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            width='38'
-            height='38'
+            width='28'
+            height='28'
             viewBox='0 0 32 32'
           >
             <path
@@ -39,8 +39,8 @@ const MobileNavbar = () => {
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            width='30'
-            height='30'
+            width='20'
+            height='20'
             viewBox='0 0 16 16'
           >
             <path
@@ -61,8 +61,8 @@ const MobileNavbar = () => {
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            width='65'
-            height='65'
+            width='45'
+            height='45'
             viewBox='0 0 24 24'
           >
             <path
@@ -82,8 +82,8 @@ const MobileNavbar = () => {
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            width='38'
-            height='38'
+            width='28'
+            height='28'
             viewBox='0 0 64 64'
           >
             <g fill={pathname === '/about' ? '#FF9E5E' : '#54BB89'}>
@@ -103,8 +103,8 @@ const MobileNavbar = () => {
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            width='38'
-            height='38'
+            width='28'
+            height='28'
             viewBox='0 0 24 24'
           >
             <svg

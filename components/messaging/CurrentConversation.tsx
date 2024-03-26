@@ -90,7 +90,7 @@ const CurrentConversation: React.FC = () => {
   }, [isScrolling, setIsScrolling]);
 
   return (
-    <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
+    <div className='conversation-height flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
       <ConversationPartner message_data={currentMessages} />
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
