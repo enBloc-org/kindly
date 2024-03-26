@@ -5,7 +5,8 @@ import { createSupabaseClient as supabase } from '../../utils/supabase/createSup
 
 type ConversationPartnerProps = {
   conversation_id: number;
-  user_conversationId?: number;
+  user_conversationId: number;
+  hideImage?: boolean;
 };
 
 type ConversationPartnerType = {
@@ -16,6 +17,7 @@ type ConversationPartnerType = {
 export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
   conversation_id,
   user_conversationId,
+  hideImage,
 }) => {
   const [conversationPartner, setConversationPartner] = useState<
     ConversationPartnerType | undefined
@@ -44,14 +46,16 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
     <div className='flex flex-row items-center p-5'>
       <p data-testid='item-donor'>{conversationPartner?.username}</p>
 
-      <Image
-        className='ml-2 rounded-full'
-        alt='user logo'
-        width='25'
-        height='35'
-        src={conversationPartner?.avatar ?? '/default-profile.png'}
-        style={{ width: 'auto', height: 'auto' }}
-      />
+      {!hideImage && (
+        <Image
+          className='ml-2 rounded-full'
+          alt='user logo'
+          width='25'
+          height='35'
+          src={conversationPartner?.avatar ?? '/default-profile.png'}
+          style={{ width: 'auto', height: 'auto' }}
+        />
+      )}
     </div>
   );
 };

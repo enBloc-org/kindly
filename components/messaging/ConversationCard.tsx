@@ -44,6 +44,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           <ConversationPartner
             conversation_id={conversationId}
             user_conversationId={user_conversationId}
+            hideImage={true}
           />
           <h2 className='text-lg font-bold'>{formatString(itemName)}</h2>
           <p className='text-sm font-light italic'>This will be a message...</p>
