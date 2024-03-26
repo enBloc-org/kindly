@@ -91,10 +91,12 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
-      <ConversationPartner
-        conversation_id={currentConversation?.conversation_id as number}
-        user_conversationId={currentConversation?.id as number}
-      />
+      <div className='p-5'>
+        <ConversationPartner
+          conversation_id={currentConversation?.conversation_id as number}
+          user_conversationId={currentConversation?.id as number}
+        />
+      </div>
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}

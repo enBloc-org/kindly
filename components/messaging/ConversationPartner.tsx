@@ -43,7 +43,7 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
   }, [conversation_id]);
 
   return (
-    <div className='flex flex-row items-center p-5'>
+    <div className='flex flex-row items-center'>
       <p data-testid='item-donor'>{conversationPartner?.username}</p>
 
       {!hideImage && (

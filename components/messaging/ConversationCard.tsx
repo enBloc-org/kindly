@@ -41,12 +41,12 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           <Image src={imageSrc} fill className='rounded-full' alt={itemName} />
         </div>
         <div className='pl-4 text-left'>
+          <h2 className='text-lg font-bold'>{formatString(itemName)}</h2>
           <ConversationPartner
             conversation_id={conversationId}
             user_conversationId={user_conversationId}
             hideImage={true}
           />
-          <h2 className='text-lg font-bold'>{formatString(itemName)}</h2>
           <p className='text-sm font-light italic'>This will be a message...</p>
         </div>
         <div className='ml-auto flex flex-col items-center gap-4 pl-8 pr-2'>
