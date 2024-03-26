@@ -61,17 +61,6 @@ Kindly uses a Postgres database served through [Supabase](https://supabase.com)
 
 ![Kindly database schema](./documentation_images/schema.png)
 
-| Donating |
-| -------- |
-| profiles |
-| items    |
-
-| Messaging          |
-| ------------------ |
-| conversations      |
-| user_conversations |
-| messages           |
-
 ## Finding an Issue
 
 ### As a newcomer
