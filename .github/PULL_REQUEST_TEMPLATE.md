@@ -10,7 +10,7 @@
 
 # Description
 
-**Relates #[issue number] / Closes #[issue number]**
+**Relates #[issue number] <u>OR</u> Closes #[issue number]**  
 Include here a short description of what behaviour this Pull Request introduces.
 Outline any new dependencies introduced.
 
