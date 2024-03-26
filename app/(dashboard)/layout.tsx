@@ -18,7 +18,7 @@ export default async function DashBoardLayout({
     <>
       <Header />
       <main>
-        <div className='min-h-[80vh]'>{children}</div>
+        <div className='min-h-[70vh]'>{children}</div>
       </main>
       <Footer />
     </>

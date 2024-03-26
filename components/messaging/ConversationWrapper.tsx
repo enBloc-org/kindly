@@ -29,9 +29,9 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
     fetchConversations();
   }, []);
   return (
-    <div className='conversation-height w-full px-2'>
+    <div className='conversation-height w-full'>
       {isBreakpoint ? (
-        <div className='mt-4 p-2'>
+        <div>
           {showConversationsList ? (
             <ConversationsList />
           ) : (
@@ -44,7 +44,7 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
           )}
         </div>
       ) : (
-        <div className='flex flex-row justify-between'>
+        <div className='p2 flex h-full flex-row justify-between'>
           <ConversationsList />
           <CurrentConversation />
         </div>

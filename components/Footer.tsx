@@ -6,7 +6,7 @@ const Footer = () => {
   const isBreakpoint = useMediaQuery(1000);
 
   return (
-    <footer className='sticky bottom-0 bg-background py-1'>
+    <footer className='fixed bottom-0 w-full bg-background py-2'>
       {isBreakpoint && <MobileNavbar />}
     </footer>
   );
