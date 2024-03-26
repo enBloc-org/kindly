@@ -14,6 +14,13 @@ type ConversationPartnerType = {
   avatar: string;
 };
 
+/**
+ *
+ * @param conversation_id refers to the relevant "converstion_id" value returned from the user_conversations table
+ * @param user_conversationId refers to the relevant "id" value returned from the user_conversations table
+ * @param hideImage is optional and allows us to display only the users name without an avatar.
+ *                  If this parameter is excluded an avatar will be displayed with either the users image or a default avatar if none has been set.
+ */
 export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
   conversation_id,
   user_conversationId,
