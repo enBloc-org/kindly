@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import ConversationCardModal from './ConversationCardModal';
 import { useConversationContext } from '../../context/conversationContext';
+import { ConversationPartner } from './ConversationPartner';
 
 export type ConversationCardProps = {
   joinedAt: string;
   itemName: string;
   imageSrc: string;
   conversationId: number;
+  user_conversationId: number;
   clickHandler: () => void;
 };
 
@@ -26,6 +28,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   imageSrc,
   conversationId,
   clickHandler,
+  user_conversationId,
 }) => {
   const { currentConversation } = useConversationContext();
 
@@ -38,6 +41,10 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           <Image src={imageSrc} fill className='rounded-full' alt={itemName} />
         </div>
         <div className='pl-4 text-left'>
+          <ConversationPartner
+            conversation_id={conversationId}
+            user_conversationId={user_conversationId}
+          />
           <h2 className='text-lg font-bold'>{formatString(itemName)}</h2>
           <p className='text-sm font-light italic'>This will be a message...</p>
         </div>

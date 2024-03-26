@@ -2,11 +2,10 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { getProfile } from '@/utils/supabase/getProfile';
 import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
-import { useConversationContext } from '@/context/conversationContext';
 
 type ConversationPartnerProps = {
   conversation_id: number;
-  user_conversationId: number;
+  user_conversationId?: number;
 };
 
 type ConversationPartnerType = {
@@ -21,7 +20,6 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
   const [conversationPartner, setConversationPartner] = useState<
     ConversationPartnerType | undefined
   >();
-  const { currentConversation } = useConversationContext();
 
   useEffect(() => {
     const getConversationPartner = async () => {
@@ -40,7 +38,7 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
     };
 
     getConversationPartner();
-  }, [currentConversation?.id]);
+  }, [conversation_id]);
 
   return (
     <div className='flex flex-row items-center p-5'>
