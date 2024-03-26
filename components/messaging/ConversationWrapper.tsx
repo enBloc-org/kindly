@@ -44,7 +44,7 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
           )}
         </div>
       ) : (
-        <div className='p2 flex flex-row justify-between'>
+        <div className='p2 flex h-full flex-row justify-between'>
           <ConversationsList />
           <CurrentConversation />
         </div>
