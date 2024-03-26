@@ -80,12 +80,10 @@ const CurrentConversation: React.FC = () => {
       return () => clearTimeout(debounce);
     };
 
-    chatWindowRef.current &&
-      chatWindowRef.current.addEventListener('scroll', handleScroll);
+    chatWindowRef?.current?.addEventListener('scroll', handleScroll);
 
     return () => {
-      chatWindowRef.current &&
-        chatWindowRef.current.removeEventListener('scroll', handleScroll);
+      chatWindowRef?.current?.removeEventListener('scroll', handleScroll);
     };
   }, [isScrolling, setIsScrolling]);
 
@@ -125,7 +123,7 @@ const CurrentConversation: React.FC = () => {
       <MessageForm
         user_id={currentConversation?.user_id}
         conversation_id={currentConversation?.conversation_id}
-      ></MessageForm>
+      />
     </div>
   );
 };
