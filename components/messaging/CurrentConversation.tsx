@@ -88,7 +88,7 @@ const CurrentConversation: React.FC = () => {
   }, [isScrolling, setIsScrolling]);
 
   return (
-    <div className='conversation-height mb-10 flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
+    <div className='conversation-height flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
       <div className='p-5'>
         <ConversationPartner
           conversation_id={currentConversation?.conversation_id as number}
