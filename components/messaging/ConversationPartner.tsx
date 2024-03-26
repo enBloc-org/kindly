@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { getProfile } from '@/utils/supabase/getProfile';
 import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
 import { useConversationContext } from '@/context/conversationContext';
-import { MessageType } from '@/types/messagingTypes';
 
 type ConversationPartnerProps = {
-  message_data: MessageType[];
+  conversation_id: number;
+  user_conversationId: number;
 };
 
 type ConversationPartnerType = {
@@ -15,7 +15,8 @@ type ConversationPartnerType = {
 };
 
 export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
-  message_data,
+  conversation_id,
+  user_conversationId,
 }) => {
   const [conversationPartner, setConversationPartner] = useState<
     ConversationPartnerType | undefined
@@ -24,50 +25,20 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
 
   useEffect(() => {
     const getConversationPartner = async () => {
-      const conversationPartnerSet = new Set(
-        message_data?.map((message: { sender_id: string }) => message.sender_id)
+      const { data: interlocutors } = await supabase
+        .from('user_conversations')
+        .select('user_id')
+        .eq('conversation_id', conversation_id)
+        .neq('id', user_conversationId);
+
+      const partnerProfile = await getProfile(
+        supabase,
+        interlocutors?.[0].user_id
       );
 
-      if (
-        conversationPartnerSet?.size !== 0 &&
-        conversationPartnerSet?.size !== 1
-      ) {
-        const calculateID = (isCurrentUser: boolean) => {
-          return (
-            conversationPartnerSet &&
-            Array.from(conversationPartnerSet).find((id) =>
-              isCurrentUser
-                ? id === currentConversation?.user_id
-                : id !== currentConversation?.user_id
-            )
-          );
-        };
-
-        const conversationDonorID = calculateID(true);
-        const conversationPartnerID = calculateID(false);
-
-        let partnerProfile;
-
-        if (conversationPartnerID && conversationPartnerID !== undefined) {
-          partnerProfile = await getProfile(supabase, conversationPartnerID);
-        }
-
-        conversationDonorID &&
-          (await getProfile(supabase, conversationDonorID));
-
-        partnerProfile && setConversationPartner(partnerProfile.data);
-      } else {
-        const { data: fetchedItemDonor } = await supabase
-          .from('items')
-          .select('profiles(username, avatar)')
-          .eq('id', currentConversation?.item_id);
-
-        fetchedItemDonor &&
-          setConversationPartner(
-            fetchedItemDonor[0].profiles as unknown as ConversationPartnerType
-          );
-      }
+      setConversationPartner(partnerProfile.data);
     };
+
     getConversationPartner();
   }, [currentConversation?.id]);
 
