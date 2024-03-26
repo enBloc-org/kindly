@@ -33,15 +33,7 @@ test.describe('/conversations', () => {
     ).toBeVisible();
   });
 
-  // this test is cannot be completed because deleting is not working
-
   // test('deletes an existing conversation', async ({page})=>{
-  //   await page.goto('/conversations');
-  // delete conversations 97
-  //   await page.locator('div:nth-child(16) > div').first().click();
-  //   await page.locator('div:nth-child(16) > div > div > .ml-auto > .rounded-md').click();
-  //   await page.getByRole('button', { name: 'Delete Conversation' }).click();
-  //   await page.getByLabel('Delete').click();
-  //   await expect(page.locator('div:nth-child(16) > div').first()).not.toBeVisible()!;
+  // this test is cannot be completed because deleting is not working
   // })
 });
