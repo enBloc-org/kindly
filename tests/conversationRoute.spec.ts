@@ -33,6 +33,8 @@ test.describe('/conversations', () => {
     ).toBeVisible();
   });
 
+  // this test is cannot be completed because deleting is not working
+
   // test('deletes an existing conversation', async ({page})=>{
   //   await page.goto('/conversations');
   // delete conversations 97
