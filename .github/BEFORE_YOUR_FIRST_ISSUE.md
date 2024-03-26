@@ -40,5 +40,5 @@ Running the app:
 ```
 ## Next Steps
 
-Once you have kindly running on your machine read the [contribution guidance][CONTRIBUTING](https://github.com/enBloc-org/kindly/blob/dev/.github/CONTRIBUTING.md)
+Once you have kindly running on your machine read the [contribution guidance](https://github.com/enBloc-org/kindly/blob/dev/.github/CONTRIBUTING.md)
 then go to the project and assign yourself an issue or create and issue yourself. Look for ones marked as good first issues.
