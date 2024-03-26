@@ -20,6 +20,7 @@ enBloc is a web agency born from the ever growing Founders and Coders alumni com
 - [CONTRIBUTING](https://github.com/enBloc-org/kindly/blob/dev/.github/CONTRIBUTING.md)
 - [TESTING](https://github.com/enBloc-org/kindly/blob/dev/.github/TESTING.md)
 
+
 *IMPORTANT*
 - All PR's must request a merge to the 
   
@@ -30,4 +31,5 @@ enBloc is a web agency born from the ever growing Founders and Coders alumni com
 
 
 - The enBloc team will be reviewing issues and PRs weekly on Friday mornings
+
 
