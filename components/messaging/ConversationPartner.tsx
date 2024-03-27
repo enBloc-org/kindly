@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { getProfile } from '@/utils/supabase/getProfile';
+import { getProfile } from '../../utils/supabase/getProfile';
 import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
 
 type ConversationPartnerProps = {
@@ -51,7 +51,9 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
 
   return (
     <div className='flex flex-row items-center'>
-      <p data-testid='item-donor'>{conversationPartner?.username}</p>
+      <p data-testid='conversation-partner-name'>
+        {conversationPartner?.username}
+      </p>
 
       {!hideImage && (
         <Image
