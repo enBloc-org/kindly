@@ -1,6 +1,6 @@
 # Kindly Security and GDPR Policy
 
-At Kindly, the security of our codebases and the privacy of our community are of paramount importance. This document outlines our policies on security and adherence to the General Data Protection Regulation (GDPR) principles, details how to report security vulnerabilities, and explains our approach to ensuring data privacy.
+The security of our codebases and the privacy of our community are of paramount importance. This document outlines our policies on security and adherence to the General Data Protection Regulation (GDPR) principles, details how to report security vulnerabilities, and explains our approach to ensuring data privacy.
 
 ## Reporting a Security Vulnerability
 
