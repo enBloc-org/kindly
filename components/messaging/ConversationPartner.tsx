@@ -63,6 +63,7 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
           height='35'
           src={conversationPartner?.avatar ?? '/default-profile.png'}
           style={{ width: 'auto', height: 'auto' }}
+          data-testid='conversation-partner-avatar'
         />
       )}
     </div>
