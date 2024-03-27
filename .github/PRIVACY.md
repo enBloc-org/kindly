@@ -1,4 +1,4 @@
-# Kindly Security and GDPR Policy
+# enBloc Security and GDPR Policy
 
 The security of our codebases and the privacy of our community are of paramount importance. This document outlines our policies on security and adherence to the General Data Protection Regulation (GDPR) principles, details how to report security vulnerabilities, and explains our approach to ensuring data privacy.
 
@@ -28,7 +28,7 @@ Upon receipt of your report, we will:
 
 ## GDPR Compliance
 
-Kindly is committed to protecting the data privacy of our users in accordance with GDPR requirements. Our practices include:
+enBloc is committed to protecting the data privacy of our users in accordance with GDPR requirements. Our practices include:
 
 - Ensuring lawful, fair, and transparent data processing.
 - Limiting data processing to specified, legitimate purposes.
@@ -43,7 +43,7 @@ Under GDPR, individuals have the right to access, correct, delete, and restrict 
 
 ## Amendments to This Policy
 
-Kindly reserves the right to amend this policy at any time. The most current version will always be posted on our website.
+enBloc reserves the right to amend this policy at any time. The most current version will always be posted on our website.
 
 ## Contact Us
 
