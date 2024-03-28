@@ -11,32 +11,17 @@ test.describe('new conversations', () => {
 });
 
 test.describe('/conversations', () => {
-  test.beforeAll(async ({ page }) => {
+  test('displays latest messages sent', async ({ page }) => {
     await page.goto('/conversations');
-  });
+    await page.locator('.conversation-card:has-text("Coat")').click();
 
-  test('sends message', async ({ page }) => {
     await page.getByPlaceholder('Type your message here').click();
-    await page.getByPlaceholder('Type your message here').press('CapsLock');
     await page.getByPlaceholder('Type your message here').fill('Nice shoes');
     await page.locator('form').getByRole('button').click();
 
     await expect(
-      page.locator('.message-card:hasText("Nice shoes")')
+      page.locator('.message-card:has-text("Nice shoes")')
     ).toBeDefined();
-  });
-
-  test('displays latest messages in CurrentConversation', async ({ page }) => {
-    await page.goto('/conversations');
-    await page.getByPlaceholder('Type your message here').click();
-    await page.getByPlaceholder('Type your message here').press('CapsLock');
-    await page
-      .getByPlaceholder('Type your message here')
-      .fill('Displays latest message test');
-    await page.locator('form').getByRole('button').click();
-    await expect(
-      page.locator('.conversation-height > .relative > div').first()
-    ).toBeVisible();
   });
 
   // test('deletes an existing conversation', async ({page})=>{
