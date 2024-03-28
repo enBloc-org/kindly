@@ -27,10 +27,8 @@ All PR's must request a merge to the base repository: ```enBloc-org/kindly``` ba
  </tr>
  <tr>
     <td>Trafalgar Girls is a volunteer project providing informational, practical and emotional support to Ukrainian Refugees living in Great Britain and beyond.
-    <br/>
     </td>
     <td>enBloc is a web agency born from the ever growing Founders and Coders alumni community and a creator of open source tools. Our ethos is simple: inspire, collaborate, and grow together.
-    <br/>
     </td>
  </tr>
 </table>
