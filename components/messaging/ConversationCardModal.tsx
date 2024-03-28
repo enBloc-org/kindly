@@ -7,6 +7,7 @@ import deleteConversation from '../../utils/messaging/deleteConversation';
 //Components
 import ElipsisMenu from '../menus/EllipsisMenu';
 import ButtonRounded from '../buttons/ButtonRounded';
+import { useConversationContext } from '@/context/conversationContext';
 
 type ModalProps = {
   conversationId?: number;
@@ -17,6 +18,8 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
+
+  const { currentConversation } = useConversationContext();
 
   const toggleModalClickHandler = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -29,14 +32,15 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.stopPropagation();
-    if (typeof conversationId === 'undefined') {
-      throw new Error('item is undefined');
+    if (
+      typeof conversationId === 'undefined' ||
+      typeof currentConversation?.user_id === 'undefined'
+    ) {
+      throw new Error('Conversation is undefined');
     }
     try {
       setIsDisabled(true);
-      console.log({ conversationId });
-
-      deleteConversation(conversationId);
+      deleteConversation(conversationId, currentConversation.user_id);
       setIsModalOpen(false);
       setError('');
       setIsDisabled(false);
