@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/experimental-ct-react';
 
 test.describe('CurrentConversation', () => {
   test('displays item donor username', async ({ page }) => {

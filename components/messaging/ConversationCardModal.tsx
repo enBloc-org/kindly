@@ -7,7 +7,7 @@ import deleteConversation from '../../utils/messaging/deleteConversation';
 //Components
 import ElipsisMenu from '../menus/EllipsisMenu';
 import ButtonRounded from '../buttons/ButtonRounded';
-import { useConversationContext } from '@/context/conversationContext';
+import { useConversationContext } from '../../context/conversationContext';
 
 type ModalProps = {
   conversationId?: number;
