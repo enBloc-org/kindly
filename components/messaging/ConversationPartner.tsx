@@ -5,7 +5,6 @@ import { createSupabaseClient as supabase } from '../../utils/supabase/createSup
 
 type ConversationPartnerProps = {
   conversation_id: number;
-  user_conversationId: number;
   hideImage?: boolean;
 };
 
@@ -23,7 +22,6 @@ type ConversationPartnerType = {
  */
 export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
   conversation_id,
-  user_conversationId,
   hideImage,
 }) => {
   const [conversationPartner, setConversationPartner] = useState<
@@ -34,13 +32,12 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
     const getConversationPartner = async () => {
       const { data: interlocutors } = await supabase
         .from('user_conversations')
-        .select('user_id')
-        .eq('conversation_id', conversation_id)
-        .neq('id', user_conversationId);
+        .select('partner_id')
+        .eq('conversation_id', conversation_id);
 
       const partnerProfile = await getProfile(
         supabase,
-        interlocutors?.[0].user_id
+        interlocutors?.[0].partner_id
       );
 
       setConversationPartner(partnerProfile.data);

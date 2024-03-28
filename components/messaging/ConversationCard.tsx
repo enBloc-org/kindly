@@ -8,7 +8,6 @@ export type ConversationCardProps = {
   itemName: string;
   imageSrc: string;
   conversationId: number;
-  user_conversationId: number;
   clickHandler: () => void;
 };
 
@@ -28,7 +27,6 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   imageSrc,
   conversationId,
   clickHandler,
-  user_conversationId,
 }) => {
   const { currentConversation } = useConversationContext();
 
@@ -44,7 +42,6 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           <h2 className='text-lg font-bold'>{formatString(itemName)}</h2>
           <ConversationPartner
             conversation_id={conversationId}
-            user_conversationId={user_conversationId}
             hideImage={true}
           />
           <p className='text-sm font-light italic'>This will be a message...</p>

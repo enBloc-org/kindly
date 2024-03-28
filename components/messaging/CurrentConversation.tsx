@@ -92,7 +92,6 @@ const CurrentConversation: React.FC = () => {
       <div className='p-5'>
         <ConversationPartner
           conversation_id={currentConversation?.conversation_id as number}
-          user_conversationId={currentConversation?.id as number}
         />
       </div>
       <div
