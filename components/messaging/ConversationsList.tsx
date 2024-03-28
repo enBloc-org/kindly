@@ -73,7 +73,6 @@ const ConversationsList: React.FC = () => {
               joinedAt={conversation.joined_at}
               itemName={conversation.items.item_name}
               imageSrc={conversation.items.imageSrc}
-              user_conversationId={conversation.id}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
             />
           </div>
