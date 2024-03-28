@@ -3,6 +3,10 @@
   rounded-2xl px-6 py-4 shadow-md;
 }
 
+.conversation-card {
+  @apply relative m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 hover:bg-secondaryGray;
+}
+
 .conversation-height {
   height: calc(100vh - 155px);
 }
