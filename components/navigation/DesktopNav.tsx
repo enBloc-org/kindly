@@ -2,7 +2,7 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 
 //Components
-import LinkContainer from './navigation/LinkContainer';
+import LinkContainer from './LinkContainer';
 
 const DesktopNav = () => {
   const pathname = usePathname();

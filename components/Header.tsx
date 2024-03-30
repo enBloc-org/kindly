@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import DesktopNav from './DesktopNav';
+import DesktopNav from './navigation/DesktopNav';
 import useMediaQuery from './hooks/useMediaQuery';
 
 export default function Header() {
