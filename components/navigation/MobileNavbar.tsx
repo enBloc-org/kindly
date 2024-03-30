@@ -6,8 +6,8 @@ import NavigationLinkContainer from './NavigationLinkContainer';
 import HomeRouteIcon from '../icons/navigation/HomeRouteIcon';
 import SearchRouteIcon from '../icons/navigation/SearchRouteIcon';
 import AboutRouteIcon from '../icons/navigation/AboutRouteIcon';
-import ProfileRouteIcon from '../icons/navigation/ProfileRouteIcon';
 import AddItemRouteIcon from '../icons/navigation/AddItemRouteIcon';
+import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 
 const MobileNavbar = () => {
   const pathname = usePathname();
@@ -47,12 +47,12 @@ const MobileNavbar = () => {
         <AboutRouteIcon pathName={pathname} height={28} width={28} />
       </NavigationLinkContainer>
       <NavigationLinkContainer
-        href='/profile'
-        ariaLabel='My profile'
+        href='/conversations'
+        ariaLabel='My messages'
         pathName={pathname}
         size='mobile'
       >
-        <ProfileRouteIcon pathName={pathname} height={28} width={28} />
+        <MessageRouteIcon pathName={pathname} height={28} width={28} />
       </NavigationLinkContainer>
     </nav>
   );
