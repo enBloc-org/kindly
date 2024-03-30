@@ -16,6 +16,9 @@ module.exports = {
         secondaryGray: '#DCDCDC',
         primaryOrange: '#FF9E5E',
       },
+      boxShadow: {
+        '3xl': '5px 10px 10px -5px #57666D',
+      },
       fontFamily: {
         barlow: ['Barlow Semi Condensed', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],

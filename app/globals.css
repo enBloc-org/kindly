@@ -19,6 +19,10 @@ body {
   @apply bg-background font-inter text-primaryGray;
 }
 
+:focus-visible {
+  outline: 3px solid #ff9e5e;
+}
+
 /* Universal component classes*/
 
 .button {
@@ -74,4 +78,3 @@ body {
   align-items: center;
   z-index: 100;
 }
-

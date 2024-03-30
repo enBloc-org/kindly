@@ -69,10 +69,10 @@ const ConversationsList: React.FC = () => {
         allConversations.map((conversation, index) => (
           <div key={`${conversation.id}-${index}`}>
             <ConversationCard
+              conversationId={conversation.conversation_id}
               joinedAt={conversation.joined_at}
               itemName={conversation.items.item_name}
               imageSrc={conversation.items.imageSrc}
-              conversationId={conversation.id}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
             />
           </div>

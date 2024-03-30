@@ -8,7 +8,7 @@ const MobileNavbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className='flex items-center justify-between px-1' role='navigation'>
+    <nav className='flex items-center justify-around' role='navigation'>
       <MobileLinkContainer
         href='/home-page'
         ariaLabel='Home page'
@@ -16,8 +16,8 @@ const MobileNavbar = () => {
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          width='38'
-          height='38'
+          width='28'
+          height='28'
           viewBox='0 0 32 32'
         >
           <path
@@ -33,8 +33,8 @@ const MobileNavbar = () => {
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          width='38'
-          height='38'
+          width='28'
+          height='28'
           viewBox='0 0 512 512'
           className='p-[.15rem]'
         >
@@ -51,8 +51,8 @@ const MobileNavbar = () => {
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          width='65'
-          height='65'
+          width='45'
+          height='45'
           viewBox='0 0 24 24'
         >
           <path
@@ -68,8 +68,8 @@ const MobileNavbar = () => {
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          width='38'
-          height='38'
+          width='28'
+          height='28'
           viewBox='0 0 64 64'
         >
           <g fill={pathname === '/about' ? '#FF9E5E' : '#54BB89'}>
@@ -85,8 +85,8 @@ const MobileNavbar = () => {
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          width='38'
-          height='38'
+          width='28'
+          height='28'
           viewBox='0 0 24 24'
         >
           <svg

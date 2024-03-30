@@ -49,7 +49,10 @@ const HomePage = async () => {
                 {lastItems.map((item) => (
                   <li key={item.id}>
                     <Link href={`/item/${item.id}`}>
-                      <div className='relative h-36 w-28 shadow-md'>
+                      <div
+                        data-testid='item-div'
+                        className='relative h-36 w-28 shadow-md'
+                      >
                         <Image
                           alt={`Image of ${item.item_name}`}
                           src={item.imageSrc}

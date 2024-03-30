@@ -55,6 +55,12 @@ Developers at all levels of experience and comfort in the Kindly tech stack are 
 
 However, before you set out to submit code, please review our [best practices](link to BEST_PRACTICE.md) and our [installation guide](link to INSTALATION.md).
 
+## Database Schema
+
+Kindly uses a Postgres database served through [Supabase](https://supabase.com)
+
+![Kindly database schema](./documentation_images/schema.png)
+
 ## Finding an Issue
 
 ### As a newcomer
