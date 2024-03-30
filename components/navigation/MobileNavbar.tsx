@@ -2,7 +2,7 @@
 import { usePathname } from 'next/navigation';
 
 // Components
-import MobileLinkContainer from './MobileLinkContainer';
+import NavigationLinkContainer from './NavigationLinkContainer';
 import HomeRouteIcon from '../icons/navigation/HomeRouteIcon';
 import SearchRouteIcon from '../icons/navigation/SearchRouteIcon';
 import AboutRouteIcon from '../icons/navigation/AboutRouteIcon';
@@ -14,41 +14,46 @@ const MobileNavbar = () => {
 
   return (
     <nav className='flex items-center justify-around' role='navigation'>
-      <MobileLinkContainer
+      <NavigationLinkContainer
         href='/home-page'
         ariaLabel='Home page'
         pathName={pathname}
+        size='mobile'
       >
         <HomeRouteIcon pathName={pathname} height={28} width={28} />
-      </MobileLinkContainer>
-      <MobileLinkContainer
+      </NavigationLinkContainer>
+      <NavigationLinkContainer
         href='/search'
         ariaLabel='Search page'
         pathName={pathname}
+        size='mobile'
       >
         <SearchRouteIcon pathName={pathname} height={28} width={28} />
-      </MobileLinkContainer>
-      <MobileLinkContainer
+      </NavigationLinkContainer>
+      <NavigationLinkContainer
         href='/add-item'
         ariaLabel='Add an item'
         pathName={pathname}
+        size='mobile'
       >
         <AddItemRouteIcon pathName={pathname} height={45} width={45} />
-      </MobileLinkContainer>
-      <MobileLinkContainer
+      </NavigationLinkContainer>
+      <NavigationLinkContainer
         href='/about'
         ariaLabel='About page'
         pathName={pathname}
+        size='mobile'
       >
         <AboutRouteIcon pathName={pathname} height={28} width={28} />
-      </MobileLinkContainer>
-      <MobileLinkContainer
+      </NavigationLinkContainer>
+      <NavigationLinkContainer
         href='/profile'
         ariaLabel='My profile'
         pathName={pathname}
+        size='mobile'
       >
         <ProfileRouteIcon pathName={pathname} height={28} width={28} />
-      </MobileLinkContainer>
+      </NavigationLinkContainer>
     </nav>
   );
 };

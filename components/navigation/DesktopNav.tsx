@@ -2,7 +2,7 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 
 //Components
-import LinkContainer from './LinkContainer';
+import NavigationLinkContainer from './NavigationLinkContainer';
 
 const DesktopNav = () => {
   const pathname = usePathname();
@@ -12,10 +12,11 @@ const DesktopNav = () => {
       className='flex items-center justify-center gap-4 px-1 text-center text-xs font-light'
       role='navigation'
     >
-      <LinkContainer
+      <NavigationLinkContainer
         href='/home-page'
         ariaLabel='Home page'
         pathName={pathname}
+        size='desktop'
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -29,8 +30,13 @@ const DesktopNav = () => {
           />
         </svg>
         Home
-      </LinkContainer>
-      <LinkContainer href='/about' ariaLabel='About page' pathName={pathname}>
+      </NavigationLinkContainer>
+      <NavigationLinkContainer
+        href='/about'
+        ariaLabel='About page'
+        pathName={pathname}
+        size='desktop'
+      >
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='38'
@@ -43,11 +49,12 @@ const DesktopNav = () => {
           </g>
         </svg>
         About
-      </LinkContainer>
-      <LinkContainer
+      </NavigationLinkContainer>
+      <NavigationLinkContainer
         href='/add-item'
         ariaLabel='Add an item'
         pathName={pathname}
+        size='desktop'
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -61,8 +68,13 @@ const DesktopNav = () => {
           />
         </svg>
         Add item
-      </LinkContainer>
-      <LinkContainer href='/search' ariaLabel='Search page' pathName={pathname}>
+      </NavigationLinkContainer>
+      <NavigationLinkContainer
+        href='/search'
+        ariaLabel='Search page'
+        pathName={pathname}
+        size='desktop'
+      >
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='35'
@@ -75,8 +87,13 @@ const DesktopNav = () => {
           />
         </svg>
         Search
-      </LinkContainer>
-      <LinkContainer href='/profile' ariaLabel='My profile' pathName={pathname}>
+      </NavigationLinkContainer>
+      <NavigationLinkContainer
+        href='/profile'
+        ariaLabel='My profile'
+        pathName={pathname}
+        size='desktop'
+      >
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='38'
@@ -92,7 +109,7 @@ const DesktopNav = () => {
           </svg>
         </svg>
         Profile
-      </LinkContainer>
+      </NavigationLinkContainer>
     </nav>
   );
 };
