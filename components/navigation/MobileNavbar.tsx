@@ -2,7 +2,7 @@
 import { usePathname } from 'next/navigation';
 
 // Components
-import MobileLinkContainer from './navigation/MobileLinkContainer';
+import MobileLinkContainer from './MobileLinkContainer';
 
 const MobileNavbar = () => {
   const pathname = usePathname();
