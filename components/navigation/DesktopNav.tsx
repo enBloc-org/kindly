@@ -54,8 +54,8 @@ const DesktopNav = () => {
         Message
       </NavigationLinkContainer>
       <NavigationLinkContainer
-        href='/conversation'
-        ariaLabel='My messages'
+        href='/profile'
+        ariaLabel='My profile'
         pathName={pathname}
         size='desktop'
       >
