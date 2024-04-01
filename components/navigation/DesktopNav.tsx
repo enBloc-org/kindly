@@ -3,11 +3,11 @@ import { usePathname } from 'next/navigation';
 
 //Components
 import NavigationLinkContainer from './NavigationLinkContainer';
-import HomeRouteIcon from '../icons/navigation/HomeRouteIcon';
 import AboutRouteIcon from '../icons/navigation/AboutRouteIcon';
 import AddItemRouteIcon from '../icons/navigation/AddItemRouteIcon';
 import SearchRouteIcon from '../icons/navigation/SearchRouteIcon';
 import ProfileRouteIcon from '../icons/navigation/ProfileRouteIcon';
+import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 
 const DesktopNav = () => {
   const pathname = usePathname();
@@ -18,13 +18,13 @@ const DesktopNav = () => {
       role='navigation'
     >
       <NavigationLinkContainer
-        href='/home-page'
-        ariaLabel='Home page'
+        href='/search'
+        ariaLabel='Search page'
         pathName={pathname}
         size='desktop'
       >
-        <HomeRouteIcon width={38} height={38} pathName={pathname} />
-        Home
+        <SearchRouteIcon width={38} height={38} pathName={pathname} />
+        Search
       </NavigationLinkContainer>
       <NavigationLinkContainer
         href='/about'
@@ -45,17 +45,17 @@ const DesktopNav = () => {
         Add item
       </NavigationLinkContainer>
       <NavigationLinkContainer
-        href='/search'
-        ariaLabel='Search page'
+        href='/conversations'
+        ariaLabel='My messages'
         pathName={pathname}
         size='desktop'
       >
-        <SearchRouteIcon width={38} height={38} pathName={pathname} />
-        Search
+        <MessageRouteIcon width={38} height={38} pathName={pathname} />
+        Message
       </NavigationLinkContainer>
       <NavigationLinkContainer
-        href='/profile'
-        ariaLabel='My profile'
+        href='/conversation'
+        ariaLabel='My messages'
         pathName={pathname}
         size='desktop'
       >

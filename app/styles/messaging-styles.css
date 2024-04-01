@@ -11,7 +11,7 @@
 
 @media screen and (min-width: 1000px) {
   .conversation-height {
-    height: calc(100vh - 105px);
+    height: calc(100vh - 85px);
   }
 }
 
