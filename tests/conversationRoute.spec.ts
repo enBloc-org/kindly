@@ -13,9 +13,12 @@ test.describe('new conversations', () => {
 test.describe('/conversations', () => {
   test('displays latest messages sent', async ({ page }) => {
     await page.goto('/conversations');
-    await page.locator('.conversation-card:has-text("Coat")').click();
 
-    await page.getByPlaceholder('Type your message here').click();
+    const conversationCard = await page.waitForSelector(
+      '.conversation-card:has-text("Coat")'
+    );
+    await conversationCard.click();
+
     await page.getByPlaceholder('Type your message here').fill('Nice shoes');
     await page.locator('form').getByRole('button').click();
 
