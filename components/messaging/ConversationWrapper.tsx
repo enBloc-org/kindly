@@ -17,6 +17,7 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
     showConversationsList,
     setShowConversationsList,
     setAllConversations,
+    setCurrentUserId,
   } = useConversationContext();
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
         await getUserConversationsandItemNames(userId);
 
       setAllConversations(fetchedConversations);
+      setCurrentUserId(userId);
     };
     fetchConversations();
   }, []);

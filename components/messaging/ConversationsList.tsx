@@ -11,6 +11,7 @@ const ConversationsList: React.FC = () => {
     setAllConversations,
     setCurrentConversation,
     setShowConversationsList,
+    currentUserId,
   } = useConversationContext();
 
   const updateOpenConvo = async (givenId: number) => {
@@ -35,10 +36,12 @@ const ConversationsList: React.FC = () => {
           table: 'user_conversations',
         },
         (payload) => {
-          setAllConversations((prevConversations) => [
-            ...prevConversations,
-            payload.new as ConversationCardType,
-          ]);
+          if (payload.new.user_id === currentUserId) {
+            setAllConversations((prevConversations) => [
+              ...prevConversations,
+              payload.new as ConversationCardType,
+            ]);
+          }
         }
       )
       .on(
