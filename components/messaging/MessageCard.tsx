@@ -23,7 +23,6 @@ const MessageCard: React.FC<MessageCardProps> = ({
 
   useEffect(() => {
     const OnRead = async () => {
-      console.log({ messageId });
       await markAsRead(messageId, currentUser);
     };
     OnRead();

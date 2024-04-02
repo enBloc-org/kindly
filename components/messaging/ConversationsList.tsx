@@ -14,6 +14,8 @@ const ConversationsList: React.FC = () => {
     currentUserId,
   } = useConversationContext();
 
+  const notificationList = [192];
+
   const updateOpenConvo = async (givenId: number) => {
     setCurrentConversation &&
       setCurrentConversation(
@@ -77,6 +79,7 @@ const ConversationsList: React.FC = () => {
               itemName={conversation.items.item_name}
               imageSrc={conversation.items.imageSrc}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
+              notificationList={notificationList}
             />
           </div>
         ))
