@@ -36,24 +36,22 @@ test.describe('/conversations', () => {
     const conversationCard = await page.waitForSelector(
       '.conversation-card:has-text("Coat")'
     );
+
+    const originalCount = await page
+      .locator('.conversation-card:has-text("Coat")')
+      .count();
+
     const ellipsisMenu = await conversationCard.$(
       'button[data-testid="ellipsis-menu"]'
     );
-    await ellipsisMenu?.click();
-    await page.locator('button:has-text("Delete Conversation")').click();
+    await ellipsisMenu?.click(); // open ellipsis menu
+    await page.locator('button:has-text("Delete Conversation")').click(); // select 'Delete conversation'
+    await page.locator('.button-rounded[aria-label="Delete"]').click(); // confirm choice
 
-    await page.screenshot({ path: 'ellispis.png' });
-    // const modal = await page.waitForSelector(
-    //   'div:has-text("Are you sure you want to delete this conversation?")'
-    // );
-    // const deleteButton = await modal.$('button[data-testid="delete-modal"]');
-    // await deleteButton?.click();
-    await page.locator('.button-rounded[aria-label="Delete"]').click();
+    const newCount = await page
+      .locator('.conversation-card:has-text("Coat")')
+      .count();
 
-    await page.screenshot({ path: 'deleted.png' });
-
-    await expect(
-      await page.locator('.conversation-card:has-text("Coat")').count()
-    ).toBeLessThanOrEqual(0);
+    await expect(newCount).toBeLessThan(originalCount);
   });
 });
