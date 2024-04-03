@@ -31,11 +31,29 @@ test.describe('/conversations', () => {
   });
 
   test('deletes an existing conversation', async ({ page }) => {
-    const ellipsisMenu = await page.waitForSelector(
-      '.conversation-card:has-text("Coat") > [data-testid="ellipsis-menu"]'
-    );
-    await ellipsisMenu.click();
+    await page.goto('/conversations');
 
-    page.screenshot({ path: 'ellispis.png' });
+    const conversationCard = await page.waitForSelector(
+      '.conversation-card:has-text("Coat")'
+    );
+    const ellipsisMenu = await conversationCard.$(
+      'button[data-testid="ellipsis-menu"]'
+    );
+    await ellipsisMenu?.click();
+    await page.locator('button:has-text("Delete Conversation")').click();
+
+    await page.screenshot({ path: 'ellispis.png' });
+    // const modal = await page.waitForSelector(
+    //   'div:has-text("Are you sure you want to delete this conversation?")'
+    // );
+    // const deleteButton = await modal.$('button[data-testid="delete-modal"]');
+    // await deleteButton?.click();
+    await page.locator('.button-rounded[aria-label="Delete"]').click();
+
+    await page.screenshot({ path: 'deleted.png' });
+
+    await expect(
+      await page.locator('.conversation-card:has-text("Coat")').count()
+    ).toBeLessThanOrEqual(0);
   });
 });
