@@ -1,5 +1,5 @@
 'use client';
-import MobileNavbar from './MobileNavbar';
+import MobileNavbar from './navigation/MobileNavbar';
 import useMediaQuery from './hooks/useMediaQuery';
 
 const Footer = () => {

@@ -35,6 +35,8 @@ The .env.example file in the root directory shows what variables you will need. 
 
 Running the app:
 
+Make sure you are on the dev branch then use
+
 ```bash
   npm run dev
 ```
