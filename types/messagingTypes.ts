@@ -9,6 +9,8 @@ export type MessageType = {
 
 export type AllConversationsType = ConversationCardType[];
 
+export type ConversationCardBasic = Omit<ConversationCardType, 'items'>;
+
 export type ConversationCardType = {
   id: number;
   joined_at: string;
@@ -18,7 +20,7 @@ export type ConversationCardType = {
   items: ItemType;
 };
 
-type ItemType = {
+export type ItemType = {
   imageSrc: string;
   item_name: string;
 };

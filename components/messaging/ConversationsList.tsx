@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
 import { ConversationCardType } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
+import selectItemImageAndName from '@/utils/messaging/selectItemImageAndName';
 
 const ConversationsList: React.FC = () => {
   const {
@@ -36,12 +37,17 @@ const ConversationsList: React.FC = () => {
           event: 'INSERT',
           schema: 'public',
           table: 'user_conversations',
+          filter: `user_id=eq.${currentUserId}`,
         },
-        (payload) => {
+        async (payload) => {
           if (payload.new.user_id === currentUserId) {
+            const newConversation = await selectItemImageAndName(
+              payload.new as ConversationCardType
+            );
+
             setAllConversations((prevConversations) => [
               ...prevConversations,
-              payload.new as ConversationCardType,
+              newConversation,
             ]);
           }
         }
@@ -52,6 +58,7 @@ const ConversationsList: React.FC = () => {
           event: 'DELETE',
           schema: 'public',
           table: 'user_conversations',
+          filter: `user_id=eq.${currentUserId}`,
         },
         (payload) => {
           setAllConversations((prevConversations) => [
