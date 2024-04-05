@@ -7,15 +7,15 @@ Kindly is an open source web application created by Trafalgar Girls and enBloc, 
 
 <h2 align=center>Contributing</h2>
 
-We * welcome * your contributions. Please familiarise yourself with the following documentation before getting started. Contributing docs can be found in [kindly/.github](https://github.com/enBloc-org/kindly/tree/dev/.github)
+We **welcome** your contributions. Please familiarise yourself with the following documentation before getting started. Contributing docs can be found in [kindly/.github](https://github.com/enBloc-org/kindly/tree/dev/.github)
 
 - [Before your first issue](https://github.com/enBloc-org/kindly/blob/dev/.github/BEFORE_YOUR_FIRST_ISSUE.md)
-- [Contributing](https://github.com/enBloc-org/kindly/blob/dev/.github/CONTRIBUTING.md)*
+- [Contributing](https://github.com/enBloc-org/kindly/blob/dev/.github/CONTRIBUTING.md) <sup>1</sup>
 - [Best practice](https://github.com/enBloc-org/kindly/blob/dev/.github/BEST_PRACTICE.md)
 - [Testing](https://github.com/enBloc-org/kindly/blob/dev/.github/TESTING.md)
 - [Privacy](https://github.com/enBloc-org/kindly/blob/dev/.github/PRIVACY.md)
 
-All PR's must request a merge to the base repository: ```enBloc-org/kindly``` base: ```dev``` *
+<sup>1</sup> All PR's must request a merge to the base repository: ```enBloc-org/kindly``` base: ```dev```
 
 <br>
 <br>
