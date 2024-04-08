@@ -62,8 +62,6 @@ const ConversationsList: React.FC = () => {
         },
         (payload) => {
           if (payload.new.has_unread_messages) {
-            console.log('add');
-
             setNotificationList((prevState) => {
               if (!prevState.includes(payload.new.conversation_id)) {
                 return [...prevState, payload.new.conversation_id];
@@ -72,7 +70,6 @@ const ConversationsList: React.FC = () => {
             });
           }
           if (!payload.new.has_unread_messages) {
-            console.log('remove');
             setNotificationList((prevState) => {
               return prevState.filter(
                 (conversationId) =>
@@ -108,8 +105,8 @@ const ConversationsList: React.FC = () => {
   return (
     <div className='m-4'>
       {allConversations.length > 0 ? (
-        allConversations.map((conversation, index) => (
-          <div key={`${conversation.id}-${index}`}>
+        allConversations.map((conversation) => (
+          <div key={`${conversation.id}`}>
             <ConversationCard
               conversationId={conversation.conversation_id}
               joinedAt={conversation.joined_at}
