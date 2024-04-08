@@ -1,6 +1,6 @@
 'use client';
 import ConversationCard from './ConversationCard';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
 import { ConversationCardType } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
@@ -15,7 +15,7 @@ const ConversationsList: React.FC = () => {
     currentUserId,
   } = useConversationContext();
 
-  const notificationList = [192];
+  const [notificationList, setNotificationList] = useState<number[]>([]);
 
   const updateOpenConvo = async (givenId: number) => {
     setCurrentConversation &&
@@ -49,6 +49,36 @@ const ConversationsList: React.FC = () => {
               ...prevConversations,
               newConversation,
             ]);
+          }
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'user_conversations',
+          filter: `user_id=eq.${currentUserId}`,
+        },
+        (payload) => {
+          if (payload.new.has_unread_messages) {
+            console.log('add');
+
+            setNotificationList((prevState) => {
+              if (!prevState.includes(payload.new.conversation_id)) {
+                return [...prevState, payload.new.conversation_id];
+              }
+              return prevState;
+            });
+          }
+          if (!payload.new.has_unread_messages) {
+            console.log('remove');
+            setNotificationList((prevState) => {
+              return prevState.filter(
+                (conversationId) =>
+                  conversationId !== payload.new.conversation_id
+              );
+            });
           }
         }
       )
