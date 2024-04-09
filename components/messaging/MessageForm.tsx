@@ -10,19 +10,6 @@ type MessageFormProps = {
   conversation_id: number | undefined;
 };
 
-function explicitLineBreaks(inputText: string): string {
-  console.groupCollapsed(`explicitLineBreaks Function`);
-  console.log(`Before Cleaning: ${inputText}`);
-
-  const regExPattern: RegExp = /\r?\n/g;
-  const outputText: string = inputText.replace(regExPattern, '<br>');
-
-  console.log(`After Cleaning: ${outputText}`);
-  console.groupEnd();
-
-  return outputText;
-}
-
 const MessageForm: React.FC<MessageFormProps> = ({
   user_id,
   conversation_id,
@@ -33,19 +20,12 @@ const MessageForm: React.FC<MessageFormProps> = ({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // TODO: Remove this console group
-    console.groupCollapsed(`Message Formatting`);
-    const messageCleaned = explicitLineBreaks(message);
-    console.log(`Returned from explicitLineBreaks: ${messageCleaned}`);
-
     try {
-      await insertMessage(user_id, conversation_id, messageCleaned);
+      await insertMessage(user_id, conversation_id, message);
       setMessage('');
       if (textareaRef.current) {
         textareaRef.current.style.height = '65px';
       }
-      console.log(`Message after try: ${messageCleaned}`);
-      console.groupEnd();
     } catch (error) {
       console.error(`Failed to fetch messages from database: ${error}`);
       throw error;
