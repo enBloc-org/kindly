@@ -64,7 +64,7 @@ const ConversationsList: React.FC = () => {
   }, [supabase, allConversations, setAllConversations]);
 
   return (
-    <div className='m-4'>
+    <div className='m-4 overflow-y-auto'>
       {allConversations.length > 0 ? (
         allConversations.map((conversation, index) => (
           <div key={`${conversation.id}-${index}`}>
