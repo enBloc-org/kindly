@@ -15,13 +15,23 @@ const MessageForm: React.FC<MessageFormProps> = ({
   conversation_id,
 }) => {
   const [message, setMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
+    const trimmedMessage = message.trim();
+
+    if (!trimmedMessage) {
+      setErrorMessage('Your message cannot be empty.');
+      return;
+    } else {
+      setErrorMessage('');
+    }
+
     try {
-      await insertMessage(user_id, conversation_id, message);
+      await insertMessage(user_id, conversation_id, trimmedMessage);
       setMessage('');
       if (textareaRef.current) {
         textareaRef.current.style.height = '65px';
@@ -35,6 +45,8 @@ const MessageForm: React.FC<MessageFormProps> = ({
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
 
+    if (errorMessage) setErrorMessage('');
+
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
@@ -46,14 +58,17 @@ const MessageForm: React.FC<MessageFormProps> = ({
       onSubmit={handleSubmit}
       className='z-50 flex items-center justify-center gap-6 border-t-2 border-gray-300 bg-gray-200 p-4'
     >
+      {errorMessage && (
+        <div className='w-full text-center text-red-500'>{errorMessage}</div>
+      )}
+
       <textarea
         className='h-[65px] w-5/6 resize-none overflow-hidden rounded-lg
-           border-2 border-gray-300 bg-white px-4 py-2 pt-5 text-black shadow-inner'
+          border-2 border-gray-300 bg-white px-4 py-2 pt-5 text-black shadow-inner'
         value={message}
         ref={textareaRef}
         onChange={onChangeHandler}
         placeholder='Type your message here'
-        required
       />
       <button
         type='submit'
