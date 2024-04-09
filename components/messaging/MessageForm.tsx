@@ -20,6 +20,9 @@ const MessageForm: React.FC<MessageFormProps> = ({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
+    // TODO: Remove this console log
+    console.log(message);
+
     try {
       await insertMessage(user_id, conversation_id, message);
       setMessage('');
