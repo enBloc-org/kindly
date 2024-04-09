@@ -3,10 +3,6 @@
   rounded-2xl px-6 py-4 shadow-md;
 }
 
-.preserve-whitespace {
-  white-space: pre-wrap;
-}
-
 .conversation-height {
   height: calc(100vh - 165px);
 }
