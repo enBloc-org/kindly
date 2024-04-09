@@ -110,7 +110,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           <input
             className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
             type='password'
-            id='confitmPassword'
+            id='confirmPassword'
             name='password'
             placeholder='••••••••'
             onChange={(e) => setConfirmPassword(e.target.value)}
