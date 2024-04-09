@@ -89,6 +89,13 @@ const CurrentConversation: React.FC = () => {
     };
   }, [isScrolling, setIsScrolling]);
 
+  function brTagsToLineBreaks(inputText: string): string {
+    const brTagRegex: RegExp = /<br\s*\/?>/gi;
+    const outputText: string = inputText.replace(brTagRegex, '\n');
+
+    return outputText;
+  }
+
   return (
     <div className='conversation-height flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
       <ConversationPartner message_data={currentMessages} />
@@ -110,7 +117,7 @@ const CurrentConversation: React.FC = () => {
               <MessageCard
                 sender_id={message.sender_id}
                 created_at={formatTimeMarker(message.created_at)}
-                message_text={message.message_text}
+                message_text={brTagsToLineBreaks(message.message_text)}
                 currentUser={currentConversation?.user_id}
               />
             </div>
