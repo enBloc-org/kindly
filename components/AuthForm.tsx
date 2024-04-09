@@ -76,6 +76,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
       </label>
       <input
         className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
+        type='email'
+        autoComplete='email'
         id='email'
         name='email'
         placeholder='you@example.com'
