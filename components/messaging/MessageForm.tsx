@@ -53,6 +53,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
         ref={textareaRef}
         onChange={onChangeHandler}
         placeholder='Type your message here'
+        required
       />
       <button
         type='submit'
