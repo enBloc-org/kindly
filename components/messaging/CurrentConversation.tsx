@@ -110,10 +110,11 @@ const CurrentConversation: React.FC = () => {
                 </div>
               )}
               <MessageCard
-                sender_id={message.sender_id}
-                created_at={formatTimeMarker(message.created_at)}
-                message_text={message.message_text}
+                senderId={message.sender_id}
+                createdAt={formatTimeMarker(message.created_at)}
+                messageText={message.message_text}
                 currentUser={currentConversation?.user_id}
+                messageId={message.id}
               />
             </div>
           ))
