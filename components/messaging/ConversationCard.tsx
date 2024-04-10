@@ -9,6 +9,7 @@ export type ConversationCardProps = {
   imageSrc: string;
   conversationId: number;
   clickHandler: () => void;
+  notificationList: number[];
 };
 
 const formatString = (input: string) => {
@@ -27,15 +28,25 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   imageSrc,
   conversationId,
   clickHandler,
+  notificationList,
 }) => {
   const { currentConversation } = useConversationContext();
-
   return (
     <div tabIndex={0} aria-label='button' onClick={clickHandler}>
       <div
-        className={`relative m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg bg-gray-300 p-4 hover:bg-secondaryGray ${currentConversation?.conversation_id === conversationId ? 'shadow-3xl' : 'shadow-md'}`}
+        className={`relative m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg 
+          bg-gray-300 p-4 hover:bg-secondaryGray 
+          ${currentConversation?.conversation_id === conversationId ? 'shadow-3xl' : 'shadow-md'}`}
       >
         <div className='relative h-[65px] w-[65px]'>
+          {notificationList.some(
+            (conversation) => conversation === conversationId
+          ) && (
+            <div
+              className='relative left-12 z-50 h-4 w-4 rounded-full border-2 
+              border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black'
+            ></div>
+          )}
           <Image src={imageSrc} fill className='rounded-full' alt={itemName} />
         </div>
         <div className='pl-4 text-left'>
