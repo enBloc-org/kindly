@@ -100,7 +100,7 @@ const CurrentConversation: React.FC = () => {
       >
         {currentMessages
           .map((message: MessageType, index: number) => (
-            <div key={`${message.id}-${message.created_at}`}>
+            <div key={`${message.id}`}>
               {formatDateMarker(message.created_at) !==
                 formatDateMarker(currentMessages[index - 1]?.created_at) && (
                 <div
