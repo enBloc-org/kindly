@@ -35,11 +35,12 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
       const { data: interlocutors } = await supabase
         .from('user_conversations')
         .select('partner_id')
-        .eq('conversation_id', conversation_id);
+        .eq('conversation_id', conversation_id)
+        .eq('user_id', currentUserId);
 
       const partnerProfile = await getProfile(
         supabase,
-        interlocutors?.find((i) => i.partner_id !== currentUserId)?.partner_id
+        interlocutors?.[0].partner_id
       );
 
       setConversationPartner(partnerProfile.data);
