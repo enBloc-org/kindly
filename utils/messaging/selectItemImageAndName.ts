@@ -1,12 +1,12 @@
 import { createSupabaseClient as supabase } from '../supabase/createSupabaseClient';
 import {
-  ConversationCardBasic,
+  ConversationCardPartial,
   ConversationCardType,
   ItemType,
 } from '../../types/messagingTypes';
 
 const selectItemImageAndName = async (
-  conversation: ConversationCardBasic
+  conversation: ConversationCardPartial
 ): Promise<ConversationCardType> => {
   try {
     const { data } = await supabase
@@ -27,7 +27,7 @@ const selectItemImageAndName = async (
       items: items,
     };
 
-    return singleConversation ?? [];
+    return singleConversation;
   } catch (error) {
     console.error(`Failed to fetch conversations from database: ${error}`);
     throw error;

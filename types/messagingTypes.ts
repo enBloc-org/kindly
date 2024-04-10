@@ -9,7 +9,7 @@ export type MessageType = {
 
 export type AllConversationsType = ConversationCardType[];
 
-export type ConversationCardBasic = Omit<ConversationCardType, 'items'>;
+export type ConversationCardPartial = Omit<ConversationCardType, 'items'>;
 
 export type ConversationCardType = {
   id: number;
