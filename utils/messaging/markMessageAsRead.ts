@@ -1,6 +1,6 @@
 import newClient from '../../config/supabaseclient';
 
-export const markAsRead = async (messageId: number, userId?: string) => {
+export const markAsRead = async (messageId: number, userId: string) => {
   const supabase = newClient();
   const { error } = await supabase
     .from('messages')
