@@ -35,7 +35,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
     >
       <div className='mx-2 flex items-center justify-center'>
         <p
-          className={`px-2 py-2 text-lg ${messageText.length > 50 && 'md:px-4'} lg:ml-10`}
+          className={`px-2 py-2 text-lg ${message_text.length > 50 && 'md:px-4'} whitespace-pre-wrap lg:ml-10`}
         >
           {messageText}
         </p>
