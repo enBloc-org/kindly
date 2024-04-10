@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { getProfile } from '../../utils/supabase/getProfile';
 import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
 import { useConversationContext } from '@/context/conversationContext';
+import selectConversationPartner from '@/utils/messaging/selectConversationPartner';
 
 type ConversationPartnerProps = {
   conversation_id: number;
@@ -31,22 +32,17 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
   const { currentUserId } = useConversationContext();
 
   useEffect(() => {
-    const getConversationPartner = async () => {
-      const { data: interlocutors } = await supabase
-        .from('user_conversations')
-        .select('partner_id')
-        .eq('conversation_id', conversation_id)
-        .eq('user_id', currentUserId);
-
-      const partnerProfile = await getProfile(
-        supabase,
-        interlocutors?.[0].partner_id
+    const getPartnerProfile = async () => {
+      const partnerId = await selectConversationPartner(
+        conversation_id,
+        currentUserId
       );
+      const partnerProfile = await getProfile(supabase, partnerId);
 
       setConversationPartner(partnerProfile.data);
     };
 
-    getConversationPartner();
+    getPartnerProfile();
   }, [conversation_id]);
 
   return (
