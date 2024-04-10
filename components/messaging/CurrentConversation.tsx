@@ -7,6 +7,7 @@ import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
 import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
 import { useConversationContext } from '../../context/conversationContext';
+import selectMessagesByConversationId from '@/utils/messaging/selectMessagesByConversationId';
 import {
   formatTimeMarker,
   formatDateMarker,
@@ -24,21 +25,13 @@ const CurrentConversation: React.FC = () => {
   }, [allConversations, setCurrentConversation]);
 
   useEffect(() => {
-    const getMessagesForCurrentConversation = async () => {
-      try {
-        const { data: messageData } = await supabase
-          .from('messages')
-          .select('*')
-          .eq('conversation_id', currentConversation?.conversation_id);
-
-        setCurrentMessages(messageData ?? []);
-      } catch (error) {
-        console.error(`Failed to get messages from database: ${error}`);
-        throw error;
-      }
+    const setMessagesForCurrentConversation = async () => {
+      const selectedMessages = await selectMessagesByConversationId(
+        currentConversation?.conversation_id as number
+      );
+      setCurrentMessages(selectedMessages);
     };
-
-    getMessagesForCurrentConversation();
+    setMessagesForCurrentConversation();
   }, [currentConversation, setCurrentMessages]);
 
   useEffect(() => {
