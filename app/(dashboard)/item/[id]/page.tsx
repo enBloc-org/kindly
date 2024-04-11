@@ -14,7 +14,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const { data } = await supabase.auth.getSession();
   const userId = data.session?.user.id;
   let canMessage: boolean = true;
-  const userProfile = await getProfile(supabase, userId as string);
+  const userProfile = await getProfile(userId as string);
   try {
     const { data: item } = await supabase
       .from('items')

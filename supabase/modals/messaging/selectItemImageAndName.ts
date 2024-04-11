@@ -1,4 +1,4 @@
-import { createSupabaseClient as supabase } from '../createSupabaseClient';
+import newClient from '@/supabase/utils/newClient';
 import {
   ConversationCardPartial,
   ConversationCardType,
@@ -9,6 +9,7 @@ const selectItemImageAndName = async (
   conversation: ConversationCardPartial
 ): Promise<ConversationCardType> => {
   try {
+    const supabase = newClient();
     const { data } = await supabase
       .from('items')
       .select(
