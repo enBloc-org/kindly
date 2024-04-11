@@ -1,4 +1,4 @@
-import newClient from '../../config/supabaseclient';
+import newClient from '../../config/createClient';
 
 const selectMessagesByConversationId = async (conversationId: number) => {
   try {

@@ -1,4 +1,4 @@
-import newClient from '../../config/supabaseclient';
+import newClient from '../../config/createClient';
 
 export default async function newConvoStart(
   userID: string | undefined,

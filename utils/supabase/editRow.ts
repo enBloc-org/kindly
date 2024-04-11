@@ -1,4 +1,4 @@
-import newClient from '@/config/supabaseclient';
+import newClient from '@/config/createClient';
 import { editProfile, item, profile, updateReserved } from '../../types/types';
 
 export default async function editRow(
