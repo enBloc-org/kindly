@@ -1,4 +1,4 @@
-import newClient from '../utils/createClient';
+import newClient from '../utils/newClient';
 import { PartialItem, PartialProfile } from '../../types/types';
 export default async function insertRow(
   table: string,

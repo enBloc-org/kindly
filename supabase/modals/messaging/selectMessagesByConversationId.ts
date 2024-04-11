@@ -1,4 +1,4 @@
-import newClient from '../../utils/createClient';
+import newClient from '../../utils/newClient';
 
 const selectMessagesByConversationId = async (conversationId: number) => {
   try {

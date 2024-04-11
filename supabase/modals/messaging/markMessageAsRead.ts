@@ -1,4 +1,4 @@
-import newClient from '../../utils/createClient';
+import newClient from '../../utils/newClient';
 
 export const markAsRead = async (messageId: number, userId: string) => {
   const supabase = newClient();
