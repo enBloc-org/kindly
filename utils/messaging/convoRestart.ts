@@ -6,7 +6,7 @@ export default async function convoRestart(
   donor_id: string | undefined,
   item_id: number | undefined
 ) {
-  if (user_id && donor_id && item_id) {
+  if (conversation_id && user_id && donor_id && item_id) {
     try {
       const supabase = newClient();
 
