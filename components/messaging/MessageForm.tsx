@@ -10,7 +10,7 @@ type MessageFormProps = {
   user_id: string | undefined;
   conversation_id: number | undefined;
   member_has_deleted: boolean | undefined;
-  donor_id: string | undefined;
+  partner_id: string | undefined;
   item_id: number | undefined;
 };
 
@@ -18,7 +18,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
   user_id,
   conversation_id,
   member_has_deleted,
-  donor_id,
+  partner_id,
   item_id,
 }) => {
   const [message, setMessage] = useState<string>('');
@@ -27,9 +27,11 @@ const MessageForm: React.FC<MessageFormProps> = ({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
+    console.log(member_has_deleted);
+
     if (member_has_deleted) {
       try {
-        await convoRestart(conversation_id, user_id, donor_id, item_id);
+        await convoRestart(conversation_id, user_id, partner_id, item_id);
       } catch (error) {
         console.error('error');
       }

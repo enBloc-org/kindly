@@ -17,6 +17,7 @@ export type ConversationCardType = {
   conversation_id: number;
   user_id: string;
   item_id: number;
+  partner_id: string;
   items: ItemType;
   conversations: { member_has_deleted: boolean };
 };
@@ -24,5 +25,4 @@ export type ConversationCardType = {
 export type ItemType = {
   imageSrc: string;
   item_name: string;
-  donated_by: string;
 };
