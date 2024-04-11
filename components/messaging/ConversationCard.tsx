@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import ConversationCardModal from './ConversationCardModal';
 import { useConversationContext } from '../../context/conversationContext';
+import { ConversationPartner } from './ConversationPartner';
 
 export type ConversationCardProps = {
   joinedAt: string;
@@ -50,6 +51,10 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
         </div>
         <div className='pl-4 text-left'>
           <h2 className='text-lg font-bold'>{formatString(itemName)}</h2>
+          <ConversationPartner
+            conversation_id={conversationId}
+            hideImage={true}
+          />
           <p className='text-sm font-light italic'>This will be a message...</p>
         </div>
         <div className='ml-auto flex flex-col items-center gap-4 pl-8 pr-2'>
