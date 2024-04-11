@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@/supabase/modals/server';
 import { redirect } from 'next/navigation';
 import AuthForm from '../../../components/AuthForm';
 import { cookies } from 'next/headers';

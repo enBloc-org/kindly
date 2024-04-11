@@ -1,4 +1,4 @@
-import { createSupabaseClient as supabase } from '../supabase/createSupabaseClient';
+import { createSupabaseClient as supabase } from '../createSupabaseClient';
 
 export default async function selectConversationPartner(
   conversationId: number,

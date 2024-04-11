@@ -1,10 +1,10 @@
 'use client';
 import ConversationCard from './ConversationCard';
 import { useEffect, useState } from 'react';
-import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
+import { createSupabaseClient as supabase } from '@/supabase/modals/createSupabaseClient';
 import { ConversationCardType } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
-import selectItemImageAndName from '@/utils/messaging/selectItemImageAndName';
+import selectItemImageAndName from '@/supabase/modals/messaging/selectItemImageAndName';
 
 const ConversationsList: React.FC = () => {
   const {

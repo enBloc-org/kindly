@@ -1,8 +1,8 @@
 import ItemCard from '@/components/ItemCard';
 import BackButton from '@/components/buttons/BackButton';
-import { getItems } from '@/utils/supabase/getItems';
-import filterItems from '@/utils/supabase/filterItems';
-import searchByName from '@/utils/supabase/searchByName';
+import { getItems } from '@/supabase/modals/getItems';
+import filterItems from '@/supabase/modals/filterItems';
+import searchByName from '@/supabase/modals/searchByName';
 import { PartialItem } from '@/types/types';
 
 type ParamsType = {

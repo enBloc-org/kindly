@@ -1,4 +1,4 @@
-import newClient from '@/config/createClient';
+import newClient from '@/supabase/utils/createClient';
 
 export async function getRecentItems() {
   const supabase = newClient();

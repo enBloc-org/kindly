@@ -1,4 +1,4 @@
-import newClient from '../../config/createClient';
+import newClient from '../../utils/createClient';
 
 export default async function newConvoStart(
   userID: string | undefined,

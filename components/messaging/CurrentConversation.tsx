@@ -5,13 +5,13 @@ import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
-import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
+import { createSupabaseClient as supabase } from '../../supabase/modals/createSupabaseClient';
 import { useConversationContext } from '../../context/conversationContext';
-import selectMessagesByConversationId from '@/utils/messaging/selectMessagesByConversationId';
+import selectMessagesByConversationId from '@/supabase/modals/messaging/selectMessagesByConversationId';
 import {
   formatTimeMarker,
   formatDateMarker,
-} from '../../utils/messaging/formatTimeStamp';
+} from '../../supabase/modals/messaging/formatTimeStamp';
 
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =

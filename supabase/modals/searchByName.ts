@@ -1,6 +1,6 @@
 'use server';
 import { cookies } from 'next/headers';
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@/supabase/modals/server';
 import { item } from '../../types/types';
 
 export default async function searchByName(name: string): Promise<item[]> {

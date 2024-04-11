@@ -1,9 +1,9 @@
-import { createSupabaseClient as supabase } from '../supabase/createSupabaseClient';
+import { createSupabaseClient as supabase } from '../createSupabaseClient';
 import {
   ConversationCardPartial,
   ConversationCardType,
   ItemType,
-} from '../../types/messagingTypes';
+} from '../../../types/messagingTypes';
 
 const selectItemImageAndName = async (
   conversation: ConversationCardPartial
