@@ -1,5 +1,6 @@
 'use client';
 import { FormEvent, useState, useRef } from 'react';
+import convoRestart from '@/utils/messaging/convoRestart';
 
 // Components
 import insertMessage from '@/utils/messaging/insertMessage';
@@ -8,13 +9,17 @@ import PaperPlaneIcon from '../icons/PaperPlaneIcon';
 type MessageFormProps = {
   user_id: string | undefined;
   conversation_id: number | undefined;
-  member_has_deleted: boolean
+  member_has_deleted: boolean | undefined;
+  donor_id: string | undefined;
+  item_id: number | undefined;
 };
 
 const MessageForm: React.FC<MessageFormProps> = ({
   user_id,
   conversation_id,
-  member_has_deleted
+  member_has_deleted,
+  donor_id,
+  item_id,
 }) => {
   const [message, setMessage] = useState<string>('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -22,16 +27,23 @@ const MessageForm: React.FC<MessageFormProps> = ({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    try {
-      await insertMessage(user_id, conversation_id, message);
-      setMessage('');
-      if (textareaRef.current) {
-        textareaRef.current.style.height = '65px';
+    if (member_has_deleted) {
+      try {
+        await convoRestart(conversation_id, user_id, donor_id, item_id);
+      } catch (error) {
+        console.error('error');
       }
-      console.log(member_has_deleted)
-    } catch (error) {
-      console.error(`Failed to fetch messages from database: ${error}`);
-      throw error;
+    } else {
+      try {
+        await insertMessage(user_id, conversation_id, message);
+        setMessage('');
+        if (textareaRef.current) {
+          textareaRef.current.style.height = '65px';
+        }
+      } catch (error) {
+        console.error(`Failed to fetch messages from database: ${error}`);
+        throw error;
+      }
     }
   };
 

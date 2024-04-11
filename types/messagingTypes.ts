@@ -24,4 +24,5 @@ export type ConversationCardType = {
 export type ItemType = {
   imageSrc: string;
   item_name: string;
+  donated_by: string;
 };

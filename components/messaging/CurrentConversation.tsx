@@ -119,6 +119,8 @@ const CurrentConversation: React.FC = () => {
         member_has_deleted={
           currentConversation?.conversations.member_has_deleted
         }
+        donor_id={currentConversation?.items.donated_by}
+        item_id={currentConversation?.item_id}
       />
     </div>
   );
