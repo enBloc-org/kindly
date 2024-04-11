@@ -18,6 +18,7 @@ export type ConversationCardType = {
   user_id: string;
   item_id: number;
   items: ItemType;
+  member_has_deleted: boolean;
 };
 
 export type ItemType = {

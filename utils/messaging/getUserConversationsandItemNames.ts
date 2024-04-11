@@ -14,7 +14,9 @@ const getUserConversationsandItemNames = async (
       conversation_id,
       user_id,
       item_id,
-      items!inner(item_name, imageSrc)
+      items!inner(item_name, imageSrc),
+      conversations(member_has_deleted)
+   
     `
       )
       .eq('user_id', userId);

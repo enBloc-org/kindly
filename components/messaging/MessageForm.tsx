@@ -8,11 +8,13 @@ import PaperPlaneIcon from '../icons/PaperPlaneIcon';
 type MessageFormProps = {
   user_id: string | undefined;
   conversation_id: number | undefined;
+  member_has_deleted: boolean
 };
 
 const MessageForm: React.FC<MessageFormProps> = ({
   user_id,
   conversation_id,
+  member_has_deleted
 }) => {
   const [message, setMessage] = useState<string>('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -26,6 +28,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
       if (textareaRef.current) {
         textareaRef.current.style.height = '65px';
       }
+      console.log(member_has_deleted)
     } catch (error) {
       console.error(`Failed to fetch messages from database: ${error}`);
       throw error;

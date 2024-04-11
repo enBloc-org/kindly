@@ -116,6 +116,9 @@ const CurrentConversation: React.FC = () => {
       <MessageForm
         user_id={currentConversation?.user_id}
         conversation_id={currentConversation?.conversation_id}
+        member_has_deleted={
+          currentConversation?.conversations.member_has_deleted
+        }
       />
     </div>
   );
