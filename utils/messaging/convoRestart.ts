@@ -1,4 +1,5 @@
 import newClient from '../../config/supabaseclient';
+import { markAsDeleted } from './markAsDeleted';
 
 export default async function convoRestart(
   conversation_id: number | undefined,
@@ -6,11 +7,9 @@ export default async function convoRestart(
   partner_id: string | undefined,
   item_id: number | undefined
 ) {
-  console.log('convo restart');
   if (conversation_id && user_id && partner_id && item_id) {
     try {
       const supabase = newClient();
-
       await supabase.from('user_conversations').insert([
         {
           conversation_id: conversation_id,
@@ -19,6 +18,7 @@ export default async function convoRestart(
           partner_id: user_id,
         },
       ]);
+      markAsDeleted(conversation_id, false);
     } catch (error) {
       console.error(error);
     }

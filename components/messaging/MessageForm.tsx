@@ -27,7 +27,6 @@ const MessageForm: React.FC<MessageFormProps> = ({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (member_has_deleted) {
-      console.log(member_has_deleted);
       try {
         await convoRestart(conversation_id, user_id, partner_id, item_id);
       } catch (error) {
