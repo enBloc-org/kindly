@@ -119,7 +119,7 @@ const CurrentConversation: React.FC = () => {
         member_has_deleted={
           currentConversation?.conversations.member_has_deleted
         }
-        partner_id={currentConversation?.items.donated_by}
+        partner_id={currentConversation?.partner_id}
         item_id={currentConversation?.item_id}
       />
     </div>
