@@ -21,7 +21,7 @@ const ProfilePage = async () => {
 
     const userId = data.session?.user.id;
 
-    const userProfile = await getProfile(supabase, userId);
+    const userProfile = await getProfile(supabase, userId as string);
     const fetchedItems = await getItems('items', '', 'donated_by', userId);
 
     if (!userProfile.data || !userProfile.data.username) {
