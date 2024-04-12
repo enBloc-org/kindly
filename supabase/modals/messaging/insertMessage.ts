@@ -1,4 +1,4 @@
-import newClient from '../../utils/newClient';
+import newClient from '@/supabase/utils/newClient';
 
 export default async function insertMessage(
   userId: string | undefined,
