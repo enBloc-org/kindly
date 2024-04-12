@@ -26,22 +26,23 @@ const MessageForm: React.FC<MessageFormProps> = ({
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    try {
+      await insertMessage(user_id, conversation_id, message);
+      setMessage('');
+      if (textareaRef.current) {
+        textareaRef.current.style.height = '65px';
+      }
+    } catch (error) {
+      console.error(`Failed to fetch messages from database: ${error}`);
+      throw error;
+    }
+
     if (member_has_deleted) {
       try {
         await convoRestart(conversation_id, user_id, partner_id, item_id);
       } catch (error) {
         console.error('error');
-      }
-    } else {
-      try {
-        await insertMessage(user_id, conversation_id, message);
-        setMessage('');
-        if (textareaRef.current) {
-          textareaRef.current.style.height = '65px';
-        }
-      } catch (error) {
-        console.error(`Failed to fetch messages from database: ${error}`);
-        throw error;
       }
     }
   };

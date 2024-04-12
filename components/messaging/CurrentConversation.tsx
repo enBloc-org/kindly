@@ -14,8 +14,12 @@ import {
 } from '../../utils/messaging/formatTimeStamp';
 
 const CurrentConversation: React.FC = () => {
-  const { allConversations, currentConversation, setCurrentConversation } =
-    useConversationContext();
+  const {
+    allConversations,
+    setAllConversations,
+    currentConversation,
+    setCurrentConversation,
+  } = useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);
@@ -61,6 +65,48 @@ const CurrentConversation: React.FC = () => {
       supabase.removeChannel(channel);
     };
   }, [supabase, currentMessages, setCurrentMessages]);
+
+  useEffect(() => {
+    console.log('use effect has run');
+    const conversationsChannel = supabase
+      .channel('realtime conversations')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'conversations',
+        },
+        (conversationPayload) => {
+          if (
+            conversationPayload.new.conversation_id ===
+            currentConversation?.conversation_id
+          )
+            // not sure if this is the right condition
+            console.log({ conversationPayload });
+
+          // if(conversationPayload.new.member_has_deleted === false){
+          // setAllConversations([...allConversations,({...currentConversation, conversations: {member_has_deleted: conversationPayload.new.member_has_deleted}} as ConversationCardType)])
+
+          // console.log("all conversations: ", allConversations)
+          // }
+
+          // setCurrentConversation({...currentConversation, conversations: {member_has_deleted: conversationPayload.new.member_has_deleted}} as ConversationCardType)
+          // console.log("current conversation payload :", {...currentConversation, conversations: {member_has_deleted: conversationPayload.new.member_has_deleted}} as ConversationCardType)
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(conversationsChannel);
+    };
+  }, [
+    supabase,
+    currentConversation,
+    setCurrentConversation,
+    allConversations,
+    setAllConversations,
+  ]);
 
   useEffect(() => {
     const handleScroll = () => {
