@@ -14,7 +14,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const { data } = await supabase.auth.getSession();
   const userId = data.session?.user.id;
   let canMessage: boolean = true;
-  const userProfile = await getProfile(userId as string);
+  const userProfile = await getProfile();
   try {
     const { data: item } = await supabase
       .from('items')
@@ -28,7 +28,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       const donerId: string = item.profiles?.id;
       const title = item.item_name;
       if (
-        userProfile.data.refugee === false ||
+        userProfile?.data.refugee === false ||
         data.session?.user.id == item.profiles.id ||
         data.session == undefined
       ) {

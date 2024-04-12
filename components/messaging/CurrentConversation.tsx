@@ -11,7 +11,7 @@ import selectMessagesByConversationId from '@/supabase/modals/messaging/selectMe
 import {
   formatTimeMarker,
   formatDateMarker,
-} from '../../supabase/utils/formatTimeStamp';
+} from '../../utils/formatTimeStamp';
 
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =

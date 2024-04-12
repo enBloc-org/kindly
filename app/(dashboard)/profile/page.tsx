@@ -21,10 +21,10 @@ const ProfilePage = async () => {
 
     const userId = data.session?.user.id;
 
-    const userProfile = await getProfile(userId as string);
+    const userProfile = await getProfile();
     const fetchedItems = await getItems('items', '', 'donated_by', userId);
 
-    if (!userProfile.data || !userProfile.data.username) {
+    if (!userProfile?.data || !userProfile?.data.username) {
       return <div>Error User profile not found or username is missing</div>;
     }
     return (
@@ -33,14 +33,14 @@ const ProfilePage = async () => {
           <div className='px-5 py-2'>
             <h1 className='pl-3 text-2xl'>Profile</h1>
             <div className='mt-2 flex gap-3'>
-              <h2 className='italic'>{userProfile.data.username}</h2>
+              <h2 className='italic'>{userProfile?.data.username}</h2>
               <LogOutButton>LOG OUT</LogOutButton>
             </div>
           </div>
           <div className='mt-10 flex flex-col items-center justify-between gap-4 px-4'>
-            {userProfile.data.avatar ? (
+            {userProfile?.data.avatar ? (
               <img
-                src={userProfile.data.avatar}
+                src={userProfile?.data.avatar}
                 alt='User avatar'
                 width={100}
                 height={100}
