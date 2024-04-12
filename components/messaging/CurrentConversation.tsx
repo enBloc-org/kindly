@@ -5,7 +5,6 @@ import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
-import { createSupabaseClient as supabase } from '../../supabase/modals/createSupabaseClient';
 import { useConversationContext } from '../../context/conversationContext';
 import selectMessagesByConversationId from '@/supabase/modals/messaging/selectMessagesByConversationId';
 import {
@@ -14,8 +13,12 @@ import {
 } from '../../utils/formatTimeStamp';
 
 const CurrentConversation: React.FC = () => {
-  const { allConversations, currentConversation, setCurrentConversation } =
-    useConversationContext();
+  const {
+    allConversations,
+    currentConversation,
+    setCurrentConversation,
+    supabase,
+  } = useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);

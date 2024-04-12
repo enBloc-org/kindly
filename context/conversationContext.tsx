@@ -1,5 +1,5 @@
 'use client';
-
+import { SupabaseClient } from '@supabase/supabase-js';
 import {
   Dispatch,
   SetStateAction,
@@ -11,6 +11,7 @@ import {
   AllConversationsType,
   ConversationCardType,
 } from '@/types/messagingTypes';
+import newClient from '@/supabase/utils/newClient';
 
 type ConverstaionContextProviderProps = {
   children: React.ReactNode;
@@ -27,6 +28,7 @@ type ConversationContext = {
   setShowConversationsList: Dispatch<SetStateAction<boolean>>;
   currentUserId: string;
   setCurrentUserId: Dispatch<SetStateAction<string>>;
+  supabase: SupabaseClient;
 };
 
 export const ConversationContext = createContext<ConversationContext | null>(
@@ -47,6 +49,8 @@ export default function ConversationContextProvider({
 
   const [currentUserId, setCurrentUserId] = useState<string>('');
 
+  const supabase = newClient();
+
   return (
     <ConversationContext.Provider
       value={{
@@ -58,6 +62,7 @@ export default function ConversationContextProvider({
         setShowConversationsList,
         currentUserId,
         setCurrentUserId,
+        supabase,
       }}
     >
       {children}
