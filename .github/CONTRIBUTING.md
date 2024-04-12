@@ -67,6 +67,14 @@ If you've been contributing to Kindly for a while (Thanks! ✨) and are quite co
 - Check for any Issues labeled `High Priority`
 - Consider pairing up with a less experienced developer dipping into a more complex issue - part of the ethos for Kindly is sharing knowledge
 
+## Assigning yourself
+
+Once you've identified an Issue you'd like to contribute to please add a comment to its thread requesting to be assigned.
+
+In that comment, add a brief outline of the approach you're hoping to take. This does not need to be a comprehensive report but it helps us promote knowledge sharing in the community and can help other contributors quickly identify any potential clashes with their code or it may outline a good opportunity to collaborate with someone.
+
+The Kindly core team will respond to your comment as soon as possible and assign you to the Issue. You may want to tag one of the team members in your comment but allow a few days for someone to get back to you. (The backlog is reviewed by the Kindly core team every Friday)
+
 ## Finally
 
 Have fun! 🎡
