@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { createClient } from '@/supabase/modals/middleware';
+import { createClient } from '@/supabase/utils/middleware';
 
 export async function middleware(request: NextRequest) {
   try {
