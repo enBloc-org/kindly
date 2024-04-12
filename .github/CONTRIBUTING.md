@@ -10,22 +10,11 @@ Check the backlog for any duplicates - it's possible that someone has already su
 
 Once you reach the **Issues** tab on the Kindly repo and create a new Issue you will be prompted with a template in the **New Issue Description** - please stick to this format and fill in as much detail as possible where prompted.
 
-**If** your Issue is **not a bug** delete everything in the template from this line:
-
-```markdown
-<hr>
-(only complete the following if reporting a bug 🪲 - delete otherwise)
-```
-
-## Reporting a Bug
-
-Include a clear example of the bug with (as far as possible):
+Include a clear example of the current behaviour with (as much as possible):
 
 - A way to reproduce the problem
 - Screenshots of the behaviour
 - Information on any triage you've attempted
-
-Apply the `bug` label to your Issue.
 
 <hr>
 
@@ -42,6 +31,8 @@ If you have gotten stuck on an Issue you are contributing to and need technical 
 
 The `Issues` tab is a working tool for the active development of Kindly, so it should be kept clear of communication not relating to development.
 
+If you have a question or suggetion directly related to an open Issue please use the comments on that Issue ticket to discuss it with anyone working on it / the core team.
+
 If you have a question related to Trafalgar Girls, Kindly or the community at large:
 
 - Check the documentation first - there's a chance your question can be answered by reading the [README](../README.md) file
@@ -53,7 +44,7 @@ If you have a question related to Trafalgar Girls, Kindly or the community at la
 
 Developers at all levels of experience and comfort in the Kindly tech stack are welcome to contribute!
 
-However, before you set out to submit code, please review our [best practices](link to BEST_PRACTICE.md) and our [installation guide](link to INSTALATION.md).
+However, before you set out to submit code, please review our [best practices](./BEST_PRACTICE.md) and our [installation guide](./BEFORE_YOUR_FIRST_ISSUE.md).
 
 ## Database Schema
 
@@ -75,6 +66,14 @@ If you've been contributing to Kindly for a while (Thanks! ✨) and are quite co
 - If you have been given access along with the core team, help the development by reviewing any pending Pull Requests before starting a new Issue
 - Check for any Issues labeled `High Priority`
 - Consider pairing up with a less experienced developer dipping into a more complex issue - part of the ethos for Kindly is sharing knowledge
+
+## Assigning yourself
+
+Once you've identified an Issue you'd like to contribute to please add a comment to its thread requesting to be assigned.
+
+In that comment, add a brief outline of the approach you're hoping to take. This does not need to be a comprehensive report but it helps us promote knowledge sharing in the community and can help other contributors quickly identify any potential clashes with their code or it may outline a good opportunity to collaborate with someone.
+
+The Kindly core team will respond to your comment as soon as possible and assign you to the Issue. You may want to tag one of the team members in your comment but allow a few days for someone to get back to you. (The backlog is reviewed by the Kindly core team every Friday)
 
 ## Finally
 
