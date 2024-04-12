@@ -10,7 +10,7 @@ Check the backlog for any duplicates - it's possible that someone has already su
 
 Once you reach the **Issues** tab on the Kindly repo and create a new Issue you will be prompted with a template in the **New Issue Description** - please stick to this format and fill in as much detail as possible where prompted.
 
-Include a clear example of the current behaviour with (as far as possible):
+Include a clear example of the current behaviour with (as much as possible):
 
 - A way to reproduce the problem
 - Screenshots of the behaviour
@@ -31,7 +31,7 @@ If you have gotten stuck on an Issue you are contributing to and need technical 
 
 The `Issues` tab is a working tool for the active development of Kindly, so it should be kept clear of communication not relating to development.
 
-If you have a question, or suggetion, directly related to an open Issue please use the comments on that Issue ticket to discuss it with anyone working on it / the core team.
+If you have a question or suggetion directly related to an open Issue please use the comments on that Issue ticket to discuss it with anyone working on it / the core team.
 
 If you have a question related to Trafalgar Girls, Kindly or the community at large:
 
