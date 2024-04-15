@@ -1,4 +1,4 @@
-'use server'
+'use server';
 import newServerClient from '../utils/newServerClient';
 
 export async function getProfile() {

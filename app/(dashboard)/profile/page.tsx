@@ -1,12 +1,12 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import { getItems } from '@/supabase/modals/getItems';
+import { getItems } from '@/supabase/models/getItems';
 
 //Components
 import ItemCard from '@/components/ItemCard';
 import Modal from '@/components/Modal';
 //Components
-import { getProfile } from '@/supabase/modals/getProfile';
+import { getProfile } from '@/supabase/models/getProfile';
 import LogOutButton from '@/components/LogOutButton';
 import { ProfileEdit } from '@/components/form/ProfileEdit';
 

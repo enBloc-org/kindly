@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { getProfile } from '../../supabase/modals/getProfile';
+import { getProfile } from '../../supabase/models/getProfile';
 import { useConversationContext } from '@/context/conversationContext';
-import selectConversationPartner from '@/supabase/modals/messaging/selectConversationPartner';
+import selectConversationPartner from '@/supabase/models/messaging/selectConversationPartner';
 
 type ConversationPartnerProps = {
   conversation_id: number;

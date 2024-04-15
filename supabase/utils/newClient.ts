@@ -2,19 +2,18 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 let supabase: SupabaseClient | null = null;
 
-const newClient = () => {
-  const supabaseUrl: string | undefined = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey: string | undefined =
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const newClient = (): SupabaseClient => {
+  if (supabase === null) {
+    const supabaseUrl: string | undefined =
+      process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey: string | undefined =
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  if (!supabaseKey) {
-    throw new Error('Supabase key is not defined.');
+    if (!supabaseKey || !supabaseUrl) {
+      throw new Error('Supabase key or URL is not defined.');
+    }
+    supabase = createClient(supabaseUrl, supabaseKey);
   }
-  if (!supabaseUrl) {
-    throw new Error('Supabase URL key is not defined.');
-  }
-  supabase = createClient(supabaseUrl, supabaseKey);
-
   return supabase;
 };
 

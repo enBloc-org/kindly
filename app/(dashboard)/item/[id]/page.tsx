@@ -6,7 +6,7 @@ import Image from 'next/image';
 import ItemDetails from '@/components/ItemDetails';
 import PostageOptionDisplay from '@/components/PostageOptionDisplay';
 import BackButton from '@/components/buttons/BackButton';
-import { getProfile } from '@/supabase/modals/getProfile';
+import { getProfile } from '@/supabase/models/getProfile';
 import NewConversationButton from '@/components/buttons/NewConversationButton';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {

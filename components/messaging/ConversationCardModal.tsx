@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState } from 'react';
 import '../../app/styles/messaging-styles.css';
-import deleteConversation from '../../supabase/modals/messaging/deleteConversation';
+import deleteConversation from '../../supabase/models/messaging/deleteConversation';
 
 //Components
 import ElipsisMenu from '../menus/EllipsisMenu';

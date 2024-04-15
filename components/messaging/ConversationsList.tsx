@@ -3,7 +3,8 @@ import ConversationCard from './ConversationCard';
 import { useEffect, useState } from 'react';
 import { ConversationCardType } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
-import selectItemImageAndName from '@/supabase/modals/messaging/selectItemImageAndName';
+import selectItemImageAndName from '@/supabase/models/messaging/selectItemImageAndName';
+import newClient from '@/supabase/utils/newClient';
 
 const ConversationsList: React.FC = () => {
   const {
@@ -12,10 +13,10 @@ const ConversationsList: React.FC = () => {
     setCurrentConversation,
     setShowConversationsList,
     currentUserId,
-    supabase,
   } = useConversationContext();
 
   const [notificationList, setNotificationList] = useState<number[]>([]);
+  const supabase = newClient();
 
   const updateOpenConvo = async (givenId: number) => {
     setCurrentConversation &&
@@ -100,7 +101,7 @@ const ConversationsList: React.FC = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [supabase, allConversations, setAllConversations]);
+  }, [allConversations, setAllConversations]);
 
   return (
     <div className='m-4'>

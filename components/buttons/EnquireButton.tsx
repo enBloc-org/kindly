@@ -1,5 +1,5 @@
 'use client';
-import editRow from '@/supabase/modals/editRow';
+import editRow from '@/supabase/models/editRow';
 import { SyntheticEvent, useEffect, useState } from 'react';
 
 export interface EnquireButtonProps {

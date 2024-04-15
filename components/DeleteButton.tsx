@@ -1,5 +1,5 @@
 'use client';
-import deleteItems from '@/supabase/modals/deleteItems';
+import deleteItems from '@/supabase/models/deleteItems';
 import { useRouter } from 'next/navigation';
 
 interface DeleteButtonProps {

@@ -1,6 +1,6 @@
 'use client';
 import ButtonRounded from '@/components/buttons/ButtonRounded';
-import insertRow from '@/supabase/modals/insertRow';
+import insertRow from '@/supabase/models/insertRow';
 import { useForm } from 'react-hook-form';
 import { PartialItem } from '@/types/types';
 import UploadImageInput from '@/components/form/UploadImageInput';
