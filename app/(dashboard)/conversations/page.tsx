@@ -2,13 +2,14 @@
 
 import ConversationsWrapper from '@/components/messaging/ConversationWrapper';
 import ConversationContextProvider from '@/context/conversationContext';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import newServerClient from '@/supabase/utils/newServerClient';
 
 const Conversations = async () => {
-  const supabase = createServerComponentClient({ cookies });
-  const { data } = await supabase.auth.getSession();
-  const userId = data.session?.user.id;
+  const supabase = newServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const userId = user?.id;
 
   return (
     userId && (

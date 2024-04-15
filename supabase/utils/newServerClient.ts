@@ -17,7 +17,7 @@ const newServerClient = () => {
   }
   const cookieStore = cookies();
 
-  return serverClient(supabaseUrl, supabaseKey, {
+  const supabase = serverClient(supabaseUrl, supabaseKey, {
     cookies: {
       get(name: string) {
         return cookieStore.get(name)?.value;
@@ -42,6 +42,7 @@ const newServerClient = () => {
       },
     },
   });
+  return supabase;
 };
 
 export default newServerClient;
