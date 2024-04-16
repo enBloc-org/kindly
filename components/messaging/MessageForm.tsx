@@ -1,5 +1,5 @@
 'use client';
-import { FormEvent, useState, useRef } from 'react';
+import { FormEvent, useState, useRef, KeyboardEvent } from 'react';
 
 // Components
 import insertMessage from '@/utils/messaging/insertMessage';
@@ -32,8 +32,17 @@ const MessageForm: React.FC<MessageFormProps> = ({
     }
   };
 
+  const onKeydownHandler = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    } else if (e.key === 'Enter' && e.shiftKey) {
+      console.log('Press with shift');
+    }
+  };
+
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage(e.target.value.trim());
+    setMessage(e.target.value);
 
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
@@ -52,13 +61,14 @@ const MessageForm: React.FC<MessageFormProps> = ({
         value={message}
         ref={textareaRef}
         onChange={onChangeHandler}
+        onKeyDown={onKeydownHandler}
         placeholder='Type your message here'
       />
       <button
         type='submit'
-        disabled={!message}
+        disabled={message.length < 0}
         className={`flex items-center justify-center rounded-full border-2 
-          border-solid border-primaryGreen p-3 ${message ? 'opacity-100' : 'opacity-50'}`}
+          border-solid border-primaryGreen p-3 ${message.length > 0 ? 'opacity-100' : 'opacity-50'}`}
       >
         <PaperPlaneIcon width={30} height={30} />
       </button>
