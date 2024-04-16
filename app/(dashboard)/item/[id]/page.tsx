@@ -1,5 +1,4 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import newServerClient from '@/supabase/utils/newServerClient';
 
 //Components
 import Image from 'next/image';
@@ -10,11 +9,12 @@ import { getProfile } from '@/supabase/models/getProfile';
 import NewConversationButton from '@/components/buttons/NewConversationButton';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
-  const supabase = createServerComponentClient({ cookies });
-  const { data } = await supabase.auth.getSession();
-  const userId = data.session?.user.id;
+  const supabase = newServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const userProfile = await getProfile(user?.id);
   let canMessage: boolean = true;
-  const userProfile = await getProfile();
   try {
     const { data: item } = await supabase
       .from('items')
@@ -27,11 +27,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       const donorEmail = item.profiles.email;
       const donerId: string = item.profiles?.id;
       const title = item.item_name;
-      if (
-        userProfile?.data.refugee === false ||
-        data.session?.user.id == item.profiles.id ||
-        data.session == undefined
-      ) {
+      if (userProfile?.data.refugee === false) {
         canMessage = false;
       }
 
@@ -67,7 +63,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
 
             {canMessage && (
               <NewConversationButton
-                userId={userId}
+                userId={user?.id}
                 donorId={donerId}
                 donorEmail={donorEmail}
                 title={title}
