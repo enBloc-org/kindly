@@ -33,7 +33,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage(e.target.value);
+    setMessage(e.target.value.trim());
 
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
@@ -48,7 +48,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
     >
       <textarea
         className='h-[65px] w-5/6 resize-none overflow-hidden rounded-lg
-           border-2 border-gray-300 bg-white px-4 py-2 pt-5 text-black shadow-inner'
+          border-2 border-gray-300 bg-white px-4 py-2 pt-5 text-black shadow-inner'
         value={message}
         ref={textareaRef}
         onChange={onChangeHandler}
@@ -56,8 +56,9 @@ const MessageForm: React.FC<MessageFormProps> = ({
       />
       <button
         type='submit'
-        className='flex items-center justify-center rounded-full border-2 
-          border-solid border-primaryGreen p-3'
+        disabled={!message}
+        className={`flex items-center justify-center rounded-full border-2 
+          border-solid border-primaryGreen p-3 ${message ? 'opacity-100' : 'opacity-50'}`}
       >
         <PaperPlaneIcon width={30} height={30} />
       </button>
