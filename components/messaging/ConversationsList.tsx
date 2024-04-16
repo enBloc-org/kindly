@@ -63,10 +63,14 @@ const ConversationsList: React.FC = () => {
     };
   }, [supabase, allConversations, setAllConversations]);
 
+  const sortedConversations = allConversations.sort(
+    (a, b) => new Date(b.joined_at).getTime() - new Date(a.joined_at).getTime()
+  );
+
   return (
     <div className='m-4'>
       {allConversations.length > 0 ? (
-        allConversations.map((conversation, index) => (
+        sortedConversations.map((conversation, index) => (
           <div key={`${conversation.id}-${index}`}>
             <ConversationCard
               conversationId={conversation.conversation_id}
