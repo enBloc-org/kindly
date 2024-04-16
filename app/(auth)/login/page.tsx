@@ -1,8 +1,7 @@
-import { createClient } from '@/supabase/models/server';
 import { redirect } from 'next/navigation';
 import AuthForm from '../../../components/AuthForm';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
+import newServerClient from '@/supabase/utils/newServerClient';
 
 export default function Login({
   searchParams,
@@ -14,8 +13,7 @@ export default function Login({
 
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = newServerClient();
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
