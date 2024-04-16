@@ -15,17 +15,21 @@ const MessageForm: React.FC<MessageFormProps> = ({
   conversation_id,
 }) => {
   const [message, setMessage] = useState<string>('');
+  const [isDisabled, setIsDisabled] = useState(true);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
+    const trimmedMessage = message.trim();
+
     try {
-      await insertMessage(user_id, conversation_id, message);
+      await insertMessage(user_id, conversation_id, trimmedMessage);
       setMessage('');
       if (textareaRef.current) {
         textareaRef.current.style.height = '65px';
       }
+      setIsDisabled(true);
     } catch (error) {
       console.error(`Failed to fetch messages from database: ${error}`);
       throw error;
@@ -35,13 +39,12 @@ const MessageForm: React.FC<MessageFormProps> = ({
   const onKeydownHandler = (e: KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      handleSubmit(e);
-    } else if (e.key === 'Enter' && e.shiftKey) {
-      console.log('Press with shift');
+      if (!isDisabled) handleSubmit(e);
     }
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (/\S+/.test(e.target.value)) setIsDisabled(false);
     setMessage(e.target.value);
 
     if (textareaRef.current) {
@@ -66,9 +69,9 @@ const MessageForm: React.FC<MessageFormProps> = ({
       />
       <button
         type='submit'
-        disabled={message.length < 0}
+        disabled={isDisabled}
         className={`flex items-center justify-center rounded-full border-2 
-          border-solid border-primaryGreen p-3 ${message.length > 0 ? 'opacity-100' : 'opacity-50'}`}
+          border-solid border-primaryGreen p-3 ${isDisabled ? 'opacity-50' : 'opacity-100'}`}
       >
         <PaperPlaneIcon width={30} height={30} />
       </button>
