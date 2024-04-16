@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/stale@v9
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
           # stale and delete issues
           stale-issue-message: '🤖 Meep Morp! This Issue is now marked as stale because there has been no activity for a while. \n\nIt will be deleted in 7 days unless there are new contributions.'
           close-issue-message: '🤖 Meep Morp :( This Issue has been closed because it was stale for 7 days.'
