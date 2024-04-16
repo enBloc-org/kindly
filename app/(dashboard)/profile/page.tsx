@@ -1,5 +1,3 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
 import { getItems } from '@/supabase/models/getItems';
 
 //Components
@@ -9,22 +7,18 @@ import Modal from '@/components/Modal';
 import { getProfile } from '@/supabase/models/getProfile';
 import LogOutButton from '@/components/LogOutButton';
 import { ProfileEdit } from '@/components/form/ProfileEdit';
+import newServerClient from '@/supabase/utils/newServerClient';
 
 const ProfilePage = async () => {
-  const supabase = createServerComponentClient({ cookies });
-
   try {
-    const { data, error } = await supabase.auth.getSession();
-    if (error) {
-      throw new Error(`Authentication error: ${error.message}`);
-    }
+    const supabase = newServerClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userProfile = await getProfile(user?.id);
+    const fetchedItems = await getItems('items', '', 'donated_by', user?.id);
 
-    const userId = data.session?.user.id;
-
-    const userProfile = await getProfile();
-    const fetchedItems = await getItems('items', '', 'donated_by', userId);
-
-    if (!userProfile?.data || !userProfile?.data.username) {
+    if (!userProfile?.data || !userProfile?.data.username || !user?.id) {
       return <div>Error User profile not found or username is missing</div>;
     }
     return (
@@ -55,7 +49,7 @@ const ProfilePage = async () => {
                 className='rounded-full'
               />
             )}
-            <ProfileEdit userId={userId!} user={userProfile.data.username} />
+            <ProfileEdit userId={user.id} user={userProfile.data.username} />
           </div>
         </div>
         <div className='m-auto mt-10 w-5/6'>

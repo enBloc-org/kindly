@@ -1,17 +1,14 @@
 'use server';
 import newServerClient from '../utils/newServerClient';
 
-export async function getProfile() {
+export async function getProfile(id: string | undefined) {
   const supabase = newServerClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
   try {
-    const userProfile = supabase
+    const userProfile = await supabase
       .from('profiles')
       .select('*')
-      .eq('id', user?.id)
+      .eq('id', id)
       .single();
 
     return userProfile;
