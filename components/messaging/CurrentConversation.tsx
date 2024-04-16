@@ -78,15 +78,27 @@ const CurrentConversation: React.FC = () => {
           table: 'conversations',
         },
         (conversationPayload) => {
+          console.log(conversationPayload);
           if (
-            conversationPayload.new.conversation_id ===
-            currentConversation?.conversation_id
-          )
-            // not sure if this is the right condition
-            console.log({ conversationPayload });
+            !allConversations.some(
+              (conversation) =>
+                conversation.conversation_id === conversationPayload.new.id
+            )
+          ) {
+            console.log('condition ran');
+            setAllConversations([
+              ...allConversations,
+              {
+                ...currentConversation,
+                conversations: {
+                  member_has_deleted:
+                    conversationPayload.new.member_has_deleted,
+                },
+              } as ConversationCardType,
+            ]);
+          }
 
           // if(conversationPayload.new.member_has_deleted === false){
-          // setAllConversations([...allConversations,({...currentConversation, conversations: {member_has_deleted: conversationPayload.new.member_has_deleted}} as ConversationCardType)])
 
           // console.log("all conversations: ", allConversations)
           // }
