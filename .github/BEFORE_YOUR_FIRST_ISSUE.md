@@ -11,10 +11,15 @@ Kindly is built with TypeScript
 
 To run the Kindly application locally:
 
-Clone the project:
+Fork the `enbloc-org/kindly` project to your personal github profile.  
+You can do this by finding the `fork` button on the top-right corner of our repo.
+
+![screenshot of fork button in github](./documentation_images/fork_repo.png)
+
+Clone your new project into a local repository:
 
 ```bash
-  git clone https://github.com/enBloc-org/kindly.git
+  git clone [url-to-your-forked-repo-here]
 ```
 
 Go to the project directory:
@@ -42,5 +47,5 @@ Make sure you are on the dev branch then use
 ```
 ## Next Steps
 
-Once you have kindly running on your machine read the [contribution guidance](https://github.com/enBloc-org/kindly/blob/dev/.github/CONTRIBUTING.md)
+Once you have kindly running on your machine read the [contribution guidance](CONTRIBUTING.md)
 then go to the project and assign yourself an issue or create and issue yourself. Look for ones marked as good first issues.
