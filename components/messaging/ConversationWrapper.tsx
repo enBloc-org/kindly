@@ -33,7 +33,7 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
   return (
     <div className='conversation-height w-full'>
       {isBreakpoint ? (
-        <div>
+        <div className='flex h-full flex-col'>
           {showConversationsList ? (
             <ConversationsList />
           ) : (
