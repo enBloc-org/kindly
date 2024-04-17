@@ -2,7 +2,7 @@
 import React from 'react';
 
 import giveKindly from '../../../public/giveKindly.png';
-import { getRecentItems } from '@/utils/supabase/getRecentItems';
+import { getRecentItems } from '@/supabase/models/getRecentItems';
 import Image from 'next/image';
 import Link from 'next/link';
 

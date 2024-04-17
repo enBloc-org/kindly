@@ -1,10 +1,10 @@
 'use client';
 import ConversationCard from './ConversationCard';
 import { useEffect, useState } from 'react';
-import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
 import { ConversationCardType } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
-import selectItemImageAndName from '@/utils/messaging/selectItemImageAndName';
+import selectItemImageAndName from '@/supabase/models/messaging/selectItemImageAndName';
+import newClient from '@/supabase/utils/newClient';
 
 const ConversationsList: React.FC = () => {
   const {
@@ -16,6 +16,7 @@ const ConversationsList: React.FC = () => {
   } = useConversationContext();
 
   const [notificationList, setNotificationList] = useState<number[]>([]);
+  const supabase = newClient();
 
   const updateOpenConvo = async (givenId: number) => {
     setCurrentConversation &&
@@ -100,7 +101,7 @@ const ConversationsList: React.FC = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [supabase, allConversations, setAllConversations]);
+  }, [allConversations, setAllConversations]);
 
   return (
     <div className='m-4 flex flex-col items-center overflow-y-auto'>

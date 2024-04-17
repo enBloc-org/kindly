@@ -1,8 +1,7 @@
 import AuthForm from '@/components/AuthForm';
-import insertRow from '@/utils/supabase/insertRow';
-import { createClient } from '@/utils/supabase/server';
+import insertRow from '@/supabase/models/insertRow';
+import newServerClient from '@/supabase/utils/newServerClient';
 import { PartialProfile } from '@/types/types';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export default function SignUp({
@@ -13,8 +12,7 @@ export default function SignUp({
   const signUp = async (formData: FormData) => {
     'use server';
 
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = newServerClient();
 
     const { data, error } = await supabase.auth.signUp({
       email: formData.get('email') as string,

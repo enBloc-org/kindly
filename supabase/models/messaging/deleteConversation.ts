@@ -1,4 +1,4 @@
-import newClient from '../../config/supabaseclient';
+import newClient from '@/supabase/utils/newClient';
 
 export default async function deleteConversation(
   conversationId: number,
