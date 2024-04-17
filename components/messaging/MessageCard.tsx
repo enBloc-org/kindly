@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import '../../app/styles/messaging-styles.css';
-import { markAsRead } from '@/utils/messaging/markMessageAsRead';
+import { markAsRead } from '@/supabase/models/messaging/markMessageAsRead';
 
 type MessageCardProps = {
   senderId: string;

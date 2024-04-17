@@ -1,11 +1,9 @@
 'use server';
-import { cookies } from 'next/headers';
-import { createClient } from '@/utils/supabase/server';
 import { item } from '../../types/types';
+import newClient from '../utils/newClient';
 
 export default async function searchByName(name: string): Promise<item[]> {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = newClient();
 
   const { data, error } = await supabase
     .from('items')

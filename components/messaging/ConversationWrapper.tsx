@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import ConversationsList from './ConversationsList';
 import CurrentConversation from './CurrentConversation';
 import useMediaQuery from '../hooks/useMediaQuery';
-import getUserConversationsandItemNames from '@/utils/messaging/getUserConversationsandItemNames';
+import getUserConversationsandItemNames from '@/supabase/models/messaging/getUserConversationsandItemNames';
 import { useConversationContext } from '@/context/conversationContext';
 
 type ConversationWrapperType = {

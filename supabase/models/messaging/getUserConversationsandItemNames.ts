@@ -1,10 +1,11 @@
-import { createSupabaseClient as supabase } from '../supabase/createSupabaseClient';
-import { AllConversationsType } from '../../types/messagingTypes';
+import newClient from '@/supabase/utils/newClient';
+import { AllConversationsType } from '../../../types/messagingTypes';
 
 const getUserConversationsandItemNames = async (
   userId?: string
 ): Promise<AllConversationsType> => {
   try {
+    const supabase = newClient();
     const { data: allConversations } = await supabase
       .from('user_conversations')
       .select(
