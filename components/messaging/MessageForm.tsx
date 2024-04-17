@@ -44,7 +44,12 @@ const MessageForm: React.FC<MessageFormProps> = ({
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (/\S+/.test(e.target.value)) setIsDisabled(false);
+    if (/\S+/.test(e.target.value) && message.length >= 0) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+
     setMessage(e.target.value);
 
     if (textareaRef.current) {
@@ -71,7 +76,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
         type='submit'
         disabled={isDisabled}
         className={`flex items-center justify-center rounded-full border-2 
-          border-solid border-primaryGreen p-3 ${isDisabled ? 'opacity-50' : 'opacity-100'}`}
+          border-solid border-primaryGreen p-3 ${isDisabled ? 'opacity-40' : 'opacity-100'}`}
       >
         <PaperPlaneIcon width={30} height={30} />
       </button>
