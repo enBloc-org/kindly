@@ -1,5 +1,5 @@
 'use client';
-import editRow from '@/utils/supabase/editRow';
+import editRow from '@/supabase/models/editRow';
 import { PartialItem, editProfile } from '@/types/supabaseTypes';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';

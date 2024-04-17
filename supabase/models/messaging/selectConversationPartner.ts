@@ -1,9 +1,10 @@
-import { createSupabaseClient as supabase } from '../supabase/createSupabaseClient';
+import newClient from '@/supabase/utils/newClient';
 
 export default async function selectConversationPartner(
   conversationId: number,
   currentUserId: string
 ) {
+  const supabase = newClient();
   const { data: partnerId } = await supabase
     .from('user_conversations')
     .select('partner_id')

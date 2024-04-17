@@ -1,30 +1,24 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
-import { getItems } from '@/utils/supabase/getItems';
+import { getItems } from '@/supabase/models/getItems';
 
 //Components
 import ItemCard from '@/components/ItemCard';
 import Modal from '@/components/Modal';
 //Components
-import { getProfile } from '@/utils/supabase/getProfile';
+import { getProfile } from '@/supabase/models/getProfile';
 import LogOutButton from '@/components/LogOutButton';
 import { ProfileEdit } from '@/components/form/ProfileEdit';
+import newServerClient from '@/supabase/utils/newServerClient';
 
 const ProfilePage = async () => {
-  const supabase = createServerComponentClient({ cookies });
-
   try {
-    const { data, error } = await supabase.auth.getSession();
-    if (error) {
-      throw new Error(`Authentication error: ${error.message}`);
-    }
+    const supabase = newServerClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userProfile = await getProfile(user?.id);
+    const fetchedItems = await getItems('items', '', 'donated_by', user?.id);
 
-    const userId = data.session?.user.id;
-
-    const userProfile = await getProfile(supabase, userId as string);
-    const fetchedItems = await getItems('items', '', 'donated_by', userId);
-
-    if (!userProfile.data || !userProfile.data.username) {
+    if (!userProfile?.data || !userProfile?.data.username || !user?.id) {
       return <div>Error User profile not found or username is missing</div>;
     }
     return (
@@ -33,14 +27,14 @@ const ProfilePage = async () => {
           <div className='px-5 py-2'>
             <h1 className='pl-3 text-2xl'>Profile</h1>
             <div className='mt-2 flex gap-3'>
-              <h2 className='italic'>{userProfile.data.username}</h2>
+              <h2 className='italic'>{userProfile?.data.username}</h2>
               <LogOutButton>LOG OUT</LogOutButton>
             </div>
           </div>
           <div className='mt-10 flex flex-col items-center justify-between gap-4 px-4'>
-            {userProfile.data.avatar ? (
+            {userProfile?.data.avatar ? (
               <img
-                src={userProfile.data.avatar}
+                src={userProfile?.data.avatar}
                 alt='User avatar'
                 width={100}
                 height={100}
@@ -55,7 +49,7 @@ const ProfilePage = async () => {
                 className='rounded-full'
               />
             )}
-            <ProfileEdit userId={userId!} user={userProfile.data.username} />
+            <ProfileEdit userId={user.id} user={userProfile.data.username} />
           </div>
         </div>
         <div className='m-auto mt-10 w-5/6'>

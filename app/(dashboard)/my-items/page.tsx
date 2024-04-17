@@ -1,4 +1,4 @@
-import { getItems } from '@/utils/supabase/getItems';
+import { getItems } from '@/supabase/models/getItems';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import ItemCard from '@/components/ItemCard';

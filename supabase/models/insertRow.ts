@@ -1,4 +1,4 @@
-import newClient from '../../config/supabaseclient';
+import newClient from '../utils/newClient';
 import { PartialItem, PartialProfile } from '../../types/supabaseTypes';
 export default async function insertRow(
   table: string,
