@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { getProfile } from '../../utils/supabase/getProfile';
-import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
+import { getProfile } from '../../supabase/models/getProfile';
 import { useConversationContext } from '@/context/conversationContext';
-import selectConversationPartner from '@/utils/messaging/selectConversationPartner';
+import selectConversationPartner from '@/supabase/models/messaging/selectConversationPartner';
 
 type ConversationPartnerProps = {
   conversation_id: number;
@@ -37,7 +36,7 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
         conversation_id,
         currentUserId
       );
-      const partnerProfile = await getProfile(supabase, partnerId);
+      const partnerProfile = await getProfile(partnerId);
 
       setConversationPartner(partnerProfile.data);
     };
