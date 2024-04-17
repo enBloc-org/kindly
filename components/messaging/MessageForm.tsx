@@ -2,7 +2,7 @@
 import { FormEvent, useState, useRef, KeyboardEvent } from 'react';
 
 // Components
-import insertMessage from '@/utils/messaging/insertMessage';
+import insertMessage from '@/supabase/models/messaging/insertMessage';
 import PaperPlaneIcon from '../icons/PaperPlaneIcon';
 
 type MessageFormProps = {

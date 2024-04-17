@@ -5,13 +5,13 @@ import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
-import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
 import { useConversationContext } from '../../context/conversationContext';
-import selectMessagesByConversationId from '@/utils/messaging/selectMessagesByConversationId';
+import selectMessagesByConversationId from '@/supabase/models/messaging/selectMessagesByConversationId';
 import {
   formatTimeMarker,
   formatDateMarker,
-} from '../../utils/messaging/formatTimeStamp';
+} from '../../utils/formatTimeStamp';
+import newClient from '@/supabase/utils/newClient';
 
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =
@@ -19,6 +19,7 @@ const CurrentConversation: React.FC = () => {
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);
+  const supabase = newClient();
 
   useEffect(() => {
     setCurrentConversation && setCurrentConversation(allConversations[0]);
@@ -60,7 +61,7 @@ const CurrentConversation: React.FC = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [supabase, currentMessages, setCurrentMessages]);
+  }, [currentMessages, setCurrentMessages]);
 
   useEffect(() => {
     const handleScroll = () => {
