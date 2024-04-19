@@ -1,4 +1,4 @@
-import newClient from '../../config/supabaseclient';
+import newClient from '@/supabase/utils/newClient';
 
 export default async function newConvoStart(
   userID: string | undefined,
@@ -16,8 +16,18 @@ export default async function newConvoStart(
       const conID = conversationData?.id;
 
       await supabase.from('user_conversations').insert([
-        { conversation_id: conID, user_id: userID, item_id: itemID },
-        { conversation_id: conID, user_id: donorID, item_id: itemID },
+        {
+          conversation_id: conID,
+          user_id: userID,
+          item_id: itemID,
+          partner_id: donorID,
+        },
+        {
+          conversation_id: conID,
+          user_id: donorID,
+          item_id: itemID,
+          partner_id: userID,
+        },
       ]);
     } catch (error) {
       console.error(error);

@@ -5,12 +5,13 @@ import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
-import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
 import { useConversationContext } from '../../context/conversationContext';
+import selectMessagesByConversationId from '@/supabase/models/messaging/selectMessagesByConversationId';
 import {
   formatTimeMarker,
   formatDateMarker,
-} from '../../utils/messaging/formatTimeStamp';
+} from '../../utils/formatTimeStamp';
+import newClient from '@/supabase/utils/newClient';
 
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =
@@ -18,27 +19,20 @@ const CurrentConversation: React.FC = () => {
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);
+  const supabase = newClient();
 
   useEffect(() => {
     setCurrentConversation && setCurrentConversation(allConversations[0]);
   }, [allConversations, setCurrentConversation]);
 
   useEffect(() => {
-    const getMessagesForCurrentConversation = async () => {
-      try {
-        const { data: messageData } = await supabase
-          .from('messages')
-          .select('*')
-          .eq('conversation_id', currentConversation?.conversation_id);
-
-        setCurrentMessages(messageData ?? []);
-      } catch (error) {
-        console.error(`Failed to get messages from database: ${error}`);
-        throw error;
-      }
+    const setMessagesForCurrentConversation = async () => {
+      const selectedMessages = await selectMessagesByConversationId(
+        currentConversation?.conversation_id as number
+      );
+      setCurrentMessages(selectedMessages);
     };
-
-    getMessagesForCurrentConversation();
+    setMessagesForCurrentConversation();
   }, [currentConversation, setCurrentMessages]);
 
   useEffect(() => {
@@ -67,7 +61,7 @@ const CurrentConversation: React.FC = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [supabase, currentMessages, setCurrentMessages]);
+  }, [currentMessages, setCurrentMessages]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,25 +74,27 @@ const CurrentConversation: React.FC = () => {
       return () => clearTimeout(debounce);
     };
 
-    chatWindowRef.current &&
-      chatWindowRef.current.addEventListener('scroll', handleScroll);
+    chatWindowRef?.current?.addEventListener('scroll', handleScroll);
 
     return () => {
-      chatWindowRef.current &&
-        chatWindowRef.current.removeEventListener('scroll', handleScroll);
+      chatWindowRef?.current?.removeEventListener('scroll', handleScroll);
     };
   }, [isScrolling, setIsScrolling]);
 
   return (
     <div className='conversation-height flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
-      <ConversationPartner message_data={currentMessages} />
+      <div className='p-5'>
+        <ConversationPartner
+          conversation_id={currentConversation?.conversation_id as number}
+        />
+      </div>
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}
       >
         {currentMessages
           .map((message: MessageType, index: number) => (
-            <div key={`${message.id}-${message.created_at}`}>
+            <div key={`${message.id}`}>
               {formatDateMarker(message.created_at) !==
                 formatDateMarker(currentMessages[index - 1]?.created_at) && (
                 <div
@@ -108,10 +104,11 @@ const CurrentConversation: React.FC = () => {
                 </div>
               )}
               <MessageCard
-                sender_id={message.sender_id}
-                created_at={formatTimeMarker(message.created_at)}
-                message_text={message.message_text}
+                senderId={message.sender_id}
+                createdAt={formatTimeMarker(message.created_at)}
+                messageText={message.message_text}
                 currentUser={currentConversation?.user_id}
+                messageId={message.id}
               />
             </div>
           ))
@@ -120,7 +117,7 @@ const CurrentConversation: React.FC = () => {
       <MessageForm
         user_id={currentConversation?.user_id}
         conversation_id={currentConversation?.conversation_id}
-      ></MessageForm>
+      />
     </div>
   );
 };

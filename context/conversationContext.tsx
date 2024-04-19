@@ -1,5 +1,4 @@
 'use client';
-
 import {
   Dispatch,
   SetStateAction,
@@ -25,6 +24,8 @@ type ConversationContext = {
   >;
   showConversationsList: boolean;
   setShowConversationsList: Dispatch<SetStateAction<boolean>>;
+  currentUserId: string;
+  setCurrentUserId: Dispatch<SetStateAction<string>>;
 };
 
 export const ConversationContext = createContext<ConversationContext | null>(
@@ -43,6 +44,8 @@ export default function ConversationContextProvider({
 
   const [showConversationsList, setShowConversationsList] = useState(false);
 
+  const [currentUserId, setCurrentUserId] = useState<string>('');
+
   return (
     <ConversationContext.Provider
       value={{
@@ -52,6 +55,8 @@ export default function ConversationContextProvider({
         setCurrentConversation,
         showConversationsList,
         setShowConversationsList,
+        currentUserId,
+        setCurrentUserId,
       }}
     >
       {children}

@@ -1,9 +1,10 @@
 'use client';
 import ConversationCard from './ConversationCard';
-import { useEffect } from 'react';
-import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
+import { useEffect, useState } from 'react';
 import { ConversationCardType } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
+import selectItemImageAndName from '@/supabase/models/messaging/selectItemImageAndName';
+import newClient from '@/supabase/utils/newClient';
 
 const ConversationsList: React.FC = () => {
   const {
@@ -11,7 +12,11 @@ const ConversationsList: React.FC = () => {
     setAllConversations,
     setCurrentConversation,
     setShowConversationsList,
+    currentUserId,
   } = useConversationContext();
+
+  const [notificationList, setNotificationList] = useState<number[]>([]);
+  const supabase = newClient();
 
   const updateOpenConvo = async (givenId: number) => {
     setCurrentConversation &&
@@ -33,12 +38,46 @@ const ConversationsList: React.FC = () => {
           event: 'INSERT',
           schema: 'public',
           table: 'user_conversations',
+          filter: `user_id=eq.${currentUserId}`,
+        },
+        async (payload) => {
+          if (payload.new.user_id === currentUserId) {
+            const newConversation = await selectItemImageAndName(
+              payload.new as ConversationCardType
+            );
+
+            setAllConversations((prevConversations) => [
+              ...prevConversations,
+              newConversation,
+            ]);
+          }
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'user_conversations',
+          filter: `user_id=eq.${currentUserId}`,
         },
         (payload) => {
-          setAllConversations((prevConversations) => [
-            ...prevConversations,
-            payload.new as ConversationCardType,
-          ]);
+          if (payload.new.has_unread_messages) {
+            setNotificationList((prevState) => {
+              if (!prevState.includes(payload.new.conversation_id)) {
+                return [...prevState, payload.new.conversation_id];
+              }
+              return prevState;
+            });
+          }
+          if (!payload.new.has_unread_messages) {
+            setNotificationList((prevState) => {
+              return prevState.filter(
+                (conversationId) =>
+                  conversationId !== payload.new.conversation_id
+              );
+            });
+          }
         }
       )
       .on(
@@ -47,6 +86,7 @@ const ConversationsList: React.FC = () => {
           event: 'DELETE',
           schema: 'public',
           table: 'user_conversations',
+          filter: `user_id=eq.${currentUserId}`,
         },
         (payload) => {
           setAllConversations((prevConversations) => [
@@ -61,7 +101,7 @@ const ConversationsList: React.FC = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [supabase, allConversations, setAllConversations]);
+  }, [allConversations, setAllConversations]);
 
   const sortedConversations = allConversations.sort(
     (a, b) => new Date(b.joined_at).getTime() - new Date(a.joined_at).getTime()
@@ -71,13 +111,14 @@ const ConversationsList: React.FC = () => {
     <div className='m-4'>
       {allConversations.length > 0 ? (
         sortedConversations.map((conversation, index) => (
-          <div key={`${conversation.id}-${index}`}>
+          <div key={`${conversation.id}`}>
             <ConversationCard
               conversationId={conversation.conversation_id}
               joinedAt={conversation.joined_at}
               itemName={conversation.items.item_name}
               imageSrc={conversation.items.imageSrc}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
+              notificationList={notificationList}
             />
           </div>
         ))

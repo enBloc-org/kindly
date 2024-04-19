@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { getProfile } from '@/utils/supabase/getProfile';
-import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
+import { getProfile } from '../../supabase/models/getProfile';
 import { useConversationContext } from '@/context/conversationContext';
-import { MessageType } from '@/types/messagingTypes';
+import selectConversationPartner from '@/supabase/models/messaging/selectConversationPartner';
 
 type ConversationPartnerProps = {
-  message_data: MessageType[];
+  conversation_id: number;
+  hideImage?: boolean;
 };
 
 type ConversationPartnerType = {
@@ -14,75 +14,53 @@ type ConversationPartnerType = {
   avatar: string;
 };
 
+/**
+ *
+ * @param conversation_id refers to the relevant "converstion_id" value returned from the user_conversations table
+ * @param user_conversationId refers to the relevant "id" value returned from the user_conversations table
+ * @param hideImage is optional and allows us to display only the users name without an avatar.
+ *                  If this parameter is excluded an avatar will be displayed with either the users image or a default avatar if none has been set.
+ */
 export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
-  message_data,
+  conversation_id,
+  hideImage,
 }) => {
   const [conversationPartner, setConversationPartner] = useState<
     ConversationPartnerType | undefined
   >();
-  const { currentConversation } = useConversationContext();
+  const { currentUserId } = useConversationContext();
 
   useEffect(() => {
-    const getConversationPartner = async () => {
-      const conversationPartnerSet = new Set(
-        message_data?.map((message: { sender_id: string }) => message.sender_id)
+    const getPartnerProfile = async () => {
+      const partnerId = await selectConversationPartner(
+        conversation_id,
+        currentUserId
       );
+      const partnerProfile = await getProfile(partnerId);
 
-      if (
-        conversationPartnerSet?.size !== 0 &&
-        conversationPartnerSet?.size !== 1
-      ) {
-        const calculateID = (isCurrentUser: boolean) => {
-          return (
-            conversationPartnerSet &&
-            Array.from(conversationPartnerSet).find((id) =>
-              isCurrentUser
-                ? id === currentConversation?.user_id
-                : id !== currentConversation?.user_id
-            )
-          );
-        };
-
-        const conversationDonorID = calculateID(true);
-        const conversationPartnerID = calculateID(false);
-
-        let partnerProfile;
-
-        if (conversationPartnerID && conversationPartnerID !== undefined) {
-          partnerProfile = await getProfile(supabase, conversationPartnerID);
-        }
-
-        conversationDonorID &&
-          (await getProfile(supabase, conversationDonorID));
-
-        partnerProfile && setConversationPartner(partnerProfile.data);
-      } else {
-        const { data: fetchedItemDonor } = await supabase
-          .from('items')
-          .select('profiles(username, avatar)')
-          .eq('id', currentConversation?.item_id);
-
-        fetchedItemDonor &&
-          setConversationPartner(
-            fetchedItemDonor[0].profiles as unknown as ConversationPartnerType
-          );
-      }
+      setConversationPartner(partnerProfile.data);
     };
-    getConversationPartner();
-  }, [currentConversation?.id]);
+
+    getPartnerProfile();
+  }, [conversation_id]);
 
   return (
-    <div className='flex flex-row items-center p-5'>
-      <p data-testid='item-donor'>{conversationPartner?.username}</p>
+    <div className='flex flex-row items-center'>
+      <p data-testid='conversation-partner-name'>
+        {conversationPartner?.username}
+      </p>
 
-      <Image
-        className='ml-2 rounded-full'
-        alt='user logo'
-        width='25'
-        height='35'
-        src={conversationPartner?.avatar ?? '/default-profile.png'}
-        style={{ width: 'auto', height: 'auto' }}
-      />
+      {!hideImage && (
+        <Image
+          className='ml-2 rounded-full'
+          alt='user logo'
+          width='25'
+          height='35'
+          src={conversationPartner?.avatar ?? '/default-profile.png'}
+          style={{ width: 'auto', height: 'auto' }}
+          data-testid='conversation-partner-avatar'
+        />
+      )}
     </div>
   );
 };
