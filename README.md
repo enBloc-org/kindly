@@ -35,4 +35,7 @@ We **welcome** your contributions. Please familiarise yourself with the followin
 
 <p align=center>✨The enBloc team will be reviewing issues and PRs weekly on Friday mornings✨</p>
 
+See a deployed version of the site [here](https://cool-creponne-3e1272.netlify.app/)
+
+
 
