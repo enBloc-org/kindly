@@ -104,7 +104,7 @@ const ConversationsList: React.FC = () => {
   }, [allConversations, setAllConversations]);
 
   return (
-    <div className='m-4'>
+    <div className='flex flex-col lg:m-2 lg:gap-2'>
       {allConversations.length > 0 ? (
         allConversations.map((conversation) => (
           <div key={`${conversation.id}`}>
