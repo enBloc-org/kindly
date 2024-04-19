@@ -9,7 +9,20 @@ export type MessageType = {
 
 export type AllConversationsType = ConversationCardType[];
 
-export type ConversationCardPartial = Omit<ConversationCardType, 'items'>;
+export type ConversationCardPartial = Omit<
+  ConversationCardType,
+  'last_message'
+>;
+
+export type ItemType = {
+  imageSrc: string;
+  item_name: string;
+};
+
+export type LastMessage = {
+  created_at: string;
+  message_text: string;
+};
 
 export type ConversationCardType = {
   id: number;
@@ -17,10 +30,11 @@ export type ConversationCardType = {
   conversation_id: number;
   user_id: string;
   item_id: number;
-  items: ItemType;
-};
-
-export type ItemType = {
-  imageSrc: string;
+  has_unread_messages: boolean;
+  partner_username: string;
+  partner_avatar: string;
+  message_text: string;
+  created_at: string;
   item_name: string;
+  item_imgae: string;
 };
