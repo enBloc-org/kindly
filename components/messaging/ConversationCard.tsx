@@ -1,13 +1,15 @@
 import Image from 'next/image';
 import ConversationCardModal from './ConversationCardModal';
 import { useConversationContext } from '../../context/conversationContext';
-import { ConversationPartner } from './ConversationPartner';
+import defaultProfileImage from '../../public/default-profile.png';
 
 export type ConversationCardProps = {
-  joinedAt: string;
-  itemName: string;
-  imageSrc: string;
+  messageTimestamp: string;
+  messageText: string;
+  partnerUsername: string;
+  partnerAvatar: string;
   conversationId: number;
+  itemName: string;
   clickHandler: () => void;
   notificationList: number[];
 };
@@ -23,14 +25,17 @@ const formatString = (input: string) => {
 };
 
 const ConversationCard: React.FC<ConversationCardProps> = ({
-  joinedAt,
-  itemName,
-  imageSrc,
+  messageTimestamp,
+  messageText,
+  partnerUsername,
+  partnerAvatar,
   conversationId,
+  itemName,
   clickHandler,
   notificationList,
 }) => {
   const { currentConversation } = useConversationContext();
+
   return (
     <div tabIndex={0} aria-label='button' onClick={clickHandler}>
       <div
@@ -47,22 +52,37 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
               border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black'
             ></div>
           )}
-          <Image src={imageSrc} fill className='rounded-full' alt={itemName} />
+          {partnerAvatar ? (
+            <Image
+              src={partnerAvatar}
+              fill
+              className='rounded-full'
+              alt={partnerUsername}
+            />
+          ) : (
+            <Image
+              src={defaultProfileImage}
+              fill
+              className='rounded-full'
+              alt={partnerUsername}
+            />
+          )}
         </div>
         <div className='pl-4 text-left'>
-          <h2 className='text-lg font-bold'>{formatString(itemName)}</h2>
-          <ConversationPartner
-            conversation_id={conversationId}
-            hideImage={true}
-          />
-          <p className='text-sm font-light italic'>This will be a message...</p>
+          <div>
+            <h2 className='text-lg font-bold'>
+              {partnerUsername ? formatString(partnerUsername) : 'Kindly User'}
+            </h2>
+            <p>{itemName}</p>
+          </div>
+          <p className='text-sm font-light italic'>{messageText}</p>
         </div>
         <div className='ml-auto flex flex-col items-center gap-4 pl-8 pr-2'>
           <ConversationCardModal
             conversationId={conversationId}
             message='Are you sure you want to delete this conversation?'
           />
-          <p className='font-light italic'>{joinedAt?.slice(5, 10)}</p>
+          <p className='font-light italic'>{messageTimestamp?.slice(5, 10)}</p>
         </div>
       </div>
     </div>

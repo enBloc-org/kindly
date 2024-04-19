@@ -110,9 +110,11 @@ const ConversationsList: React.FC = () => {
           <div key={`${conversation.id}`}>
             <ConversationCard
               conversationId={conversation.conversation_id}
-              joinedAt={conversation.joined_at}
-              itemName={conversation.items.item_name}
-              imageSrc={conversation.items.imageSrc}
+              messageTimestamp={conversation.created_at}
+              messageText={conversation.message_text}
+              partnerUsername={conversation.partner_username}
+              partnerAvatar={conversation.partner_avatar}
+              itemName={conversation.item_name}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
               notificationList={notificationList}
             />
