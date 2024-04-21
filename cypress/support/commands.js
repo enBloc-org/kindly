@@ -1,3 +1,7 @@
+import LoginPage from '../support/page_objects/loginPage';
+import HomePage from '../support/page_objects/homePage';
+import * as page from '../fixtures/URLs.json';
+
 /// <reference types="cypress" />
 // ***********************************************
 // This example commands.ts shows you how to
@@ -11,7 +15,13 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('login', (username, password) => {
+  cy.visit(page.login);
+  LoginPage.emailInput().type(username);
+  LoginPage.passwordInput().type(password);
+  LoginPage.loginButton().click();
+  HomePage.profileIcon().should('be.visible');
+});
 //
 //
 // -- This is a child command --

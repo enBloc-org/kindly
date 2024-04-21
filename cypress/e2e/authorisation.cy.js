@@ -1,5 +1,6 @@
 import LoginPage from '../support/page_objects/loginPage';
 import HomePage from '../support/page_objects/homePage';
+import ProfilePage from '../support/page_objects/profilePage';
 import * as page from '../fixtures/URLs.json';
 
 describe('Authorisation Spec', () => {
@@ -9,5 +10,12 @@ describe('Authorisation Spec', () => {
     LoginPage.passwordInput().type(Cypress.env('loginPassword'));
     LoginPage.loginButton().click();
     HomePage.profileIcon().should('be.visible');
+  });
+
+  it('User can log out', () => {
+    cy.login(Cypress.env('loginEmail'), Cypress.env('loginPassword'));
+    cy.visit(page.profile);
+    ProfilePage.logoutButton().click();
+    HomePage.profileIcon().should('not.exist');
   });
 });
