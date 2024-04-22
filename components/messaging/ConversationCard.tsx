@@ -16,8 +16,8 @@ export type ConversationCardProps = {
 };
 
 const formatString = (input: string): string => {
-  const capitalized = input.charAt(0).toUpperCase() + input.slice(1);
-  return cappedStringLength(capitalized, 15);
+  const capitalizedString = input.charAt(0).toUpperCase() + input.slice(1);
+  return cappedStringLength(capitalizedString, 15);
 };
 
 const cappedStringLength = (input: string, length: number): string => {
@@ -39,8 +39,8 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
 
   return (
     <div
-      className={`relative flex items-center border border-[#b9b8b8] bg-gray-300 
-          p-4 shadow-md hover:bg-secondaryGray lg:max-w-[500px] lg:rounded-lg
+      className={`relative flex items-center bg-gray-300 p-4 shadow-md 
+          outline outline-[#b9b8b8] hover:bg-secondaryGray lg:max-w-[500px] lg:rounded-lg
           ${currentConversation?.conversation_id === conversationId ? 'lg: border-2 lg:border-primaryGreen' : ''}`}
       tabIndex={0}
       aria-label='button'
