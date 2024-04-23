@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import ConversationsList from './ConversationsList';
 import CurrentConversation from './CurrentConversation';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -19,7 +19,6 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
     setAllConversations,
     setCurrentUserId,
   } = useConversationContext();
-  const wrapperRef = useRef(null);
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -33,7 +32,7 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
   }, []);
 
   return (
-    <div className='conversation-height w-full' ref={wrapperRef}>
+    <div className='conversation-height w-full'>
       {isBreakpoint ? (
         <div>
           {showConversationsList ? (
