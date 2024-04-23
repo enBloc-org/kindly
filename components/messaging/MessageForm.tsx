@@ -4,6 +4,7 @@ import { FormEvent, useState, useRef, KeyboardEvent } from 'react';
 // Components
 import insertMessage from '@/supabase/models/messaging/insertMessage';
 import PaperPlaneIcon from '../icons/PaperPlaneIcon';
+import useMediaQuery from '../hooks/useMediaQuery';
 
 type MessageFormProps = {
   user_id: string | undefined;
@@ -17,6 +18,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
   const [message, setMessage] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState(true);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const breakpoint = useMediaQuery(1000);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -37,7 +39,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
   };
 
   const onKeydownHandler = (e: KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey && !breakpoint) {
       e.preventDefault();
       if (!isDisabled) handleSubmit(e);
     }
