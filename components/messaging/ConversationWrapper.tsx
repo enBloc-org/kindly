@@ -30,6 +30,7 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
     };
     fetchConversations();
   }, []);
+
   return (
     <div className='conversation-height w-full'>
       {isBreakpoint ? (
