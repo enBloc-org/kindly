@@ -3,6 +3,7 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import Footer from '@/components/Footer';
+import { LayoutProvider } from '@/context/LayoutContext';
 
 export default async function DashBoardLayout({
   children,
@@ -16,9 +17,11 @@ export default async function DashBoardLayout({
   }
   return (
     <>
-      <Header />
-      <main>{children}</main>
-      <Footer />
+      <LayoutProvider>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </LayoutProvider>
     </>
   );
 }
