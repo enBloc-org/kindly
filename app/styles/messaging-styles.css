@@ -7,9 +7,6 @@
   height: calc(100vh - 165px);
 }
 
-.conversation-height {
-  height: calc(100vh - 85px);
-}
 /*------- Media Queries ---------*/
 
 @media screen and (min-width: 1000px) {
