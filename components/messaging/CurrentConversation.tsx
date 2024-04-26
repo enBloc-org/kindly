@@ -1,6 +1,6 @@
 'use client';
 
-import { MessageType } from '@/types/messagingTypes';
+import { ConversationCardType, MessageType } from '@/types/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { ConversationPartner } from './ConversationPartner';
@@ -65,60 +65,9 @@ const CurrentConversation: React.FC = () => {
       supabase.removeChannel(channel);
     };
   }, [supabase, currentMessages, setCurrentMessages]);
-
-  useEffect(() => {
-    console.log('use effect has run');
-    const conversationsChannel = supabase
-      .channel('realtime conversations')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'conversations',
-        },
-        (conversationPayload) => {
-          console.log(conversationPayload);
-          if (
-            !allConversations.some(
-              (conversation) =>
-                conversation.conversation_id === conversationPayload.new.id
-            )
-          ) {
-            console.log('condition ran');
-            setAllConversations([
-              ...allConversations,
-              {
-                ...currentConversation,
-                conversations: {
-                  member_has_deleted:
-                    conversationPayload.new.member_has_deleted,
-                },
-              } as ConversationCardType,
-            ]);
-          }
-
-          // if(conversationPayload.new.member_has_deleted === false){
-
-          // console.log("all conversations: ", allConversations)
-          // }
-
-          // setCurrentConversation({...currentConversation, conversations: {member_has_deleted: conversationPayload.new.member_has_deleted}} as ConversationCardType)
-          // console.log("current conversation payload :", {...currentConversation, conversations: {member_has_deleted: conversationPayload.new.member_has_deleted}} as ConversationCardType)
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(conversationsChannel);
-    };
-  }, [
-    supabase,
-    currentConversation,
-    setCurrentConversation,
-    allConversations,
-    setAllConversations,
-  ]);
+// instead of listining for conversations update listen for insertions to user_converstions 
+//then add that too all conversations and change to true update to false in the listening for deletion
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -175,7 +124,7 @@ const CurrentConversation: React.FC = () => {
         user_id={currentConversation?.user_id}
         conversation_id={currentConversation?.conversation_id}
         member_has_deleted={
-          currentConversation?.conversations.member_has_deleted
+          currentConversation?.conversations?.member_has_deleted
         }
         partner_id={currentConversation?.partner_id}
         item_id={currentConversation?.item_id}
