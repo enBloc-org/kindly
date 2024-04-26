@@ -3,13 +3,13 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import useMediaQuery from './hooks/useMediaQuery';
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 // Components
+import { useLayout } from '@/context/LayoutContext';
 import DesktopNav from './navigation/DesktopNav';
 import NavigationLinkContainer from './navigation/NavigationLinkContainer';
 import ProfileRouteIcon from './icons/navigation/ProfileRouteIcon';
-import { useLayout } from '@/context/LayoutContext';
 
 export default function Header() {
   const isBreakpoint = useMediaQuery(1000);
@@ -18,15 +18,23 @@ export default function Header() {
   const { dispatch } = useLayout();
   const [headerHeight, setHeaderHeight] = useState(0);
 
-  useEffect(() => {
-    if (headerRef.current) {
-      const currentHeight = headerRef.current.offsetHeight;
-      if (currentHeight !== headerHeight) {
-        setHeaderHeight(currentHeight);
-        dispatch({ type: 'SET_HEADER_HEIGHT', height: currentHeight });
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      if (headerRef.current) {
+        const currentHeight = headerRef.current.offsetHeight;
+        if (currentHeight !== headerHeight) {
+          setHeaderHeight(currentHeight);
+          dispatch({ type: 'SET_HEADER_HEIGHT', height: currentHeight });
+        }
       }
-    }
-  }, [headerHeight, dispatch]);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <header

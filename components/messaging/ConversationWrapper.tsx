@@ -21,10 +21,10 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
     setCurrentUserId,
   } = useConversationContext();
   const {
-    state: { headerHeight },
+    state: { headerHeight, footerHeight },
   } = useLayout();
 
-  console.log({ headerHeight });
+  console.log(headerHeight, footerHeight);
 
   useEffect(() => {
     const fetchConversations = async () => {
