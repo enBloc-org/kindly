@@ -24,8 +24,9 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
     state: { headerHeight, footerHeight },
   } = useLayout();
 
-  console.log(headerHeight, footerHeight);
-
+  const containerHeight = {
+    height: `calc(100vh - ${headerHeight + footerHeight}px)`,
+  };
   useEffect(() => {
     const fetchConversations = async () => {
       const fetchedConversations =
@@ -38,7 +39,7 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
   }, []);
 
   return (
-    <div className='conversation-height w-full'>
+    <div className='w-full' style={containerHeight}>
       {isBreakpoint ? (
         <div>
           {showConversationsList ? (
