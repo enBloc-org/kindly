@@ -1,18 +1,19 @@
 import Header from '@/components/Header';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
 import Footer from '@/components/Footer';
 import Providers from '@/context/Providers';
+import newServerClient from '@/supabase/utils/newServerClient';
 
 export default async function DashBoardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createServerComponentClient({ cookies });
-  const { data } = await supabase.auth.getSession();
-  if (!data.session) {
+  const supabase = newServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
     redirect('/login');
   }
   return (
