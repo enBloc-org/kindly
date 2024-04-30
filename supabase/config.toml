@@ -94,7 +94,7 @@ enable_confirmations = false
 # Uncomment to customize email template
 [auth.email.template.confirmation]
 subject = "Confirm your Kindly account"
-content_path = "./supabase/templates/invite.html"
+content_path = "./supabase/templates/confirm-signup.html"
 
 [auth.sms]
 # Allow/disallow new user signups via SMS to your project.
