@@ -33,7 +33,7 @@ export type profile = {
 };
 
 export type editProfile = {
-  avatar: string;
+  avatar: string | undefined;
   username: string | undefined;
 };
 export type updateReserved = {

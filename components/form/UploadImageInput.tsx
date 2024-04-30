@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 type UploadImageProps = {
   setImageSrc: (src: string) => void;
   setError?: (error: string) => void;
+  pagePathname?: string;
 };
 
 const CDN =
@@ -15,10 +16,12 @@ const CDN =
 const UploadImageInput: React.FC<UploadImageProps> = ({
   setImageSrc,
   setError,
+  pagePathname,
 }) => {
   const supabase = createClientComponentClient();
   const [userId, setUserId] = useState('');
   const [isImageUploaded, setIsImageUploaded] = useState(false);
+  const [isImageRequired, setIsImageRequired] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +31,10 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 
         if (user) {
           setUserId(user);
+          if (window.location.pathname === pagePathname) {
+            setIsImageUploaded(true);
+            setIsImageRequired(false);
+          }
         } else {
           setUserId('');
         }
@@ -72,7 +79,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
         type='file'
         name='image'
         onChange={(e) => imageFileUpload(e)}
-        required
+        required={isImageRequired}
       />
       {!isImageUploaded && (
         <p className='font-extralight italic text-primaryOrange'>

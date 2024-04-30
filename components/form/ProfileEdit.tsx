@@ -48,7 +48,10 @@ export const ProfileEdit = ({
 
       await editRow(
         'profiles',
-        { username: dataItem.username, avatar: dataItem.avatar },
+        {
+          username: dataItem.username,
+          avatar: imgAvatar.length > 0 ? dataItem.avatar : undefined,
+        },
         'id',
         userId
       );
@@ -96,7 +99,10 @@ export const ProfileEdit = ({
             />
           </label>
           <p className='error-message'>{errors.username?.message as string}</p>
-          <UploadImageInput setImageSrc={setImgAvatar} />
+          <UploadImageInput
+            setImageSrc={setImgAvatar}
+            pagePathname='/profile'
+          />
           <div className='mt-4'>
             <ButtonRounded type='submit'>EDIT PROFILE</ButtonRounded>
           </div>
