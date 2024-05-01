@@ -16,7 +16,7 @@ const Footer = () => {
         const currentHeight = footerRef.current.offsetHeight;
         if (currentHeight !== footerHeight) {
           setFooterHeight(currentHeight);
-          dispatch({ type: 'SET_FOOTER_HEIGHT', height: currentHeight });
+          dispatch({ type: 'set_footer_height', height: currentHeight });
         }
       }
     };

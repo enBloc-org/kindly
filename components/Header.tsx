@@ -24,7 +24,7 @@ export default function Header() {
         const currentHeight = headerRef.current.offsetHeight;
         if (currentHeight !== headerHeight) {
           setHeaderHeight(currentHeight);
-          dispatch({ type: 'SET_HEADER_HEIGHT', height: currentHeight });
+          dispatch({ type: 'set_header_height', height: currentHeight });
         }
       }
     };
