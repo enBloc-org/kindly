@@ -34,8 +34,8 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   return (
     <div tabIndex={0} aria-label='button' onClick={clickHandler}>
       <div
-        className={`relative m-2 flex max-h-28 w-[400px] items-center gap-4 rounded-lg 
-          bg-gray-300 p-4 hover:bg-secondaryGray 
+        className={`relative m-2 flex max-h-28 w-[400px] cursor-pointer items-center gap-4 
+        rounded-lg bg-gray-300 p-4 hover:bg-secondaryGray 
           ${currentConversation?.conversation_id === conversationId ? 'shadow-3xl' : 'shadow-md'}`}
       >
         <div className='relative h-[65px] w-[65px]'>
