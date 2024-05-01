@@ -5,15 +5,16 @@ import { ConversationCardType } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
 import selectItemImageAndName from '@/supabase/models/messaging/selectItemImageAndName';
 import newClient from '@/supabase/utils/newClient';
+import { useLayout } from '@/context/LayoutContext';
 
 const ConversationsList: React.FC = () => {
   const {
     allConversations,
     setAllConversations,
     setCurrentConversation,
-    setShowConversationsList,
     currentUserId,
   } = useConversationContext();
+  const { dispatch } = useLayout();
 
   const [notificationList, setNotificationList] = useState<number[]>([]);
   const supabase = newClient();
@@ -25,8 +26,10 @@ const ConversationsList: React.FC = () => {
           (conversations) => conversations.conversation_id === givenId
         )[0]
       );
-
-    setShowConversationsList(false);
+    dispatch({
+      type: 'set_show_conversation_list',
+      value: false,
+    });
   };
 
   useEffect(() => {
