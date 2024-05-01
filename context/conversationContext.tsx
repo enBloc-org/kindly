@@ -11,7 +11,7 @@ import {
   ConversationCardType,
 } from '@/types/messagingTypes';
 
-type ConverstaionContextProviderProps = {
+type ConversationContextProviderProps = {
   children: React.ReactNode;
 };
 
@@ -22,8 +22,6 @@ type ConversationContext = {
   setCurrentConversation: Dispatch<
     SetStateAction<ConversationCardType | undefined>
   >;
-  showConversationsList: boolean;
-  setShowConversationsList: Dispatch<SetStateAction<boolean>>;
   currentUserId: string;
   setCurrentUserId: Dispatch<SetStateAction<string>>;
 };
@@ -34,15 +32,13 @@ export const ConversationContext = createContext<ConversationContext | null>(
 
 export default function ConversationContextProvider({
   children,
-}: ConverstaionContextProviderProps) {
+}: ConversationContextProviderProps) {
   const [allConversations, setAllConversations] =
     useState<AllConversationsType>([]);
 
   const [currentConversation, setCurrentConversation] = useState<
     ConversationCardType | undefined
   >(undefined);
-
-  const [showConversationsList, setShowConversationsList] = useState(false);
 
   const [currentUserId, setCurrentUserId] = useState<string>('');
 
@@ -53,8 +49,6 @@ export default function ConversationContextProvider({
         setAllConversations,
         currentConversation,
         setCurrentConversation,
-        showConversationsList,
-        setShowConversationsList,
         currentUserId,
         setCurrentUserId,
       }}
@@ -68,7 +62,7 @@ export function useConversationContext() {
   const context = useContext(ConversationContext);
   if (!context) {
     throw new Error(
-      'useConvesationContext must be used within a ConversationContextProvider.'
+      'useConversationContext must be used within a ConversationContextProvider.'
     );
   }
   return context;
