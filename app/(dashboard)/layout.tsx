@@ -19,9 +19,11 @@ export default async function DashBoardLayout({
   return (
     <>
       <Providers>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <div className='flex min-h-screen flex-col'>
+          <Header />
+          <main className='flex-grow'>{children}</main>
+          <Footer />
+        </div>
       </Providers>
     </>
   );

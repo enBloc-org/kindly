@@ -12,22 +12,20 @@ import {
   formatDateMarker,
 } from '../../utils/formatTimeStamp';
 import newClient from '@/supabase/utils/newClient';
-import { useLayout } from '@/context/LayoutContext';
 
-const CurrentConversation: React.FC = () => {
+type CurrentConversationProps = {
+  containerHeight: string;
+};
+
+const CurrentConversation: React.FC<CurrentConversationProps> = ({
+  containerHeight,
+}) => {
   const { allConversations, currentConversation, setCurrentConversation } =
     useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);
   const supabase = newClient();
-  const {
-    state: { headerHeight, footerHeight },
-  } = useLayout();
-
-  const containerStyle = {
-    height: `calc(100vh - ${headerHeight + footerHeight}px)`,
-  };
 
   useEffect(() => {
     setCurrentConversation && setCurrentConversation(allConversations[0]);
@@ -92,7 +90,7 @@ const CurrentConversation: React.FC = () => {
   return (
     <div
       className='flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'
-      style={containerStyle}
+      style={{ height: containerHeight }}
     >
       <div className='p-5'>
         <ConversationPartner

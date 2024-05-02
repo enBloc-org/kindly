@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ConversationsList from './ConversationsList';
 import CurrentConversation from './CurrentConversation';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -15,21 +15,25 @@ type ConversationWrapperType = {
 const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
   const isBreakpoint = useMediaQuery(1000);
   const { setAllConversations, setCurrentUserId } = useConversationContext();
+  const [containerHeight, setContainerHeight] = useState('auto');
   const {
     state: { headerHeight, footerHeight, showConversationList },
-    dispatch,
   } = useLayout();
 
-  const handleBackButtonClick = () => {
-    dispatch({
-      type: 'set_show_conversation_list',
-      value: true,
-    });
-  };
+  useEffect(() => {
+    const calculateHeight = () => {
+      const windowHeight = window.innerHeight;
+      const calculatedHeight = windowHeight - headerHeight - footerHeight;
+      setContainerHeight(`${calculatedHeight}px`);
+    };
 
-  const containerStyle = {
-    height: `calc(100vh - ${headerHeight + footerHeight}px)`,
-  };
+    calculateHeight();
+    window.addEventListener('resize', calculateHeight);
+
+    return () => {
+      window.removeEventListener('resize', calculateHeight);
+    };
+  }, [headerHeight, footerHeight]);
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -43,22 +47,21 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
   }, []);
 
   return (
-    <div className='w-full' style={containerStyle}>
+    <div className='w-full' style={{ height: containerHeight }}>
       {isBreakpoint ? (
         <>
           {showConversationList ? (
             <ConversationsList />
           ) : (
             <>
-              <button onClick={handleBackButtonClick}>back</button>
-              <CurrentConversation />
+              <CurrentConversation containerHeight={containerHeight} />
             </>
           )}
         </>
       ) : (
         <div className='p2 flex h-full flex-row justify-between'>
           <ConversationsList />
-          <CurrentConversation />
+          <CurrentConversation containerHeight={containerHeight} />
         </div>
       )}
     </div>

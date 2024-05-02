@@ -14,7 +14,7 @@ const Footer = () => {
   const [footerHeight, setFooterHeight] = useState(0);
 
   useLayoutEffect(() => {
-    const handleResize = () => {
+    const updateHeight = () => {
       if (footerRef.current) {
         const currentHeight = footerRef.current.offsetHeight;
         if (currentHeight !== footerHeight) {
@@ -24,12 +24,12 @@ const Footer = () => {
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    updateHeight();
 
-    handleResize();
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, [showConversationList, footerHeight, dispatch]);
+    return () => {
+      dispatch({ type: 'set_footer_height', height: 0 });
+    };
+  }, []);
 
   return (
     isBreakpoint &&

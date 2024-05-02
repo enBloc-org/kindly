@@ -15,11 +15,14 @@ export default function Header() {
   const isBreakpoint = useMediaQuery(1000);
   const pathname = usePathname();
   const headerRef = useRef<HTMLHeadingElement>(null);
-  const { dispatch } = useLayout();
+  const {
+    dispatch,
+    state: { showConversationList },
+  } = useLayout();
   const [headerHeight, setHeaderHeight] = useState(0);
 
   useLayoutEffect(() => {
-    const handleResize = () => {
+    const updateHeight = () => {
       if (headerRef.current) {
         const currentHeight = headerRef.current.offsetHeight;
         if (currentHeight !== headerHeight) {
@@ -29,12 +32,21 @@ export default function Header() {
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
 
-    handleResize();
-
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', updateHeight);
+      dispatch({ type: 'set_header_height', height: 0 });
+    };
   }, []);
+
+  const handleBackButtonClick = () => {
+    dispatch({
+      type: 'set_show_conversation_list',
+      value: true,
+    });
+  };
 
   return (
     <header
@@ -42,14 +54,18 @@ export default function Header() {
       ref={headerRef}
     >
       <div className='flex items-center'>
-        <Link href='/home-page' aria-label='Home page'>
-          <Image
-            src='/KINDLY_LOGO.png'
-            alt='Kindly Logo'
-            height={70}
-            width={110}
-          />
-        </Link>
+        {showConversationList ? (
+          <Link href='/home-page' aria-label='Home page'>
+            <Image
+              src='/KINDLY_LOGO.png'
+              alt='Kindly Logo'
+              height={70}
+              width={110}
+            />
+          </Link>
+        ) : (
+          <button onClick={handleBackButtonClick}>back</button>
+        )}
       </div>
       {isBreakpoint ? (
         <NavigationLinkContainer

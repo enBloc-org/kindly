@@ -50,7 +50,7 @@ export const LayoutProvider: React.FC<{ children: ReactNode }> = ({
 };
 
 // Custom hook to use the context
-export const useLayout = () => {
+export const useLayout = (): LayoutContextType => {
   const context = useContext(LayoutContext);
   if (!context) {
     throw new Error('useLayout must be used within a LayoutProvider');
