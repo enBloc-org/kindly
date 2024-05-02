@@ -7,7 +7,10 @@ import { useRef, useState, useLayoutEffect } from 'react';
 const Footer = () => {
   const isBreakpoint = useMediaQuery(1000);
   const footerRef = useRef<HTMLElement>(null);
-  const { dispatch } = useLayout();
+  const {
+    dispatch,
+    state: { showConversationList },
+  } = useLayout();
   const [footerHeight, setFooterHeight] = useState(0);
 
   useLayoutEffect(() => {
@@ -26,14 +29,14 @@ const Footer = () => {
     handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [showConversationList, footerHeight, dispatch]);
 
   return (
     <footer
-      className='fixed bottom-0 w-full bg-background py-2'
+      className='fixed bottom-0 h-auto w-full bg-background py-2'
       ref={footerRef}
     >
-      {isBreakpoint && <MobileNavbar />}
+      {isBreakpoint && showConversationList && <MobileNavbar />}
     </footer>
   );
 };

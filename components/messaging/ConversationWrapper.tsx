@@ -14,16 +14,18 @@ type ConversationWrapperType = {
 
 const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
   const isBreakpoint = useMediaQuery(1000);
+  const { setAllConversations, setCurrentUserId } = useConversationContext();
   const {
-    showConversationsList,
-    setShowConversationsList,
-    setAllConversations,
-    setCurrentUserId,
-  } = useConversationContext();
-
-  const {
-    state: { headerHeight, footerHeight },
+    state: { headerHeight, footerHeight, showConversationList },
+    dispatch,
   } = useLayout();
+
+  const handleBackButtonClick = () => {
+    dispatch({
+      type: 'set_show_conversation_list',
+      value: true,
+    });
+  };
 
   const containerStyle = {
     height: `calc(100vh - ${headerHeight + footerHeight}px)`,
@@ -44,13 +46,11 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
     <div className='w-full' style={containerStyle}>
       {isBreakpoint ? (
         <>
-          {showConversationsList ? (
+          {showConversationList ? (
             <ConversationsList />
           ) : (
             <>
-              <button onClick={() => setShowConversationsList(true)}>
-                back
-              </button>
+              <button onClick={handleBackButtonClick}>back</button>
               <CurrentConversation />
             </>
           )}
