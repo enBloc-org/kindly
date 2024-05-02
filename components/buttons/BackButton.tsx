@@ -11,7 +11,7 @@ const BackButton = () => {
       aria-label='back button'
       onClick={router.back}
     >
-      <BackArrowIcon width={40} height={40} />
+      <BackArrowIcon width={40} height={40} stroke='#57666D' />
     </button>
   );
 };
