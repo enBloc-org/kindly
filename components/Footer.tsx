@@ -32,12 +32,15 @@ const Footer = () => {
   }, [showConversationList, footerHeight, dispatch]);
 
   return (
-    <footer
-      className='fixed bottom-0 h-auto w-full bg-background py-2'
-      ref={footerRef}
-    >
-      {isBreakpoint && showConversationList && <MobileNavbar />}
-    </footer>
+    isBreakpoint &&
+    showConversationList && (
+      <footer
+        className='fixed bottom-0 h-auto w-full bg-background py-2'
+        ref={footerRef}
+      >
+        <MobileNavbar />
+      </footer>
+    )
   );
 };
 

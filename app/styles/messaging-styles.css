@@ -3,17 +3,10 @@
   rounded-2xl px-6 py-4 shadow-md;
 }
 
-.message-card-container {
-  height: calc(100vh - 165px);
-}
+
 
 /*------- Media Queries ---------*/
 
-@media screen and (min-width: 1000px) {
-  .message-card-container {
-    height: calc(100vh - 85px);
-  }
-}
 
 @media screen and (min-width: 1400px) {
   .message-card {
