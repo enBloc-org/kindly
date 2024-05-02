@@ -25,8 +25,10 @@ const Footer = () => {
     };
 
     updateHeight();
+    window.addEventListener('resize', updateHeight);
 
     return () => {
+      window.removeEventListener('resize', updateHeight);
       dispatch({ type: 'set_footer_height', height: 0 });
     };
   }, []);
