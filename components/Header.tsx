@@ -10,6 +10,7 @@ import { useLayout } from '@/context/LayoutContext';
 import DesktopNav from './navigation/DesktopNav';
 import NavigationLinkContainer from './navigation/NavigationLinkContainer';
 import ProfileRouteIcon from './icons/navigation/ProfileRouteIcon';
+import BackArrowIcon from './icons/navigation/BackArrowIcon';
 
 export default function Header() {
   const isBreakpoint = useMediaQuery(1000);
@@ -64,18 +65,24 @@ export default function Header() {
             />
           </Link>
         ) : (
-          <button onClick={handleBackButtonClick}>back</button>
+          <button onClick={handleBackButtonClick}>
+            <BackArrowIcon width={40} height={40} stroke='#54BB89' />
+          </button>
         )}
       </div>
       {isBreakpoint ? (
-        <NavigationLinkContainer
-          href='/profile'
-          ariaLabel='My profile'
-          pathName={pathname}
-          size='mobile'
-        >
-          <ProfileRouteIcon pathName={pathname} height={28} width={28} />
-        </NavigationLinkContainer>
+        showConversationList ? (
+          <NavigationLinkContainer
+            href='/profile'
+            ariaLabel='My profile'
+            pathName={pathname}
+            size='mobile'
+          >
+            <ProfileRouteIcon pathName={pathname} height={28} width={28} />
+          </NavigationLinkContainer>
+        ) : (
+          ''
+        )
       ) : (
         <DesktopNav />
       )}
