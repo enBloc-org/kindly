@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Footer from '@/components/Footer';
 import Providers from '@/context/Providers';
 import newServerClient from '@/supabase/utils/newServerClient';
+import Container from '@/components/layout/Container';
 
 export default async function DashBoardLayout({
   children,
@@ -19,11 +20,11 @@ export default async function DashBoardLayout({
   return (
     <>
       <Providers>
-        <div className='flex min-h-screen flex-col'>
+        <Container>
           <Header />
-          <main className='flex-grow'>{children}</main>
+          <main className='flex flex-grow flex-col'>{children}</main>
           <Footer />
-        </div>
+        </Container>
       </Providers>
     </>
   );

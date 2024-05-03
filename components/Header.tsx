@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import useMediaQuery from './hooks/useMediaQuery';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Components
 import { useLayout } from '@/context/LayoutContext';
@@ -22,7 +22,7 @@ export default function Header() {
   } = useLayout();
   const [headerHeight, setHeaderHeight] = useState(0);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const updateHeight = () => {
       if (headerRef.current) {
         const currentHeight = headerRef.current.offsetHeight;
@@ -51,7 +51,7 @@ export default function Header() {
 
   return (
     <header
-      className='min-h-30 sticky top-0 z-10 flex items-center justify-between bg-background px-4 py-2 shadow-sm'
+      className='min-h-30 sticky top-0 z-10 flex flex-shrink-0 items-center justify-between bg-background px-4 py-2 shadow-sm'
       ref={headerRef}
     >
       <div className='flex items-center'>

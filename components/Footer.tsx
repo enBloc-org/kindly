@@ -2,7 +2,7 @@
 import MobileNavbar from './navigation/MobileNavbar';
 import useMediaQuery from './hooks/useMediaQuery';
 import { useLayout } from '@/context/LayoutContext';
-import { useRef, useState, useLayoutEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const Footer = () => {
   const isBreakpoint = useMediaQuery(1000);
@@ -13,7 +13,7 @@ const Footer = () => {
   } = useLayout();
   const [footerHeight, setFooterHeight] = useState(0);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const updateHeight = () => {
       if (footerRef.current) {
         const currentHeight = footerRef.current.offsetHeight;

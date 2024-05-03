@@ -3,7 +3,6 @@
 import { MessageType } from '@/types/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
-import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
 import { useConversationContext } from '../../context/conversationContext';
 import selectMessagesByConversationId from '@/supabase/models/messaging/selectMessagesByConversationId';
@@ -13,13 +12,7 @@ import {
 } from '../../utils/formatTimeStamp';
 import newClient from '@/supabase/utils/newClient';
 
-type CurrentConversationProps = {
-  containerHeight: string;
-};
-
-const CurrentConversation: React.FC<CurrentConversationProps> = ({
-  containerHeight,
-}) => {
+const CurrentConversation: React.FC = ({}) => {
   const { allConversations, currentConversation, setCurrentConversation } =
     useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
@@ -88,17 +81,9 @@ const CurrentConversation: React.FC<CurrentConversationProps> = ({
   }, [isScrolling, setIsScrolling]);
 
   return (
-    <div
-      className='flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'
-      style={{ height: containerHeight }}
-    >
-      <div className='p-5'>
-        <ConversationPartner
-          conversation_id={currentConversation?.conversation_id as number}
-        />
-      </div>
+    <div className='flex flex-grow flex-col bg-[#fafaf9] shadow-inner'>
       <div
-        className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
+        className='relative flex flex-grow flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}
       >
         {currentMessages

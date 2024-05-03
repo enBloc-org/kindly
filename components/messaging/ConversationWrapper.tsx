@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import ConversationsList from './ConversationsList';
 import CurrentConversation from './CurrentConversation';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -15,25 +15,9 @@ type ConversationWrapperType = {
 const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
   const isBreakpoint = useMediaQuery(1000);
   const { setAllConversations, setCurrentUserId } = useConversationContext();
-  const [containerHeight, setContainerHeight] = useState('auto');
   const {
-    state: { headerHeight, footerHeight, showConversationList },
+    state: { showConversationList },
   } = useLayout();
-
-  useEffect(() => {
-    const calculateHeight = () => {
-      const windowHeight = window.innerHeight;
-      const calculatedHeight = windowHeight - headerHeight - footerHeight;
-      setContainerHeight(`${calculatedHeight}px`);
-    };
-
-    calculateHeight();
-    window.addEventListener('resize', calculateHeight);
-
-    return () => {
-      window.removeEventListener('resize', calculateHeight);
-    };
-  }, [headerHeight, footerHeight]);
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -47,24 +31,24 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
   }, []);
 
   return (
-    <div className='w-full' style={{ height: containerHeight }}>
+    <>
       {isBreakpoint ? (
         <>
           {showConversationList ? (
             <ConversationsList />
           ) : (
             <>
-              <CurrentConversation containerHeight={containerHeight} />
+              <CurrentConversation />
             </>
           )}
         </>
       ) : (
-        <div className='p2 flex h-full flex-row justify-between'>
+        <div className='p2 flex h-full flex-grow flex-row justify-between'>
           <ConversationsList />
-          <CurrentConversation containerHeight={containerHeight} />
+          <CurrentConversation />
         </div>
       )}
-    </div>
+    </>
   );
 };
 
