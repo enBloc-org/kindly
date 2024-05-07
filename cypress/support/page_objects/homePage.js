@@ -1,9 +1,5 @@
 import BasePage from './basePage';
 
-export class HomePage extends BasePage {
-  profileIcon() {
-    return cy.get('a[href="/profile"]');
-  }
-}
+export class HomePage extends BasePage {}
 
 export default new HomePage();
