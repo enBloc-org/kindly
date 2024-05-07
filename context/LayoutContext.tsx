@@ -1,28 +1,17 @@
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 
 type LayoutState = {
-  headerHeight: number;
-  footerHeight: number;
   showConversationList: boolean;
 };
 
-type LayoutAction =
-  | { type: 'set_header_height'; height: number }
-  | { type: 'set_footer_height'; height: number }
-  | { type: 'set_show_conversation_list'; value: boolean };
+type LayoutAction = { type: 'set_show_conversation_list'; value: boolean };
 
 const initialState: LayoutState = {
-  headerHeight: 0,
-  footerHeight: 0,
   showConversationList: true,
 };
 
 function layoutReducer(state: LayoutState, action: LayoutAction): LayoutState {
   switch (action.type) {
-    case 'set_header_height':
-      return { ...state, headerHeight: action.height };
-    case 'set_footer_height':
-      return { ...state, footerHeight: action.height };
     case 'set_show_conversation_list':
       return { ...state, showConversationList: action.value };
     default:

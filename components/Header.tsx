@@ -3,7 +3,6 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import useMediaQuery from './hooks/useMediaQuery';
-import { useEffect, useRef, useState } from 'react';
 
 // Components
 import { useLayout } from '@/context/LayoutContext';
@@ -17,33 +16,11 @@ import { useConversationContext } from '@/context/conversationContext';
 export default function Header() {
   const isBreakpoint = useMediaQuery(1000);
   const pathname = usePathname();
-  const headerRef = useRef<HTMLHeadingElement>(null);
   const { currentConversation } = useConversationContext();
   const {
     dispatch,
     state: { showConversationList },
   } = useLayout();
-  const [headerHeight, setHeaderHeight] = useState(0);
-
-  useEffect(() => {
-    const updateHeight = () => {
-      if (headerRef.current) {
-        const currentHeight = headerRef.current.offsetHeight;
-        if (currentHeight !== headerHeight) {
-          setHeaderHeight(currentHeight);
-          dispatch({ type: 'set_header_height', height: currentHeight });
-        }
-      }
-    };
-
-    updateHeight();
-    window.addEventListener('resize', updateHeight);
-
-    return () => {
-      window.removeEventListener('resize', updateHeight);
-      dispatch({ type: 'set_header_height', height: 0 });
-    };
-  }, []);
 
   const handleBackButtonClick = () => {
     dispatch({
@@ -53,10 +30,7 @@ export default function Header() {
   };
 
   return (
-    <header
-      className='min-h-30 sticky top-0 z-10 flex flex-shrink-0 items-center justify-between bg-background px-4 py-2 shadow-sm'
-      ref={headerRef}
-    >
+    <header className='min-h-30 sticky top-0 z-10 flex flex-shrink-0 items-center justify-between bg-background px-4 py-2 shadow-sm'>
       <div className='flex items-center'>
         {showConversationList ? (
           <Link href='/home-page' aria-label='Home page'>
