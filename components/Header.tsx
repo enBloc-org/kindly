@@ -11,11 +11,14 @@ import DesktopNav from './navigation/DesktopNav';
 import NavigationLinkContainer from './navigation/NavigationLinkContainer';
 import ProfileRouteIcon from './icons/navigation/ProfileRouteIcon';
 import BackArrowIcon from './icons/navigation/BackArrowIcon';
+import { ConversationPartner } from './messaging/ConversationPartner';
+import { useConversationContext } from '@/context/conversationContext';
 
 export default function Header() {
   const isBreakpoint = useMediaQuery(1000);
   const pathname = usePathname();
   const headerRef = useRef<HTMLHeadingElement>(null);
+  const { currentConversation } = useConversationContext();
   const {
     dispatch,
     state: { showConversationList },
@@ -81,7 +84,9 @@ export default function Header() {
             <ProfileRouteIcon pathName={pathname} height={28} width={28} />
           </NavigationLinkContainer>
         ) : (
-          ''
+          <ConversationPartner
+            conversation_id={currentConversation?.conversation_id as number}
+          />
         )
       ) : (
         <DesktopNav />
