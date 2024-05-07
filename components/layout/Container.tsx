@@ -21,7 +21,7 @@ const Container: React.FC<ContainerProps> = ({ children }) => {
     };
   }, []);
   return (
-    <div className='flex flex-col' style={{ height: containerHeight }}>
+    <div className='flex flex-col' style={{ minHeight: containerHeight }}>
       {children}
     </div>
   );
