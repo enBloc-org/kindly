@@ -30,15 +30,19 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
     };
     fetchConversations();
   }, []);
+
   return (
     <div className='conversation-height w-full'>
       {isBreakpoint ? (
-        <div>
+        <div className='flex h-full flex-col'>
           {showConversationsList ? (
             <ConversationsList />
           ) : (
             <>
-              <button onClick={() => setShowConversationsList(true)}>
+              <button
+                className='self-start'
+                onClick={() => setShowConversationsList(true)}
+              >
                 back
               </button>
               <CurrentConversation />

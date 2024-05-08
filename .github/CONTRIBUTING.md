@@ -36,7 +36,7 @@ If you have a question or suggetion directly related to an open Issue please use
 If you have a question related to Trafalgar Girls, Kindly or the community at large:
 
 - Check the documentation first - there's a chance your question can be answered by reading the [README](../README.md) file
-- Reach out on [Discord](https://discord.gg/Chkx4GeZ)
+- Reach out on [Discord](https://discord.gg/Mrh5NYw52S)
 
 <hr>
 

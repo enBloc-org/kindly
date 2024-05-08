@@ -1,5 +1,5 @@
 'use server';
-import { item } from '../../types/types';
+import { item } from '../../types/supabaseTypes';
 import newClient from '../utils/newClient';
 
 export default async function searchByName(name: string): Promise<item[]> {

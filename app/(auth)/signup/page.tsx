@@ -1,7 +1,7 @@
 import AuthForm from '@/components/AuthForm';
 import insertRow from '@/supabase/models/insertRow';
 import newServerClient from '@/supabase/utils/newServerClient';
-import { PartialProfile } from '@/types/types';
+import { PartialProfile } from '@/types/supabaseTypes';
 import { redirect } from 'next/navigation';
 
 export default function SignUp({
