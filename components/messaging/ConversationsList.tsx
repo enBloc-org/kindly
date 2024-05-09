@@ -104,7 +104,7 @@ const ConversationsList: React.FC = () => {
   }, [allConversations, setAllConversations]);
 
   return (
-    <div className='flex flex-col items-center overflow-y-auto lg:m-2 lg:gap-2'>
+    <div className='flex flex-col overflow-y-auto bg-gray-200 p-2 shadow-inner'>
       {allConversations.length > 0 ? (
         allConversations.map((conversation) => (
           <div key={`${conversation.id}`}>
@@ -121,7 +121,7 @@ const ConversationsList: React.FC = () => {
           </div>
         ))
       ) : (
-        <p>There are no active conversations</p>
+        <p className='font-light italic'>You have no active conversations...</p>
       )}
     </div>
   );
