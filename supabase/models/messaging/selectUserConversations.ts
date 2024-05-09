@@ -6,12 +6,19 @@ const selectUserConversations = async (
 ): Promise<AllConversationsType> => {
   try {
     const supabase = newClient();
-    const { data: allConversations } = await supabase
-      .from('user_conversations_with_last_message_and_item')
-      .select('*')
-      .eq('user_id', userId);
+    const { data, error } = await supabase.rpc('fetch_user_conversations', {
+      p_user_id: userId,
+    });
 
-    const conversations = allConversations as unknown as AllConversationsType;
+    if (error) throw error;
+
+    if (error) {
+      throw error;
+    }
+    const conversations = data as unknown as AllConversationsType;
+    console.log('====================================');
+    console.log(conversations);
+    console.log('====================================');
 
     return conversations ?? [];
   } catch (error) {
