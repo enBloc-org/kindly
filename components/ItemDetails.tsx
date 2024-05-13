@@ -1,4 +1,4 @@
-import { PartialItem } from '@/types/types';
+import { PartialItem } from '@/types/supabaseTypes';
 
 type ItemDetailPropType = PartialItem & {
   fontSize?: string;

@@ -1,5 +1,5 @@
 import newClient from '../utils/newClient';
-import { PartialItem } from '../../types/types';
+import { PartialItem } from '../../types/supabaseTypes';
 
 export async function getItems(
   callFrom: string,
