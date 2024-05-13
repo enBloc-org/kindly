@@ -15,13 +15,13 @@ export type ConversationCardProps = {
   notificationList: number[];
 };
 
-const formatString = (input: string): string => {
+const formatString = (input: string | null): string => {
   if (input === null) return 'new conversation';
   const capitalizedString = input.charAt(0).toUpperCase() + input.slice(1);
   return cappedStringLength(capitalizedString, 15);
 };
 
-const cappedStringLength = (input: string, length: number): string => {
+const cappedStringLength = (input: string | null, length: number): string => {
   if (input === null) return 'New conversation...';
 
   return input.length > 15 ? input.substring(0, length) + '...' : input;

@@ -1,10 +1,10 @@
 'use client';
 import ConversationCard from './ConversationCard';
 import { useEffect, useState } from 'react';
-import { ConversationCardType } from '@/types/messagingTypes';
+import { UserConversationType } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
-import selectItemImageAndName from '@/supabase/models/messaging/selectItemImageAndName';
 import newClient from '@/supabase/utils/newClient';
+import selectSingleUserConversation from '@/supabase/models/messaging/selectItemImageAndName';
 
 const ConversationsList: React.FC = () => {
   const {
@@ -42,8 +42,8 @@ const ConversationsList: React.FC = () => {
         },
         async (payload) => {
           if (payload.new.user_id === currentUserId) {
-            const newConversation = await selectItemImageAndName(
-              payload.new as ConversationCardType
+            const newConversation = await selectSingleUserConversation(
+              payload.new as UserConversationType
             );
 
             setAllConversations((prevConversations) => [

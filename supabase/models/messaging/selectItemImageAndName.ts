@@ -1,31 +1,40 @@
 import newClient from '@/supabase/utils/newClient';
 import {
+  UserConversationType,
   ConversationCardPartial,
   ConversationCardType,
-  ItemType,
 } from '../../../types/messagingTypes';
+import { PostgrestError } from '@supabase/supabase-js';
 
-const selectItemImageAndName = async (
-  conversation: ConversationCardPartial
+const selectSingleUserConversation = async (
+  conversation: UserConversationType
 ): Promise<ConversationCardType> => {
   try {
     const supabase = newClient();
-    const { data } = await supabase
-      .from('items')
-      .select(
-        `
-      item_name, 
-      imageSrc
-    `
-      )
-      .eq('id', conversation.item_id)
-      .single();
+    const {
+      data,
+      error,
+    }: { data: ConversationCardPartial | null; error: PostgrestError | null } =
+      await supabase
+        .rpc('fetch_profile_message_and_item', {
+          uc_partner_id: conversation.partner_id,
+          uc_conversation_id: conversation.conversation_id,
+          uc_item_id: conversation.item_id,
+        })
+        .single();
 
-    const items = data as ItemType;
+    if (error) throw error;
+
+    const info = data as ConversationCardPartial;
 
     const singleConversation: ConversationCardType = {
       ...conversation,
-      items: items,
+      partner_username: info.partner_username,
+      partner_avatar: info.partner_avatar,
+      message_text: info.message_text,
+      created_at: info.created_at,
+      item_name: info.item_name,
+      item_image: info.item_image,
     };
 
     return singleConversation;
@@ -35,4 +44,4 @@ const selectItemImageAndName = async (
   }
 };
 
-export default selectItemImageAndName;
+export default selectSingleUserConversation;

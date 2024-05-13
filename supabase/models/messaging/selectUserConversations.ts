@@ -12,13 +12,7 @@ const selectUserConversations = async (
 
     if (error) throw error;
 
-    if (error) {
-      throw error;
-    }
     const conversations = data as unknown as AllConversationsType;
-    console.log('====================================');
-    console.log(conversations);
-    console.log('====================================');
 
     return conversations ?? [];
   } catch (error) {
