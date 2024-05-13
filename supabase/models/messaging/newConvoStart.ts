@@ -13,8 +13,6 @@ export default async function newConvoStart(
        * if we find such a conversation, we return its ID that we can use further in the code,
        * if such a conversation does not exist in the database, then we create a new conversation
        */
-
-      // Checking if there is already a conversation between these users about this product
       const { data: existingConversations, error } = await supabase
         .from('user_conversations')
         .select('conversation_id')
@@ -25,12 +23,9 @@ export default async function newConvoStart(
         console.error('Error checking for existing conversations:', error);
         return null;
       }
-      // If the conversation already exists, we return its ID
       if (existingConversations.length > 0) {
-        console.log('such a conversation already exists');
         return existingConversations[0].conversation_id;
       }
-      // Creating a new conversation
       const { data: newConversation, error: insertError } = await supabase
         .from('conversations')
         .insert([{}])
@@ -40,7 +35,6 @@ export default async function newConvoStart(
         console.error('Error inserting new conversation:', insertError);
         return null;
       }
-      // Registration of new conversation participants
       const conID = newConversation?.id;
       await supabase.from('user_conversations').insert([
         {
