@@ -52,7 +52,7 @@ Once it is installed, start your docker console. A container will be created in 
 The cli will allow you to set up the schema and seed your local copy of the kindly database. Install it with the following command on your terminal:
 
 ```bash
-bew install supabase/tap/supabase
+brew install supabase/tap/supabase
 ```
 
 You can find more comprehensive guidance in the [official docs](https://supabase.com/docs/guides/cli/getting-started) but we've outlined below the commands you will need to run in order to get started.
