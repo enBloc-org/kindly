@@ -19,6 +19,7 @@ export default async function convoRestart(
         },
       ]);
       markAsDeleted(conversation_id, false);
+      console.log('convo restart has run');
     } catch (error) {
       console.error(error);
     }

@@ -1,6 +1,6 @@
 'use client';
 
-import { ConversationCardType, MessageType } from '@/types/messagingTypes';
+import { MessageType } from '@/types/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { ConversationPartner } from './ConversationPartner';
@@ -14,12 +14,8 @@ import {
 } from '../../utils/messaging/formatTimeStamp';
 
 const CurrentConversation: React.FC = () => {
-  const {
-    allConversations,
-    setAllConversations,
-    currentConversation,
-    setCurrentConversation,
-  } = useConversationContext();
+  const { allConversations, currentConversation, setCurrentConversation } =
+    useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);
@@ -65,9 +61,8 @@ const CurrentConversation: React.FC = () => {
       supabase.removeChannel(channel);
     };
   }, [supabase, currentMessages, setCurrentMessages]);
-// instead of listining for conversations update listen for insertions to user_converstions 
-//then add that too all conversations and change to true update to false in the listening for deletion
-  
+  // instead of listining for conversations update listen for insertions to user_converstions
+  //then add that too all conversations and change to true update to false in the listening for deletion
 
   useEffect(() => {
     const handleScroll = () => {

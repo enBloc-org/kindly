@@ -122,9 +122,15 @@ const ConversationsList: React.FC = () => {
             );
             console.log('target conversation  ');
             console.log(targetConversation);
-            if (targetConversation) {
+            /// error comes from conversation traget conversation existing but having no conversations
+            // why is that though are conversations created without them somewhere no join
+            // seems to be going wrong where we are setting deleted to true so I guess here
+            if (targetConversation && payload.new.member_has_deleted === true) {
               targetConversation.conversations.member_has_deleted = true;
             }
+            // if (targetConversation && payload.new.member_has_deleted === false)  {
+            //   targetConversation.conversations.member_has_deleted = false;
+            // }
             setAllConversations(newConversations);
             console.log('new conversations final');
             console.log(newConversations);
