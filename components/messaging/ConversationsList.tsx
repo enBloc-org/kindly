@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { UserConversationType } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
 import newClient from '@/supabase/utils/newClient';
-import selectSingleUserConversation from '@/supabase/models/messaging/selectItemImageAndName';
+import selectConversationCardDetails from '@/supabase/models/messaging/selectConversationCardDetails';
 
 const ConversationsList: React.FC = () => {
   const {
@@ -42,7 +42,7 @@ const ConversationsList: React.FC = () => {
         },
         async (payload) => {
           if (payload.new.user_id === currentUserId) {
-            const newConversation = await selectSingleUserConversation(
+            const newConversation = await selectConversationCardDetails(
               payload.new as UserConversationType
             );
 

@@ -6,7 +6,7 @@ import {
 } from '../../../types/messagingTypes';
 import { PostgrestError } from '@supabase/supabase-js';
 
-const selectSingleUserConversation = async (
+const selectConversationCardDetails = async (
   conversation: UserConversationType
 ): Promise<ConversationCardType> => {
   try {
@@ -44,4 +44,4 @@ const selectSingleUserConversation = async (
   }
 };
 
-export default selectSingleUserConversation;
+export default selectConversationCardDetails;
