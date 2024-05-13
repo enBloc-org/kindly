@@ -49,14 +49,13 @@ const ConversationsList: React.FC = () => {
                 ...payload.new, // copy all existing properties from payload.new
                 conversations: {
                   ...payload.new.conversations, // copy all existing properties from payload.new.conversations
-                  member_has_deleted: true, // set the new value
+                  member_has_deleted: false, // set the new value
                 },
               },
             };
             const newConversation = await selectItemImageAndName(
               payload.new as ConversationCardType
             );
-            console.log('new conversation:', newConversation);
 
             setAllConversations((prevConversations) => [
               ...prevConversations,
