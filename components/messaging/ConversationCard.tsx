@@ -42,8 +42,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
 
   return (
     <div
-      className={`relative flex items-center bg-gray-300 p-4 shadow-md 
-      outline outline-[#b9b8b8] hover:bg-secondaryGray lg:max-w-[500px] lg:rounded-lg lg:outline-none
+      className={`relative flex items-center bg-gray-300 p-4 lg:max-w-[500px] lg:rounded-lg lg:shadow-md lg:hover:bg-secondaryGray
           ${currentConversation?.conversation_id === conversationId ? 'lg: border-2 lg:border-primaryGreen' : ''}`}
       tabIndex={0}
       aria-label='button'
