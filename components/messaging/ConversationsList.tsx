@@ -42,23 +42,19 @@ const ConversationsList: React.FC = () => {
         },
         async (payload) => {
           if (payload.new.user_id === currentUserId) {
-            // update payload to include conversations.member_has_deleted to match ConversationCardType
             payload = {
-              ...payload, // copy all existing properties from payload
+              ...payload,
               new: {
-                ...payload.new, // copy all existing properties from payload.new
+                ...payload.new,
                 conversations: {
-                  ...payload.new.conversations, // copy all existing properties from payload.new.conversations
-                  member_has_deleted: true, // set the new value
+                  ...payload.new.conversations,
+                  member_has_deleted: true,
                 },
               },
             };
-            // const newConversation = await selectItemImageAndName(
-            //   payload.new as ConversationCardType
             const newConversation = await selectConversationCardDetails(
               payload.new as UserConversationType
             );
-            console.log('new conversation: ', newConversation);
 
             setAllConversations((prevConversations) => [
               ...prevConversations,
