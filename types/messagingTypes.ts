@@ -22,12 +22,8 @@ export type UserConversationType = {
   user_id: string;
   item_id: number;
   has_unread_messages: boolean;
+  conversations: { member_has_deleted: boolean };
 };
-
-// export type ItemType = {
-//   imageSrc: string;
-//   item_name: string;
-// };
 
 export type LastMessage = {
   created_at: string;
