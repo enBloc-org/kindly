@@ -1,9 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import newConvoStart from '@/utils/messaging/newConvoStart';
+import newConvoStart from '@/supabase/models/messaging/newConvoStart';
 import { useEffect } from 'react';
-import editRow from '@/utils/supabase/editRow';
+import editRow from '@/supabase/models/editRow';
 
 export default function NewConversationButton({
   userId,

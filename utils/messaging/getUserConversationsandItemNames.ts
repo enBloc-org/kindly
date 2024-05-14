@@ -1,4 +1,4 @@
-import { createSupabaseClient as supabase } from '../supabase/createSupabaseClient';
+import { createSupabaseClient as supabase } from '../../supabase/modals/createSupabaseClient';
 import { AllConversationsType } from '../../types/messagingTypes';
 
 const getUserConversationsandItemNames = async (

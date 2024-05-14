@@ -1,10 +1,10 @@
 'use client';
 import ConversationCard from './ConversationCard';
 import { useEffect, useState } from 'react';
-import { createSupabaseClient as supabase } from '@/utils/supabase/createSupabaseClient';
-import { ConversationCardType } from '@/types/messagingTypes';
+import { UserConversationType } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
-import selectItemImageAndName from '@/utils/messaging/selectItemImageAndName';
+import newClient from '@/supabase/utils/newClient';
+import selectConversationCardDetails from '@/supabase/models/messaging/selectConversationCardDetails';
 
 const ConversationsList: React.FC = () => {
   const {
@@ -16,6 +16,7 @@ const ConversationsList: React.FC = () => {
   } = useConversationContext();
 
   const [notificationList, setNotificationList] = useState<number[]>([]);
+  const supabase = newClient();
 
   const updateOpenConvo = async (givenId: number) => {
     setCurrentConversation &&
@@ -52,8 +53,10 @@ const ConversationsList: React.FC = () => {
                 },
               },
             };
-            const newConversation = await selectItemImageAndName(
-              payload.new as ConversationCardType
+            // const newConversation = await selectItemImageAndName(
+            //   payload.new as ConversationCardType
+            const newConversation = await selectConversationCardDetails(
+              payload.new as UserConversationType
             );
             console.log('new conversation: ', newConversation);
 
@@ -139,25 +142,27 @@ const ConversationsList: React.FC = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [supabase, allConversations, setAllConversations]);
+  }, [allConversations, setAllConversations]);
 
   return (
-    <div className='m-4'>
+    <div className='flex flex-col gap-[2px] overflow-y-auto bg-gray-200 shadow-inner lg:w-[400px] lg:gap-2 lg:p-2'>
       {allConversations.length > 0 ? (
         allConversations.map((conversation) => (
           <div key={`${conversation.id}`}>
             <ConversationCard
               conversationId={conversation.conversation_id}
-              joinedAt={conversation.joined_at}
-              itemName={conversation.items.item_name}
-              imageSrc={conversation.items.imageSrc}
+              messageTimestamp={conversation.created_at}
+              messageText={conversation.message_text}
+              partnerUsername={conversation.partner_username}
+              partnerAvatar={conversation.partner_avatar}
+              itemName={conversation.item_name}
               clickHandler={() => updateOpenConvo(conversation.conversation_id)}
               notificationList={notificationList}
             />
           </div>
         ))
       ) : (
-        <p>There are no active conversations</p>
+        <p className='font-light italic'>You have no active conversations...</p>
       )}
     </div>
   );

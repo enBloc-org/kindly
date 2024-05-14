@@ -5,13 +5,13 @@ import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
 import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
-import { createSupabaseClient as supabase } from '../../utils/supabase/createSupabaseClient';
 import { useConversationContext } from '../../context/conversationContext';
-import selectMessagesByConversationId from '@/utils/messaging/selectMessagesByConversationId';
+import selectMessagesByConversationId from '@/supabase/models/messaging/selectMessagesByConversationId';
 import {
   formatTimeMarker,
   formatDateMarker,
-} from '../../utils/messaging/formatTimeStamp';
+} from '../../utils/formatTimeStamp';
+import newClient from '@/supabase/utils/newClient';
 
 const CurrentConversation: React.FC = () => {
   const { allConversations, currentConversation, setCurrentConversation } =
@@ -19,6 +19,7 @@ const CurrentConversation: React.FC = () => {
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);
+  const supabase = newClient();
 
   useEffect(() => {
     setCurrentConversation && setCurrentConversation(allConversations[0]);
@@ -60,9 +61,7 @@ const CurrentConversation: React.FC = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [supabase, currentMessages, setCurrentMessages]);
-  // instead of listining for conversations update listen for insertions to user_converstions
-  //then add that too all conversations and change to true update to false in the listening for deletion
+  }, [currentMessages, setCurrentMessages]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,7 +82,7 @@ const CurrentConversation: React.FC = () => {
   }, [isScrolling, setIsScrolling]);
 
   return (
-    <div className='conversation-height flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
+    <div className='message-card-container flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
       <div className='p-5'>
         <ConversationPartner
           conversation_id={currentConversation?.conversation_id as number}

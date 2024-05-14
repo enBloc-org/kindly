@@ -1,8 +1,8 @@
 'use client';
 import ButtonRounded from '@/components/buttons/ButtonRounded';
-import insertRow from '@/utils/supabase/insertRow';
+import insertRow from '@/supabase/models/insertRow';
 import { useForm } from 'react-hook-form';
-import { PartialItem } from '@/types/types';
+import { PartialItem } from '@/types/supabaseTypes';
 import UploadImageInput from '@/components/form/UploadImageInput';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useEffect, useState } from 'react';

@@ -64,6 +64,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           </label>
           <input
             className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
+            id='user_name'
             name='user_name'
             placeholder='Your Username'
             required
@@ -75,6 +76,9 @@ const AuthForm: React.FC<AuthFormProps> = ({
       </label>
       <input
         className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
+        type='email'
+        autoComplete='email'
+        id='email'
         name='email'
         placeholder='you@example.com'
         required
@@ -86,6 +90,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         <input
           className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
           type={showPassword ? 'text' : 'password'}
+          id='password'
           name='password'
           placeholder='••••••••'
           onChange={(e) => setPassword(e.target.value)}
@@ -107,6 +112,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           <input
             className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
             type='password'
+            id='confirmPassword'
             name='password'
             placeholder='••••••••'
             onChange={(e) => setConfirmPassword(e.target.value)}
