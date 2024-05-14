@@ -98,6 +98,18 @@ Your local development is now ready ✨
 
 You can use the `Studio URL` provided to view and edit your local supabase project if needed.
 
+You can also run all migration files and re-seed the database whenever necessary with the following command:
+```bash
+supabase db reset
+```
+This will set your local project back to the latest committed state and re-populate all data.
+
+## Managing Database Migrations:
+
+Now that you are working from a local instance of the database you will need to handle Migration files in order to version-control any changes made to our supabase project.
+
+You can find more detailed guidance on how to handle migrations in the Supabase [official documentation](https://supabase.com/docs/guides/cli/managing-environments?queryGroups=environment&environment=staging#auto-schema-diff)
+
 ## Running the app:
 
 Make sure you are on the dev branch then use
