@@ -49,7 +49,11 @@ const ProfilePage = async () => {
                 className='rounded-full'
               />
             )}
-            <ProfileEdit userId={user.id} user={userProfile.data.username} />
+            <ProfileEdit
+              userId={user.id}
+              user={userProfile.data.username}
+              userAvatar={userProfile.data.avatar}
+            />
           </div>
         </div>
         <div className='m-auto mt-10 w-5/6'>

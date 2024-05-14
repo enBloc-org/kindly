@@ -13,6 +13,11 @@ type UploadImageProps = {
 const CDN =
   'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/';
 
+/**
+ *
+ * @description If the [pagePathname] prop is not set by default, an image upload is required. However, if it is set to a specific path, then uploading an image is not required.
+ */
+
 const UploadImageInput: React.FC<UploadImageProps> = ({
   setImageSrc,
   setError,
@@ -21,7 +26,6 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
   const supabase = createClientComponentClient();
   const [userId, setUserId] = useState('');
   const [isImageUploaded, setIsImageUploaded] = useState(false);
-  const [isImageRequired, setIsImageRequired] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +37,6 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
           setUserId(user);
           if (window.location.pathname === pagePathname) {
             setIsImageUploaded(true);
-            setIsImageRequired(false);
           }
         } else {
           setUserId('');
@@ -79,7 +82,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
         type='file'
         name='image'
         onChange={(e) => imageFileUpload(e)}
-        required={isImageRequired}
+        required={!isImageUploaded}
       />
       {!isImageUploaded && (
         <p className='font-extralight italic text-primaryOrange'>

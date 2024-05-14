@@ -10,9 +10,11 @@ import UploadImageInput from './UploadImageInput';
 export const ProfileEdit = ({
   userId,
   user,
+  userAvatar,
 }: {
   userId: string;
   user: string;
+  userAvatar: string;
 }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [imgAvatar, setImgAvatar] = useState('');
@@ -50,7 +52,7 @@ export const ProfileEdit = ({
         'profiles',
         {
           username: dataItem.username,
-          avatar: imgAvatar.length > 0 ? dataItem.avatar : undefined,
+          avatar: imgAvatar,
         },
         'id',
         userId
@@ -67,6 +69,7 @@ export const ProfileEdit = ({
 
   useEffect(() => {
     setValue('username', isEditMode ? user : '');
+    setImgAvatar(userAvatar);
   }, [isEditMode, user, setValue]);
 
   return (
