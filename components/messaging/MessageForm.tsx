@@ -43,12 +43,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
 
     if (member_has_deleted) {
       try {
-        console.log('code knows deleted is true');
         await convoRestart(conversation_id, user_id, partner_id, item_id);
-        console.log('initial current conversation');
-        console.log(currentConversation);
-        // console.log("what should be going in to set Current conversation")
-        // console.log({...currentConversation, ...conversations,  member_has_deleted: false  })
 
         currentConversation &&
           setCurrentConversation({
@@ -58,8 +53,6 @@ const MessageForm: React.FC<MessageFormProps> = ({
               member_has_deleted: false, // Update only this property
             },
           } as ConversationCardType);
-        console.log('final current conversation');
-        console.log(currentConversation);
       } catch (error) {
         console.error('error');
       }

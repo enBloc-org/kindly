@@ -91,7 +91,6 @@ const ConversationsList: React.FC = () => {
           }
         }
       )
-      // note use a new on to listen for partner_id = currentuserid and then handle that
       .on(
         'postgres_changes',
         {
@@ -124,75 +123,23 @@ const ConversationsList: React.FC = () => {
             )
           ) {
             const newConversations = allConversations;
-            console.log('new conversation initial:  ', newConversations);
-            console.log('payload:   ', payload);
             const targetConversation = newConversations.find(
               (conversation) => conversation.conversation_id === payload.new.id
             );
-            console.log('target conversation: ', targetConversation);
-            /// error comes from conversation traget conversation existing but having no conversations
-            // why is that though are conversations created without them somewhere no join
-            // seems to be going wrong where we are setting deleted to true so I guess here
+
             if (targetConversation && payload.new.member_has_deleted === true) {
               targetConversation.conversations.member_has_deleted = true;
             }
             setAllConversations(newConversations);
-            console.log('new conversations final');
-            console.log(newConversations);
-            console.log('all conversations final');
-            console.log(allConversations);
           }
         }
       )
-      // .on(
-      //   'postgres_changes',
-      //   {
-      //     event: 'DELETE',
-      //     schema: 'public',
-      //     table: 'user_conversations',
-      //     filter: `partner_id=eq.${currentUserId}`,        },
-      //   (payload) => {
-      //     console.log("current user id  "+ currentUserId)
-      //     console.log('partner deleted')
-      //     // what needs to happen here is that all conversations is updated so the conversation that was deleted
-      //     // has its flag set to true try spreading and creating duplicate or after filter adding it back in with
-      //     //change
-
-      //     const newConversations = allConversations;
-      //     console.log("new conversation  " )
-      //     console.log(newConversations)
-      //     console.log("payload   " )
-      //     console.log(payload)
-      //     console.log("what should go in target conversation ")
-      //     console.log(newConversations.find(conversation => conversation.id === payload.old.id +1 ||conversation.id === payload.old.id -1 ))
-      //    const targetConversation = newConversations.find(conversation => conversation.id === payload.old.id +1 ||conversation.id === payload.old.id -1 )
-      //    console.log("target conversation  " + targetConversation)
-      //   //   if(targetConversation && targetConversation.)
-      //   //  {targetConversation.conversations.member_has_deleted = true;}
-      //   //  setAllConversations(newConversations);
-
-      //   }
-      // )
       .subscribe();
 
     return () => {
       supabase.removeChannel(channel);
     };
   }, [supabase, allConversations, setAllConversations]);
-  /* we need to have current conversation update is deleted state to false when we recreate a conversation
-  this does not actually need to be done by web sockets
-  we also need the other user to have that state automatically updated to true when the other user deletes
-  this can be done in the deletion web socket maybe or for sure in the conversation update one
-
-  ok deletion does not work due to the only thing you have to work with from that update being a 
-  user conversation id for the person who deleted it which to can only be used to filter all conversations
-  by using a plus or minus one. This would cause errors though if someone started two conversations in
-  a row and could end up with something in their conversations with an id one higherthat is not related.
-
-  the direction seems likely to be and update of conversations table I think its worked out well that the 
-  boolean is there we have to think how to filter when it runs though probably a some array method for 
-  all conversations looking at the conversation ID
-   */
 
   return (
     <div className='m-4'>
