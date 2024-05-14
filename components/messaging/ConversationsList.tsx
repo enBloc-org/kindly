@@ -41,8 +41,7 @@ const ConversationsList: React.FC = () => {
         },
         async (payload) => {
           if (payload.new.user_id === currentUserId) {
-            // ADD IN CONVERSATIONS.MEMBER_HAS_DELETED TO MATCH CONVERSATION CARD TYPE
-
+            // update payload to include conversations.member_has_deleted to match ConversationCardType
             payload = {
               ...payload, // copy all existing properties from payload
               new: {
@@ -56,6 +55,7 @@ const ConversationsList: React.FC = () => {
             const newConversation = await selectItemImageAndName(
               payload.new as ConversationCardType
             );
+            console.log('new conversation: ', newConversation);
 
             setAllConversations((prevConversations) => [
               ...prevConversations,
@@ -91,7 +91,7 @@ const ConversationsList: React.FC = () => {
           }
         }
       )
-      // note use a new on to listen for partner_id = currenuserid and then handle that
+      // note use a new on to listen for partner_id = currentuserid and then handle that
       .on(
         'postgres_changes',
         {
@@ -124,25 +124,18 @@ const ConversationsList: React.FC = () => {
             )
           ) {
             const newConversations = allConversations;
-            console.log('new conversation initial  ');
-            console.log(newConversations);
-            console.log('payload   ');
-            console.log(payload);
-            console.log('what should go in target conversation ');
+            console.log('new conversation initial:  ', newConversations);
+            console.log('payload:   ', payload);
             const targetConversation = newConversations.find(
               (conversation) => conversation.conversation_id === payload.new.id
             );
-            console.log('target conversation  ');
-            console.log(targetConversation);
+            console.log('target conversation: ', targetConversation);
             /// error comes from conversation traget conversation existing but having no conversations
             // why is that though are conversations created without them somewhere no join
             // seems to be going wrong where we are setting deleted to true so I guess here
             if (targetConversation && payload.new.member_has_deleted === true) {
               targetConversation.conversations.member_has_deleted = true;
             }
-            // if (targetConversation && payload.new.member_has_deleted === false)  {
-            //   targetConversation.conversations.member_has_deleted = false;
-            // }
             setAllConversations(newConversations);
             console.log('new conversations final');
             console.log(newConversations);
@@ -188,7 +181,7 @@ const ConversationsList: React.FC = () => {
   }, [supabase, allConversations, setAllConversations]);
   /* we need to have current conversation update is deleted state to false when we recreate a conversation
   this does not actually need to be done by web sockets
-  we also nee the other user to have that state automatically updated to true when the other user deletes
+  we also need the other user to have that state automatically updated to true when the other user deletes
   this can be done in the deletion web socket maybe or for sure in the conversation update one
 
   ok deletion does not work due to the only thing you have to work with from that update being a 
