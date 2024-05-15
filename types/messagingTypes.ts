@@ -30,6 +30,22 @@ export type LastMessage = {
   message_text: string;
 };
 
+// export type ConversationCardType = {
+//   id: number;
+//   joined_at: string;
+//   conversation_id: number;
+//   user_id: string;
+//   item_id: number;
+//   partner_id: string;
+//   items: ItemType;
+//   conversations: { member_has_deleted: boolean };
+//   // created_at: string;
+//   // message_text: string;
+//   // partner_username: string;
+//   // partner_avatar: string;
+//   // item_name: string;
+// };
+
 export type ConversationCardType = {
   id: number;
   joined_at: string;
@@ -37,17 +53,6 @@ export type ConversationCardType = {
   user_id: string;
   item_id: number;
   partner_id: string;
-  items: ItemType;
-  conversations: { member_has_deleted: boolean };
-  created_at: string;
-  message_text: string;
-  partner_username: string;
-  partner_avatar: string;
-  item_name: string;
-};
-
-export type ItemType = {
-  imageSrc: string;
   has_unread_messages: boolean;
   partner_username: string;
   partner_avatar: string;
@@ -55,4 +60,5 @@ export type ItemType = {
   created_at: string;
   item_name: string;
   item_image: string;
+  conversations: { member_has_deleted: boolean };
 };
