@@ -46,7 +46,9 @@ Kindly uses Supabase to serve its _postgres_ database. You will need to setup a 
 ### Install docker
 You will need to have docker installed and running before following the next steps. Find the latest version [here](https://www.docker.com/products/docker-desktop/).
 
-Once it is installed, start your docker console. A container will be created in the next steps.
+Once it is installed, start your docker console and make sure there are no outstanding updates. 
+
+You don't need to do anything else within docker for now. A container will be created in the next steps.
 
 ### Install the supabase cli
 The cli will allow you to set up the schema and seed your local copy of the kindly database. Install it with the following command on your terminal:
@@ -92,7 +94,7 @@ You can view these details again at any time by running the following command:
 supabase status
 ```
 
-Copy the `DB URL` value into your `.env` file as the value of our `NEXT_PUBLIC_SUPABASE_URL` and the `anon key` value as our `NEXT_PUBLIC_SUPABASE_ANON_KEY` value.
+Copy the `API URL` value into your `.env` file as the value of our `NEXT_PUBLIC_SUPABASE_URL` and the `anon key` value as our `NEXT_PUBLIC_SUPABASE_ANON_KEY` value.
 
 Your local development is now ready ✨
 
