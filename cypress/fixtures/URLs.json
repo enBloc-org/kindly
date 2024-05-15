@@ -1,4 +1,5 @@
 {
   "login": "/login",
-  "profile": "/profile"
+  "profile": "/profile",
+  "addItem": "/add-item"
 }
