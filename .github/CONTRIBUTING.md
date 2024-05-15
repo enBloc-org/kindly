@@ -52,6 +52,10 @@ Kindly uses a Postgres database served through [Supabase](https://supabase.com)
 
 ![Kindly database schema](./documentation_images/schema.png)
 
+### Contributing changes to our database
+
+Refer to the [official documentation](https://supabase.com/docs/guides/cli/managing-environments?queryGroups=environment&environment=staging#auto-schema-diff) on managing migrations for any contributions that require changes to the Supabase project.
+
 ## Finding an Issue
 
 ### As a newcomer
