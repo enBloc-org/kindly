@@ -7,21 +7,21 @@ import { v4 as uuidv4 } from 'uuid';
 type UploadImageProps = {
   setImageSrc: (src: string) => void;
   setError?: (error: string) => void;
-  pagePathname?: string;
+  isRequired?: boolean;
 };
 
 const CDN =
   'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/';
 
 /**
- *
- * @description If the [pagePathname] prop is not set by default, an image upload is required. However, if it is set to a specific path, then uploading an image is not required.
+ * @description this function will add any image to our project storage.
+ * @param isRequired is an optional parameter that accepts a boolean. It will consider the value of false unless explicitly assigned the value of true.
  */
 
 const UploadImageInput: React.FC<UploadImageProps> = ({
   setImageSrc,
   setError,
-  pagePathname,
+  isRequired: isRequired = false,
 }) => {
   const supabase = createClientComponentClient();
   const [userId, setUserId] = useState('');
@@ -35,7 +35,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 
         if (user) {
           setUserId(user);
-          if (window.location.pathname === pagePathname) {
+          if (!isRequired) {
             setIsImageUploaded(true);
           }
         } else {
@@ -82,7 +82,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
         type='file'
         name='image'
         onChange={(e) => imageFileUpload(e)}
-        required={!isImageUploaded}
+        required={isRequired}
       />
       {!isImageUploaded && (
         <p className='font-extralight italic text-primaryOrange'>
