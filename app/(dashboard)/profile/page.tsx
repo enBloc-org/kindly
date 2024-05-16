@@ -51,7 +51,7 @@ const ProfilePage = async () => {
             )}
             <ProfileEdit
               userId={user.id}
-              user={userProfile.data.username}
+              userName={userProfile.data.username}
               userAvatar={userProfile.data.avatar}
             />
           </div>
