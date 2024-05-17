@@ -4,7 +4,6 @@ import convoRestart from '../../supabase/models/messaging/convoRestart';
 import { useConversationContext } from '../../context/conversationContext';
 import { FormEvent, useState, useRef, KeyboardEvent } from 'react';
 
-// Components
 import insertMessage from '@/supabase/models/messaging/insertMessage';
 import PaperPlaneIcon from '../icons/PaperPlaneIcon';
 import { ConversationCardType } from '@/types/messagingTypes';
@@ -57,8 +56,8 @@ const MessageForm: React.FC<MessageFormProps> = ({
           setCurrentConversation({
             ...currentConversation,
             conversations: {
-              ...currentConversation.conversations, // Keep other properties
-              memberHasDeleted: false, // Update only this property
+              ...currentConversation.conversations,
+              memberHasDeleted: false,
             },
           } as ConversationCardType);
       } catch (error) {
