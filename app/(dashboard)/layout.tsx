@@ -3,6 +3,7 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import Footer from '@/components/Footer';
+import Providers from '@/context/Providers';
 
 export default async function DashBoardLayout({
   children,
@@ -16,9 +17,11 @@ export default async function DashBoardLayout({
   }
   return (
     <>
-      <Header />
-      <main>{children}</main>
-      <Footer />
+      <Providers>
+        <Header />
+        <main className='flex flex-grow flex-col'>{children}</main>
+        <Footer />
+      </Providers>
     </>
   );
 }
