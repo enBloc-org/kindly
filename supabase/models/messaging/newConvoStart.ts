@@ -1,5 +1,12 @@
 import newClient from '@/supabase/utils/newClient';
 
+/**
+ * @description checks if a conversation matching these parameters already exists before attempting to create a new one
+ * @param userID Id of the user currently logged in
+ * @param donorID Id of the user who is donating this item
+ * @param itemID Id of the item which the new conversation will relate to
+ * @returns null if no conversation existed previously or conversation_id if an existing conversation has been found
+ */
 export default async function newConvoStart(
   userID: string | undefined,
   donorID: string,
@@ -8,11 +15,6 @@ export default async function newConvoStart(
   if (userID && donorID && itemID) {
     try {
       const supabase = newClient();
-      /**
-       * @description before creating a new conversation, we check if such a conversation already exists in the database,
-       * if we find such a conversation, we return its ID that we can use further in the code,
-       * if such a conversation does not exist in the database, then we create a new conversation
-       */
       const { data: existingConversations, error } = await supabase
         .from('user_conversations')
         .select('conversation_id')
