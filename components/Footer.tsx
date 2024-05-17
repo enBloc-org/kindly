@@ -1,14 +1,19 @@
 'use client';
 import MobileNavbar from './navigation/MobileNavbar';
 import useMediaQuery from './hooks/useMediaQuery';
+import { useConversationContext } from '@/context/conversationContext';
 
 const Footer = () => {
   const isBreakpoint = useMediaQuery(1000);
+  const { showConversationsList } = useConversationContext();
 
   return (
-    <footer className='fixed bottom-0 w-full bg-background py-2'>
-      {isBreakpoint && <MobileNavbar />}
-    </footer>
+    isBreakpoint &&
+    showConversationsList && (
+      <footer className='sticky bottom-0 h-auto w-full bg-background py-2'>
+        <MobileNavbar />
+      </footer>
+    )
   );
 };
 
