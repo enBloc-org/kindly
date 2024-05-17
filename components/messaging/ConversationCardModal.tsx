@@ -8,6 +8,7 @@ import deleteConversation from '../../supabase/models/messaging/deleteConversati
 import ElipsisMenu from '../menus/EllipsisMenu';
 import ButtonRounded from '../buttons/ButtonRounded';
 import { useConversationContext } from '@/context/conversationContext';
+import updateConversation from '@/supabase/models/messaging/updateConversation';
 
 type ModalProps = {
   conversationId?: number;
@@ -51,6 +52,33 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
     }
   };
 
+  const markConversationUnreadHandler = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.stopPropagation();
+
+    if (
+      typeof conversationId === 'undefined' ||
+      typeof currentConversation?.user_id === 'undefined'
+    ) {
+      throw new Error('Conversation is undefined');
+    }
+
+    try {
+      setIsDisabled(true);
+
+      updateConversation(conversationId, currentConversation?.user_id);
+
+      setIsModalOpen(false);
+      setError('');
+      setIsDisabled(false);
+    } catch (error) {
+      console.log(`Error: ${error}`);
+      setError(`There was an error: ${error}`);
+      setIsDisabled(false);
+    }
+  };
+
   return (
     <>
       <ElipsisMenu
@@ -61,7 +89,7 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
           },
           {
             buttonMessage: 'Mark Unread',
-            clickHandler: () => console.log('Log'),
+            clickHandler: markConversationUnreadHandler,
           },
         ]}
       />
