@@ -115,13 +115,13 @@ const CurrentConversation: React.FC = () => {
           .reverse()}
       </div>
       <MessageForm
-        user_id={currentConversation?.user_id}
-        conversation_id={currentConversation?.conversation_id}
-        member_has_deleted={
+        userId={currentConversation?.user_id}
+        conversationId={currentConversation?.conversation_id}
+        memberHasDeleted={
           currentConversation?.conversations?.member_has_deleted
         }
-        partner_id={currentConversation?.partner_id}
-        item_id={currentConversation?.item_id}
+        partnerId={currentConversation?.partner_id}
+        itemId={currentConversation?.item_id}
       />
     </div>
   );
