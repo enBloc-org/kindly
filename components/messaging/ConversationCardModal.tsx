@@ -5,7 +5,7 @@ import '../../app/styles/messaging-styles.css';
 import deleteConversation from '../../supabase/models/messaging/deleteConversation';
 
 //Components
-import ElipsisMenu from '../menus/EllipsisMenu';
+import Ellipsis from '../menus/EllipsisMenu';
 import ButtonRounded from '../buttons/ButtonRounded';
 import { useConversationContext } from '@/context/conversationContext';
 import updateConversation from '@/supabase/models/messaging/updateConversation';
@@ -46,7 +46,7 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
       setError('');
       setIsDisabled(false);
     } catch (error) {
-      console.log(`Error: ${error}`);
+      console.error(`Could not delete conversation: ${error}`);
       setError(`There was an error: ${error}`);
       setIsDisabled(false);
     }
@@ -67,13 +67,13 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
     try {
       setIsDisabled(true);
 
-      updateConversation(conversationId, currentConversation?.user_id);
+      await updateConversation(conversationId, currentConversation?.user_id);
 
       setIsModalOpen(false);
       setError('');
       setIsDisabled(false);
     } catch (error) {
-      console.log(`Error: ${error}`);
+      console.error(`Could not update conversation: ${error}`);
       setError(`There was an error: ${error}`);
       setIsDisabled(false);
     }
@@ -81,7 +81,7 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
 
   return (
     <>
-      <ElipsisMenu
+      <Ellipsis
         menuOptions={[
           {
             buttonMessage: 'Delete Conversation',
