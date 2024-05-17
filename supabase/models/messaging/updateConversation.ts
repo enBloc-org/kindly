@@ -8,7 +8,7 @@ export default async function updateConversation(
     const supabase = newClient();
     const { error } = await supabase
       .from('user_conversations')
-      .upsert({ has_unread_messages: true })
+      .update({ has_unread_messages: true })
       .match({ conversation_id: conversationId, user_id: userId });
 
     if (error) throw error;
