@@ -1,5 +1,5 @@
 <h1 align=center><img src=https://github.com/enBloc-org/kindly/assets/114364165/ec1855ea-13b7-4d61-800d-ff1f0c90ff70 height=200/></h1>
-Kindly is an open source web application created by Trafalgar Girls and enBloc, supporting Ukrainian Refugees in London. Individuals can contribute items at no cost to provide much-needed support to members of the Ukrainian refugee community.
+Kindly is an open source web application created by Trafalgar Girls and enBloc, supporting Ukrainian refugees in the United Kingdom. Individuals can contribute items at no cost to provide much-needed support to members of the Ukrainian refugee community.
 <br>
 <br>
 <br>

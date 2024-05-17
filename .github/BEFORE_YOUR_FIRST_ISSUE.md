@@ -46,7 +46,9 @@ Kindly uses Supabase to serve its _postgres_ database. You will need to setup a 
 ### Install docker
 You will need to have docker installed and running before following the next steps. Find the latest version [here](https://www.docker.com/products/docker-desktop/).
 
-Once it is installed, start your docker console. A container will be created in the next steps.
+Once it is installed, start your docker console and make sure there are no outstanding updates. 
+
+You don't need to do anything else within docker for now. A container will be created in the next steps.
 
 ### Install the supabase cli
 The cli will allow you to set up the schema and seed your local copy of the kindly database. Install it with the following command on your terminal:
@@ -92,11 +94,23 @@ You can view these details again at any time by running the following command:
 supabase status
 ```
 
-Copy the `DB URL` value into your `.env` file as the value of our `NEXT_PUBLIC_SUPABASE_URL` and the `anon key` value as our `NEXT_PUBLIC_SUPABASE_ANON_KEY` value.
+Copy the `API URL` value into your `.env` file as the value of our `NEXT_PUBLIC_SUPABASE_URL` and the `anon key` value as our `NEXT_PUBLIC_SUPABASE_ANON_KEY` value.
 
 Your local development is now ready ✨
 
 You can use the `Studio URL` provided to view and edit your local supabase project if needed.
+
+You can also run all migration files and re-seed the database whenever necessary with the following command:
+```bash
+supabase db reset
+```
+This will set your local project back to the latest committed state and re-populate all data.
+
+## Managing Database Migrations:
+
+Now that you are working from a local instance of the database you will need to handle Migration files in order to version-control any changes made to our supabase project.
+
+You can find more detailed guidance on how to handle migrations in the Supabase [official documentation](https://supabase.com/docs/guides/cli/managing-environments?queryGroups=environment&environment=staging#auto-schema-diff)
 
 ## Running the app:
 
