@@ -68,7 +68,7 @@ brew install supabase/tap/supabase
 <summary><strong>Windows</strong></summary>
 
 ```bash
-npm install -g supabase-cli
+npm install supabase --save-dev
 ```
 
 </details>
