@@ -11,19 +11,19 @@ import { ConversationCardType } from '@/types/messagingTypes';
 import useMediaQuery from '../hooks/useMediaQuery';
 
 type MessageFormProps = {
-  user_id: string | undefined;
-  conversation_id: number | undefined;
-  member_has_deleted: boolean | undefined;
-  partner_id: string | undefined;
-  item_id: number | undefined;
+  userId: string | undefined;
+  conversationId: number | undefined;
+  memberHasDeleted: boolean | undefined;
+  partnerId: string | undefined;
+  itemId: number | undefined;
 };
 
 const MessageForm: React.FC<MessageFormProps> = ({
-  user_id,
-  conversation_id,
-  member_has_deleted,
-  partner_id,
-  item_id,
+  userId,
+  conversationId,
+  memberHasDeleted,
+  partnerId,
+  itemId,
 }) => {
   const [message, setMessage] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState(true);
@@ -38,7 +38,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
     const trimmedMessage = message.trim();
 
     try {
-      await insertMessage(user_id, conversation_id, trimmedMessage);
+      await insertMessage(userId, conversationId, trimmedMessage);
       setMessage('');
       if (textareaRef.current) {
         textareaRef.current.style.height = '65px';
@@ -49,16 +49,16 @@ const MessageForm: React.FC<MessageFormProps> = ({
       throw error;
     }
 
-    if (member_has_deleted) {
+    if (memberHasDeleted) {
       try {
-        await convoRestart(conversation_id, user_id, partner_id, item_id);
+        await convoRestart(conversationId, userId, partnerId, itemId);
 
         currentConversation &&
           setCurrentConversation({
             ...currentConversation,
             conversations: {
               ...currentConversation.conversations, // Keep other properties
-              member_has_deleted: false, // Update only this property
+              memberHasDeleted: false, // Update only this property
             },
           } as ConversationCardType);
       } catch (error) {
