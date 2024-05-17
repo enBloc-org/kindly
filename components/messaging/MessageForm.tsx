@@ -1,6 +1,6 @@
 'use client';
 
-import convoRestart from '../../supabase/models/messaging/convoRestart';
+import restartConversation from '../../supabase/models/messaging/restartConversation';
 import { useConversationContext } from '../../context/conversationContext';
 import { FormEvent, useState, useRef, KeyboardEvent } from 'react';
 
@@ -50,7 +50,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
 
     if (memberHasDeleted) {
       try {
-        await convoRestart(conversationId, userId, partnerId, itemId);
+        await restartConversation(conversationId, userId, partnerId, itemId);
 
         currentConversation &&
           setCurrentConversation({

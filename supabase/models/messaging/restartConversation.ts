@@ -1,7 +1,7 @@
 import newClient from '@/supabase/utils/newClient';
 import { markAsDeleted } from './markAsDeleted';
 
-export default async function convoRestart(
+export default async function restartConversation(
   conversation_id: number | undefined,
   user_id: string | undefined,
   partner_id: string | undefined,
@@ -19,11 +19,9 @@ export default async function convoRestart(
         },
       ]);
       markAsDeleted(conversation_id, false);
-      console.log('convo restart has run');
     } catch (error) {
       console.error(error);
+      alert('Something went wrong!');
     }
-  } else {
-    alert('Something went wrong!');
   }
 }
