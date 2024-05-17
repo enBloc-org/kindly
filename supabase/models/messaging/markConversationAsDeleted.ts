@@ -1,6 +1,9 @@
 import newClient from '@/supabase/utils/newClient';
 
-export const markAsDeleted = async (conversationId: number, bool: boolean) => {
+export const markConversationAsDeleted = async (
+  conversationId: number,
+  bool: boolean
+) => {
   const supabase = newClient();
   const { error } = await supabase
     .from('conversations')

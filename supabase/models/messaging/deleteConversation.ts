@@ -1,4 +1,4 @@
-import { markAsDeleted } from './markAsDeleted';
+import { markConversationAsDeleted } from './markConversationAsDeleted';
 import newClient from '@/supabase/utils/newClient';
 
 export default async function deleteConversation(
@@ -12,7 +12,7 @@ export default async function deleteConversation(
       .delete()
       .match({ conversation_id: conversationId, user_id: userId });
 
-    markAsDeleted(conversationId, true);
+    markConversationAsDeleted(conversationId, true);
 
     if (error) throw error;
   } catch (error) {
