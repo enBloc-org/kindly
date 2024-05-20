@@ -1,4 +1,4 @@
-import newClient from '@/supabase/utils/newClient';
+import selectSystemUser from './selectSystemUser';
 import insertMessage from './insertMessage';
 
 export default async function insertSystemMessage(
@@ -6,16 +6,8 @@ export default async function insertSystemMessage(
   message: string
 ) {
   try {
-    const supabase = newClient();
-    const { data: systemUser, error } = await supabase
-      .from('profiles')
-      .select('id')
-      .eq('username', 'trafalgargirls')
-      .single();
-
-    if (error) throw error;
-
-    await insertMessage(systemUser?.id, conversationId, message);
+    const systemUser = await selectSystemUser();
+    await insertMessage(systemUser, conversationId, message);
   } catch (error) {
     console.error(`Error processing a system message: ${error}`);
     throw error;
