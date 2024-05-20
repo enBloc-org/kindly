@@ -3,6 +3,7 @@ import ButtonRounded from '@/components/buttons/ButtonRounded';
 import insertRow from '@/supabase/models/insertRow';
 import { useForm } from 'react-hook-form';
 import { PartialItem } from '@/types/supabaseTypes';
+import { ExtendedPartialItem } from './pageTypes';
 import UploadImageInput from '@/components/form/UploadImageInput';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useEffect, useState } from 'react';
@@ -18,6 +19,7 @@ const AddItemPage = () => {
     register,
     handleSubmit,
     watch,
+    setValue,
     reset,
     formState: { errors },
   } = useForm({
@@ -32,6 +34,7 @@ const AddItemPage = () => {
       postable: false,
       collectible: false,
       postage_covered: false,
+      imageUploaded: false,
     },
   });
 
@@ -47,7 +50,14 @@ const AddItemPage = () => {
     getUserId();
   }, []);
 
-  const onSubmit = async (data: PartialItem) => {
+  const onSubmit = async (data: ExtendedPartialItem) => {
+    console.log('Sending form');
+
+    if (!data.imageUploaded) {
+      console.log('Please upload an image.');
+      return; // You might want to handle this in the UI
+    }
+
     const dataItem: PartialItem = {
       imageSrc: imgSrc,
       donated_by: userId,
@@ -62,6 +72,12 @@ const AddItemPage = () => {
   const category = watch('item_type');
   const isWillingToPostChecked = watch('postable');
   const isPickUpChecked = watch('collectible');
+  const isPostageCovered = watch('postage_covered');
+  const isImageUploaded = watch('imageUploaded');
+
+  const handleImageUpload = (isUploaded: boolean) => {
+    setValue('imageUploaded', isUploaded); // Update and validate the field
+  };
 
   return (
     <div className='my-20 flex flex-col items-center gap-3'>
@@ -77,6 +93,7 @@ const AddItemPage = () => {
         >
           Item Name
           <input
+            id='item_name'
             type='text'
             className='input-text'
             {...register('item_name', { required: 'This field is required' })}
@@ -89,6 +106,7 @@ const AddItemPage = () => {
         >
           Description
           <textarea
+            id='item_description'
             {...register('item_description')}
             maxLength={200}
             className='input-text'
@@ -100,6 +118,7 @@ const AddItemPage = () => {
         >
           Postcode <span className='text-xs italic'>First half</span>
           <input
+            id='postcode'
             type='text'
             maxLength={5}
             {...register('postcode', {
@@ -120,6 +139,7 @@ const AddItemPage = () => {
           >
             Condition
             <select
+              id='condition'
               {...register('condition', { required: 'Required' })}
               className='input-text '
             >
@@ -134,11 +154,12 @@ const AddItemPage = () => {
             <p className='error-message'>{errors.condition?.message}</p>
           </label>
           <label
-            htmlFor='item_type'
+            htmlFor='categories'
             className='flex flex-col items-center gap-1 font-light'
           >
             Categories
             <select
+              id='categories'
               {...register('item_type', { required: 'Required' })}
               className='input-text '
             >
@@ -162,6 +183,7 @@ const AddItemPage = () => {
             >
               Size
               <input
+                id='size'
                 type='text'
                 {...register('size')}
                 maxLength={30}
@@ -188,11 +210,15 @@ const AddItemPage = () => {
         )}
         {category === 'books' && (
           <label
-            htmlFor='item_type'
+            htmlFor='age'
             className='flex flex-col items-center gap-1 font-light'
           >
             Age
-            <select {...register('item_subtype')} className='input-text '>
+            <select
+              id='age'
+              {...register('item_subtype')}
+              className='input-text '
+            >
               <option value={'adults'}>Adult</option>
               <option value={'children'}>Children</option>
             </select>
@@ -220,20 +246,22 @@ const AddItemPage = () => {
             Postage Covered
           </label>
         </div>
-        {!isPickUpChecked && !isWillingToPostChecked && (
+        {!isPickUpChecked && !isWillingToPostChecked && !isPostageCovered && (
           <p className='error-message'>Select at least one option </p>
         )}
 
         <UploadImageInput
+          onImageUpload={handleImageUpload}
           setImageSrc={setImageSrc}
           setError={setGeneralError}
-          isRequired={true}
         />
         {generalError && <p className='error-message'>{generalError}</p>}
-
+        {!isImageUploaded && <p className='error-message'>Image is required</p>}
         <ButtonRounded type='submit'>ADD YOUR ITEM</ButtonRounded>
       </form>
     </div>
   );
+  console.log(isPostageCovered, setValue, isImageUploaded);
 };
+
 export default AddItemPage;
