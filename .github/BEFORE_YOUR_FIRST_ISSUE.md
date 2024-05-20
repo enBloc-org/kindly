@@ -138,7 +138,8 @@ You can view these details again at any time by running the following command:
 
 <details>
 <summary><strong>macOS / Linux</strong></summary>
-```bash
+
+```bash 
 supabase status
 ```
 </details>
@@ -162,6 +163,7 @@ You can use the `Studio URL` provided to view and edit your local supabase proje
 You can also run all migration files and re-seed the database whenever necessary with the following command:
 <details>
 <summary><strong>macOS / Linux</strong></summary>
+
 ```bash
 supabase db reset
 ```
