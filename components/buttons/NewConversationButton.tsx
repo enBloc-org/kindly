@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import newConvoStart from '@/supabase/models/messaging/newConvoStart';
 import { useEffect } from 'react';
 import editRow from '@/supabase/models/editRow';
+import insertMessage from '@/supabase/models/messaging/insertMessage';
 
 export default function NewConversationButton({
   userId,
@@ -64,7 +65,15 @@ export default function NewConversationButton({
       setIsDisabled(true);
       setErrorMessage('');
       setError(false);
-      await newConvoStart(userId, donorId, item_id);
+
+      const conversationId = await newConvoStart(userId, donorId, item_id);
+
+      await insertMessage(
+        '2cc24681-b05a-4755-9112-4f7dd27ae2e2system',
+        conversationId,
+        'This is the start of your conversation.'
+      );
+
       router.push('/conversations');
     } catch (error) {
       console.log(error);
