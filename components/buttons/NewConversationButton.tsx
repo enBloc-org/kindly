@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import newConvoStart from '@/supabase/models/messaging/newConvoStart';
 import { useEffect } from 'react';
 import editRow from '@/supabase/models/editRow';
-import insertMessage from '@/supabase/models/messaging/insertMessage';
+import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
 
 export default function NewConversationButton({
   userId,
@@ -68,8 +68,7 @@ export default function NewConversationButton({
 
       const conversationId = await newConvoStart(userId, donorId, item_id);
 
-      await insertMessage(
-        '2cc24681-b05a-4755-9112-4f7dd27ae2e2system',
+      await insertSystemMessage(
         conversationId,
         'This is the start of your conversation.'
       );
