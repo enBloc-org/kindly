@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import newConvoStart from '@/supabase/models/messaging/newConvoStart';
+import startNewConversation from '@/supabase/models/messaging/startNewConversation';
 import { useEffect } from 'react';
 import editRow from '@/supabase/models/editRow';
 import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
@@ -66,7 +66,11 @@ export default function NewConversationButton({
       setErrorMessage('');
       setError(false);
 
-      const conversationId = await newConvoStart(userId, donorId, item_id);
+      const conversationId = await startNewConversation(
+        userId,
+        donorId,
+        item_id
+      );
 
       await insertSystemMessage(
         conversationId,
