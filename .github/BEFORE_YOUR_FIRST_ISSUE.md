@@ -51,25 +51,70 @@ Once it is installed, start your docker console and make sure there are no outst
 You don't need to do anything else within docker for now. A container will be created in the next steps.
 
 ### Install the supabase cli
-The cli will allow you to set up the schema and seed your local copy of the kindly database. Install it with the following command on your terminal:
+The cli will allow you to set up the schema and seed your local copy of the kindly database. You can find more comprehensive guidance in the [official docs](https://supabase.com/docs/guides/cli/getting-started) but we've outlined below the commands you will need to run in order to get started.
+
+Depending on the operating system you use, run the following command in your terminal to install the CLI:
+
+<details>
+<summary><strong>macOS / Linux</strong></summary>
 
 ```bash
 brew install supabase/tap/supabase
 ```
 
-You can find more comprehensive guidance in the [official docs](https://supabase.com/docs/guides/cli/getting-started) but we've outlined below the commands you will need to run in order to get started.
+</details>
+
+<details>
+<summary><strong>Windows</strong></summary>
+
+```bash
+npm install supabase --save-dev
+```
+
+</details>
+<br/>
 
 We have added to the repo a migration file and a seed file for the database, so you will only need to log into supabase with the following command:
+
+<details>
+<summary><strong>macOS / Linux</strong></summary>
 
 ```bash
 supabase login
 ```
 
+</details>
+
+<details>
+<summary><strong>Windows</strong></summary>
+
+```bash
+npx supabase login
+```
+
+</details>
+<br/>
+
 This will take you to the browser to complete a login. Then you will need to start your container with the following command:
+
+<details>
+<summary><strong>macOS / Linux</strong></summary>
 
 ```bash
 supabase start
 ```
+
+</details>
+
+<details>
+<summary><strong>Windows</strong></summary>
+
+```bash
+npx supabase start
+```
+
+ </details>
+ <br/>
 
 This script will run the migration file to set up your schema and then will run the `supabase/seed.sql` file to populate the database with some test data.
 
@@ -90,9 +135,24 @@ service_role key: eyJh......
 
 ```
 You can view these details again at any time by running the following command:
-```bash
+
+<details>
+<summary><strong>macOS / Linux</strong></summary>
+
+```bash 
 supabase status
 ```
+</details>
+
+<details>
+<summary><strong>Windows</strong></summary>
+
+```bash
+npx supabase status
+```
+
+ </details>
+ <br/>
 
 Copy the `API URL` value into your `.env` file as the value of our `NEXT_PUBLIC_SUPABASE_URL` and the `anon key` value as our `NEXT_PUBLIC_SUPABASE_ANON_KEY` value.
 
@@ -101,9 +161,23 @@ Your local development is now ready ✨
 You can use the `Studio URL` provided to view and edit your local supabase project if needed.
 
 You can also run all migration files and re-seed the database whenever necessary with the following command:
+<details>
+<summary><strong>macOS / Linux</strong></summary>
+
 ```bash
 supabase db reset
 ```
+</details>
+
+<details>
+<summary><strong>Windows</strong></summary>
+
+```bash
+npx supabase db reset
+```
+
+ </details>
+ <br/>
 This will set your local project back to the latest committed state and re-populate all data.
 
 ## Managing Database Migrations:
