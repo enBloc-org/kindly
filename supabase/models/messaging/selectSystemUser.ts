@@ -1,5 +1,9 @@
 import newClient from '@/supabase/utils/newClient';
 
+/**
+ *
+ * @returns {string} the user Id for the default System User in our environment (trafalgargirls)
+ */
 export default async function selectSystemUser() {
   try {
     const supabase = newClient();
