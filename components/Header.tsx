@@ -1,25 +1,32 @@
 'use client';
 import useMediaQuery from './hooks/useMediaQuery';
+import { useConversationContext } from '@/context/conversationContext';
+import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 
 // Components
+import Image from 'next/image';
+import Link from 'next/link';
 import DesktopNav from './navigation/DesktopNav';
 import NavigationLinkContainer from './navigation/NavigationLinkContainer';
 import ProfileRouteIcon from './icons/navigation/ProfileRouteIcon';
 import { ConversationPartner } from './messaging/ConversationPartner';
-import { useConversationContext } from '@/context/conversationContext';
-import Image from 'next/image';
-import Link from 'next/link';
 import BackArrowIcon from './icons/BackArrowIcon';
-import { usePathname } from 'next/navigation';
 
 export default function Header() {
-  const isBreakpoint = useMediaQuery(1000);
-  const pathname = usePathname();
   const {
     currentConversation,
     showConversationsList,
     setShowConversationsList,
   } = useConversationContext();
+  const isBreakpoint = useMediaQuery(1000);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname !== '/conversations') {
+      setShowConversationsList(true);
+    }
+  }, [pathname, setShowConversationsList]);
 
   const handleBackButtonClick = () => {
     setShowConversationsList((prevState) => !prevState);
