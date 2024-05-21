@@ -1,6 +1,6 @@
 import newClient from '@/supabase/utils/newClient';
 
-export default async function newConvoStart(
+export default async function startNewConversation(
   userID: string | undefined,
   donorID: string,
   itemID: string
