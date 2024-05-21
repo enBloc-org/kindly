@@ -8,7 +8,7 @@ import deleteConversation from '../../supabase/models/messaging/deleteConversati
 import Ellipsis from '../menus/EllipsisMenu';
 import ButtonRounded from '../buttons/ButtonRounded';
 import { useConversationContext } from '@/context/conversationContext';
-import updateConversation from '@/supabase/models/messaging/updateConversation';
+import updateConversationReadStatus from '@/supabase/models/messaging/updateConversationReadStatus';
 
 type ModalProps = {
   conversationId?: number;
@@ -67,7 +67,11 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
     try {
       setIsDisabled(true);
 
-      await updateConversation(conversationId, currentConversation?.user_id);
+      await updateConversationReadStatus(
+        conversationId,
+        currentConversation?.user_id,
+        true
+      );
 
       setIsModalOpen(false);
       setError('');
