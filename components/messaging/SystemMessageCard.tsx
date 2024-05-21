@@ -23,7 +23,15 @@ const SystemMessageCard: React.FC<SystemMessageCardProps> = ({
   }, []);
 
   return (
-    <div className='message-card'>
+    <div
+      style={{
+        minWidth: 20,
+        minHeight: 2.75,
+        maxHeight: 'max-content',
+        maxWidth: 'fit-content',
+      }}
+      className='mx-auto flex items-center justify-center rounded-2xl bg-background p-3'
+    >
       <p>{messageText}</p>
     </div>
   );
