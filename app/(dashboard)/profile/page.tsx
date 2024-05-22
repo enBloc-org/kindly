@@ -8,6 +8,7 @@ import { getProfile } from '@/supabase/models/getProfile';
 import LogOutButton from '@/components/LogOutButton';
 import { ProfileEdit } from '@/components/form/ProfileEdit';
 import newServerClient from '@/supabase/utils/newServerClient';
+import Link from 'next/link';
 
 const ProfilePage = async () => {
   try {
@@ -73,11 +74,18 @@ const ProfilePage = async () => {
                     postable={item.postable}
                     itemId={item.id}
                   />
-                  <Modal
-                    name='Delete Item'
-                    itemId={item.id}
-                    message='By pressing Confirm you will delete this item'
-                  />
+                  <div className='flex flex-row'>
+                    <Link href={`/edit-item/${item.id}`}>
+                      <p className='button button-rounded mx-2 my-2'>
+                        Edit item
+                      </p>
+                    </Link>
+                    <Modal
+                      name='Delete Item'
+                      itemId={item.id}
+                      message='By pressing Confirm you will delete this item'
+                    />
+                  </div>
                 </li>
               ))}
             </ul>

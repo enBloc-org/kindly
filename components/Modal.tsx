@@ -18,24 +18,21 @@ const Modal = ({ name, itemId, message }: ModalProps) => {
 
   return (
     <>
-      {!modal && (
-        <button className='button button-rounded my-2' onClick={toggleModal}>
-          {name}
-        </button>
-      )}
+      <button className='button button-rounded my-2' onClick={toggleModal}>
+        {name}
+      </button>
       {modal && (
-        <div className='modal my-2'>
-          <div className='rounded-t bg-backgroundHighlight p-2'>
-            <h1 className='font-semibold text-primaryOrange'>Warning</h1>
-            <p>{message}</p>
+        <div className='overlay'>
+          <div className='flex flex-col items-center justify-center gap-3 rounded-lg bg-backgroundHighlight p-6 shadow-md'>
+            <h1 className='font-semibold text-primaryOrange'>Warning!</h1>
+            <p className='font-light italic'>{message}</p>
+            <div className='mt-2 flex gap-6'>
+              <DeleteButton itemId={itemId} title='Confirm' />
+              <button className='button button-rounded' onClick={toggleModal}>
+                Cancel
+              </button>
+            </div>
           </div>
-          <DeleteButton itemId={itemId} title='Confirm' />
-          <button
-            className='button button-rounded mx-2 my-2'
-            onClick={toggleModal}
-          >
-            Cancel
-          </button>
         </div>
       )}
     </>
