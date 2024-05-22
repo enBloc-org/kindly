@@ -37,16 +37,16 @@ export default async function newConvoStart(
         console.error('Error inserting new conversation:', insertError);
         return null;
       }
-      const conversationId = newConversation?.id;
+      const conID = newConversation?.id;
       await supabase.from('user_conversations').insert([
         {
-          conversation_id: conversationId,
+          conversation_id: conID,
           user_id: userID,
           item_id: itemID,
           partner_id: donorID,
         },
         {
-          conversation_id: conversationId,
+          conversation_id: conID,
           user_id: donorID,
           item_id: itemID,
           partner_id: userID,
