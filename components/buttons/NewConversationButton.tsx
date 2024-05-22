@@ -64,8 +64,14 @@ export default function NewConversationButton({
       setIsDisabled(true);
       setErrorMessage('');
       setError(false);
-      await newConvoStart(userId, donorId, item_id);
-      router.push('/conversations');
+      const conversationId = await newConvoStart(userId, donorId, item_id);
+      if (conversationId instanceof Error) {
+        setErrorMessage(conversationId.message);
+        setError(true);
+        setIsDisabled(false);
+      } else {
+        router.push('/conversations');
+      }
     } catch (error) {
       console.log(error);
       setErrorMessage('Failed to start a new conversation. Please try again.');
