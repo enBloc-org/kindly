@@ -227,6 +227,7 @@ const AddItemPage = () => {
         <UploadImageInput
           setImageSrc={setImageSrc}
           setError={setGeneralError}
+          isRequired={true}
         />
         {generalError && <p className='error-message'>{generalError}</p>}
 

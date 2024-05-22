@@ -9,10 +9,12 @@ import UploadImageInput from './UploadImageInput';
 
 export const ProfileEdit = ({
   userId,
-  user,
+  userName,
+  userAvatar,
 }: {
   userId: string;
-  user: string;
+  userName: string;
+  userAvatar: string;
 }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [imgAvatar, setImgAvatar] = useState('');
@@ -48,7 +50,10 @@ export const ProfileEdit = ({
 
       await editRow(
         'profiles',
-        { username: dataItem.username, avatar: dataItem.avatar },
+        {
+          username: dataItem.username,
+          avatar: imgAvatar,
+        },
         'id',
         userId
       );
@@ -63,8 +68,9 @@ export const ProfileEdit = ({
   };
 
   useEffect(() => {
-    setValue('username', isEditMode ? user : '');
-  }, [isEditMode, user, setValue]);
+    setValue('username', isEditMode ? userName : '');
+    setImgAvatar(userAvatar);
+  }, [isEditMode, userName, setValue]);
 
   return (
     <div className='flex flex-col'>
