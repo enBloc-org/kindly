@@ -5,7 +5,7 @@ import '../../app/styles/messaging-styles.css';
 import deleteConversation from '../../supabase/models/messaging/deleteConversation';
 
 //Components
-import Ellipsis from '../menus/EllipsisMenu';
+import EllipsisMenu from '../menus/EllipsisMenu';
 import ButtonRounded from '../buttons/ButtonRounded';
 import { useConversationContext } from '@/context/conversationContext';
 import updateConversationReadStatus from '@/supabase/models/messaging/updateConversationReadStatus';
@@ -85,7 +85,7 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
 
   return (
     <>
-      <Ellipsis
+      <EllipsisMenu
         menuOptions={[
           {
             buttonMessage: 'Delete Conversation',
