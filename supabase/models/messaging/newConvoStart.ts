@@ -12,10 +12,6 @@ export default async function newConvoStart(
   donorID: string,
   itemID: string
 ) {
-  if (userID === donorID) {
-    alert("You can't initiate a conversation with yourself.");
-    return new Error(`You can't initiate a conversation with yourself.`);
-  }
   if (userID && donorID && itemID) {
     try {
       const supabase = newClient();
