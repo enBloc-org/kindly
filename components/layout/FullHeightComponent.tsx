@@ -19,7 +19,7 @@ const FullHeightContainer = ({ children }: { children: ReactNode }) => {
 
   const style = {
     height: height + 'px',
-    overflow: 'auto', // Add this style if you want the component to be scrollable
+    overflow: 'auto',
   };
 
   return <div style={style}>{children}</div>;
