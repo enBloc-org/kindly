@@ -30,7 +30,7 @@ const SystemMessageCard: React.FC<SystemMessageCardProps> = ({
         maxHeight: 'max-content',
         maxWidth: 'fit-content',
       }}
-      className='mx-auto flex items-center justify-center rounded-2xl bg-background p-3'
+      className='mx-auto my-6 flex items-center justify-center rounded-2xl bg-background p-3'
     >
       <p>{messageText}</p>
     </div>
