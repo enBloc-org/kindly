@@ -5,6 +5,7 @@ import { UserConversationType } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
 import newClient from '@/supabase/utils/newClient';
 import selectConversationCardDetails from '@/supabase/models/messaging/selectConversationCardDetails';
+import updateConversationReadStatus from '@/supabase/models/messaging/updateConversationReadStatus';
 
 const ConversationsList: React.FC = () => {
   const {
@@ -18,13 +19,15 @@ const ConversationsList: React.FC = () => {
   const [notificationList, setNotificationList] = useState<number[]>([]);
   const supabase = newClient();
 
-  const updateOpenConvo = async (givenId: number) => {
+  const updateOpenConversation = async (givenId: number) => {
     setCurrentConversation &&
       setCurrentConversation(
         allConversations?.filter(
           (conversations) => conversations.conversation_id === givenId
         )[0]
       );
+
+    updateConversationReadStatus(givenId, currentUserId, false);
 
     setShowConversationsList(false);
   };
@@ -115,7 +118,9 @@ const ConversationsList: React.FC = () => {
               partnerUsername={conversation.partner_username}
               partnerAvatar={conversation.partner_avatar}
               itemName={conversation.item_name}
-              clickHandler={() => updateOpenConvo(conversation.conversation_id)}
+              clickHandler={() =>
+                updateOpenConversation(conversation.conversation_id)
+              }
               notificationList={notificationList}
             />
           </div>
