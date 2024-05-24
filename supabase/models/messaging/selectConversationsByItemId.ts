@@ -1,5 +1,9 @@
 import newClient from '@/supabase/utils/newClient';
 
+/**
+ *
+ * @returns all conversation_id values in the 'conversations' table that relate to the item_id passed to the function. All duplicates are removed from the return value.
+ */
 export default async function selectConversationsByItemId(itemId: number) {
   try {
     const supabase = newClient();
@@ -10,7 +14,7 @@ export default async function selectConversationsByItemId(itemId: number) {
 
     if (error) throw error;
 
-    const conversationsSet = new Set(
+    const conversationsSet: Set<number> = new Set(
       data.map((conversation) => conversation.conversation_id)
     );
     return conversationsSet;
