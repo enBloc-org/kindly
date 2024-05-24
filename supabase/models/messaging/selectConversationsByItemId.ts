@@ -1,6 +1,6 @@
 import newClient from '@/supabase/utils/newClient';
 
-export default async function selectConversationByItemId(itemId: number) {
+export default async function selectConversationsByItemId(itemId: number) {
   try {
     const supabase = newClient();
     const { data, error } = await supabase

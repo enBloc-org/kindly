@@ -1,7 +1,7 @@
 'use client';
 import deleteItems from '@/supabase/models/deleteItems';
 import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
-import selectConversationByItemId from '@/supabase/models/messaging/selectConversationByItemId';
+import selectConversationsByItemId from '@/supabase/models/messaging/selectConversationsByItemId';
 import { useRouter } from 'next/navigation';
 
 interface DeleteButtonProps {
@@ -11,7 +11,7 @@ interface DeleteButtonProps {
 
 const deleteItemHandler = async (givenId: number) => {
   try {
-    const allConversations = await selectConversationByItemId(givenId);
+    const allConversations = await selectConversationsByItemId(givenId);
     allConversations.forEach((conversation) => {
       insertSystemMessage(
         conversation,
