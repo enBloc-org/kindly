@@ -1,6 +1,5 @@
 'use client';
 import deleteItems from '@/supabase/models/deleteItems';
-import { useRouter } from 'next/navigation';
 
 interface DeleteButtonProps {
   itemId?: number;
@@ -13,12 +12,16 @@ export default function DeleteButton({ itemId, title }: DeleteButtonProps) {
     throw new Error('item is undefined');
   }
 
-  const router = useRouter();
+  const handleDelete = async () => {
+    try {
+      await deleteItems(itemId);
+      window.location.reload();
+    } catch (error) {
+      console.error('Failed to delete item:', error);
+    }
+  };
   return (
-    <button
-      className='button button-rounded '
-      onClick={() => deleteItems(itemId).then(router.refresh)}
-    >
+    <button className='button button-rounded ' onClick={handleDelete}>
       {title}
     </button>
   );

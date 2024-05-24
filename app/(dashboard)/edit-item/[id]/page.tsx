@@ -1,4 +1,5 @@
 'use client';
+
 import ButtonRounded from '@/components/buttons/ButtonRounded';
 import { useForm } from 'react-hook-form';
 import { PartialItem } from '@/types/supabaseTypes';
@@ -63,13 +64,13 @@ const EditItemPage = ({ params }: { params: { id: number } }) => {
   }, []);
 
   const onSubmit = async (data: PartialItem) => {
-    const dataItem: PartialItem = {
+    const itemData: PartialItem = {
       id: params.id,
       imageSrc: imgSrc,
       ...data,
     };
     try {
-      await editRow('items', dataItem, 'id', dataItem.id);
+      await editRow('items', itemData, 'id', itemData.id);
       reset();
       router.push('/edit-item/success');
     } catch (error) {

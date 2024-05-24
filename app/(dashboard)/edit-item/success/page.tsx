@@ -1,5 +1,7 @@
-import Link from 'next/link';
+'use client';
+
 import ButtonRounded from '@/components/buttons/ButtonRounded';
+import Link from 'next/link';
 
 const SuccessEditItemPage = () => {
   return (
@@ -7,7 +9,7 @@ const SuccessEditItemPage = () => {
       <h1 className='text-center text-xl font-bold'>
         Item was successfully edited.
       </h1>
-      <Link href='/profile'>
+      <Link href={'/profile'}>
         <ButtonRounded type='button'>Your profile</ButtonRounded>
       </Link>
     </div>
