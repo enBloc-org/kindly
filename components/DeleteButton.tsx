@@ -1,5 +1,7 @@
 'use client';
 import deleteItems from '@/supabase/models/deleteItems';
+import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
+import selectConversationByItemId from '@/supabase/models/messaging/selectConversationByItemId';
 import { useRouter } from 'next/navigation';
 
 interface DeleteButtonProps {
@@ -7,8 +9,27 @@ interface DeleteButtonProps {
   title: string;
 }
 
+const deleteItemHandler = async (givenId: number) => {
+  try {
+    const allConversations = await selectConversationByItemId(givenId);
+    allConversations.forEach((conversation) => {
+      insertSystemMessage(
+        conversation,
+        'This item is no longer available for donation.'
+      );
+    });
+  } catch (error) {
+    throw error;
+  }
+
+  try {
+    await deleteItems(givenId);
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default function DeleteButton({ itemId, title }: DeleteButtonProps) {
-  // Get id of items you want to delete from database and refresh page
   if (typeof itemId === 'undefined') {
     throw new Error('item is undefined');
   }
@@ -17,7 +38,7 @@ export default function DeleteButton({ itemId, title }: DeleteButtonProps) {
   return (
     <button
       className='button button-rounded '
-      onClick={() => deleteItems(itemId).then(router.refresh)}
+      onClick={() => deleteItemHandler(itemId).then(router.refresh)}
     >
       {title}
     </button>
