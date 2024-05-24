@@ -16,12 +16,14 @@ const selectConversationCardDetails = async (
       error,
     }: { data: ConversationCardPartial | null; error: PostgrestError | null } =
       await supabase
-        .rpc('fetch_profile_message_and_item', {
+        .rpc('fetch_conversation_card_details', {
           uc_partner_id: conversation.partner_id,
           uc_conversation_id: conversation.conversation_id,
           uc_item_id: conversation.item_id,
         })
         .single();
+
+    console.log(error);
 
     if (error) throw error;
 
@@ -37,6 +39,7 @@ const selectConversationCardDetails = async (
       item_image: info.item_image,
     };
 
+    console.log({ singleConversation });
     return singleConversation;
   } catch (error) {
     console.error(`Failed to fetch conversations from database: ${error}`);
