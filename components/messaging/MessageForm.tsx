@@ -5,22 +5,33 @@ import { FormEvent, useState, useRef, KeyboardEvent } from 'react';
 import insertMessage from '@/supabase/models/messaging/insertMessage';
 import PaperPlaneIcon from '../icons/PaperPlaneIcon';
 import useMediaQuery from '../hooks/useMediaQuery';
+import restartConversation from '@/supabase/models/messaging/restartConversation';
+import { useConversationContext } from '@/context/conversationContext';
 
 type MessageFormProps = {
   user_id: string | undefined;
   conversation_id: number | undefined;
+  memberHasDeleted: boolean | undefined;
+  partnerId: string | undefined;
+  itemId: number | undefined;
 };
 
 const MessageForm: React.FC<MessageFormProps> = ({
   user_id,
   conversation_id,
+  memberHasDeleted,
+  partnerId,
+  itemId,
 }) => {
   const [message, setMessage] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState(true);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const breakpoint = useMediaQuery(1000);
+  const currentConversation = useConversationContext();
+  console.log({ currentConversation });
 
   const handleSubmit = async (e: FormEvent) => {
+    console.log('click');
     e.preventDefault();
 
     const trimmedMessage = message.trim();
@@ -35,6 +46,12 @@ const MessageForm: React.FC<MessageFormProps> = ({
     } catch (error) {
       console.error(`Failed to fetch messages from database: ${error}`);
       throw error;
+    }
+
+    console.log({ conversation_id, user_id, partnerId, itemId });
+
+    if (memberHasDeleted) {
+      await restartConversation(conversation_id, user_id, partnerId, itemId);
     }
   };
 

@@ -37,6 +37,7 @@ const selectConversationCardDetails = async (
       created_at: info.created_at,
       item_name: info.item_name,
       item_image: info.item_image,
+      member_has_deleted: info.member_has_deleted,
     };
 
     console.log({ singleConversation });

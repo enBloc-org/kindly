@@ -8,6 +8,7 @@ export default async function restartConversation(
   item_id: number | undefined
 ) {
   if (conversation_id && user_id && partner_id && item_id) {
+    console.log('conversation restarted');
     try {
       const supabase = newClient();
       await supabase.from('user_conversations').insert([

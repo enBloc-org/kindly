@@ -47,4 +47,6 @@ export type ConversationCardType = {
   created_at: string;
   item_name: string;
   item_image: string;
+  member_has_deleted: boolean;
+  partner_id: string;
 };
