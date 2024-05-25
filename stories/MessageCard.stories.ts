@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import MessageCard from '@/components/messaging/MessageCard';
 
-const meta = {
+const meta: Meta<typeof MessageCard> = {
   title: 'Messaging/MessageCard',
   component: MessageCard,
   parameters: {
@@ -9,7 +9,7 @@ const meta = {
       default: 'messaging',
     },
   },
-} satisfies Meta<typeof MessageCard>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
