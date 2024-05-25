@@ -11,7 +11,7 @@ const preview: Preview = {
           value: '#F0EFED',
         },
         {
-          name: 'currentConversation',
+          name: 'messaging',
           value: '#FAFAF9',
         },
       ],

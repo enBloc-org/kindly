@@ -4,6 +4,11 @@ import MessageCard from '@/components/messaging/MessageCard';
 const meta = {
   title: 'Messaging/MessageCard',
   component: MessageCard,
+  parameters: {
+    backgrounds: {
+      default: 'messaging',
+    },
+  },
 } satisfies Meta<typeof MessageCard>;
 
 export default meta;

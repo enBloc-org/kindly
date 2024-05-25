@@ -6,7 +6,7 @@ const meta = {
   component: SystemMessageCard,
   parameters: {
     backgrounds: {
-      default: 'currentConversation',
+      default: 'messaging',
     },
   },
 } satisfies Meta<typeof SystemMessageCard>;
