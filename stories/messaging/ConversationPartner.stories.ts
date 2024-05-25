@@ -4,6 +4,17 @@ import { ConversationPartner } from '@/components/messaging/ConversationPartner'
 const meta: Meta<typeof ConversationPartner> = {
   title: 'Messaging/ConversationPartner',
   component: ConversationPartner,
+  parameters: {
+    mocks: {
+      getPartnerProfile: () => {
+        username: 'test user';
+        avatar: null;
+      },
+      useConversationContext: () => {
+        currentUserId: 269;
+      },
+    },
+  },
 };
 
 export default meta;
