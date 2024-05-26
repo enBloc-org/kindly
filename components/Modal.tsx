@@ -11,10 +11,10 @@ interface ModalProps {
 }
 
 const Modal = ({ name, itemId, message }: ModalProps) => {
-  const [modal, setModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => {
-    setModal(!modal);
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -22,7 +22,7 @@ const Modal = ({ name, itemId, message }: ModalProps) => {
       <button className='button button-rounded my-2' onClick={toggleModal}>
         {name}
       </button>
-      {modal && (
+      {isOpen && (
         <div className='overlay'>
           <div className='flex flex-col items-center justify-center gap-3 rounded-lg bg-backgroundHighlight p-6 shadow-md'>
             <h1 className='font-semibold text-primaryOrange'>Warning!</h1>

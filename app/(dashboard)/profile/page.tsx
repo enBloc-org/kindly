@@ -2,7 +2,7 @@ import { getProfile } from '@/supabase/models/getProfile';
 import LogOutButton from '@/components/LogOutButton';
 import { ProfileEdit } from '@/components/form/ProfileEdit';
 import newServerClient from '@/supabase/utils/newServerClient';
-import DisplayDonatedItems from '@/components/DisplayDonatedItems';
+import DonatedItemsList from '@/components/DonatedItemsList';
 
 const ProfilePage = async () => {
   try {
@@ -50,7 +50,7 @@ const ProfilePage = async () => {
             />
           </div>
         </div>
-        <DisplayDonatedItems userId={user.id}></DisplayDonatedItems>
+        <DonatedItemsList userId={user.id} />
       </>
     );
   } catch (error) {

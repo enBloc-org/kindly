@@ -7,7 +7,7 @@ import UploadImageInput from '@/components/form/UploadImageInput';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import editRow from '@/supabase/models/editRow';
+import upsertRow from '@/supabase/models/upsertRow';
 
 const EditItemPage = ({ params }: { params: { id: number } }) => {
   const [imgSrc, setImageSrc] = useState('');
@@ -70,11 +70,16 @@ const EditItemPage = ({ params }: { params: { id: number } }) => {
       ...data,
     };
     try {
-      await editRow('items', itemData, 'id', itemData.id);
-      reset();
-      router.push('/edit-item/success');
+      const response = await upsertRow('items', itemData);
+      if (response) {
+        reset();
+        router.push('/edit-item/success');
+      } else {
+        setGeneralError('Failed to update item.');
+      }
     } catch (error) {
       console.log(error);
+      setGeneralError('An error occured.');
     }
   };
 

@@ -4,7 +4,7 @@ import { getItems } from '@/supabase/models/getItems';
 import Link from 'next/link';
 import Modal from '@/components/Modal';
 import ItemCard from '@/components/ItemCard';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PartialItem } from '@/types/supabaseTypes';
 import useMediaQuery from './hooks/useMediaQuery';
 
@@ -12,15 +12,20 @@ type DisplayDonatedItemsProps = {
   userId: string;
 };
 
-const DisplayDonatedItems = ({ userId }: DisplayDonatedItemsProps) => {
+const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
   const isBreakpoint = useMediaQuery(1000);
-  const [storeItems, setStoreItems] = useState<PartialItem[]>([]);
+  const [storeItems, setStoreItems] = useState<PartialItem[] | null>([]);
 
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const fetchItemsRes = await getItems('items', '', 'donated_by', userId);
-        setStoreItems(fetchItemsRes || []);
+        const fetchItemsResult = await getItems(
+          'items',
+          '',
+          'donated_by',
+          userId
+        );
+        setStoreItems(fetchItemsResult);
       } catch (error) {
         return (
           <div>An error has occured while retrieving your donated items.</div>
@@ -71,4 +76,4 @@ const DisplayDonatedItems = ({ userId }: DisplayDonatedItemsProps) => {
   );
 };
 
-export default DisplayDonatedItems;
+export default DonatedItemsList;
