@@ -19,13 +19,8 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const fetchItemsResult = await getItems(
-          'items',
-          '',
-          'donated_by',
-          userId
-        );
-        setStoreItems(fetchItemsResult);
+        const itemsResult = await getItems('items', '', 'donated_by', userId);
+        itemsResult && setStoreItems(itemsResult);
       } catch (error) {
         return (
           <div>An error has occured while retrieving your donated items.</div>
