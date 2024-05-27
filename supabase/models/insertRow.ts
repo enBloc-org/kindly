@@ -7,7 +7,9 @@ export default async function insertRow(
   try {
     // setSubmitting(true);
     const supabase = newClient();
-    await supabase.from(table).insert(InsertValues).select();
+    const response = await supabase.from(table).insert(InsertValues).select();
+    const [createdRecord] = response?.data ?? [];
+    return createdRecord as PartialItem;
   } catch (error) {
     // setSubmitting(false);
     console.log('An unexpected error occurred');
