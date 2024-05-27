@@ -26,8 +26,8 @@ body {
 /* Universal component classes*/
 
 .button {
-  @apply relative max-w-xs cursor-pointer bg-primaryGreen 
-  px-4 py-1.5 text-sm  font-semibold  tracking-wider text-background 
+  @apply relative max-w-xs cursor-pointer bg-primaryGreen
+  px-4 py-1.5 text-sm  font-semibold  tracking-wider text-background
   shadow-md;
 }
 
@@ -37,6 +37,11 @@ body {
 
 .button-rounded {
   @apply rounded-md;
+}
+
+.button-stroke {
+  border-left: #54BB89 solid 8px;
+  border-right: #54BB89 solid 8px;
 }
 
 .button-pill {
