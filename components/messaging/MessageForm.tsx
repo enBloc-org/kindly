@@ -28,21 +28,22 @@ const MessageForm: React.FC<MessageFormProps> = ({
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const breakpoint = useMediaQuery(1000);
   // const currentConversation = useConversationContext();
-  // console.log({ currentConversation });
+  console.log({ memberHasDeleted });
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const trimmedMessage = message.trim();
+    console.log({
+      conversation_id,
+      user_id,
+      partnerId,
+      itemId,
+      memberHasDeleted,
+    });
 
     try {
-      await insertMessage(user_id, conversation_id, trimmedMessage);
-      console.log({ conversation_id, user_id, partnerId, itemId });
-      setMessage('');
-      if (textareaRef.current) {
-        textareaRef.current.style.height = '65px';
-      }
-      setIsDisabled(true);
+      // check conversation exists for both users, if one user has deleted then restart
       if (memberHasDeleted) {
         try {
           await restartConversation(
@@ -55,6 +56,14 @@ const MessageForm: React.FC<MessageFormProps> = ({
           console.error(error);
         }
       }
+
+      await insertMessage(user_id, conversation_id, trimmedMessage);
+
+      setMessage('');
+      if (textareaRef.current) {
+        textareaRef.current.style.height = '65px';
+      }
+      setIsDisabled(true);
     } catch (error) {
       console.error(`Failed to fetch messages from database: ${error}`);
       throw error;

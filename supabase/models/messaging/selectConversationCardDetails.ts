@@ -40,7 +40,6 @@ const selectConversationCardDetails = async (
       member_has_deleted: info.member_has_deleted,
     };
 
-    console.log({ singleConversation });
     return singleConversation;
   } catch (error) {
     console.error(`Failed to fetch conversations from database: ${error}`);
