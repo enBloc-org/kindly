@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { userEvent, within, expect, waitFor, fn } from '@storybook/test';
+
 import ConversationCard from '@/components/messaging/ConversationCard';
 import ConversationContextProvider from '@/context/conversationContext';
 
@@ -14,6 +16,13 @@ const meta: Meta<typeof ConversationCard> = {
       );
     },
   ],
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement);
+    await step('Click ConversationCard', async () => {
+      await userEvent.click(canvas.getByTestId('card-wrapper'));
+    });
+    await waitFor(() => expect(args.clickHandler).toHaveBeenCalled());
+  },
 };
 
 export default meta;
@@ -28,7 +37,7 @@ export const ConversationCardDefault: Story = {
     partnerUsername: 'Jane Doe',
     partnerAvatar: undefined,
     itemName: 'White Jumper',
-    clickHandler: () => console.log('clicked'),
+    clickHandler: fn(),
     notificationList: [1, 2, 3],
   },
 };
