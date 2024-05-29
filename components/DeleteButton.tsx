@@ -9,37 +9,36 @@ interface DeleteButtonProps {
   title: string;
 }
 
-const deleteItemHandler = async (givenId: number) => {
-  try {
-    const allConversations = await selectConversationsByItemId(givenId);
-    allConversations.forEach((conversation) => {
-      insertSystemMessage(
-        conversation,
-        'This item is no longer available for donation.'
-      );
-    });
-  } catch (error) {
-    throw error;
-  }
-
-  try {
-    await deleteItems(givenId);
-  } catch (error) {
-    throw error;
-  }
-};
-
 export default function DeleteButton({ itemId, title }: DeleteButtonProps) {
   if (typeof itemId === 'undefined') {
     throw new Error('item is undefined');
   }
-
   const router = useRouter();
+
+  const deleteItemHandler = async () => {
+    try {
+      const allConversations = await selectConversationsByItemId(itemId);
+      allConversations.forEach((conversation) => {
+        insertSystemMessage(
+          conversation,
+          'This item is no longer available for donation.'
+        );
+      });
+
+      router.refresh();
+    } catch (error) {
+      throw error;
+    }
+
+    try {
+      await deleteItems(itemId);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return (
-    <button
-      className='button button-rounded '
-      onClick={() => deleteItemHandler(itemId).then(router.refresh)}
-    >
+    <button className='button button-rounded ' onClick={deleteItemHandler}>
       {title}
     </button>
   );
