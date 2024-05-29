@@ -21,11 +21,13 @@ npm run storybook
 If you create a new component or refactor an existing component you should make the relevant changes to a `.stories.tsx` file inside the `stories/` folder.
 
 ### Component Library and documentation
+You can learn more about how to structure your stories in the codebase from the [**official documentation 📚**](https://storybook.js.org/docs/writing-stories#where-to-put-stories)
 
 In order to build the best possible Developer Experience keep the component library organized by feature, as shown in the example below:  
 ![Storybook component library structure](./documentation_images/storybook_component_library.png)
 
 ### Component interactions in Storybook
+You can learn more about writing tests within the `play` block of your stories by reading the [**official documentation 📚**](https://storybook.js.org/docs/writing-stories/play-function#writing-stories-with-the-play-function)
 
 All component stories should include tests for any basic functionality provided by the component. All `interactions` tests should be passing in Storybook after any changes to our components.
 
