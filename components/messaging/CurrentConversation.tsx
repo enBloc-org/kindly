@@ -81,12 +81,22 @@ const CurrentConversation: React.FC = () => {
         },
         (payload) => {
           console.log(payload);
-          const updatedConversations = [...allConversations];
-          updatedConversations.forEach((conversation) => {
-            if (conversation.conversation_id == payload.new.id) {
-              conversation.member_has_deleted = payload.new.member_has_deleted;
-              setAllConversations(updatedConversations);
+          setAllConversations((prevConversations) => {
+            // Create a shallow copy
+            const updatedConversations = [...prevConversations];
+            // Find the conversation to update
+            const conversationIndex = updatedConversations.findIndex(
+              (conversation) => conversation.conversation_id === payload.new.id
+            );
+            // Update the conversation if found
+            if (conversationIndex !== -1) {
+              updatedConversations[conversationIndex] = {
+                ...updatedConversations[conversationIndex],
+                member_has_deleted: payload.new.member_has_deleted,
+              };
             }
+            // Return the updated conversations
+            return updatedConversations;
           });
         }
       )
