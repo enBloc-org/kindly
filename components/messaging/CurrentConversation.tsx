@@ -15,8 +15,12 @@ import newClient from '@/supabase/utils/newClient';
 import SystemMessageCard from './SystemMessageCard';
 
 const CurrentConversation: React.FC = () => {
-  const { allConversations, currentConversation, setCurrentConversation } =
-    useConversationContext();
+  const {
+    allConversations,
+    setAllConversations,
+    currentConversation,
+    setCurrentConversation,
+  } = useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const [systemUser, setSystemUser] = useState<string | undefined>(undefined);
@@ -47,6 +51,7 @@ const CurrentConversation: React.FC = () => {
   }, [currentConversation, setCurrentMessages]);
 
   useEffect(() => {
+    // const updatedConversations = allConversations
     const channel = supabase
       .channel('realtime messages')
       .on(
@@ -65,6 +70,24 @@ const CurrentConversation: React.FC = () => {
               payload.new as MessageType,
             ]);
           }
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'conversations',
+        },
+        (payload) => {
+          console.log(payload);
+          const updatedConversations = [...allConversations];
+          updatedConversations.forEach((conversation) => {
+            if (conversation.conversation_id == payload.new.id) {
+              conversation.member_has_deleted = payload.new.member_has_deleted;
+              setAllConversations(updatedConversations);
+            }
+          });
         }
       )
       .subscribe();
