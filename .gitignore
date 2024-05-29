@@ -6,10 +6,6 @@
 .pnp.js
 .yarn/install-state.gz
 
-# testing
-/coverage
-playwright/.auth/user.json
-
 # next.js
 /.next/
 /out/
@@ -44,18 +40,3 @@ next-env.d.ts
 # Sentry Config File
 .sentryclirc
 /test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
