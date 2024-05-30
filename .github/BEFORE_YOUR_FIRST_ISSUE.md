@@ -1,10 +1,15 @@
-## Technologies Used
-Kindly is built with TypeScript
-### Languages 
+# Welcome - Before you get started
+If you are visiting our repo for the first time and would like a quick intro, you may want to watch this video:
+
+<iframe width="640" height="400" src="https://www.loom.com/embed/f67dccc47ab448508e32bb3e672121f9?sid=a1f4d93d-9f7a-49b9-9974-085f6d03dccc" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+You can read below the detailed guidance on getting set up and contributing to Kindly 👇
+
+## Tech Stack
 | Frontend | Backend | Testing    |
 | -------- | ------- | ---------- |
-| React    | Next.js | Playwright|
-| Tailwind | Supabase|            | 
+| React    | Next.js |  Cypress   |
+| Tailwind | Supabase|  Storybook | 
  
 
 ## Installation
