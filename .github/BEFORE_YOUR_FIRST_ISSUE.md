@@ -1,10 +1,8 @@
-## Technologies Used
-Kindly is built with TypeScript
-### Languages 
+## Tech Stack
 | Frontend | Backend | Testing    |
 | -------- | ------- | ---------- |
-| React    | Next.js | Playwright|
-| Tailwind | Supabase|            | 
+| React    | Next.js |  Cypress   |
+| Tailwind | Supabase|  Storybook | 
  
 
 ## Installation
