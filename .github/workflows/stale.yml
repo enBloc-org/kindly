@@ -16,8 +16,6 @@ jobs:
     steps:
       - uses: actions/stale@v9
         with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
           # stale and delete issues
           stale-issue-message: '🤖 meep morp! This Issue is now marked as stale because there has been no activity for a while.  The Issue may be unassigned and moved to the Backlog or it will get deleted if there is no activity in the next 7 days.'
           close-issue-message: '🤖 meep morp :( This Issue has been closed because it was stale for 7 days.'
