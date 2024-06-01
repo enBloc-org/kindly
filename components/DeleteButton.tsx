@@ -17,8 +17,8 @@ export default function DeleteButton({ itemId, title }: DeleteButtonProps) {
 
   const deleteItemHandler = async () => {
     try {
-      const allConversations = await selectConversationsByItemId(itemId);
-      allConversations.forEach((conversation) => {
+      const selectedConversations = await selectConversationsByItemId(itemId);
+      selectedConversations.forEach((conversation) => {
         insertSystemMessage(
           conversation,
           'This item is no longer available for donation.'
