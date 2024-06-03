@@ -7,7 +7,7 @@ import newClient from '@/supabase/utils/newClient';
  * @param itemID Id of the item which the new conversation will relate to
  * @returns null if no conversation existed previously or conversation_id if an existing conversation has been found
  */
-export default async function newConvoStart(
+export default async function startNewConversation(
   userID: string | undefined,
   donorID: string,
   itemID: string
