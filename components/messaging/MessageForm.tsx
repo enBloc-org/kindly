@@ -27,7 +27,8 @@ const MessageForm: React.FC<MessageFormProps> = ({
   const [isDisabled, setIsDisabled] = useState(true);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const breakpoint = useMediaQuery(1000);
-  // const currentConversation = useConversationContext();
+  // const currentConversation = useConversationContext()
+  // console.log(currentConversation)
   console.log({ memberHasDeleted });
 
   const handleSubmit = async (e: FormEvent) => {

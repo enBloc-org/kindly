@@ -9,6 +9,7 @@ export default async function restartConversation(
 ) {
   if (conversation_id && user_id && partner_id && item_id) {
     console.log('conversation restarted');
+    markConversationAsDeleted(conversation_id, false);
     try {
       const supabase = newClient();
       await supabase.from('user_conversations').insert([
@@ -19,7 +20,6 @@ export default async function restartConversation(
           partner_id: user_id,
         },
       ]);
-      markConversationAsDeleted(conversation_id, false);
     } catch (error) {
       console.error(error);
       alert('Something went wrong!');

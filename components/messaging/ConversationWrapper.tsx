@@ -20,8 +20,6 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
     const fetchConversations = async () => {
       const fetchedConversations =
         await getUserConversationsandItemNames(userId);
-      console.log({ fetchedConversations });
-
       setAllConversations(fetchedConversations);
       setCurrentUserId(userId);
     };

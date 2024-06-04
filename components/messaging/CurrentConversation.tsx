@@ -80,22 +80,20 @@ const CurrentConversation: React.FC = () => {
           table: 'conversations',
         },
         (payload) => {
-          console.log(payload);
+          console.log({ payload });
           setAllConversations((prevConversations) => {
-            // Create a shallow copy
-            const updatedConversations = [...prevConversations];
-            // Find the conversation to update
+            const updatedConversations = [...prevConversations]; // creates a shallow copy of prevConversations
             const conversationIndex = updatedConversations.findIndex(
-              (conversation) => conversation.conversation_id === payload.new.id
+              (conversation) => conversation.conversation_id === payload.new.id // finds the conversation to update
             );
-            // Update the conversation if found
+            console.log({ conversationIndex });
+
             if (conversationIndex !== -1) {
               updatedConversations[conversationIndex] = {
                 ...updatedConversations[conversationIndex],
                 member_has_deleted: payload.new.member_has_deleted,
-              };
+              }; // updates the conversation if found
             }
-            // Return the updated conversations
             return updatedConversations;
           });
         }
