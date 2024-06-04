@@ -186,6 +186,13 @@ Now that you are working from a local instance of the database you will need to 
 
 You can find more detailed guidance on how to handle migrations in the Supabase [official documentation](https://supabase.com/docs/guides/cli/managing-environments?queryGroups=environment&environment=staging#auto-schema-diff)
 
+We have helpfully included a script in the ```package.json``` to help create a new migration file:
+
+```
+npm run migrate insert-your-file-name
+```
+Make sure to replace **insert-your-file-name** with a name that describes your changes to the database.
+
 ## Running the app:
 
 Make sure you are on the dev branch then use
