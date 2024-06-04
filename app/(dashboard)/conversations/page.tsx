@@ -1,7 +1,6 @@
 //Components
 
 import ConversationsWrapper from '@/components/messaging/ConversationWrapper';
-import ConversationContextProvider from '@/context/conversationContext';
 import newServerClient from '@/supabase/utils/newServerClient';
 
 const Conversations = async () => {
@@ -11,13 +10,7 @@ const Conversations = async () => {
   } = await supabase.auth.getUser();
   const userId = user?.id;
 
-  return (
-    userId && (
-      <ConversationContextProvider>
-        <ConversationsWrapper userId={userId} />
-      </ConversationContextProvider>
-    )
-  );
+  return userId && <ConversationsWrapper userId={userId} />;
 };
 
 export default Conversations;

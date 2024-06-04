@@ -42,7 +42,7 @@ export default function ConversationContextProvider({
     ConversationCardType | undefined
   >(undefined);
 
-  const [showConversationsList, setShowConversationsList] = useState(false);
+  const [showConversationsList, setShowConversationsList] = useState(true);
 
   const [currentUserId, setCurrentUserId] = useState<string>('');
 
