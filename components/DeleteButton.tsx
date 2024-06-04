@@ -4,10 +4,19 @@ import deleteItems from '@/supabase/models/deleteItems';
 interface DeleteButtonProps {
   itemId?: number;
   title: string;
+  onDeleteSuccess: () => void;
 }
 
-export default function DeleteButton({ itemId, title }: DeleteButtonProps) {
-  // Get id of items you want to delete from database and refresh page
+/**
+ * @description Deletes an item from database using its id.
+ * @param onDeleteSuccess - A function provided by the parent component to handle actions after the item is deleted.
+ */
+
+export default function DeleteButton({
+  itemId,
+  title,
+  onDeleteSuccess,
+}: DeleteButtonProps) {
   if (typeof itemId === 'undefined') {
     throw new Error('item is undefined');
   }
@@ -15,7 +24,7 @@ export default function DeleteButton({ itemId, title }: DeleteButtonProps) {
   const handleDelete = async () => {
     try {
       await deleteItems(itemId);
-      window.location.reload();
+      onDeleteSuccess();
     } catch (error) {
       console.error('Failed to delete item:', error);
     }

@@ -8,9 +8,10 @@ interface ModalProps {
   name: string;
   itemId?: number;
   message: string;
+  onDeleteSuccess: () => void;
 }
 
-const Modal = ({ name, itemId, message }: ModalProps) => {
+const Modal = ({ name, itemId, message, onDeleteSuccess }: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => {
@@ -28,7 +29,11 @@ const Modal = ({ name, itemId, message }: ModalProps) => {
             <h1 className='font-semibold text-primaryOrange'>Warning!</h1>
             <p className='font-light italic'>{message}</p>
             <div className='mt-2 flex gap-6'>
-              <DeleteButton itemId={itemId} title='Confirm' />
+              <DeleteButton
+                itemId={itemId}
+                title='Confirm'
+                onDeleteSuccess={onDeleteSuccess}
+              />
               <button className='button button-rounded' onClick={toggleModal}>
                 Cancel
               </button>
