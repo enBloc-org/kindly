@@ -47,8 +47,8 @@ const ConversationsList: React.FC = () => {
             );
 
             setAllConversations((prevConversations) => [
-              newConversation,
               ...prevConversations,
+              newConversation,
             ]);
           }
         }

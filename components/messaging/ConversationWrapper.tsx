@@ -4,9 +4,8 @@ import { useEffect } from 'react';
 import ConversationsList from './ConversationsList';
 import CurrentConversation from './CurrentConversation';
 import useMediaQuery from '../hooks/useMediaQuery';
-import selectUserConversations from '@/supabase/models/messaging/selectUserConversations';
+import getUserConversationsandItemNames from '@/supabase/models/messaging/selectUserConversations';
 import { useConversationContext } from '@/context/conversationContext';
-import sortByDate from '@/utils/sortByDate';
 
 type ConversationWrapperType = {
   userId: string;
@@ -19,9 +18,10 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
 
   useEffect(() => {
     const fetchConversations = async () => {
-      const fetchedConversations = await selectUserConversations(userId);
+      const fetchedConversations =
+        await getUserConversationsandItemNames(userId);
 
-      setAllConversations(sortByDate(fetchedConversations));
+      setAllConversations(fetchedConversations);
       setCurrentUserId(userId);
     };
     fetchConversations();
