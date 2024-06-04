@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import ConversationsList from './ConversationsList';
 import CurrentConversation from './CurrentConversation';
 import useMediaQuery from '../hooks/useMediaQuery';
-import getUserConversationsandItemNames from '@/supabase/models/messaging/selectUserConversations';
+import selectUserConversations from '@/supabase/models/messaging/selectUserConversations';
 import { useConversationContext } from '@/context/conversationContext';
 
 type ConversationWrapperType = {
@@ -13,17 +13,12 @@ type ConversationWrapperType = {
 
 const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
   const isBreakpoint = useMediaQuery(1000);
-  const {
-    showConversationsList,
-    setShowConversationsList,
-    setAllConversations,
-    setCurrentUserId,
-  } = useConversationContext();
+  const { showConversationsList, setAllConversations, setCurrentUserId } =
+    useConversationContext();
 
   useEffect(() => {
     const fetchConversations = async () => {
-      const fetchedConversations =
-        await getUserConversationsandItemNames(userId);
+      const fetchedConversations = await selectUserConversations(userId);
 
       setAllConversations(fetchedConversations);
       setCurrentUserId(userId);
@@ -39,12 +34,6 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
             <ConversationsList />
           ) : (
             <>
-              <button
-                className='self-start'
-                onClick={() => setShowConversationsList(true)}
-              >
-                back
-              </button>
               <CurrentConversation />
             </>
           )}

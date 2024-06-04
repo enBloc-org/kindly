@@ -6,6 +6,7 @@
     "build": "next build",
     "start": "next start -p 3654",
     "lint": "next lint",
+    "migrate": "supabase db diff -f",
     "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss}\"",
     "format": "prettier --write .",
     "prepare": "husky install",

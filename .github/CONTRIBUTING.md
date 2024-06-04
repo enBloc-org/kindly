@@ -79,6 +79,13 @@ In that comment, add a brief outline of the approach you're hoping to take. This
 
 The Kindly core team will respond to your comment as soon as possible and assign you to the Issue. You may want to tag one of the team members in your comment but allow a few days for someone to get back to you. (The backlog is reviewed by the Kindly core team every Friday)
 
+To help us maintain the workflow of development please keep in mind these guidelines:
+
+- **Always check if someone else has already been assigned or requested an issue.** If they have, please do not assign yourself (if you are a collaborator on the repo) or request the same issue unless you have agreed to work on it together 
+  - Most tickets are not likely to need more than one developer but if you intend on collaborating then please let us know in a comment to that issue
+- **If an Issue is flagged as `Stale` while you are assigned to it the core team may un-assign you and move the issue into the backlog.** Issues are marked as `stale` after a period of inactivity to help the core team monitor the workflow of the project
+- **Only request (or assign yourself, if you are a collaborator in the repo) one issue at a time** unless you are implementing changes that affect two issues closely related. We try to keep issues in the backlog free, if they are not being addressed immediately, to allow new contributors to pick them up
+
 ## Finally
 
 Have fun! 🎡

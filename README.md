@@ -15,7 +15,7 @@ You can also connect with the developing community on our [discord server](https
 - [Contributing](https://github.com/enBloc-org/kindly/blob/dev/.github/CONTRIBUTING.md) <sup>1</sup>
 - [Best practice](https://github.com/enBloc-org/kindly/blob/dev/.github/BEST_PRACTICE.md)
 - [Testing](https://github.com/enBloc-org/kindly/blob/dev/.github/TESTING.md)
-- [Privacy](https://github.com/enBloc-org/kindly/blob/dev/.github/PRIVACY.md)
+- [Privacy](https://github.com/enBloc-org/kindly/blob/dev/PRIVACY.md)
 
 <sup>1</sup> All PR's must request a merge to the base repository: ```enBloc-org/kindly``` base: ```dev```
 

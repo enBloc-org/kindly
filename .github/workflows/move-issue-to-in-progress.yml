@@ -1,0 +1,15 @@
+name: Move Assigned Issues To In Progress
+on:
+  issue:
+    types: [assigned]
+jobs:
+  move-to-in-progress:
+    runs-on: ubuntu-latest
+    name: Move to In Progress Column
+    steps:
+      - name: Move Issues to Column
+        uses: kin/gh-action-move-issues-to-column@v1.0
+        with:
+          access-token: ${{secrets.GITHUB_TOKEN}}
+          project-name: 'Kindly (enBloc)'
+          target-column: 'In Progress'

@@ -15,6 +15,7 @@ export default async function startNewConversation(
   if (userID && donorID && itemID) {
     try {
       const supabase = newClient();
+      
       const { data: existingConversations, error } = await supabase
         .from('user_conversations')
         .select('conversation_id')
@@ -28,6 +29,7 @@ export default async function startNewConversation(
       if (existingConversations.length > 0) {
         return existingConversations[0].conversation_id;
       }
+      
       const { data: newConversation, error: insertError } = await supabase
         .from('conversations')
         .insert([{}])
@@ -38,6 +40,7 @@ export default async function startNewConversation(
         return null;
       }
       const conversationId = newConversation?.id;
+
       await supabase.from('user_conversations').insert([
         {
           conversation_id: conversationId,
@@ -52,15 +55,14 @@ export default async function startNewConversation(
           partner_id: userID,
         },
       ]);
-      return null;
+
+      return conversationId;
     } catch (error) {
       console.error(error);
-      return null;
     }
   } else {
     alert(
       'Something went wrong! Please retry messaging - you may need to log back in.'
     );
-    return null;
   }
 }

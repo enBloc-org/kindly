@@ -10,21 +10,17 @@ permissions:
 
 jobs:
   stale:
-    env:
-      repo-token: ${{secrets.GITHUB_TOKEN}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/stale@v9
         with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
           # stale and delete issues
-          stale-issue-message: '🤖 Meep Morp! This Issue is now marked as stale because there has been no activity for a while. \n\nIt will be deleted in 7 days unless there are new contributions.'
-          close-issue-message: '🤖 Meep Morp :( This Issue has been closed because it was stale for 7 days.'
+          stale-issue-message: '🤖 meep morp! This Issue is now marked as stale because there has been no activity for a while.  The Issue may be unassigned and moved to the Backlog or it will get deleted if there is no activity in the next 7 days.'
+          close-issue-message: '🤖 meep morp :( This Issue has been closed because it was stale for 7 days.'
           days-before-issue-stale: 21
           days-before-issue-close: 7
 
           # stale pull requests
-          stale-pr-message: '🤖 Meep Morp! This PR is now marked as stale because there has been no activity for a while. \n\nPlease guarantee this is still a relevant PR.'
+          stale-pr-message: '🤖 meep morp! This PR is now marked as stale because there has been no activity for a while.  Please guarantee this is still a relevant PR.'
           days-before-pr-stale: 14
           days-before-pr-close: -1 # Applying a negative value means the pr will not be closed and is simply being marked as stale

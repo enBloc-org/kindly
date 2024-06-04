@@ -1,11 +1,17 @@
-## Technologies Used
-Kindly is built with TypeScript
-### Languages 
-| Frontend | Backend | Testing    |
-| -------- | ------- | ---------- |
-| React    | Next.js | Playwright|
-| Tailwind | Supabase|            | 
- 
+# Welcome - Before you get started
+
+If you are visiting our repo for the first time and would like a quick intro, you may want to watch this video:
+
+[![welcome to Kindly](https://cdn.loom.com/sessions/thumbnails/f67dccc47ab448508e32bb3e672121f9-1716460124959-with-play.gif)](https://www.loom.com/share/f67dccc47ab448508e32bb3e672121f9?sid=5a67e0d6-7151-4e8b-a71a-8748a74b820e)
+
+You can read below the detailed guidance on getting set up and contributing to Kindly 👇
+
+## Tech Stack
+
+| Frontend | Backend  | Testing   |
+| -------- | -------- | --------- |
+| React    | Next.js  | Cypress   |
+| Tailwind | Supabase | Storybook |
 
 ## Installation
 
@@ -44,13 +50,15 @@ For the supabase variables follow the guidance below on setting up your local in
 Kindly uses Supabase to serve its _postgres_ database. You will need to setup a local container to run a development instance of the database.
 
 ### Install docker
+
 You will need to have docker installed and running before following the next steps. Find the latest version [here](https://www.docker.com/products/docker-desktop/).
 
-Once it is installed, start your docker console and make sure there are no outstanding updates. 
+Once it is installed, start your docker console and make sure there are no outstanding updates.
 
 You don't need to do anything else within docker for now. A container will be created in the next steps.
 
 ### Install the supabase cli
+
 The cli will allow you to set up the schema and seed your local copy of the kindly database. You can find more comprehensive guidance in the [official docs](https://supabase.com/docs/guides/cli/getting-started) but we've outlined below the commands you will need to run in order to get started.
 
 Depending on the operating system you use, run the following command in your terminal to install the CLI:
@@ -134,14 +142,16 @@ Started supabase local development setup.
 service_role key: eyJh......
 
 ```
+
 You can view these details again at any time by running the following command:
 
 <details>
 <summary><strong>macOS / Linux</strong></summary>
 
-```bash 
+```bash
 supabase status
 ```
+
 </details>
 
 <details>
@@ -161,12 +171,14 @@ Your local development is now ready ✨
 You can use the `Studio URL` provided to view and edit your local supabase project if needed.
 
 You can also run all migration files and re-seed the database whenever necessary with the following command:
+
 <details>
 <summary><strong>macOS / Linux</strong></summary>
 
 ```bash
 supabase db reset
 ```
+
 </details>
 
 <details>
@@ -186,6 +198,13 @@ Now that you are working from a local instance of the database you will need to 
 
 You can find more detailed guidance on how to handle migrations in the Supabase [official documentation](https://supabase.com/docs/guides/cli/managing-environments?queryGroups=environment&environment=staging#auto-schema-diff)
 
+We have helpfully included a script in the ```package.json``` to help create a new migration file:
+
+```
+npm run migrate insert-your-file-name
+```
+Make sure to replace **insert-your-file-name** with a name that describes your changes to the database.
+
 ## Running the app:
 
 Make sure you are on the dev branch then use
@@ -193,6 +212,7 @@ Make sure you are on the dev branch then use
 ```bash
   npm run dev
 ```
+
 ## Next Steps
 
 Once you have kindly running on your machine read the [contribution guidance](CONTRIBUTING.md)
