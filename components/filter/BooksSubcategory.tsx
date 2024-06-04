@@ -6,7 +6,7 @@ type CategoryProp = {
   setSubcategory: React.Dispatch<React.SetStateAction<string>>;
   subcategory: string;
 };
-const BooksSubcatergory: React.FC<CategoryProp> = ({
+const BooksSubcategory: React.FC<CategoryProp> = ({
   subcategory,
   setSubcategory,
 }) => {
@@ -40,4 +40,4 @@ const BooksSubcatergory: React.FC<CategoryProp> = ({
   );
 };
 
-export default BooksSubcatergory;
+export default BooksSubcategory;

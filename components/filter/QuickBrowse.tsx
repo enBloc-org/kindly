@@ -8,7 +8,7 @@ import ShoeIcon from '../icons/ShoeIcon';
 import ToyIcon from '../icons/ToyIcon';
 import BookIcon from '../icons/BookIcon';
 import HomeIcon from '../icons/HomeIcon';
-import BooksSubcatergory from './BooksSubcatergory';
+import BooksSubcategory from './BooksSubcategory';
 
 export type IconPropType = {
   category?: string;
@@ -89,7 +89,7 @@ const QuickBrowse = () => {
         />
       )}
       {category === 'books' && (
-        <BooksSubcatergory
+        <BooksSubcategory
           subcategory={subcategory}
           setSubcategory={setSubcategory}
         />

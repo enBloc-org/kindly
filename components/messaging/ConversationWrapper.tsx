@@ -14,12 +14,8 @@ type ConversationWrapperType = {
 
 const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
   const isBreakpoint = useMediaQuery(1000);
-  const {
-    showConversationsList,
-    setShowConversationsList,
-    setAllConversations,
-    setCurrentUserId,
-  } = useConversationContext();
+  const { showConversationsList, setAllConversations, setCurrentUserId } =
+    useConversationContext();
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -39,12 +35,6 @@ const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
             <ConversationsList />
           ) : (
             <>
-              <button
-                className='self-start'
-                onClick={() => setShowConversationsList(true)}
-              >
-                back
-              </button>
               <CurrentConversation />
             </>
           )}
