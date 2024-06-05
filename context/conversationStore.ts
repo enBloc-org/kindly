@@ -8,17 +8,22 @@ export default function conversationReducer(
     case 'SET_ALL_CONVERSATIONS':
       console.log('SET_ALL_CONVERSATIONS');
       return { ...state, allConversations: action.payload };
+
     case 'SET_CURRENT_CONVERSATION':
       return { ...state, currentConversation: action.payload };
+
     case 'SET_SHOW_CONVERSATIONS_LIST':
       return { ...state, showConversationsList: action.payload };
+
     case 'SET_CURRENT_USER_ID':
       return { ...state, currentUserId: action.payload };
+
     case 'ADD_NEW_CONVERSATION':
       return {
         ...state,
         allConversations: [action.payload, ...state.allConversations],
       };
+
     case 'DELETE_CONVERSATION':
       return {
         ...state,
@@ -26,6 +31,7 @@ export default function conversationReducer(
           (conversation) => conversation.id !== action.payload
         ),
       };
+
     default:
       return state;
   }
