@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ItemCard from '@/components/ItemCard';
-import testItem from '../../public/white-jumper.jpg';
+import testItem from '../public/white-jumper.jpg';
 
 const meta: Meta<typeof ItemCard> = {
   title: 'Donations/ItemCard',
