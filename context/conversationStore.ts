@@ -13,6 +13,11 @@ export default function conversationReducer(
       return { ...state, showConversationsList: action.payload };
     case 'SET_CURRENT_USER_ID':
       return { ...state, currentUserId: action.payload };
+    case 'ADD_NEW_CONVERSATION':
+      return {
+        ...state,
+        allConversations: [action.payload, ...state.allConversations],
+      };
     default:
       return state;
   }
