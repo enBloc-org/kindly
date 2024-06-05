@@ -1,66 +1,52 @@
 'use client';
-import {
-  Dispatch,
-  SetStateAction,
-  createContext,
-  useContext,
-  useState,
-} from 'react';
+import { Dispatch, createContext, useContext, useReducer } from 'react';
 import {
   AllConversationsType,
   ConversationCardType,
 } from '@/types/messagingTypes';
 
-type ConverstaionContextProviderProps = {
+type ConversationContextProviderProps = {
   children: React.ReactNode;
 };
 
-// Alphonso!
-
-type ConversationContext = {
+interface IConversationState {
   allConversations: AllConversationsType;
-  setAllConversations: Dispatch<SetStateAction<AllConversationsType>>;
   currentConversation: ConversationCardType | undefined;
-  setCurrentConversation: Dispatch<
-    SetStateAction<ConversationCardType | undefined>
-  >;
   showConversationsList: boolean;
-  setShowConversationsList: Dispatch<SetStateAction<boolean>>;
   currentUserId: string;
-  setCurrentUserId: Dispatch<SetStateAction<string>>;
+}
+
+type ConversationContextType = {
+  conversationState: IConversationState;
+  dispatch: Dispatch<ConversationActionType>;
 };
 
-export const ConversationContext = createContext<ConversationContext | null>(
-  null
-);
+type ConversationActionType =
+  | { type: 'SET_ALL_CONVERSATIONS'; payload: AllConversationsType }
+  | { type: 'SET_CURRENT_CONVERSATION'; payload: ConversationCardType }
+  | { type: 'SET_SHOW_CONVERSATIONS_LIST'; payload: boolean }
+  | { type: 'SET_CURRENT_USER_ID'; payload: string };
+
+export const ConversationContext =
+  createContext<ConversationContextType | null>(null);
 
 export default function ConversationContextProvider({
   children,
-}: ConverstaionContextProviderProps) {
-  const [allConversations, setAllConversations] =
-    useState<AllConversationsType>([]);
+}: ConversationContextProviderProps) {
+  const initialState: IConversationState = {
+    allConversations: [],
+    currentConversation: undefined,
+    showConversationsList: true,
+    currentUserId: '',
+  };
 
-  const [currentConversation, setCurrentConversation] = useState<
-    ConversationCardType | undefined
-  >(undefined);
-
-  const [showConversationsList, setShowConversationsList] = useState(true);
-
-  const [currentUserId, setCurrentUserId] = useState<string>('');
+  const [conversationState, dispatch] = useReducer(
+    conversationReducer,
+    initialState
+  );
 
   return (
-    <ConversationContext.Provider
-      value={{
-        allConversations,
-        setAllConversations,
-        currentConversation,
-        setCurrentConversation,
-        showConversationsList,
-        setShowConversationsList,
-        currentUserId,
-        setCurrentUserId,
-      }}
-    >
+    <ConversationContext.Provider value={{ conversationState, dispatch }}>
       {children}
     </ConversationContext.Provider>
   );
@@ -70,7 +56,7 @@ export function useConversationContext() {
   const context = useContext(ConversationContext);
   if (!context) {
     throw new Error(
-      'useConvesationContext must be used within a ConversationContextProvider.'
+      'useConversationContext must be used within a ConversationContextProvider.'
     );
   }
   return context;
