@@ -27,7 +27,7 @@ export default function Header() {
 
   useEffect(() => {
     if (pathname !== '/conversations') {
-      dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: false });
+      dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: true });
     }
   }, [pathname]);
 
