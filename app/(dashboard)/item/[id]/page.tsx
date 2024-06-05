@@ -27,7 +27,10 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       const donorEmail = item.profiles.email;
       const donerId: string = item.profiles?.id;
       const title = item.item_name;
-      if (userProfile?.data.refugee === false) {
+      if (
+        userProfile?.data.refugee === false ||
+        item?.profiles?.id === userProfile?.data.id
+      ) {
         canMessage = false;
       }
 
