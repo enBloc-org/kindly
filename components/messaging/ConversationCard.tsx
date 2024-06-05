@@ -47,6 +47,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
       tabIndex={0}
       aria-label='button'
       onClick={clickHandler}
+      data-testid='card-wrapper'
     >
       <div className='relative h-[65px] w-[65px]'>
         {notificationList.some(
