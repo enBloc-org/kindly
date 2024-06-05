@@ -14,21 +14,21 @@ import KindlyLogoLink from './navigation/KindlyLogoLink';
 
 export default function Header() {
   const {
-    currentConversation,
-    showConversationsList,
-    setShowConversationsList,
+    conversationState: { currentConversation, showConversationsList },
+    dispatch,
   } = useConversationContext();
+
   const isBreakpoint = useMediaQuery(1000);
   const pathname = usePathname();
 
   useEffect(() => {
     if (pathname !== '/conversations') {
-      setShowConversationsList(true);
+      dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: false });
     }
-  }, [pathname, setShowConversationsList]);
+  }, [pathname]);
 
   const handleBackButtonClick = () => {
-    setShowConversationsList((prevState) => !prevState);
+    dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: true });
   };
 
   return (
