@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { userEvent, within, expect, waitFor, fn } from '@storybook/test';
+import { userEvent, within, waitFor, fn } from '@storybook/test';
+import { expect } from '@storybook/jest';
 
 import ConversationCard from '@/components/messaging/ConversationCard';
 import ConversationContextProvider from '@/context/conversationContext';
@@ -27,12 +28,8 @@ const meta: Meta<typeof ConversationCard> = {
     await step('Open Ellipsis Menu', async () => {
       await userEvent.click(canvas.getByRole('button'));
     });
-    await waitFor(() =>
-      expect(canvas.queryByText('Delete Conversation')).toBeVisible()
-    );
-    await waitFor(() =>
-      expect(canvas.queryByText('Mark Unread')).toBeVisible()
-    );
+    expect(canvas.queryByText('Delete Conversation')).toBeVisible();
+    expect(canvas.queryByText('Mark Unread')).toBeVisible();
   },
 };
 
