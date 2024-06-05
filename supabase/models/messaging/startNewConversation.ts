@@ -1,4 +1,5 @@
 import newClient from '@/supabase/utils/newClient';
+import insertSystemMessage from './insertSystemMessage';
 
 /**
  * @description checks if a conversation matching these parameters already exists before attempting to create a new one
@@ -15,7 +16,7 @@ export default async function startNewConversation(
   if (userID && donorID && itemID) {
     try {
       const supabase = newClient();
-      
+
       const { data: existingConversations, error } = await supabase
         .from('user_conversations')
         .select('conversation_id')
@@ -29,7 +30,7 @@ export default async function startNewConversation(
       if (existingConversations.length > 0) {
         return existingConversations[0].conversation_id;
       }
-      
+
       const { data: newConversation, error: insertError } = await supabase
         .from('conversations')
         .insert([{}])
@@ -55,6 +56,11 @@ export default async function startNewConversation(
           partner_id: userID,
         },
       ]);
+
+      await insertSystemMessage(
+        conversationId,
+        'This is the start of your conversation.'
+      );
 
       return conversationId;
     } catch (error) {
