@@ -14,7 +14,11 @@ import KindlyLogoLink from './navigation/KindlyLogoLink';
 
 export default function Header() {
   const {
-    conversationState: { currentConversation, showConversationsList },
+    conversationState: {
+      currentConversation,
+      showConversationsList,
+      currentUserId,
+    },
     dispatch,
   } = useConversationContext();
 
@@ -53,6 +57,7 @@ export default function Header() {
               <BackArrowIcon width={40} height={40} stroke='#54BB89' />
             </button>
             <ConversationPartner
+              currentUserId={currentUserId}
               conversation_id={currentConversation?.conversation_id as number}
             />
           </>

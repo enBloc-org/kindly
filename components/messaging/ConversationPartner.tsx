@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { getProfile } from '../../supabase/models/getProfile';
-import { useConversationContext } from '@/context/conversationContext';
 import selectConversationPartner from '@/supabase/models/messaging/selectConversationPartner';
 
 type ConversationPartnerProps = {
   conversation_id: number;
   hideImage?: boolean;
+  currentUserId: string;
 };
 
 type ConversationPartnerType = {
@@ -16,19 +16,20 @@ type ConversationPartnerType = {
 
 /**
  *
- * @param conversation_id refers to the relevant "converstion_id" value returned from the user_conversations table
+ * @param conversation_id refers to the relevant "conversation_id" value returned from the user_conversations table
  * @param user_conversationId refers to the relevant "id" value returned from the user_conversations table
+ * @param currentUserId expects the Id for the current user with a current session
  * @param hideImage is optional and allows us to display only the users name without an avatar.
  *                  If this parameter is excluded an avatar will be displayed with either the users image or a default avatar if none has been set.
  */
 export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
   conversation_id,
   hideImage,
+  currentUserId,
 }) => {
   const [conversationPartner, setConversationPartner] = useState<
     ConversationPartnerType | undefined
   >();
-  const { currentUserId } = useConversationContext();
 
   useEffect(() => {
     const getPartnerProfile = async () => {
