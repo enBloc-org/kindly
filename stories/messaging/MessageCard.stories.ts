@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>;
 export const ShortMessageFromSelf: Story = {
   args: {
     senderId: 'testuser',
-    createdAt: '24/05/2024',
+    createdAt: '16:04',
     messageText: 'Short test message',
     currentUser: 'testuser',
     messageId: 3,
@@ -27,7 +27,7 @@ export const ShortMessageFromSelf: Story = {
 export const LongMessageFromSelf: Story = {
   args: {
     senderId: 'testuser',
-    createdAt: '24/05/2024',
+    createdAt: '16:04',
     messageText:
       'This is a really long message and it even includes \nodd \n\n    formatting!! 🤪',
     currentUser: 'testuser',
@@ -38,7 +38,7 @@ export const LongMessageFromSelf: Story = {
 export const ShortMessageFromOther: Story = {
   args: {
     senderId: 'testuser',
-    createdAt: '24/05/2024',
+    createdAt: '16:04',
     messageText: 'Short test message',
     currentUser: 'anotheruser',
     messageId: 3,
@@ -48,7 +48,7 @@ export const ShortMessageFromOther: Story = {
 export const LongMessageFromOther: Story = {
   args: {
     senderId: 'testuser',
-    createdAt: '24/05/2024',
+    createdAt: '16:04',
     messageText:
       "This message is really long! \nIn fact, it is much too long!! \n\nIt's very uncommon indeed 🤔",
     currentUser: 'anotheruser',
