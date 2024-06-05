@@ -15,8 +15,10 @@ import newClient from '@/supabase/utils/newClient';
 import SystemMessageCard from './SystemMessageCard';
 
 const CurrentConversation: React.FC = () => {
-  const { allConversations, currentConversation, setCurrentConversation } =
-    useConversationContext();
+  const {
+    conversationState: { allConversations, currentConversation },
+    dispatch,
+  } = useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const [systemUser, setSystemUser] = useState<string | undefined>(undefined);
@@ -33,8 +35,11 @@ const CurrentConversation: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setCurrentConversation && setCurrentConversation(allConversations[0]);
-  }, [allConversations, setCurrentConversation]);
+    dispatch({
+      type: 'SET_CURRENT_CONVERSATION',
+      payload: allConversations[0],
+    });
+  }, [allConversations]);
 
   useEffect(() => {
     const setMessagesForCurrentConversation = async () => {

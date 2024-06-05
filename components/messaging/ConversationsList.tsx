@@ -12,7 +12,7 @@ import updateConversationReadStatus from '@/supabase/models/messaging/updateConv
 
 const ConversationsList: React.FC = () => {
   const {
-    conversationState: { allConversations, currentUserId },
+    conversationState: { allConversations, currentConversation, currentUserId },
     dispatch,
   } = useConversationContext();
 
@@ -120,6 +120,9 @@ const ConversationsList: React.FC = () => {
                 updateOpenConversation(conversation.conversation_id)
               }
               notificationList={notificationList}
+              currentConversationId={
+                currentConversation?.conversation_id as number
+              }
             />
           </div>
         ))
