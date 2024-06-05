@@ -5,7 +5,9 @@ import { useConversationContext } from '@/context/conversationContext';
 
 const Footer = () => {
   const isBreakpoint = useMediaQuery(1000);
-  const { showConversationsList } = useConversationContext();
+  const {
+    conversationState: { showConversationsList },
+  } = useConversationContext();
 
   return (
     isBreakpoint &&
