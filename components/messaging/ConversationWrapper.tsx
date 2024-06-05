@@ -7,7 +7,7 @@ import useMediaQuery from '../hooks/useMediaQuery';
 import selectUserConversations from '@/supabase/models/messaging/selectUserConversations';
 import { useConversationContext } from '@/context/conversationContext';
 
-const ConversationWrapper: React.FC<string> = (userId) => {
+const ConversationWrapper = ({ userId }: { userId: string }) => {
   const isBreakpoint = useMediaQuery(1000);
   const {
     conversationState: { showConversationsList },
