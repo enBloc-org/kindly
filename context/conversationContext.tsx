@@ -1,31 +1,16 @@
 'use client';
 import { Dispatch, createContext, useContext, useReducer } from 'react';
-import {
-  AllConversationsType,
-  ConversationCardType,
-} from '@/types/messagingTypes';
+import { ConversationActionType, IConversationState } from './contextTypes';
+import conversationReducer from './conversationStore';
 
 type ConversationContextProviderProps = {
   children: React.ReactNode;
 };
 
-interface IConversationState {
-  allConversations: AllConversationsType;
-  currentConversation: ConversationCardType | undefined;
-  showConversationsList: boolean;
-  currentUserId: string;
-}
-
 type ConversationContextType = {
   conversationState: IConversationState;
   dispatch: Dispatch<ConversationActionType>;
 };
-
-type ConversationActionType =
-  | { type: 'SET_ALL_CONVERSATIONS'; payload: AllConversationsType }
-  | { type: 'SET_CURRENT_CONVERSATION'; payload: ConversationCardType }
-  | { type: 'SET_SHOW_CONVERSATIONS_LIST'; payload: boolean }
-  | { type: 'SET_CURRENT_USER_ID'; payload: string };
 
 export const ConversationContext =
   createContext<ConversationContextType | null>(null);
