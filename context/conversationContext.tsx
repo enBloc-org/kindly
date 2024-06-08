@@ -2,7 +2,7 @@
 import { Dispatch, createContext, useContext, useReducer } from 'react';
 import {
   ConversationActionType,
-  IConversationState,
+  ConversationStateType,
 } from '../types/contextTypes';
 import conversationReducer from './conversationStore';
 
@@ -11,7 +11,7 @@ type ConversationContextProviderProps = {
 };
 
 type ConversationContextType = {
-  conversationState: IConversationState;
+  conversationState: ConversationStateType;
   dispatch: Dispatch<ConversationActionType>;
 };
 
@@ -21,7 +21,7 @@ export const ConversationContext =
 export default function ConversationContextProvider({
   children,
 }: ConversationContextProviderProps) {
-  const initialState: IConversationState = {
+  const initialState: ConversationStateType = {
     allConversations: [],
     currentConversation: undefined,
     showConversationsList: true,

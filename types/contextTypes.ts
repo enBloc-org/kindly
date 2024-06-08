@@ -3,7 +3,7 @@ import {
   ConversationCardType,
 } from '@/types/messagingTypes';
 
-export interface IConversationState {
+export interface ConversationStateType {
   allConversations: AllConversationsType;
   currentConversation: ConversationCardType | undefined;
   showConversationsList: boolean;
