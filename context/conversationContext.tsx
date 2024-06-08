@@ -1,6 +1,9 @@
 'use client';
 import { Dispatch, createContext, useContext, useReducer } from 'react';
-import { ConversationActionType, IConversationState } from './contextTypes';
+import {
+  ConversationActionType,
+  IConversationState,
+} from '../types/contextTypes';
 import conversationReducer from './conversationStore';
 
 type ConversationContextProviderProps = {

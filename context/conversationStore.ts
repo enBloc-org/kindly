@@ -1,4 +1,7 @@
-import { ConversationActionType, IConversationState } from './contextTypes';
+import {
+  ConversationActionType,
+  IConversationState,
+} from '../types/contextTypes';
 
 export default function conversationReducer(
   state: IConversationState,
