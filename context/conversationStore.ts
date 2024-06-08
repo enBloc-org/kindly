@@ -6,7 +6,6 @@ export default function conversationReducer(
 ): IConversationState {
   switch (action.type) {
     case 'SET_ALL_CONVERSATIONS':
-      console.log('SET_ALL_CONVERSATIONS');
       return { ...state, allConversations: action.payload };
 
     case 'SET_CURRENT_CONVERSATION':
