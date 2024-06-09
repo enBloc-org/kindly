@@ -1,6 +1,5 @@
 import newClient from '@/supabase/utils/newClient';
 import {
-  PartialItem,
   editProfile,
   item,
   profile,
@@ -9,7 +8,7 @@ import {
 
 export default async function editRow(
   table: string,
-  EditValues: item | profile | editProfile | updateReserved | PartialItem,
+  EditValues: item | profile | editProfile | updateReserved,
   columnName: string,
   columnCriteria: string | number | string[] | number[] | boolean | undefined
 ) {

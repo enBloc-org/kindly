@@ -1,11 +1,11 @@
 'use client';
 import deleteItems from '@/supabase/models/deleteItems';
 
-interface DeleteButtonProps {
+type DeleteButtonProps = {
   itemId?: number;
   title: string;
   onDeleteSuccess: () => void;
-}
+};
 
 /**
  * @description Deletes an item from database using its id.

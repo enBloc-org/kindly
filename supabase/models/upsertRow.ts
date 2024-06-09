@@ -6,12 +6,21 @@ export default async function upsertRow(
   upsertValues: PartialItem
 ) {
   const supabase = newClient();
-  const { error } = await supabase.from(table).upsert(upsertValues);
 
-  if (error) {
-    console.log(error);
-    return false;
+  try {
+    const { data: editedItem, error } = await supabase
+      .from(table)
+      .upsert(upsertValues)
+      .select();
+
+    if (error) {
+      console.error(error);
+      throw error;
+    }
+
+    return editedItem;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
-
-  return true;
 }
