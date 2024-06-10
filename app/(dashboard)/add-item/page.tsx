@@ -251,7 +251,7 @@ const AddItemPage = () => {
         )}
 
         <UploadImageInput
-          onImageUpload={handleImageUpload}
+          setImageUpload={handleImageUpload}
           setImageSrc={setImageSrc}
           setError={setGeneralError}
         />
