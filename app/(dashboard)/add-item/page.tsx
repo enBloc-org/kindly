@@ -76,7 +76,7 @@ const AddItemPage = () => {
   const isImageUploaded = watch('imageUploaded');
 
   const handleImageUpload = (isUploaded: boolean) => {
-    setValue('imageUploaded', isUploaded); // Update and validate the field
+    setValue('imageUploaded', isUploaded); 
   };
 
   return (
