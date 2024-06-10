@@ -3,11 +3,14 @@ import ButtonRounded from '@/components/buttons/ButtonRounded';
 import insertRow from '@/supabase/models/insertRow';
 import { useForm } from 'react-hook-form';
 import { PartialItem } from '@/types/supabaseTypes';
-import { ExtendedPartialItem } from './pageTypes';
 import UploadImageInput from '@/components/form/UploadImageInput';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+
+type ExtendedPartialItem = PartialItem & {
+  imageUploaded?: boolean;
+};
 
 const AddItemPage = () => {
   const [userId, setUserId] = useState('');
@@ -51,11 +54,8 @@ const AddItemPage = () => {
   }, []);
 
   const onSubmit = async (data: ExtendedPartialItem) => {
-    console.log('Sending form');
-
     if (!data.imageUploaded) {
-      console.log('Please upload an image.');
-      return; // You might want to handle this in the UI
+      return;
     }
 
     const dataItem: PartialItem = {
@@ -76,7 +76,7 @@ const AddItemPage = () => {
   const isImageUploaded = watch('imageUploaded');
 
   const handleImageUpload = (isUploaded: boolean) => {
-    setValue('imageUploaded', isUploaded); // Update and validate the field
+    setValue('imageUploaded', isUploaded);
   };
 
   return (
@@ -261,7 +261,6 @@ const AddItemPage = () => {
       </form>
     </div>
   );
-  console.log(isPostageCovered, setValue, isImageUploaded);
 };
 
 export default AddItemPage;
