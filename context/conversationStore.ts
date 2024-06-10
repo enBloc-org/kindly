@@ -1,12 +1,12 @@
 import {
   ConversationActionType,
-  IConversationState,
+  ConversationStateType,
 } from '../types/contextTypes';
 
 export default function conversationReducer(
-  state: IConversationState,
+  state: ConversationStateType,
   action: ConversationActionType
-): IConversationState {
+): ConversationStateType {
   switch (action.type) {
     case 'SET_ALL_CONVERSATIONS':
       return { ...state, allConversations: action.payload };
