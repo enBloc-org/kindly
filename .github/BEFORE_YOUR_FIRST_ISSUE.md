@@ -34,7 +34,7 @@ Go to the project directory:
   cd kindly
 ```
 
-Install dependencies:
+With Node.js 20, install the project dependencies:
 
 ```bash
   npm install
