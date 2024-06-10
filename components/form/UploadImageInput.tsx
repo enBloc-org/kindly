@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 type UploadImageProps = {
   setImageSrc: (src: string) => void;
   setError?: (error: string) => void;
-  onImageUpload: (isUploaded: boolean) => void;
+  setImageUpload: (isUploaded: boolean) => void;
 };
 
 const CDN =
@@ -21,7 +21,7 @@ const CDN =
 const UploadImageInput: React.FC<UploadImageProps> = ({
   setImageSrc,
   setError,
-  onImageUpload,
+  setImageUpload,
 }) => {
   const supabase = createClientComponentClient();
   const [userId, setUserId] = useState('');
@@ -55,7 +55,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 
         setImageSrc(imagePath);
 
-        onImageUpload(true);
+        setImageUpload(true);
         setError?.('');
 
         const { error } = await supabase.storage
@@ -64,11 +64,11 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 
         if (error) {
           console.log(error);
-          onImageUpload(false);
+          setImageUpload(false);
         }
       } else {
         console.error('No file selected');
-        onImageUpload(false);
+        setImageUpload(false);
       }
     }
   };
