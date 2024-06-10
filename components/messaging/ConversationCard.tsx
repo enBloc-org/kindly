@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import ConversationCardModal from './ConversationCardModal';
-import { useConversationContext } from '../../context/conversationContext';
 import defaultProfileImage from '../../public/default-profile.png';
 import useMediaQuery from '../hooks/useMediaQuery';
 
@@ -13,6 +12,7 @@ export type ConversationCardProps = {
   itemName: string;
   clickHandler: () => void;
   notificationList: number[];
+  currentConversationId: number;
 };
 
 const formatString = (input: string | null): string => {
@@ -36,14 +36,14 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   itemName,
   clickHandler,
   notificationList,
+  currentConversationId,
 }) => {
-  const { currentConversation } = useConversationContext();
   const isBreakpoint = useMediaQuery(1000);
 
   return (
     <div
       className={`relative flex items-center bg-gray-300 p-4 lg:max-w-[500px] lg:rounded-lg lg:shadow-md lg:hover:bg-secondaryGray
-          ${currentConversation?.conversation_id === conversationId ? 'lg: border-2 lg:border-primaryGreen' : ''}`}
+          ${currentConversationId === conversationId ? 'lg: border-2 lg:border-primaryGreen' : ''}`}
       tabIndex={0}
       aria-label='button'
       onClick={clickHandler}

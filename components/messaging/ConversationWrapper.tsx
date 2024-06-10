@@ -7,21 +7,22 @@ import useMediaQuery from '../hooks/useMediaQuery';
 import selectUserConversations from '@/supabase/models/messaging/selectUserConversations';
 import { useConversationContext } from '@/context/conversationContext';
 
-type ConversationWrapperType = {
-  userId: string;
-};
-
-const ConversationWrapper: React.FC<ConversationWrapperType> = ({ userId }) => {
+const ConversationWrapper = ({ userId }: { userId: string }) => {
   const isBreakpoint = useMediaQuery(1000);
-  const { showConversationsList, setAllConversations, setCurrentUserId } =
-    useConversationContext();
+  const {
+    conversationState: { showConversationsList },
+    dispatch,
+  } = useConversationContext();
 
   useEffect(() => {
     const fetchConversations = async () => {
       const fetchedConversations = await selectUserConversations(userId);
 
-      setAllConversations(fetchedConversations);
-      setCurrentUserId(userId);
+      dispatch({
+        type: 'SET_ALL_CONVERSATIONS',
+        payload: fetchedConversations,
+      });
+      dispatch({ type: 'SET_CURRENT_USER_ID', payload: userId });
     };
     fetchConversations();
   }, []);
