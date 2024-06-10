@@ -25,7 +25,6 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 }) => {
   const supabase = createClientComponentClient();
   const [userId, setUserId] = useState('');
-  // const [isImageUploaded, setIsImageUploaded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +54,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
         const imagePath = CDN + userId + '/' + imageName;
 
         setImageSrc(imagePath);
-        //setIsImageUploaded(true);
+
         onImageUpload(true);
         setError?.('');
 
@@ -83,13 +82,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
         type='file'
         name='image'
         onChange={(e) => imageFileUpload(e)}
-        // required={isRequired}
       />
-      {/*!isImageUploaded && (
-        <p className='font-extralight italic text-primaryOrange'>
-          Image is required
-        </p>
-      )*/}
     </div>
   );
 };
