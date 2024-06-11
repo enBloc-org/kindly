@@ -14,21 +14,25 @@ import KindlyLogoLink from './navigation/KindlyLogoLink';
 
 export default function Header() {
   const {
-    currentConversation,
-    showConversationsList,
-    setShowConversationsList,
+    conversationState: {
+      currentConversation,
+      showConversationsList,
+      currentUserId,
+    },
+    dispatch,
   } = useConversationContext();
+
   const isBreakpoint = useMediaQuery(1000);
   const pathname = usePathname();
 
   useEffect(() => {
     if (pathname !== '/conversations') {
-      setShowConversationsList(true);
+      dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: true });
     }
-  }, [pathname, setShowConversationsList]);
+  }, [pathname]);
 
   const handleBackButtonClick = () => {
-    setShowConversationsList((prevState) => !prevState);
+    dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: true });
   };
 
   return (
@@ -53,6 +57,7 @@ export default function Header() {
               <BackArrowIcon width={40} height={40} stroke='#54BB89' />
             </button>
             <ConversationPartner
+              currentUserId={currentUserId}
               conversation_id={currentConversation?.conversation_id as number}
             />
           </>

@@ -7,8 +7,8 @@ import deleteConversation from '../../supabase/models/messaging/deleteConversati
 //Components
 import EllipsisMenu from '../menus/EllipsisMenu';
 import ButtonRounded from '../buttons/ButtonRounded';
-import { useConversationContext } from '@/context/conversationContext';
 import updateConversationReadStatus from '@/supabase/models/messaging/updateConversationReadStatus';
+import { useConversationContext } from '@/context/conversationContext';
 
 type ModalProps = {
   conversationId?: number;
@@ -20,7 +20,9 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
   const [error, setError] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
 
-  const { currentConversation } = useConversationContext();
+  const {
+    conversationState: { currentConversation },
+  } = useConversationContext();
 
   const toggleModalClickHandler = (
     event: React.MouseEvent<HTMLButtonElement>
