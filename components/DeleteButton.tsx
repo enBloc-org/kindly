@@ -1,24 +1,36 @@
 'use client';
 import deleteItems from '@/supabase/models/deleteItems';
-import { useRouter } from 'next/navigation';
 
-interface DeleteButtonProps {
+type DeleteButtonProps = {
   itemId?: number;
   title: string;
-}
+  onDeleteSuccess: () => void;
+};
 
-export default function DeleteButton({ itemId, title }: DeleteButtonProps) {
-  // Get id of items you want to delete from database and refresh page
+/**
+ * @description Deletes an item from database using its id.
+ * @param onDeleteSuccess - A function provided by the parent component to handle actions after the item is deleted.
+ */
+
+export default function DeleteButton({
+  itemId,
+  title,
+  onDeleteSuccess,
+}: DeleteButtonProps) {
   if (typeof itemId === 'undefined') {
     throw new Error('item is undefined');
   }
 
-  const router = useRouter();
+  const handleDelete = async () => {
+    try {
+      await deleteItems(itemId);
+      onDeleteSuccess();
+    } catch (error) {
+      console.error('Failed to delete item:', error);
+    }
+  };
   return (
-    <button
-      className='button button-rounded '
-      onClick={() => deleteItems(itemId).then(router.refresh)}
-    >
+    <button className='button button-rounded ' onClick={handleDelete}>
       {title}
     </button>
   );
