@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import startNewConversation from '@/supabase/models/messaging/startNewConversation';
 import { useEffect } from 'react';
 import editRow from '@/supabase/models/editRow';
-import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
 
 export default function NewConversationButton({
   userId,
@@ -66,16 +65,7 @@ export default function NewConversationButton({
       setErrorMessage('');
       setError(false);
 
-      const conversationId = await startNewConversation(
-        userId,
-        donorId,
-        item_id
-      );
-
-      await insertSystemMessage(
-        conversationId,
-        'This is the start of your conversation.'
-      );
+      await startNewConversation(userId, donorId, item_id);
 
       router.push('/conversations');
     } catch (error) {

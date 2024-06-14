@@ -1,6 +1,9 @@
 import newClient from '@/supabase/utils/newClient';
 
-export const markAsRead = async (messageId: number, userId: string) => {
+export default async function markMessageAsRead(
+  messageId: number,
+  userId: string
+) {
   const supabase = newClient();
   const { error } = await supabase
     .from('messages')
@@ -12,4 +15,4 @@ export const markAsRead = async (messageId: number, userId: string) => {
     console.error('Error updating message:', error.message);
     return { error };
   }
-};
+}

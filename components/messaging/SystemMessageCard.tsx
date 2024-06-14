@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect } from 'react';
 import '../../app/styles/messaging-styles.css';
-import { markAsRead } from '@/supabase/models/messaging/markMessageAsRead';
+import markMessageAsRead from '@/supabase/models/messaging/markMessageAsRead';
 
 type SystemMessageCardProps = {
   messageId: number;
@@ -16,7 +16,7 @@ const SystemMessageCard: React.FC<SystemMessageCardProps> = ({
 }) => {
   useEffect(() => {
     const onRead = async () => {
-      currentUser && (await markAsRead(messageId, currentUser));
+      currentUser && (await markMessageAsRead(messageId, currentUser));
     };
 
     onRead();
@@ -30,7 +30,7 @@ const SystemMessageCard: React.FC<SystemMessageCardProps> = ({
         maxHeight: 'max-content',
         maxWidth: 'fit-content',
       }}
-      className='mx-auto flex items-center justify-center rounded-2xl bg-background p-3'
+      className='mx-auto my-6 flex items-center justify-center rounded-2xl bg-background p-3'
     >
       <p>{messageText}</p>
     </div>
