@@ -7,7 +7,7 @@ Kindly is an open source web application created by Trafalgar Girls and enBloc, 
 
 <h2 align=center>Contributing</h2>
 
-We **welcome** your contributions. Please familiarize yourself with our documentation before getting started. You can find guidance on how to contributing in the following sources:
+We **welcome** your contributions. Please familiarize yourself with our documentation before getting started. You can find guidance on how to contribute in the following sources:
 
 - Our [discord server](https://discord.gg/Mrh5NYw52S) - say Hi to the other developers and share knowledge here 👋
 - [Before your first issue](https://github.com/enBloc-org/kindly/blob/dev/.github/BEFORE_YOUR_FIRST_ISSUE.md)

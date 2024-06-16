@@ -18,7 +18,7 @@ Similarly, new Issue submissions are always welcomed but may be prioritized for 
 - As a User I want to have an option to reset my password from the login page
 - As a User I want to be able to suspend my account
 - As a User I want to be able to delete my account
-- As a User I want to be able to browse through Kindly before I need to create an account in order to interact Donations
+- As a User I want to be able to browse through Kindly before I need to create an account in order to interact with Donations
 - As a User I want to be able to sign up and login to Kindly with my login from social platforms such as Google or Facebook
 - As a User I want to be able to keep my account logged in between visits to Kindly 
 
