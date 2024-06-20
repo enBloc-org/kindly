@@ -24,14 +24,13 @@ export default async function ResetPassword({
     const supabase = newServerClient();
 
     if (searchParams.code) {
-      const supabase = newServerClient();
       const { error } = await supabase.auth.exchangeCodeForSession(
         searchParams.code
       );
 
       if (error) {
         return redirect(
-          `/reset-password?message=Unable to reset Password. Link expired!`
+          `/login/reset-password?message=Unable to reset Password. Link expired!`
         );
       }
     }
@@ -43,14 +42,15 @@ export default async function ResetPassword({
     if (error) {
       console.log(error);
       return redirect(
-        `/reset-password?message=Unable to reset Password. Try again!`
+        `/login/reset-password?message=Unable to reset Password. Try again!`
       );
     }
 
-    redirect(
+    return redirect(
       `/login?message=Your Password has been reset successfully. Sign in.`
     );
   };
+
   return (
     <div>
       <Link

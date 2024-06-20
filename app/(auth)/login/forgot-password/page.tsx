@@ -32,11 +32,13 @@ export default async function ForgotPassword({
     });
 
     if (error) {
-      return redirect('/forgot-password?message=Could not authenticate user');
+      return redirect(
+        '/login/forgot-password?message=Could not authenticate user'
+      );
     }
 
     return redirect(
-      '/confirm?message=Password Reset link has been sent to your email address'
+      '/login/confirm?message=Password Reset link has been sent to your email address'
     );
   };
 
