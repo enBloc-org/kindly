@@ -18,10 +18,16 @@ export default async function ResetPassword({
   }
 
   const resetPassword = async (formData: FormData) => {
-    'use server';
+    ('use server');
 
     const password = formData.get('password') as string;
+    const confirmPassword = formData.get('confirmPassword') as string;
     const supabase = newServerClient();
+
+    // Ensure the passwords match
+    if (password !== confirmPassword) {
+      return redirect(`/login/reset-password?message=Passwords do not match!`);
+    }
 
     if (searchParams.code) {
       const { error } = await supabase.auth.exchangeCodeForSession(
@@ -53,23 +59,20 @@ export default async function ResetPassword({
 
   return (
     <div>
-      <Link
-        href='/'
-        className='text-foreground bg-btn-background hover:bg-btn-background-hover m-4 rounded-md px-4 py-2 text-sm no-underline'
-      >
+      <Link href='/' className='mt-2 text-sm text-primaryGreen'>
         Home
       </Link>
 
-      <div className='mx-auto mt-4 w-full px-8 sm:max-w-md'>
+      <div className='flex flex-col  items-center  px-8'>
         <form
-          className='animate-in text-foreground mb-4 flex w-full flex-1 flex-col justify-center gap-2'
+          className='text-foreground flex flex-1  flex-col  items-center justify-center gap-4'
           action={resetPassword}
         >
           <label className='text-md' htmlFor='password'>
             New Password
           </label>
           <input
-            className='mb-6 rounded-md border bg-inherit px-4 py-2'
+            className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
             type='password'
             name='password'
             placeholder='••••••••'
@@ -79,15 +82,13 @@ export default async function ResetPassword({
             Confirm New Password
           </label>
           <input
-            className='mb-6 rounded-md border bg-inherit px-4 py-2'
+            className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
             type='password'
             name='confirmPassword'
             placeholder='••••••••'
             required
           />
-          <button className='text-foreground mb-2 rounded-md bg-indigo-700 px-4 py-2'>
-            Reset
-          </button>
+          <button className='button button-rounded mb-2'>Reset</button>
 
           {searchParams?.message && (
             <p className='bg-foreground/10 text-foreground mt-4 p-4 text-center'>
