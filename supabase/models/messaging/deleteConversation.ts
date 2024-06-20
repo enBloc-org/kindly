@@ -4,8 +4,18 @@ export default async function deleteConversation(
   conversationId: number,
   userId: string
 ) {
+  const supabase = newClient();
+
   try {
-    const supabase = newClient();
+    await supabase
+      .from('conversations')
+      .update({ member_has_deleted: true })
+      .eq('id', conversationId);
+  } catch (error) {
+    console.error(`Error editing the conversation: ${error}`);
+  }
+
+  try {
     const { error } = await supabase
       .from('user_conversations')
       .delete()
