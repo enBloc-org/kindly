@@ -1,0 +1,18 @@
+name: Move unassigned Issues to the Backlog
+
+on: 
+  issues:
+    types: [unassigned]
+
+jobs:
+  mark-unassigned-issues-backlog:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: move-unassigned-issue-to-backlog-column
+        uses: takanabe/github-actions-automate-projects@v0.0.2
+        if: github.event_name == 'issues' && github.event.action == 'unassigned'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PROJECT_URL: https://github.com/orgs/enBloc-org/projects/4/
+          GITHUB_PROJECT_COLUMN_NAME: Backlog
