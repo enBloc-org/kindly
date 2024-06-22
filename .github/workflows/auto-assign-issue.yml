@@ -1,0 +1,28 @@
+name: Auto assign Issue
+
+on:
+    issues:
+        types: [opened]
+
+jobs:
+    auto-assign:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Check if it's been requested
+              id: check-if-requested
+              run: |
+                  ISSUE_BODY=$(jq -r .issue.body "$GITHUB_EVENT_PATH")
+                  echo "Issue Body: $ISSUE_BODY"
+                  if echo "$ISSUE_BODY" | grep -q "I'd like to work on this Issue myself"; then
+                    echo "self-assigned=true" >> $GITHUB_ENV
+                  else
+                    echo "self-assigned=false" >> $GITHUB_ENV
+                  fi
+
+            - name: Assign to issuer
+              if: env.self-assigned == 'true'
+              uses: actions-ecosystem/action-add-assignees@v1
+              with:
+                  github_token: ${{secrets.GITHUB_TOKEN}}
+                  assignees: ${{github.event.issue.user.login}}
