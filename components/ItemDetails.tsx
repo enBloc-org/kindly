@@ -1,4 +1,4 @@
-import { PartialItem } from '@/utils/supabase/types';
+import { PartialItem } from '@/types/supabaseTypes';
 
 type ItemDetailPropType = PartialItem & {
   fontSize?: string;
@@ -16,28 +16,28 @@ const ItemDetails: React.FC<ItemDetailPropType> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col justify-center items-center gap-1 ${fontSize}`}
+      className={`flex flex-col items-center justify-center gap-1 ${fontSize}`}
     >
       {condition && (
         <p className=''>
-          <span className='text-primaryOrange font-light mr-2'>Condition:</span>
+          <span className='mr-2 font-light text-primaryOrange'>Condition:</span>
           {condition}
         </p>
       )}
       {item_type && (
         <p className=''>
-          <span className='text-primaryOrange font-light mr-2'>Category:</span>
+          <span className='mr-2 font-light text-primaryOrange'>Category:</span>
           {item_type}
         </p>
       )}
       {postcode && (
         <p className=''>
-          <span className='text-primaryOrange font-light mr-2'>Location:</span>
+          <span className='mr-2 font-light text-primaryOrange'>Location:</span>
           {postcode}
         </p>
       )}
 
-      {postable && <p className='text-center italic mt-5'>Postage covered</p>}
+      {postable && <p className='mt-5 text-center italic'>Postage covered</p>}
     </div>
   );
 };

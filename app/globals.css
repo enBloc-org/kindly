@@ -16,13 +16,19 @@ label {
 }
 
 body {
-  @apply font-inter text-primaryGray bg-background;
+  @apply bg-background font-inter text-primaryGray;
+}
+
+:focus-visible {
+  outline: 3px solid #ff9e5e;
 }
 
 /* Universal component classes*/
 
 .button {
-  @apply bg-primaryGreen text-background text-sm font-semibold tracking-wider px-4 py-1.5  shadow-md  cursor-pointer relative max-w-xs;
+  @apply relative max-w-xs cursor-pointer bg-primaryGreen 
+  px-4 py-1.5 text-sm  font-semibold  tracking-wider text-background 
+  shadow-md;
 }
 
 .button:active {
@@ -42,14 +48,33 @@ body {
   border-color: #ff9e5e;
 }
 
+.error-message {
+  @apply text-lg font-bold italic text-primaryOrange;
+}
+
 /* Form classes*/
 
 .input-text {
-  @apply bg-background py-3 px-5 rounded-3xl border border-primaryGreen text-sm md:w-80;
+  @apply rounded-3xl border border-primaryGreen bg-background px-5 py-3 text-sm md:w-80;
 }
 
-/*  Card hover animation */
+/*  Cards */
 
 .card {
-  @apply bg-white shadow-sm px-8 pb-5  rounded-lg overflow-hidden lg:text-lg hover:scale-95 hover:shadow-lg transition-all;
+  @apply overflow-hidden rounded-lg bg-white px-8  pb-5 shadow-sm transition-all hover:scale-95 hover:shadow-lg lg:text-lg;
+}
+
+/*  Menus */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
 }
