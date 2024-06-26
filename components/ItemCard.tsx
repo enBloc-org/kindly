@@ -32,6 +32,7 @@ const ItemCard: React.FC<ItemCardPropType> = ({
               src={imageSrc ? `${imageSrc}` : '/default-item-img.png'}
               alt={`Image of ${item_name}`}
               fill
+              sizes='(max-width: 768px) 100vw, 50vw'
             />
           </div>
           <ItemDetails
