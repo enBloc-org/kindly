@@ -1,5 +1,5 @@
-import { SearchBar } from '@/components/filter/SearchBar';
-import QuickBrowse from '@/components/filter/QuickBrowse';
+import { SearchBar } from '@/components/search/SearchBar';
+import QuickBrowse from '@/components/search/filter/QuickBrowse';
 
 export default function SearchItemPage() {
   return (

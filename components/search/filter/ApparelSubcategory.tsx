@@ -1,8 +1,8 @@
 'use client';
-import BoyIcon from '../icons/BoyIcon';
-import GirlIcon from '../icons/GirlIcon';
-import ManIcon from '../icons/ManIcon';
-import WomanIcon from '../icons/WomanIcon';
+import BoyIcon from '../../icons/BoyIcon';
+import GirlIcon from '../../icons/GirlIcon';
+import ManIcon from '../../icons/ManIcon';
+import WomanIcon from '../../icons/WomanIcon';
 import CategoryButton from './CategoryButton';
 
 type CategoryProp = {

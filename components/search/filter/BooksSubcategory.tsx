@@ -1,5 +1,5 @@
-import GirlIcon from '../icons/GirlIcon';
-import WomanIcon from '../icons/WomanIcon';
+import GirlIcon from '../../icons/GirlIcon';
+import WomanIcon from '../../icons/WomanIcon';
 import CategoryButton from './CategoryButton';
 
 type CategoryProp = {

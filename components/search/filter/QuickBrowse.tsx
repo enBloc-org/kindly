@@ -3,11 +3,11 @@ import { useState } from 'react';
 import ApparelSubcategory from './ApparelSubcategory';
 import CategoryButton from './CategoryButton';
 import { useRouter } from 'next/navigation';
-import ShirtIcon from '../icons/ShirtIcon';
-import ShoeIcon from '../icons/ShoeIcon';
-import ToyIcon from '../icons/ToyIcon';
-import BookIcon from '../icons/BookIcon';
-import HomeIcon from '../icons/HomeIcon';
+import ShirtIcon from '../../icons/ShirtIcon';
+import ShoeIcon from '../../icons/ShoeIcon';
+import ToyIcon from '../../icons/ToyIcon';
+import BookIcon from '../../icons/BookIcon';
+import HomeIcon from '../../icons/HomeIcon';
 import BooksSubcategory from './BooksSubcategory';
 
 export type IconPropType = {

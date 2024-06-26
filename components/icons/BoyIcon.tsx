@@ -1,4 +1,4 @@
-import { IconPropType } from '../filter/QuickBrowse';
+import { IconPropType } from '../search/filter/QuickBrowse';
 
 const BoyIcon: React.FC<IconPropType> = ({ subcategory }) => {
   return (
