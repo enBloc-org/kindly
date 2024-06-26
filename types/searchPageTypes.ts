@@ -1,5 +1,5 @@
 export type SearchParamsType = {
-  query?: string;
-  category?: string;
-  subcategory?: string;
+  query: string;
+  category: string;
+  subcategory: string;
 };

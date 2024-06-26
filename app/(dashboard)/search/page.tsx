@@ -10,9 +10,9 @@ import { PartialItem } from '@/types/supabaseTypes';
 import { useEffect, useState } from 'react';
 
 const initialSearchParams = {
-  query: undefined,
-  category: undefined,
-  subcategory: undefined,
+  query: '',
+  category: '',
+  subcategory: '',
 };
 
 export default function SearchItemPage() {
@@ -25,7 +25,7 @@ export default function SearchItemPage() {
       console.log(searchParams);
       try {
         let data: PartialItem[] | null = [];
-        if (searchParams.query !== undefined) {
+        if (searchParams.query.length > 0) {
           data = await searchItemsByName(searchParams.query);
         } else {
           data = await getItems(
@@ -35,7 +35,7 @@ export default function SearchItemPage() {
             searchParams.category
           );
           if (!data) {
-            return 'supabase request fialed';
+            return 'supabase request failed';
           }
           if (searchParams.subcategory && data) {
             data = filterItems(data, searchParams.subcategory);
@@ -55,9 +55,9 @@ export default function SearchItemPage() {
       />
       <QuickBrowse />
       <ItemDisplayContainer
-        query=''
-        category=''
-        subcategory=''
+        query={searchParams.query}
+        category={searchParams.category}
+        subcategory={searchParams.subcategory}
         searchResults={searchResults}
       />
     </div>

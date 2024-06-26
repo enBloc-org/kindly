@@ -3,9 +3,9 @@ import { PartialItem } from '@/types/supabaseTypes';
 import ItemCard from '../ItemCard';
 
 type ItemDisplayContainerProps = {
-  query?: string;
-  category?: string;
-  subcategory?: string;
+  query: string;
+  category: string;
+  subcategory: string;
   searchResults: PartialItem[] | [];
 };
 
@@ -20,9 +20,9 @@ const ItemDisplayContainer: React.FC<ItemDisplayContainerProps> = ({
       <h2 className='mx-5 font-semibold italic'>
         Search for:{' '}
         <span className='font-normal'>
-          {query && query}
-          {category && category}
-          {subcategory && ' & ' + subcategory}
+          {query.length > 0 ? query : ''}
+          {category.length > 0 ? category : ''}
+          {subcategory.length > 0 ? subcategory : ''}
         </span>
       </h2>
       <div className='mt-10 flex flex-col items-center gap-5'>
