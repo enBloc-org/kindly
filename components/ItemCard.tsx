@@ -31,8 +31,7 @@ const ItemCard: React.FC<ItemCardPropType> = ({
             <Image
               src={imageSrc ? `${imageSrc}` : '/default-item-img.png'}
               alt={`Image of ${item_name}`}
-              layout='fill'
-              objectFit='cover'
+              fill
             />
           </div>
           <ItemDetails
