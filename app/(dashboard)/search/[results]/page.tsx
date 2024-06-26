@@ -11,7 +11,7 @@ type ParamsType = {
   subcategory: string;
 };
 
-const SearchResulsPage = async ({
+const SearchResultsPage = async ({
   searchParams,
 }: {
   searchParams: ParamsType;
@@ -68,4 +68,4 @@ const SearchResulsPage = async ({
   );
 };
 
-export default SearchResulsPage;
+export default SearchResultsPage;
