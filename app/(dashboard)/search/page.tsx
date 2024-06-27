@@ -20,8 +20,10 @@ export default function SearchItemPage() {
   const [searchParams, setSearchParams] =
     useState<SearchParamsType>(initialSearchParams);
   const [searchResults, setSearchResults] = useState<PartialItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchSearchResults = async () => {
+    setIsLoading(true);
     let data: PartialItem[] = [];
     switch (true) {
       // case !!searchParams.query &&
@@ -58,6 +60,7 @@ export default function SearchItemPage() {
         break;
     }
     setSearchResults(data);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -72,10 +75,8 @@ export default function SearchItemPage() {
       />
       <QuickBrowse />
       <ItemDisplayContainer
-        query={searchParams.query}
-        category={searchParams.category}
-        subcategory={searchParams.subcategory}
         searchResults={searchResults}
+        isLoading={isLoading}
       />
     </div>
   );
