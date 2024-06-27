@@ -2,17 +2,18 @@
 import ItemDisplayContainer from '@/components/search/ItemDisplayContainer';
 import { SearchBar } from '@/components/search/SearchBar';
 import QuickBrowse from '@/components/search/filter/QuickBrowse';
-import filterItems from '@/supabase/models/filterItems';
-import { getItems } from '@/supabase/models/getItems';
 import searchItemsByName from '@/supabase/models/searchItemsByName';
+import selectItemsByCreatedAt from '@/supabase/models/selectingItems/selectItemsByCreatedAt';
 import { SearchParamsType } from '@/types/searchPageTypes';
 import { PartialItem } from '@/types/supabaseTypes';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const initialSearchParams = {
   query: '',
   category: '',
   subcategory: '',
+  limit: 10,
+  cursor: '',
 };
 
 export default function SearchItemPage() {
@@ -20,30 +21,46 @@ export default function SearchItemPage() {
     useState<SearchParamsType>(initialSearchParams);
   const [searchResults, setSearchResults] = useState<PartialItem[]>([]);
 
+  const fetchSearchResults = useCallback(async () => {
+    let data: PartialItem[] = [];
+    switch (true) {
+      // case !!searchParams.query &&
+      //   !!searchParams.category &&
+      //   !!searchParams.subcategory:
+      //   data = await searchItemsByQueryCategorySubcategory(
+      //     searchParams.query,
+      //     searchParams.category,
+      //     searchParams.subcategory,
+      //     searchParams.limit,
+      //     searchParams.cursor
+      //   );
+      //   break;
+      // case !!searchParams.query && !!searchParams.category:
+      //   data = await searchItemsByQueryAndCategory(
+      //     searchParams.query,
+      //     searchParams.category,
+      //     searchParams.limit,
+      //     searchParams.cursor
+      //   );
+      //   break;
+      case !!searchParams.query:
+        data = await searchItemsByName(
+          searchParams.query,
+          searchParams.limit,
+          searchParams.cursor
+        );
+        break;
+      default:
+        data = await selectItemsByCreatedAt(
+          searchParams.cursor,
+          searchParams.limit
+        );
+        break;
+    }
+    setSearchResults(data);
+  }, [searchParams]);
+
   useEffect(() => {
-    const fetchSearchResults = async () => {
-      console.log(searchParams);
-      try {
-        let data: PartialItem[] | null = [];
-        if (searchParams.query.length > 0) {
-          data = await searchItemsByName(searchParams.query);
-        } else {
-          data = await getItems(
-            'items',
-            '*',
-            'item_type',
-            searchParams.category
-          );
-          if (!data) {
-            return 'supabase request failed';
-          }
-          if (searchParams.subcategory && data) {
-            data = filterItems(data, searchParams.subcategory);
-          }
-        }
-        setSearchResults(data);
-      } catch (error) {}
-    };
     fetchSearchResults();
   }, [searchParams]);
 
