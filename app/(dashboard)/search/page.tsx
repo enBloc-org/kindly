@@ -6,7 +6,7 @@ import searchItemsByName from '@/supabase/models/searchItemsByName';
 import selectItemsByCreatedAt from '@/supabase/models/selectingItems/selectItemsByCreatedAt';
 import { SearchParamsType } from '@/types/searchPageTypes';
 import { PartialItem } from '@/types/supabaseTypes';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const initialSearchParams = {
   query: '',
@@ -21,7 +21,7 @@ export default function SearchItemPage() {
     useState<SearchParamsType>(initialSearchParams);
   const [searchResults, setSearchResults] = useState<PartialItem[]>([]);
 
-  const fetchSearchResults = useCallback(async () => {
+  const fetchSearchResults = async () => {
     let data: PartialItem[] = [];
     switch (true) {
       // case !!searchParams.query &&
@@ -58,7 +58,7 @@ export default function SearchItemPage() {
         break;
     }
     setSearchResults(data);
-  }, [searchParams]);
+  };
 
   useEffect(() => {
     fetchSearchResults();

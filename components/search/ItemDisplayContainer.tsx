@@ -26,22 +26,18 @@ const ItemDisplayContainer: React.FC<ItemDisplayContainerProps> = ({
         </span>
       </h2>
       <div className='mt-10 flex flex-col items-center gap-5'>
-        {searchResults.length > 0 ? (
-          searchResults.map((result) => (
-            <ItemCard
-              key={result.id}
-              imageSrc={result.imageSrc}
-              item_name={result.item_name}
-              condition={result.condition}
-              item_type={result.item_type}
-              postcode={result.postcode}
-              postable={result.postable}
-              itemId={result.id}
-            />
-          ))
-        ) : (
-          <p className='text-center'>No results found.</p>
-        )}
+        {searchResults.map((result) => (
+          <ItemCard
+            key={result.id}
+            imageSrc={result.imageSrc}
+            item_name={result.item_name}
+            condition={result.condition}
+            item_type={result.item_type}
+            postcode={result.postcode}
+            postable={result.postable}
+            itemId={result.id}
+          />
+        ))}
       </div>
     </div>
   );

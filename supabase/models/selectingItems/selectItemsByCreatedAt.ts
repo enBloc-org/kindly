@@ -12,7 +12,7 @@ const selectItemsByCreatedAt = async (
     let query = supabase
       .from('items')
       .select('*')
-      .order('created_at', { ascending: false })
+      .order('created_at')
       .limit(Number(limit));
 
     if (cursor) {
