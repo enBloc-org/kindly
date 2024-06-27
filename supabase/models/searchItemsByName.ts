@@ -12,7 +12,7 @@ export default async function searchItemsByName(
     let query = supabase
       .from('items')
       .select()
-      .ilike('item_name', `%${name}%`)
+      .or(`item_name.ilike.%${name}%,item_type.ilike.%${name}%`)
       .order('created_at', { ascending: false })
       .limit(Number(limit));
 
@@ -27,7 +27,7 @@ export default async function searchItemsByName(
     }
     return data ? (data as item[]) : [];
   } catch (error) {
-    console.error(`Failed to get messages from database: ${error}`);
+    console.error(`Failed to get items from database: ${error}`);
     throw error;
   }
 }
