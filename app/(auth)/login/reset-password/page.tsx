@@ -18,7 +18,7 @@ export default async function ResetPassword({
   }
 
   const resetPassword = async (formData: FormData) => {
-    'use server';
+    ('use server');
 
     const password = formData.get('password') as string;
     const confirmPassword = formData.get('confirmPassword') as string;
