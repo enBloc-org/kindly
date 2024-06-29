@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import AccountDeleteForm from '@/components/AccountDeleteForm';
 import Modal from '@/components/Modal';
@@ -11,6 +12,7 @@ export default function DeleteAccount() {
   const [loggedUser, setLoggedUser] = useState('');
   const [userId, setUserId] = useState<undefined | string>(undefined);
   const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     const getUserId = async () => {
@@ -39,6 +41,7 @@ export default function DeleteAccount() {
     const deleteUser = async () => {
       if (userId !== undefined) {
         await deleteProfile(userId);
+        router.push('/');
       }
     };
 
