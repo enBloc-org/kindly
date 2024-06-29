@@ -48,6 +48,11 @@ const ProfilePage = async () => {
               userName={userProfile.data.username}
               userAvatar={userProfile.data.avatar}
             />
+            <p>
+              <a href='http://localhost:3000/delete-account'>
+                Delete this joint
+              </a>
+            </p>
           </div>
         </div>
         <DonatedItemsList userId={user.id} />
