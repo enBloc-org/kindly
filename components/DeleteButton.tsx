@@ -1,7 +1,7 @@
 'use client';
 
 type DeleteButtonProps = {
-  targetId?: number;
+  targetId?: number | string;
   title: string;
   onDeleteSuccess: () => void;
 };

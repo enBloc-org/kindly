@@ -6,7 +6,7 @@ import DeleteButton from './DeleteButton';
 
 interface ModalProps {
   name: string;
-  targetId?: number;
+  targetId?: number | string;
   message: string;
   onDeleteSuccess: () => void;
 }
