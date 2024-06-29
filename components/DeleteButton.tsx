@@ -7,7 +7,7 @@ type DeleteButtonProps = {
 };
 
 /**
- * @description Deletes an item from database using its id.
+ * @description Deletes a target from the database using its id.
  * @param onDeleteSuccess - A function provided by the parent component to handle actions after the item is deleted.
  */
 export default function DeleteButton({
