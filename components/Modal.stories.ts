@@ -34,7 +34,7 @@ export const ItemDeleteModal: Story = {
   args: {
     onDeleteSuccess: fn(),
     name: 'Delete Item',
-    itemId: 269,
+    targetId: 269,
     message: 'By pressing "Confirm" you will delete this item permanently.',
   },
 };
@@ -43,7 +43,7 @@ export const ProfileDeleteModal: Story = {
   args: {
     onDeleteSuccess: fn(),
     name: 'Delete Profile',
-    itemId: 616,
+    targetId: 616,
     message:
       'Your profile will be deleted permanently. Are you sure you want to continue?',
   },
