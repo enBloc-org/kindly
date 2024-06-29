@@ -1,10 +1,7 @@
 'use client';
-import deleteItems from '@/supabase/models/deleteItems';
-import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
-import selectConversationsByItemId from '@/supabase/models/messaging/selectConversationsByItemId';
 
 type DeleteButtonProps = {
-  itemId?: number;
+  targetId?: number;
   title: string;
   onDeleteSuccess: () => void;
 };
@@ -14,38 +11,16 @@ type DeleteButtonProps = {
  * @param onDeleteSuccess - A function provided by the parent component to handle actions after the item is deleted.
  */
 export default function DeleteButton({
-  itemId,
+  targetId,
   title,
   onDeleteSuccess,
 }: DeleteButtonProps) {
-  if (typeof itemId === 'undefined') {
+  if (typeof targetId === 'undefined') {
     throw new Error('item is undefined');
   }
-  const handleDelete = async () => {
-    try {
-      const selectedConversations = await selectConversationsByItemId(itemId);
-      selectedConversations.forEach((conversation) => {
-        insertSystemMessage(
-          conversation,
-          'This item is no longer available for donation.'
-        );
-      });
-    } catch (error) {
-      console.error(`Error inserting system message: ${error}`);
-      throw error;
-    }
-
-    try {
-      await deleteItems(itemId);
-      onDeleteSuccess();
-    } catch (error) {
-      console.error('Failed to delete item:', error);
-      throw error;
-    }
-  };
 
   return (
-    <button className='button button-rounded ' onClick={handleDelete}>
+    <button className='button button-rounded ' onClick={onDeleteSuccess}>
       {title}
     </button>
   );
