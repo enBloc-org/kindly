@@ -9,8 +9,75 @@ import AboutRouteIcon from '../icons/navigation/AboutRouteIcon';
 import AddItemRouteIcon from '../icons/navigation/AddItemRouteIcon';
 import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 
-const MobileNavbar = () => {
+import { useEffect, useState } from 'react';
+import newClient from '@/supabase/utils/newClient';
+import selectUserUnreadConversations from '@/supabase/models/messaging/selectUserUnreadMessages';
+
+type DesktopNavProps = {
+  userId: string;
+};
+
+const MobileNavbar = ({ userId }: DesktopNavProps) => {
   const pathname = usePathname();
+  const supabase = newClient();
+  const [notification, setNotification] = useState<boolean>(false);
+  const [trigger, setTrigger] = useState<number>(0);
+
+  useEffect(() => {
+    if (pathname === '/conversations') {
+      setNotification(false);
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    const getUnreadConversations = async () => {
+      const unreadConversations = await selectUserUnreadConversations(userId);
+      if (unreadConversations.length > 0) {
+        setNotification(true);
+      }
+    };
+    getUnreadConversations();
+  }, []);
+
+  useEffect(() => {
+    const channel = supabase
+      .channel('realtime conversations notifications')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'user_conversations',
+          filter: `user_id=eq.${userId}`,
+        },
+        (payload) => {
+          if (payload.new.user_id === userId) {
+            setNotification(true);
+            setTrigger((previous) => previous + 1);
+          }
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'user_conversations',
+          filter: `user_id=eq.${userId}`,
+        },
+        (payload) => {
+          if (payload.new.has_unread_messages) {
+            setNotification(true);
+            setTrigger((previous) => previous + 1);
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [trigger]);
 
   return (
     <nav className='flex items-center justify-around' role='navigation'>
@@ -53,6 +120,12 @@ const MobileNavbar = () => {
         size='mobile'
       >
         <MessageRouteIcon pathName={pathname} height={28} width={28} />
+        {notification && (
+          <div
+            className='absolute right-1 top-1 z-50 h-3 w-3 rounded-full border-2 
+              border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black'
+          ></div>
+        )}
       </NavigationLinkContainer>
     </nav>
   );

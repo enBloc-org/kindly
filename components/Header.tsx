@@ -12,7 +12,11 @@ import { ConversationPartner } from './messaging/ConversationPartner';
 import BackArrowIcon from './icons/BackArrowIcon';
 import KindlyLogoLink from './navigation/KindlyLogoLink';
 
-export default function Header() {
+type HeaderProps = {
+  userId: string;
+};
+
+export default function Header({ userId }: HeaderProps) {
   const {
     conversationState: {
       currentConversation,
@@ -63,7 +67,7 @@ export default function Header() {
           </>
         )
       ) : (
-        <DesktopNav />
+        <DesktopNav userId={userId} />
       )}
     </header>
   );
