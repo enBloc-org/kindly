@@ -20,9 +20,9 @@ export default async function DashBoardLayout({
     <>
       <Providers>
         <FullHeightContainer>
-          <Header userId={data.session.user.id} />
+          <Header />
           <main className='flex flex-grow flex-col'>{children}</main>
-          <Footer userId={data.session.user.id} />
+          <Footer />
         </FullHeightContainer>
       </Providers>
     </>

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { usePathname } from 'next/navigation';
 
@@ -10,18 +12,29 @@ import ProfileRouteIcon from '../icons/navigation/ProfileRouteIcon';
 import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 
 import { useEffect, useState } from 'react';
-import newClient from '@/supabase/utils/newClient';
 import selectUserUnreadConversations from '@/supabase/models/messaging/selectUserUnreadMessages';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
-type DesktopNavProps = {
-  userId: string;
-};
-
-const DesktopNav = ({ userId }: DesktopNavProps) => {
+const DesktopNav = () => {
   const pathname = usePathname();
-  const supabase = newClient();
+  const supabase = createClientComponentClient();
+  const [userId, setUserId] = useState<string>('');
   const [notification, setNotification] = useState<boolean>(false);
   const [trigger, setTrigger] = useState<number>(0);
+
+  useEffect(() => {
+    const getUserSession = async () => {
+      try {
+        const { data: userData } = await supabase.auth.getSession();
+        if (userData.session?.user.id) {
+          setUserId(userData.session?.user.id);
+        }
+      } catch (error) {
+        console.error('Error getting user session: ', error);
+      }
+    };
+    getUserSession();
+  }, []);
 
   useEffect(() => {
     if (pathname === '/conversations') {
@@ -31,13 +44,14 @@ const DesktopNav = ({ userId }: DesktopNavProps) => {
 
   useEffect(() => {
     const getUnreadConversations = async () => {
+      if (!userId) return;
       const unreadConversations = await selectUserUnreadConversations(userId);
       if (unreadConversations.length > 0) {
         setNotification(true);
       }
     };
     getUnreadConversations();
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     const channel = supabase
@@ -52,7 +66,9 @@ const DesktopNav = ({ userId }: DesktopNavProps) => {
         },
         (payload) => {
           if (payload.new.user_id === userId) {
-            setNotification(true);
+            if (pathname !== '/conversations') {
+              setNotification(true);
+            }
             setTrigger((previous) => previous + 1);
           }
         }
@@ -67,7 +83,9 @@ const DesktopNav = ({ userId }: DesktopNavProps) => {
         },
         (payload) => {
           if (payload.new.has_unread_messages) {
-            setNotification(true);
+            if (pathname !== '/conversations') {
+              setNotification(true);
+            }
             setTrigger((previous) => previous + 1);
           }
         }
@@ -77,7 +95,7 @@ const DesktopNav = ({ userId }: DesktopNavProps) => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [trigger]);
+  }, [trigger, pathname, userId]);
 
   return (
     <nav
