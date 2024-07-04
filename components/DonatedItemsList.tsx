@@ -5,14 +5,18 @@ import Link from 'next/link';
 import Modal from '@/components/Modal';
 import ItemCard from '@/components/ItemCard';
 import React, { useEffect, useState } from 'react';
-import { PartialItem } from '@/types/supabaseTypes';
+import { PartialItem, item } from '@/types/supabaseTypes';
 import useMediaQuery from './hooks/useMediaQuery';
+import ReserveForUserModal from './ReserveForUserModal';
+import UnreserveButton from './buttons/UnreserveButton';
 
 type DisplayDonatedItemsProps = {
   userId: string;
 };
 
-const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
+const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
+  userId,
+}: DisplayDonatedItemsProps) => {
   const isBreakpoint = useMediaQuery(1000);
   const [storeItems, setStoreItems] = useState<PartialItem[]>([]);
   const [error, setError] = useState('');
@@ -34,7 +38,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
   }, []);
 
   const handleDeleteSuccess = (deleteItemId: number) => {
-    setStoreItems(storeItems.filter((item) => item.id !== deleteItemId));
+    setStoreItems(storeItems.filter((item: item) => item.id !== deleteItemId));
   };
 
   return (
@@ -50,7 +54,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
           {storeItems
             .slice()
             .reverse()
-            .map((item) => (
+            .map((item: item) => (
               <li key={item.id}>
                 <ItemCard
                   imageSrc={item.imageSrc}
@@ -60,9 +64,9 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
                   postable={item.postable}
                   itemId={item.id}
                 />
-                <div className='flex flex-row'>
+                <div className='flex flex-row gap-2'>
                   <Link href={`/edit-item/${item.id}`}>
-                    <p className='button button-rounded mx-2 my-2'>Edit item</p>
+                    <p className='button button-rounded my-2'>Edit item</p>
                   </Link>
                   <Modal
                     name='Delete Item'
@@ -70,6 +74,15 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
                     message='By pressing Confirm you will delete this item'
                     onDeleteSuccess={() => handleDeleteSuccess(item.id!)}
                   />
+                  {item.reserved ? (
+                    <UnreserveButton itemId={item.id} />
+                  ) : (
+                    <ReserveForUserModal
+                      name='Mark as Reserved'
+                      itemId={item.id}
+                      currentUserId={userId}
+                    />
+                  )}
                 </div>
               </li>
             ))}
