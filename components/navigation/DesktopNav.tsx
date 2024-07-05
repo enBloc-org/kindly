@@ -10,7 +10,7 @@ import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import selectUserUnreadConversations from '@/supabase/models/messaging/selectUserUnreadMessages';
+import selectUserUnreadConversations from '@/supabase/models/messaging/selectUserUnreadConversations';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import selectLoggedUserId from '@/supabase/utils/selectLoggedUserId';
 import '../../app/styles/messaging-styles.css';
