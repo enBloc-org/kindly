@@ -1,11 +1,32 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
+import { fn, userEvent, within } from '@storybook/test';
+import { expect } from '@storybook/jest';
 
 import AccountDeleteForm from './AccountDeleteForm';
 
 const meta: Meta<typeof AccountDeleteForm> = {
   title: 'User Account/AccountDeleteForm',
   component: AccountDeleteForm,
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole('textbox');
+    const button = canvas.getByRole('button');
+
+    await step('User name is displayed as placeholder', async () => {
+      await expect(input.getAttribute('placeholder')).toBe(
+        args.currentUserName
+      );
+    });
+
+    await step("User can't submit before typing", async () => {
+      await expect(button).toBeDisabled();
+    });
+    await step('Typing the wrong user name returns an alert', async () => {
+      await userEvent.type(input, 'wrong user');
+      await userEvent.click(button);
+      await expect(alert).toHaveBeenCalled();
+    });
+  },
 };
 
 export default meta;
