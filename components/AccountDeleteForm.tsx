@@ -28,7 +28,7 @@ export default function AccountDeleteForm({
   };
 
   return (
-    <div className='w-5/6 rounded-lg bg-backgroundHighlight p-5'>
+    <div>
       <form
         onSubmit={(event) => handleSubmit(event)}
         className='text-foreground flex flex-1  flex-col  items-center justify-center gap-4'

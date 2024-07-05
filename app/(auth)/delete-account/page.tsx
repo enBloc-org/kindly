@@ -49,7 +49,7 @@ export default function DeleteAccount() {
   };
 
   return (
-    <>
+    <div className='flex flex-col  items-center  px-8'>
       <AccountDeleteForm
         currentUserName={loggedUser}
         submitHandler={formSubmitHandler}
@@ -62,6 +62,6 @@ export default function DeleteAccount() {
         onDeleteSuccess={accountDeleteHandler}
         isDisabled={!isConfirmed}
       />
-    </>
+    </div>
   );
 }
