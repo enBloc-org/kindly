@@ -41,6 +41,17 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
     setStoreItems(storeItems.filter((item: item) => item.id !== deleteItemId));
   };
 
+  const onReserveStatusChange = (itemId: number): void => {
+    setStoreItems((prevItems: PartialItem[]) => {
+      return prevItems.map((item: PartialItem) => {
+        if (item.id === itemId) {
+          return { ...item, reserved: !item.reserved };
+        }
+        return item;
+      });
+    });
+  };
+
   return (
     <div className='m-auto mt-10 w-5/6'>
       <h2 className='m-5 text-lg font-medium md:pl-20 lg:pl-40'>
@@ -75,12 +86,20 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
                     onDeleteSuccess={() => handleDeleteSuccess(item.id!)}
                   />
                   {item.reserved ? (
-                    <UnreserveButton itemId={item.id} />
+                    <UnreserveButton
+                      itemId={item.id}
+                      onReserveStatusChange={() =>
+                        onReserveStatusChange(item.id)
+                      }
+                    />
                   ) : (
                     <ReserveForUserModal
                       name='Mark as Reserved'
                       itemId={item.id}
                       currentUserId={userId}
+                      onReserveStatusChange={() =>
+                        onReserveStatusChange(item.id)
+                      }
                     />
                   )}
                 </div>

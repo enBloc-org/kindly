@@ -11,11 +11,17 @@ interface ModalProps {
   name: string;
   itemId: number;
   currentUserId: string;
+  onReserveStatusChange: () => void;
 }
 
 type ReserveUserData = Pick<profile, 'username' | 'id'>;
 
-const ReserveForUserModal = ({ name, itemId, currentUserId }: ModalProps) => {
+const ReserveForUserModal = ({
+  name,
+  itemId,
+  currentUserId,
+  onReserveStatusChange,
+}: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [usersThatCanReserve, setUsersThatCanReserve] = useState<
     ReserveUserData[]
@@ -55,6 +61,7 @@ const ReserveForUserModal = ({ name, itemId, currentUserId }: ModalProps) => {
         reserved_by: userId,
       });
       toggleModal();
+      onReserveStatusChange();
     } catch (error) {
       console.error(error);
     }
@@ -74,8 +81,11 @@ const ReserveForUserModal = ({ name, itemId, currentUserId }: ModalProps) => {
                 : 'Nobody has asked about this item yet.'}
             </p>
             {usersThatCanReserve.map((user, index) => (
-              <div className='flex gap-2' key={index}>
-                <p>{user.username}</p>
+              <div
+                className='flex w-full items-center justify-between gap-2'
+                key={index}
+              >
+                <p className='font-light'>{user.username}</p>
                 <button
                   className='button button-rounded'
                   onClick={() => handleConfirmReserve(user.id as string)}

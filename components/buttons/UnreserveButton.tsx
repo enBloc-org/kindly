@@ -2,16 +2,20 @@ import upsertRow from '@/supabase/models/upsertRow';
 
 type UnreserveButtonProps = {
   itemId: number;
+  onReserveStatusChange: () => void;
 };
 
-const UnreserveButton: React.FC<UnreserveButtonProps> = ({ itemId }) => {
+const UnreserveButton: React.FC<UnreserveButtonProps> = ({
+  itemId,
+  onReserveStatusChange,
+}) => {
   const handleUnreserve = async () => {
     try {
       await upsertRow('items', {
         id: itemId,
         reserved: false,
-        reserved_by: undefined,
       });
+      onReserveStatusChange();
     } catch (error) {
       console.error(error);
     }
