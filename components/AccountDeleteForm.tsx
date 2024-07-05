@@ -9,6 +9,7 @@ export default function AccountDeleteForm({
   submitHandler: () => void;
 }) {
   const [userName, setUserName] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -16,8 +17,14 @@ export default function AccountDeleteForm({
     if (userName === currentUserName) {
       submitHandler();
     } else {
-      alert('The username you submitted is incorrect');
+      setErrorMessage('The username you submitted is incorrect');
     }
+  };
+
+  const inputChangeHandler = (input: string) => {
+    if (errorMessage.length > 0) setErrorMessage('');
+
+    setUserName(input);
   };
 
   return (
@@ -38,7 +45,7 @@ export default function AccountDeleteForm({
             id='confirmation-input'
             value={userName}
             name='user-confirmation'
-            onChange={(event) => setUserName(event.target.value)}
+            onChange={(event) => inputChangeHandler(event.target.value)}
             placeholder={currentUserName}
             className='p-1'
           />
@@ -49,6 +56,9 @@ export default function AccountDeleteForm({
             X
           </button>
         </div>
+        {errorMessage.length > 0 && (
+          <p className='mt-2 text-sm text-red-500'>{errorMessage}</p>
+        )}
       </form>
     </div>
   );
