@@ -24,7 +24,16 @@ const meta: Meta<typeof AccountDeleteForm> = {
     await step('Typing the wrong user name returns an alert', async () => {
       await userEvent.type(input, 'wrong user');
       await userEvent.click(button);
-      await expect(alert).toHaveBeenCalled();
+      await expect(
+        canvas.getByText('The username you submitted is incorrect')
+      ).toBeVisible();
+    });
+    await step('Typing the correct user name clears the error', async () => {
+      await userEvent.clear(input);
+      await userEvent.type(input, 'Test User');
+      await expect(
+        canvas.queryByText('The username you submitted is incorrect')
+      ).not.toBeInTheDocument();
     });
   },
 };
