@@ -42,6 +42,8 @@ const AddItemPage = () => {
       const user = userData.session?.user.id;
       if (user) {
         setUserId(user);
+      } else {
+        router.replace('/login');
       }
     };
     getUserId();
