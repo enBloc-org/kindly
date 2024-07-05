@@ -29,31 +29,27 @@ export default function AccountDeleteForm({
 
   return (
     <div className='w-5/6 rounded-lg bg-backgroundHighlight p-5'>
-      <p className='mb-2 font-bold'>We are sorry to see you go</p>
-      <p className='text-wrap w-3/4'>
-        We hope you have found Kindly helpful and will consider coming back
-        another time.
-        <br />
-        Any help is greatly appreciated.
-      </p>
-      <form onSubmit={(event) => handleSubmit(event)} className='m-3'>
+      <form
+        onSubmit={(event) => handleSubmit(event)}
+        className='text-foreground flex flex-1  flex-col  items-center justify-center gap-4'
+      >
         <label htmlFor='confirmation-input'>
           Please confirm your username below to delete your account
         </label>
-        <div className='m-1 flex w-fit flex-row items-center rounded-md bg-white p-1'>
+        <div className='relative h-min flex-row items-center'>
           <input
             id='confirmation-input'
             value={userName}
             name='user-confirmation'
             onChange={(event) => inputChangeHandler(event.target.value)}
             placeholder={currentUserName}
-            className='p-1'
+            className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
           />
           <button
-            className={`h-max bg-white ${userName.length === 0 && 'text-slate-200'}`}
+            className={`absolute right-3 top-2 h-max ${userName.length === 0 && 'text-slate-200'}`}
             disabled={userName.length === 0}
           >
-            X
+            ⏎
           </button>
         </div>
         {errorMessage.length > 0 && (
