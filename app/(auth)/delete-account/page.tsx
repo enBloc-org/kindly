@@ -55,14 +55,13 @@ export default function DeleteAccount() {
         submitHandler={formSubmitHandler}
       />
 
-      {isConfirmed && (
-        <Modal
-          name='Delete Profile'
-          message='Confirming will delete your profile permanently. Are you sure you want to continue?'
-          targetId={userId as string}
-          onDeleteSuccess={accountDeleteHandler}
-        />
-      )}
+      <Modal
+        name='Delete Profile'
+        message='Confirming will delete your profile permanently. Are you sure you want to continue?'
+        targetId={userId as string}
+        onDeleteSuccess={accountDeleteHandler}
+        isDisabled={!isConfirmed}
+      />
     </>
   );
 }
