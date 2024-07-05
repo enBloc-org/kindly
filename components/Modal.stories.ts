@@ -48,3 +48,19 @@ export const ProfileDeleteModal: Story = {
       'Your profile will be deleted permanently. Are you sure you want to continue?',
   },
 };
+
+export const DisabledModal: Story = {
+  args: {
+    onDeleteSuccess: fn(),
+    name: 'Conditionally disabled',
+    targetId: 1312,
+    message: 'Invisible message because the modal is disabled',
+    isDisabled: true,
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    await step('Modal is disabled', async () => {
+      expect(canvas.getByRole('button')).toBeDisabled();
+    });
+  },
+};
