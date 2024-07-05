@@ -35,6 +35,7 @@ const meta: Meta<typeof AccountDeleteForm> = {
         canvas.queryByText('The username you submitted is incorrect')
       ).not.toBeInTheDocument();
     });
+    await userEvent.clear(input);
   },
 };
 
