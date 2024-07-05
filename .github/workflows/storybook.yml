@@ -1,0 +1,25 @@
+name: Storybook
+on:
+  pull_request:
+  push:
+    branches:
+      - dev
+jobs:
+  tests-interaction:
+    name: Interaction tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install npm dependencies
+        run: npm i
+      - name: Build Storybook
+        run: npm run build-storybook
+      - name: Serve Storybook
+        run: npx http-server ./storybook-static -p 6006 &
+      - name: Run interaction tests
+        run: npx test-storybook
