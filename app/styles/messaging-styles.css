@@ -10,6 +10,18 @@
 .conversation-height {
   height: calc(100vh - 65px);
 }
+
+.notification-dot {
+  position: absolute;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  border-width: 2px;
+  border-color: #2f855a;
+  background-color: #54bb89;
+  box-shadow: 0 0 1px black;
+  z-index: 50;
+}
 /*------- Media Queries ---------*/
 
 @media screen and (min-width: 1000px) {

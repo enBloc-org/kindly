@@ -1,7 +1,5 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-
 // Components
 import NavigationLinkContainer from './NavigationLinkContainer';
 import HomeRouteIcon from '../icons/navigation/HomeRouteIcon';
@@ -10,47 +8,49 @@ import AboutRouteIcon from '../icons/navigation/AboutRouteIcon';
 import AddItemRouteIcon from '../icons/navigation/AddItemRouteIcon';
 import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import selectUserUnreadConversations from '@/supabase/models/messaging/selectUserUnreadMessages';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import selectLoggedUserId from '@/supabase/utils/selectLoggedUserId';
+import '../../app/styles/messaging-styles.css';
 
 const MobileNavbar = () => {
   const pathname = usePathname();
   const supabase = createClientComponentClient();
   const [userId, setUserId] = useState<string>('');
   const [notification, setNotification] = useState<boolean>(false);
-  const [trigger, setTrigger] = useState<number>(0);
 
   useEffect(() => {
-    const getUserSession = async () => {
-      try {
-        const { data: userData } = await supabase.auth.getSession();
-        if (userData.session?.user.id) {
-          setUserId(userData.session?.user.id);
-        }
-      } catch (error) {
-        console.error('Error getting user session: ', error);
+    const getUserId = async () => {
+      const data = await selectLoggedUserId();
+      if (data) {
+        setUserId(data);
+      } else {
+        console.error('Failed to fetch user Id');
       }
     };
-    getUserSession();
+    getUserId();
   }, []);
-
-  useEffect(() => {
-    if (pathname === '/conversations') {
-      setNotification(false);
-    }
-  }, [pathname]);
 
   useEffect(() => {
     const getUnreadConversations = async () => {
       if (!userId) return;
       const unreadConversations = await selectUserUnreadConversations(userId);
       if (unreadConversations.length > 0) {
-        setNotification(true);
+        if (pathname !== '/conversations') {
+          setNotification(true);
+        }
       }
     };
     getUnreadConversations();
   }, [userId]);
+
+  useEffect(() => {
+    if (pathname === '/conversations') {
+      setNotification(false);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const channel = supabase
@@ -68,7 +68,6 @@ const MobileNavbar = () => {
             if (pathname !== '/conversations') {
               setNotification(true);
             }
-            setTrigger((previous) => previous + 1);
           }
         }
       )
@@ -85,7 +84,6 @@ const MobileNavbar = () => {
             if (pathname !== '/conversations') {
               setNotification(true);
             }
-            setTrigger((previous) => previous + 1);
           }
         }
       )
@@ -94,7 +92,7 @@ const MobileNavbar = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [trigger, pathname, userId]);
+  }, [notification, pathname, userId]);
 
   return (
     <nav className='flex items-center justify-around' role='navigation'>
@@ -138,10 +136,7 @@ const MobileNavbar = () => {
       >
         <MessageRouteIcon pathName={pathname} height={28} width={28} />
         {notification && (
-          <div
-            className='absolute right-1 top-1 z-50 h-3 w-3 rounded-full border-2 
-              border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black'
-          ></div>
+          <div className='notification-dot right-1 top-1 !h-3 !w-3' />
         )}
       </NavigationLinkContainer>
     </nav>
