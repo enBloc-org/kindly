@@ -28,7 +28,7 @@ const Modal = ({
   return (
     <>
       <button
-        className={`button${isDisabled && '-disabled'} button-rounded my-2 cursor-not-allowed`}
+        className={`${isDisabled ? 'button-disabled' : 'button'} button-rounded my-2 cursor-not-allowed`}
         onClick={toggleModal}
         disabled={isDisabled}
       >
