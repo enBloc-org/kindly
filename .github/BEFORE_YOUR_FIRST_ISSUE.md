@@ -96,7 +96,10 @@ You can view these details again at any time by running the following command:
 npx supabase status
 ```
 
-Copy the `API URL` value into your `.env` file as the value of our `NEXT_PUBLIC_SUPABASE_URL` and the `anon key` value as our `NEXT_PUBLIC_SUPABASE_ANON_KEY` value.
+Copy the following values:
+- `API URL` value into your `.env` file as the value of our `NEXT_PUBLIC_SUPABASE_URL`
+- `anon key` value as our `NEXT_PUBLIC_SUPABASE_ANON_KEY` value
+- `service_role key` as our `SUPABASE_SERVICE_ROLE_KEY` value
 
 Your local development is now ready ✨
 
