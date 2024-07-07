@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import '../../app/styles/messaging-styles.css';
-import { markAsRead } from '@/supabase/models/messaging/markMessageAsRead';
+import markMessageAsRead from '@/supabase/models/messaging/markMessageAsRead';
 
 type MessageCardProps = {
   senderId: string;
@@ -23,7 +23,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
 
   useEffect(() => {
     const OnRead = async () => {
-      currentUser && (await markAsRead(messageId, currentUser));
+      currentUser && (await markMessageAsRead(messageId, currentUser));
     };
     OnRead();
   }, []);

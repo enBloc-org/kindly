@@ -3,27 +3,43 @@
 import { MessageType } from '@/types/messagingTypes';
 import MessageCard from './MessageCard';
 import MessageForm from './MessageForm';
-import { ConversationPartner } from './ConversationPartner';
 import { useEffect, useState, useRef } from 'react';
 import { useConversationContext } from '../../context/conversationContext';
 import selectMessagesByConversationId from '@/supabase/models/messaging/selectMessagesByConversationId';
+import selectSystemUser from '@/supabase/models/messaging/selectSystemUser';
 import {
   formatTimeMarker,
   formatDateMarker,
 } from '../../utils/formatTimeStamp';
 import newClient from '@/supabase/utils/newClient';
+import SystemMessageCard from './SystemMessageCard';
 
 const CurrentConversation: React.FC = () => {
-  const { allConversations, currentConversation, setCurrentConversation } =
-    useConversationContext();
+  const {
+    conversationState: { allConversations, currentConversation },
+    dispatch,
+  } = useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
+  const [systemUser, setSystemUser] = useState<string | undefined>(undefined);
   const chatWindowRef = useRef<HTMLDivElement>(null);
   const supabase = newClient();
 
   useEffect(() => {
-    setCurrentConversation && setCurrentConversation(allConversations[0]);
-  }, [allConversations, setCurrentConversation]);
+    const getSystemUser = async () => {
+      const systemUser = await selectSystemUser();
+      setSystemUser(systemUser);
+    };
+
+    getSystemUser();
+  }, []);
+
+  useEffect(() => {
+    dispatch({
+      type: 'SET_CURRENT_CONVERSATION',
+      payload: allConversations[0],
+    });
+  }, [allConversations]);
 
   useEffect(() => {
     const setMessagesForCurrentConversation = async () => {
@@ -83,11 +99,6 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='message-card-container flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
-      <div className='p-5'>
-        <ConversationPartner
-          conversation_id={currentConversation?.conversation_id as number}
-        />
-      </div>
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}
@@ -103,13 +114,21 @@ const CurrentConversation: React.FC = () => {
                   {formatDateMarker(message.created_at)}
                 </div>
               )}
-              <MessageCard
-                senderId={message.sender_id}
-                createdAt={formatTimeMarker(message.created_at)}
-                messageText={message.message_text}
-                currentUser={currentConversation?.user_id}
-                messageId={message.id}
-              />
+              {systemUser && message.sender_id === systemUser ? (
+                <SystemMessageCard
+                  messageId={message.id}
+                  messageText={message.message_text}
+                  currentUser={currentConversation?.user_id}
+                />
+              ) : (
+                <MessageCard
+                  senderId={message.sender_id}
+                  createdAt={formatTimeMarker(message.created_at)}
+                  messageText={message.message_text}
+                  currentUser={currentConversation?.user_id}
+                  messageId={message.id}
+                />
+              )}
             </div>
           ))
           .reverse()}

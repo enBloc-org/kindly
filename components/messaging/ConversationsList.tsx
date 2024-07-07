@@ -1,32 +1,37 @@
 'use client';
 import ConversationCard from './ConversationCard';
 import { useEffect, useState } from 'react';
-import { UserConversationType } from '@/types/messagingTypes';
+import {
+  ConversationCardType,
+  UserConversationType,
+} from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
 import newClient from '@/supabase/utils/newClient';
 import selectConversationCardDetails from '@/supabase/models/messaging/selectConversationCardDetails';
+import updateConversationReadStatus from '@/supabase/models/messaging/updateConversationReadStatus';
 
 const ConversationsList: React.FC = () => {
   const {
-    allConversations,
-    setAllConversations,
-    setCurrentConversation,
-    setShowConversationsList,
-    currentUserId,
+    conversationState: { allConversations, currentConversation, currentUserId },
+    dispatch,
   } = useConversationContext();
 
   const [notificationList, setNotificationList] = useState<number[]>([]);
   const supabase = newClient();
 
-  const updateOpenConvo = async (givenId: number) => {
-    setCurrentConversation &&
-      setCurrentConversation(
-        allConversations?.filter(
-          (conversations) => conversations.conversation_id === givenId
-        )[0]
-      );
+  const updateOpenConversation = async (givenId: number) => {
+    const newCurrentConversation = allConversations?.filter(
+      (conversation: ConversationCardType) =>
+        conversation.conversation_id === givenId
+    )[0];
 
-    setShowConversationsList(false);
+    dispatch({
+      type: 'SET_CURRENT_CONVERSATION',
+      payload: newCurrentConversation,
+    });
+    updateConversationReadStatus(givenId, currentUserId, false);
+
+    dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: false });
   };
 
   useEffect(() => {
@@ -46,10 +51,10 @@ const ConversationsList: React.FC = () => {
               payload.new as UserConversationType
             );
 
-            setAllConversations((prevConversations) => [
-              ...prevConversations,
-              newConversation,
-            ]);
+            dispatch({
+              type: 'ADD_NEW_CONVERSATION',
+              payload: newConversation,
+            });
           }
         }
       )
@@ -89,11 +94,7 @@ const ConversationsList: React.FC = () => {
           filter: `user_id=eq.${currentUserId}`,
         },
         (payload) => {
-          setAllConversations((prevConversations) => [
-            ...prevConversations.filter(
-              (conversation) => conversation.id !== payload.old.id
-            ),
-          ]);
+          dispatch({ type: 'DELETE_CONVERSATION', payload: payload.old.id });
         }
       )
       .subscribe();
@@ -101,7 +102,7 @@ const ConversationsList: React.FC = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [allConversations, setAllConversations]);
+  }, [allConversations]);
 
   return (
     <div className='flex flex-col gap-[2px] overflow-y-auto bg-gray-200 shadow-inner lg:w-[400px] lg:gap-2 lg:p-2'>
@@ -115,8 +116,13 @@ const ConversationsList: React.FC = () => {
               partnerUsername={conversation.partner_username}
               partnerAvatar={conversation.partner_avatar}
               itemName={conversation.item_name}
-              clickHandler={() => updateOpenConvo(conversation.conversation_id)}
+              clickHandler={() =>
+                updateOpenConversation(conversation.conversation_id)
+              }
               notificationList={notificationList}
+              currentConversationId={
+                currentConversation?.conversation_id as number
+              }
             />
           </div>
         ))

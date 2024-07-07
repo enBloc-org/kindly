@@ -8,22 +8,27 @@ All Pull Requests are expected to include sufficient testing.
 
 All new and prior tests should be passing in every Pull Request
 
-## Set Up
+## Component Testing
 
-Before running tests you will need to set up your authentication. An `example.auth.setup.ts` file is provided in the repo.
+We use [Storybook](https://storybook.js.org/tutorials/intro-to-storybook/react/en/get-started/) to test the rendering and basic functionality of our components as well as documenting them.
 
-Open this file and follow the indications in comments. You must have signed up to Kindly with a test account before this, as you will need to fill in your credentials.
+You can view our component library by running the following command:
 
-Add your test user details to your `.env` variables. These are described in the `.env.example`.
+```bash
+npm run storybook
+```
 
-## Running your tests
+If you create a new component or refactor an existing component you should make the relevant changes to a `.stories.tsx` file inside the `stories/` folder.
 
-Tests for this codebase use Playwright. Once fully set up, you can run all tests using the command `npm run test:all`
+### Component Library and documentation
+You can learn more about how to structure your stories in the codebase from the [**official documentation 📚**](https://storybook.js.org/docs/writing-stories#where-to-put-stories)
 
-This command has been set up with `start-server-and-test` npm package to spin up the local server ahead of running end-to-end tests. Unit tests for components are also run in the same script by using the experimental playwright-ct package.
+In order to build the best possible Developer Experience keep the component library organized by feature, as shown in the example below:  
+![Storybook component library structure](./documentation_images/storybook_component_library.png)
 
-Similarly, you may run any tests relevant to files you have edited in your current branch with the command `npm run test:changed`
-This command will check all your staged files for any relevant test suites and run only those.
-This command also uses `start-server-and-test` to spin up the local server before any tests are run.
+### Component interactions in Storybook
+You can learn more about writing tests within the `play` block of your stories by reading the [**official documentation 📚**](https://storybook.js.org/docs/writing-stories/play-function#writing-stories-with-the-play-function)
 
-Individual tests can be run using `npx playwright test -c playwright-ct.config.ts /pathToTestFile` however, in this case you should start your local server manually before running the test if it is needed.
+All component stories should include tests for any basic functionality provided by the component. All `interactions` tests should be passing in Storybook after any changes to our components.
+
+![Storybook interactions test suite](./documentation_images/storybook_interactions_suite.png)

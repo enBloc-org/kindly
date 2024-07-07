@@ -5,8 +5,9 @@ import '../../app/styles/messaging-styles.css';
 import deleteConversation from '../../supabase/models/messaging/deleteConversation';
 
 //Components
-import ElipsisMenu from '../menus/EllipsisMenu';
+import EllipsisMenu from '../menus/EllipsisMenu';
 import ButtonRounded from '../buttons/ButtonRounded';
+import updateConversationReadStatus from '@/supabase/models/messaging/updateConversationReadStatus';
 import { useConversationContext } from '@/context/conversationContext';
 
 type ModalProps = {
@@ -19,7 +20,9 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
   const [error, setError] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
 
-  const { currentConversation } = useConversationContext();
+  const {
+    conversationState: { currentConversation },
+  } = useConversationContext();
 
   const toggleModalClickHandler = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -45,7 +48,38 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
       setError('');
       setIsDisabled(false);
     } catch (error) {
-      console.log(`Error: ${error}`);
+      console.error(`Could not delete conversation: ${error}`);
+      setError(`There was an error: ${error}`);
+      setIsDisabled(false);
+    }
+  };
+
+  const markConversationUnreadHandler = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.stopPropagation();
+
+    if (
+      typeof conversationId === 'undefined' ||
+      typeof currentConversation?.user_id === 'undefined'
+    ) {
+      throw new Error('Conversation is undefined');
+    }
+
+    try {
+      setIsDisabled(true);
+
+      await updateConversationReadStatus(
+        conversationId,
+        currentConversation?.user_id,
+        true
+      );
+
+      setIsModalOpen(false);
+      setError('');
+      setIsDisabled(false);
+    } catch (error) {
+      console.error(`Could not update conversation: ${error}`);
       setError(`There was an error: ${error}`);
       setIsDisabled(false);
     }
@@ -53,7 +87,7 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
 
   return (
     <>
-      <ElipsisMenu
+      <EllipsisMenu
         menuOptions={[
           {
             buttonMessage: 'Delete Conversation',
@@ -61,7 +95,7 @@ const ConversationCardModal = ({ conversationId, message }: ModalProps) => {
           },
           {
             buttonMessage: 'Mark Unread',
-            clickHandler: () => console.log('Log'),
+            clickHandler: markConversationUnreadHandler,
           },
         ]}
       />
