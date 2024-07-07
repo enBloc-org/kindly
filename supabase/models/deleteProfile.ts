@@ -1,17 +1,17 @@
 'use server';
 
-import newClient from '../utils/newClient';
+import newAdminClient from '../utils/newAdminClient';
 
 export default async function deleteProfile(userId: string) {
-  const supabase = newClient();
+  const supabase = newAdminClient();
+
   try {
-    const { data } = await supabase
-      .from('profiles')
-      .delete()
-      .eq('id', userId)
-      .select();
+    await supabase.auth.signOut();
+    const { data, error } = await supabase.auth.admin.deleteUser(userId);
+    if (error) throw error;
     console.log(data);
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
