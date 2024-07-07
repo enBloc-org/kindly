@@ -40,8 +40,13 @@ export default function DeleteAccount() {
   const accountDeleteHandler = () => {
     const deleteUser = async () => {
       if (userId !== undefined) {
-        await deleteProfile(userId);
-        router.push('/');
+        try {
+          await deleteProfile(userId);
+          router.push('/');
+        } catch (error) {
+          console.error(error);
+          throw error;
+        }
       }
     };
 
