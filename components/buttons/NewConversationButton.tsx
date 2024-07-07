@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import newConvoStart from '@/supabase/models/messaging/newConvoStart';
+import startNewConversation from '@/supabase/models/messaging/startNewConversation';
 import { useEffect } from 'react';
 import editRow from '@/supabase/models/editRow';
 
@@ -64,7 +64,9 @@ export default function NewConversationButton({
       setIsDisabled(true);
       setErrorMessage('');
       setError(false);
-      await newConvoStart(userId, donorId, item_id);
+
+      await startNewConversation(userId, donorId, item_id);
+
       router.push('/conversations');
     } catch (error) {
       console.log(error);

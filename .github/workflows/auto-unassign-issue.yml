@@ -1,0 +1,27 @@
+name: Auto Unassign Inactive Issues
+
+on:
+  schedule:
+    - cron: '00 17 * * *'
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  unassign-inactive-issues:
+    name: Unnassign inactive issues
+    runs-on: ubuntu@latest
+    steps:
+      - uses: boundfoxstudios/action-unassign-contributor-after-days-of-inactivity@main
+        with:
+          last-activity: 7
+          labels: 'Stale'
+          labels-to-remove: 'Stale'
+          message: |
+            🤖 meep morp!
+
+            This issue has been stale for 7 days so it's being automaticaly unassigned and will return to the backlog.
+
+            💡 Once in the Backlog this issue will be available for anyone to take up - you can request it again if you have contributions ready to submit.
