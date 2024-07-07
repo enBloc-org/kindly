@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 type UploadImageProps = {
   setImageSrc: (src: string) => void;
   setError?: (error: string) => void;
-  isRequired?: boolean;
+  setImageUpload: (isUploaded: boolean) => void;
 };
 
 const CDN =
@@ -21,11 +21,10 @@ const CDN =
 const UploadImageInput: React.FC<UploadImageProps> = ({
   setImageSrc,
   setError,
-  isRequired: isRequired = false,
+  setImageUpload,
 }) => {
   const supabase = createClientComponentClient();
   const [userId, setUserId] = useState('');
-  const [isImageUploaded, setIsImageUploaded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,9 +34,6 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 
         if (user) {
           setUserId(user);
-          if (!isRequired) {
-            setIsImageUploaded(true);
-          }
         } else {
           setUserId('');
         }
@@ -58,7 +54,8 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
         const imagePath = CDN + userId + '/' + imageName;
 
         setImageSrc(imagePath);
-        setIsImageUploaded(true);
+
+        setImageUpload(true);
         setError?.('');
 
         const { error } = await supabase.storage
@@ -67,9 +64,11 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 
         if (error) {
           console.log(error);
+          setImageUpload(false);
         }
       } else {
         console.error('No file selected');
+        setImageUpload(false);
       }
     }
   };
@@ -78,17 +77,12 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
     <div className='my-3 flex flex-col items-center gap-4'>
       <label htmlFor='image'>Upload an image:</label>
       <input
+        id='image'
         className='pl-14'
         type='file'
         name='image'
         onChange={(e) => imageFileUpload(e)}
-        required={isRequired}
       />
-      {!isImageUploaded && (
-        <p className='font-extralight italic text-primaryOrange'>
-          Image is required
-        </p>
-      )}
     </div>
   );
 };
