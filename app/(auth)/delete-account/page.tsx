@@ -4,9 +4,9 @@ import { useRouter } from 'next/navigation';
 
 import AccountDeleteForm from '@/components/AccountDeleteForm';
 import Modal from '@/components/Modal';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { getProfile } from '@/supabase/models/getProfile';
 import deleteProfile from '@/supabase/models/deleteProfile';
+import newClient from '@/supabase/utils/newClient';
 
 export default function DeleteAccount() {
   const [loggedUser, setLoggedUser] = useState('');
@@ -16,7 +16,7 @@ export default function DeleteAccount() {
 
   useEffect(() => {
     const getUserId = async () => {
-      const supabase = createClientComponentClient();
+      const supabase = newClient();
       try {
         const { data: userData } = await supabase.auth.getSession();
         setUserId(userData.session?.user.id);
