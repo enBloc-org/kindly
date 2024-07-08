@@ -10,7 +10,7 @@ import { useConversationContext } from '@/context/conversationContext';
 const ConversationWrapper = ({ userId }: { userId: string }) => {
   const isBreakpoint = useMediaQuery(1000);
   const {
-    conversationState: { showConversationsList },
+    conversationState: { showConversationsList, conversationId },
     dispatch,
   } = useConversationContext();
 
@@ -23,6 +23,10 @@ const ConversationWrapper = ({ userId }: { userId: string }) => {
         payload: fetchedConversations,
       });
       dispatch({ type: 'SET_CURRENT_USER_ID', payload: userId });
+
+      if (conversationId > 0) {
+        dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: false });
+      }
     };
     fetchConversations();
   }, []);
