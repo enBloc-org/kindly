@@ -26,6 +26,7 @@ export default function ConversationContextProvider({
     currentConversation: undefined,
     showConversationsList: true,
     currentUserId: '',
+    conversationId: -1,
   };
 
   const [conversationState, dispatch] = useReducer(
