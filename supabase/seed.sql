@@ -61,7 +61,14 @@ INSERT INTO "auth"."audit_log_entries" ("instance_id", "id", "payload", "created
 	('00000000-0000-0000-0000-000000000000', '98e911a0-46d7-4ffc-b087-25af5efbe5e7', '{"action":"login","actor_id":"48f9db70-05f7-4a04-a34d-75ae8267c90b","actor_username":"refugee+test.reshetniak@gmail.com","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2024-06-16 13:52:40.620839+00', ''),
 	('00000000-0000-0000-0000-000000000000', 'd79dd340-d61a-44c7-8fca-df8d364fc991', '{"action":"logout","actor_id":"48f9db70-05f7-4a04-a34d-75ae8267c90b","actor_username":"refugee+test.reshetniak@gmail.com","actor_via_sso":false,"log_type":"account"}', '2024-06-16 13:53:01.732573+00', ''),
 	('00000000-0000-0000-0000-000000000000', 'ed11ff4e-364a-417c-a6dc-74146c8f5d1c', '{"action":"login","actor_id":"cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85","actor_username":"donor+test.reshetniak@gmail.com","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2024-06-16 13:53:06.529571+00', ''),
-	('00000000-0000-0000-0000-000000000000', '7a2f95c6-1cbe-494a-a8fb-acc4b7fc6159', '{"action":"logout","actor_id":"cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85","actor_username":"donor+test.reshetniak@gmail.com","actor_via_sso":false,"log_type":"account"}', '2024-06-16 13:53:15.09581+00', '');
+	('00000000-0000-0000-0000-000000000000', '7a2f95c6-1cbe-494a-a8fb-acc4b7fc6159', '{"action":"logout","actor_id":"cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85","actor_username":"donor+test.reshetniak@gmail.com","actor_via_sso":false,"log_type":"account"}', '2024-06-16 13:53:15.09581+00', ''),
+	('00000000-0000-0000-0000-000000000000', '7f1ba2eb-4671-4901-9883-84ae6ceb621a', '{"action":"login","actor_id":"cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85","actor_username":"donor+test.reshetniak@gmail.com","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2024-06-30 14:33:16.603655+00', ''),
+	('00000000-0000-0000-0000-000000000000', '6ae6bded-b8de-48c6-b74f-0153400efd6f', '{"action":"login","actor_id":"cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85","actor_username":"donor+test.reshetniak@gmail.com","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2024-07-08 10:32:09.903291+00', ''),
+	('00000000-0000-0000-0000-000000000000', 'b4e56fb5-4be0-4b59-bbd9-8d095436c07d', '{"action":"logout","actor_id":"cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85","actor_username":"donor+test.reshetniak@gmail.com","actor_via_sso":false,"log_type":"account"}', '2024-07-08 10:32:20.703955+00', ''),
+	('00000000-0000-0000-0000-000000000000', 'e777758a-5ea8-4f0e-8d53-bca8969dfdd6', '{"action":"user_signedup","actor_id":"1dc06b29-0b93-46d8-a33b-fb6f80ee5263","actor_username":"trafalgargirls@gmail.com","actor_via_sso":false,"log_type":"team","traits":{"provider":"email"}}', '2024-07-08 10:36:10.415734+00', ''),
+	('00000000-0000-0000-0000-000000000000', '7a7e450d-1bcb-47a3-94f3-765bd8458d9e', '{"action":"login","actor_id":"1dc06b29-0b93-46d8-a33b-fb6f80ee5263","actor_username":"trafalgargirls@gmail.com","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2024-07-08 10:36:10.418372+00', ''),
+	('00000000-0000-0000-0000-000000000000', '66019979-5992-4b64-8dcf-05045ce0f7de', '{"action":"login","actor_id":"1dc06b29-0b93-46d8-a33b-fb6f80ee5263","actor_username":"trafalgargirls@gmail.com","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2024-07-08 10:36:41.686863+00', ''),
+	('00000000-0000-0000-0000-000000000000', '306922a5-71cc-46bd-bff0-055f85efa64f', '{"action":"logout","actor_id":"1dc06b29-0b93-46d8-a33b-fb6f80ee5263","actor_username":"trafalgargirls@gmail.com","actor_via_sso":false,"log_type":"account"}', '2024-07-08 10:37:49.07888+00', '');
 
 
 --
@@ -75,8 +82,9 @@ INSERT INTO "auth"."audit_log_entries" ("instance_id", "id", "payload", "created
 --
 
 INSERT INTO "auth"."users" ("instance_id", "id", "aud", "role", "email", "encrypted_password", "email_confirmed_at", "invited_at", "confirmation_token", "confirmation_sent_at", "recovery_token", "recovery_sent_at", "email_change_token_new", "email_change", "email_change_sent_at", "last_sign_in_at", "raw_app_meta_data", "raw_user_meta_data", "is_super_admin", "created_at", "updated_at", "phone", "phone_confirmed_at", "phone_change", "phone_change_token", "phone_change_sent_at", "email_change_token_current", "email_change_confirm_status", "banned_until", "reauthentication_token", "reauthentication_sent_at", "is_sso_user", "deleted_at", "is_anonymous") VALUES
-	('00000000-0000-0000-0000-000000000000', '48f9db70-05f7-4a04-a34d-75ae8267c90b', 'authenticated', 'authenticated', 'refugee+test.reshetniak@gmail.com', '$2a$10$zAzJXbl1vGRpAG1y3FLbLOQKCXmdWqdmFYfhv.jdVid1r1XDEUyNy', '2024-06-16 13:26:37.939331+00', NULL, '', NULL, '', NULL, '', '', NULL, '2024-06-16 13:52:40.621223+00', '{"provider": "email", "providers": ["email"]}', '{"sub": "48f9db70-05f7-4a04-a34d-75ae8267c90b", "email": "refugee+test.reshetniak@gmail.com", "email_verified": false, "phone_verified": false}', NULL, '2024-06-16 13:26:37.937564+00', '2024-06-16 13:52:40.622772+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
-	('00000000-0000-0000-0000-000000000000', 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 'authenticated', 'authenticated', 'donor+test.reshetniak@gmail.com', '$2a$10$Dgv.tIuKWW4DhRgiJQVnie/nrRvOZCk3KmrIRLrKD825zOrG5kIkK', '2024-06-16 13:26:05.292097+00', NULL, '', NULL, '', NULL, '', '', NULL, '2024-06-16 13:53:06.53001+00', '{"provider": "email", "providers": ["email"]}', '{"sub": "cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85", "email": "donor+test.reshetniak@gmail.com", "email_verified": false, "phone_verified": false}', NULL, '2024-06-16 13:26:05.287335+00', '2024-06-16 13:53:06.530867+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false);
+	('00000000-0000-0000-0000-000000000000', '48f9db70-05f7-4a04-a34d-75ae8267c90b', 'authenticated', 'authenticated', 'refugee+test.reshetniak@gmail.com', '$2a$10$zAzJXbl1vGRpAG1y3FLbLOQKCXmdWqdmFYfhv.jdVid1r1XDEUyNy', '2024-06-16 13:26:37.939331+00', NULL, '', NULL, '', NULL, '', '', NULL, '2024-06-16 13:52:40.621223+00', '{"provider": "email", "providers": ["email"]}', '{"sub": "48f9db70-05f7-4a04-a34d-75ae8267c90b", "email": "refugee+test.reshetniak@gmail.com", "email_verified": true, "phone_verified": true}', NULL, '2024-06-16 13:26:37.937564+00', '2024-06-16 13:52:40.622772+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 'authenticated', 'authenticated', 'donor+test.reshetniak@gmail.com', '$2a$10$Dgv.tIuKWW4DhRgiJQVnie/nrRvOZCk3KmrIRLrKD825zOrG5kIkK', '2024-06-16 13:26:05.292097+00', NULL, '', NULL, '', NULL, '', '', NULL, '2024-07-08 10:32:09.904931+00', '{"provider": "email", "providers": ["email"]}', '{"sub": "cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85", "email": "donor+test.reshetniak@gmail.com", "email_verified": true, "phone_verified": true}', NULL, '2024-06-16 13:26:05.287335+00', '2024-07-08 10:32:09.909429+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', '1dc06b29-0b93-46d8-a33b-fb6f80ee5263', 'authenticated', 'authenticated', 'trafalgargirls@gmail.com', '$2a$10$jm4OV0NB/g1hqNG6pWDwV.X4AT3snY7R7A9aZDu.azO7fmzv97yRy', '2024-07-08 10:36:10.416182+00', NULL, '', NULL, '', NULL, '', '', NULL, '2024-07-08 10:36:41.687433+00', '{"provider": "email", "providers": ["email"]}', '{"sub": "1dc06b29-0b93-46d8-a33b-fb6f80ee5263", "email": "trafalgargirls@gmail.com", "email_verified": true, "phone_verified": true}', NULL, '2024-07-08 10:36:10.41159+00', '2024-07-08 10:36:41.688756+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false);
 
 
 --
@@ -84,8 +92,9 @@ INSERT INTO "auth"."users" ("instance_id", "id", "aud", "role", "email", "encryp
 --
 
 INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "provider", "last_sign_in_at", "created_at", "updated_at", "id") VALUES
-	('cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', '{"sub": "cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85", "email": "donor+test.reshetniak@gmail.com", "email_verified": false, "phone_verified": false}', 'email', '2024-06-16 13:26:05.29027+00', '2024-06-16 13:26:05.29029+00', '2024-06-16 13:26:05.29029+00', '57523079-dad4-4f4d-9932-6668c7978c36'),
-	('48f9db70-05f7-4a04-a34d-75ae8267c90b', '48f9db70-05f7-4a04-a34d-75ae8267c90b', '{"sub": "48f9db70-05f7-4a04-a34d-75ae8267c90b", "email": "refugee+test.reshetniak@gmail.com", "email_verified": false, "phone_verified": false}', 'email', '2024-06-16 13:26:37.938507+00', '2024-06-16 13:26:37.938521+00', '2024-06-16 13:26:37.938521+00', '64906c04-c7ea-430f-ae0a-d7a3165891c4');
+	('cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', '{"sub": "cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85", "email": "donor+test.reshetniak@gmail.com", "email_verified": true, "phone_verified": true}', 'email', '2024-06-16 13:26:05.29027+00', '2024-06-16 13:26:05.29029+00', '2024-06-16 13:26:05.29029+00', '57523079-dad4-4f4d-9932-6668c7978c36'),
+	('48f9db70-05f7-4a04-a34d-75ae8267c90b', '48f9db70-05f7-4a04-a34d-75ae8267c90b', '{"sub": "48f9db70-05f7-4a04-a34d-75ae8267c90b", "email": "refugee+test.reshetniak@gmail.com", "email_verified": true, "phone_verified": true}', 'email', '2024-06-16 13:26:37.938507+00', '2024-06-16 13:26:37.938521+00', '2024-06-16 13:26:37.938521+00', '64906c04-c7ea-430f-ae0a-d7a3165891c4'),
+	('1dc06b29-0b93-46d8-a33b-fb6f80ee5263', '1dc06b29-0b93-46d8-a33b-fb6f80ee5263', '{"sub": "1dc06b29-0b93-46d8-a33b-fb6f80ee5263", "email": "trafalgargirls@gmail.com", "email_verified": true, "phone_verified": true}', 'email', '2024-07-08 10:36:10.414142+00', '2024-07-08 10:36:10.414164+00', '2024-07-08 10:36:10.414164+00', '841a9dd8-dd39-47bf-a82c-dea9e03298f8');
 
 
 --
@@ -177,8 +186,9 @@ INSERT INTO "public"."conversations" ("id", "created_at", "member_has_deleted") 
 --
 
 INSERT INTO "public"."profiles" ("id", "created_at", "email", "items_added", "reserved_items", "refugee", "image", "postcode", "username", "avatar") VALUES
-	('48f9db70-05f7-4a04-a34d-75ae8267c90b', '2024-06-16 13:26:37.960648+00', 'refugee+test.reshetniak@gmail.com', NULL, NULL, true, NULL, NULL, 'test_refugee', 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/48f9db70-05f7-4a04-a34d-75ae8267c90b/07995dac-6352-48fb-a061-c85b07560554'),
-	('cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', '2024-06-16 13:26:05.319866+00', 'donor+test.reshetniak@gmail.com', NULL, NULL, false, NULL, NULL, 'test_donor', 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85/04852b2e-da05-429e-acca-35eeb61d0b5f');
+	('48f9db70-05f7-4a04-a34d-75ae8267c90b', '2024-06-16 13:26:37.960648+00', 'refugee+test.reshetniak@gmail.com', NULL, NULL, true, NULL, NULL, 'Test Refugee', 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/48f9db70-05f7-4a04-a34d-75ae8267c90b/07995dac-6352-48fb-a061-c85b07560554'),
+	('cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', '2024-06-16 13:26:05.319866+00', 'donor+test.reshetniak@gmail.com', NULL, NULL, false, NULL, NULL, 'Test Donor', 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85/04852b2e-da05-429e-acca-35eeb61d0b5f'),
+	('1dc06b29-0b93-46d8-a33b-fb6f80ee5263', '2024-07-08 10:36:10.438915+00', 'trafalgargirls@gmail.com', NULL, NULL, false, NULL, NULL, 'trafalgargirls', NULL);
 
 
 --
@@ -186,10 +196,10 @@ INSERT INTO "public"."profiles" ("id", "created_at", "email", "items_added", "re
 --
 
 INSERT INTO "public"."items" ("id", "created_at", "donated_by", "reserved", "size", "brand", "postcode", "condition", "item_type", "item_subtype", "reserved_by", "item_name", "item_description", "imageSrc", "postable", "collectible", "requestedToReserve", "postage_covered") VALUES
-	(1, '2024-06-16 13:34:25.931798+00', 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false, '9', NULL, 'CF1', 'Good', 'shoes', 'men', NULL, 'test_mens_shoes_willing_to_post_name', 'test_mens_shoes_willing_to_post_description', 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85/ebb2e026-3a94-48db-9405-2fff9530fa84', true, false, NULL, false),
-	(2, '2024-06-16 13:37:00.460318+00', 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false, 'S', NULL, 'CF1', 'Fair', 'clothing', 'women', NULL, 'test_womens_clothing_pick_up_name', 'test_womens_clothing_pick_up_description', 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85/e4611e6a-2682-4c13-9a78-f4132904356d', false, true, NULL, false),
-	(3, '2024-06-16 13:38:30.028263+00', 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false, '', NULL, 'CF1', 'Poor', 'toys', '', NULL, 'test_toys_postage_covered_name', 'test_toys_postage_covered_description', 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85/1f216cae-2721-48ee-9b37-84a8eac94ba0', false, false, NULL, true),
-	(5, '2024-06-16 13:41:48.120062+00', 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false, '', NULL, 'CF1', 'New', 'household', '', NULL, 'test_home_pick_up_name', 'test_home_pick_up_description', 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85/805480d3-d26d-4dad-bc42-c179e9eb8b2a', false, true, NULL, false);
+	(1, '2024-06-16 13:34:25.931798+00', 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false, '9', NULL, 'CF1', 'Good', 'shoes', 'men', NULL, 'test_mens_shoes_willing_to_post_name', 'test_mens_shoes_willing_to_post_description', '/public/shoes.jpg', true, false, NULL, false),
+	(2, '2024-06-16 13:37:00.460318+00', 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false, 'S', NULL, 'CF1', 'Fair', 'clothing', 'women', NULL, 'test_womens_clothing_pick_up_name', 'test_womens_clothing_pick_up_description', '/public/blouse.jpg', false, true, NULL, false),
+	(3, '2024-06-16 13:38:30.028263+00', 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false, '', NULL, 'CF1', 'Poor', 'toys', '', NULL, 'test_toys_postage_covered_name', 'test_toys_postage_covered_description', '/public/toy.jpg', false, false, NULL, true),
+	(5, '2024-06-16 13:41:48.120062+00', 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false, '', NULL, 'CF1', 'New', 'household', '', NULL, 'test_home_pick_up_name', 'test_home_pick_up_description', '/public/sofa.jpg', false, true, NULL, false);
 
 
 --
@@ -277,7 +287,7 @@ INSERT INTO "public"."user_conversations" ("id", "joined_at", "conversation_id",
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: supabase_auth_admin
 --
 
-SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 14, true);
+SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 18, true);
 
 
 --
