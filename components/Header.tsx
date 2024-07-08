@@ -33,6 +33,7 @@ export default function Header() {
 
   const handleBackButtonClick = () => {
     dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: true });
+    dispatch({ type: 'SET_CURRENT_CONVERSATION_ID', payload: -1 });
   };
 
   return (
