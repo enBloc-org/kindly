@@ -16,7 +16,11 @@ import SystemMessageCard from './SystemMessageCard';
 
 const CurrentConversation: React.FC = () => {
   const {
-    conversationState: { allConversations, currentConversation },
+    conversationState: {
+      allConversations,
+      currentConversation,
+      conversationId,
+    },
     dispatch,
   } = useConversationContext();
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
@@ -35,10 +39,20 @@ const CurrentConversation: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch({
-      type: 'SET_CURRENT_CONVERSATION',
-      payload: allConversations[0],
-    });
+    const currentConversation = allConversations.find(
+      (convo) => convo.conversation_id === conversationId
+    );
+    if (currentConversation) {
+      dispatch({
+        type: 'SET_CURRENT_CONVERSATION',
+        payload: currentConversation,
+      });
+    } else {
+      dispatch({
+        type: 'SET_CURRENT_CONVERSATION',
+        payload: allConversations[0],
+      });
+    }
   }, [allConversations]);
 
   useEffect(() => {
