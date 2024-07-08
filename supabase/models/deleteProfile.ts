@@ -7,9 +7,8 @@ export default async function deleteProfile(userId: string) {
 
   try {
     await supabase.auth.signOut();
-    const { data, error } = await supabase.auth.admin.deleteUser(userId);
+    const { error } = await supabase.auth.admin.deleteUser(userId);
     if (error) throw error;
-    console.log(data);
   } catch (error) {
     console.error(error);
     throw error;
