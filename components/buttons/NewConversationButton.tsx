@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import startNewConversation from '@/supabase/models/messaging/startNewConversation';
 import { useEffect } from 'react';
 import editRow from '@/supabase/models/editRow';
+import { useConversationContext } from '../../context/conversationContext';
 
 export default function NewConversationButton({
   userId,
@@ -24,6 +25,8 @@ export default function NewConversationButton({
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
+  const { dispatch } = useConversationContext();
+
   useEffect(() => {
     if (isDisabled) {
       const sendMail = async () => {
@@ -65,7 +68,18 @@ export default function NewConversationButton({
       setErrorMessage('');
       setError(false);
 
-      await startNewConversation(userId, donorId, item_id);
+      const conversationId = await startNewConversation(
+        userId,
+        donorId,
+        item_id
+      );
+
+      if (conversationId) {
+        dispatch({
+          type: 'SET_CURRENT_CONVERSATION_ID',
+          payload: conversationId,
+        });
+      }
 
       router.push('/conversations');
     } catch (error) {
@@ -77,7 +91,7 @@ export default function NewConversationButton({
   };
 
   return (
-    <>
+    <div className='pb-10'>
       <button
         className='button button-rounded disabled:bg-primaryGray'
         disabled={isDisabled}
@@ -88,6 +102,6 @@ export default function NewConversationButton({
       {error && (
         <p className='text-center italic text-primaryOrange'>{errorMessage}</p>
       )}
-    </>
+    </div>
   );
 }
