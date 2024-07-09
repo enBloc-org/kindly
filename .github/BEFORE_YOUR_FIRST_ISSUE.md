@@ -40,10 +40,10 @@ With Node.js 20, install the project dependencies:
 npm install
 ```
 
-Add env variables:
+### Add `env` variables:
 
-The .env.example file in the root directory shows what variables you will need. For Gmail app and AWS amplify variables you will need to ask for them on discord.  
-For the supabase variables follow the guidance below on setting up your local instance.
+The `.env.example` file in the root directory shows what variables you will need.  
+Follow the guidance below on setting up your local instance and obtain the relevant Supabase varaiables.
 
 ## Setting up your development database
 
@@ -121,6 +121,7 @@ We have helpfully included a script in the `package.json` to help create a new m
 ```
 npm run migrate insert-your-file-name
 ```
+
 Make sure to replace **insert-your-file-name** with a name that describes your changes to the database.
 
 ## Running the app:
