@@ -14,6 +14,7 @@ const UnreserveButton: React.FC<UnreserveButtonProps> = ({
       await upsertRow('items', {
         id: itemId,
         reserved: false,
+        reserved_by: null,
       });
       onReserveStatusChange();
     } catch (error) {

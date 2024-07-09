@@ -10,7 +10,7 @@ export type item = {
   item_description: string;
   postcode: string;
   donated_by: string;
-  reserved_by: string;
+  reserved_by: string | null;
   postable: boolean;
   collectible: boolean;
   requestedToReserve: string[];

@@ -35,20 +35,32 @@ const ReserveForUserModal = ({
     const fetchUsers = async () => {
       const users: ReserveUserData[] = [];
       const userConversationIds = await selectConversationsByItemId(itemId);
+      if (userConversationIds.size > 0) {
+        const promises = Array.from(userConversationIds).map(
+          async (id: number) => {
+            try {
+              const profileId = await selectConversationPartner(
+                id,
+                currentUserId
+              );
+              if (profileId !== undefined) {
+                const partnerProfile = await getProfile(profileId);
+                users.push({
+                  username: partnerProfile.data.username,
+                  id: profileId,
+                });
+              } else {
+                console.warn(`No profileId found for conversationId: ${id}`);
+              }
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        );
+        await Promise.all(promises);
 
-      userConversationIds.forEach(async (id: number) => {
-        try {
-          const profileId = await selectConversationPartner(id, currentUserId);
-          const partnerProfile = await getProfile(profileId);
-          users.push({
-            username: partnerProfile.data.username,
-            id: profileId,
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      });
-      setUsersThatCanReserve(users);
+        setUsersThatCanReserve(users);
+      }
     };
     fetchUsers();
   }, []);
