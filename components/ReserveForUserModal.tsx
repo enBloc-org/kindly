@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 
 interface ModalProps {
   name: string;
-  itemId: number;
+  itemId: number | undefined;
   currentUserId: string;
   onReserveStatusChange: () => void;
 }
@@ -34,7 +34,7 @@ const ReserveForUserModal = ({
   useEffect(() => {
     const fetchUsers = async () => {
       const users: ReserveUserData[] = [];
-      const userConversationIds = await selectConversationsByItemId(itemId);
+      const userConversationIds = await selectConversationsByItemId(itemId!);
       if (userConversationIds.size > 0) {
         const promises = Array.from(userConversationIds).map(
           async (id: number) => {
@@ -69,7 +69,7 @@ const ReserveForUserModal = ({
     try {
       await upsertRow('items', {
         id: itemId,
-        reserved: true,
+        is_reserved: true,
         reserved_by: userId,
       });
       toggleModal();

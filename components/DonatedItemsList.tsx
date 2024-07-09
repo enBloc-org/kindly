@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Modal from '@/components/Modal';
 import ItemCard from '@/components/ItemCard';
 import React, { useEffect, useState } from 'react';
-import { PartialItem, item } from '@/types/supabaseTypes';
+import { PartialItem } from '@/types/supabaseTypes';
 import useMediaQuery from './hooks/useMediaQuery';
 import ReserveForUserModal from './ReserveForUserModal';
 import UnreserveButton from './buttons/UnreserveButton';
@@ -38,14 +38,14 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
   }, []);
 
   const handleDeleteSuccess = (deleteItemId: number) => {
-    setStoreItems(storeItems.filter((item: item) => item.id !== deleteItemId));
+    setStoreItems(storeItems.filter((item) => item.id !== deleteItemId));
   };
 
   const onReserveStatusChange = (itemId: number): void => {
-    setStoreItems((prevItems: PartialItem[]) => {
+    setStoreItems((prevItems) => {
       return prevItems.map((item: PartialItem) => {
         if (item.id === itemId) {
-          return { ...item, reserved: !item.reserved };
+          return { ...item, is_reserved: !item.is_reserved };
         }
         return item;
       });
@@ -65,7 +65,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
           {storeItems
             .slice()
             .reverse()
-            .map((item: item) => (
+            .map((item) => (
               <li key={item.id}>
                 <ItemCard
                   imageSrc={item.imageSrc}
@@ -85,11 +85,11 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
                     message='By pressing Confirm you will delete this item'
                     onDeleteSuccess={() => handleDeleteSuccess(item.id!)}
                   />
-                  {item.reserved ? (
+                  {item.is_reserved ? (
                     <UnreserveButton
                       itemId={item.id}
                       onReserveStatusChange={() =>
-                        onReserveStatusChange(item.id)
+                        onReserveStatusChange(item.id!)
                       }
                     />
                   ) : (
@@ -98,7 +98,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
                       itemId={item.id}
                       currentUserId={userId}
                       onReserveStatusChange={() =>
-                        onReserveStatusChange(item.id)
+                        onReserveStatusChange(item.id!)
                       }
                     />
                   )}

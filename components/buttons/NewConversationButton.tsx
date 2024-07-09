@@ -47,7 +47,7 @@ export default function NewConversationButton({
           setError(false);
           await editRow(
             'items',
-            { reserved: true, reserved_by: userId ?? '' },
+            { is_reserved: true, reserved_by: userId ?? '' },
             'id',
             item_id
           );
