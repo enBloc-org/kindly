@@ -7,7 +7,6 @@ import selectItemsByCreatedAt from '@/supabase/models/selectingItems/selectItems
 import { SearchParamsType } from '@/types/searchPageTypes';
 import { PartialItem } from '@/types/supabaseTypes';
 import { useEffect, useState } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
 
 const initialSearchParams = {
   query: '',
@@ -64,20 +63,21 @@ export default function SearchItemPage() {
     setIsLoading(false);
   };
 
-  const debouncedFetchSearchResults = useDebouncedCallback(
-    fetchSearchResults,
-    500
-  );
-
   useEffect(() => {
-    debouncedFetchSearchResults();
-  }, [searchParams, debouncedFetchSearchResults]);
+    fetchSearchResults();
+  }, []);
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    fetchSearchResults();
+  };
 
   return (
     <div className='mt-8'>
       <SearchBar
         searchParams={searchParams}
         setSearchParams={setSearchParams}
+        handleSubmit={handleSubmit}
       />
       <QuickBrowse />
       <ItemDisplayContainer
