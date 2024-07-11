@@ -29,7 +29,8 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       const title = item.item_name;
       if (
         userProfile?.data.refugee === false ||
-        item?.profiles?.id === userProfile?.data.id
+        item?.profiles?.id === userProfile?.data.id ||
+        item?.reserved
       ) {
         canMessage = false;
       }
