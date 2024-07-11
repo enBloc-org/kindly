@@ -10,13 +10,6 @@ Cypress.on(
 );
 
 describe('Anonymous Navigation', () => {
-  it('Is redirected from landing page to home page', () => {
-    // go to landing page
-    cy.visit(page.landing, { failOnStatusCode: false });
-    // validate redirect
-    cy.location('pathname').should('eq', page.home);
-  });
-
   it('Can browse items', () => {
     // go to home page
     cy.visit(page.home, { failOnStatusCode: false });

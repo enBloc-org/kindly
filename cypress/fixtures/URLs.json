@@ -1,6 +1,5 @@
 {
-  "landing": "/",
-  "home": "/home-page",
+  "home": "/",
   "login": "/login",
   "about": "/about",
   "search": "/search",
