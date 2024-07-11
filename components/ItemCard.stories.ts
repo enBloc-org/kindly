@@ -19,5 +19,6 @@ export const ItemCardDefault: Story = {
     postcode: 'E12',
     postable: true,
     itemId: 2,
+    reserved: true,
   },
 };
