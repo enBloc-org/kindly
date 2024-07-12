@@ -68,17 +68,14 @@ export default function NewConversationButton({
       setErrorMessage('');
       setError(false);
 
-      const conversationId = await startNewConversation(
-        userId,
-        donorId,
-        item_id
-      );
+      const conversation = await startNewConversation(userId, donorId, item_id);
 
-      if (conversationId) {
+      if (conversation) {
         dispatch({
-          type: 'SET_CURRENT_CONVERSATION_ID',
-          payload: conversationId,
+          type: 'SET_CURRENT_CONVERSATION',
+          payload: conversation,
         });
+        dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: false });
       }
 
       router.push('/conversations');

@@ -6,7 +6,7 @@ import insertSystemMessage from './insertSystemMessage';
  * @param userID Id of the user currently logged in
  * @param donorID Id of the user who is donating this item
  * @param itemID Id of the item which the new conversation will relate to
- * @returns null if no conversation existed previously or conversation_id if an existing conversation has been found
+ * @returns null if no conversation existed previously or a conversation object if an existing conversation has been found
  */
 export default async function startNewConversation(
   userID: string | undefined,
@@ -17,24 +17,28 @@ export default async function startNewConversation(
     try {
       const supabase = newClient();
 
-      const { data: existingConversations, error } = await supabase
-        .from('user_conversations')
-        .select('conversation_id')
-        .eq('user_id', userID)
-        .eq('partner_id', donorID)
-        .eq('item_id', itemID);
-      if (error) {
-        console.error('Error checking for existing conversations:', error);
+      const { data: existingConversations, error: userConversationsError } =
+        await supabase
+          .from('user_conversations')
+          .select('*')
+          .eq('user_id', userID)
+          .eq('partner_id', donorID)
+          .eq('item_id', itemID);
+      if (userConversationsError) {
+        console.error(
+          'Error checking for existing conversations:',
+          userConversationsError
+        );
         return null;
       }
       if (existingConversations.length > 0) {
-        return existingConversations[0].conversation_id;
+        return existingConversations[0];
       }
 
       const { data: newConversation, error: insertError } = await supabase
         .from('conversations')
         .insert([{}])
-        .select('id')
+        .select('*')
         .single();
       if (insertError) {
         console.error('Error inserting new conversation:', insertError);
@@ -62,13 +66,31 @@ export default async function startNewConversation(
         'This is the start of your conversation.'
       );
 
-      return conversationId;
+      const { data: newUserConversation, error: newUserConversationError } =
+        await supabase
+          .from('user_conversations')
+          .select('*')
+          .eq('user_id', userID)
+          .eq('partner_id', donorID)
+          .eq('item_id', itemID)
+          .single();
+
+      if (newUserConversationError) {
+        console.error(
+          'Error fetching new user conversation:',
+          newUserConversationError
+        );
+        return null;
+      }
+      return newUserConversation;
     } catch (error) {
       console.error(error);
+      return null;
     }
   } else {
     alert(
       'Something went wrong! Please retry messaging - you may need to log back in.'
     );
+    return null;
   }
 }
