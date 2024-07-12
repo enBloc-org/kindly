@@ -57,7 +57,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               <div className='flex flex-row content-start justify-between'>
                 <h2 className='text-xl italic'>{item.item_name}</h2>
                 {item.reserved && (
-                  <p className='-m-2 rounded-full bg-primaryOrange p-2'>
+                  <p className='-m-2 rounded-full bg-primaryOrange p-3'>
                     Reserved
                   </p>
                 )}

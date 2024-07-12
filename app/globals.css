@@ -61,7 +61,7 @@ body {
 /*  Cards */
 
 .card {
-  @apply overflow-hidden rounded-lg bg-white px-8  pb-5 shadow-sm transition-all hover:scale-95 hover:shadow-lg lg:text-lg;
+  @apply max-w-md overflow-hidden rounded-lg bg-white  px-8 pb-5 shadow-sm transition-all hover:scale-95 hover:shadow-lg lg:text-lg;
 }
 
 /*  Menus */

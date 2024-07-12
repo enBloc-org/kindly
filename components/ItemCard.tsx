@@ -24,12 +24,13 @@ const ItemCard: React.FC<ItemCardPropType> = ({
   itemId,
   reserved,
 }) => {
+  console.log('Reserved:', reserved);
   return (
     <div className='card'>
       <Link href={`/item/${itemId}`} className=''>
         <div className='flex flex-row justify-between align-middle'>
           <h2 className='p-4  font-semibold'>{item_name}</h2>
-          {reserved === true && (
+          {reserved && (
             <span className='place-self-center rounded-full bg-primaryOrange p-2'>
               Reserved
             </span>
