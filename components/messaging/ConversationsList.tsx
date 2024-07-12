@@ -30,7 +30,6 @@ const ConversationsList: React.FC = () => {
       payload: newCurrentConversation,
     });
     updateConversationReadStatus(givenId, currentUserId, false);
-    dispatch({ type: 'SET_CURRENT_CONVERSATION_ID', payload: givenId });
     dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: false });
   };
 
