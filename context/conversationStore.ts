@@ -20,9 +20,6 @@ export default function conversationReducer(
     case 'SET_CURRENT_USER_ID':
       return { ...state, currentUserId: action.payload };
 
-    case 'SET_CURRENT_CONVERSATION_ID':
-      return { ...state, conversationId: action.payload };
-
     case 'ADD_NEW_CONVERSATION':
       return {
         ...state,
