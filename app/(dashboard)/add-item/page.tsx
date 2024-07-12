@@ -54,9 +54,15 @@ const AddItemPage = () => {
       ...data,
     };
 
-    await insertRow('items', dataItem);
-    reset();
-    router.push('/add-item/success');
+    const insertedItem = await insertRow('items', dataItem);
+    if (insertedItem && insertedItem.length > 0) {
+      const itemId = insertedItem[0].id;
+      console.log(itemId, 'add-item page');
+      reset();
+      router.push(`/add-item/success/${itemId}`);
+    } else {
+      throw new Error('Failed to add the new item');
+    }
   };
 
   const category = watch('item_type');
