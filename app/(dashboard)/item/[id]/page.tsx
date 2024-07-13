@@ -28,6 +28,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       const donerId: string = item.profiles?.id;
       const title = item.item_name;
       if (
+        !user ||
         userProfile?.data.refugee === false ||
         item?.profiles?.id === userProfile?.data.id
       ) {

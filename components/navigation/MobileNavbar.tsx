@@ -15,7 +15,7 @@ const MobileNavbar = () => {
   return (
     <nav className='flex items-center justify-around' role='navigation'>
       <NavigationLinkContainer
-        href='/home-page'
+        href='/'
         ariaLabel='Home page'
         pathName={pathname}
         size='mobile'

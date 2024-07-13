@@ -3,13 +3,17 @@ import LogOutButton from '@/components/LogOutButton';
 import { ProfileEdit } from '@/components/form/ProfileEdit';
 import newServerClient from '@/supabase/utils/newServerClient';
 import DonatedItemsList from '@/components/DonatedItemsList';
+import { redirect } from 'next/navigation';
 
 const ProfilePage = async () => {
+  const supabase = newServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    redirect('/login');
+  }
   try {
-    const supabase = newServerClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
     const userProfile = await getProfile(user?.id);
 
     if (!userProfile?.data || !userProfile?.data.username || !user?.id) {
