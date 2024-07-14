@@ -35,6 +35,31 @@ const AddItemPage = () => {
     },
   });
 
+  const shoeSizes = ['UK3', 'UK4', 'UK5', 'UK6', 'UK7', 'UK8', 'UK10'];
+  const allSizes = [
+    'XXS',
+    'XS',
+    'S',
+    'M',
+    'L',
+    'XL',
+    'XXL',
+    'XXXL',
+    'UK4',
+    'UK5',
+    'UK6',
+    'UK8',
+    'UK10',
+    'UK12',
+    'UK14',
+    'UK16',
+    'UK18',
+    'UK20',
+    'UK22',
+    'UK24',
+    'UK26',
+  ];
+
   useEffect(() => {
     const getUserId = async () => {
       const supabase = createClientComponentClient();
@@ -163,12 +188,25 @@ const AddItemPage = () => {
               className='flex flex-col items-center gap-2 font-light'
             >
               Size
-              <input
-                type='text'
-                {...register('size')}
-                maxLength={30}
+              <select
+                {...register('item_subtype')}
                 className='input-text h-11 w-24'
-              />
+              >
+                <option value='' disabled hidden>
+                  Select one
+                </option>
+                {category === 'clothing'
+                  ? allSizes.map((size) => (
+                      <option value={size} key={size}>
+                        {size}
+                      </option>
+                    ))
+                  : shoeSizes.map((size) => (
+                      <option value={size} key={size}>
+                        {size}
+                      </option>
+                    ))}
+              </select>
             </label>
             <label
               htmlFor='item_type'
