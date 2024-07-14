@@ -1,7 +1,6 @@
 'use client';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 import ButtonRounded from '../buttons/ButtonRounded';
 import UploadImageInput from './UploadImageInput';
@@ -14,7 +13,6 @@ export default function AddNewItemForm({
   onSubmit: (data: PartialItem) => void;
   userId: string | undefined;
 }) {
-  const router = useRouter();
   const [generalError, setGeneralError] = useState('');
   const [imageSource, setImageSource] = useState('');
 
@@ -77,7 +75,6 @@ export default function AddNewItemForm({
 
     onSubmit(itemData);
     reset();
-    router.push('/add-item/success');
   };
 
   return (

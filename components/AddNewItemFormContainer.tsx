@@ -15,6 +15,7 @@ export default function AddNewItemFormContainer({
 
   const submitHandler = async (itemData: PartialItem) => {
     await insertRow('items', itemData);
+    router.push('/add-item/success');
   };
 
   return <AddNewItemForm onSubmit={submitHandler} userId={userId} />;
