@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import ButtonRounded from '@/components/buttons/ButtonRounded';
 
@@ -14,11 +12,9 @@ const SuccessPage = ({ params }: { params: { itemId: string } }) => {
       <Link href='/add-item'>
         <ButtonRounded type='button'>ADD ANOTHER ITEM</ButtonRounded>
       </Link>
-      {itemId && (
-        <Link href={`/item/${itemId}`}>
-          <ButtonRounded type='button'>GO TO YOUR ITEM</ButtonRounded>
-        </Link>
-      )}
+      <Link href={`/item/${itemId}`}>
+        <ButtonRounded type='button'>GO TO YOUR ITEM</ButtonRounded>
+      </Link>
     </div>
   );
 };
