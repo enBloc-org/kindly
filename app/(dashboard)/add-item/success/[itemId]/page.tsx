@@ -9,12 +9,18 @@ const SuccessPage = ({ params }: { params: { itemId: string } }) => {
       <h1 className='text-center text-xl font-bold'>
         You have successfully added an item
       </h1>
-      <Link href='/add-item'>
-        <ButtonRounded type='button'>ADD ANOTHER ITEM</ButtonRounded>
-      </Link>
-      <Link href={`/item/${itemId}`}>
-        <ButtonRounded type='button'>GO TO YOUR ITEM</ButtonRounded>
-      </Link>
+      <div className='flex flex-col gap-4'>
+        <Link href='/add-item'>
+          <ButtonRounded type='button' width='w-full'>
+            ADD ANOTHER ITEM
+          </ButtonRounded>
+        </Link>
+        <Link href={`/item/${itemId}`}>
+          <ButtonRounded type='button' width='w-full'>
+            GO TO YOUR ITEM
+          </ButtonRounded>
+        </Link>
+      </div>
     </div>
   );
 };
