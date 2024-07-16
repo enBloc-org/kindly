@@ -3,7 +3,7 @@ import AccountDeleteFormContainer from '@/components/AccountDeleteFormContainer'
 import { getProfile } from '@/supabase/models/getProfile';
 import newServerClient from '@/supabase/utils/newServerClient';
 
-export default async function DeleteAccount() {
+export default async function DeleteAccountPage() {
   const supabase = newServerClient();
   try {
     const {
