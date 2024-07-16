@@ -16,7 +16,8 @@ export default async function selectUserUnreadConversations(
     return data;
   } catch (error) {
     console.error(
-      `Failed to fetch unread conversations from database: ${error}`
+      'Failed to fetch unread conversations from database: ',
+      error
     );
     throw error;
   }

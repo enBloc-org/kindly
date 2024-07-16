@@ -1,7 +1,7 @@
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import newClient from './newClient';
 
 export default async function selectLoggedUserId() {
-  const supabase = createClientComponentClient();
+  const supabase = newClient();
   try {
     const { data, error } = await supabase.auth.getSession();
 

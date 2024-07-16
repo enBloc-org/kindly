@@ -7,27 +7,31 @@ import SearchRouteIcon from '../icons/navigation/SearchRouteIcon';
 import AboutRouteIcon from '../icons/navigation/AboutRouteIcon';
 import AddItemRouteIcon from '../icons/navigation/AddItemRouteIcon';
 import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
+import NotificationDot from '../NotificationDot';
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import selectUserUnreadConversations from '@/supabase/models/messaging/selectUserUnreadConversations';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import newClient from '@/supabase/utils/newClient';
 import selectLoggedUserId from '@/supabase/utils/selectLoggedUserId';
-import '../../app/styles/messaging-styles.css';
 
 const MobileNavbar = () => {
   const pathname = usePathname();
-  const supabase = createClientComponentClient();
+  const supabase = newClient();
   const [userId, setUserId] = useState<string>('');
-  const [notification, setNotification] = useState<boolean>(false);
+  const [hasNotification, setHasNotification] = useState<boolean>(false);
 
   useEffect(() => {
     const getUserId = async () => {
-      const data = await selectLoggedUserId();
-      if (data) {
-        setUserId(data);
-      } else {
-        console.error('Failed to fetch user Id');
+      try {
+        const data = await selectLoggedUserId();
+        if (data) {
+          setUserId(data);
+        } else {
+          console.error('Failed to fetch user Id');
+        }
+      } catch (error) {
+        console.error('Error fetching user Id:', error);
       }
     };
     getUserId();
@@ -36,11 +40,14 @@ const MobileNavbar = () => {
   useEffect(() => {
     const getUnreadConversations = async () => {
       if (!userId) return;
-      const unreadConversations = await selectUserUnreadConversations(userId);
-      if (unreadConversations.length > 0) {
-        if (pathname !== '/conversations') {
-          setNotification(true);
+
+      try {
+        const unreadConversations = await selectUserUnreadConversations(userId);
+        if (unreadConversations.length > 0 && pathname !== '/conversations') {
+          setHasNotification(true);
         }
+      } catch (error) {
+        console.error('Failed to fetch unread conversations :', error);
       }
     };
     getUnreadConversations();
@@ -48,7 +55,7 @@ const MobileNavbar = () => {
 
   useEffect(() => {
     if (pathname === '/conversations') {
-      setNotification(false);
+      setHasNotification(false);
     }
   }, [pathname]);
 
@@ -66,7 +73,7 @@ const MobileNavbar = () => {
         (payload) => {
           if (payload.new.user_id === userId) {
             if (pathname !== '/conversations') {
-              setNotification(true);
+              setHasNotification(true);
             }
           }
         }
@@ -82,7 +89,7 @@ const MobileNavbar = () => {
         (payload) => {
           if (payload.new.has_unread_messages) {
             if (pathname !== '/conversations') {
-              setNotification(true);
+              setHasNotification(true);
             }
           }
         }
@@ -92,7 +99,7 @@ const MobileNavbar = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [notification, pathname, userId]);
+  }, [hasNotification, pathname, userId]);
 
   return (
     <nav className='flex items-center justify-around' role='navigation'>
@@ -135,9 +142,13 @@ const MobileNavbar = () => {
         size='mobile'
       >
         <MessageRouteIcon pathName={pathname} height={28} width={28} />
-        {notification && (
-          <div className='notification-dot right-1 top-1 !h-3 !w-3' />
-        )}
+        <NotificationDot
+          hasNotification={hasNotification}
+          height={0.75}
+          width={0.75}
+          top={0.35}
+          left={1.25}
+        />
       </NavigationLinkContainer>
     </nav>
   );
