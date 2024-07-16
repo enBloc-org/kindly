@@ -3,7 +3,6 @@ import LogOutButton from '@/components/LogOutButton';
 import { ProfileEdit } from '@/components/form/ProfileEdit';
 import newServerClient from '@/supabase/utils/newServerClient';
 import DonatedItemsList from '@/components/DonatedItemsList';
-import Link from 'next/link';
 
 const ProfilePage = async () => {
   try {
@@ -25,9 +24,6 @@ const ProfilePage = async () => {
               <h2 className='italic'>{userProfile?.data.username}</h2>
               <LogOutButton>LOG OUT</LogOutButton>
             </div>
-            <p className='text-md mt-5'>
-              <Link href='/delete-account'>Delete my account</Link>
-            </p>
           </div>
           <div className='mt-10 flex flex-col items-center justify-between gap-4 px-4'>
             {userProfile?.data.avatar ? (
