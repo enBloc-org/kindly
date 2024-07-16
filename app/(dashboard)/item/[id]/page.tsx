@@ -54,13 +54,11 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               postage_covered={item.postage_covered}
             />
             <div className='min-h-40 w-full bg-secondaryGray p-10 md:w-1/2 md:rounded-lg'>
-              <div className='flex flex-row content-start justify-between'>
-                <h2 className='text-xl italic'>{item.item_name}</h2>
-                {item.reserved && (
-                  <p className='-m-2 rounded-full bg-primaryOrange p-3'>
-                    Reserved
-                  </p>
-                )}
+              <div className='flex flex-row justify-between'>
+                <h2 className='place-self-center text-xl italic'>
+                  {item.item_name}
+                </h2>
+                {item.reserved && <p className='reserved'>Reserved</p>}
               </div>
               <h3 className='pt-3 font-light'>Description:</h3>
               <p className='pt-2 text-center'>{item.item_description}</p>

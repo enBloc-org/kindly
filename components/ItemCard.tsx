@@ -30,11 +30,7 @@ const ItemCard: React.FC<ItemCardPropType> = ({
       <Link href={`/item/${itemId}`} className=''>
         <div className='flex flex-row justify-between align-middle'>
           <h2 className='p-4  font-semibold'>{item_name}</h2>
-          {reserved && (
-            <span className='place-self-center rounded-full bg-primaryOrange p-2'>
-              Reserved
-            </span>
-          )}
+          {reserved && <p className='reserved'>Reserved</p>}
         </div>
         <div className='flex gap-3'>
           <div className='relative h-36 w-48 md:h-52 md:w-64'>
