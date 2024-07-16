@@ -1,13 +1,15 @@
-import newClient from './newClient';
+'use server';
+
+import newServerClient from './newServerClient';
 
 export default async function selectLoggedUserId() {
-  const supabase = newClient();
+  const supabase = newServerClient();
   try {
-    const { data, error } = await supabase.auth.getSession();
+    const { data, error } = await supabase.auth.getUser();
 
     if (error) throw error;
 
-    return data.session?.user.id;
+    return data.user.id;
   } catch (error) {
     console.error('Error getting user session: ', error);
   }
