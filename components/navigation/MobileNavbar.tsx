@@ -35,7 +35,10 @@ const MobileNavbar = () => {
 
   useEffect(() => {
     const getUnreadConversations = async () => {
-      if (!userId || pathname === '/conversations') return;
+      if (!userId || pathname === '/conversations') {
+        setHasNotification(false);
+        return;
+      }
 
       try {
         const unreadConversations = await selectUserUnreadConversations(userId);
@@ -50,9 +53,6 @@ const MobileNavbar = () => {
   }, [userId, pathname]);
 
   useEffect(() => {
-    if (pathname === '/conversations') {
-      setHasNotification(false);
-    }
     notificationWatcher(userId, pathname, setHasNotification);
   }, [hasNotification, pathname, userId]);
 
