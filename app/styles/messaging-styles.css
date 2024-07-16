@@ -10,6 +10,7 @@
 .conversation-height {
   height: calc(100vh - 65px);
 }
+
 /*------- Media Queries ---------*/
 
 @media screen and (min-width: 1000px) {
