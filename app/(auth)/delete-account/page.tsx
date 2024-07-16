@@ -1,4 +1,3 @@
-'use server';
 import AccountDeleteFormContainer from '@/components/AccountDeleteFormContainer';
 import { getProfile } from '@/supabase/models/getProfile';
 import newServerClient from '@/supabase/utils/newServerClient';
