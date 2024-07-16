@@ -24,7 +24,6 @@ const ItemCard: React.FC<ItemCardPropType> = ({
   itemId,
   reserved,
 }) => {
-  console.log('Reserved:', reserved);
   return (
     <div className='card'>
       <Link href={`/item/${itemId}`} className=''>
