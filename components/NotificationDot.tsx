@@ -4,37 +4,28 @@ import '../app/styles/messaging-styles.css';
 
 type NotificationDotProps = {
   hasNotification: boolean;
-  height?: number;
-  width?: number;
-  top?: number;
-  left?: number;
+  top: number;
+  left: number;
 };
 
 /**
  * @description Displays notification dot.
  * @param hasNotification - A boolean indicating if the notification dot should be shown.
- * @description Adjust these parameters to resize and position the notification dot. These parameters are not required and have default values:
- * @param height - 1rem.
- * @param width - 1rem.
- * @param top - 0rem.
- * @param left - 0rem.
+ * @param top - Adjust notification dot top position (rem).
+ * @param left -Adjust notification dot left position (rem).
  */
 const NotificationDot = ({
   hasNotification,
-  height = 1,
-  width = 1,
-  top = 0,
-  left = 0,
+  top,
+  left,
 }: NotificationDotProps) => {
   return (
     hasNotification && (
       <div
-        className={'notification-dot'}
+        className='absolute z-50 h-3 w-3 rounded-full border-2 border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black'
         style={{
           top: `${top}rem`,
           left: `${left}rem`,
-          height: `${height}rem`,
-          width: `${width}rem`,
         }}
       />
     )

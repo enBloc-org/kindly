@@ -12,12 +12,11 @@ import NotificationDot from '../NotificationDot';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import selectUserUnreadConversations from '@/supabase/models/messaging/selectUserUnreadConversations';
-import newClient from '@/supabase/utils/newClient';
 import selectLoggedUserId from '@/supabase/utils/selectLoggedUserId';
+import notificationWatcher from '@/supabase/channels/notificationsWatcher';
 
 const DesktopNav = () => {
   const pathname = usePathname();
-  const supabase = newClient();
   const [userId, setUserId] = useState<string>('');
   const [hasNotification, setHasNotification] = useState<boolean>(false);
 
@@ -25,11 +24,8 @@ const DesktopNav = () => {
     const getUserId = async () => {
       try {
         const data = await selectLoggedUserId();
-        if (data) {
-          setUserId(data);
-        } else {
-          console.error('Failed to fetch user Id');
-        }
+        if (!data) return;
+        setUserId(data);
       } catch (error) {
         console.error('Error fetching user Id:', error);
       }
@@ -60,45 +56,7 @@ const DesktopNav = () => {
   }, [pathname]);
 
   useEffect(() => {
-    const channel = supabase
-      .channel('realtime conversations notifications')
-      .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'user_conversations',
-          filter: `user_id=eq.${userId}`,
-        },
-        (payload) => {
-          if (payload.new.user_id === userId) {
-            if (pathname !== '/conversations') {
-              setHasNotification(true);
-            }
-          }
-        }
-      )
-      .on(
-        'postgres_changes',
-        {
-          event: 'UPDATE',
-          schema: 'public',
-          table: 'user_conversations',
-          filter: `user_id=eq.${userId}`,
-        },
-        (payload) => {
-          if (payload.new.has_unread_messages) {
-            if (pathname !== '/conversations') {
-              setHasNotification(true);
-            }
-          }
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
+    notificationWatcher(userId, pathname, setHasNotification);
   }, [hasNotification, pathname, userId]);
 
   return (
@@ -143,8 +101,6 @@ const DesktopNav = () => {
         Message
         <NotificationDot
           hasNotification={hasNotification}
-          height={0.75}
-          width={0.75}
           top={0.75}
           left={2.25}
         />
