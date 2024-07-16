@@ -15,7 +15,20 @@ export const ItemCardDefault: Story = {
     imageSrc: testItem.src,
     item_name: 'White Jumper',
     condition: 'New',
-    item_type: 'toys',
+    item_type: 'Clothing',
+    postcode: 'E12',
+    postable: true,
+    itemId: 2,
+    reserved: false,
+  },
+};
+
+export const ItemCardReserved: Story = {
+  args: {
+    imageSrc: testItem.src,
+    item_name: 'White Jumper',
+    condition: 'New',
+    item_type: 'Clothing',
     postcode: 'E12',
     postable: true,
     itemId: 2,
