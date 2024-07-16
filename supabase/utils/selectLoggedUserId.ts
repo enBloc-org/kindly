@@ -12,5 +12,6 @@ export default async function selectLoggedUserId() {
     return data.user.id;
   } catch (error) {
     console.error('Error getting user session: ', error);
+    throw error;
   }
 }

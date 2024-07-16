@@ -35,11 +35,14 @@ const DesktopNav = () => {
 
   useEffect(() => {
     const getUnreadConversations = async () => {
-      if (!userId) return;
+      if (!userId || pathname === '/conversations') {
+        setHasNotification(false);
+        return;
+      }
 
       try {
         const unreadConversations = await selectUserUnreadConversations(userId);
-        if (unreadConversations.length > 0 && pathname !== '/conversations') {
+        if (unreadConversations.length > 0) {
           setHasNotification(true);
         }
       } catch (error) {
@@ -47,13 +50,7 @@ const DesktopNav = () => {
       }
     };
     getUnreadConversations();
-  }, [userId]);
-
-  useEffect(() => {
-    if (pathname === '/conversations') {
-      setHasNotification(false);
-    }
-  }, [pathname]);
+  }, [userId, pathname]);
 
   useEffect(() => {
     notificationWatcher(userId, pathname, setHasNotification);

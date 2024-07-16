@@ -35,11 +35,11 @@ const MobileNavbar = () => {
 
   useEffect(() => {
     const getUnreadConversations = async () => {
-      if (!userId) return;
+      if (!userId || pathname === '/conversations') return;
 
       try {
         const unreadConversations = await selectUserUnreadConversations(userId);
-        if (unreadConversations.length > 0 && pathname !== '/conversations') {
+        if (unreadConversations.length > 0) {
           setHasNotification(true);
         }
       } catch (error) {
@@ -47,15 +47,12 @@ const MobileNavbar = () => {
       }
     };
     getUnreadConversations();
-  }, [userId]);
+  }, [userId, pathname]);
 
   useEffect(() => {
     if (pathname === '/conversations') {
       setHasNotification(false);
     }
-  }, [pathname]);
-
-  useEffect(() => {
     notificationWatcher(userId, pathname, setHasNotification);
   }, [hasNotification, pathname, userId]);
 
