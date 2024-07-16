@@ -19,7 +19,7 @@ const NavigationLinkContainer: React.FC<NavigationLinkContainerProps> = ({
   return (
     <Link href={href} aria-label={ariaLabel}>
       <div
-        className={`flex flex-col items-center justify-center ${
+        className={`relative flex flex-col items-center justify-center ${
           size === 'mobile'
             ? pathName === href
               ? 'rounded-full border-4 border-primaryOrange bg-backgroundHighlight p-1'
