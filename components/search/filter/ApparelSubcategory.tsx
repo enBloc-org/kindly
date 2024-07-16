@@ -6,22 +6,14 @@ import WomanIcon from '../../icons/WomanIcon';
 import CategoryButton from './CategoryButton';
 
 type CategoryProp = {
-  setSubcategory: React.Dispatch<React.SetStateAction<string>>;
   subcategory: string;
+  handleButtonClick: (value: string) => void;
 };
 
 const ApparelSubcategory: React.FC<CategoryProp> = ({
-  setSubcategory,
   subcategory,
+  handleButtonClick,
 }) => {
-  const handleButtonClick = (value: string) => {
-    if (subcategory === value) {
-      setSubcategory('');
-    } else {
-      setSubcategory(value);
-    }
-  };
-
   return (
     <div className='mt-10 flex justify-center gap-2 text-sm md:gap-10'>
       <CategoryButton

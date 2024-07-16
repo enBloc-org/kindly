@@ -79,7 +79,10 @@ export default function SearchItemPage() {
         setSearchParams={setSearchParams}
         handleSubmit={handleSubmit}
       />
-      <QuickBrowse />
+      <QuickBrowse
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
+      />
       <ItemDisplayContainer
         searchResults={searchResults}
         isLoading={isLoading}

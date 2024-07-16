@@ -1,101 +1,104 @@
 'use client';
-import { useState } from 'react';
+import { Dispatch } from 'react';
 import ApparelSubcategory from './ApparelSubcategory';
 import CategoryButton from './CategoryButton';
-import { useRouter } from 'next/navigation';
 import ShirtIcon from '../../icons/ShirtIcon';
 import ShoeIcon from '../../icons/ShoeIcon';
 import ToyIcon from '../../icons/ToyIcon';
 import BookIcon from '../../icons/BookIcon';
 import HomeIcon from '../../icons/HomeIcon';
 import BooksSubcategory from './BooksSubcategory';
+import { SearchParamsType } from '@/types/searchPageTypes';
 
-export type IconPropType = {
-  category?: string;
-  subcategory?: string;
+type QuickBrowseProps = {
+  searchParams: SearchParamsType;
+  setSearchParams: Dispatch<React.SetStateAction<SearchParamsType>>;
 };
 
-const QuickBrowse = () => {
-  const [category, setCategory] = useState('');
-  const [subcategory, setSubcategory] = useState('');
-  const router = useRouter();
-
-  const handleButtonClick = (value: string) => {
-    if (category === value) {
-      setCategory('');
+const QuickBrowse: React.FC<QuickBrowseProps> = ({
+  searchParams,
+  setSearchParams,
+}) => {
+  const handleCategoryClick = (value: string) => {
+    if (searchParams.category === value) {
+      setSearchParams((prev) => ({ ...prev, category: '' }));
     } else {
-      setCategory(value);
+      setSearchParams((prev) => ({ ...prev, category: value }));
+    }
+  };
+
+  const handleSubcategoryClick = (value: string) => {
+    if (searchParams.subcategory === value) {
+      setSearchParams((prev) => ({ ...prev, subcategory: '' }));
+    } else {
+      setSearchParams((prev) => ({ ...prev, subcategory: value }));
     }
   };
 
   const onSearchHandler = () => {
-    router.push(
-      `/search/results/?category=${category}&subcategory=${subcategory}`
-    );
-    setCategory('');
-    setSubcategory('');
+    console.log('searchParams', searchParams);
+    setSearchParams((prev) => ({ ...prev, category: '', subcategory: '' }));
   };
 
   return (
     <div className='m-auto max-w-xl'>
-      <h1 className='ml-4 mt-16 font-semibold italic'>Quick search:</h1>
       <div className='mt-10 flex justify-between gap-1 px-2 text-sm'>
         <CategoryButton
-          handleButtonClick={handleButtonClick}
-          category={category}
+          handleButtonClick={handleCategoryClick}
+          category={searchParams.category}
           option='clothing'
         >
           Clothing
-          <ShirtIcon category={category} />
+          <ShirtIcon category={searchParams.category} />
         </CategoryButton>
         <CategoryButton
-          handleButtonClick={handleButtonClick}
-          category={category}
+          handleButtonClick={handleCategoryClick}
+          category={searchParams.category}
           option='shoes'
         >
           Shoes
-          <ShoeIcon category={category} />
+          <ShoeIcon category={searchParams.category} />
         </CategoryButton>
 
         <CategoryButton
-          handleButtonClick={handleButtonClick}
-          category={category}
+          handleButtonClick={handleCategoryClick}
+          category={searchParams.category}
           option='toys'
         >
           Toys
-          <ToyIcon category={category} />
+          <ToyIcon category={searchParams.category} />
         </CategoryButton>
         <CategoryButton
-          handleButtonClick={handleButtonClick}
-          category={category}
+          handleButtonClick={handleCategoryClick}
+          category={searchParams.category}
           option='books'
         >
           Books
-          <BookIcon category={category} />
+          <BookIcon category={searchParams.category} />
         </CategoryButton>
         <CategoryButton
-          handleButtonClick={handleButtonClick}
-          category={category}
+          handleButtonClick={handleCategoryClick}
+          category={searchParams.category}
           option='household'
         >
           Home
-          <HomeIcon category={category} />
+          <HomeIcon category={searchParams.category} />
         </CategoryButton>
       </div>
-      {['shoes', 'clothing'].includes(category) && (
+      {['shoes', 'clothing'].includes(searchParams.category) && (
         <ApparelSubcategory
-          setSubcategory={setSubcategory}
-          subcategory={subcategory}
+          subcategory={searchParams.subcategory}
+          handleButtonClick={handleSubcategoryClick}
         />
       )}
-      {category === 'books' && (
+      {searchParams.category === 'books' && (
         <BooksSubcategory
-          subcategory={subcategory}
-          setSubcategory={setSubcategory}
+          subcategory={searchParams.subcategory}
+          handleButtonClick={handleSubcategoryClick}
         />
       )}
 
-      {category.length > 0 && (
+      {searchParams.category.length > 0 && (
         <div className='mt-10 flex justify-center'>
           <button
             className='button button-rounded'
@@ -103,7 +106,7 @@ const QuickBrowse = () => {
             aria-label='See results'
             onClick={onSearchHandler}
           >
-            SEE RESULTS
+            Apply Filters
           </button>
         </div>
       )}
