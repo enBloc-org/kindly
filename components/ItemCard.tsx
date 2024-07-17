@@ -4,14 +4,14 @@ import Link from 'next/link';
 import ItemDetails from './ItemDetails';
 
 type ItemCardPropType = {
-  imageSrc: string;
-  item_name: string;
-  condition: string;
-  item_type: string;
-  postcode: string;
-  postable: boolean;
-  itemId: number;
-  reserved: boolean;
+  imageSrc: string | undefined;
+  item_name: string | undefined;
+  condition: string | undefined;
+  item_type: string | undefined;
+  postcode: string | undefined;
+  postable: boolean | undefined;
+  itemId: number | undefined;
+  reserved: boolean | undefined;
 };
 
 const ItemCard: React.FC<ItemCardPropType> = ({
