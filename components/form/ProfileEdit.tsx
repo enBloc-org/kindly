@@ -2,6 +2,7 @@
 import editRow from '@/supabase/models/editRow';
 import { PartialItem, editProfile } from '@/types/supabaseTypes';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import ButtonPill from '../buttons/ButtonPill';
 import ButtonRounded from '../buttons/ButtonRounded';
@@ -106,6 +107,11 @@ export const ProfileEdit = ({
           <div className='mt-4'>
             <ButtonRounded type='submit'>EDIT PROFILE</ButtonRounded>
           </div>
+          <p className='text-md mt-5'>
+            <Link href='/delete-account'>
+              <ButtonRounded type='button'>DELETE ACCOUNT</ButtonRounded>
+            </Link>
+          </p>
         </form>
       )}
     </div>

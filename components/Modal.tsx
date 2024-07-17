@@ -6,12 +6,19 @@ import DeleteButton from './DeleteButton';
 
 interface ModalProps {
   name: string;
-  targetId?: number;
+  targetId?: number | string;
   message: string;
   onDeleteSuccess: () => void;
+  isDisabled?: boolean;
 }
 
-const Modal = ({ name, targetId, message, onDeleteSuccess }: ModalProps) => {
+const Modal = ({
+  name,
+  targetId,
+  message,
+  onDeleteSuccess,
+  isDisabled = false,
+}: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => {
@@ -20,7 +27,11 @@ const Modal = ({ name, targetId, message, onDeleteSuccess }: ModalProps) => {
 
   return (
     <>
-      <button className='button button-rounded my-2' onClick={toggleModal}>
+      <button
+        className={`${isDisabled ? 'button-disabled' : 'button'} button-rounded my-2 cursor-not-allowed`}
+        onClick={toggleModal}
+        disabled={isDisabled}
+      >
         {name}
       </button>
       {isOpen && (

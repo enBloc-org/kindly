@@ -19,9 +19,9 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
   const isBreakpoint = useMediaQuery(1000);
   const [storeItems, setStoreItems] = useState<PartialItem[]>([]);
   const [error, setError] = useState('');
-  const [displayDeletedItemMessage, setDisplayDeletedItemMessage] =
-    useState<boolean>(false);
-  const [deletedItemName, setDeletedItemName] = useState<string>('');
+  const [deletedItemName, setDeletedItemName] = useState<string | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -48,9 +48,11 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
           'This item is no longer available for donation.'
         );
       });
-      setStoreItems(storeItems.filter((item) => item.id !== itemId));
       const deletedItem = storeItems.find((item) => item.id === itemId);
-      setDeletedItemName(deletedItem?.item_name || 'Unknown name');
+      if (deletedItem) {
+        setDeletedItemName(deletedItem?.item_name);
+      }
+      setStoreItems(storeItems.filter((item) => item.id !== itemId));
     } catch (error) {
       console.error(`Error inserting system message: ${error}`);
       throw error;
@@ -58,7 +60,6 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
 
     try {
       await deleteItems(itemId);
-      setDisplayDeletedItemMessage(true);
     } catch (error) {
       console.error('Failed to delete item:', error);
       throw error;
@@ -70,9 +71,9 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
       <h2 className='m-5 text-lg font-medium md:pl-20 lg:pl-40'>
         My donated items:
       </h2>
-      {displayDeletedItemMessage && (
+      {deletedItemName && (
         <h2 className='mb-2 text-center text-xl font-bold'>
-          You have successfully deleted {deletedItemName} item
+          You have successfully deleted &#34;{deletedItemName}&#34;
         </h2>
       )}
 
@@ -102,7 +103,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
                   <Modal
                     name='Delete Item'
                     targetId={item.id}
-                    message='By pressing Confirm you will delete this item'
+                    message='By pressing "Confirm" you will delete this item permanently.'
                     onDeleteSuccess={() => handleDeleteSuccess(item.id!)}
                   />
                 </div>
