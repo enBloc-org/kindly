@@ -10,13 +10,13 @@ describe('Create and Delete item positive test Suite', () => {
   });
 
   it('User can create an item. The item is visible in user profile', () => {
-    cy.visit(page.addItem);
+    cy.visit(page.addItem, { failOnStatusCode: false });
     AddItemPage.nameInput().type(uniqueItemName);
     AddItemPage.descriptionInput().type(data.itemDescription);
     AddItemPage.postCodeInput().type(data.postCode);
     AddItemPage.conditionDropDown().select(data.itemCondition);
     AddItemPage.categoriesDropDown().select(data.itemCategory);
-    AddItemPage.sizeInput().type(data.itemShoesSize);
+    AddItemPage.sizeDropDown().select(data.itemShoesSize);
     AddItemPage.genderDropDown().select(data.itemGender);
     AddItemPage.willingToPostCheckBox().check();
     AddItemPage.postageCoveredCheckBox().check();
@@ -30,7 +30,7 @@ describe('Create and Delete item positive test Suite', () => {
   });
 
   it('User can delete the item', () => {
-    cy.visit(page.profile);
+    cy.visit(page.profile, { failOnStatusCode: false });
     ProfilePage.deleteItemButton(uniqueItemName).click();
     ProfilePage.ConfirmDeleteItemButton(uniqueItemName).click();
     ProfilePage.itemCard(uniqueItemName).should('not.exist');

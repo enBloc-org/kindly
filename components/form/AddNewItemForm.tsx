@@ -175,10 +175,7 @@ export default function AddNewItemForm({
               className='flex flex-col items-center gap-2 font-light'
             >
               Size
-              <select
-                {...register('item_subtype')}
-                className='input-text h-11 w-24'
-              >
+              <select {...register('size')} className='input-text h-11 w-24'>
                 <option value='' disabled hidden>
                   Select one
                 </option>

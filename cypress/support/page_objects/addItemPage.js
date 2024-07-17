@@ -21,8 +21,8 @@ export class AddItemPage extends BasePage {
     return cy.get('select[name="item_type"]').should('be.visible');
   }
 
-  sizeInput() {
-    return cy.get('input[name="size"]').should('be.visible');
+  sizeDropDown() {
+    return cy.get('select[name="size"]').should('be.visible');
   }
 
   genderDropDown() {
@@ -49,7 +49,7 @@ export class AddItemPage extends BasePage {
     return cy.get('button[aria-label="ADD YOUR ITEM"]').should('be.visible');
   }
   itemAddedMessage() {
-    return cy.get('h1').contains("You've successfully add an item");
+    return cy.get('h1').contains('You have successfully added an item');
   }
 }
 
