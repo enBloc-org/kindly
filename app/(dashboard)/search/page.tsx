@@ -1,12 +1,15 @@
 'use client';
+import { useEffect, useState } from 'react';
+import { SearchParamsType } from '@/types/searchPageTypes';
+import { PartialItem } from '@/types/supabaseTypes';
+
+//Components
 import ItemDisplayContainer from '@/components/search/ItemDisplayContainer';
 import { SearchBar } from '@/components/search/SearchBar';
 import QuickBrowse from '@/components/search/filter/QuickBrowse';
-import searchItemsByName from '@/supabase/models/filtering-items/searchItemsByName';
-import selectItemsByCreatedAt from '@/supabase/models/filtering-items/selectItemsByCreatedAt';
-import { SearchParamsType } from '@/types/searchPageTypes';
-import { PartialItem } from '@/types/supabaseTypes';
-import { useEffect, useState } from 'react';
+
+//Utils
+import searchItems from '@/supabase/models/filtering-items/searchItems';
 
 const initialSearchParams = {
   query: '',
@@ -25,40 +28,7 @@ export default function SearchItemPage() {
   const fetchSearchResults = async () => {
     setIsLoading(true);
     let data: PartialItem[] = [];
-    switch (true) {
-      case !!searchParams.query:
-        data = await searchItemsByName(
-          searchParams.query,
-          searchParams.limit,
-          searchParams.cursor
-        );
-        break;
-      case !!searchParams.query && !!searchParams.category:
-        data = await searchItemsByQueryAndCategory(
-          searchParams.query,
-          searchParams.category,
-          searchParams.limit,
-          searchParams.cursor
-        );
-        break;
-      // case !!searchParams.query &&
-      //   !!searchParams.category &&
-      //   !!searchParams.subcategory:
-      //   data = await searchItemsByQueryCategorySubcategory(
-      //     searchParams.query,
-      //     searchParams.category,
-      //     searchParams.subcategory,
-      //     searchParams.limit,
-      //     searchParams.cursor
-      //   );
-      //   break;
-      default:
-        data = await selectItemsByCreatedAt(
-          searchParams.cursor,
-          searchParams.limit
-        );
-        break;
-    }
+    data = await searchItems(searchParams);
     setSearchResults(data);
     setIsLoading(false);
   };
@@ -67,7 +37,7 @@ export default function SearchItemPage() {
     fetchSearchResults();
   }, []);
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetchSearchResults();
   };
@@ -82,6 +52,7 @@ export default function SearchItemPage() {
       <QuickBrowse
         searchParams={searchParams}
         setSearchParams={setSearchParams}
+        handleSubmit={handleSubmit}
       />
       <ItemDisplayContainer
         searchResults={searchResults}

@@ -18,6 +18,7 @@ type QuickBrowseProps = {
 const QuickBrowse: React.FC<QuickBrowseProps> = ({
   searchParams,
   setSearchParams,
+  handleSubmit,
 }) => {
   const handleCategoryClick = (value: string) => {
     if (searchParams.category === value) {
@@ -33,11 +34,6 @@ const QuickBrowse: React.FC<QuickBrowseProps> = ({
     } else {
       setSearchParams((prev) => ({ ...prev, subcategory: value }));
     }
-  };
-
-  const onSearchHandler = () => {
-    console.log('searchParams', searchParams);
-    setSearchParams((prev) => ({ ...prev, category: '', subcategory: '' }));
   };
 
   return (
@@ -104,7 +100,7 @@ const QuickBrowse: React.FC<QuickBrowseProps> = ({
             className='button button-rounded'
             type='button'
             aria-label='See results'
-            onClick={onSearchHandler}
+            onClick={handleSubmit}
           >
             Apply Filters
           </button>
