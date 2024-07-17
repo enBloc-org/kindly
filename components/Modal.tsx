@@ -30,7 +30,7 @@ const Modal = ({ name, itemId, message, onDeleteSuccess }: ModalProps) => {
             <p className='font-light italic'>{message}</p>
             <div className='mt-2 flex gap-6'>
               <DeleteButton
-                itemId={itemId}
+                targetId={itemId}
                 title='Confirm'
                 onDeleteSuccess={onDeleteSuccess}
               />

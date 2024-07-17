@@ -7,6 +7,9 @@ import ItemCard from '@/components/ItemCard';
 import React, { useEffect, useState } from 'react';
 import { PartialItem } from '@/types/supabaseTypes';
 import useMediaQuery from './hooks/useMediaQuery';
+import selectConversationsByItemId from '@/supabase/models/messaging/selectConversationsByItemId';
+import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
+import deleteItems from '@/supabase/models/deleteItems';
 
 type DisplayDonatedItemsProps = {
   userId: string;
@@ -18,8 +21,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
   const [error, setError] = useState('');
   const [displayDeletedItemMessage, setDisplayDeletedItemMessage] =
     useState<boolean>(false);
-  const [deletedItemName, setDeletedItemName] =
-    useState<string>('Unknown name');
+  const [deletedItemName, setDeletedItemName] = useState<string>('');
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -37,11 +39,30 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
     fetchItems();
   }, []);
 
-  const handleDeleteSuccess = (deleteItemId: number) => {
-    const deletedItem = storeItems.find((item) => item.id === deleteItemId);
-    setDeletedItemName(deletedItem?.item_name || 'Unknown name');
-    setStoreItems(storeItems.filter((item) => item.id !== deleteItemId));
-    setDisplayDeletedItemMessage(true);
+  const handleDeleteSuccess = async (itemId: number) => {
+    try {
+      const selectedConversations = await selectConversationsByItemId(itemId);
+      selectedConversations.forEach((conversation) => {
+        insertSystemMessage(
+          conversation,
+          'This item is no longer available for donation.'
+        );
+      });
+      setStoreItems(storeItems.filter((item) => item.id !== itemId));
+      const deletedItem = storeItems.find((item) => item.id === itemId);
+      setDeletedItemName(deletedItem?.item_name || 'Unknown name');
+    } catch (error) {
+      console.error(`Error inserting system message: ${error}`);
+      throw error;
+    }
+
+    try {
+      await deleteItems(itemId);
+      setDisplayDeletedItemMessage(true);
+    } catch (error) {
+      console.error('Failed to delete item:', error);
+      throw error;
+    }
   };
 
   return (
