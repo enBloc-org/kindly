@@ -95,11 +95,11 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
                   ) : (
                     <ReserveForUserModal
                       name='Mark as Reserved'
-                      itemId={item.id}
-                      currentUserId={userId}
+                      itemId={item.id!}
                       onReserveStatusChange={() =>
                         onReserveStatusChange(item.id!)
                       }
+                      requestedToReserveUserIds={item.requestedToReserve ?? []}
                     />
                   )}
                 </div>
