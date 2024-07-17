@@ -21,7 +21,7 @@ export const ItemCardDefault: Story = {
     item_type: 'Clothing',
     postcode: 'E12',
     postable: true,
-    itemId: 2,
+    id: 2,
     reserved: false,
   },
 };
@@ -34,7 +34,7 @@ export const ItemCardReserved: Story = {
     item_type: 'Clothing',
     postcode: 'E12',
     postable: true,
-    itemId: 2,
+    id: 2,
     reserved: true,
   },
   play: async ({ canvasElement, step }) => {

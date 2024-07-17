@@ -16,6 +16,10 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
   const isBreakpoint = useMediaQuery(1000);
   const [storeItems, setStoreItems] = useState<PartialItem[]>([]);
   const [error, setError] = useState('');
+  const [displayDeletedItemMessage, setDisplayDeletedItemMessage] =
+    useState<boolean>(false);
+  const [deletedItemName, setDeletedItemName] =
+    useState<string>('Unknown name');
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -34,7 +38,10 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
   }, []);
 
   const handleDeleteSuccess = (deleteItemId: number) => {
+    const deletedItem = storeItems.find((item) => item.id === deleteItemId);
+    setDeletedItemName(deletedItem?.item_name || 'Unknown name');
     setStoreItems(storeItems.filter((item) => item.id !== deleteItemId));
+    setDisplayDeletedItemMessage(true);
   };
 
   return (
@@ -42,6 +49,11 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
       <h2 className='m-5 text-lg font-medium md:pl-20 lg:pl-40'>
         My donated items:
       </h2>
+      {displayDeletedItemMessage && (
+        <h2 className='mb-2 text-center text-xl font-bold'>
+          You have successfully deleted {deletedItemName} item
+        </h2>
+      )}
 
       {storeItems && storeItems.length > 0 ? (
         <ul
@@ -56,9 +68,11 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
                   imageSrc={item.imageSrc}
                   item_name={item.item_name}
                   condition={item.condition}
+                  item_type={item.item_type}
                   postcode={item.postcode}
                   postable={item.postable}
-                  itemId={item.id}
+                  id={item.id}
+                  reserved={item.reserved}
                 />
                 <div className='flex flex-row'>
                   <Link href={`/edit-item/${item.id}`}>
