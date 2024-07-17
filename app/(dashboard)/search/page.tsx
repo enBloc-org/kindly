@@ -2,8 +2,8 @@
 import ItemDisplayContainer from '@/components/search/ItemDisplayContainer';
 import { SearchBar } from '@/components/search/SearchBar';
 import QuickBrowse from '@/components/search/filter/QuickBrowse';
-import searchItemsByName from '@/supabase/models/searchItemsByName';
-import selectItemsByCreatedAt from '@/supabase/models/selectingItems/selectItemsByCreatedAt';
+import searchItemsByName from '@/supabase/models/filtering-items/searchItemsByName';
+import selectItemsByCreatedAt from '@/supabase/models/filtering-items/selectItemsByCreatedAt';
 import { SearchParamsType } from '@/types/searchPageTypes';
 import { PartialItem } from '@/types/supabaseTypes';
 import { useEffect, useState } from 'react';
@@ -26,6 +26,21 @@ export default function SearchItemPage() {
     setIsLoading(true);
     let data: PartialItem[] = [];
     switch (true) {
+      case !!searchParams.query:
+        data = await searchItemsByName(
+          searchParams.query,
+          searchParams.limit,
+          searchParams.cursor
+        );
+        break;
+      case !!searchParams.query && !!searchParams.category:
+        data = await searchItemsByQueryAndCategory(
+          searchParams.query,
+          searchParams.category,
+          searchParams.limit,
+          searchParams.cursor
+        );
+        break;
       // case !!searchParams.query &&
       //   !!searchParams.category &&
       //   !!searchParams.subcategory:
@@ -37,21 +52,6 @@ export default function SearchItemPage() {
       //     searchParams.cursor
       //   );
       //   break;
-      // case !!searchParams.query && !!searchParams.category:
-      //   data = await searchItemsByQueryAndCategory(
-      //     searchParams.query,
-      //     searchParams.category,
-      //     searchParams.limit,
-      //     searchParams.cursor
-      //   );
-      //   break;
-      case !!searchParams.query:
-        data = await searchItemsByName(
-          searchParams.query,
-          searchParams.limit,
-          searchParams.cursor
-        );
-        break;
       default:
         data = await selectItemsByCreatedAt(
           searchParams.cursor,

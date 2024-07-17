@@ -1,5 +1,5 @@
-import { item } from '../../types/supabaseTypes';
-import newClient from '../utils/newClient';
+import { item } from '../../../types/supabaseTypes';
+import newClient from '../../utils/newClient';
 
 export default async function searchItemsByName(
   searchTerm: string,
