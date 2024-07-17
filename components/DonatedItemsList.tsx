@@ -7,6 +7,9 @@ import ItemCard from '@/components/ItemCard';
 import React, { useEffect, useState } from 'react';
 import { PartialItem } from '@/types/supabaseTypes';
 import useMediaQuery from './hooks/useMediaQuery';
+import selectConversationsByItemId from '@/supabase/models/messaging/selectConversationsByItemId';
+import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
+import deleteItems from '@/supabase/models/deleteItems';
 
 type DisplayDonatedItemsProps = {
   userId: string;
@@ -33,8 +36,27 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
     fetchItems();
   }, []);
 
-  const handleDeleteSuccess = (deleteItemId: number) => {
-    setStoreItems(storeItems.filter((item) => item.id !== deleteItemId));
+  const handleDeleteSuccess = async (itemId: number) => {
+    try {
+      const selectedConversations = await selectConversationsByItemId(itemId);
+      selectedConversations.forEach((conversation) => {
+        insertSystemMessage(
+          conversation,
+          'This item is no longer available for donation.'
+        );
+      });
+      setStoreItems(storeItems.filter((item) => item.id !== itemId));
+    } catch (error) {
+      console.error(`Error inserting system message: ${error}`);
+      throw error;
+    }
+
+    try {
+      await deleteItems(itemId);
+    } catch (error) {
+      console.error('Failed to delete item:', error);
+      throw error;
+    }
   };
 
   return (
@@ -66,8 +88,8 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
                   </Link>
                   <Modal
                     name='Delete Item'
-                    itemId={item.id}
-                    message='By pressing Confirm you will delete this item'
+                    targetId={item.id}
+                    message='By pressing "Confirm" you will delete this item permanently.'
                     onDeleteSuccess={() => handleDeleteSuccess(item.id!)}
                   />
                 </div>

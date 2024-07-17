@@ -31,6 +31,12 @@ body {
   shadow-md;
 }
 
+.button-disabled {
+  @apply relative max-w-xs cursor-not-allowed opacity-60 bg-primaryGreen 
+  px-4 py-1.5 text-sm  font-semibold  tracking-wider text-background 
+  shadow-md;
+}
+
 .button:active {
   top: 0.1rem;
 }
