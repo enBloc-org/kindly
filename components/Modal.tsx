@@ -6,12 +6,12 @@ import DeleteButton from './DeleteButton';
 
 interface ModalProps {
   name: string;
-  itemId?: number;
+  targetId?: number;
   message: string;
   onDeleteSuccess: () => void;
 }
 
-const Modal = ({ name, itemId, message, onDeleteSuccess }: ModalProps) => {
+const Modal = ({ name, targetId, message, onDeleteSuccess }: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => {
@@ -30,7 +30,7 @@ const Modal = ({ name, itemId, message, onDeleteSuccess }: ModalProps) => {
             <p className='font-light italic'>{message}</p>
             <div className='mt-2 flex gap-6'>
               <DeleteButton
-                targetId={itemId}
+                targetId={targetId}
                 title='Confirm'
                 onDeleteSuccess={onDeleteSuccess}
               />
