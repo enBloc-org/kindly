@@ -16,6 +16,6 @@ describe('Authorisation Spec', () => {
     cy.login(Cypress.env('loginEmail'), Cypress.env('loginPassword'));
     cy.visit(page.profile, { failOnStatusCode: false });
     ProfilePage.logoutButton().click();
-    HomePage.profileIcon().should('not.exist');
+    LoginPage.loginButton().should('be.visible');
   });
 });
