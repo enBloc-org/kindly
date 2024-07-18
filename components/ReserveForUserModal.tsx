@@ -58,11 +58,7 @@ const ReserveForUserModal = ({
 
   return (
     <>
-      <button
-        className='button button-rounded my-2'
-        onClick={toggleModal}
-        data-testid='open-modal'
-      >
+      <button className='button button-rounded my-2' onClick={toggleModal}>
         {name}
       </button>
       {isOpen && (
@@ -82,7 +78,6 @@ const ReserveForUserModal = ({
                 <button
                   className='button button-rounded'
                   onClick={() => handleConfirmReserve(user.id)}
-                  data-testid='confirm-reserve'
                 >
                   Confirm
                 </button>

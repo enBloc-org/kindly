@@ -18,6 +18,14 @@ export const ReserveForUserModalWithNoEnquiries: Story = {
     requestedToReserveUserIds: [],
     onReserveStatusChange: fn(),
   },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const reserveButton = canvas.getByText(args.name);
+    await userEvent.click(reserveButton);
+    await expect(
+      canvas.getByText('Nobody has asked about this item yet.')
+    ).toBeVisible();
+  },
 };
 
 export const ReserveForUserModalWithEnquiries: Story = {
@@ -32,11 +40,11 @@ export const ReserveForUserModalWithEnquiries: Story = {
   },
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByTestId('open-modal'));
-    const confirmButtons = await canvas.findAllByTestId('confirm-reserve');
-    await expect(confirmButtons[0]).toBeVisible();
-    await userEvent.click(confirmButtons[0]);
+    await userEvent.click(canvas.getByText(args.name));
+    const confirmButton = (await canvas.findAllByText('Confirm'))[0];
+    await expect(confirmButton).toBeVisible();
+    await userEvent.click(confirmButton);
     await waitFor(() => expect(args.onReserveStatusChange).toHaveBeenCalled());
-    await expect(confirmButtons[0]).not.toBeVisible();
+    await expect(confirmButton).not.toBeVisible();
   },
 };
