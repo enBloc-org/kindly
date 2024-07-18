@@ -8,10 +8,11 @@ import React, { useEffect, useState } from 'react';
 import { PartialItem } from '@/types/supabaseTypes';
 import useMediaQuery from './hooks/useMediaQuery';
 import ReserveForUserModal from './ReserveForUserModal';
-import UnreserveButton from './buttons/UnreserveButton';
 import selectConversationsByItemId from '@/supabase/models/messaging/selectConversationsByItemId';
 import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
 import deleteItems from '@/supabase/models/deleteItems';
+import upsertRow from '@/supabase/models/upsertRow';
+import ButtonRounded from './buttons/ButtonRounded';
 
 type DisplayDonatedItemsProps = {
   userId: string;
@@ -63,14 +64,24 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
     }
   };
 
+  const handleUnreserve = async (itemId: number) => {
+    try {
+      await upsertRow('items', {
+        id: itemId,
+        is_reserved: false,
+        reserved_by: null,
+      });
+      onReserveStatusChange(itemId);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const onReserveStatusChange = (itemId: number): void => {
     setStoreItems((prevItems) => {
-      return prevItems.map((item: PartialItem) => {
-        if (item.id === itemId) {
-          return { ...item, is_reserved: !item.is_reserved };
-        }
-        return item;
-      });
+      return prevItems.map((item: PartialItem) =>
+        item.id === itemId ? { ...item, is_reserved: !item.is_reserved } : item
+      );
     });
   };
 
@@ -108,12 +119,12 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
                     onDeleteSuccess={() => handleDeleteSuccess(item.id!)}
                   />
                   {item.is_reserved ? (
-                    <UnreserveButton
-                      itemId={item.id}
-                      onReserveStatusChange={() =>
-                        onReserveStatusChange(item.id!)
-                      }
-                    />
+                    <ButtonRounded
+                      clickHandler={() => handleUnreserve(item.id!)}
+                      type='button'
+                    >
+                      Unreserve
+                    </ButtonRounded>
                   ) : (
                     <ReserveForUserModal
                       name='Mark as Reserved'
@@ -121,7 +132,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
                       onReserveStatusChange={() =>
                         onReserveStatusChange(item.id!)
                       }
-                      requestedToReserveUserIds={item.requestedToReserve ?? []}
+                      requestedToReserveUserIds={item.requestedToReserve}
                     />
                   )}
                 </div>

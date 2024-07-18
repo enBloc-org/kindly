@@ -9,7 +9,7 @@ interface ModalProps {
   name: string;
   itemId: number;
   onReserveStatusChange: () => void;
-  requestedToReserveUserIds: string[];
+  requestedToReserveUserIds?: string[];
 }
 
 type ReserveUserData = Pick<profile, 'username' | 'id'>;
@@ -31,13 +31,15 @@ const ReserveForUserModal = ({
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const promises = requestedToReserveUserIds.map(async (userId) => {
-        const usersdata = await getProfile(userId);
-        return { username: usersdata.data.username, id: userId };
-      });
-      const users = await Promise.all(promises);
-      console.log('users', users);
-      setRequestedToReserveUsers(users);
+      if (requestedToReserveUserIds) {
+        const promises = requestedToReserveUserIds.map(async (userId) => {
+          const usersdata = await getProfile(userId);
+          return { username: usersdata.data.username, id: userId };
+        });
+        const users = await Promise.all(promises);
+        console.log('users', users);
+        setRequestedToReserveUsers(users);
+      }
     };
     fetchUsers();
   }, []);
