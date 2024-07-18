@@ -7,6 +7,9 @@ import ItemCard from '@/components/ItemCard';
 import React, { useEffect, useState } from 'react';
 import { PartialItem } from '@/types/supabaseTypes';
 import useMediaQuery from './hooks/useMediaQuery';
+import selectConversationsByItemId from '@/supabase/models/messaging/selectConversationsByItemId';
+import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
+import deleteItems from '@/supabase/models/deleteItems';
 
 type DisplayDonatedItemsProps = {
   userId: string;
@@ -16,6 +19,9 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
   const isBreakpoint = useMediaQuery(1000);
   const [storeItems, setStoreItems] = useState<PartialItem[]>([]);
   const [error, setError] = useState('');
+  const [deletedItemName, setDeletedItemName] = useState<string | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -33,8 +39,31 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
     fetchItems();
   }, []);
 
-  const handleDeleteSuccess = (deleteItemId: number) => {
-    setStoreItems(storeItems.filter((item) => item.id !== deleteItemId));
+  const handleDeleteSuccess = async (itemId: number) => {
+    try {
+      const selectedConversations = await selectConversationsByItemId(itemId);
+      selectedConversations.forEach((conversation) => {
+        insertSystemMessage(
+          conversation,
+          'This item is no longer available for donation.'
+        );
+      });
+      const deletedItem = storeItems.find((item) => item.id === itemId);
+      if (deletedItem) {
+        setDeletedItemName(deletedItem?.item_name);
+      }
+      setStoreItems(storeItems.filter((item) => item.id !== itemId));
+    } catch (error) {
+      console.error(`Error inserting system message: ${error}`);
+      throw error;
+    }
+
+    try {
+      await deleteItems(itemId);
+    } catch (error) {
+      console.error('Failed to delete item:', error);
+      throw error;
+    }
   };
 
   return (
@@ -42,6 +71,11 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
       <h2 className='m-5 text-lg font-medium md:pl-20 lg:pl-40'>
         My donated items:
       </h2>
+      {deletedItemName && (
+        <h2 className='mb-2 text-center text-xl font-bold'>
+          You have successfully deleted &#34;{deletedItemName}&#34;
+        </h2>
+      )}
 
       {storeItems && storeItems.length > 0 ? (
         <ul
@@ -56,10 +90,10 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
                   imageSrc={item.imageSrc}
                   item_name={item.item_name}
                   condition={item.condition}
+                  item_type={item.item_type}
                   postcode={item.postcode}
                   postable={item.postable}
-                  itemId={item.id}
-                  item_type={item.item_type}
+                  id={item.id}
                   reserved={item.reserved}
                 />
                 <div className='flex flex-row'>
@@ -68,8 +102,8 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
                   </Link>
                   <Modal
                     name='Delete Item'
-                    itemId={item.id}
-                    message='By pressing Confirm you will delete this item'
+                    targetId={item.id}
+                    message='By pressing "Confirm" you will delete this item permanently.'
                     onDeleteSuccess={() => handleDeleteSuccess(item.id!)}
                   />
                 </div>
