@@ -57,7 +57,7 @@ const SearchResulsPage = async ({
               item_type={result.item_type}
               postcode={result.postcode}
               postable={result.postable}
-              itemId={result.id}
+              id={result.id}
               reserved={result.reserved}
             />
           ))
