@@ -54,14 +54,16 @@ const AddItemPage = () => {
       ...data,
     };
 
-    const insertedItem = await insertRow('items', dataItem);
-    if (insertedItem && insertedItem.length > 0) {
-      const itemId = insertedItem[0].id;
-      console.log(itemId, 'add-item page');
+    try {
+      const addedItem = await insertRow('items', dataItem);
+      if (!addedItem || addedItem.length === 0) {
+        throw new Error('Failed to add the new item');
+      }
+      const itemId = addedItem[0].id;
       reset();
       router.push(`/add-item/success/${itemId}`);
-    } else {
-      throw new Error('Failed to add the new item');
+    } catch (error) {
+      console.error('Error adding item:', error);
     }
   };
 
