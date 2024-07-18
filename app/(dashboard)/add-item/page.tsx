@@ -64,6 +64,7 @@ const AddItemPage = () => {
       router.push(`/add-item/success/${itemId}`);
     } catch (error) {
       console.error('Error adding item:', error);
+      throw error;
     }
   };
 
