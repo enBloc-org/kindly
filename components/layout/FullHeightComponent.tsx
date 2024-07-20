@@ -3,10 +3,10 @@
 import { ReactNode, useEffect, useState } from 'react';
 
 const FullHeightContainer = ({ children }: { children: ReactNode }) => {
-  const [height, setHeight] = useState(window.innerHeight);
+  if (typeof window !== 'undefined') {
+    const [height, setHeight] = useState(window.innerHeight);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
+    useEffect(() => {
       const handleResize = () => {
         setHeight(window.innerHeight);
       };
@@ -16,15 +16,15 @@ const FullHeightContainer = ({ children }: { children: ReactNode }) => {
       return () => {
         window.removeEventListener('resize', handleResize);
       };
-    }
-  }, []);
+    }, []);
 
-  const style = {
-    height: height + 'px',
-    overflow: 'auto',
-  };
+    const style = {
+      height: height + 'px',
+      overflow: 'auto',
+    };
 
-  return <div style={style}>{children}</div>;
+    return <div style={style}>{children}</div>;
+  }
 };
 
 export default FullHeightContainer;
