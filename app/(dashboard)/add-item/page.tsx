@@ -25,8 +25,18 @@ export default function AddItemPage() {
   }, []);
 
   const submitHandler = async (itemData: PartialItem) => {
-    await insertRow('items', itemData);
-    router.push('/add-item/success');
+    try {
+      const addedItem = await insertRow('items', itemData);
+      if (!addedItem || addedItem.length === 0) {
+        throw new Error('Failed to add the new item');
+      }
+      const itemId = addedItem[0].id;
+
+      router.push(`/add-item/success/${itemId}`);
+    } catch (error) {
+      console.error('Error adding item:', error);
+      throw error;
+    }
   };
 
   return (
