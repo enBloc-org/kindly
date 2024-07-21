@@ -207,15 +207,20 @@ INSERT INTO "public"."items" ("id", "created_at", "donated_by", "reserved", "siz
 --
 
 INSERT INTO "public"."messages" ("id", "created_at", "conversation_id", "sender_id", "message_text", "is_read") VALUES
-	(1, '2024-06-16 13:47:33.320944+00', 1, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 'Unread to donor', false),
-	(2, '2024-06-16 13:47:59.560082+00', 2, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 'Hello!', true),
-	(3, '2024-06-16 13:48:38.692718+00', 2, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 'Unread to refugee', false),
-	(5, '2024-06-16 13:50:10.337136+00', 3, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 'Sorry it''s deleted', false),
-	(4, '2024-06-16 13:49:45.938567+00', 3, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 'Can I have it please?', true),
-	(9, '2024-06-16 13:52:55.597471+00', 4, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 'Message 4 day 4', true),
-	(6, '2024-06-10 13:51:33+00', 4, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 'Message 1 day 1', true),
-	(7, '2024-06-12 13:52:11+00', 4, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 'Message 2 day 2', true),
-	(8, '2024-06-14 13:52:31+00', 4, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 'Message 3 day 3', true);
+	(1, '2024-06-16 13:47:33.320940+00', 1, '1dc06b29-0b93-46d8-a33b-fb6f80ee5263', 'This is the start of your conversation.', false),
+	(2, '2024-06-16 13:47:33.320944+00', 1, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 'Unread to donor', false),
+	(3, '2024-06-16 13:47:59.560080+00', 2, '1dc06b29-0b93-46d8-a33b-fb6f80ee5263', 'This is the start of your conversation.', true),
+	(4, '2024-06-16 13:47:59.560082+00', 2, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 'Hello!', true),
+	(5, '2024-06-16 13:48:38.692718+00', 2, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 'Unread to refugee', false),
+	(6, '2024-06-16 13:49:45.938565+00', 3, '1dc06b29-0b93-46d8-a33b-fb6f80ee5263', 'This is the start of your conversation.', true),
+	(7, '2024-06-16 13:49:45.938566+00', 3, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 'Can I have it please?', true),
+	(8, '2024-06-16 13:49:45.938567+00', 3, '1dc06b29-0b93-46d8-a33b-fb6f80ee5263', 'This item is no longer available.', true),
+	(9, '2024-06-16 13:50:10.337136+00', 3, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 'Sorry it''s deleted', false),
+	(10, '2024-06-10 13:51:32+00', 4, '1dc06b29-0b93-46d8-a33b-fb6f80ee5263', 'This is the start of your conversation.', true),
+	(11, '2024-06-10 13:51:33+00', 4, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 'Message 1 day 1', true),
+	(12, '2024-06-12 13:52:11+00', 4, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 'Message 2 day 2', true),
+	(13, '2024-06-14 13:52:31+00', 4, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 'Message 3 day 3', true),
+	(14, '2024-06-16 13:52:55.597471+00', 4, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 'Message 4 day 4', true);
 
 
 --
