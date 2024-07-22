@@ -135,6 +135,22 @@ Make sure you are on the dev branch then use
 npm run dev
 ```
 
+### Test Users
+
+To help you get started with development and testing, we have created the following accounts:
+
+- **Test Donor**
+  - Email: `donor+test.reshetniak@gmail.com`
+  - Password: `schemu8s`
+
+- **Test Refugee**
+  - Email: `refugee+test.reshetniak@gmail.com`
+  - Password: `schemu8s`
+
+- **trafalgargirls** *(this is used by the code as a system user for actions like adding message notifications to conversations)*
+  - Email: `trafalgargirls@gmail.com`
+  - Password: `donor-trafalgar`
+
 ## Next Steps
 
 Once you have kindly running on your machine read the [contribution guidance](CONTRIBUTING.md)
