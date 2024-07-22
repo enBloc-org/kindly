@@ -16,7 +16,6 @@ const LogOutButton: React.FC<PropsType> = ({ children }) => {
 
     if (!error) {
       router.push('/login');
-      window.location.reload();
     }
 
     if (error) {
