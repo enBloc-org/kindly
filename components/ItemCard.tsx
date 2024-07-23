@@ -2,32 +2,27 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import ItemDetails from './ItemDetails';
+import { PartialItem } from '@/types/supabaseTypes';
 
-type ItemCardPropType = {
-  imageSrc?: string;
-  item_name?: string;
-  condition?: string;
-  item_type?: string;
-  postcode?: string;
-  postable?: boolean;
-  itemId?: number;
-};
-
-const ItemCard: React.FC<ItemCardPropType> = ({
+const ItemCard: React.FC<PartialItem> = ({
   imageSrc,
   item_name,
   condition,
   item_type,
   postcode,
   postable,
-  itemId,
+  id,
+  reserved,
 }) => {
   return (
     <div className='card'>
-      <Link href={`/item/${itemId}`} className=''>
-        <h2 className='font-semibold  p-4'>{item_name}</h2>
+      <Link href={`/item/${id}`} className=''>
+        <div className='flex flex-row justify-between align-middle'>
+          <h2 className='p-4  font-semibold'>{item_name}</h2>
+          {reserved && <p className='reserved'>Reserved</p>}
+        </div>
         <div className='flex gap-3'>
-          <div className='relative w-48 h-36 md:w-64 md:h-52'>
+          <div className='relative h-36 w-48 md:h-52 md:w-64'>
             <Image
               src={imageSrc ? `${imageSrc}` : '/default-item-img.png'}
               alt={`Image of ${item_name}`}

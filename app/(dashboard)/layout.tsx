@@ -1,26 +1,22 @@
 import Header from '@/components/Header';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
 import Footer from '@/components/Footer';
+import Providers from '@/context/Providers';
+import FullHeightContainer from '@/components/layout/FullHeightComponent';
 
 export default async function DashBoardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createServerComponentClient({ cookies });
-  const { data } = await supabase.auth.getSession();
-  if (!data.session) {
-    redirect('/login');
-  }
   return (
     <>
-      <Header />
-      <main>
-        <div className='min-h-screen'>{children}</div>
-      </main>
-      <Footer />
+      <Providers>
+        <FullHeightContainer>
+          <Header />
+          <main className='flex flex-grow flex-col'>{children}</main>
+          <Footer />
+        </FullHeightContainer>
+      </Providers>
     </>
   );
 }

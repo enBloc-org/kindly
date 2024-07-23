@@ -12,15 +12,17 @@ const useMediaQuery = (width: number) => {
   }, []);
 
   useEffect(() => {
-    const media = window.matchMedia(`(max-width: ${width}px)`);
-    media.addListener(updateTarget);
+    if (typeof window !== 'undefined') {
+      const media = window.matchMedia(`(max-width: ${width}px)`);
+      media.addEventListener('change', updateTarget);
 
-    // Check on mount (callback is not called until a change occurs)
-    if (media.matches) {
-      setTargetReached(true);
+      // Check on mount (callback is not called until a change occurs)
+      if (media.matches) {
+        setTargetReached(true);
+      }
+
+      return () => media.removeEventListener('change', updateTarget);
     }
-
-    return () => media.removeListener(updateTarget);
   }, []);
 
   return targetReached;

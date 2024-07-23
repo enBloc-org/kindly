@@ -1,7 +1,8 @@
 'use client';
-import EditSupabaseRow from '@/utils/supabase/EditSupabaseRow';
-import { PartialItem, editProfile } from '@/utils/supabase/types';
+import editRow from '@/supabase/models/editRow';
+import { PartialItem, editProfile } from '@/types/supabaseTypes';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import ButtonPill from '../buttons/ButtonPill';
 import ButtonRounded from '../buttons/ButtonRounded';
@@ -9,10 +10,12 @@ import UploadImageInput from './UploadImageInput';
 
 export const ProfileEdit = ({
   userId,
-  user,
+  userName,
+  userAvatar,
 }: {
   userId: string;
-  user: string;
+  userName: string;
+  userAvatar: string;
 }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [imgAvatar, setImgAvatar] = useState('');
@@ -46,13 +49,15 @@ export const ProfileEdit = ({
         return;
       }
 
-      await EditSupabaseRow(
+      await editRow(
         'profiles',
-        { username: dataItem.username, avatar: dataItem.avatar },
+        {
+          username: dataItem.username,
+          avatar: imgAvatar,
+        },
         'id',
         userId
       );
-      window.location.reload();
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -63,12 +68,13 @@ export const ProfileEdit = ({
   };
 
   useEffect(() => {
-    setValue('username', isEditMode ? user : '');
-  }, [isEditMode, user, setValue]);
+    setValue('username', isEditMode ? userName : '');
+    setImgAvatar(userAvatar);
+  }, [isEditMode, userName, setValue]);
 
   return (
     <div className='flex flex-col'>
-      <div className='mb-5 flex flex-col justify-between items-center '>
+      <div className='mb-5 flex flex-col items-center justify-between '>
         <ButtonPill clickHandler={handleEditButtonClick}>
           {isEditMode ? 'CLOSE' : 'EDIT'}
         </ButtonPill>
@@ -85,7 +91,7 @@ export const ProfileEdit = ({
             Username
             <input
               type='text'
-              className='input-text mt-2 mb-4'
+              className='input-text mb-4 mt-2'
               {...register('username', {
                 required: 'Username is required',
                 maxLength: {
@@ -95,13 +101,16 @@ export const ProfileEdit = ({
               })}
             />
           </label>
-          <p className='italic font-extralight text-primaryOrange'>
-            {errors.username?.message as string}
-          </p>
+          <p className='error-message'>{errors.username?.message as string}</p>
           <UploadImageInput setImageSrc={setImgAvatar} />
           <div className='mt-4'>
             <ButtonRounded type='submit'>EDIT PROFILE</ButtonRounded>
           </div>
+          <p className='text-md mt-5'>
+            <Link href='/delete-account'>
+              <ButtonRounded type='button'>DELETE ACCOUNT</ButtonRounded>
+            </Link>
+          </p>
         </form>
       )}
     </div>

@@ -1,4 +1,5 @@
 {
+  "plugins": ["prettier-plugin-tailwindcss"],
   "semi": true,
   "singleQuote": true,
   "jsxSingleQuote": true,

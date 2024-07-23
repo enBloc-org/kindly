@@ -6,9 +6,6 @@
 .pnp.js
 .yarn/install-state.gz
 
-# testing
-/coverage
-
 # next.js
 /.next/
 /out/
@@ -37,12 +34,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-
-
+# Storybook
+*storybook.log
 
 # Sentry Config File
 .sentryclirc
 /test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/

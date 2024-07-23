@@ -1,84 +1,50 @@
-# Kindly - Supporting Ukrainian Refugees in London
-Kindly is a web application dedicated to assisting Ukrainian refugees in London by facilitating the donation of clothes and essential items. Individuals can contribute items at no cost to provide much-needed support to those in need.
+<h1 align=center><img src=https://github.com/enBloc-org/kindly/assets/114364165/ec1855ea-13b7-4d61-800d-ff1f0c90ff70 height=200/></h1>
+Kindly is an open source web application created by Trafalgar Girls and enBloc, supporting Ukrainian refugees in the United Kingdom. Individuals can contribute items at no cost to provide much-needed support to members of the Ukrainian refugee community.
+<br>
+<br>
+<br>
+<br>
 
-## Deployed Website
+<h2 align=center>Contributing</h2>
 
-The deployed website can be accessed at (https://kindly-v2zt.vercel.app/).
+We **welcome** your contributions. Please familiarize yourself with our documentation before getting started. You can find guidance on how to contribute in the following sources:
 
-Site style guide can be found at [https://github.com/fac28/kindly/blob/main/style-guide]
+- Our [discord server](https://discord.gg/Mrh5NYw52S) - say Hi to the other developers and share knowledge here 👋
+- [Before your first issue](https://github.com/enBloc-org/kindly/blob/dev/.github/BEFORE_YOUR_FIRST_ISSUE.md)
+- [Contributing](https://github.com/enBloc-org/kindly/blob/dev/.github/CONTRIBUTING.md) <sup>1</sup>
+- [Best practice](https://github.com/enBloc-org/kindly/blob/dev/.github/BEST_PRACTICE.md)
+- [Testing](https://github.com/enBloc-org/kindly/blob/dev/.github/TESTING.md)
+- [Privacy](https://github.com/enBloc-org/kindly/blob/dev/PRIVACY.md)
 
-## How It Works
-**Explore Categories**:
+<sup>1</sup> All PR's must request a merge to the base repository: ```enBloc-org/kindly``` base: ```dev```
 
-Browse through different categories of items to find what suits your preferences using an intuitive filtering system.
+<br>
+<br>
 
-**Select Items**:
+<table align=center border="0">
+ <tr align=center>
+    <td><b style="font-size:60px"><img src="https://github.com/enBloc-org/kindly/assets/114364165/f968742f-e28b-4177-af05-f7f712346898" height=100/>Trafalgar Girls</b></td>
+    <td><img src="https://github.com/enBloc-org/kindly/assets/114364165/358e8744-8683-4a44-b583-da3c412e7fdc" height=80/></td>
+ </tr>
+ <tr>
+    <td>Trafalgar Girls is a volunteer project providing informational, practical and emotional support to Ukrainian Refugees living in Great Britain and beyond.
+    </td>
+    <td>enBloc is a web agency born from the ever growing Founders and Coders alumni community and a creator of open source tools. Our ethos is simple: inspire, collaborate, and grow together.
+    </td>
+ </tr>
+</table>
 
-Easily select the items you need from the available options.
+<p align=center>✨The enBloc team will be reviewing issues and PRs weekly on Friday mornings✨</p>
 
-**Send Enquiries**:
+### Copyright (C) 2024  enBloc
+This program is free software: you can redistribute it and/or modify
+it under the terms of the **GNU General Public License** as published by
+the Free Software Foundation, either version 3 of the License or any later version.
 
-Communicate with donors by sending messages to inquire about specific items.
+This program is distributed in the hope that it will be useful,
+but **WITHOUT ANY WARRANTY**; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-## Technologies Used
-
-### Frontend: React and Next.js
-
-**React:**
-A JavaScript library for building interactive user interfaces, React's component-based architecture simplifies development and enhances code reusability.
-
-**Next.js:**
-A React framework that facilitates server-side rendering, automatic code splitting, and straightforward deployment, optimizing the performance of our application.
-
-### Backend: Supabase
-
-**Supabase:**
-Leveraging PostgreSQL for the database, Supabase streamlines backend development with real-time capabilities, authentication services, and serverless functions.
-
-- **Database:** Offers scalability and real-time updates, essential for live data applications.
-- **Authentication:** Provides secure user authentication with seamless integration for frontend frameworks like React.
-- **Serverless Functions:** Enables scalable and cost-effective backend operations without managing servers.
-
-### Other: Nodemailer
-
-**Nodemailer:**
-A Node.js library for sending emails programmatically, Nodemailer enhances communication within the application, facilitating notifications and updates.
-
-## Installation
-
-To run the Kindly application locally:
-
-Clone the project:
-
-```bash
-  git clone https://github.com/fac28/kindly.git
-```
-
-Go to the project directory:
-
-```bash
-  cd kindly
-```
-
-Install dependencies:
-
-```bash
-  npm install
-```
-
-Add env variable:
-
-Create an .env file in the root directory of your project and add the environment variables from supabase (https://supabase.com/docs/guides/functions/secrets).
-
-Running the app:
-
-```bash
-  npm run dev
-```
-
-## Credits
-
-DevOps: <a href="https://github.com/cazanelena">Elena Cazan</a> <br>
-Ux/UI: <a href="https://github.com/nichgalzin">Nich Galzin</a> <br>
-QA: <a href="https://github.com/ShaughnAnderson94">Shaughn Anderson</a> <br>
-Scrum: <a href="https://github.com/benante">Tommaso Orlandi</a> <br>
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see https://www.gnu.org/licenses/.

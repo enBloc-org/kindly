@@ -1,0 +1,38 @@
+name: 'Close stale Issues and PRs'
+on:
+  schedule:
+    - cron: '00 9 * * *'
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale-inactive-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-close: -1 # this value will keep issues and prs from being closed
+          include-only-assigned: true # issues in the backlog will not become stale
+
+          # stale and delete issues
+          stale-issue-message: |
+            🤖 meep morp! 
+            
+            This Issue is now marked as stale because there has been no activity for a while.
+            
+            🔎 The Issue will be automaticaly unassigned and moved to the Backlog if it doesn't receive new activity in the next 7 days.
+
+            💡 To unstale this Issue please push any commits that are ready or provide an update in the comments.
+          days-before-issue-stale: 7
+
+          # stale pull requests
+          stale-pr-message: |
+            🤖 meep morp! 
+            
+            This PR is now marked as stale because there has been no activity for a while.
+            
+            💡 Please guarantee this is still a relevant PR.
+          days-before-pr-stale: 7
