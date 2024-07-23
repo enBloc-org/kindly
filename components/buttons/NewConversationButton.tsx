@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import startNewConversation from '@/supabase/models/messaging/startNewConversation';
 import { useEffect } from 'react';
-import editRow from '@/supabase/models/editRow';
 import { useConversationContext } from '../../context/conversationContext';
 
 export default function NewConversationButton({
@@ -48,12 +47,6 @@ export default function NewConversationButton({
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
           setError(false);
-          await editRow(
-            'items',
-            { reserved: true, reserved_by: userId ?? '' },
-            'id',
-            item_id
-          );
         } catch (error) {
           console.error(error);
         }
