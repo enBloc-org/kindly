@@ -1,7 +1,8 @@
 'use client';
-import { Dispatch } from 'react';
+import { Dispatch, useState } from 'react';
 import { SearchParamsType } from '@/types/searchPageTypes';
 import CategoryButtonContainer from './CategoryButtonContainer.';
+import FilterIcon from '@/components/icons/FilterIcon';
 
 type FilterOptionsProps = {
   searchParams: SearchParamsType;
@@ -14,6 +15,7 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
   setSearchParams,
   setHasFilters,
 }) => {
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const handleCategoryClick = (value: string) => {
     if (searchParams.category === value) {
       setSearchParams((prev) => ({ ...prev, category: '' }));
@@ -44,13 +46,23 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
   };
 
   return (
-    <CategoryButtonContainer
-      searchParams={searchParams}
-      handleCategoryClick={handleCategoryClick}
-      handleSubcategoryClick={handleSubcategoryClick}
-      handleFilterApply={handleFilterApply}
-      handleFilterClear={handleFilterClear}
-    />
+    <>
+      <button
+        className='mt-2 px-4'
+        onClick={() => setFiltersOpen((prev) => !prev)}
+      >
+        <FilterIcon width={30} height={30} active={filtersOpen} />
+      </button>
+      {filtersOpen && (
+        <CategoryButtonContainer
+          searchParams={searchParams}
+          handleCategoryClick={handleCategoryClick}
+          handleSubcategoryClick={handleSubcategoryClick}
+          handleFilterApply={handleFilterApply}
+          handleFilterClear={handleFilterClear}
+        />
+      )}
+    </>
   );
 };
 

@@ -45,16 +45,18 @@ export default function SearchItemPage() {
 
   return (
     <div className='mb-28 mt-8'>
-      <SearchBar
-        searchParams={searchParams}
-        setSearchParams={setSearchParams}
-        handleSubmit={handleSubmit}
-      />
-      <FilterOptions
-        searchParams={searchParams}
-        setSearchParams={setSearchParams}
-        setHasFilters={setHasFilters}
-      />
+      <div className='m-auto flex max-w-[500px] flex-wrap justify-center gap-3'>
+        <SearchBar
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+          handleSubmit={handleSubmit}
+        />
+        <FilterOptions
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+          setHasFilters={setHasFilters}
+        />
+      </div>
       <ItemDisplayContainer
         searchResults={searchResults}
         isLoading={isLoading}

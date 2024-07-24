@@ -84,7 +84,7 @@ const CategoryButtonContainer: React.FC<CategoryButtonContainerProps> = ({
       )}
 
       {searchParams.category.length > 0 && (
-        <div className='mt-10 flex justify-center gap-2'>
+        <div className='mt-10 flex justify-center gap-6'>
           <button
             className='button button-rounded'
             type='button'
