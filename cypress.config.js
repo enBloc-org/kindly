@@ -7,8 +7,8 @@ module.exports = defineConfig({
     viewportHeight: 1080,
     baseUrl: 'http://localhost:3000',
     env: {
-      loginEmail: process.env.TEST_USER_EMAIL,
-      loginPassword: process.env.TEST_USER_PASSWORD,
+      loginEmail: 'refugee+test.reshetniak@gmail.com',
+      loginPassword: 'schemu8s',
     },
   },
 });
