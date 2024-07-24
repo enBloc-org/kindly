@@ -1,5 +1,16 @@
 {
+<<<<<<< HEAD
   "login": "/login",
   "profile": "/profile",
   "addItem": "/add-item"
+=======
+  "home": "/",
+  "login": "/login",
+  "about": "/about",
+  "search": "/search",
+  "addItem": "/add-item",
+  "message": "/conversations",
+  "profile": "/profile",
+  "item": "/item/"
+>>>>>>> dev
 }
