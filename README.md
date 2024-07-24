@@ -16,7 +16,11 @@ We **welcome** your contributions. Please familiarize yourself with our document
 - [Testing](https://github.com/enBloc-org/kindly/blob/dev/.github/TESTING.md)
 - [Privacy](https://github.com/enBloc-org/kindly/blob/dev/PRIVACY.md)
 
+### Governance
 For details on different ways you can help maintaining Kindly please see our documentation on [governance](./.github/GOVERNANCE.md)
+
+### Product Roadmap
+For more detail on what features are planned for Kindly please see the [roadmap](./.github/PRODUCT_ROADMAP.md)
 
 <br>
 <br>
