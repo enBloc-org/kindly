@@ -1,5 +1,3 @@
-'use client';
-import { Dispatch } from 'react';
 import ApparelSubcategory from './ApparelSubcategory';
 import CategoryButton from './CategoryButton';
 import ShirtIcon from '../../icons/ShirtIcon';
@@ -8,35 +6,25 @@ import ToyIcon from '../../icons/ToyIcon';
 import BookIcon from '../../icons/BookIcon';
 import HomeIcon from '../../icons/HomeIcon';
 import BooksSubcategory from './BooksSubcategory';
-import { SearchParamsType } from '@/types/searchPageTypes';
 
-type QuickBrowseProps = {
-  searchParams: SearchParamsType;
-  setSearchParams: Dispatch<React.SetStateAction<SearchParamsType>>;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+type CategoryButtonContainerProps = {
+  searchParams: {
+    category: string;
+    subcategory: string;
+  };
+  handleCategoryClick: (category: string) => void;
+  handleSubcategoryClick: (subcategory: string) => void;
+  handleFilterApply: () => void;
+  handleFilterClear: () => void;
 };
 
-const QuickBrowse: React.FC<QuickBrowseProps> = ({
+const CategoryButtonContainer: React.FC<CategoryButtonContainerProps> = ({
   searchParams,
-  setSearchParams,
-  handleSubmit,
+  handleCategoryClick,
+  handleSubcategoryClick,
+  handleFilterApply,
+  handleFilterClear,
 }) => {
-  const handleCategoryClick = (value: string) => {
-    if (searchParams.category === value) {
-      setSearchParams((prev) => ({ ...prev, category: '' }));
-    } else {
-      setSearchParams((prev) => ({ ...prev, category: value }));
-    }
-  };
-
-  const handleSubcategoryClick = (value: string) => {
-    if (searchParams.subcategory === value) {
-      setSearchParams((prev) => ({ ...prev, subcategory: '' }));
-    } else {
-      setSearchParams((prev) => ({ ...prev, subcategory: value }));
-    }
-  };
-
   return (
     <div className='m-auto max-w-xl'>
       <div className='mt-10 flex justify-between gap-1 px-2 text-sm'>
@@ -45,16 +33,16 @@ const QuickBrowse: React.FC<QuickBrowseProps> = ({
           category={searchParams.category}
           option='clothing'
         >
-          Clothing
           <ShirtIcon category={searchParams.category} />
+          Clothing
         </CategoryButton>
         <CategoryButton
           handleButtonClick={handleCategoryClick}
           category={searchParams.category}
           option='shoes'
         >
-          Shoes
           <ShoeIcon category={searchParams.category} />
+          Shoes
         </CategoryButton>
 
         <CategoryButton
@@ -62,24 +50,24 @@ const QuickBrowse: React.FC<QuickBrowseProps> = ({
           category={searchParams.category}
           option='toys'
         >
-          Toys
           <ToyIcon category={searchParams.category} />
+          Toys
         </CategoryButton>
         <CategoryButton
           handleButtonClick={handleCategoryClick}
           category={searchParams.category}
           option='books'
         >
-          Books
           <BookIcon category={searchParams.category} />
+          Books
         </CategoryButton>
         <CategoryButton
           handleButtonClick={handleCategoryClick}
           category={searchParams.category}
           option='household'
         >
-          Home
           <HomeIcon category={searchParams.category} />
+          Home
         </CategoryButton>
       </div>
       {['shoes', 'clothing'].includes(searchParams.category) && (
@@ -96,14 +84,22 @@ const QuickBrowse: React.FC<QuickBrowseProps> = ({
       )}
 
       {searchParams.category.length > 0 && (
-        <div className='mt-10 flex justify-center'>
+        <div className='mt-10 flex justify-center gap-2'>
           <button
             className='button button-rounded'
             type='button'
-            aria-label='See results'
-            onClick={handleSubmit}
+            aria-label='Apply filters'
+            onClick={handleFilterApply}
           >
-            Apply Filters
+            APPLY FILTERS
+          </button>
+          <button
+            className='button button-rounded'
+            type='button'
+            aria-label='Clear filters'
+            onClick={handleFilterClear}
+          >
+            CLEAR FILTERS
           </button>
         </div>
       )}
@@ -111,4 +107,4 @@ const QuickBrowse: React.FC<QuickBrowseProps> = ({
   );
 };
 
-export default QuickBrowse;
+export default CategoryButtonContainer;

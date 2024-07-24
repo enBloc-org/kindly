@@ -21,8 +21,7 @@ export default async function searchItems(
       case !!query && !!category:
         queryBuilder = queryBuilder
           .ilike('item_name', `%${query}%`)
-          .eq('item_type', category)
-          .or(`item_subtype.ilike.%${query}%`);
+          .eq('item_type', category);
         break;
       case !!query:
         queryBuilder = queryBuilder.or(
@@ -42,13 +41,13 @@ export default async function searchItems(
         break;
     }
 
-    if (cursor) {
-      queryBuilder = queryBuilder.lt('created_at', cursor);
-    }
-
     queryBuilder = queryBuilder
       .order('created_at', { ascending: false })
       .limit(Number(limit));
+
+    if (cursor) {
+      queryBuilder = queryBuilder.lt('created_at', cursor);
+    }
 
     const { data, error } = await queryBuilder;
 

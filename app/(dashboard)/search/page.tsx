@@ -6,7 +6,7 @@ import { PartialItem } from '@/types/supabaseTypes';
 //Components
 import ItemDisplayContainer from '@/components/search/ItemDisplayContainer';
 import { SearchBar } from '@/components/search/SearchBar';
-import QuickBrowse from '@/components/search/filter/QuickBrowse';
+import FilterOptions from '@/components/search/filter/FilterOptions';
 
 //Utils
 import searchItems from '@/supabase/models/filtering-items/searchItems';
@@ -24,6 +24,7 @@ export default function SearchItemPage() {
     useState<SearchParamsType>(initialSearchParams);
   const [searchResults, setSearchResults] = useState<PartialItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasFilters, setHasFilters] = useState(false);
 
   const fetchSearchResults = async () => {
     setIsLoading(true);
@@ -35,7 +36,7 @@ export default function SearchItemPage() {
 
   useEffect(() => {
     fetchSearchResults();
-  }, []);
+  }, [hasFilters]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,10 +50,10 @@ export default function SearchItemPage() {
         setSearchParams={setSearchParams}
         handleSubmit={handleSubmit}
       />
-      <QuickBrowse
+      <FilterOptions
         searchParams={searchParams}
         setSearchParams={setSearchParams}
-        handleSubmit={handleSubmit}
+        setHasFilters={setHasFilters}
       />
       <ItemDisplayContainer
         searchResults={searchResults}
