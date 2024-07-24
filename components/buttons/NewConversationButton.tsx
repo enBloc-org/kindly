@@ -81,7 +81,7 @@ export default function NewConversationButton({
   };
 
   return (
-    <div className='pb-10'>
+    <div>
       <button
         className='button button-rounded disabled:bg-primaryGray'
         disabled={isDisabled}

@@ -73,7 +73,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
             />
 
             {canMessage && user?.id && item.id && (
-              <div>
+              <div className='flex flex-row gap-4 pb-10'>
                 <NewConversationButton
                   userId={user?.id}
                   donorId={donerId}
