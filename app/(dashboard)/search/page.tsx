@@ -43,7 +43,7 @@ export default function SearchItemPage() {
   };
 
   return (
-    <div className='mt-8'>
+    <div className='mb-28 mt-8'>
       <SearchBar
         searchParams={searchParams}
         setSearchParams={setSearchParams}

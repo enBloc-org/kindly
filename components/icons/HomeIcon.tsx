@@ -1,4 +1,5 @@
-import { IconPropType } from '../search/filter/QuickBrowse';
+import { IconPropType } from '@/types/searchPageTypes';
+
 const HomeIcon: React.FC<IconPropType> = ({ category }) => {
   return (
     <svg

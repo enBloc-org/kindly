@@ -1,4 +1,4 @@
-import { IconPropType } from '../search/filter/QuickBrowse';
+import { IconPropType } from '@/types/searchPageTypes';
 
 const BookIcon: React.FC<IconPropType> = ({ category }) => {
   return (

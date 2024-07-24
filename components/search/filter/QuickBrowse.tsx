@@ -13,6 +13,7 @@ import { SearchParamsType } from '@/types/searchPageTypes';
 type QuickBrowseProps = {
   searchParams: SearchParamsType;
   setSearchParams: Dispatch<React.SetStateAction<SearchParamsType>>;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
 const QuickBrowse: React.FC<QuickBrowseProps> = ({
