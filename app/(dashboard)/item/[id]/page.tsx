@@ -7,6 +7,7 @@ import PostageOptionDisplay from '@/components/PostageOptionDisplay';
 import BackButton from '@/components/buttons/BackButton';
 import { getProfile } from '@/supabase/models/getProfile';
 import NewConversationButton from '@/components/buttons/NewConversationButton';
+import ReserveButton from '@/components/buttons/ReserveButton';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const supabase = newServerClient();
@@ -71,14 +72,17 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
               fontSize='text-lg'
             />
 
-            {canMessage && (
-              <NewConversationButton
-                userId={user?.id}
-                donorId={donerId}
-                donorEmail={donorEmail}
-                title={title}
-                item_id={item.id}
-              />
+            {canMessage && user?.id && item.id && (
+              <div>
+                <NewConversationButton
+                  userId={user?.id}
+                  donorId={donerId}
+                  donorEmail={donorEmail}
+                  title={title}
+                  item_id={item.id}
+                />
+                <ReserveButton itemId={item.id} userId={user.id} />
+              </div>
             )}
           </div>
         </>
