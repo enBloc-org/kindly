@@ -6,14 +6,21 @@ import ToyIcon from '../../icons/ToyIcon';
 import BookIcon from '../../icons/BookIcon';
 import HomeIcon from '../../icons/HomeIcon';
 import BooksSubcategory from './BooksSubcategory';
+import {
+  CategoryType,
+  BooksSubcategoryType,
+  ApparelSubcategoryType,
+} from '@/types/searchPageTypes';
 
 type CategoryButtonContainerProps = {
   searchParams: {
-    category: string;
-    subcategory: string;
+    category: CategoryType;
+    subcategory: BooksSubcategoryType | ApparelSubcategoryType;
   };
-  handleCategoryClick: (category: string) => void;
-  handleSubcategoryClick: (subcategory: string) => void;
+  handleCategoryClick: (category: CategoryType) => void;
+  handleSubcategoryClick: (
+    subcategory: BooksSubcategoryType | ApparelSubcategoryType
+  ) => void;
   handleFilterApply: () => void;
   handleFilterClear: () => void;
 };
@@ -28,7 +35,7 @@ const CategoryButtonContainer: React.FC<CategoryButtonContainerProps> = ({
   return (
     <div className='m-auto max-w-xl'>
       <div className='mt-10 flex justify-between gap-1 px-2 text-sm'>
-        <CategoryButton
+        <CategoryButton<CategoryType>
           handleButtonClick={handleCategoryClick}
           category={searchParams.category}
           option='clothing'
@@ -36,7 +43,7 @@ const CategoryButtonContainer: React.FC<CategoryButtonContainerProps> = ({
           <ShirtIcon category={searchParams.category} />
           Clothing
         </CategoryButton>
-        <CategoryButton
+        <CategoryButton<CategoryType>
           handleButtonClick={handleCategoryClick}
           category={searchParams.category}
           option='shoes'
@@ -45,7 +52,7 @@ const CategoryButtonContainer: React.FC<CategoryButtonContainerProps> = ({
           Shoes
         </CategoryButton>
 
-        <CategoryButton
+        <CategoryButton<CategoryType>
           handleButtonClick={handleCategoryClick}
           category={searchParams.category}
           option='toys'
@@ -53,7 +60,7 @@ const CategoryButtonContainer: React.FC<CategoryButtonContainerProps> = ({
           <ToyIcon category={searchParams.category} />
           Toys
         </CategoryButton>
-        <CategoryButton
+        <CategoryButton<CategoryType>
           handleButtonClick={handleCategoryClick}
           category={searchParams.category}
           option='books'
@@ -61,7 +68,7 @@ const CategoryButtonContainer: React.FC<CategoryButtonContainerProps> = ({
           <BookIcon category={searchParams.category} />
           Books
         </CategoryButton>
-        <CategoryButton
+        <CategoryButton<CategoryType>
           handleButtonClick={handleCategoryClick}
           category={searchParams.category}
           option='household'
@@ -71,13 +78,13 @@ const CategoryButtonContainer: React.FC<CategoryButtonContainerProps> = ({
         </CategoryButton>
       </div>
       {['shoes', 'clothing'].includes(searchParams.category) && (
-        <ApparelSubcategory
+        <ApparelSubcategory<ApparelSubcategoryType>
           subcategory={searchParams.subcategory}
           handleButtonClick={handleSubcategoryClick}
         />
       )}
       {searchParams.category === 'books' && (
-        <BooksSubcategory
+        <BooksSubcategory<BooksSubcategoryType>
           subcategory={searchParams.subcategory}
           handleButtonClick={handleSubcategoryClick}
         />

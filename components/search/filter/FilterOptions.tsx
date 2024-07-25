@@ -1,6 +1,11 @@
 'use client';
 import { Dispatch, useState } from 'react';
-import { SearchParamsType } from '@/types/searchPageTypes';
+import {
+  BooksSubcategoryType,
+  CategoryType,
+  SearchParamsType,
+  ApparelSubcategoryType,
+} from '@/types/searchPageTypes';
 import CategoryButtonContainer from './CategoryButtonContainer.';
 import FilterIcon from '@/components/icons/FilterIcon';
 
@@ -16,7 +21,8 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
   setHasFilters,
 }) => {
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const handleCategoryClick = (value: string) => {
+
+  const handleCategoryClick = (value: CategoryType) => {
     if (searchParams.category === value) {
       setSearchParams((prev) => ({ ...prev, category: '' }));
     } else {
@@ -24,7 +30,9 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
     }
   };
 
-  const handleSubcategoryClick = (value: string) => {
+  const handleSubcategoryClick = (
+    value: BooksSubcategoryType | ApparelSubcategoryType
+  ) => {
     if (searchParams.subcategory === value) {
       setSearchParams((prev) => ({ ...prev, subcategory: '' }));
     } else {

@@ -11,7 +11,7 @@ import FilterOptions from '@/components/search/filter/FilterOptions';
 //Utils
 import searchItems from '@/supabase/models/filtering-items/searchItems';
 
-const initialSearchParams = {
+const initialSearchParams: SearchParamsType = {
   query: '',
   category: '',
   subcategory: '',
@@ -20,8 +20,7 @@ const initialSearchParams = {
 };
 
 export default function SearchItemPage() {
-  const [searchParams, setSearchParams] =
-    useState<SearchParamsType>(initialSearchParams);
+  const [searchParams, setSearchParams] = useState(initialSearchParams);
   const [searchResults, setSearchResults] = useState<PartialItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasFilters, setHasFilters] = useState(false);
