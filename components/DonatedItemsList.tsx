@@ -64,7 +64,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
     }
   };
 
-  const handleUnreserve = async (itemId: number) => {
+  const unreserveHandler = async (itemId: number) => {
     try {
       await upsertRow('items', {
         id: itemId,
@@ -120,7 +120,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
                   />
                   {item.is_reserved ? (
                     <ButtonRounded
-                      clickHandler={() => handleUnreserve(item.id!)}
+                      clickHandler={() => unreserveHandler(item.id!)}
                       type='button'
                     >
                       Unreserve

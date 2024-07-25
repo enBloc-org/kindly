@@ -33,11 +33,10 @@ const ReserveForUserModal = ({
     const fetchUsers = async () => {
       if (requestedToReserveUserIds) {
         const promises = requestedToReserveUserIds.map(async (userId) => {
-          const usersdata = await getProfile(userId);
-          return { username: usersdata.data.username, id: userId };
+          const usersData = await getProfile(userId);
+          return { username: usersData.data.username, id: userId };
         });
         const users = await Promise.all(promises);
-        console.log('users', users);
         setRequestedToReserveUsers(users);
       }
     };
@@ -71,10 +70,10 @@ const ReserveForUserModal = ({
                 ? 'Who are you reserving this for?'
                 : 'Nobody has asked about this item yet.'}
             </p>
-            {requestedToReserveUsers.map((user, index) => (
+            {requestedToReserveUsers.map((user) => (
               <div
                 className='flex w-full items-center justify-between gap-2'
-                key={index}
+                key={user.id as string}
               >
                 <p className='font-light'>{user.username}</p>
                 <button
