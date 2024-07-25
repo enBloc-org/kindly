@@ -5,9 +5,21 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
+      //production image host
       {
         protocol: 'https',
         hostname: 'undfcbmldjkujposixvn\\.supabase\\.co',
+        pathname: '/storage/v1/object/public/images/**',
+      },
+      //local development image host
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        pathname: '/storage/v1/object/public/images/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
         pathname: '/storage/v1/object/public/images/**',
       },
     ],
