@@ -11,9 +11,9 @@ type UploadImageProps = {
 };
 
 const CDN =
-  process.env.NODE_ENV === 'development'
-    ? 'http://127.0.0.1:54321/storage/v1/object/public/images/'
-    : 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/';
+  process.env.NODE_ENV === 'production'
+    ? 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/'
+    : 'http://127.0.0.1:54321/storage/v1/object/public/images/';
 
 /**
  * @description this function will add any image to our project storage.
