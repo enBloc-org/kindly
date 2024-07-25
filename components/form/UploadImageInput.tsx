@@ -56,19 +56,44 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
       const file = e.target.files[0];
 
       if (file) {
-        const imageName = uuidv4();
-        const imagePath = CDN + userId + '/' + imageName;
+        try {
+          const { data: listData, error: listError } = await supabase.storage
+            .from('images')
+            .list(userId, { recursive: true });
 
-        setImageSrc(imagePath);
-        setIsImageUploaded(true);
-        setError?.('');
+          if (listError) {
+            console.error('Error fetching old images:', listError);
+            return;
+          }
 
-        const { error } = await supabase.storage
-          .from('images')
-          .upload(userId + '/' + imageName, file);
+          const oldImages = listData?.map((image) => image.name) || [];
+          if (oldImages.length > 0) {
+            const { error: deleteError } = await supabase.storage
+              .from('images')
+              .remove(oldImages.map((image) => userId + '/' + image));
 
-        if (error) {
-          console.log(error);
+            if (deleteError) {
+              console.error('Error deleting old images:', deleteError);
+              return;
+            }
+          }
+
+          const imageName = uuidv4();
+          const imagePath = CDN + userId + '/' + imageName;
+
+          const { error: uploadError } = await supabase.storage
+            .from('images')
+            .upload(userId + '/' + imageName, file);
+
+          if (uploadError) {
+            console.error('Error uploading new image:', uploadError);
+            return;
+          }
+          setImageSrc(imagePath);
+          setIsImageUploaded(true);
+          setError?.('');
+        } catch (error) {
+          console.error('Error handling image upload:', error);
         }
       } else {
         console.error('No file selected');
