@@ -61,6 +61,10 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
     <>
       <button
         className='mt-2 px-4'
+        aria-label='Filter Options'
+        aria-haspopup='true'
+        aria-expanded={filtersOpen}
+        data-cy='filter-button'
         onClick={() => setFiltersOpen((prev) => !prev)}
       >
         <FilterIcon width={30} height={30} active={filtersOpen} />

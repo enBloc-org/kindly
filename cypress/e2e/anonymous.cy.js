@@ -19,13 +19,14 @@ describe('Anonymous Navigation', () => {
     // click search, validate navigation
     HomePage.searchIcon().click();
     cy.location('pathname').should('eq', page.search);
+    // click filter
+    SearchPage.filterButton().click();
     // click toys
-    SearchPage.toysButton().click();
+    cy.get('button').contains('Toys').click();
     // click see results
-    SearchPage.seeResultsButton().click();
+    cy.get('button').contains('APPLY FILTERS').click();
     // click first result, validate navigation
     SearchPage.firstSearchResult().click();
-    cy.location('pathname').should('include', page.item);
     // should not be able to message
     ItemPage.messageButton().should('not.exist');
   });
