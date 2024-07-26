@@ -1,11 +1,15 @@
 'use client';
 import { Dispatch, useState } from 'react';
+
+// Types
 import {
   BooksSubcategoryType,
   CategoryType,
   SearchParamsType,
   ApparelSubcategoryType,
 } from '@/types/searchPageTypes';
+
+// Components
 import CategoryButtonContainer from './CategoryButtonContainer.';
 import FilterIcon from '@/components/icons/FilterIcon';
 
