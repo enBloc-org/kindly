@@ -1,4 +1,4 @@
-import AddItemPage from '../support/page_objects/AddItemPage';
+import AddItemPage from '../support/page_objects/addItemPage';
 import ProfilePage from '../support/page_objects/profilePage';
 import * as page from '../fixtures/URLs.json';
 import * as data from '../fixtures/inputData.json';

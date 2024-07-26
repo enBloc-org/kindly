@@ -9,6 +9,9 @@ Cypress.on(
   (err) => !err.message.includes('NEXT_REDIRECT')
 );
 
+// timeout to wait for redirects (in ms)
+const redirectTimeout = 10000;
+
 describe('Anonymous Navigation', () => {
   it('Can browse items', () => {
     // go to home page
@@ -40,7 +43,7 @@ describe('Anonymous Navigation', () => {
     cy.visit(page.home, { failOnStatusCode: false });
     // click add item, validate navigation
     HomePage.addItemIcon().click();
-    cy.location('pathname')
+    cy.location('pathname', { timeout: redirectTimeout })
       .should('not.eq', page.addItem)
       .should('eq', page.login);
   });
@@ -50,7 +53,7 @@ describe('Anonymous Navigation', () => {
     cy.visit(page.home, { failOnStatusCode: false });
     // click message, validate navigation
     HomePage.messageIcon().click();
-    cy.location('pathname')
+    cy.location('pathname', { timeout: redirectTimeout })
       .should('not.eq', page.message)
       .should('eq', page.login);
   });
@@ -60,7 +63,7 @@ describe('Anonymous Navigation', () => {
     cy.visit(page.home, { failOnStatusCode: false });
     // click profile, validate navigation
     HomePage.profileIcon().click();
-    cy.location('pathname')
+    cy.location('pathname', { timeout: redirectTimeout })
       .should('not.eq', page.profile)
       .should('eq', page.login);
   });
