@@ -5,13 +5,16 @@ export class SearchPage extends BasePage {
     return cy.get('[data-cy="filter-button"]').should('be.visible');
   }
 
-  // toysButton() {
-  //   return cy.get('button').contains('Toys').should('be.visible');
-  // }
+  searchInput() {
+    return cy
+      .get('input')
+      .contains(/Find an item/gi)
+      .should('be.visible');
+  }
 
-  // seeResultsButton() {
-  //   return cy.get('button').contains('APPLY FILTERS').should('be.visible');
-  // }
+  submitButton() {
+    return cy.get('button[type="submit"]').should('be.visible');
+  }
 
   firstSearchResult() {
     return cy.get('div.flex.gap-3').first().should('be.visible');
