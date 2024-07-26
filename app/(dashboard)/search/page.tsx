@@ -15,7 +15,7 @@ const initialSearchParams: SearchParamsType = {
   query: '',
   category: '',
   subcategory: '',
-  limit: 10,
+  limit: 30,
   cursor: '',
 };
 
