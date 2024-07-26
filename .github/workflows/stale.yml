@@ -1,11 +1,7 @@
 name: 'Close stale Issues and PRs'
 on:
   schedule:
-<<<<<<< HEAD
-    - cron: '30 1 * * *'
-=======
     - cron: '00 9 * * *'
->>>>>>> dev
 
 permissions:
   contents: write
@@ -13,27 +9,11 @@ permissions:
   pull-requests: write
 
 jobs:
-<<<<<<< HEAD
-  stale:
-=======
   stale-inactive-issues:
->>>>>>> dev
     runs-on: ubuntu-latest
     steps:
       - uses: actions/stale@v9
         with:
-<<<<<<< HEAD
-          # stale and delete issues
-          stale-issue-message: '🤖 meep morp! This Issue is now marked as stale because there has been no activity for a while.  The Issue may be unassigned and moved to the Backlog or it will get deleted if there is no activity in the next 7 days.'
-          close-issue-message: '🤖 meep morp :( This Issue has been closed because it was stale for 7 days.'
-          days-before-issue-stale: 21
-          days-before-issue-close: 7
-
-          # stale pull requests
-          stale-pr-message: '🤖 meep morp! This PR is now marked as stale because there has been no activity for a while.  Please guarantee this is still a relevant PR.'
-          days-before-pr-stale: 14
-          days-before-pr-close: -1 # Applying a negative value means the pr will not be closed and is simply being marked as stale
-=======
           days-before-close: -1 # this value will keep issues and prs from being closed
           include-only-assigned: true # issues in the backlog will not become stale
 
@@ -56,4 +36,3 @@ jobs:
             
             💡 Please guarantee this is still a relevant PR.
           days-before-pr-stale: 7
->>>>>>> dev
