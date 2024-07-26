@@ -1,4 +1,7 @@
+//Types
 import { BooksSubcategoryType } from '@/types/searchPageTypes';
+
+//Components
 import GirlIcon from '../../icons/GirlIcon';
 import WomanIcon from '../../icons/WomanIcon';
 import CategoryButton from './CategoryButton';
@@ -12,22 +15,22 @@ const BooksSubcategory: React.FC<BookSubcategoryProp> = ({
   handleButtonClick,
 }) => {
   return (
-    <div className='mt-10 flex justify-center gap-2 text-sm'>
+    <div className='mt-10 flex justify-center gap-6 text-sm'>
       <CategoryButton<BooksSubcategoryType>
         handleButtonClick={handleButtonClick}
         category={subcategory}
         option='adults'
       >
-        Adults
         <WomanIcon subcategory={subcategory} />
+        Adults
       </CategoryButton>
       <CategoryButton<BooksSubcategoryType>
         handleButtonClick={handleButtonClick}
         category={subcategory}
         option='children'
       >
-        Children
         <GirlIcon subcategory={subcategory} />
+        Children
       </CategoryButton>
     </div>
   );

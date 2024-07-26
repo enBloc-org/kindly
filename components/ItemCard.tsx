@@ -1,8 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import ItemDetails from './ItemDetails';
+
+//Types
 import { PartialItem } from '@/types/supabaseTypes';
+
+//Components
+import ItemDetails from './ItemDetails';
 
 const ItemCard: React.FC<PartialItem> = ({
   imageSrc,

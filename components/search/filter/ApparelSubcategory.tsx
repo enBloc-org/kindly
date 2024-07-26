@@ -1,5 +1,8 @@
 'use client';
+//Types
 import { ApparelSubcategoryType } from '@/types/searchPageTypes';
+
+//Components
 import BoyIcon from '../../icons/BoyIcon';
 import GirlIcon from '../../icons/GirlIcon';
 import ManIcon from '../../icons/ManIcon';
@@ -16,7 +19,7 @@ const ApparelSubcategory: React.FC<ApparelSubcategoryProp> = ({
   handleButtonClick,
 }) => {
   return (
-    <div className='mt-10 flex justify-center gap-2 text-sm md:gap-10'>
+    <div className='mt-10 flex justify-center gap-2 text-sm md:gap-6'>
       <CategoryButton<ApparelSubcategoryType>
         handleButtonClick={handleButtonClick}
         category={subcategory}
@@ -38,16 +41,16 @@ const ApparelSubcategory: React.FC<ApparelSubcategoryProp> = ({
         category={subcategory}
         option='girls'
       >
-        Girls
         <GirlIcon subcategory={subcategory} />
+        Girls
       </CategoryButton>
       <CategoryButton<ApparelSubcategoryType>
         handleButtonClick={handleButtonClick}
         category={subcategory}
         option='boys'
       >
-        Boys
         <BoyIcon subcategory={subcategory} />
+        Boys
       </CategoryButton>
     </div>
   );

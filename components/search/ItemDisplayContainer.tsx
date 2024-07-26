@@ -1,5 +1,9 @@
 import React from 'react';
+
+//Types
 import { PartialItem } from '@/types/supabaseTypes';
+
+//Components
 import ItemCard from '../ItemCard';
 
 type ItemDisplayContainerProps = {
@@ -31,7 +35,7 @@ const ItemDisplayContainer: React.FC<ItemDisplayContainerProps> = ({
               item_type={result.item_type}
               postcode={result.postcode}
               postable={result.postable}
-              itemId={result.id}
+              id={result.id}
             />
           ))
         ) : (

@@ -1,3 +1,11 @@
+//Types
+import {
+  CategoryType,
+  BooksSubcategoryType,
+  ApparelSubcategoryType,
+} from '@/types/searchPageTypes';
+
+//Components
 import ApparelSubcategory from './ApparelSubcategory';
 import CategoryButton from './CategoryButton';
 import ShirtIcon from '../../icons/ShirtIcon';
@@ -6,11 +14,6 @@ import ToyIcon from '../../icons/ToyIcon';
 import BookIcon from '../../icons/BookIcon';
 import HomeIcon from '../../icons/HomeIcon';
 import BooksSubcategory from './BooksSubcategory';
-import {
-  CategoryType,
-  BooksSubcategoryType,
-  ApparelSubcategoryType,
-} from '@/types/searchPageTypes';
 
 type CategoryButtonContainerProps = {
   searchParams: {
@@ -33,8 +36,9 @@ const CategoryButtonContainer: React.FC<CategoryButtonContainerProps> = ({
   handleFilterClear,
 }) => {
   return (
-    <div className='m-auto max-w-xl'>
-      <div className='mt-10 flex justify-between gap-1 px-2 text-sm'>
+    <div className='m-auto mt-6 bg-gray-100 px-4 sm:px-24'>
+      <h2 className='p-2 font-light'>Filters:</h2>
+      <div className='mt-2 flex justify-between gap-2 px-2 text-sm'>
         <CategoryButton<CategoryType>
           handleButtonClick={handleCategoryClick}
           category={searchParams.category}
@@ -91,7 +95,7 @@ const CategoryButtonContainer: React.FC<CategoryButtonContainerProps> = ({
       )}
 
       {searchParams.category.length > 0 && (
-        <div className='mt-10 flex justify-center gap-6'>
+        <div className='my-6 flex justify-center gap-6'>
           <button
             className='button button-rounded'
             type='button'
