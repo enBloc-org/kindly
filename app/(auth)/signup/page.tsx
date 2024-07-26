@@ -17,6 +17,7 @@ export default function SignUp({
     const { data, error } = await supabase.auth.signUp({
       email: formData.get('email') as string,
       password: formData.get('password') as string,
+      options: { emailRedirectTo: '/login' },
     });
 
     if (error) {
