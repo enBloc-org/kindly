@@ -7,7 +7,7 @@ import { PartialItem } from '@/types/supabaseTypes';
 import ItemCard from '../ItemCard';
 
 type ItemDisplayContainerProps = {
-  searchResults: PartialItem[] | [];
+  searchResults: PartialItem[];
   isLoading: boolean;
 };
 
@@ -34,7 +34,7 @@ const ItemDisplayContainer: React.FC<ItemDisplayContainerProps> = ({
               condition={result.condition}
               item_type={result.item_type}
               postcode={result.postcode}
-              postable={result.postable}
+              postage_covered={result.postage_covered}
               id={result.id}
             />
           ))

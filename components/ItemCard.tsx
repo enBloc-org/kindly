@@ -14,7 +14,7 @@ const ItemCard: React.FC<PartialItem> = ({
   condition,
   item_type,
   postcode,
-  postable,
+  postage_covered,
   id,
   reserved,
 }) => {
@@ -38,7 +38,7 @@ const ItemCard: React.FC<PartialItem> = ({
             condition={condition}
             item_type={item_type}
             postcode={postcode}
-            postable={postable}
+            postage_covered={postage_covered}
             fontSize='text-sm'
           />
         </div>
