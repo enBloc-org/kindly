@@ -23,7 +23,7 @@ const SearchResulsPage = async ({
   } else {
     searchResults = await getItems(
       'items',
-      '*',
+      '',
       'item_type',
       searchParams.category
     );

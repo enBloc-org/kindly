@@ -4,7 +4,7 @@ export async function getRecentItems() {
   const supabase = newClient();
   const { data, error } = await supabase
     .from('items')
-    .select('*')
+    .select('')
     .order('created_at', { ascending: false })
     .limit(4);
   if (error) {
