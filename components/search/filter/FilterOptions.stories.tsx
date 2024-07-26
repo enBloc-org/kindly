@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import FilterOptions from './FilterOptions';
+import { SearchParamsType } from '@/types/searchPageTypes';
 
 const meta: Meta<typeof FilterOptions> = {
   title: 'Search/Filter/FilterOprions',
@@ -18,7 +19,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const params = {
+const params: SearchParamsType = {
   query: '',
   category: '',
   subcategory: '',
