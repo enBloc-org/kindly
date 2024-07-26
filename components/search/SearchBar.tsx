@@ -1,5 +1,3 @@
-'use client';
-
 import { SearchParamsType } from '@/types/searchPageTypes';
 import { Dispatch, SetStateAction } from 'react';
 
@@ -25,7 +23,7 @@ export const SearchBar: React.FC<SearchBarPropType> = ({
     <div className='flex items-center justify-center'>
       <form
         onSubmit={handleSubmit}
-        className='flex opacity-70 transition-opacity duration-200 focus-within:opacity-90'
+        className='flex gap-2 opacity-70 transition-opacity duration-200 focus-within:opacity-90'
       >
         <div>
           <input

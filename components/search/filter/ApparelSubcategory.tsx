@@ -22,16 +22,16 @@ const ApparelSubcategory: React.FC<ApparelSubcategoryProp> = ({
         category={subcategory}
         option='women'
       >
-        Women
         <WomanIcon subcategory={subcategory} />
+        Women
       </CategoryButton>
       <CategoryButton<ApparelSubcategoryType>
         handleButtonClick={handleButtonClick}
         category={subcategory}
         option='men'
       >
-        Men
         <ManIcon subcategory={subcategory} />
+        Men
       </CategoryButton>
       <CategoryButton<ApparelSubcategoryType>
         handleButtonClick={handleButtonClick}

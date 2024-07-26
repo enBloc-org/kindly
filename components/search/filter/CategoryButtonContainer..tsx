@@ -78,14 +78,14 @@ const CategoryButtonContainer: React.FC<CategoryButtonContainerProps> = ({
         </CategoryButton>
       </div>
       {['shoes', 'clothing'].includes(searchParams.category) && (
-        <ApparelSubcategory<ApparelSubcategoryType>
-          subcategory={searchParams.subcategory}
+        <ApparelSubcategory
+          subcategory={searchParams.subcategory as ApparelSubcategoryType}
           handleButtonClick={handleSubcategoryClick}
         />
       )}
       {searchParams.category === 'books' && (
-        <BooksSubcategory<BooksSubcategoryType>
-          subcategory={searchParams.subcategory}
+        <BooksSubcategory
+          subcategory={searchParams.subcategory as BooksSubcategoryType}
           handleButtonClick={handleSubcategoryClick}
         />
       )}
