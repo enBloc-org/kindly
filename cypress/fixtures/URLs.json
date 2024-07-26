@@ -1,9 +1,4 @@
 {
-<<<<<<< HEAD
-  "login": "/login",
-  "profile": "/profile",
-  "addItem": "/add-item"
-=======
   "home": "/",
   "login": "/login",
   "about": "/about",
@@ -12,5 +7,4 @@
   "message": "/conversations",
   "profile": "/profile",
   "item": "/item/"
->>>>>>> dev
 }
