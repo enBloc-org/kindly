@@ -12,7 +12,7 @@ export default async function searchItems(
     let queryBuilder = supabase.from('items').select();
 
     switch (true) {
-      case query && !!category && !!subcategory:
+      case !!query && !!category && !!subcategory:
         queryBuilder = queryBuilder
           .ilike('item_name', `%${query}%`)
           .eq('item_type', category)
