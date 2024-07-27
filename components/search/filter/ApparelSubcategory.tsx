@@ -1,60 +1,56 @@
 'use client';
-import BoyIcon from '../icons/BoyIcon';
-import GirlIcon from '../icons/GirlIcon';
-import ManIcon from '../icons/ManIcon';
-import WomanIcon from '../icons/WomanIcon';
+//Types
+import { ApparelSubcategoryType } from '@/types/searchPageTypes';
+
+//Components
+import BoyIcon from '../../icons/BoyIcon';
+import GirlIcon from '../../icons/GirlIcon';
+import ManIcon from '../../icons/ManIcon';
+import WomanIcon from '../../icons/WomanIcon';
 import CategoryButton from './CategoryButton';
 
-type CategoryProp = {
-  setSubcategory: React.Dispatch<React.SetStateAction<string>>;
-  subcategory: string;
+type ApparelSubcategoryProp = {
+  subcategory: ApparelSubcategoryType;
+  handleButtonClick: (value: ApparelSubcategoryType) => void;
 };
 
-const ApparelSubcategory: React.FC<CategoryProp> = ({
-  setSubcategory,
+const ApparelSubcategory: React.FC<ApparelSubcategoryProp> = ({
   subcategory,
+  handleButtonClick,
 }) => {
-  const handleButtonClick = (value: string) => {
-    if (subcategory === value) {
-      setSubcategory('');
-    } else {
-      setSubcategory(value);
-    }
-  };
-
   return (
-    <div className='mt-10 flex justify-center gap-2 text-sm md:gap-10'>
-      <CategoryButton
+    <div className='mt-10 flex justify-center gap-2 text-sm md:gap-6'>
+      <CategoryButton<ApparelSubcategoryType>
         handleButtonClick={handleButtonClick}
         category={subcategory}
         option='women'
       >
-        Women
         <WomanIcon subcategory={subcategory} />
+        Women
       </CategoryButton>
-      <CategoryButton
+      <CategoryButton<ApparelSubcategoryType>
         handleButtonClick={handleButtonClick}
         category={subcategory}
         option='men'
       >
-        Men
         <ManIcon subcategory={subcategory} />
+        Men
       </CategoryButton>
-      <CategoryButton
+      <CategoryButton<ApparelSubcategoryType>
         handleButtonClick={handleButtonClick}
         category={subcategory}
         option='girls'
       >
-        Girls
         <GirlIcon subcategory={subcategory} />
+        Girls
       </CategoryButton>
-      <CategoryButton
+      <CategoryButton<ApparelSubcategoryType>
         handleButtonClick={handleButtonClick}
         category={subcategory}
         option='boys'
       >
-        Boys
         <BoyIcon subcategory={subcategory} />
+        Boys
       </CategoryButton>
     </div>
   );

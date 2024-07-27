@@ -1,29 +1,33 @@
-'use client';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { SearchParamsType } from '@/types/searchPageTypes';
+import { Dispatch, SetStateAction } from 'react';
 
-export const SearchBar: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const router = useRouter();
+type SearchBarPropType = {
+  searchParams: SearchParamsType;
+  setSearchParams: Dispatch<SetStateAction<SearchParamsType>>;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+};
 
+export const SearchBar: React.FC<SearchBarPropType> = ({
+  setSearchParams,
+  searchParams,
+  handleSubmit,
+}) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    router.push(`/search/results/?query=${searchTerm}`);
+    setSearchParams((prevState) => ({
+      ...prevState,
+      query: e.target.value,
+    }));
   };
 
   return (
-    <div className='searchmargintop flex items-center justify-center'>
+    <div className='flex items-center justify-center'>
       <form
         onSubmit={handleSubmit}
-        className='flex opacity-70 transition-opacity duration-200 focus-within:opacity-90'
+        className='flex gap-2 opacity-70 transition-opacity duration-200 focus-within:opacity-90'
       >
         <div>
           <input
-            value={searchTerm}
+            value={searchParams.query}
             className='bg-primaryLight mh-10 rounded-l-md p-2 shadow-sm outline-none'
             type='text'
             placeholder='Find an item...'

@@ -1,4 +1,4 @@
-import { IconPropType } from '../filter/QuickBrowse';
+import { IconPropType } from '@/types/searchPageTypes';
 
 const ToyIcon: React.FC<IconPropType> = ({ category }) => {
   return (
