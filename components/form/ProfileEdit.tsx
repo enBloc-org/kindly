@@ -58,7 +58,6 @@ export const ProfileEdit = ({
         'id',
         userId
       );
-      window.location.reload();
     } catch (error) {
       console.error('Error submitting form:', error);
     }

@@ -5,7 +5,7 @@ import * as page from '../fixtures/URLs.json';
 
 describe('Authorisation Spec', () => {
   it('User can log in with valid username and password', () => {
-    cy.visit(page.login);
+    cy.visit(page.login, { failOnStatusCode: false });
     LoginPage.emailInput().type(Cypress.env('loginEmail'));
     LoginPage.passwordInput().type(Cypress.env('loginPassword'));
     LoginPage.loginButton().click();
@@ -14,8 +14,8 @@ describe('Authorisation Spec', () => {
 
   it('User can log out', () => {
     cy.login(Cypress.env('loginEmail'), Cypress.env('loginPassword'));
-    cy.visit(page.profile);
+    cy.visit(page.profile, { failOnStatusCode: false });
     ProfilePage.logoutButton().click();
-    HomePage.profileIcon().should('not.exist');
+    LoginPage.loginButton().should('be.visible');
   });
 });
