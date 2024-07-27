@@ -8,9 +8,11 @@ How much you contribute and how long for is entirely at your discretion and coll
 There are two simple steps to taking on any role:
 
 - 🔨 **Do** the work involved.  
-  This community is run on willful collaboration, meaning we invite and expect everyone to identify the areas of Kindly they would like to help with and take any reasonable action towards improving the platform.  
-  If you are interested in being a maintainer, find ways in which you can help maintainers with their tasks;  
-  If you see an opportunity to improve the performance of our code, publish an issue suggesting a spike or changes
+  This community is run on willful collaboration, meaning we invite and expect everyone to identify the areas of Kindly they would like to help with and take any reasonable action towards improving the platform. 
+
+  - If you are interested in being a maintainer, find ways in which you can help maintainers with their tasks  
+  - If you see an opportunity to improve the performance of our code, publish an issue suggesting a spike or changes
+  - you get the point...
 
 - 🙋 **Ask** for any help needed.  
   The codebase on Kindly is the result of a large community collaborating over time, so if there's something you're not sure about it's very likely that someone else will have an insight that can help.  
@@ -18,7 +20,7 @@ There are two simple steps to taking on any role:
 
 ## Collaborator
 
-Everyone involved in maintaining / improving Kindly is considered a collaborator. All you need in order to be a collaborator is the willpower to become involved.
+Everyone involved in maintaining / improving Kindly is considered a collaborator. All you need in order to be a collaborator is to get involved.
 
 - **Do**  
   Get familiar with the documentation on Kindly. Set up your local environment and try using the platform. Connect with the community on the Discord server and introduce yourself in the `#start-here` channel. Submit new issues if you spot an opportunity to improve Kindly by adding functionality of fixing a bug.
