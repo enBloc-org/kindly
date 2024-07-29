@@ -6,10 +6,7 @@ export class SearchPage extends BasePage {
   }
 
   searchInput() {
-    return cy
-      .get('input')
-      .contains(/Find an item/gi)
-      .should('be.visible');
+    return cy.get('input[placeholder*="Find an item"]').should('be.visible');
   }
 
   submitButton() {
