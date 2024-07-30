@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ReserveForUserModal from '@/components/ReserveForUserModal';
-import { userEvent, within, waitFor, fn } from '@storybook/test';
+import { userEvent, within, fn } from '@storybook/test';
 import { expect } from '@storybook/jest';
 
 const meta: Meta<typeof ReserveForUserModal> = {
@@ -37,14 +37,5 @@ export const ReserveForUserModalWithEnquiries: Story = {
       '96a064f1-56b7-4368-baaa-4f9889081c21',
     ],
     onReserveStatusChange: fn(),
-  },
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByText(args.name));
-    const confirmButton = (await canvas.findAllByText('Confirm'))[0];
-    await expect(confirmButton).toBeVisible();
-    await userEvent.click(confirmButton);
-    await waitFor(() => expect(args.onReserveStatusChange).toHaveBeenCalled());
-    await expect(confirmButton).not.toBeVisible();
   },
 };

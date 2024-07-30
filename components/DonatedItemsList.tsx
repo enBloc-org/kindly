@@ -120,7 +120,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
                   postcode={item.postcode}
                   postable={item.postable}
                   id={item.id}
-                  reserved={item.reserved}
+                  is_reserved={item.is_reserved}
                 />
                 <div className='flex flex-row gap-2'>
                   <Link href={`/edit-item/${item.id}`}>
