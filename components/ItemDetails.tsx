@@ -11,7 +11,7 @@ const ItemDetails: React.FC<ItemDetailPropType> = ({
   condition,
   item_type,
   postcode,
-  postable,
+  postage_covered,
   fontSize,
 }) => {
   return (
@@ -37,7 +37,9 @@ const ItemDetails: React.FC<ItemDetailPropType> = ({
         </p>
       )}
 
-      {postable && <p className='mt-5 text-center italic'>Postage covered</p>}
+      {postage_covered && (
+        <p className='mt-5 text-center italic'>Postage covered</p>
+      )}
     </div>
   );
 };

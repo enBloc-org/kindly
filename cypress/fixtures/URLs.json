@@ -1,6 +1,7 @@
 {
   "home": "/",
   "login": "/login",
+  "signup": "/signup",
   "about": "/about",
   "search": "/search",
   "addItem": "/add-item",
