@@ -33,4 +33,35 @@ describe('Authorisation Spec', () => {
       .contains(/user already registered/gi)
       .should('be.visible');
   });
+
+  it('User should be able to signup with a new email address', () => {
+    cy.visit('https://www.guerrillamail.com');
+    cy.get('#email-widget')
+      .invoke('text')
+      .then((randomEmail) => {
+        cy.origin(
+          'http://localhost:3000/',
+          { args: randomEmail },
+          (randomEmail) => {
+            cy.visit('/signup');
+            cy.get('input[name="user_name"]').type('existing user');
+            cy.get('input[name="email"]').type(randomEmail);
+            cy.get('input[id="password"]').type('NewPasswo0rd!');
+            cy.get('input[id="confirmPassword"]').type('NewPasswo0rd!');
+            cy.get('input[id="agreeCheckbox"]').check();
+            cy.get('button')
+              .contains(/register/gi)
+              .click();
+          }
+        );
+      });
+
+    // cy.visit('https://www.guerrillamail.com');
+    cy.get('#email_list tr:not(#mr_1)', { timeout: 60000 })
+      .should('be.visible')
+      .click()
+      .then(() => {
+        cy.get('.email_body a').first();
+      });
+  });
 });
