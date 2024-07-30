@@ -54,14 +54,24 @@ describe('Authorisation Spec', () => {
               .click();
           }
         );
-      });
-
-    // cy.visit('https://www.guerrillamail.com');
-    cy.get('#email_list tr:not(#mr_1)', { timeout: 60000 })
-      .should('be.visible')
-      .click()
-      .then(() => {
-        cy.get('.email_body a').first();
+        cy.origin(
+          'http://127.0.0.1:54324',
+          { args: randomEmail },
+          (randomEmail) => {
+            cy.visit('/');
+            cy.get('input[placeholder="mailbox"]')
+              .type(randomEmail)
+              .closest('form')
+              .submit();
+            cy.get('div .message-list-entry').click();
+            cy.get('a')
+              .contains(/confirm email/gi)
+              .invoke('attr', 'href')
+              .then((linkAddress) => {
+                expect(linkAddress).to.include('/login');
+              });
+          }
+        );
       });
   });
 });
