@@ -10,10 +10,7 @@ type UploadImageProps = {
   isRequired?: boolean;
 };
 
-const CDN =
-  process.env.NODE_ENV === 'production'
-    ? 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/'
-    : 'http://127.0.0.1:54321/storage/v1/object/public/images/';
+const CDN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
 
 /**
  * @description this function will add any image to our project storage.
@@ -66,7 +63,12 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
             return;
           }
 
-          const oldImages = listData?.map((image) => image.name) || [];
+          if (!listData) {
+            throw new Error('Failed to fetch images');
+          }
+
+          const oldImages = listData.map((image) => image.name);
+
           if (oldImages.length > 0) {
             const { error: deleteError } = await supabase.storage
               .from('images')
