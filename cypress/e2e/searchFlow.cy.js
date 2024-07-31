@@ -20,6 +20,15 @@ describe('search page', () => {
     cy.get('h2').contains('Summer Blouse').should('be.visible');
   });
 
+  it('search by category and subcategory and query', () => {
+    searchPage.searchInput().type('summer');
+    searchPage.filterButton().click();
+    cy.get('button').contains('Clothing').click();
+    cy.get('button').contains('Women').click();
+    cy.get('button').contains('APPLY FILTERS').click();
+    cy.get('h2').contains('Summer Blouse').should('be.visible');
+  });
+
   it('clear filters on when button is pressed', () => {
     searchPage.filterButton().click();
     cy.get('button').contains('Clothing').click();
