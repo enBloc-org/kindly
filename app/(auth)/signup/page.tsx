@@ -28,7 +28,13 @@ export default function SignUp({
         );
       }
 
-      return redirect(`/signup?message=${error.code?.replaceAll(/_/g, ' ')}.`);
+      if (error.code === 'weak_password') {
+        return redirect(
+          `/signup?message=Your password must include at lease one uppercase character, one number and one special character`
+        );
+      }
+
+      return redirect(`/signup?message=${error.code?.replaceAll(/_/g, ' ')}`);
     }
 
     // Get userId and insert it as ID in Profiles table
