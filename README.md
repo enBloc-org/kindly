@@ -11,12 +11,16 @@ We **welcome** your contributions. Please familiarize yourself with our document
 
 - Our [discord server](https://discord.gg/Mrh5NYw52S) - say Hi to the other developers and share knowledge here 👋
 - [Before your first issue](https://github.com/enBloc-org/kindly/blob/dev/.github/BEFORE_YOUR_FIRST_ISSUE.md)
-- [Contributing](https://github.com/enBloc-org/kindly/blob/dev/.github/CONTRIBUTING.md) <sup>1</sup>
+- [Contributing](https://github.com/enBloc-org/kindly/blob/dev/.github/CONTRIBUTING.md)
 - [Best practice](https://github.com/enBloc-org/kindly/blob/dev/.github/BEST_PRACTICE.md)
 - [Testing](https://github.com/enBloc-org/kindly/blob/dev/.github/TESTING.md)
 - [Privacy](https://github.com/enBloc-org/kindly/blob/dev/PRIVACY.md)
 
-<sup>1</sup> All PR's must request a merge to the base repository: ```enBloc-org/kindly``` base: ```dev```
+### Governance
+For details on different ways you can help maintaining Kindly please see our documentation on [governance](./.github/GOVERNANCE.md)
+
+### Product Roadmap
+For more detail on what features are planned for Kindly please see the [roadmap](./.github/PRODUCT_ROADMAP.md)
 
 <br>
 <br>
