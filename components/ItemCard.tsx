@@ -1,8 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import ItemDetails from './ItemDetails';
+
+//Types
 import { PartialItem } from '@/types/supabaseTypes';
+
+//Components
+import ItemDetails from './ItemDetails';
 
 const ItemCard: React.FC<PartialItem> = ({
   imageSrc,
@@ -10,7 +14,7 @@ const ItemCard: React.FC<PartialItem> = ({
   condition,
   item_type,
   postcode,
-  postable,
+  postage_covered,
   id,
   reserved,
 }) => {
@@ -26,15 +30,15 @@ const ItemCard: React.FC<PartialItem> = ({
             <Image
               src={imageSrc ? `${imageSrc}` : '/default-item-img.png'}
               alt={`Image of ${item_name}`}
-              layout='fill'
-              objectFit='cover'
+              fill
+              sizes='(max-width: 768px) 100vw, 50vw'
             />
           </div>
           <ItemDetails
             condition={condition}
             item_type={item_type}
             postcode={postcode}
-            postable={postable}
+            postage_covered={postage_covered}
             fontSize='text-sm'
           />
         </div>
