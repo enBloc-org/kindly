@@ -16,7 +16,7 @@ Kindly is an open source web application created by Trafalgar Girls and <a href=
 
 - ### How to start using it?
 
-   Kindly is currently in beta stage, meaning that it is being tested by a small volunteer community of testing. If you want to be a part of the testing community, contact **XYZ**
+   Kindly is currently in beta stage, meaning that it is being tested by a small community of volunteer testers. If you want to be a part of the testing community, contact **XYZ**
 
 <br>
 <br>
