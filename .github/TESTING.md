@@ -32,3 +32,31 @@ You can learn more about writing tests within the `play` block of your stories b
 All component stories should include tests for any basic functionality provided by the component. All `interactions` tests should be passing in Storybook after any changes to our components.
 
 ![Storybook interactions test suite](./documentation_images/storybook_interactions_suite.png)
+
+## End-to-end Testing (E2E)
+
+[Cypress](https://www.cypress.io/) is the tool used to test the high-level functionality of the application.
+
+[With the app running](https://github.com/enBloc-org/kindly/blob/dev/.github/BEFORE_YOUR_FIRST_ISSUE.md#running-the-app), you can run the Cypress tests with the following command:
+
+```bash
+npx cypress run
+```
+
+Alternatively, if you have Supabase running (but not the app) you can start the app and run the tests simultaneously with:
+
+```bash
+npm run start-dev
+```
+
+The Cypress E2E test files are located in the `cypress/e2e/` folder.
+
+### Developing and debugging E2E tests
+
+As you work on new features and fixes, you may need to write new E2E tests or update existing ones. With the app running, you can run the E2E tests interactively using Launchpad:
+
+```bash
+npx cypress open
+```
+
+Learn more about the Cypress Launchpad by checking out the [**official documentation 📚**](https://docs.cypress.io/guides/getting-started/opening-the-app)
