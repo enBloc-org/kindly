@@ -5,7 +5,7 @@ Kindly is an open source web application created by Trafalgar Girls and <a href=
 
 - ### Who is it for?
 
-   Kindly is for anyone who wants to share items with the Ukrainian refugee community. Equally, it is for members of the Ukrainian refugee community who want to borrow or receive items
+   Kindly is for anyone who wants to share items with the Ukrainian refugee community. Equally, it is for members of the Ukrainian refugee community who want to give back, borrow or receive items
 
 - ### Who are we?
 
