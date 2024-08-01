@@ -5,18 +5,18 @@ Kindly is an open source web application created by Trafalgar Girls and <a href=
 
 - ### Who is it for?
 
-   Kindly is for anyone who wants to share, sell or donate items to the Ukrainian refugee community. Equally, it is for members of the Ukrainian refugee community who want to borrow, buy or recieve items.
+   Kindly is for anyone who wants to share items with the Ukrainian refugee community. Equally, it is for members of the Ukrainian refugee community who want to borrow or receive items
 
 - ### Who are we?
 
-   **Trafalgar Girls** is a volunteer project providing informational, practical and emotional support to Ukrainian Refugees living in Great Britain and beyond.
+   **Trafalgar Girls** is a volunteer project providing informational, practical and emotional support to Ukrainian Refugees living in Great Britain and beyond
    
-   **enBloc** is a web agency born from the ever growing Founders and Coders alumni community and a creator of open source tools. Our ethos is simple: inspire, collaborate, and grow together.
+   **enBloc** is a web agency born from the ever growing Founders and Coders alumni community and a creator of open source tools. Our ethos is simple: inspire, collaborate, and grow together
 
 
 - ### How to start using it?
 
-   Kindly is currently in beta stage, meaning that it is being tested by a small community of volunteer testers. If you want to be a part of the testing community, contact **XYZ**
+   Kindly is currently in beta stage, meaning that it is being tested by a small community of volunteer testers. If you want to get involved at this stage, check out the documentation linked under [Contributing](#Contributing)
 
 <br>
 <br>
@@ -31,6 +31,7 @@ Kindly is an open source project and we welcome anyone looking to get involved. 
 - [Best practice](https://github.com/enBloc-org/kindly/blob/dev/.github/BEST_PRACTICE.md)
 - [Testing](https://github.com/enBloc-org/kindly/blob/dev/.github/TESTING.md)
 - [Privacy](https://github.com/enBloc-org/kindly/blob/dev/PRIVACY.md)
+- [Governance](https://github.com/enBloc-org/kindly/blob/dev/GOVERNANCE.md)
 
 ### Governance
 For details on different ways you can help maintaining Kindly please see our documentation on [governance](./.github/GOVERNANCE.md)
