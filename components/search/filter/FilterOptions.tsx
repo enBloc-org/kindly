@@ -30,7 +30,11 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
     if (searchParams.category === value) {
       setSearchParams((prev) => ({ ...prev, category: '' }));
     } else {
-      setSearchParams((prev) => ({ ...prev, category: value }));
+      setSearchParams((prev) => ({
+        ...prev,
+        category: value,
+        subcategory: '',
+      }));
     }
   };
 
@@ -54,7 +58,7 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({
   };
 
   const handleFilterApply = () => {
-    setHasFilters(true);
+    setHasFilters((prevState) => !prevState);
   };
 
   return (
