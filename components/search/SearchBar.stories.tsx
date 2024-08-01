@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SearchBar } from './SearchBar';
 import { SearchParamsType } from '@/types/searchPageTypes';
+import { fn } from '@storybook/test';
 
 const meta: Meta<typeof SearchBar> = {
-  title: 'Search/Filter/SearchBar',
+  title: 'Search/SearchBar',
   component: SearchBar,
   decorators: [
     (Story) => (
@@ -29,5 +30,7 @@ const params: SearchParamsType = {
 export const SearchBarDefault: Story = {
   args: {
     searchParams: params,
+    setSearchParams: fn(),
+    handleSubmit: fn(),
   },
 };
