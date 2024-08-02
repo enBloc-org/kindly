@@ -16,7 +16,7 @@ export default function NewConversationButton({
   donorId: string;
   donorEmail: string;
   title: string;
-  item_id: string;
+  item_id: number;
 }) {
   const subject = title;
   const message = `Someone is interested in your item. Please check your messages to get the conversation started.`;

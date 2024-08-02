@@ -8,11 +8,11 @@ import NewConversationButton from '@/components/buttons/NewConversationButton';
 import BackButton from '@/components/buttons/BackButton';
 import ButtonRounded from './buttons/ButtonRounded';
 import { updateRequestToReserve } from '@/supabase/models/updateRequestToReserve';
-import { PartialItem, PartialProfile } from '@/types/supabaseTypes';
+import { PartialItem } from '@/types/supabaseTypes';
 
 type ItemDetailsClientProps = {
   item: PartialItem;
-  user: PartialProfile;
+  user: { id: string };
   canMessage: boolean;
   donorId: string;
   donorEmail: string;
