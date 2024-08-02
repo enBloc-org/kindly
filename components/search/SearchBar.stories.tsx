@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
-import FilterOptions from './FilterOptions';
+import { SearchBar } from './SearchBar';
 import { SearchParamsType } from '@/types/searchPageTypes';
+import { fn } from '@storybook/test';
 
-const meta: Meta<typeof FilterOptions> = {
-  title: 'Search/Filter/FilterOprions',
-  component: FilterOptions,
+const meta: Meta<typeof SearchBar> = {
+  title: 'Search/SearchBar',
+  component: SearchBar,
   decorators: [
     (Story) => (
-      <div style={{ width: '300px' }}>
+      <div style={{ marginTop: '2rem' }}>
         <Story />
       </div>
     ),
@@ -27,10 +27,10 @@ const params: SearchParamsType = {
   cursor: '',
 };
 
-export const FilterOptionsDefault: Story = {
+export const SearchBarDefault: Story = {
   args: {
     searchParams: params,
     setSearchParams: fn(),
-    setHasFilters: fn(),
+    handleSubmit: fn(),
   },
 };
