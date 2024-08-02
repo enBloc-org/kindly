@@ -102,7 +102,7 @@ export const ProfileEdit = ({
             />
           </label>
           <p className='error-message'>{errors.username?.message as string}</p>
-          <UploadImageInput setImageSrc={setImgAvatar} />
+          <UploadImageInput setImageSrc={setImgAvatar} imageType={'profile'} />
           <div className='mt-4'>
             <ButtonRounded type='submit'>EDIT PROFILE</ButtonRounded>
           </div>

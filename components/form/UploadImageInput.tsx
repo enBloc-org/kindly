@@ -8,6 +8,7 @@ type UploadImageProps = {
   setImageSrc: (src: string) => void;
   setError?: (error: string) => void;
   isRequired?: boolean;
+  imageType: 'item' | 'profile';
 };
 
 const CDN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
@@ -21,6 +22,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
   setImageSrc,
   setError,
   isRequired: isRequired = false,
+  imageType,
 }) => {
   const supabase = createClientComponentClient();
   const [userId, setUserId] = useState('');
@@ -54,33 +56,38 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 
       if (file) {
         try {
-          const { data: listData, error: listError } = await supabase.storage
-            .from('images')
-            .list(userId, { recursive: true });
-
-          if (listError) {
-            console.error('Error fetching old images:', listError);
-            return;
-          }
-
-          if (!listData) {
-            throw new Error('Failed to fetch images');
-          }
-
-          const oldImages = listData.map((image) => image.name);
-
-          if (oldImages.length > 0) {
-            const { error: deleteError } = await supabase.storage
+          if (imageType === 'profile') {
+            const { data: listData, error: listError } = await supabase.storage
               .from('images')
-              .remove(oldImages.map((image) => userId + '/' + image));
+              .list(userId, { recursive: true });
 
-            if (deleteError) {
-              console.error('Error deleting old images:', deleteError);
+            if (listError) {
+              console.error('Error fetching old images:', listError);
               return;
+            }
+
+            if (!listData) {
+              throw new Error('Failed to fetch images');
+            }
+
+            const profileImages = listData
+              .filter((image) => image.name.startsWith('profile_'))
+              .map((image) => userId + '/' + image.name);
+
+            if (profileImages.length > 0) {
+              const { error: deleteError } = await supabase.storage
+                .from('images')
+                .remove(profileImages);
+
+              if (deleteError) {
+                console.error('Error deleting old images:', deleteError);
+                return;
+              }
             }
           }
 
-          const imageName = uuidv4();
+          const prefix = imageType === 'profile' ? 'profile_' : 'item_';
+          const imageName = prefix + uuidv4();
           const imagePath = CDN + userId + '/' + imageName;
 
           const { error: uploadError } = await supabase.storage
