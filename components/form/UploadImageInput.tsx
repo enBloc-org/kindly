@@ -15,7 +15,10 @@ const CDN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/im
 
 /**
  * @description this function will add any image to our project storage.
+ * @param setImageSrc is a required parameter that accepts a string. It will set the value of the image source if the upload is successful.
+ * @param setError is an optional parameter that accepts a string. It will set the value of the error message if the image upload fails.
  * @param isRequired is an optional parameter that accepts a boolean. It will consider the value of false unless explicitly assigned the value of true.
+ * @param imageType is a required parameter that accepts either 'item' or 'profile'. It will determine the type of image to be uploaded in the imageFileUpload function.
  */
 
 const UploadImageInput: React.FC<UploadImageProps> = ({
