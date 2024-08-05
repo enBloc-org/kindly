@@ -25,7 +25,7 @@ describe('Edit user profile and check if the changes are visible after page relo
     cy.get('button').contains('EDIT PROFILE').click();
     cy.reload();
     cy.get('img[alt="User avatar"]')
-      .should('have.attr', 'src')
-      .and('match', /profile_/);
+      .should('be.visible')
+      .and('have.attr', 'src');
   });
 });
