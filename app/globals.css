@@ -71,10 +71,6 @@ body {
   hover:scale-95 hover:shadow-lg lg:text-lg;
 }
 
-.reserved {
-  @apply p-2 text-xl font-bold text-primaryOrange;
-}
-
 /*  Menus */
 
 .overlay {
