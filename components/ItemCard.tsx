@@ -16,14 +16,14 @@ const ItemCard: React.FC<PartialItem> = ({
   postcode,
   postage_covered,
   id,
-  reserved,
+  is_reserved,
 }) => {
   return (
     <div className='card'>
       <Link href={`/item/${id}`} className=''>
         <div className='flex flex-row justify-between align-middle'>
           <h2 className='p-4  font-semibold'>{item_name}</h2>
-          {reserved && <p className='reserved'>Reserved</p>}
+          {is_reserved && <p className='reserved'>Reserved</p>}
         </div>
         <div className='flex gap-3'>
           <div className='relative h-36 w-48 md:h-52 md:w-64'>
