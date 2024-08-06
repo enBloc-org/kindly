@@ -26,6 +26,9 @@ describe('Edit user profile and check if the changes are visible after page relo
     cy.reload();
     cy.get('img[alt="User avatar"]')
       .should('be.visible')
-      .and('have.attr', 'src');
+      .and('have.attr', 'src')
+      .then((src) => {
+        expect(src).to.match(/public\/images/gi);
+      });
   });
 });
