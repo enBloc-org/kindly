@@ -18,11 +18,25 @@ export const ItemCardDefault: Story = {
     imageSrc: testItem.src,
     item_name: 'White Jumper',
     condition: 'New',
-    item_type: 'Clothing',
+    size: 'Medium',
     postcode: 'E12',
     postable: true,
     id: 2,
     reserved: false,
+  },
+};
+
+export const ItemCardPotageCovered: Story = {
+  args: {
+    imageSrc: testItem.src,
+    item_name: 'White Jumper',
+    condition: 'New',
+    size: 'Medium',
+    postcode: 'E12',
+    postable: true,
+    id: 2,
+    reserved: false,
+    postage_covered: true,
   },
 };
 
@@ -31,7 +45,7 @@ export const ItemCardReserved: Story = {
     imageSrc: testItem.src,
     item_name: 'White Jumper',
     condition: 'New',
-    item_type: 'Clothing',
+    size: 'Medium',
     postcode: 'E12',
     postable: true,
     id: 2,
