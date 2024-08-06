@@ -16,10 +16,12 @@ describe('Reserve and Unreserve item for a user test suite', () => {
       .find('button')
       .contains('Unreserve')
       .should('be.visible');
+    cy.get('p').contains('Reserved').should('be.visible');
   });
 
   it('user can remove the reservation status of their item', () => {
     cy.visit(page.profile, { failOnStatusCode: false });
+    cy.get('p').contains('Reserved').should('be.visible');
     const unreserveButton = cy
       .get('.card')
       .contains('shoes')
