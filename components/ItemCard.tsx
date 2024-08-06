@@ -26,8 +26,8 @@ const ItemCard: React.FC<PartialItem> = ({
       >
         {reserved && (
           <div
-            className='absolute top-14 z-10 mx-4 w-[175px] rounded-lg border border-primaryGreen
-            bg-background p-2 text-center opacity-70'
+            className='absolute left-0 right-0 top-14 z-10 m-auto w-[175px] rounded-lg border border-primaryGreen
+            bg-background p-2 text-center opacity-70 md:w-[200px]'
           >
             <p className='text-lg text-primaryGreen'>RESERVED</p>
           </div>
