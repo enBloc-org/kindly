@@ -25,7 +25,7 @@ const ItemDisplayContainer: React.FC<ItemDisplayContainerProps> = ({
   return (
     <div
       className='m-auto mt-10 grid grid-cols-2 px-1
-        sm:max-w-[825px] sm:grid-cols-3 lg:mt-20 lg:max-w-[1140px] lg:grid-cols-4 lg:gap-10'
+        sm:max-w-[825px] sm:grid-cols-3 lg:max-w-[1140px] lg:grid-cols-4 lg:gap-10'
     >
       {searchResults.length > 0 ? (
         searchResults.map((result) => (
