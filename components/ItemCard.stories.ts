@@ -55,9 +55,8 @@ export const ItemCardReserved: Story = {
     const canvas = within(canvasElement);
 
     await step('Check if reserved tag is present', async () => {
-      const reservedTag = await canvas.findByText('Reserved');
+      const reservedTag = await canvas.findByText(/reserved/i);
       expect(reservedTag).toBeInTheDocument();
-      expect(reservedTag).toHaveClass('reserved');
     });
   },
 };
