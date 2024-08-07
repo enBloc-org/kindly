@@ -12,9 +12,9 @@ permissions:
 jobs:
   unassign-inactive-issues:
     name: Unnassign inactive issues
-    runs-on: ubuntu@latest
+    runs-on: ubuntu-latest
     steps:
-      - uses: boundfoxstudios/action-unassign-contributor-after-days-of-inactivity@main
+      - uses: boundfoxstudios/action-unassign-contributor-after-days-of-inactivity@v1.0.2
         with:
           last-activity: 7
           labels: 'Stale'
