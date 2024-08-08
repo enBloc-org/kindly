@@ -9,6 +9,7 @@ import BackButton from '@/components/buttons/BackButton';
 import ButtonRounded from './buttons/ButtonRounded';
 import { updateRequestToReserve } from '@/supabase/models/updateRequestToReserve';
 import { PartialItem } from '@/types/supabaseTypes';
+import { useState } from 'react';
 
 type ItemDetailsClientProps = {
   item: PartialItem;
@@ -16,6 +17,7 @@ type ItemDetailsClientProps = {
   canMessage: boolean;
   donorId: string;
   donorEmail: string;
+  donorName: string;
   title: string;
 };
 
@@ -25,13 +27,18 @@ const DisplayItemDetailsClient: React.FC<ItemDetailsClientProps> = ({
   canMessage,
   donorId,
   donorEmail,
+  donorName,
   title,
 }) => {
+  const [requestStatus, setRequestStatus] = useState<string | null>(null);
+
   const handleReserve = async () => {
-    if (item && user) {
-      await updateRequestToReserve(item.id!, user.id!);
-    } else {
-      console.error('Item ID or User ID is missing');
+    try {
+      const message = await updateRequestToReserve(item.id!, user.id!);
+      setRequestStatus(message);
+    } catch (error) {
+      setRequestStatus('Failed to send request to reserve the item.');
+      console.error('Error reserving item:', error);
     }
   };
 
@@ -65,11 +72,13 @@ const DisplayItemDetailsClient: React.FC<ItemDetailsClientProps> = ({
         </div>
         <ItemDetails
           condition={item.condition}
-          donated_by={item.profiles.username}
+          donated_by={donorName}
           postcode={item.postcode}
           fontSize='text-lg'
         />
-
+        {requestStatus && (
+          <p className='text-center text-red-500'>{requestStatus}</p>
+        )}
         {canMessage && user?.id && item.id && (
           <div className='flex flex-row gap-4 pb-10'>
             <NewConversationButton

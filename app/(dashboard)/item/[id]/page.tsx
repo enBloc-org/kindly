@@ -20,6 +20,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
     } else {
       const donorEmail = item.profiles.email;
       const donorId: string = item.profiles?.id;
+      const donorName = item.profiles.username;
       const title = item.item_name;
       if (
         !user ||
@@ -37,6 +38,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
           canMessage={canMessage}
           donorId={donorId}
           donorEmail={donorEmail}
+          donorName={donorName}
           title={title}
         />
       );

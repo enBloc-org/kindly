@@ -19,7 +19,7 @@ export const updateRequestToReserve = async (
 
     const currentRequestedToReserve = item?.requestedToReserve || [];
     if (currentRequestedToReserve.includes(userId)) {
-      alert('You have already requested this item.');
+      return 'You have already requested this item.';
     } else {
       const updatedRequestedToReserve = [...currentRequestedToReserve, userId];
       const { error: updateError } = await supabase
@@ -30,10 +30,10 @@ export const updateRequestToReserve = async (
       if (updateError) {
         throw new Error(updateError.message);
       }
-      alert('Request to reserve the item has been sent successfully.');
+      return 'Request to reserve the item has been sent successfully.';
     }
   } catch (error) {
     console.error('Error reserving item:', error);
-    alert('Failed to send request to reserve the item.');
+    return 'Failed to send request to reserve the item.';
   }
 };
