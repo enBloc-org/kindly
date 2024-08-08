@@ -20,18 +20,17 @@ export const updateRequestToReserve = async (
     const currentRequestedToReserve = item?.requestedToReserve || [];
     if (currentRequestedToReserve.includes(userId)) {
       return 'You have already requested this item.';
-    } else {
-      const updatedRequestedToReserve = [...currentRequestedToReserve, userId];
-      const { error: updateError } = await supabase
-        .from('items')
-        .update({ requestedToReserve: updatedRequestedToReserve })
-        .eq('id', itemId);
-
-      if (updateError) {
-        throw new Error(updateError.message);
-      }
-      return 'Request to reserve the item has been sent successfully.';
     }
+    const updatedRequestedToReserve = [...currentRequestedToReserve, userId];
+    const { error: updateError } = await supabase
+      .from('items')
+      .update({ requestedToReserve: updatedRequestedToReserve })
+      .eq('id', itemId);
+
+    if (updateError) {
+      throw new Error(updateError.message);
+    }
+    return 'Request to reserve the item has been sent successfully.';
   } catch (error) {
     console.error('Error reserving item:', error);
     return 'Failed to send request to reserve the item.';
