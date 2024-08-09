@@ -36,7 +36,7 @@ export default function Header() {
   };
 
   return (
-    <header className='min-h-30 sticky top-0 z-10 flex flex-shrink-0 items-center justify-between bg-background px-4 py-2 shadow-sm'>
+    <header className='min-h-30 sticky top-0 z-20 flex flex-shrink-0 items-center justify-between bg-background px-4 py-2 shadow-sm'>
       {!isBreakpoint && <KindlyLogoLink />}
       {isBreakpoint ? (
         showConversationsList ? (
