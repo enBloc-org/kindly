@@ -97,6 +97,7 @@ npx supabase status
 ```
 
 Copy the following values:
+
 - `API URL` value into your `.env` file as the value of our `NEXT_PUBLIC_SUPABASE_URL`
 - `anon key` value as our `NEXT_PUBLIC_SUPABASE_ANON_KEY` value
 - `service_role key` as our `SUPABASE_SERVICE_ROLE_KEY` value
@@ -112,6 +113,17 @@ npx supabase db reset
 ```
 
 This will set your local project back to the latest committed state and re-populate all data.
+
+### Setting Up Supabase Bucket
+
+To store and serve images, Kindly uses a bucket in Supabase. You need to create and configure this bucket manually:
+
+1. Open the 'Studio URL' in your web browser
+2. Navigate to the "Storage" section
+3. Create a new bucket named 'images'
+4. Set the bucket to be public to ensure it can be accessed without authentication
+
+💡 Note: The bucket and its configuration will be lost if you reset the database or destroy the container. Make sure to create the bucket once again if you reset your environment.
 
 ## Managing Database Migrations:
 
@@ -140,14 +152,16 @@ npm run dev
 To help you get started with development and testing, we have created the following accounts:
 
 - **Test Donor**
+
   - Email: `donor+test.reshetniak@gmail.com`
   - Password: `schemu8s`
 
 - **Test Refugee**
+
   - Email: `refugee+test.reshetniak@gmail.com`
   - Password: `schemu8s`
 
-- **trafalgargirls** *(this is used by the code as a system user for actions like adding message notifications to conversations)*
+- **trafalgargirls** _(this is used by the code as a system user for actions like adding message notifications to conversations)_
   - Email: `trafalgargirls@gmail.com`
   - Password: `donor-trafalgar`
 
