@@ -16,7 +16,7 @@ export default function NewConversationButton({
   donorId: string;
   donorEmail: string;
   title: string;
-  item_id: string;
+  item_id: number;
 }) {
   const subject = title;
   const message = `Someone is interested in your item. Please check your messages to get the conversation started.`;
@@ -81,7 +81,7 @@ export default function NewConversationButton({
   };
 
   return (
-    <div className='pb-10'>
+    <div>
       <button
         className='button button-rounded disabled:bg-primaryGray'
         disabled={isDisabled}

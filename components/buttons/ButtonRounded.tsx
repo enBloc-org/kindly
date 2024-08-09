@@ -14,7 +14,7 @@ const ButtonRounded: React.FC<ButtonRoundedPropTypes> = ({
   clickHandler,
   isDisabled,
   type,
-  width,
+  width = '',
 }) => {
   return (
     <button
