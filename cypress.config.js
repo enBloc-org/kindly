@@ -10,6 +10,7 @@ module.exports = defineConfig({
     env: {
       loginEmail: 'refugee+test.reshetniak@gmail.com',
       loginPassword: 'schemu8s',
+      donorLoginEmail: 'donor+test.reshetniak@gmail.com',
     },
   },
 });

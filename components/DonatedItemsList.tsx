@@ -7,15 +7,20 @@ import ItemCard from '@/components/ItemCard';
 import React, { useEffect, useState } from 'react';
 import { PartialItem } from '@/types/supabaseTypes';
 import useMediaQuery from './hooks/useMediaQuery';
+import ReserveForUserModal from './ReserveForUserModal';
 import selectConversationsByItemId from '@/supabase/models/messaging/selectConversationsByItemId';
 import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
 import deleteItems from '@/supabase/models/deleteItems';
+import upsertRow from '@/supabase/models/upsertRow';
+import ButtonRounded from './buttons/ButtonRounded';
 
 type DisplayDonatedItemsProps = {
   userId: string;
 };
 
-const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
+const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
+  userId,
+}: DisplayDonatedItemsProps) => {
   const isBreakpoint = useMediaQuery(1000);
   const [storeItems, setStoreItems] = useState<PartialItem[]>([]);
   const [error, setError] = useState('');
@@ -66,6 +71,27 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
     }
   };
 
+  const unreserveHandler = async (itemId: number) => {
+    try {
+      await upsertRow('items', {
+        id: itemId,
+        is_reserved: false,
+        reserved_by: null,
+      });
+      onReserveStatusChange(itemId);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onReserveStatusChange = (itemId: number): void => {
+    setStoreItems((prevItems) => {
+      return prevItems.map((item: PartialItem) =>
+        item.id === itemId ? { ...item, is_reserved: !item.is_reserved } : item
+      );
+    });
+  };
+
   return (
     <div className='m-auto mt-10 w-5/6'>
       <h2 className='m-5 text-lg font-medium md:pl-20 lg:pl-40'>
@@ -94,11 +120,11 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
                   postcode={item.postcode}
                   postable={item.postable}
                   id={item.id}
-                  reserved={item.reserved}
+                  is_reserved={item.is_reserved}
                 />
-                <div className='flex flex-row'>
+                <div className='flex flex-row gap-2'>
                   <Link href={`/edit-item/${item.id}`}>
-                    <p className='button button-rounded mx-2 my-2'>Edit item</p>
+                    <p className='button button-rounded my-2'>Edit item</p>
                   </Link>
                   <Modal
                     name='Delete Item'
@@ -106,6 +132,23 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({ userId }) => {
                     message='By pressing "Confirm" you will delete this item permanently.'
                     onDeleteSuccess={() => handleDeleteSuccess(item.id!)}
                   />
+                  {item.is_reserved ? (
+                    <ButtonRounded
+                      clickHandler={() => unreserveHandler(item.id!)}
+                      type='button'
+                    >
+                      Unreserve
+                    </ButtonRounded>
+                  ) : (
+                    <ReserveForUserModal
+                      name='Mark as Reserved'
+                      itemId={item.id!}
+                      onReserveStatusChange={() =>
+                        onReserveStatusChange(item.id!)
+                      }
+                      requestedToReserveUserIds={item.requestedToReserve}
+                    />
+                  )}
                 </div>
               </li>
             ))}

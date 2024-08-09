@@ -18,7 +18,7 @@ const ButtonRounded: React.FC<ButtonRoundedPropTypes> = ({
 }) => {
   return (
     <button
-      className={`button button-rounded disabled:bg-primaryGray ${width}`}
+      className={`button button-rounded my-2 disabled:bg-primaryGray ${width}`}
       onClick={clickHandler}
       role='button'
       type={type}

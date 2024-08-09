@@ -48,7 +48,7 @@ export default function EnquireButton({
           setError(false);
           await editRow(
             'items',
-            { reserved: true, reserved_by: user_id },
+            { is_reserved: true, reserved_by: user_id },
             'id',
             item_id
           );
