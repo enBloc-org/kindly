@@ -13,7 +13,7 @@ export default async function DashBoardLayout({
       <Providers>
         <FullHeightContainer>
           <Header />
-          <main className='flex flex-grow flex-col'>{children}</main>
+          <main className='flex flex-col'>{children}</main>
           <Footer />
         </FullHeightContainer>
       </Providers>

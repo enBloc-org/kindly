@@ -44,7 +44,7 @@ export default function SearchItemPage() {
 
   return (
     <div className='mb-28 mt-8'>
-      <div className='m-auto flex max-w-[500px] flex-wrap justify-center gap-3'>
+      <div className='m-auto flex max-w-[450px] flex-wrap justify-center gap-3'>
         <SearchBar
           searchParams={searchParams}
           setSearchParams={setSearchParams}

@@ -5,40 +5,39 @@ type ItemDetailPropType = PartialItem & {
   condition?: string;
   item_type?: string;
   postcode?: string;
+  size?: string;
 };
 
 const ItemDetails: React.FC<ItemDetailPropType> = ({
   condition,
-  item_type,
+  size,
   postcode,
   postage_covered,
   fontSize,
 }) => {
   return (
-    <div
-      className={`flex flex-col items-center justify-center gap-1 ${fontSize}`}
-    >
+    <div className={`flex flex-col items-center gap-2 ${fontSize}`}>
+      {size && (
+        <p>
+          <span className='mr-2 font-light text-primaryOrange'>Size:</span>
+          {size}
+        </p>
+      )}
       {condition && (
-        <p className=''>
+        <p>
           <span className='mr-2 font-light text-primaryOrange'>Condition:</span>
           {condition}
         </p>
       )}
-      {item_type && (
-        <p className=''>
-          <span className='mr-2 font-light text-primaryOrange'>Category:</span>
-          {item_type}
-        </p>
-      )}
       {postcode && (
-        <p className=''>
+        <p>
           <span className='mr-2 font-light text-primaryOrange'>Location:</span>
           {postcode}
         </p>
       )}
 
       {postage_covered && (
-        <p className='mt-5 text-center italic'>Postage covered</p>
+        <p className='mt-3 text-center italic'>Postage covered</p>
       )}
     </div>
   );
