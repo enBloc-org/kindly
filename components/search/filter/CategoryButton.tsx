@@ -1,19 +1,19 @@
 'use client';
 import { ReactNode } from 'react';
 
-type CategoryButtonPropsType = {
+type CategoryButtonPropsType<T> = {
   children: ReactNode;
-  handleButtonClick: (value: string) => void;
-  category: string;
-  option: string;
+  handleButtonClick: (value: T) => void;
+  category: T;
+  option: T;
 };
 
-const CategoryButton: React.FC<CategoryButtonPropsType> = ({
+const CategoryButton = <T,>({
   children,
   handleButtonClick,
   category,
   option,
-}) => {
+}: CategoryButtonPropsType<T>) => {
   return (
     <button
       role='button'

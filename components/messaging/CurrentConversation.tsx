@@ -35,10 +35,12 @@ const CurrentConversation: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch({
-      type: 'SET_CURRENT_CONVERSATION',
-      payload: allConversations[0],
-    });
+    if (!currentConversation) {
+      dispatch({
+        type: 'SET_CURRENT_CONVERSATION',
+        payload: allConversations[0],
+      });
+    }
   }, [allConversations]);
 
   useEffect(() => {

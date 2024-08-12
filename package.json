@@ -10,10 +10,7 @@
     "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss}\"",
     "format": "prettier --write .",
     "prepare": "husky install",
-    "test": "playwright test -c playwright-ct.config.ts",
-    "changed": "CHANGED_FILES=$(git diff --name-only HEAD^) && [ -n \"$CHANGED_FILES\" ] && npm run test -- $CHANGED_FILES || (echo '\\033[1;31mThere are no tests associated with your changes\\033[0m' && exit 0)",
-    "test:all": "next build && start-server-and-test http://localhost:3654 test",
-    "test:changed": "next build && start-server-and-test http://localhost:3654 changed",
+    "start-test": "start-server-and-test dev http://localhost:3000 'cypress run'",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

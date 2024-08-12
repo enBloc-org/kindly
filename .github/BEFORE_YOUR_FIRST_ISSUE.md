@@ -40,10 +40,10 @@ With Node.js 20, install the project dependencies:
 npm install
 ```
 
-Add env variables:
+### Add `env` variables:
 
-The .env.example file in the root directory shows what variables you will need. For Gmail app and AWS amplify variables you will need to ask for them on discord.  
-For the supabase variables follow the guidance below on setting up your local instance.
+The `.env.example` file in the root directory shows what variables you will need.  
+Follow the guidance below on setting up your local instance and obtain the relevant Supabase variables.
 
 ## Setting up your development database
 
@@ -96,7 +96,10 @@ You can view these details again at any time by running the following command:
 npx supabase status
 ```
 
-Copy the `API URL` value into your `.env` file as the value of our `NEXT_PUBLIC_SUPABASE_URL` and the `anon key` value as our `NEXT_PUBLIC_SUPABASE_ANON_KEY` value.
+Copy the following values:
+- `API URL` value into your `.env` file as the value of our `NEXT_PUBLIC_SUPABASE_URL`
+- `anon key` value as our `NEXT_PUBLIC_SUPABASE_ANON_KEY` value
+- `service_role key` as our `SUPABASE_SERVICE_ROLE_KEY` value
 
 Your local development is now ready ✨
 
@@ -121,6 +124,7 @@ We have helpfully included a script in the `package.json` to help create a new m
 ```
 npm run migrate insert-your-file-name
 ```
+
 Make sure to replace **insert-your-file-name** with a name that describes your changes to the database.
 
 ## Running the app:
@@ -130,6 +134,22 @@ Make sure you are on the dev branch then use
 ```bash
 npm run dev
 ```
+
+### Test Users
+
+To help you get started with development and testing, we have created the following accounts:
+
+- **Test Donor**
+  - Email: `donor+test.reshetniak@gmail.com`
+  - Password: `schemu8s`
+
+- **Test Refugee**
+  - Email: `refugee+test.reshetniak@gmail.com`
+  - Password: `schemu8s`
+
+- **trafalgargirls** *(this is used by the code as a system user for actions like adding message notifications to conversations)*
+  - Email: `trafalgargirls@gmail.com`
+  - Password: `donor-trafalgar`
 
 ## Next Steps
 

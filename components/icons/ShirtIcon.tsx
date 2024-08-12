@@ -1,4 +1,4 @@
-import { IconPropType } from '../filter/QuickBrowse';
+import { IconPropType } from '@/types/searchPageTypes';
 
 const ShirtIcon: React.FC<IconPropType> = ({ category }) => {
   return (

@@ -1,4 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { within } from '@storybook/test';
+import { expect } from '@storybook/jest';
+
 import ItemCard from '@/components/ItemCard';
 import testItem from '../public/white-jumper.jpg';
 
@@ -15,9 +18,45 @@ export const ItemCardDefault: Story = {
     imageSrc: testItem.src,
     item_name: 'White Jumper',
     condition: 'New',
-    item_type: 'toys',
+    size: 'Medium',
     postcode: 'E12',
     postable: true,
-    itemId: 2,
+    id: 2,
+    reserved: false,
+  },
+};
+
+export const ItemCardPotageCovered: Story = {
+  args: {
+    imageSrc: testItem.src,
+    item_name: 'White Jumper',
+    condition: 'New',
+    size: 'Medium',
+    postcode: 'E12',
+    postable: true,
+    id: 2,
+    reserved: false,
+    postage_covered: true,
+  },
+};
+
+export const ItemCardReserved: Story = {
+  args: {
+    imageSrc: testItem.src,
+    item_name: 'White Jumper',
+    condition: 'New',
+    size: 'Medium',
+    postcode: 'E12',
+    postable: true,
+    id: 2,
+    reserved: true,
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Check if reserved tag is present', async () => {
+      const reservedTag = await canvas.findByText(/reserved/i);
+      expect(reservedTag).toBeInTheDocument();
+    });
   },
 };
