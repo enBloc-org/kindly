@@ -34,6 +34,8 @@ export default function AddNewItemForm({
       postable: false,
       collectible: false,
       postage_covered: false,
+      //ADDED BY ME
+      image: '',
     },
   });
 
@@ -252,6 +254,8 @@ export default function AddNewItemForm({
           setImageSrc={setImageSource}
           setError={setGeneralError}
           isRequired={true}
+          //ADDED BY ME
+          register={register}
         />
         {generalError && <p className='error-message'>{generalError}</p>}
 
