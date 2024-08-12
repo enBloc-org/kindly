@@ -62,7 +62,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
           if (imageType === 'profile') {
             const { data: listData, error: listError } = await supabase.storage
               .from('images')
-              .list(userId, { recursive: true });
+              .list(userId);
 
             if (listError) {
               console.error('Error fetching old images:', listError);
