@@ -23,25 +23,27 @@ const ItemDisplayContainer: React.FC<ItemDisplayContainerProps> = ({
     );
   }
   return (
-    <div className='lg-px-20 m-auto mt-5 lg:w-5/6'>
-      <div className='mt-10 flex flex-col items-center gap-5'>
-        {searchResults.length > 0 ? (
-          searchResults.map((result) => (
-            <ItemCard
-              key={result.id}
-              imageSrc={result.imageSrc}
-              item_name={result.item_name}
-              condition={result.condition}
-              item_type={result.item_type}
-              postcode={result.postcode}
-              postage_covered={result.postage_covered}
-              id={result.id}
-            />
-          ))
-        ) : (
-          <p className='text-center'>No results found.</p>
-        )}
-      </div>
+    <div
+      className='m-auto mt-10 grid grid-cols-2 px-1
+        sm:max-w-[825px] sm:grid-cols-3 lg:max-w-[1140px] lg:grid-cols-4 lg:gap-10'
+    >
+      {searchResults.length > 0 ? (
+        searchResults.map((result) => (
+          <ItemCard
+            key={result.id}
+            imageSrc={result.imageSrc}
+            item_name={result.item_name}
+            condition={result.condition}
+            size={result.size}
+            postcode={result.postcode}
+            postage_covered={result.postage_covered}
+            id={result.id}
+            reserved={result.reserved}
+          />
+        ))
+      ) : (
+        <p className='text-center'>No results found.</p>
+      )}
     </div>
   );
 };
