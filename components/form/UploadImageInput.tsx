@@ -78,6 +78,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
     <div className='my-3 flex flex-col items-center gap-4'>
       <label htmlFor='image'>Upload an image:</label>
       <input
+        id='image'
         className='pl-14'
         type='file'
         name='image'

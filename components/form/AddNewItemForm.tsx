@@ -91,6 +91,7 @@ export default function AddNewItemForm({
         >
           Item Name
           <input
+            id='item_name'
             type='text'
             className='input-text'
             {...register('item_name', { required: 'This field is required' })}
@@ -103,6 +104,7 @@ export default function AddNewItemForm({
         >
           Description
           <textarea
+            id='item_description'
             {...register('item_description')}
             maxLength={200}
             className='input-text'
@@ -114,6 +116,7 @@ export default function AddNewItemForm({
         >
           Postcode <span className='text-xs italic'>First half</span>
           <input
+            id='postcode'
             type='text'
             maxLength={5}
             {...register('postcode', {
@@ -134,6 +137,7 @@ export default function AddNewItemForm({
           >
             Condition
             <select
+              id='condition'
               {...register('condition', { required: 'Required' })}
               className='input-text '
             >
@@ -153,6 +157,7 @@ export default function AddNewItemForm({
           >
             Categories
             <select
+              id='item_type'
               {...register('item_type', { required: 'Required' })}
               className='input-text '
             >
@@ -175,7 +180,11 @@ export default function AddNewItemForm({
               className='flex flex-col items-center gap-2 font-light'
             >
               Size
-              <select {...register('size')} className='input-text h-11 w-24'>
+              <select
+                id='size'
+                {...register('size')}
+                className='input-text h-11 w-24'
+              >
                 <option value='' disabled hidden>
                   Select one
                 </option>
@@ -197,7 +206,11 @@ export default function AddNewItemForm({
               className='flex flex-col items-center gap-1 font-light'
             >
               Gender
-              <select {...register('item_subtype')} className='input-text '>
+              <select
+                id='item_type'
+                {...register('item_subtype')}
+                className='input-text '
+              >
                 <option value='' disabled hidden>
                   Select one
                 </option>
@@ -212,11 +225,15 @@ export default function AddNewItemForm({
         )}
         {category === 'books' && (
           <label
-            htmlFor='item_type'
+            htmlFor='category'
             className='flex flex-col items-center gap-1 font-light'
           >
             Age
-            <select {...register('item_subtype')} className='input-text '>
+            <select
+              id='category'
+              {...register('item_subtype')}
+              className='input-text '
+            >
               <option value={'adults'}>Adult</option>
               <option value={'children'}>Children</option>
             </select>
