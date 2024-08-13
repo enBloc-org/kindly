@@ -320,7 +320,7 @@ SELECT pg_catalog.setval('"public"."items_id_seq"', 5, true);
 -- Name: messages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"public"."messages_id_seq"', 9, true);
+SELECT pg_catalog.setval('"public"."messages_id_seq"', 14, true);
 
 
 --

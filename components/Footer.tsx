@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     isBreakpoint &&
     showConversationsList && (
-      <footer className='fixed bottom-0 h-auto w-full bg-background py-2'>
+      <footer className='fixed bottom-0 z-20 h-auto w-full bg-background py-2'>
         <MobileNavbar />
       </footer>
     )
