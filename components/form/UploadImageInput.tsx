@@ -3,15 +3,11 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-//ADDED BY ME
-import { UseFormRegister, FieldValues } from 'react-hook-form';
 
 type UploadImageProps = {
   setImageSrc: (src: string) => void;
   setError?: (error: string) => void;
   isRequired?: boolean;
-  //ADDED BY ME
-  register: UseFormRegister<FieldValues>;
 };
 
 const CDN =
@@ -26,7 +22,6 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
   setImageSrc,
   setError,
   isRequired: isRequired = false,
-  register,
 }) => {
   const supabase = createClientComponentClient();
   const [userId, setUserId] = useState('');
@@ -85,11 +80,9 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
       <input
         className='pl-14'
         type='file'
-        //name='image'
-        //CHANGE BY ME
-        {...register('image', { required: isRequired })}
+        name='image'
         onChange={(e) => imageFileUpload(e)}
-        //required={isRequired}
+        required={isRequired}
       />
       {!isImageUploaded && (
         <p className='font-extralight italic text-primaryOrange'>
