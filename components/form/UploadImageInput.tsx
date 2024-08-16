@@ -1,6 +1,6 @@
 'use client';
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import newClient from '@/supabase/utils/newClient';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -27,7 +27,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
   isRequired: isRequired = false,
   imageType,
 }) => {
-  const supabase = createClientComponentClient();
+  const supabase = newClient();
   const [userId, setUserId] = useState('');
   const [isImageUploaded, setIsImageUploaded] = useState(false);
 
@@ -91,9 +91,8 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 
           const prefix = imageType === 'profile' ? 'profile_' : 'item_';
           const imageName = prefix + uuidv4();
-          const imagePath = CDN + userId + '/' + imageName;
 
-          const { error: uploadError } = await supabase.storage
+          const { data, error: uploadError } = await supabase.storage
             .from('images')
             .upload(userId + '/' + imageName, file);
 
@@ -101,7 +100,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
             console.error('Error uploading new image:', uploadError);
             return;
           }
-          setImageSrc(imagePath);
+          setImageSrc(CDN + data.path);
           setIsImageUploaded(true);
           setError?.('');
         } catch (error) {

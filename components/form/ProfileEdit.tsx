@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import ButtonPill from '../buttons/ButtonPill';
 import ButtonRounded from '../buttons/ButtonRounded';
 import UploadImageInput from './UploadImageInput';
+import { useRouter } from 'next/navigation';
 
 export const ProfileEdit = ({
   userId,
@@ -19,6 +20,8 @@ export const ProfileEdit = ({
 }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [imgAvatar, setImgAvatar] = useState('');
+
+  const router = useRouter();
 
   const {
     register,
@@ -58,6 +61,7 @@ export const ProfileEdit = ({
         'id',
         userId
       );
+      router.refresh();
     } catch (error) {
       console.error('Error submitting form:', error);
     }
