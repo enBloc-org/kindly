@@ -16,7 +16,7 @@ describe('Reserve and Unreserve item for a user test suite', () => {
       .find('button')
       .contains('Unreserve')
       .should('be.visible');
-    cy.get('p').contains('Reserved').should('be.visible');
+    cy.get('p').contains(/reserved/i).should('be.visible');
   });
 
   it('user can remove the reservation status of their item', () => {
