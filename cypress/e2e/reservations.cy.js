@@ -21,7 +21,7 @@ describe('Reserve and Unreserve item for a user test suite', () => {
 
   it('user can remove the reservation status of their item', () => {
     cy.visit(page.profile, { failOnStatusCode: false });
-    cy.get('p').contains('Reserved').should('be.visible');
+    cy.get('p').contains(/reserved/i).should('be.visible');
     const unreserveButton = cy
       .get('.card')
       .contains('shoes')
