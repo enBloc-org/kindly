@@ -11,7 +11,7 @@ import { updateRequestToReserve } from '@/supabase/models/updateRequestToReserve
 import { PartialItem } from '@/types/supabaseTypes';
 import { useState } from 'react';
 
-type ItemDetailsClientProps = {
+type ItemDetailsPageProps = {
   item: PartialItem;
   user: { id: string };
   canMessage: boolean;
@@ -21,7 +21,7 @@ type ItemDetailsClientProps = {
   title: string;
 };
 
-const DisplayItemDetailsClient: React.FC<ItemDetailsClientProps> = ({
+const ItemDetailsPage: React.FC<ItemDetailsPageProps> = ({
   item,
   user,
   canMessage,
@@ -98,4 +98,4 @@ const DisplayItemDetailsClient: React.FC<ItemDetailsClientProps> = ({
   );
 };
 
-export default DisplayItemDetailsClient;
+export default ItemDetailsPage;

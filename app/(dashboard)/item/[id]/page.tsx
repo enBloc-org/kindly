@@ -1,6 +1,6 @@
 import newServerClient from '@/supabase/utils/newServerClient';
 import { getProfile } from '@/supabase/models/getProfile';
-import DisplayItemDetailsClient from '@/components/DisplayItemDetailsClient';
+import ItemDetailsPage from '@/components/ItemDetailsPage';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
   const supabase = newServerClient();
@@ -32,7 +32,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       }
 
       return (
-        <DisplayItemDetailsClient
+        <ItemDetailsPage
           item={item}
           user={user!}
           canMessage={canMessage}
