@@ -49,7 +49,7 @@ export class ProfilePage extends BasePage {
       .contains(itemName)
       .parents('li')
       .find('button')
-      .contains('Mark as Reserved')
+      .contains('Mark as Reserved', { matchCase: false })
       .should('be.visible');
   }
 }
