@@ -22,7 +22,7 @@ export const ItemCardDefault: Story = {
     postcode: 'E12',
     postable: true,
     id: 2,
-    reserved: false,
+    is_reserved: false,
   },
 };
 
@@ -35,7 +35,7 @@ export const ItemCardPotageCovered: Story = {
     postcode: 'E12',
     postable: true,
     id: 2,
-    reserved: false,
+    is_reserved: false,
     postage_covered: true,
   },
 };
@@ -49,7 +49,7 @@ export const ItemCardReserved: Story = {
     postcode: 'E12',
     postable: true,
     id: 2,
-    reserved: true,
+    is_reserved: true,
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
