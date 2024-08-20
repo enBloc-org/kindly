@@ -30,14 +30,14 @@ const DisplayItemDetailsClient: React.FC<ItemDetailsClientProps> = ({
   donorName,
   title,
 }) => {
-  const [requestStatus, setRequestStatus] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
 
   const handleReserve = async () => {
     try {
       const message = await updateRequestToReserve(item.id!, user.id!);
-      setRequestStatus(message);
+      setMessage(message);
     } catch (error) {
-      setRequestStatus('Failed to send request to reserve the item.');
+      setMessage('Failed to send request to reserve the item.');
       console.error('Error reserving item:', error);
     }
   };
@@ -76,8 +76,8 @@ const DisplayItemDetailsClient: React.FC<ItemDetailsClientProps> = ({
           postcode={item.postcode}
           fontSize='text-lg'
         />
-        {requestStatus && (
-          <p className='text-center text-red-500'>{requestStatus}</p>
+        {message && (
+          <p className='error-message mt-4 p-4 text-center'>{message}</p>
         )}
         {canMessage && user?.id && item.id && (
           <div className='flex flex-row gap-4 pb-10'>

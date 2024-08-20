@@ -19,7 +19,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       throw new Error('Error fetching data');
     } else {
       const donorEmail = item.profiles.email;
-      const donorId: string = item.profiles?.id;
+      const donorId: string = item.profiles.id;
       const donorName = item.profiles.username;
       const title = item.item_name;
       if (
