@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 type AuthFormProps = {
   onSubmit: (formData: FormData) => Promise<void>;
@@ -20,7 +19,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -44,7 +42,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
     try {
       setErrorMessage(null);
       await onSubmit(formData);
-      router.back();
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
