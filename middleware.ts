@@ -33,5 +33,6 @@ export const config = {
     '/conversations',
     '/item/:id*',
     '/profile',
+    '/add-item',
   ],
 };
