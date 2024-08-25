@@ -1,4 +1,5 @@
 import newServerClient from '@/supabase/utils/newServerClient';
+import { headers } from 'next/headers';
 
 //Components
 import Image from 'next/image';
@@ -9,12 +10,14 @@ import { getProfile } from '@/supabase/models/getProfile';
 import NewConversationButton from '@/components/buttons/NewConversationButton';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
+  const headersList = headers();
+  const userId = headersList.get('k-active-user')!;
+
   const supabase = newServerClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  const userProfile = await getProfile(user?.id);
+
+  const userProfile = await getProfile(userId);
   let canMessage: boolean = true;
+
   try {
     const { data: item } = await supabase
       .from('items')
@@ -28,7 +31,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       const donerId: string = item.profiles?.id;
       const title = item.item_name;
       if (
-        !user ||
+        !userId ||
         userProfile?.data.refugee === false ||
         item?.profiles?.id === userProfile?.data.id ||
         item?.is_reserved
@@ -73,7 +76,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
 
             {canMessage && (
               <NewConversationButton
-                userId={user?.id}
+                userId={userId}
                 donorId={donerId}
                 donorEmail={donorEmail}
                 title={title}
