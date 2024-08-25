@@ -16,7 +16,7 @@ const ItemCard: React.FC<PartialItem> = ({
   size,
   postage_covered,
   id,
-  reserved,
+  is_reserved,
 }) => {
   return (
     <Link href={`/item/${id}`}>
@@ -24,7 +24,7 @@ const ItemCard: React.FC<PartialItem> = ({
         className='card relative m-auto mt-8
         flex h-[400px] w-[176px] flex-col gap-3 sm:w-[200px] md:h-[450px] md:w-[256px]'
       >
-        {reserved && (
+        {is_reserved && (
           <div
             className='absolute left-0 right-0 top-14 z-10 m-auto w-[175px] rounded-lg border border-primaryGreen
             bg-background p-2 text-center opacity-70 md:w-[200px]'
