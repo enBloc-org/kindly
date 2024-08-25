@@ -1,6 +1,6 @@
 'use client';
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import newClient from '@/supabase/utils/newClient';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -8,22 +8,26 @@ type UploadImageProps = {
   setImageSrc: (src: string) => void;
   setError?: (error: string) => void;
   isRequired?: boolean;
+  imageType: 'item' | 'profile';
 };
 
-const CDN =
-  'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/';
+const CDN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
 
 /**
  * @description this function will add any image to our project storage.
+ * @param setImageSrc is a required parameter that accepts a string. It will set the value of the image source if the upload is successful.
+ * @param setError is an optional parameter that accepts a string. It will set the value of the error message if the image upload fails.
  * @param isRequired is an optional parameter that accepts a boolean. It will consider the value of false unless explicitly assigned the value of true.
+ * @param imageType is a required parameter that accepts either 'item' or 'profile'. It will determine the type of image to be uploaded in the imageFileUpload function.
  */
 
 const UploadImageInput: React.FC<UploadImageProps> = ({
   setImageSrc,
   setError,
   isRequired: isRequired = false,
+  imageType,
 }) => {
-  const supabase = createClientComponentClient();
+  const supabase = newClient();
   const [userId, setUserId] = useState('');
   const [isImageUploaded, setIsImageUploaded] = useState(false);
 
@@ -54,19 +58,53 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
       const file = e.target.files[0];
 
       if (file) {
-        const imageName = uuidv4();
-        const imagePath = CDN + userId + '/' + imageName;
+        try {
+          if (imageType === 'profile') {
+            const { data: listData, error: listError } = await supabase.storage
+              .from('images')
+              .list(userId);
 
-        setImageSrc(imagePath);
-        setIsImageUploaded(true);
-        setError?.('');
+            if (listError) {
+              console.error('Error fetching old images:', listError);
+              return;
+            }
 
-        const { error } = await supabase.storage
-          .from('images')
-          .upload(userId + '/' + imageName, file);
+            if (!listData) {
+              throw new Error('Failed to fetch images');
+            }
 
-        if (error) {
-          console.log(error);
+            const profileImages = listData
+              .filter((image) => image.name.startsWith('profile_'))
+              .map((image) => userId + '/' + image.name);
+
+            if (profileImages.length > 0) {
+              const { error: deleteError } = await supabase.storage
+                .from('images')
+                .remove(profileImages);
+
+              if (deleteError) {
+                console.error('Error deleting old images:', deleteError);
+                return;
+              }
+            }
+          }
+
+          const prefix = imageType === 'profile' ? 'profile_' : 'item_';
+          const imageName = prefix + uuidv4();
+
+          const { data, error: uploadError } = await supabase.storage
+            .from('images')
+            .upload(userId + '/' + imageName, file);
+
+          if (uploadError) {
+            console.error('Error uploading new image:', uploadError);
+            return;
+          }
+          setImageSrc(CDN + data.path);
+          setIsImageUploaded(true);
+          setError?.('');
+        } catch (error) {
+          console.error('Error handling image upload:', error);
         }
       } else {
         console.error('No file selected');
