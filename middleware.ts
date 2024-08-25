@@ -9,7 +9,6 @@ export async function middleware(request: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (user) {
-      console.log('HAS USER');
       const newHeaders = new Headers(request.headers);
       newHeaders.set('k-active-user', user!.id);
 
@@ -19,20 +18,20 @@ export async function middleware(request: NextRequest) {
         },
       });
     }
-    console.log('DOES NOT HAVE USER');
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(
+      new URL('/login?message=Please login to use this feature', request.url)
+    );
   } catch (error) {
     console.error(error);
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(
+      new URL(
+        '/login?message=Something has gone wrong. Please try again later.',
+        request.url
+      )
+    );
   }
 }
 
 export const config = {
-  matcher: [
-    // '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).)*',
-    '/conversations',
-    '/item/:id*',
-    '/profile',
-    '/add-item',
-  ],
+  matcher: ['/conversations', '/item/:id*', '/profile', '/add-item'],
 };
