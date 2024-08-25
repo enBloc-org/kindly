@@ -20,11 +20,11 @@ export default function Login({
       password,
     });
 
-    redirect(
-      error
-        ? '/login?message=Something has gone wrong. Please try again later.'
-        : '/'
-    );
+    if (error)
+      redirect(
+        '/login?message=Something has gone wrong. Please try again later.'
+      );
+    return;
   };
 
   return (
