@@ -1,6 +1,6 @@
 'use client';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import ButtonRounded from '../buttons/ButtonRounded';
 import UploadImageInput from './UploadImageInput';
@@ -15,6 +15,7 @@ export default function AddNewItemForm({
 }) {
   const [generalError, setGeneralError] = useState('');
   const [imageSource, setImageSource] = useState('');
+  const [isSubmitAttempted, setIsSubmitAttempted] = useState(false);
 
   const {
     register,
@@ -23,6 +24,7 @@ export default function AddNewItemForm({
     reset,
     formState: { errors },
   } = useForm({
+    mode: 'onChange',
     defaultValues: {
       item_name: '',
       item_description: '',
@@ -66,7 +68,27 @@ export default function AddNewItemForm({
     'UK26',
   ];
 
+  useEffect(() => {
+    if (isSubmitAttempted && !imageSource) {
+      setGeneralError('Image is requiresd');
+    } else {
+      setGeneralError('');
+    }
+  }, [imageSource, isSubmitAttempted]);
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitAttempted(true);
+    handleSubmit(submitHandler)(e);
+  };
+
   const submitHandler = async (data: PartialItem) => {
+    if (!imageSource) {
+      return;
+    }
+
+    setGeneralError('');
+
     const itemData: PartialItem = {
       imageSrc: imageSource,
       donated_by: userId,
@@ -75,6 +97,8 @@ export default function AddNewItemForm({
 
     onSubmit(itemData);
     reset();
+    setImageSource('');
+    setIsSubmitAttempted(false);
   };
 
   return (
@@ -82,7 +106,7 @@ export default function AddNewItemForm({
       <h2 className='mb-10 font-bold'>Add your item</h2>
 
       <form
-        onSubmit={handleSubmit(submitHandler)}
+        onSubmit={handleFormSubmit}
         className='flex flex-col items-center gap-5'
       >
         <label
@@ -261,17 +285,15 @@ export default function AddNewItemForm({
             Postage Covered
           </label>
         </div>
-        {!isPickUpChecked && !isWillingToPostChecked && (
+        {isSubmitAttempted && !isPickUpChecked && !isWillingToPostChecked && (
           <p className='error-message'>Select at least one option </p>
         )}
 
-        <UploadImageInput
-          setImageSrc={setImageSource}
-          setError={setGeneralError}
-          isRequired={true}
-          imageType={'item'}
-        />
-        {generalError && <p className='error-message'>{generalError}</p>}
+        <UploadImageInput setImageSrc={setImageSource} imageType={'item'} />
+
+        {isSubmitAttempted && generalError && (
+          <p className='error-message'>{generalError}</p>
+        )}
 
         <ButtonRounded type='submit'>ADD YOUR ITEM</ButtonRounded>
       </form>

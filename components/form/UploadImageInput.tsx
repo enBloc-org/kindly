@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 type UploadImageProps = {
   setImageSrc: (src: string) => void;
+  //Check where else is used UploadImageInput and delete there setError and isRequired
   setError?: (error: string) => void;
   isRequired?: boolean;
   imageType: 'item' | 'profile';
@@ -23,13 +24,10 @@ const CDN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/im
 
 const UploadImageInput: React.FC<UploadImageProps> = ({
   setImageSrc,
-  setError,
-  isRequired: isRequired = false,
   imageType,
 }) => {
   const supabase = newClient();
   const [userId, setUserId] = useState('');
-  const [isImageUploaded, setIsImageUploaded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,9 +37,6 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 
         if (user) {
           setUserId(user);
-          if (!isRequired) {
-            setIsImageUploaded(true);
-          }
         } else {
           setUserId('');
         }
@@ -101,8 +96,6 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
             return;
           }
           setImageSrc(CDN + data.path);
-          setIsImageUploaded(true);
-          setError?.('');
         } catch (error) {
           console.error('Error handling image upload:', error);
         }
@@ -121,13 +114,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
         type='file'
         name='image'
         onChange={(e) => imageFileUpload(e)}
-        required={isRequired}
       />
-      {!isImageUploaded && (
-        <p className='font-extralight italic text-primaryOrange'>
-          Image is required
-        </p>
-      )}
     </div>
   );
 };
