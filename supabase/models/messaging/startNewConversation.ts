@@ -11,7 +11,7 @@ import insertSystemMessage from './insertSystemMessage';
 export default async function startNewConversation(
   userID: string | undefined,
   donorID: string,
-  itemID: string
+  itemID: number
 ) {
   try {
     const supabase = newClient();
