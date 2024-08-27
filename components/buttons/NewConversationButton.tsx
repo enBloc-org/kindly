@@ -83,7 +83,7 @@ export default function NewConversationButton({
   return (
     <div>
       <button
-        className='button button-rounded disabled:bg-primaryGray'
+        className='button button-rounded my-2 disabled:bg-primaryGray'
         disabled={isDisabled}
         onClick={clickHandler}
       >

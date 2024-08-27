@@ -1,12 +1,16 @@
 import BasePage from './basePage';
 
 export class SearchPage extends BasePage {
-  toysButton() {
-    return cy.get('button').contains('Toys').should('be.visible');
+  filterButton() {
+    return cy.get('[data-cy="filter-button"]').should('be.visible');
   }
 
-  seeResultsButton() {
-    return cy.get('button').contains('SEE RESULTS').should('be.visible');
+  searchInput() {
+    return cy.get('input[placeholder*="Find an item"]').should('be.visible');
+  }
+
+  submitButton() {
+    return cy.get('button[type="submit"]').should('be.visible');
   }
 
   firstSearchResult() {

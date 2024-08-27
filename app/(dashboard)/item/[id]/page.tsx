@@ -24,7 +24,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
         !user ||
         userProfile?.data.refugee === false ||
         item?.profiles?.id === userProfile?.data.id ||
-        item?.reserved
+        item?.is_reserved
       ) {
         canMessage = false;
       }

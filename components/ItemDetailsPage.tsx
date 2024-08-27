@@ -61,7 +61,7 @@ const ItemDetailsPage: React.FC<ItemDetailsPageProps> = ({
             <h2 className='place-self-center text-xl italic'>
               {item.item_name}
             </h2>
-            {item.reserved && <p className='reserved'>Reserved</p>}
+            {item.is_reserved && <p className='reserved'>Reserved</p>}
           </div>
           <h3 className='pt-3 font-light'>Description:</h3>
           <p className='pt-2 text-center'>{item.item_description}</p>

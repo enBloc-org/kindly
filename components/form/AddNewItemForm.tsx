@@ -252,6 +252,7 @@ export default function AddNewItemForm({
           setImageSrc={setImageSource}
           setError={setGeneralError}
           isRequired={true}
+          imageType={'item'}
         />
         {generalError && <p className='error-message'>{generalError}</p>}
 

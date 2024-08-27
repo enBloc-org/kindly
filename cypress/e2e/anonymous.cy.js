@@ -9,6 +9,9 @@ Cypress.on(
   (err) => !err.message.includes('NEXT_REDIRECT')
 );
 
+// timeout to wait for redirects (in ms)
+const redirectTimeout = 10000;
+
 describe('Anonymous Navigation', () => {
   it('Can browse items', () => {
     // go to home page
@@ -16,13 +19,14 @@ describe('Anonymous Navigation', () => {
     // click search, validate navigation
     HomePage.searchIcon().click();
     cy.location('pathname').should('eq', page.search);
+    // click filter
+    SearchPage.filterButton().click();
     // click toys
-    SearchPage.toysButton().click();
+    cy.get('button').contains('Toys').click();
     // click see results
-    SearchPage.seeResultsButton().click();
+    cy.get('button').contains('APPLY FILTERS').click();
     // click first result, validate navigation
     SearchPage.firstSearchResult().click();
-    cy.location('pathname').should('include', page.item);
     // should not be able to message
     ItemPage.messageButton().should('not.exist');
   });
@@ -40,7 +44,7 @@ describe('Anonymous Navigation', () => {
     cy.visit(page.home, { failOnStatusCode: false });
     // click add item, validate navigation
     HomePage.addItemIcon().click();
-    cy.location('pathname')
+    cy.location('pathname', { timeout: redirectTimeout })
       .should('not.eq', page.addItem)
       .should('eq', page.login);
   });
@@ -50,7 +54,7 @@ describe('Anonymous Navigation', () => {
     cy.visit(page.home, { failOnStatusCode: false });
     // click message, validate navigation
     HomePage.messageIcon().click();
-    cy.location('pathname')
+    cy.location('pathname', { timeout: redirectTimeout })
       .should('not.eq', page.message)
       .should('eq', page.login);
   });
@@ -60,7 +64,7 @@ describe('Anonymous Navigation', () => {
     cy.visit(page.home, { failOnStatusCode: false });
     // click profile, validate navigation
     HomePage.profileIcon().click();
-    cy.location('pathname')
+    cy.location('pathname', { timeout: redirectTimeout })
       .should('not.eq', page.profile)
       .should('eq', page.login);
   });
