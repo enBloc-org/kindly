@@ -15,20 +15,16 @@ type ItemDetailsPageProps = {
   item: PartialItem;
   user: { id: string };
   canMessage: boolean;
-  donorId: string;
   donorEmail: string;
   donorName: string;
-  title: string;
 };
 
 const ItemDetailsPage: React.FC<ItemDetailsPageProps> = ({
   item,
   user,
   canMessage,
-  donorId,
   donorEmail,
   donorName,
-  title,
 }) => {
   const [message, setMessage] = useState<string | null>(null);
 
@@ -83,9 +79,9 @@ const ItemDetailsPage: React.FC<ItemDetailsPageProps> = ({
           <div className='flex flex-row gap-4 pb-10'>
             <NewConversationButton
               userId={user?.id}
-              donorId={donorId}
+              donorId={item.donated_by!}
               donorEmail={donorEmail}
-              title={title}
+              title={item.item_name!}
               item_id={item.id}
             />
             <ButtonRounded type='button' clickHandler={handleReserve}>
