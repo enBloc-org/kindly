@@ -72,9 +72,7 @@ const ItemDetailsPage: React.FC<ItemDetailsPageProps> = ({
           postcode={item.postcode}
           fontSize='text-lg'
         />
-        {message && (
-          <p className='error-message mt-4 p-4 text-center'>{message}</p>
-        )}
+        {message && <p className='error-message text-center'>{message}</p>}
         {canMessage && user?.id && item.id && (
           <div className='flex flex-row gap-4 pb-10'>
             <NewConversationButton
@@ -85,7 +83,7 @@ const ItemDetailsPage: React.FC<ItemDetailsPageProps> = ({
               item_id={item.id}
             />
             <ButtonRounded type='button' clickHandler={handleReserve}>
-              RESERVE ITEM
+              REQUEST ITEM
             </ButtonRounded>
           </div>
         )}
