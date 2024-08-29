@@ -9,7 +9,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
 
   const supabase = newServerClient();
 
-  const userProfile = await getProfile(userId);
+  const { data: userProfile } = await getProfile(userId);
   let canMessage: boolean = true;
 
   try {
@@ -25,7 +25,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       const donorName = item.profiles.username;
       if (
         !userId ||
-        userProfile?.data.refugee === false ||
+        userProfile?.refugee === false ||
         item?.profiles?.id === userProfile?.data.id ||
         item?.is_reserved
       ) {
@@ -35,7 +35,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       return (
         <ItemDetailsPage
           item={item}
-          user={user!}
+          user={userProfile}
           canMessage={canMessage}
           donorEmail={donorEmail}
           donorName={donorName}
