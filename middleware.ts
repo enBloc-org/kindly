@@ -42,5 +42,11 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/conversations', '/item/:id*', '/profile', '/add-item'],
+  matcher: [
+    '/conversations',
+    '/item/:id*',
+    '/profile',
+    '/add-item',
+    '/delete-account',
+  ],
 };
