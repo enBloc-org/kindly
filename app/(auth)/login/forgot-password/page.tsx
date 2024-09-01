@@ -10,10 +10,9 @@ export default async function ForgotPassword({
 }) {
   const supabase = newServerClient();
 
-  // Access request headers to get the origin
   let origin = headers().get('origin');
   if (!origin) {
-    origin = 'http://localhost:3000/'; // Default to localhost if origin is not present
+    origin = 'http://localhost:3000/';
   }
 
   const {

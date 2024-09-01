@@ -24,7 +24,6 @@ export default async function ResetPassword({
     const confirmPassword = formData.get('confirmPassword') as string;
     const supabase = newServerClient();
 
-    // Ensure the passwords match
     if (password !== confirmPassword) {
       return redirect(`/login/reset-password?message=Passwords do not match!`);
     }
