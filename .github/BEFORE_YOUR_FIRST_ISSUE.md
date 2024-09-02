@@ -25,25 +25,25 @@ You can do this by finding the `fork` button on the top-right corner of our repo
 Clone your new project into a local repository:
 
 ```bash
-  git clone [url-to-your-forked-repo-here]
+git clone [url-to-your-forked-repo-here]
 ```
 
 Go to the project directory:
 
 ```bash
-  cd kindly
+cd kindly
 ```
 
 With Node.js 20, install the project dependencies:
 
 ```bash
-  npm install
+npm install
 ```
 
-Add env variables:
+### Add `env` variables:
 
-The .env.example file in the root directory shows what variables you will need. For Gmail app and AWS amplify variables you will need to ask for them on discord.  
-For the supabase variables follow the guidance below on setting up your local instance.
+The `.env.example` file in the root directory shows what variables you will need.  
+Follow the guidance below on setting up your local instance and obtain the relevant Supabase variables.
 
 ## Setting up your development database
 
@@ -57,72 +57,21 @@ Once it is installed, start your docker console and make sure there are no outst
 
 You don't need to do anything else within docker for now. A container will be created in the next steps.
 
-### Install the supabase cli
+### Supabase CLI
 
-The cli will allow you to set up the schema and seed your local copy of the kindly database. You can find more comprehensive guidance in the [official docs](https://supabase.com/docs/guides/cli/getting-started) but we've outlined below the commands you will need to run in order to get started.
-
-Depending on the operating system you use, run the following command in your terminal to install the CLI:
-
-<details>
-<summary><strong>macOS / Linux</strong></summary>
-
-```bash
-brew install supabase/tap/supabase
-```
-
-</details>
-
-<details>
-<summary><strong>Windows</strong></summary>
-
-```bash
-npm install supabase --save-dev
-```
-
-</details>
-<br/>
+The CLI will allow you to set up the schema and seed your local copy of the kindly database. You can find more comprehensive guidance in the [official docs](https://supabase.com/docs/guides/cli/getting-started) but we've outlined below the commands you will need to run in order to get started.
 
 We have added to the repo a migration file and a seed file for the database, so you will only need to log into supabase with the following command:
-
-<details>
-<summary><strong>macOS / Linux</strong></summary>
-
-```bash
-supabase login
-```
-
-</details>
-
-<details>
-<summary><strong>Windows</strong></summary>
 
 ```bash
 npx supabase login
 ```
 
-</details>
-<br/>
-
 This will take you to the browser to complete a login. Then you will need to start your container with the following command:
-
-<details>
-<summary><strong>macOS / Linux</strong></summary>
-
-```bash
-supabase start
-```
-
-</details>
-
-<details>
-<summary><strong>Windows</strong></summary>
 
 ```bash
 npx supabase start
 ```
-
- </details>
- <br/>
 
 This script will run the migration file to set up your schema and then will run the `supabase/seed.sql` file to populate the database with some test data.
 
@@ -131,7 +80,6 @@ You should see the new "kindly" container in your docker console now.
 Your terminal will have logged a series of details that will look something like this:
 
 ```bash
-
 Started supabase local development setup.
 
          API URL: http://localhost:54321
@@ -140,31 +88,19 @@ Started supabase local development setup.
     Inbucket URL: http://localhost:54324
         anon key: eyJh......
 service_role key: eyJh......
-
 ```
 
 You can view these details again at any time by running the following command:
-
-<details>
-<summary><strong>macOS / Linux</strong></summary>
-
-```bash
-supabase status
-```
-
-</details>
-
-<details>
-<summary><strong>Windows</strong></summary>
 
 ```bash
 npx supabase status
 ```
 
- </details>
- <br/>
+Copy the following values:
 
-Copy the `API URL` value into your `.env` file as the value of our `NEXT_PUBLIC_SUPABASE_URL` and the `anon key` value as our `NEXT_PUBLIC_SUPABASE_ANON_KEY` value.
+- `API URL` value into your `.env` file as the value of our `NEXT_PUBLIC_SUPABASE_URL`
+- `anon key` value as our `NEXT_PUBLIC_SUPABASE_ANON_KEY` value
+- `service_role key` as our `SUPABASE_SERVICE_ROLE_KEY` value
 
 Your local development is now ready ✨
 
@@ -172,25 +108,22 @@ You can use the `Studio URL` provided to view and edit your local supabase proje
 
 You can also run all migration files and re-seed the database whenever necessary with the following command:
 
-<details>
-<summary><strong>macOS / Linux</strong></summary>
-
-```bash
-supabase db reset
-```
-
-</details>
-
-<details>
-<summary><strong>Windows</strong></summary>
-
 ```bash
 npx supabase db reset
 ```
 
- </details>
- <br/>
 This will set your local project back to the latest committed state and re-populate all data.
+
+### Setting Up Supabase Bucket
+
+To store and serve images, Kindly uses a bucket in Supabase. You need to create and configure this bucket manually:
+
+1. Open the 'Studio URL' in your web browser
+2. Navigate to the "Storage" section
+3. Create a new bucket named 'images'
+4. Set the bucket to be public to ensure it can be accessed without authentication
+
+💡 Note: The bucket and its configuration will be lost if you reset the database or destroy the container. Make sure to create the bucket once again if you reset your environment.
 
 ## Managing Database Migrations:
 
@@ -198,11 +131,12 @@ Now that you are working from a local instance of the database you will need to 
 
 You can find more detailed guidance on how to handle migrations in the Supabase [official documentation](https://supabase.com/docs/guides/cli/managing-environments?queryGroups=environment&environment=staging#auto-schema-diff)
 
-We have helpfully included a script in the ```package.json``` to help create a new migration file:
+We have helpfully included a script in the `package.json` to help create a new migration file:
 
 ```
 npm run migrate insert-your-file-name
 ```
+
 Make sure to replace **insert-your-file-name** with a name that describes your changes to the database.
 
 ## Running the app:
@@ -210,8 +144,26 @@ Make sure to replace **insert-your-file-name** with a name that describes your c
 Make sure you are on the dev branch then use
 
 ```bash
-  npm run dev
+npm run dev
 ```
+
+### Test Users
+
+To help you get started with development and testing, we have created the following accounts:
+
+- **Test Donor**
+
+  - Email: `donor+test.reshetniak@gmail.com`
+  - Password: `schemu8s`
+
+- **Test Refugee**
+
+  - Email: `refugee+test.reshetniak@gmail.com`
+  - Password: `schemu8s`
+
+- **trafalgargirls** _(this is used by the code as a system user for actions like adding message notifications to conversations)_
+  - Email: `trafalgargirls@gmail.com`
+  - Password: `donor-trafalgar`
 
 ## Next Steps
 

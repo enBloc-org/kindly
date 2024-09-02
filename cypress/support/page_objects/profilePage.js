@@ -42,6 +42,16 @@ export class ProfilePage extends BasePage {
       .contains('Cancel')
       .should('be.visible');
   }
+
+  reserveButton(itemName) {
+    return cy
+      .get('.card')
+      .contains(itemName)
+      .parents('li')
+      .find('button')
+      .contains('Mark as Reserved', { matchCase: false })
+      .should('be.visible');
+  }
 }
 
 export default new ProfilePage();

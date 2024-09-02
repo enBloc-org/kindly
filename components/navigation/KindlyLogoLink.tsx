@@ -4,7 +4,7 @@ import Link from 'next/link';
 const KindlyLogoLink = () => {
   return (
     <div className='flex items-center'>
-      <Link href='/home-page' aria-label='Home page'>
+      <Link href='/' aria-label='Home page'>
         <Image
           src='/KINDLY_LOGO.png'
           alt='Kindly Logo'

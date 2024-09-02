@@ -7,7 +7,10 @@ import AccordionItem from '@/components/accordian/AccordionItem';
 
 const AboutPage = () => {
   return (
-    <div className='mt-10 flex flex-col items-center justify-center gap-10 px-10 md:px-20 lg:gap-20 lg:px-48 lg:text-lg xl:px-80'>
+    <div
+      className='flex flex-grow flex-col items-center justify-center
+     gap-10 px-10 md:mt-10 md:px-20 lg:gap-20 lg:px-48 lg:text-lg xl:px-80'
+    >
       <h1 className='p-10 text-center text-4xl font-extrabold'>About</h1>
       <p>
         KINDLY is a platform that lets you donate unwanted items to Ukrainian
@@ -47,7 +50,7 @@ const AboutPage = () => {
           <FaTwitter size={60} />
         </Link>
       </div>
-      <div>
+      <div className='mb-32 flex flex-col gap-1'>
         <h2 className='my-8 text-center text-4xl font-extrabold'>FAQs</h2>
         {questionsAndAnswers.map((faq, index) => (
           <AccordionItem key={index} {...faq} />
