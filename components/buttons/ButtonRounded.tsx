@@ -6,6 +6,7 @@ type ButtonRoundedPropTypes = {
   type: 'button' | 'submit' | 'reset';
   isDisabled?: boolean;
   clickHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  width?: string;
 };
 
 const ButtonRounded: React.FC<ButtonRoundedPropTypes> = ({
@@ -13,10 +14,11 @@ const ButtonRounded: React.FC<ButtonRoundedPropTypes> = ({
   clickHandler,
   isDisabled,
   type,
+  width = '',
 }) => {
   return (
     <button
-      className='button button-rounded disabled:bg-primaryGray'
+      className={`button button-rounded my-2 disabled:bg-primaryGray ${width}`}
       onClick={clickHandler}
       role='button'
       type={type}

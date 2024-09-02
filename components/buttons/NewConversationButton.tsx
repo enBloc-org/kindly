@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import startNewConversation from '@/supabase/models/messaging/startNewConversation';
 import { useEffect } from 'react';
-import editRow from '@/supabase/models/editRow';
+import { useConversationContext } from '../../context/conversationContext';
 
 export default function NewConversationButton({
   userId,
@@ -16,7 +16,7 @@ export default function NewConversationButton({
   donorId: string;
   donorEmail: string;
   title: string;
-  item_id: string;
+  item_id: number;
 }) {
   const subject = title;
   const message = `Someone is interested in your item. Please check your messages to get the conversation started.`;
@@ -24,6 +24,8 @@ export default function NewConversationButton({
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
+  const { dispatch } = useConversationContext();
+
   useEffect(() => {
     if (isDisabled) {
       const sendMail = async () => {
@@ -45,12 +47,6 @@ export default function NewConversationButton({
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
           setError(false);
-          await editRow(
-            'items',
-            { reserved: true, reserved_by: userId ?? '' },
-            'id',
-            item_id
-          );
         } catch (error) {
           console.error(error);
         }
@@ -65,7 +61,15 @@ export default function NewConversationButton({
       setErrorMessage('');
       setError(false);
 
-      await startNewConversation(userId, donorId, item_id);
+      const conversation = await startNewConversation(userId, donorId, item_id);
+
+      if (conversation) {
+        dispatch({
+          type: 'SET_CURRENT_CONVERSATION',
+          payload: conversation,
+        });
+        dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: false });
+      }
 
       router.push('/conversations');
     } catch (error) {
@@ -77,9 +81,9 @@ export default function NewConversationButton({
   };
 
   return (
-    <>
+    <div>
       <button
-        className='button button-rounded disabled:bg-primaryGray'
+        className='button button-rounded my-2 disabled:bg-primaryGray'
         disabled={isDisabled}
         onClick={clickHandler}
       >
@@ -88,6 +92,6 @@ export default function NewConversationButton({
       {error && (
         <p className='text-center italic text-primaryOrange'>{errorMessage}</p>
       )}
-    </>
+    </div>
   );
 }

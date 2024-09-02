@@ -1,0 +1,42 @@
+name: Assign Issue
+
+on:
+  schedule:
+    - cron: 0 9 * * *
+  issue_comment:
+    types: [created]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign the user or unassign stale assignments
+        uses: takanome-dev/assign-issue-action@v2.1.1
+        with:
+          trigger: '!request'
+          assigned_label: 🧑‍💻 assigned
+          pin_label: 🧑‍💻 assigned
+          assigned_comment: |
+            🤖 meep morp!
+
+            Thank you for your contribution @{{comment.user.login}} - this Issue is assigned to you as requested ✨
+
+            🔎 Please keep in mind that in order to give everyone a chance to contribute Issues may be unassigned if they go stale.
+            You will be warned if the Issue is marked as stale at any point.
+
+            🔎 Please review our documentation for guidance on:
+            - common Patterns we follow in the code base
+            - conventions set for commit messages and naming of functions, classes or files
+
+            💡 The core team is available for any help and will try to respond to any comments in this Issue or questions on discord as quickly as possible.
+
+            Happy coding ! 🦆
+          already_assigned_comment: |
+            🤖 meep morp!
+
+            Thank you for your interest @{{comment.user.login}}, but it looks like this issue is already assigned to someone.
+
+            🔎 We try to keep issues assigned only to one developer unless they have planned to collaborate directly.
+            If you have discussed this issue with the developer currently assigned and would like to help please let us know in a comment and someone from the core team will manually add you to the Issue.
+
+            🔎 If this Issue returns to the backlog for any reason please feel free to request it then.

@@ -20,10 +20,7 @@ export default function Login({
       password,
     });
 
-    if (error) {
-      return redirect('/login?message=Could not authenticate user');
-    }
-    return redirect('/home-page');
+    return redirect(error ? '/login?message=Could not authenticate user' : '/');
   };
 
   return (

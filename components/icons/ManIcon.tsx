@@ -1,4 +1,4 @@
-import { IconPropType } from '../filter/QuickBrowse';
+import { IconPropType } from '@/types/searchPageTypes';
 
 const ManIcon: React.FC<IconPropType> = ({ subcategory }) => {
   return (

@@ -1,5 +1,11 @@
 {
+  "home": "/",
   "login": "/login",
+  "signup": "/signup",
+  "about": "/about",
+  "search": "/search",
+  "addItem": "/add-item",
+  "message": "/conversations",
   "profile": "/profile",
-  "addItem": "/add-item"
+  "item": "/item/"
 }

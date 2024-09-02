@@ -19,14 +19,20 @@ export default function SignUp({
       password: formData.get('password') as string,
     });
 
-    if (data.user?.role === '') {
-      return redirect(
-        '/login?message=User already registered. Please try logging in instead.'
-      );
-    }
-
     if (error) {
-      return redirect('/signup?message=Could not authenticate user.');
+      if (error.code === 'user_already_exists') {
+        return redirect(
+          '/login?message=User already registered. Please try logging in instead.'
+        );
+      }
+
+      if (error.code === 'weak_password') {
+        return redirect(
+          `/signup?message=Your password must include at lease one uppercase character, one number and one special character`
+        );
+      }
+
+      return redirect(`/signup?message=${error.code?.replaceAll(/_/g, ' ')}`);
     }
 
     // Get userId and insert it as ID in Profiles table
