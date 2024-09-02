@@ -1,5 +1,6 @@
 {
   "login": "/login",
   "profile": "/profile",
-  "addItem": "/add-item"
+  "addItem": "/add-item",
+  "forgotPassword": "/login/forgot-password"
 }
