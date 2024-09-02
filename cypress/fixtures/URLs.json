@@ -7,5 +7,6 @@
   "addItem": "/add-item",
   "message": "/conversations",
   "profile": "/profile",
-  "item": "/item/"
+  "item": "/item/",
+  "forgotPassword": "/login/forgot-password"
 }
