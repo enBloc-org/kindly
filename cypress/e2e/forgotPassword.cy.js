@@ -16,4 +16,13 @@ describe('ForgotPassword page spec', () => {
     forgotPasswordPage.confirmResetButton().click();
     cy.url().should('include', '/login/confirm');
   });
+
+  it('should show an error message when an unregistered email is submitted', () => {
+    cy.visit(page.forgotPassword);
+    const unregisteredEmail = 'enregistered@example.com';
+    forgotPasswordPage.emailInput().type(unregisteredEmail);
+    forgotPasswordPage.confirmResetButton().click();
+    cy.url().should('include', '/login/forgot-password');
+    cy.get('p').contains('User does not exist. Please sign uo');
+  });
 });
