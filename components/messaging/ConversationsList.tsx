@@ -16,7 +16,11 @@ const ConversationsList: React.FC = () => {
     dispatch,
   } = useConversationContext();
 
-  const [notificationList, setNotificationList] = useState<number[]>([]);
+  const [notificationList, setNotificationList] = useState<number[]>(
+    allConversations
+      .filter((conversation) => conversation.has_unread_messages)
+      .map((conversation) => conversation.conversation_id)
+  );
   const supabase = newClient();
 
   const updateOpenConversation = async (givenId: number) => {
