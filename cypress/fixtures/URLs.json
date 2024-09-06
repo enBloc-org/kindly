@@ -8,5 +8,6 @@
   "message": "/conversations",
   "profile": "/profile",
   "item": "/item/",
-  "forgotPassword": "/login/forgot-password"
+  "forgotPassword": "/login/forgot-password",
+  "login-confirm": "/login/confirm"
 }
