@@ -2,7 +2,6 @@ import Image from 'next/image';
 import ConversationCardModal from './ConversationCardModal';
 import defaultProfileImage from '../../public/default-profile.png';
 import useMediaQuery from '../hooks/useMediaQuery';
-import '../../app/styles/messaging-styles.css';
 
 export type ConversationCardProps = {
   messageTimestamp: string;
