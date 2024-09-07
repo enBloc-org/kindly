@@ -16,11 +16,7 @@ const ConversationsList: React.FC = () => {
     dispatch,
   } = useConversationContext();
 
-  const [notificationList, setNotificationList] = useState<number[]>(
-    allConversations
-      .filter((conversation) => conversation.has_unread_messages)
-      .map((conversation) => conversation.conversation_id)
-  );
+  const [notificationList, setNotificationList] = useState<number[]>([]);
   const supabase = newClient();
 
   const updateOpenConversation = async (givenId: number) => {
@@ -36,6 +32,14 @@ const ConversationsList: React.FC = () => {
     updateConversationReadStatus(givenId, currentUserId, false);
     dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: false });
   };
+
+  useEffect(() => {
+    setNotificationList(
+      allConversations
+        .filter((conversation) => conversation.has_unread_messages)
+        .map((conversation) => conversation.conversation_id)
+    );
+  }, [allConversations]);
 
   useEffect(() => {
     const channel = supabase
