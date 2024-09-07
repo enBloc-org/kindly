@@ -12,7 +12,7 @@ describe('messaging feature', () => {
     ConversationsPage.conversationCard().click();
     ConversationsPage.notificationDot().should('have.length', 1);
     ConversationsPage.conversationCard()
-      .parents('[data-testid="card-wrapper"]')
+      .parents('.conversation-card')
       .find('[name="ellipsis-button"]')
       .click();
     cy.get('button')
