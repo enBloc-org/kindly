@@ -7,11 +7,11 @@ describe('messaging feature', () => {
   });
 
   it('alerts users for unread messages in a conversation', () => {
-    cy.visit(page.message);
+    cy.visit(page.conversations);
     ConversationsPage.notificationDot().should('have.length', 2);
-    ConversationsPage.conversationCard().click();
+    ConversationsPage.conversationCard(/unread to refugee/i).click();
     ConversationsPage.notificationDot().should('have.length', 1);
-    ConversationsPage.conversationCard()
+    ConversationsPage.conversationCard(/unread to refugee/i)
       .parents('.conversation-card')
       .find('[name="ellipsis-button"]')
       .click();
@@ -19,5 +19,30 @@ describe('messaging feature', () => {
       .contains(/mark unread/i)
       .click();
     ConversationsPage.notificationDot().should('have.length', 2);
+  });
+
+  it('allows users to send new messages', () => {
+    cy.visit(page.conversations);
+    ConversationsPage.messageInput().type('NEW MESSAGE');
+    ConversationsPage.messageSubmitButton().click();
+    ConversationsPage.messageCard(/new message/i);
+  });
+
+  it.only('allows users to delete a conversation', () => {
+    cy.visit(page.conversations);
+    ConversationsPage.conversationCard(/message 4/i)
+      .parents('.conversation-card')
+      .find('[name="ellipsis-button"]')
+      .click();
+    cy.get('button')
+      .contains(/delete/i)
+      .click();
+    cy.get('.overlay')
+      .find('button')
+      .contains(/delete/i)
+      .click();
+    cy.get('.conversation-card')
+      .contains(/message 4/i)
+      .should('not.exist');
   });
 });
