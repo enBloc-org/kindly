@@ -2,6 +2,7 @@ import Image from 'next/image';
 import ConversationCardModal from './ConversationCardModal';
 import defaultProfileImage from '../../public/default-profile.png';
 import useMediaQuery from '../hooks/useMediaQuery';
+import '../../app/styles/messaging-styles.css';
 
 export type ConversationCardProps = {
   messageTimestamp: string;
@@ -42,23 +43,16 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
 
   return (
     <div
-      className={`relative flex items-center bg-gray-300 p-4 lg:max-w-[500px] lg:rounded-lg lg:shadow-md lg:hover:bg-secondaryGray
+      className={`conversation-card
           ${currentConversationId === conversationId ? 'lg: border-2 lg:border-primaryGreen' : ''}`}
       tabIndex={0}
       aria-label='button'
       onClick={clickHandler}
-      data-testid='card-wrapper'
     >
       <div className='relative h-[65px] w-[65px]'>
         {notificationList.some(
           (conversation) => conversation === conversationId
-        ) && (
-          <div
-            data-testid='notification-dot'
-            className='relative left-12 z-50 h-4 w-4 rounded-full border-2 
-              border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black'
-          ></div>
-        )}
+        ) && <div className='notification-dot'></div>}
         {partnerAvatar ? (
           <Image
             src={partnerAvatar}
