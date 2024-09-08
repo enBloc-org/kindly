@@ -46,6 +46,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           ${currentConversationId === conversationId ? 'lg: border-2 lg:border-primaryGreen' : ''}`}
       tabIndex={0}
       aria-label='button'
+      data-testid='card-wrapper'
       onClick={clickHandler}
     >
       <div className='relative h-[65px] w-[65px]'>
