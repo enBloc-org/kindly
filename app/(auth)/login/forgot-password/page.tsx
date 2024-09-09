@@ -38,9 +38,8 @@ export default async function ForgotPassword({
         '/login/forgot-password?message=Could not authenticate user'
       );
     }
-
     return redirect(
-      '/login/confirm?message=Password Reset link has been sent to your email address'
+      `/login/forgot-password?message=A reset email password has been sent to ${encodeURIComponent(email)}`
     );
   };
 
@@ -68,7 +67,6 @@ export default async function ForgotPassword({
           </p>
         )}
       </form>
-
       <Link href='/login' className='mt-2 text-sm text-primaryGreen'>
         Remember your password? Sign in
       </Link>
