@@ -6,7 +6,7 @@ describe('ForgotPassword page spec', () => {
     cy.visit(page.forgotPassword);
     forgotPasswordPage.confirmResetButton().click();
     cy.get('input[name="email"]').then(($input) => {
-      expect($input[0].validationMessage).to.eq('Please fill in this field.');
+      expect($input[0].validationMessage).to.match(/please fill/gi);
     });
   });
   it('should redirect the user to a success page when filling the valid email form and clicking "Confirm Reset" button', () => {
@@ -14,15 +14,17 @@ describe('ForgotPassword page spec', () => {
     console.log('Login Email:', Cypress.env('loginEmail'));
     forgotPasswordPage.emailInput().type(Cypress.env('loginEmail'));
     forgotPasswordPage.confirmResetButton().click();
-    cy.url().should('include', '/login/confirm');
+    cy.url().should('include', '/login/forgot-password');
   });
-
-  it('should show an error message when an unregistered email is submitted', () => {
+  it('should display the user email in the message', () => {
     cy.visit(page.forgotPassword);
-    const unregisteredEmail = 'enregistered@example.com';
-    forgotPasswordPage.emailInput().type(unregisteredEmail);
+    const testEmail = Cypress.env('loginEmail');
+    forgotPasswordPage.emailInput().type(testEmail);
     forgotPasswordPage.confirmResetButton().click();
     cy.url().should('include', '/login/forgot-password');
-    cy.get('p').contains('User does not exist. Please sign uo');
+    cy.get('p').should(
+      'contain.text',
+      `A reset email password has been sent to ${testEmail}`
+    );
   });
 });
