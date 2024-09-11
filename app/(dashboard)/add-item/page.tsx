@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AddNewItemForm from '@/components/form/AddNewItemForm';
 import selectLoggedUserId from '@/supabase/utils/selectLoggedUserId';
+import { PartialItem } from '@/types/supabaseTypes';
+import insertRow from '@/supabase/models/insertRow';
 
 export default function AddItemPage() {
   const [loggedUser, setLoggedUser] = useState<string | null>(null);
@@ -22,5 +24,24 @@ export default function AddItemPage() {
     getUserId();
   }, []);
 
-  return loggedUser && <AddNewItemForm userId={loggedUser} />;
+  const submitHandler = async (itemData: PartialItem) => {
+    try {
+      const addedItem = await insertRow('items', itemData);
+      if (!addedItem || addedItem.length === 0) {
+        throw new Error('Failed to add the new item');
+      }
+      const itemId = addedItem[0].id;
+
+      router.push(`/add-item/success/${itemId}`);
+    } catch (error) {
+      console.error('Error adding item:', error);
+      throw error;
+    }
+  };
+
+  return (
+    loggedUser && (
+      <AddNewItemForm userId={loggedUser} onSubmit={submitHandler} />
+    )
+  );
 }
