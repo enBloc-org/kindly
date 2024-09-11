@@ -1,26 +1,26 @@
 'use client';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-
+//Components
 import ButtonRounded from '../buttons/ButtonRounded';
-import UploadImageInput from './UploadImageInput';
+import ImageUploadComponent from './ImageUploadComponent';
+//Types
 import { PartialItem } from '@/types/supabaseTypes';
 
 export default function AddNewItemForm({
-  onSubmit,
   userId,
+  onSubmit,
 }: {
-  onSubmit: (data: PartialItem) => void;
   userId: string | undefined;
+  onSubmit: (itemData: PartialItem) => void;
 }) {
   const [generalError, setGeneralError] = useState('');
-  const [imageSource, setImageSource] = useState('');
+  const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
 
   const {
     register,
     handleSubmit,
     watch,
-    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -66,15 +66,30 @@ export default function AddNewItemForm({
     'UK26',
   ];
 
-  const submitHandler = async (data: PartialItem) => {
-    const itemData: PartialItem = {
-      imageSrc: imageSource,
-      donated_by: userId,
-      ...data,
-    };
+  const uploadImage = async (files: FileList) => {
+    // Implement image upload logic here
+    // This should return an array of image URLs
+    console.log(files);
+    // Placeholder for now
+    return ['https://example.com/dummy-image.jpg'];
+  };
 
-    onSubmit(itemData);
-    reset();
+  const submitHandler = async (data: PartialItem) => {
+    if (selectedFiles) {
+      try {
+        const uploadedImageUrls = await uploadImage(selectedFiles);
+        const itemData: PartialItem = {
+          imageSrc: uploadedImageUrls[0], // Assuming you want the first image
+          donated_by: userId,
+          ...data,
+        };
+        onSubmit(itemData);
+      } catch (error) {
+        setGeneralError('Failed to upload image. Please try again.');
+      }
+    } else {
+      setGeneralError('Please select an image before submitting.');
+    }
   };
 
   return (
@@ -248,11 +263,13 @@ export default function AddNewItemForm({
           <p className='error-message'>Select at least one option </p>
         )}
 
-        <UploadImageInput
-          setImageSrc={setImageSource}
-          setError={setGeneralError}
+        <ImageUploadComponent
+          onUploadError={(error) => setGeneralError(error.message)}
           isRequired={true}
-          imageType={'item'}
+          imageType='item'
+          accept='image/*'
+          allowMultiple={true}
+          onFilesSelected={setSelectedFiles}
         />
         {generalError && <p className='error-message'>{generalError}</p>}
 
