@@ -14,10 +14,10 @@ interface UploadImageComponentProps {
 const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
   onFilesChange,
   onUploadError,
+  onFilesSelected,
   isRequired = false,
   accept = 'image/*',
   allowMultiple = false,
-  onFilesSelected,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [thumbnailsUrl, setThumbnailsUrl] = useState<string[]>([]);
