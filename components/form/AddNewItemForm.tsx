@@ -1,6 +1,7 @@
 'use client';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import insertImagesToStorage from '@/supabase/models/storage/insertImagesToStorage';
 //Components
 import ButtonRounded from '../buttons/ButtonRounded';
 import ImageUploadComponent from './ImageUploadComponent';
@@ -67,10 +68,11 @@ export default function AddNewItemForm({
   ];
 
   const uploadImage = async (files: FileList) => {
-    // Implement image upload logic here
-    // This should return an array of image URLs
-    console.log(files);
-    // Placeholder for now
+    if (!userId) return;
+
+    const filesArray = Array.from(files);
+    const urlArray = await insertImagesToStorage(filesArray, 'item', userId);
+    console.log(urlArray);
     return ['https://example.com/dummy-image.jpg'];
   };
 
@@ -79,7 +81,7 @@ export default function AddNewItemForm({
       try {
         const uploadedImageUrls = await uploadImage(selectedFiles);
         const itemData: PartialItem = {
-          imageSrc: uploadedImageUrls[0], // Assuming you want the first image
+          imageSrc: uploadedImageUrls?.[0] ?? '',
           donated_by: userId,
           ...data,
         };
