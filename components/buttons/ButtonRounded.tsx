@@ -13,8 +13,8 @@ type ButtonRoundedPropTypes = {
 const ButtonRounded: React.FC<ButtonRoundedPropTypes> = ({
   children,
   clickHandler,
-  isDisabled,
-  type,
+  isDisabled = false,
+  type = 'button',
   width = '',
   role = 'button',
 }) => {
