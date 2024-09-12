@@ -40,6 +40,11 @@ export default function AddNewItemForm({
   const category = watch('item_type');
   const isWillingToPostChecked = watch('postable');
   const isPickUpChecked = watch('collectible');
+  const postcodeValue = watch('postcode');
+  const itemNameValue = watch('item_name');
+  const itemDescriptionValue = watch('item_description');
+  const conditionValue = watch('condition');
+  const categoryValue = watch('item_type');
 
   const shoeSizes = ['UK3', 'UK4', 'UK5', 'UK6', 'UK7', 'UK8', 'UK10'];
   const allSizes = [
@@ -89,41 +94,44 @@ export default function AddNewItemForm({
           htmlFor='item_name'
           className='flex flex-col items-center gap-2 font-light'
         >
-          <span className='flex items-center'>
-            Item Name
-            <span className='ml-1 text-primaryGray'>*</span>
-          </span>
+          <span className='flex items-center'>Item Name</span>
           <input
             type='text'
             className='input-text'
             {...register('item_name', { required: 'This field is required' })}
           />
         </label>
-        <p className='error-message'>{errors.item_name?.message}</p>
+        {(!itemNameValue || errors.item_name) && (
+          <p className='error-message'>
+            {errors.item_name?.message || 'This field is required'}
+          </p>
+        )}
+
         <label
           htmlFor='item_description'
           className='flex flex-col items-center gap-1 font-light'
         >
-          <span className='flex items-center'>
-            Description
-            <span className='ml-1 text-primaryGray'>*</span>
-          </span>
+          <span className='flex items-center'>Description</span>
           <textarea
-            {...register('item_description')}
+            {...register('item_description', {
+              required: 'This field is required',
+            })}
             maxLength={200}
             className='input-text'
           />
         </label>
+        {(!itemDescriptionValue || errors.item_description) && (
+          <p className='error-message'>
+            {errors.item_description?.message || 'This field is required'}
+          </p>
+        )}
+
         <label
           htmlFor='postcode'
           className='flex flex-col items-center gap-1 font-light'
         >
-          <span className='flex items-center'>
-            Postcode
-            <span className='ml-1 text-primaryGray'>*</span>
-          </span>
+          <span className='flex items-center'>Postcode</span>
           <span className='text-xs italic'>First half</span>
-
           <input
             type='text'
             maxLength={5}
@@ -137,19 +145,20 @@ export default function AddNewItemForm({
             className='input-text w-24 text-center'
           />
         </label>
-        <p className='error-message'>{errors.postcode?.message}</p>
+        {(!postcodeValue || errors.postcode) && (
+          <p className='error-message'>
+            {errors.postcode?.message || 'This field is required'}
+          </p>
+        )}
         <div className='mt-2 flex items-center justify-center gap-5'>
           <label
             htmlFor='condition'
             className='flex flex-col items-center gap-1 font-light'
           >
-            <span className='flex items-center'>
-              Condition
-              <span className='ml-1 text-primaryGray'>*</span>
-            </span>
+            <span className='flex items-center'>Condition</span>
             <select
               {...register('condition', { required: 'Required' })}
-              className='input-text '
+              className='input-text'
             >
               <option value='' disabled hidden>
                 Select one
@@ -159,16 +168,17 @@ export default function AddNewItemForm({
               <option value={'Poor'}>Poor</option>
               <option value={'New'}>New</option>
             </select>
-            <p className='error-message'>{errors.condition?.message}</p>
+            {(!conditionValue || errors.condition) && (
+              <p className='error-message'>
+                {errors.condition?.message || 'This field is required'}
+              </p>
+            )}
           </label>
           <label
             htmlFor='item_type'
             className='flex flex-col items-center gap-1 font-light'
           >
-            <span className='flex items-center'>
-              Categories
-              <span className='ml-1 text-primaryGray'>*</span>
-            </span>
+            <span className='flex items-center'>Categories</span>
             <select
               {...register('item_type', { required: 'Required' })}
               className='input-text '
@@ -182,7 +192,11 @@ export default function AddNewItemForm({
               <option value={'books'}>Books</option>
               <option value={'household'}>Home</option>
             </select>
-            <p className='error-message'>{errors.item_type?.message}</p>
+            {(!categoryValue || errors.item_type) && (
+              <p className='error-message'>
+                {errors.item_type?.message || 'This field is required'}
+              </p>
+            )}
           </label>
         </div>
         {(category === 'clothing' || category === 'shoes') && (
