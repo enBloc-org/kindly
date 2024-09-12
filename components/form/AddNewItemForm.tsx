@@ -89,7 +89,10 @@ export default function AddNewItemForm({
           htmlFor='item_name'
           className='flex flex-col items-center gap-2 font-light'
         >
-          Item Name
+          <span className='flex items-center'>
+            Item Name
+            <span className='ml-1 text-primaryGray'>*</span>
+          </span>
           <input
             type='text'
             className='input-text'
@@ -101,7 +104,10 @@ export default function AddNewItemForm({
           htmlFor='item_description'
           className='flex flex-col items-center gap-1 font-light'
         >
-          Description
+          <span className='flex items-center'>
+            Description
+            <span className='ml-1 text-primaryGray'>*</span>
+          </span>
           <textarea
             {...register('item_description')}
             maxLength={200}
@@ -112,7 +118,12 @@ export default function AddNewItemForm({
           htmlFor='postcode'
           className='flex flex-col items-center gap-1 font-light'
         >
-          Postcode <span className='text-xs italic'>First half</span>
+          <span className='flex items-center'>
+            Postcode
+            <span className='ml-1 text-primaryGray'>*</span>
+          </span>
+          <span className='text-xs italic'>First half</span>
+
           <input
             type='text'
             maxLength={5}
@@ -132,7 +143,10 @@ export default function AddNewItemForm({
             htmlFor='condition'
             className='flex flex-col items-center gap-1 font-light'
           >
-            Condition
+            <span className='flex items-center'>
+              Condition
+              <span className='ml-1 text-primaryGray'>*</span>
+            </span>
             <select
               {...register('condition', { required: 'Required' })}
               className='input-text '
@@ -151,7 +165,10 @@ export default function AddNewItemForm({
             htmlFor='item_type'
             className='flex flex-col items-center gap-1 font-light'
           >
-            Categories
+            <span className='flex items-center'>
+              Categories
+              <span className='ml-1 text-primaryGray'>*</span>
+            </span>
             <select
               {...register('item_type', { required: 'Required' })}
               className='input-text '
