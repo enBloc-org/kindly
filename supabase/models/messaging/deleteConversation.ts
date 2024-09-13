@@ -10,6 +10,10 @@ export default async function deleteConversation(
       .from('user_conversations')
       .delete()
       .match({ conversation_id: conversationId, user_id: userId });
+    await supabase
+      .from('conversations')
+      .update({ member_has_deleted: true })
+      .match({ id: conversationId });
 
     if (error) throw error;
   } catch (error) {
