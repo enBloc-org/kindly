@@ -250,7 +250,7 @@ const EditItemPage = ({ params }: { params: { id: number } }) => {
         <UploadImageInput
           setImageSrc={setImageSrc}
           setError={setGeneralError}
-          imageType='item'
+          imageType={'item'}
         />
         {generalError && <p className='error-message'>{generalError}</p>}
         <ButtonRounded type='submit'>EDIT ITEM</ButtonRounded>

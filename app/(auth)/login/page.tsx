@@ -20,7 +20,11 @@ export default function Login({
       password,
     });
 
-    return redirect(error ? '/login?message=Could not authenticate user' : '/');
+    redirect(
+      error
+        ? '/login?message=Something has gone wrong. Please try again later.'
+        : '/'
+    );
   };
 
   return (
