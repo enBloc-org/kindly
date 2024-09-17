@@ -17,11 +17,12 @@ export type item = {
   postage_covered: boolean;
   imageSrc: string;
   username: string;
+  given_away_to: string | null;
 };
 
 export type profile = {
-  id: String;
-  email: String;
+  id: string;
+  email: string;
   items_added: number[];
   reserved_items: number[];
   refugee: boolean;
