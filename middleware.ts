@@ -1,31 +1,43 @@
-import { NextResponse, type NextRequest } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import { createClient } from '@/supabase/utils/middleware';
 
 export async function middleware(request: NextRequest) {
   try {
-    // This `try/catch` block is only here for the interactive tutorial.
-    // Feel free to remove once you have Supabase connected.
-    const { supabase, response } = createClient(request);
+    const { supabase } = createClient(request);
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-    // Refresh session if expired - required for Server Components
-    // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-session-with-middleware
-    await supabase.auth.getSession();
+    if (user) {
+      const newHeaders = new Headers(request.headers);
+      newHeaders.set('k-active-user', user!.id);
 
-    return response;
-  } catch (e) {
-    // If you are here, a Supabase client could not be created!
-    // This is likely because you have not set up environment variables.
-    // Check out http://localhost:3000 for Next Steps.
-    return NextResponse.next({
-      request: {
-        headers: request.headers,
-      },
-    });
+      return NextResponse.next({
+        request: {
+          headers: newHeaders,
+        },
+      });
+    }
+    return NextResponse.redirect(
+      new URL('/login?message=Please login to use this feature', request.url)
+    );
+  } catch (error) {
+    console.error(error);
+    return NextResponse.redirect(
+      new URL(
+        '/login?message=Something has gone wrong. Please try again later.',
+        request.url
+      )
+    );
   }
 }
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).)*',
+    '/conversations',
+    '/item/:id*',
+    '/profile',
+    '/add-item',
+    '/delete-account',
   ],
 };

@@ -1,20 +1,21 @@
 'use client';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import ButtonRounded from '../buttons/ButtonRounded';
 import UploadImageInput from './UploadImageInput';
 import { PartialItem } from '@/types/supabaseTypes';
+import insertRow from '@/supabase/models/insertRow';
 
 export default function AddNewItemForm({
-  onSubmit,
   userId,
 }: {
-  onSubmit: (data: PartialItem) => void;
   userId: string | undefined;
 }) {
   const [generalError, setGeneralError] = useState('');
   const [imageSource, setImageSource] = useState('');
+  const router = useRouter();
 
   const {
     register,
@@ -73,8 +74,17 @@ export default function AddNewItemForm({
       ...data,
     };
 
-    onSubmit(itemData);
-    reset();
+    try {
+      const addedItem = await insertRow('items', itemData);
+      if (!addedItem || addedItem.length === 0) {
+        throw new Error('Failed to add the new item');
+      }
+      const itemId = addedItem[0].id;
+      reset();
+      router.push(`/add-item/success/${itemId}`);
+    } catch (error) {
+      router.push(`/add-item?message=${error}`);
+    }
   };
 
   return (
