@@ -19,6 +19,7 @@ const CurrentConversation: React.FC = () => {
     conversationState: { allConversations, currentConversation },
     dispatch,
   } = useConversationContext();
+  const [deletedList, setDeletedList] = useState<number[]>([]);
   const [currentMessages, setCurrentMessages] = useState<MessageType[]>([]);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const [systemUser, setSystemUser] = useState<string | undefined>(undefined);
@@ -71,6 +72,40 @@ const CurrentConversation: React.FC = () => {
               ...prevMessages,
               payload.new as MessageType,
             ]);
+          }
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'user_conversations',
+          filter: `user_id=eq.${currentConversation?.user_id}`,
+        },
+        (payload) => {
+          console.log('ran effect');
+          if (payload) {
+            console.log('payload');
+            console.dir(payload, { depth: null });
+          } else {
+            console.log('Payload is undefined or null');
+          }
+          console.log('payload');
+
+          console.log('payload.old');
+          console.log(payload.old);
+          console.log('payload.new');
+          console.log(payload.new);
+          if (payload.new.partner_has_deleted) {
+            setDeletedList((prevState) => {
+              if (!prevState.includes(payload.new.conversation_id)) {
+                return [...prevState, payload.new.conversation_id];
+              }
+              console.log('Updated deletedList', prevState);
+              return prevState;
+            });
+            console.log(deletedList);
           }
         }
       )
@@ -138,6 +173,7 @@ const CurrentConversation: React.FC = () => {
       <MessageForm
         user_id={currentConversation?.user_id}
         conversation_id={currentConversation?.conversation_id}
+        deletedList={deletedList}
       />
     </div>
   );

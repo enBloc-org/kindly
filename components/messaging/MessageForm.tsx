@@ -9,11 +9,13 @@ import useMediaQuery from '../hooks/useMediaQuery';
 type MessageFormProps = {
   user_id: string | undefined;
   conversation_id: number | undefined;
+  deletedList: number[] | undefined;
 };
 
 const MessageForm: React.FC<MessageFormProps> = ({
   user_id,
   conversation_id,
+  deletedList,
 }) => {
   const [message, setMessage] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState(true);
@@ -22,7 +24,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
+    console.log('deleted list at send ', deletedList);
     const trimmedMessage = message.trim();
 
     try {
