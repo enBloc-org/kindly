@@ -83,11 +83,11 @@ const CurrentConversation: React.FC = () => {
     };
   }, [currentMessages, setCurrentMessages]);
 
-  useEffect(() => {
-    //define the variable outside handleScroll (using useRef to avoid mutability) to handle multiple timeouts
-    //this ensures that the timeout can be cleared properly in handleScroll
-    const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  //define the variable outside handleScroll (using useRef to avoid mutability) to handle multiple timeouts
+  //this ensures that the timeout can be cleared properly in handleScroll
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolling(true);
 
