@@ -45,13 +45,14 @@ const CurrentConversation: React.FC = () => {
 
   useEffect(() => {
     const setMessagesForCurrentConversation = async () => {
+      if (!currentConversation) return;
       const selectedMessages = await selectMessagesByConversationId(
         currentConversation?.conversation_id as number
       );
       setCurrentMessages(selectedMessages);
     };
     setMessagesForCurrentConversation();
-  }, [currentConversation, setCurrentMessages]);
+  }, [currentConversation]);
 
   useEffect(() => {
     const channel = supabase
@@ -65,6 +66,7 @@ const CurrentConversation: React.FC = () => {
         },
         (payload) => {
           if (
+            currentConversation &&
             payload.new.conversation_id === currentConversation?.conversation_id
           ) {
             setCurrentMessages((prevMessages) => [
@@ -82,22 +84,24 @@ const CurrentConversation: React.FC = () => {
   }, [currentMessages, setCurrentMessages]);
 
   useEffect(() => {
+    let debounce: NodeJS.Timeout;
+    const chatWindow = chatWindowRef?.current;
+    if (!chatWindow) return;
     const handleScroll = () => {
       setIsScrolling(true);
-
-      const debounce = setTimeout(() => {
+      clearTimeout(debounce);
+      debounce = setTimeout(() => {
         setIsScrolling(false);
       }, 3000);
-
-      return () => clearTimeout(debounce);
     };
 
-    chatWindowRef?.current?.addEventListener('scroll', handleScroll);
+    chatWindow.addEventListener('scroll', handleScroll);
 
     return () => {
-      chatWindowRef?.current?.removeEventListener('scroll', handleScroll);
+      chatWindow.removeEventListener('scroll', handleScroll);
+      clearTimeout(debounce);
     };
-  }, [isScrolling, setIsScrolling]);
+  }, []);
 
   return (
     <div className='message-card-container flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
@@ -105,35 +109,36 @@ const CurrentConversation: React.FC = () => {
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}
       >
-        {currentMessages
-          .map((message: MessageType, index: number) => (
-            <div key={`${message.id}`}>
-              {formatDateMarker(message.created_at) !==
-                formatDateMarker(currentMessages[index - 1]?.created_at) && (
-                <div
-                  className={`${isScrolling ? 'opacity-100' : 'opacity-0'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition-opacity ease-in-out`}
-                >
-                  {formatDateMarker(message.created_at)}
-                </div>
-              )}
-              {systemUser && message.sender_id === systemUser ? (
-                <SystemMessageCard
-                  messageId={message.id}
-                  messageText={message.message_text}
-                  currentUser={currentConversation?.user_id}
-                />
-              ) : (
-                <MessageCard
-                  senderId={message.sender_id}
-                  createdAt={formatTimeMarker(message.created_at)}
-                  messageText={message.message_text}
-                  currentUser={currentConversation?.user_id}
-                  messageId={message.id}
-                />
-              )}
-            </div>
-          ))
-          .reverse()}
+        {systemUser &&
+          currentMessages
+            .map((message: MessageType, index: number) => (
+              <div key={`${message.id}`}>
+                {formatDateMarker(message.created_at) !==
+                  formatDateMarker(currentMessages[index - 1]?.created_at) && (
+                  <div
+                    className={`${isScrolling ? 'opacity-100' : 'opacity-0'} sticky top-4 z-10 my-[-15px] ml-[calc((100%_-_120px)/2)] h-[30px] w-[120px] rounded-xl bg-stone-50 object-center p-1 text-center text-lg font-semibold text-slate-400 transition-opacity ease-in-out`}
+                  >
+                    {formatDateMarker(message.created_at)}
+                  </div>
+                )}
+                {systemUser && message.sender_id === systemUser ? (
+                  <SystemMessageCard
+                    messageId={message.id}
+                    messageText={message.message_text}
+                    currentUser={currentConversation?.user_id}
+                  />
+                ) : (
+                  <MessageCard
+                    senderId={message.sender_id}
+                    createdAt={formatTimeMarker(message.created_at)}
+                    messageText={message.message_text}
+                    currentUser={currentConversation?.user_id}
+                    messageId={message.id}
+                  />
+                )}
+              </div>
+            ))
+            .reverse()}
       </div>
       <MessageForm
         user_id={currentConversation?.user_id}
