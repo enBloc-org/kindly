@@ -13,7 +13,6 @@ export default function AddNewItemForm({
   onSubmit: (data: PartialItem) => void;
   userId: string | undefined;
 }) {
-  const [generalError, setGeneralError] = useState('');
   const [imageSource, setImageSource] = useState('');
   const [isSubmitAttempted, setIsSubmitAttempted] = useState(false);
 
@@ -72,11 +71,6 @@ export default function AddNewItemForm({
   ];
 
   const submitHandler = async (data: PartialItem) => {
-    setIsSubmitAttempted(true);
-    if (!imageSource) {
-      setGeneralError('Please upload an image');
-      return;
-    }
     const itemData: PartialItem = {
       imageSrc: imageSource,
       donated_by: userId,
@@ -86,7 +80,6 @@ export default function AddNewItemForm({
     onSubmit(itemData);
     reset();
     setIsSubmitAttempted(false);
-    setGeneralError('');
   };
 
   return (
@@ -330,17 +323,14 @@ export default function AddNewItemForm({
 
         <UploadImageInput
           setImageSrc={setImageSource}
-          setError={setGeneralError}
           isRequired={true}
           imageType={'item'}
-          showErrorMessage={false}
+          showErrorMessage={isSubmitAttempted}
+          imageSource={imageSource}
         />
-        {isSubmitAttempted && !imageSource && (
-          <p className='error-message'>
-            {generalError || 'Please upload an image'}
-          </p>
+        {isSubmitted && !imageSource && (
+          <p className='error-message'>Image is required</p>
         )}
-
         <ButtonRounded type='submit'>ADD YOUR ITEM</ButtonRounded>
       </form>
     </div>

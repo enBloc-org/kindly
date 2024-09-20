@@ -9,6 +9,8 @@ type UploadImageProps = {
   setError?: (error: string) => void;
   isRequired?: boolean;
   imageType: 'item' | 'profile';
+  showErrorMessage?: boolean;
+  imageSource?: string;
 };
 
 const CDN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
@@ -26,10 +28,11 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
   setError,
   isRequired: isRequired = false,
   imageType,
+  imageSource,
 }) => {
   const supabase = newClient();
   const [userId, setUserId] = useState('');
-  const [isImageUploaded, setIsImageUploaded] = useState(false);
+  const [setIsImageUploaded] = useState(!!imageSource);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +54,7 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
     };
 
     fetchData();
-  }, []);
+  }, [imageSource]);
 
   const imageFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -114,19 +117,17 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 
   return (
     <div className='my-3 flex flex-col items-center gap-4'>
-      <label htmlFor='image'>Upload an image:</label>
+      <label htmlFor='image' className='flex items-center gap-1'>
+        Upload an image
+        {isRequired && <span className=''>*</span>}
+      </label>
       <input
         className='pl-14'
         type='file'
         name='image'
         onChange={(e) => imageFileUpload(e)}
-        required={isRequired}
+        accept='image/*'
       />
-      {!isImageUploaded && (
-        <p className='font-extralight italic text-primaryOrange'>
-          Image is required
-        </p>
-      )}
     </div>
   );
 };
