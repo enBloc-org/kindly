@@ -84,22 +84,29 @@ const CurrentConversation: React.FC = () => {
   }, [currentMessages, setCurrentMessages]);
 
   useEffect(() => {
-    let debounce: NodeJS.Timeout;
-    const chatWindow = chatWindowRef?.current;
-    if (!chatWindow) return;
+    //define the variable outside handleScroll (using useRef to avoid mutability) to handle multiple timeouts
+    //this ensures that the timeout can be cleared properly in handleScroll
+    const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
     const handleScroll = () => {
       setIsScrolling(true);
-      clearTimeout(debounce);
-      debounce = setTimeout(() => {
+
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current); // Clear the previous timeout
+      }
+
+      debounceRef.current = setTimeout(() => {
         setIsScrolling(false);
       }, 3000);
     };
 
-    chatWindow.addEventListener('scroll', handleScroll);
+    chatWindowRef?.current?.addEventListener('scroll', handleScroll);
 
     return () => {
-      chatWindow.removeEventListener('scroll', handleScroll);
-      clearTimeout(debounce);
+      chatWindowRef?.current?.removeEventListener('scroll', handleScroll);
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current); // Clear timeout on cleanup
+      }
     };
   }, []);
 
