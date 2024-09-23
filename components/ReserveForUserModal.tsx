@@ -78,7 +78,7 @@ const ReserveForUserModal = ({
                 <p className='font-light'>{user.username}</p>
                 <button
                   className='button button-rounded'
-                  onClick={() => handleConfirmReserve(user.id)}
+                  onClick={() => handleConfirmReserve(user.id as string)}
                 >
                   Confirm
                 </button>

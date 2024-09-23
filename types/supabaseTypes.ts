@@ -21,8 +21,8 @@ export type item = {
 };
 
 export type profile = {
-  id: string;
-  email: string;
+  id: String;
+  email: String;
   items_added: number[];
   reserved_items: number[];
   refugee: boolean;
