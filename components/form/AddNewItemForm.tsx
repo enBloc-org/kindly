@@ -90,7 +90,6 @@ export default function AddNewItemForm({
         onSubmit={handleSubmit(submitHandler)}
         className='flex flex-col items-center gap-5'
       >
-        {/* Item Name */}
         <label
           htmlFor='item_name'
           className='flex flex-col items-center gap-2 font-light'
@@ -109,7 +108,6 @@ export default function AddNewItemForm({
           <p className='error-message'>This field is required</p>
         )}
 
-        {/* Item Description */}
         <label
           htmlFor='item_description'
           className='flex flex-col items-center gap-1 font-light'
@@ -130,7 +128,6 @@ export default function AddNewItemForm({
           <p className='error-message'>This field is required</p>
         )}
 
-        {/* Postcode */}
         <label
           htmlFor='postcode'
           className='flex flex-col items-center gap-1 font-light'
@@ -157,7 +154,6 @@ export default function AddNewItemForm({
           <p className='error-message'>This field is required</p>
         )}
 
-        {/* Condition and Category */}
         <div className='mt-2 flex items-center justify-center gap-5'>
           <div className='flex flex-col items-center'>
             <label
@@ -282,7 +278,6 @@ export default function AddNewItemForm({
           </div>
         )}
 
-        {/* Delivery Options */}
         <div className='mt-5 flex flex-col items-center gap-3'>
           <span className='flex items-center gap-1 font-light'>
             Delivery Options
