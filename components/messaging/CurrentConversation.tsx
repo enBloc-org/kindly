@@ -90,7 +90,7 @@ const CurrentConversation: React.FC = () => {
       setIsScrolling(true);
 
       if (debounceRef.current) {
-        clearTimeout(debounceRef.current); // Clear the previous timeout
+        clearTimeout(debounceRef.current);
       }
 
       debounceRef.current = setTimeout(() => {
@@ -103,7 +103,7 @@ const CurrentConversation: React.FC = () => {
     return () => {
       chatWindowRef?.current?.removeEventListener('scroll', handleScroll);
       if (debounceRef.current) {
-        clearTimeout(debounceRef.current); // Clear timeout on cleanup
+        clearTimeout(debounceRef.current);
       }
     };
   }, []);
