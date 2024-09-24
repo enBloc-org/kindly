@@ -1,14 +1,17 @@
 import newServerClient from '@/supabase/utils/newServerClient';
+import { headers } from 'next/headers';
 import { getProfile } from '@/supabase/models/getProfile';
 import ItemDetailsPage from '@/components/ItemDetailsPage';
 
 const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
+  const headersList = headers();
+  const userId = headersList.get('k-active-user')!;
+
   const supabase = newServerClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  const userProfile = await getProfile(user?.id);
+
+  const { data: userProfile } = await getProfile(userId);
   let canMessage: boolean = true;
+
   try {
     const { data: item } = await supabase
       .from('items')
@@ -21,8 +24,8 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       const donorEmail = item.profiles.email;
       const donorName = item.profiles.username;
       if (
-        !user ||
-        userProfile?.data.refugee === false ||
+        !userId ||
+        userProfile?.refugee === false ||
         item?.profiles?.id === userProfile?.data.id ||
         item?.is_reserved
       ) {
@@ -32,7 +35,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
       return (
         <ItemDetailsPage
           item={item}
-          user={user!}
+          user={userProfile}
           canMessage={canMessage}
           donorEmail={donorEmail}
           donorName={donorName}

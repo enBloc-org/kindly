@@ -26,7 +26,6 @@ const MessageForm: React.FC<MessageFormProps> = ({
     e.preventDefault();
     console.log('deleted list at send ', deletedList);
     const trimmedMessage = message.trim();
-
     try {
       await insertMessage(user_id, conversation_id, trimmedMessage);
       setMessage('');

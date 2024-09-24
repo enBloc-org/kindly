@@ -1,19 +1,10 @@
 //Components
-
 import ConversationsWrapper from '@/components/messaging/ConversationWrapper';
-import newServerClient from '@/supabase/utils/newServerClient';
-import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 
-const Conversations = async () => {
-  const supabase = newServerClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  const userId = user?.id;
-  if (!userId) {
-    redirect('/login');
-  }
-  return <ConversationsWrapper userId={userId} />;
-};
+export default function Conversations() {
+  const headersList = headers();
+  const user = headersList.get('k-active-user');
 
-export default Conversations;
+  return <ConversationsWrapper userId={user!} />;
+}
