@@ -2,15 +2,13 @@
 
 import newClient from '@/supabase/utils/newClient';
 import { useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
-type UploadImageProps = {
-  setImageSrc: (src: string) => void;
-  setError?: (error: string) => void;
-  isRequired?: boolean;
+type UploadImageInputProps = {
+  isRequired: boolean;
   imageType: 'item' | 'profile';
-  showErrorMessage?: boolean;
-  imageSource?: string;
+  setImageSrc: (src: string) => void;
 };
 
 const CDN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
@@ -23,16 +21,14 @@ const CDN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/im
  * @param imageType is a required parameter that accepts either 'item' or 'profile'. It will determine the type of image to be uploaded in the imageFileUpload function.
  */
 
-const UploadImageInput: React.FC<UploadImageProps> = ({
-  setImageSrc,
-  setError,
-  isRequired: isRequired = false,
+const UploadImageInput: React.FC<UploadImageInputProps> = ({
+  isRequired = true,
   imageType,
-  imageSource,
+  setImageSrc,
 }) => {
   const supabase = newClient();
   const [userId, setUserId] = useState('');
-  const [setIsImageUploaded] = useState(!!imageSource);
+  const { register } = useFormContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,9 +38,6 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
 
         if (user) {
           setUserId(user);
-          if (!isRequired) {
-            setIsImageUploaded(true);
-          }
         } else {
           setUserId('');
         }
@@ -54,79 +47,82 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
     };
 
     fetchData();
-  }, [imageSource]);
+  }, []);
 
-  const imageFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const file = e.target.files[0];
-
-      if (file) {
-        try {
-          if (imageType === 'profile') {
-            const { data: listData, error: listError } = await supabase.storage
-              .from('images')
-              .list(userId);
-
-            if (listError) {
-              console.error('Error fetching old images:', listError);
-              return;
-            }
-
-            if (!listData) {
-              throw new Error('Failed to fetch images');
-            }
-
-            const profileImages = listData
-              .filter((image) => image.name.startsWith('profile_'))
-              .map((image) => userId + '/' + image.name);
-
-            if (profileImages.length > 0) {
-              const { error: deleteError } = await supabase.storage
-                .from('images')
-                .remove(profileImages);
-
-              if (deleteError) {
-                console.error('Error deleting old images:', deleteError);
-                return;
-              }
-            }
-          }
-
-          const prefix = imageType === 'profile' ? 'profile_' : 'item_';
-          const imageName = prefix + uuidv4();
-
-          const { data, error: uploadError } = await supabase.storage
+  const imageFileUpload = async (file: File) => {
+    if (file) {
+      try {
+        if (imageType === 'profile') {
+          const { data: listData, error: listError } = await supabase.storage
             .from('images')
-            .upload(userId + '/' + imageName, file);
+            .list(userId);
 
-          if (uploadError) {
-            console.error('Error uploading new image:', uploadError);
+          if (listError) {
+            console.error('Error fetching old images:', listError);
             return;
           }
-          setImageSrc(CDN + data.path);
-          setIsImageUploaded(true);
-          setError?.('');
-        } catch (error) {
-          console.error('Error handling image upload:', error);
+
+          if (!listData) {
+            throw new Error('Failed to fetch images');
+          }
+
+          const profileImages = listData
+            .filter((image) => image.name.startsWith('profile_'))
+            .map((image) => userId + '/' + image.name);
+
+          if (profileImages.length > 0) {
+            const { error: deleteError } = await supabase.storage
+              .from('images')
+              .remove(profileImages);
+
+            if (deleteError) {
+              console.error('Error deleting old images:', deleteError);
+              return;
+            }
+          }
         }
-      } else {
-        console.error('No file selected');
+
+        const prefix = imageType === 'profile' ? 'profile_' : 'item_';
+        const imageName = prefix + uuidv4();
+
+        const { data, error: uploadError } = await supabase.storage
+          .from('images')
+          .upload(userId + '/' + imageName, file);
+
+        if (uploadError) {
+          console.error('Error uploading new image:', uploadError);
+          return;
+        }
+        setImageSrc(CDN + data.path);
+      } catch (error) {
+        console.error('Error handling image upload:', error);
       }
+    } else {
+      console.error('No file selected');
     }
   };
 
   return (
     <div className='my-3 flex flex-col items-center gap-4'>
-      <label htmlFor='image' className='flex items-center gap-1'>
-        Upload an image
-        {isRequired && <span className=''>*</span>}
+      <label className='flex items-center gap-1'>
+        <span>
+          Upload an image
+          {isRequired && <span className=''>*</span>}
+        </span>
       </label>
       <input
         className='pl-14'
         type='file'
-        name='image'
-        onChange={(e) => imageFileUpload(e)}
-        accept='image/*'
+        {...register('imageUpload', {
+          required: isRequired ? 'Image is required' : false,
+          onChange: (e) => {
+            const file = e.target.files?.[0];
+            if (file) {
+              imageFileUpload(file);
+            }
+            return undefined;
+          },
+        })}
       />
     </div>
   );
