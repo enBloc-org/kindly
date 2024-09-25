@@ -39,23 +39,28 @@ export default async function ForgotPassword({
       );
     }
     return redirect(
-      `/login/forgot-password?message=A reset email password has been sent to ${encodeURIComponent(email)}`
+      `/login/forgot-password?message=Check your email. Password reset link has been sent to ${encodeURIComponent(email)}`
     );
   };
 
   return (
     <div className='flex flex-col  items-center  px-8'>
+      <h1 className='text-center text-4xl font-extrabold'>Forgot password</h1>
       <form
         className='text-foreground flex flex-1  flex-col  items-center justify-center gap-4'
         action={confirmReset}
       >
-        <label className='text-md' htmlFor='email'>
-          Enter Email Address
+        <label
+          className='text-md mt-5 text-center md:px-16 lg:px-0'
+          htmlFor='email'
+        >
+          Enter your email address and we will send you the reset password link
         </label>
         <input
           className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
           name='email'
           placeholder='you@example.com'
+          type='email'
           required
         />
 
