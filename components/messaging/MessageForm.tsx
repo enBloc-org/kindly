@@ -24,7 +24,11 @@ const MessageForm: React.FC<MessageFormProps> = ({
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log('deleted list at send ', deletedList);
+    if (deletedList?.some(conversation_id)) {
+      // some new function that goes to supabase and takes the information from this conversation and uses it to recreate user conversation
+      // needs conversation_id, user_id item_id: partner_id:
+      // has conversation_id, user_id,
+    }
     const trimmedMessage = message.trim();
     try {
       await insertMessage(user_id, conversation_id, trimmedMessage);
