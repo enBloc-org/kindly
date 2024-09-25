@@ -42,6 +42,7 @@ export default function AddNewItemForm({
   const categoryValue = watch('item_type');
   const isWillingToPostChecked = watch('postable');
   const isPickUpChecked = watch('collectible');
+  const isPostageCoveredChecked = watch('postage_covered');
   const postcodeValue = watch('postcode');
   const itemNameValue = watch('item_name');
   const itemDescriptionValue = watch('item_description');
@@ -316,9 +317,12 @@ export default function AddNewItemForm({
             </div>
           </div>
           <div className='h-6'>
-            {isSubmitted && !isPickUpChecked && !isWillingToPostChecked && (
-              <p className='error-message'>Select at least one option</p>
-            )}
+            {isSubmitted &&
+              !isPickUpChecked &&
+              !isWillingToPostChecked &&
+              !isPostageCoveredChecked && (
+                <p className='error-message'>Select at least one option</p>
+              )}
           </div>
 
           <UploadImageInput
