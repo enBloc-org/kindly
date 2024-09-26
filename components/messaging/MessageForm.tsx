@@ -5,6 +5,8 @@ import { FormEvent, useState, useRef, KeyboardEvent } from 'react';
 import insertMessage from '@/supabase/models/messaging/insertMessage';
 import PaperPlaneIcon from '../icons/PaperPlaneIcon';
 import useMediaQuery from '../hooks/useMediaQuery';
+import getAdditionalConversationDetails from '@/supabase/models/messaging/getAdditionalConversationDetails';
+import restoreDeletedConversation from '@/supabase/models/messaging/restoreDeletedConversation';
 
 type MessageFormProps = {
   user_id: string | undefined;
@@ -24,10 +26,25 @@ const MessageForm: React.FC<MessageFormProps> = ({
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (deletedList?.some(conversation_id)) {
+    if (
+      deletedList?.some(
+        (deltetedConversationId) => deltetedConversationId == conversation_id
+      )
+    ) {
       // some new function that goes to supabase and takes the information from this conversation and uses it to recreate user conversation
       // needs conversation_id, user_id item_id: partner_id:
       // has conversation_id, user_id,
+      // call adatabase to get item id and partner id
+      const additionalConversationData = await getAdditionalConversationDetails(
+        user_id,
+        conversation_id
+      );
+      await restoreDeletedConversation(
+        user_id,
+        additionalConversationData?.partner_id,
+        additionalConversationData?.item_id,
+        conversation_id
+      );
     }
     const trimmedMessage = message.trim();
     try {
