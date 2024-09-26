@@ -79,7 +79,7 @@ describe('Reset Password Page', () => {
     resetPasswordPage.resetButton().click();
     cy.get('input[name="password"]').then(($input) => {
       expect($input[0].validationMessage).to.match(
-        /Please fill in this field./gi
+        /Please fill (in|out) this field./gi
       );
     });
   });
