@@ -43,8 +43,6 @@ next-env.d.ts
 
 # Cypress output
 cypress/screenshots/
-<<<<<<< HEAD
+
 cypress/videos/
-=======
-cypress/videos/
->>>>>>> 74650b94959b2ef2c8f606b838b7e5d0c0421dab
+

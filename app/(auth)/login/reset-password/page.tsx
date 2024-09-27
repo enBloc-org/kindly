@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import newServerClient from '@/supabase/utils/newServerClient';
+import ResetPasswordForm from '../../../../components/ResetPasswordForm';
 
 export default async function ResetPassword({
   searchParams,
@@ -62,39 +63,11 @@ export default async function ResetPassword({
         Home
       </Link>
 
-      <div className='flex flex-col  items-center  px-8'>
-        <form
-          className='text-foreground flex flex-1  flex-col  items-center justify-center gap-4'
-          action={resetPassword}
-        >
-          <label className='text-md' htmlFor='password'>
-            New Password
-          </label>
-          <input
-            className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
-            type='password'
-            name='password'
-            placeholder='••••••••'
-            required
-          />
-          <label className='text-md' htmlFor='password'>
-            Confirm New Password
-          </label>
-          <input
-            className='mb-2 rounded border border-primaryGreen bg-white p-2 shadow'
-            type='password'
-            name='confirmPassword'
-            placeholder='••••••••'
-            required
-          />
-          <button className='button button-rounded mb-2'>Reset</button>
-
-          {searchParams?.message && (
-            <p className='bg-foreground/10 text-foreground mt-4 p-4 text-center'>
-              {searchParams.message}
-            </p>
-          )}
-        </form>
+      <div className='flex flex-col items-center px-8'>
+        <ResetPasswordForm
+          onSubmit={resetPassword}
+          searchParams={searchParams}
+        />
       </div>
     </div>
   );
