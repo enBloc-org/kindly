@@ -5,7 +5,7 @@
   "about": "/about",
   "search": "/search",
   "addItem": "/add-item",
-  "message": "/conversations",
+  "conversations": "/conversations",
   "profile": "/profile",
   "item": "/item/",
   "forgotPassword": "/login/forgot-password",
