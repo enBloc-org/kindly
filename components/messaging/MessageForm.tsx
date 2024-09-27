@@ -12,12 +12,14 @@ type MessageFormProps = {
   user_id: string | undefined;
   conversation_id: number | undefined;
   deletedList: number[] | undefined;
+  setDeletedList: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 const MessageForm: React.FC<MessageFormProps> = ({
   user_id,
   conversation_id,
   deletedList,
+  setDeletedList,
 }) => {
   const [message, setMessage] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState(true);
@@ -31,20 +33,26 @@ const MessageForm: React.FC<MessageFormProps> = ({
         (deltetedConversationId) => deltetedConversationId == conversation_id
       )
     ) {
-      // some new function that goes to supabase and takes the information from this conversation and uses it to recreate user conversation
-      // needs conversation_id, user_id item_id: partner_id:
-      // has conversation_id, user_id,
-      // call adatabase to get item id and partner id
+      //combine into one function
       const additionalConversationData = await getAdditionalConversationDetails(
         user_id,
         conversation_id
       );
+
+      //have change the status back to false in database
+      // stop from double addition
       await restoreDeletedConversation(
         user_id,
         additionalConversationData?.partner_id,
         additionalConversationData?.item_id,
         conversation_id
       );
+
+      //remove number from delete array
+      const updatedDeletedList = deletedList.filter(
+        (deltedId) => deltedId !== conversation_id
+      );
+      setDeletedList(updatedDeletedList);
     }
     const trimmedMessage = message.trim();
     try {
