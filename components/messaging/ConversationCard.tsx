@@ -53,7 +53,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
       onClick={clickHandler}
       data-testid='card-wrapper'
     >
-      <div className='relative h-[65px] w-[65px]'>
+      <div className='relative h-[65px] w-[65px] flex-shrink-0'>
         {notificationList.some(
           (conversation) => conversation === conversationId
         ) && (
