@@ -32,14 +32,16 @@ const ItemCard: React.FC<PartialItem> = ({
           >
             <p className='text-lg text-primaryGreen'>GIVEN AWAY</p>
           </div>
-        ) : is_reserved ? (
-          <div
-            className='absolute left-0 right-0 top-14 z-10 m-auto w-[175px] rounded-lg border border-primaryGreen
+        ) : (
+          is_reserved && (
+            <div
+              className='absolute left-0 right-0 top-14 z-10 m-auto w-[175px] rounded-lg border border-primaryGreen
             bg-background p-2 text-center opacity-70 md:w-[200px]'
-          >
-            <p className='text-lg text-primaryGreen'>RESERVED</p>
-          </div>
-        ) : null}
+            >
+              <p className='text-lg text-primaryGreen'>RESERVED</p>
+            </div>
+          )
+        )}
         <div className='relative h-[176px] w-[176px] sm:w-[200px] md:h-52 md:w-64'>
           <Image
             src={imageSrc ? `${imageSrc}` : '/default-item-img.png'}
