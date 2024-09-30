@@ -16,7 +16,7 @@ const meta: Meta<typeof Modal> = {
     await step('Confirm deleting', async () => {
       await userEvent.click(canvas.getByText('Confirm'));
     });
-    await waitFor(() => expect(args.onDeleteSuccess).toHaveBeenCalled());
+    await waitFor(() => expect(args.onAction).toHaveBeenCalled());
 
     await step('Cancel deleting', async () => {
       await userEvent.click(canvas.getByText('Cancel'));
@@ -32,7 +32,7 @@ type Story = StoryObj<typeof meta>;
 
 export const ItemDeleteModal: Story = {
   args: {
-    onDeleteSuccess: fn(),
+    onAction: fn(),
     name: 'Delete Item',
     targetId: 269,
     message: 'By pressing "Confirm" you will delete this item permanently.',
@@ -41,7 +41,7 @@ export const ItemDeleteModal: Story = {
 
 export const ProfileDeleteModal: Story = {
   args: {
-    onDeleteSuccess: fn(),
+    onAction: fn(),
     name: 'Delete Profile',
     targetId: 616,
     message:
@@ -51,7 +51,7 @@ export const ProfileDeleteModal: Story = {
 
 export const DisabledModal: Story = {
   args: {
-    onDeleteSuccess: fn(),
+    onAction: fn(),
     name: 'Conditionally disabled',
     targetId: 1312,
     message: 'Invisible message because the modal is disabled',
