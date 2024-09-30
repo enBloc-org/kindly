@@ -13,17 +13,15 @@ const meta: Meta<typeof Modal> = {
     });
     expect(canvas.queryByText(args.message)).toBeVisible();
 
-    await step('Confirm deleting', async () => {
+    await step('Confirm action', async () => {
       await userEvent.click(canvas.getByText('Confirm'));
     });
     await waitFor(() => expect(args.onAction).toHaveBeenCalled());
 
-    await step('Cancel deleting', async () => {
+    await step('Cancel action', async () => {
       await userEvent.click(canvas.getByText('Cancel'));
     });
-    expect(
-      canvas.queryByText('Are you sure you want to delete?')
-    ).not.toBeInTheDocument();
+    expect(canvas.queryByText(args.message)).not.toBeInTheDocument();
   },
 };
 
@@ -46,6 +44,16 @@ export const ProfileDeleteModal: Story = {
     targetId: 616,
     message:
       'Your profile will be deleted permanently. Are you sure you want to continue?',
+  },
+};
+
+export const GiveAwayModal: Story = {
+  args: {
+    onAction: fn(),
+    name: 'Give Away',
+    targetId: 123,
+    message:
+      'Are you sure you want to give away this item? Once confirmed, the recipient will be notified.',
   },
 };
 
