@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 interface ModalProps {
   name: string;
   itemId: number;
-  onReserveStatusChange: (itemId: number, reservedBy: string | null) => void;
+  onReserveStatusChange: (itemId: number, reservedBy: string) => void;
   requestedToReserveUserIds?: string[];
 }
 

@@ -81,7 +81,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
         is_reserved: false,
         reserved_by: null,
       });
-      onReserveStatusChange(itemId, null);
+      onReserveStatusChange(itemId);
     } catch (error) {
       console.error(error);
     }
@@ -89,7 +89,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
 
   const onReserveStatusChange = (
     itemId: number,
-    reservedBy: string | null
+    reservedBy: string = ''
   ): void => {
     setStoreItems((prevItems) => {
       return prevItems.map((item: PartialItem) =>
@@ -207,7 +207,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
                           itemId={item.id!}
                           onReserveStatusChange={(
                             itemId: number,
-                            reservedBy: string | null
+                            reservedBy: string
                           ) => onReserveStatusChange(item.id!, reservedBy)}
                           requestedToReserveUserIds={item.requestedToReserve}
                         />
