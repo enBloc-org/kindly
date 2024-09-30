@@ -3,7 +3,6 @@
 import { getItems } from '@/supabase/models/getItems';
 import Link from 'next/link';
 import Modal from '@/components/Modal';
-import GiveAwayConfirmationModal from '@/components/GiveAwayConfirmationModal';
 import ItemCard from '@/components/ItemCard';
 import React, { useEffect, useState } from 'react';
 import { PartialItem } from '@/types/supabaseTypes';
@@ -182,7 +181,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
                     name='Delete Item'
                     targetId={item.id}
                     message='By pressing "Confirm" you will delete this item permanently.'
-                    onDeleteSuccess={() => handleDeleteSuccess(item.id!)}
+                    onAction={() => handleDeleteSuccess(item.id!)}
                   />
                   {!item.given_away_to && (
                     <>
@@ -194,11 +193,13 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
                           >
                             Unreserve
                           </ButtonRounded>
-                          <GiveAwayConfirmationModal
-                            itemName={item.item_name || 'Unnamed item'}
-                            onConfirm={() =>
-                              markAsGivenAway(item.id!, item.reserved_by!)
-                            }
+                          <Modal
+                            name='Give Away'
+                            targetId={item.id!}
+                            message={`Are you sure you want to give away  "${item.item_name || 'Unnamed item'}"? Once confirmed, a message will be sent to the recipient informing them the item has been given away.`}
+                            onAction={() => {
+                              markAsGivenAway(item.id!, item.reserved_by!);
+                            }}
                           />
                         </>
                       ) : (
