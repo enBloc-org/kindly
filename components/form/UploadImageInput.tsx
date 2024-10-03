@@ -2,13 +2,13 @@
 
 import newClient from '@/supabase/utils/newClient';
 import { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
-type UploadImageInputProps = {
-  isRequired: boolean;
-  imageType: 'item' | 'profile';
+type UploadImageProps = {
   setImageSrc: (src: string) => void;
+  setError?: (error: string) => void;
+  isRequired?: boolean;
+  imageType: 'item' | 'profile';
 };
 
 const CDN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
@@ -21,14 +21,16 @@ const CDN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/im
  * @param imageType is a required parameter that accepts either 'item' or 'profile'. It will determine the type of image to be uploaded in the imageFileUpload function.
  */
 
-const UploadImageInput: React.FC<UploadImageInputProps> = ({
-  isRequired = true,
-  imageType,
+const UploadImageInput: React.FC<UploadImageProps> = ({
   setImageSrc,
+  setError,
+  isRequired = false,
+  imageType,
 }) => {
   const supabase = newClient();
   const [userId, setUserId] = useState('');
-  const { register } = useFormContext();
+  const [isImageUploaded, setIsImageUploaded] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +40,9 @@ const UploadImageInput: React.FC<UploadImageInputProps> = ({
 
         if (user) {
           setUserId(user);
+          if (!isRequired) {
+            setIsImageUploaded(true);
+          }
         } else {
           setUserId('');
         }
@@ -49,81 +54,83 @@ const UploadImageInput: React.FC<UploadImageInputProps> = ({
     fetchData();
   }, []);
 
-  const imageFileUpload = async (file: File) => {
-    if (file) {
-      try {
-        if (imageType === 'profile') {
-          const { data: listData, error: listError } = await supabase.storage
-            .from('images')
-            .list(userId);
+  const imageFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
 
-          if (listError) {
-            console.error('Error fetching old images:', listError);
-            return;
-          }
-
-          if (!listData) {
-            throw new Error('Failed to fetch images');
-          }
-
-          const profileImages = listData
-            .filter((image) => image.name.startsWith('profile_'))
-            .map((image) => userId + '/' + image.name);
-
-          if (profileImages.length > 0) {
-            const { error: deleteError } = await supabase.storage
+      if (file) {
+        try {
+          if (imageType === 'profile') {
+            const { data: listData, error: listError } = await supabase.storage
               .from('images')
-              .remove(profileImages);
+              .list(userId);
 
-            if (deleteError) {
-              console.error('Error deleting old images:', deleteError);
+            if (listError) {
+              console.error('Error fetching old images:', listError);
               return;
             }
+
+            if (!listData) {
+              throw new Error('Failed to fetch images');
+            }
+
+            const profileImages = listData
+              .filter((image) => image.name.startsWith('profile_'))
+              .map((image) => userId + '/' + image.name);
+
+            if (profileImages.length > 0) {
+              const { error: deleteError } = await supabase.storage
+                .from('images')
+                .remove(profileImages);
+
+              if (deleteError) {
+                console.error('Error deleting old images:', deleteError);
+                return;
+              }
+            }
           }
+
+          const prefix = imageType === 'profile' ? 'profile_' : 'item_';
+          const imageName = prefix + uuidv4();
+
+          const { data, error: uploadError } = await supabase.storage
+            .from('images')
+            .upload(userId + '/' + imageName, file);
+
+          if (uploadError) {
+            console.error('Error uploading new image:', uploadError);
+            return;
+          }
+          setImageSrc(CDN + data.path);
+          setIsImageUploaded(true);
+          setError?.('');
+        } catch (error) {
+          console.error('Error handling image upload:', error);
+          setError?.('Failed to upload image. Please try again.');
+        } finally {
+          setIsUploading(false);
         }
-
-        const prefix = imageType === 'profile' ? 'profile_' : 'item_';
-        const imageName = prefix + uuidv4();
-
-        const { data, error: uploadError } = await supabase.storage
-          .from('images')
-          .upload(userId + '/' + imageName, file);
-
-        if (uploadError) {
-          console.error('Error uploading new image:', uploadError);
-          return;
-        }
-        setImageSrc(CDN + data.path);
-      } catch (error) {
-        console.error('Error handling image upload:', error);
       }
-    } else {
-      console.error('No file selected');
     }
   };
 
   return (
     <div className='my-3 flex flex-col items-center gap-4'>
-      <label className='flex items-center gap-1'>
-        <span>
-          Upload an image
-          {isRequired && <span className=''>*</span>}
-        </span>
-      </label>
+      <label htmlFor='image'>Upload an image:</label>
       <input
         className='pl-14'
         type='file'
-        {...register('imageUpload', {
-          required: isRequired ? 'Image is required' : false,
-          onChange: (e) => {
-            const file = e.target.files?.[0];
-            if (file) {
-              imageFileUpload(file);
-            }
-            return undefined;
-          },
-        })}
+        name='image'
+        onChange={(e) => imageFileUpload(e)}
+        required={isRequired}
+        disabled={isUploading}
       />
+      {isUploading && <p>Uploading...</p>}
+      {!isImageUploaded && !isUploading && (
+        <p className='font-extralight italic text-primaryOrange'>
+          Image is required
+        </p>
+      )}
     </div>
   );
 };

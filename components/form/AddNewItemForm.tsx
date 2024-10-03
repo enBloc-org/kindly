@@ -14,6 +14,7 @@ export default function AddNewItemForm({
   userId: string | undefined;
 }) {
   const [imageSource, setImageSource] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const methods = useForm({
     defaultValues: {
@@ -27,7 +28,6 @@ export default function AddNewItemForm({
       postable: false,
       collectible: false,
       postage_covered: false,
-      imageUpload: null,
     },
   });
 
@@ -74,14 +74,36 @@ export default function AddNewItemForm({
   ];
 
   const submitHandler = async (data: PartialItem) => {
-    const itemData: PartialItem = {
-      imageSrc: imageSource,
-      donated_by: userId,
-      ...data,
-    };
+    if (isSubmitting) {
+      console.log('Preventing duplicate submission');
+      return;
+    }
 
-    onSubmit(itemData);
-    reset();
+    setIsSubmitting(true);
+    try {
+      const itemData: PartialItem = {
+        imageSrc: imageSource,
+        donated_by: userId,
+        ...data,
+      };
+
+      console.log(
+        'Payload being sent to server:',
+        JSON.stringify(itemData, null, 2)
+      );
+      await onSubmit(itemData);
+      console.log('onSubmit completed successfully');
+      reset();
+    } catch (error) {
+      console.error('Error in submitHandler:', error);
+      // Log more details about the error if available
+      if (error instanceof Error) {
+        console.error('Error message:', error.message);
+        console.error('Error stack:', error.stack);
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
