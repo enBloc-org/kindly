@@ -1,6 +1,6 @@
 'use client';
 import { useForm, FormProvider } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import ButtonRounded from '../buttons/ButtonRounded';
 import UploadImageInput from './UploadImageInput';
@@ -15,6 +15,7 @@ export default function AddNewItemForm({
 }) {
   const [imageSource, setImageSource] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const methods = useForm({
     defaultValues: {
@@ -87,24 +88,24 @@ export default function AddNewItemForm({
         ...data,
       };
 
-      console.log(
-        'Payload being sent to server:',
-        JSON.stringify(itemData, null, 2)
-      );
+      console.log('Submitting item data:', JSON.stringify(itemData, null, 2));
       await onSubmit(itemData);
-      console.log('onSubmit completed successfully');
-      reset();
+      console.log('Item submitted successfully');
+      setSubmitSuccess(true);
     } catch (error) {
-      console.error('Error in submitHandler:', error);
-      // Log more details about the error if available
-      if (error instanceof Error) {
-        console.error('Error message:', error.message);
-        console.error('Error stack:', error.stack);
-      }
+      console.error('Error submitting item:', error);
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (submitSuccess) {
+      reset();
+      setImageSource('');
+      setSubmitSuccess(false);
+    }
+  }, [submitSuccess, reset]);
 
   return (
     <FormProvider {...methods}>
