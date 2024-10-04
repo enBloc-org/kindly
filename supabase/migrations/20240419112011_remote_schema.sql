@@ -115,6 +115,7 @@ ALTER TABLE "Test"."test-profiles" OWNER TO "postgres";
 CREATE TABLE IF NOT EXISTS "public"."conversations" (
     "id" bigint NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "member_has_deleted" boolean DEFAULT false
 );
 
 ALTER TABLE "public"."conversations" OWNER TO "postgres";

@@ -28,7 +28,7 @@ describe('messaging feature', () => {
     ConversationsPage.messageCard(/new message/i);
   });
 
-  it.only('allows users to delete a conversation', () => {
+  it('allows users to delete a conversation', () => {
     cy.visit(page.conversations);
     ConversationsPage.conversationCard(/message 4/i)
       .parents('.conversation-card')
@@ -44,5 +44,18 @@ describe('messaging feature', () => {
     cy.get('.conversation-card')
       .contains(/message 4/i)
       .should('not.exist');
+  });
+
+  it('allows user to send message where partner has deleted conversation', () => {
+    // X alter database seed dont delte one with message for or either with an unread not rugugee user id starts with 4
+    // return databse to default content but keep new row might not be nessicary depends on how tests work
+    //Xcreate message deleted by doner
+    // visit conversation that doner has deleted
+    // send message in it
+  });
+  it('restarts the conversation for the other user if a delted conversation is messaged', () => {
+    //prevent before each login
+    // login to refugee instead
+    //look for new message
   });
 });
