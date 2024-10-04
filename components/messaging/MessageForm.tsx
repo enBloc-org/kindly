@@ -12,6 +12,7 @@ type MessageFormProps = {
   user_id: string | undefined;
   conversation_id: number | undefined;
   deletedList: number[] | undefined;
+  partner_has_deleted: boolean;
   setDeletedList: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
@@ -19,6 +20,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
   user_id,
   conversation_id,
   deletedList,
+  partner_has_deleted,
   setDeletedList,
 }) => {
   const [message, setMessage] = useState<string>('');
@@ -30,7 +32,9 @@ const MessageForm: React.FC<MessageFormProps> = ({
     e.preventDefault();
     if (
       deletedList?.some(
-        (deltetedConversationId) => deltetedConversationId == conversation_id
+        (deltetedConversationId) =>
+          deltetedConversationId == conversation_id ||
+          partner_has_deleted === true
       )
     ) {
       //combine into one function
@@ -48,7 +52,6 @@ const MessageForm: React.FC<MessageFormProps> = ({
         conversation_id
       );
 
-      //remove number from delete array
       const updatedDeletedList = deletedList.filter(
         (deltedId) => deltedId !== conversation_id
       );

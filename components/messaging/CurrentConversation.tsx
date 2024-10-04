@@ -187,6 +187,7 @@ const CurrentConversation: React.FC = () => {
         item_id={currentConversation?.item_id}
         deletedList={deletedList}
         setDeletedList={setDeletedList}
+        partner_has_deleted={currentConversation?.partner_has_deleted}
       />
     </div>
   );
