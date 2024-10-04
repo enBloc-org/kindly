@@ -12,7 +12,7 @@ type MessageFormProps = {
   user_id: string | undefined;
   conversation_id: number | undefined;
   deletedList: number[] | undefined;
-  partner_has_deleted: boolean;
+  partner_has_deleted: boolean | undefined;
   setDeletedList: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
@@ -34,28 +34,30 @@ const MessageForm: React.FC<MessageFormProps> = ({
       deletedList?.some(
         (deltetedConversationId) =>
           deltetedConversationId == conversation_id ||
-          partner_has_deleted === true
+          (partner_has_deleted !== undefined && partner_has_deleted === true)
       )
     ) {
-      //combine into one function
-      const additionalConversationData = await getAdditionalConversationDetails(
-        user_id,
-        conversation_id
-      );
+      try {
+        const additionalConversationData =
+          await getAdditionalConversationDetails(user_id, conversation_id);
 
-      //have change the status back to false in database
-      // stop from double addition
-      await restoreDeletedConversation(
-        user_id,
-        additionalConversationData?.partner_id,
-        additionalConversationData?.item_id,
-        conversation_id
-      );
+        await restoreDeletedConversation(
+          user_id,
+          additionalConversationData?.partner_id,
+          additionalConversationData?.item_id,
+          conversation_id
+        );
 
-      const updatedDeletedList = deletedList.filter(
-        (deltedId) => deltedId !== conversation_id
-      );
-      setDeletedList(updatedDeletedList);
+        const updatedDeletedList = deletedList.filter(
+          (deltedId) => deltedId !== conversation_id
+        );
+        setDeletedList(updatedDeletedList);
+      } catch (error) {
+        throw new Error(
+          'conversation form failed during conversation restart: ' +
+            (error as Error).message
+        );
+      }
     }
     const trimmedMessage = message.trim();
     try {

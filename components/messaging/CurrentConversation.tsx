@@ -183,8 +183,6 @@ const CurrentConversation: React.FC = () => {
       <MessageForm
         user_id={currentConversation?.user_id}
         conversation_id={currentConversation?.conversation_id}
-        partner_id={currentConversation?.partner_id}
-        item_id={currentConversation?.item_id}
         deletedList={deletedList}
         setDeletedList={setDeletedList}
         partner_has_deleted={currentConversation?.partner_has_deleted}
