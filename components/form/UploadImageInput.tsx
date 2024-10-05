@@ -3,6 +3,7 @@
 import newClient from '@/supabase/utils/newClient';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useFormContext } from 'react-hook-form';
 
 type UploadImageProps = {
   setImageSrc: (src: string) => void;
@@ -27,9 +28,13 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
   isRequired = false,
   imageType,
 }) => {
+  const {
+    register,
+    formState: { isSubmitted, errors },
+  } = useFormContext();
   const supabase = newClient();
   const [userId, setUserId] = useState('');
-  const [isImageUploaded, setIsImageUploaded] = useState(false);
+  const [, setIsImageUploaded] = useState(false);
   const [isUploading] = useState(false);
 
   useEffect(() => {
@@ -121,16 +126,17 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
       <input
         className='pl-14'
         type='file'
-        name='image'
-        onChange={(e) => imageFileUpload(e)}
-        required={isRequired}
+        //name='image'
+        //onChange={(e) => imageFileUpload(e)}
+        //required={isRequired} Browser validation
         disabled={isUploading}
+        {...register('image', {
+          required: isRequired ? 'Image is required' : false,
+          onChange: imageFileUpload,
+        })}
       />
-      {isUploading && <p>Uploading...</p>}
-      {!isImageUploaded && !isUploading && (
-        <p className='font-extralight italic text-primaryOrange'>
-          Image is required
-        </p>
+      {isSubmitted && errors.image && (
+        <p className='error-message'>{errors.image.message as string}</p>
       )}
     </div>
   );

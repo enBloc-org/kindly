@@ -353,9 +353,7 @@ export default function AddNewItemForm({
             imageType='item'
             setImageSrc={setImageSource}
           />
-          <div className='h-6'>
-            {isSubmitted && <p className='error-message'>Image is required</p>}
-          </div>
+
           <ButtonRounded type='submit'>ADD YOUR ITEM</ButtonRounded>
         </form>
       </div>
