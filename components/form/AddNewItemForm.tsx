@@ -82,10 +82,14 @@ export default function AddNewItemForm({
 
     setIsSubmitting(true);
     try {
+      const itemDataWithoutImage = Object.fromEntries(
+        Object.entries(data).filter(([key]) => key !== 'image')
+      );
+
       const itemData: PartialItem = {
         imageSrc: imageSource,
         donated_by: userId,
-        ...data,
+        ...itemDataWithoutImage,
       };
 
       console.log('Submitting item data:', JSON.stringify(itemData, null, 2));
