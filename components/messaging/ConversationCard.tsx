@@ -46,16 +46,17 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
 
   return (
     <div
-      className={`relative flex items-center bg-gray-300 p-4 lg:max-w-[500px] lg:rounded-lg lg:shadow-md lg:hover:bg-secondaryGray
+      className={`conversation-card
           ${currentConversationId === conversationId ? 'lg: border-2 lg:border-primaryGreen' : ''}`}
       tabIndex={0}
       aria-label='button'
-      onClick={clickHandler}
       data-testid='card-wrapper'
+      onClick={clickHandler}
     >
       <div className='relative h-[65px] w-[65px] flex-shrink-0'>
         {notificationList.some(
           (conversation) => conversation === conversationId
+
         ) && <div className='notification-dot' />}
 
         <Image
@@ -66,6 +67,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           alt={partnerUsername}
           sizes='(max-width: 640px) 50px, (max-width: 768px) 75px, 100px'
         />
+
       </div>
       <div className='pl-4 text-left'>
         <div className='flex items-center gap-2'>
