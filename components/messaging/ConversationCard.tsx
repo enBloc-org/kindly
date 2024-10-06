@@ -56,18 +56,13 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
       <div className='relative h-[65px] w-[65px] flex-shrink-0'>
         {notificationList.some(
           (conversation) => conversation === conversationId
-        ) && (
-          <div
-            className='relative left-12 z-50 h-4 w-4 rounded-full 
-              border-2 border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black'
-          ></div>
-        )}
+        ) && <div className='notification-dot' />}
 
         <Image
           src={imgSrc}
           onError={handleError}
           fill
-          className='flex-shrink-0 rounded-full'
+          className='rounded-full'
           alt={partnerUsername}
           sizes='(max-width: 640px) 50px, (max-width: 768px) 75px, 100px'
         />
