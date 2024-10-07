@@ -8,10 +8,10 @@ describe('Mark item as Given Away for a user test suite', () => {
 
   it('user can mark an item as Given Away for a user that reserved it', () => {
     cy.visit(page.profile, { failOnStatusCode: false });
-    ProfilePage.giveAwayButton('give_away').click();
+    ProfilePage.giveAwayButton('Summer Blouse').click();
     cy.get('button').contains('Confirm').should('be.visible').click();
     cy.get('.card')
-      .contains('give_away')
+      .contains('Summer Blouse')
       .parents('li')
       .find('p')
       .contains('GIVEN AWAY', { matchCase: false })
