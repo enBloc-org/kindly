@@ -62,7 +62,6 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
   const imageFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      console.log('Starting image upload for file:', file.name);
 
       try {
         if (imageType === 'profile') {
@@ -89,7 +88,6 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
               .remove(profileImages);
 
             if (deleteError) {
-              console.error('Error deleting old images:', deleteError);
               return;
             }
           }
@@ -103,18 +101,13 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
           .upload(userId + '/' + imageName, file);
 
         if (uploadError) {
-          console.error('Error uploading new image:', uploadError);
           return;
         }
-        console.log('Image uploaded successfully, new path:', data.path);
         const fullImageUrl = CDN + data.path;
         setImageSrc(fullImageUrl);
         setIsImageUploaded(true);
         setError?.('');
-
-        console.log('Image URL set in form:', fullImageUrl);
       } catch (error) {
-        console.error('Error in image upload:', error);
         setError?.('Failed to upload image. Please try again.');
       }
     }
@@ -126,9 +119,6 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
       <input
         className='pl-14'
         type='file'
-        //name='image'
-        //onChange={(e) => imageFileUpload(e)}
-        //required={isRequired} Browser validation
         disabled={isUploading}
         {...register('image', {
           required: isRequired ? 'Image is required' : false,

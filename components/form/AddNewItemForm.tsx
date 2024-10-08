@@ -79,7 +79,6 @@ export default function AddNewItemForm({
 
   const submitHandler = async (data: PartialItem) => {
     if (isSubmitting) {
-      console.log('Preventing duplicate submission');
       return;
     }
 
@@ -107,12 +106,9 @@ export default function AddNewItemForm({
         router.push(`/add-item?message=${error}`);
       }
 
-      console.log('Submitting item data:', JSON.stringify(itemData, null, 2));
       await onSubmit(itemData);
-      console.log('Item submitted successfully');
       setSubmitSuccess(true);
     } catch (error) {
-      console.error('Error submitting item:', error);
     } finally {
       setIsSubmitting(false);
     }
