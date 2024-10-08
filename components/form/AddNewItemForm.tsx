@@ -1,10 +1,12 @@
 'use client';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 import ButtonRounded from '../buttons/ButtonRounded';
 import UploadImageInput from './UploadImageInput';
 import { PartialItem } from '@/types/supabaseTypes';
+import insertRow from '@/supabase/models/insertRow';
 
 export default function AddNewItemForm({
   onSubmit,
@@ -16,6 +18,7 @@ export default function AddNewItemForm({
   const [imageSource, setImageSource] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const router = useRouter();
 
   const methods = useForm({
     defaultValues: {
@@ -91,6 +94,18 @@ export default function AddNewItemForm({
         donated_by: userId,
         ...itemDataWithoutImage,
       };
+
+      try {
+        const addedItem = await insertRow('items', itemData);
+        if (!addedItem || addedItem.length === 0) {
+          throw new Error('Failed to add the new item');
+        }
+        const itemId = addedItem[0].id;
+        reset();
+        router.push(`/add-item/success/${itemId}`);
+      } catch (error) {
+        router.push(`/add-item?message=${error}`);
+      }
 
       console.log('Submitting item data:', JSON.stringify(itemData, null, 2));
       await onSubmit(itemData);

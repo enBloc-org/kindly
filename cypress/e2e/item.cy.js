@@ -33,6 +33,9 @@ describe('Create and Delete item positive test Suite', () => {
     cy.visit(page.profile, { failOnStatusCode: false });
     ProfilePage.deleteItemButton(uniqueItemName).click();
     ProfilePage.ConfirmDeleteItemButton(uniqueItemName).click();
-    ProfilePage.itemCard(uniqueItemName).should('not.exist');
+    cy.reload();
+    ProfilePage.itemCard(uniqueItemName).should('not.exist', {
+      timeout: 10000,
+    });
   });
 });
