@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
+import { PartialItem } from '@/types/supabaseTypes';
 
 interface SizeSelectorProps {
   category: string;
@@ -7,7 +8,7 @@ interface SizeSelectorProps {
 }
 
 const SizeSelector: React.FC<SizeSelectorProps> = ({ category, register }) => {
-  const clothinSizes = [
+  const clothingSizes = [
     'XXS',
     'XS',
     'S',
@@ -55,13 +56,17 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({ category, register }) => {
 
   const euShoeSizes = ['EU36', 'EU37', 'EU38', 'EU39', 'EU40', 'EU41', 'EU42'];
 
-  let sizeOptions: string[] = [];
+  const [sizeOptions, setSizeOptions] = useState<string[]>([]);
 
-  if (category === 'clothing') {
-    sizeOptions = clothinSizes;
-  } else if (category === 'shoes') {
-    sizeOptions = [...shoeSizes, ...euShoeSizes];
-  }
+  useEffect(() => {
+    if (category === 'clothing') {
+      setSizeOptions(clothingSizes);
+    } else if (category === 'shoes') {
+      setSizeOptions([...shoeSizes, ...euShoeSizes]);
+    } else {
+      setSizeOptions([]);
+    }
+  }, [category]);
 
   return (
     <label
