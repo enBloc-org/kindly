@@ -12,8 +12,8 @@ export default function AddNewItemForm({
   onSubmit,
   userId,
 }: {
-  onSubmit: (data: PartialItem) => void;
   userId: string | undefined;
+  onSubmit: (data: PartialItem) => void;
 }) {
   const [imageSource, setImageSource] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);

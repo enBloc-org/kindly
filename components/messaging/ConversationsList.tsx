@@ -34,6 +34,14 @@ const ConversationsList: React.FC = () => {
   };
 
   useEffect(() => {
+    setNotificationList(
+      allConversations
+        .filter((conversation) => conversation.has_unread_messages)
+        .map((conversation) => conversation.conversation_id)
+    );
+  }, [allConversations]);
+
+  useEffect(() => {
     const channel = supabase
       .channel('realtime conversations')
       .on(

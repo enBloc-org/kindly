@@ -40,3 +40,11 @@ next-env.d.ts
 # Sentry Config File
 .sentryclirc
 /test-results/
+
+# Cypress output
+cypress/screenshots/
+cypress/videos/
+
+# Cypress output
+cypress/screenshots/
+cypress/videos/

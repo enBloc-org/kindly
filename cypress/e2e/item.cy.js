@@ -46,11 +46,6 @@ describe('Create and Delete item positive test Suite', () => {
       expect(interception.response.statusCode).to.eq(204);
     });
 
-    ProfilePage.deleteItemButton(uniqueItemName).click();
-    ProfilePage.ConfirmDeleteItemButton(uniqueItemName).click();
-
-    cy.wait('@deleteItem').its('response.statusCode').should('eq', 204);
-
     const waitForItemRemoval = (itemName, maxAttempts = 20) => {
       let attempts = 0;
       const checkForItem = () => {
