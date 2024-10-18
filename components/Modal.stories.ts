@@ -13,15 +13,17 @@ const meta: Meta<typeof Modal> = {
     });
     expect(canvas.queryByText(args.message)).toBeVisible();
 
-    await step('Confirm action', async () => {
+    await step('Confirm deleting', async () => {
       await userEvent.click(canvas.getByText('Confirm'));
     });
-    await waitFor(() => expect(args.onAction).toHaveBeenCalled());
+    await waitFor(() => expect(args.onDeleteSuccess).toHaveBeenCalled());
 
-    await step('Cancel action', async () => {
+    await step('Cancel deleting', async () => {
       await userEvent.click(canvas.getByText('Cancel'));
     });
-    expect(canvas.queryByText(args.message)).not.toBeInTheDocument();
+    expect(
+      canvas.queryByText('Are you sure you want to delete?')
+    ).not.toBeInTheDocument();
   },
 };
 
@@ -30,7 +32,7 @@ type Story = StoryObj<typeof meta>;
 
 export const ItemDeleteModal: Story = {
   args: {
-    onAction: fn(),
+    onDeleteSuccess: fn(),
     name: 'Delete Item',
     targetId: 269,
     message: 'By pressing "Confirm" you will delete this item permanently.',
@@ -39,7 +41,7 @@ export const ItemDeleteModal: Story = {
 
 export const ProfileDeleteModal: Story = {
   args: {
-    onAction: fn(),
+    onDeleteSuccess: fn(),
     name: 'Delete Profile',
     targetId: 616,
     message:
@@ -47,19 +49,9 @@ export const ProfileDeleteModal: Story = {
   },
 };
 
-export const GiveAwayModal: Story = {
-  args: {
-    onAction: fn(),
-    name: 'Give Away',
-    targetId: 123,
-    message:
-      'Are you sure you want to give away this item? Once confirmed, the recipient will be notified.',
-  },
-};
-
 export const DisabledModal: Story = {
   args: {
-    onAction: fn(),
+    onDeleteSuccess: fn(),
     name: 'Conditionally disabled',
     targetId: 1312,
     message: 'Invisible message because the modal is disabled',

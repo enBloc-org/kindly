@@ -9,10 +9,7 @@ export default async function searchItems(
   const supabase = newClient();
 
   try {
-    let queryBuilder = supabase
-      .from('items')
-      .select()
-      .is('given_away_to', null);
+    let queryBuilder = supabase.from('items').select();
 
     switch (true) {
       case !!query && !!category && !!subcategory:

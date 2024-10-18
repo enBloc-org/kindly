@@ -52,16 +52,6 @@ export class ProfilePage extends BasePage {
       .contains('Mark as Reserved', { matchCase: false })
       .should('be.visible');
   }
-
-  giveAwayButton(itemName) {
-    return cy
-      .get('.card')
-      .contains(itemName)
-      .parents('li')
-      .find('button')
-      .contains('Give Away', { matchCase: false })
-      .should('be.visible');
-  }
 }
 
 export default new ProfilePage();

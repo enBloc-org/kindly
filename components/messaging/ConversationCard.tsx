@@ -46,28 +46,31 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
 
   return (
     <div
-      className={`conversation-card
+      className={`relative flex items-center bg-gray-300 p-4 lg:max-w-[500px] lg:rounded-lg lg:shadow-md lg:hover:bg-secondaryGray
           ${currentConversationId === conversationId ? 'lg: border-2 lg:border-primaryGreen' : ''}`}
       tabIndex={0}
       aria-label='button'
-      data-testid='card-wrapper'
       onClick={clickHandler}
+      data-testid='card-wrapper'
     >
       <div className='relative h-[65px] w-[65px] flex-shrink-0'>
         {notificationList.some(
           (conversation) => conversation === conversationId
-
-        ) && <div className='notification-dot' />}
+        ) && (
+          <div
+            className='relative left-12 z-50 h-4 w-4 rounded-full 
+              border-2 border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black'
+          ></div>
+        )}
 
         <Image
           src={imgSrc}
           onError={handleError}
           fill
-          className='rounded-full'
+          className='flex-shrink-0 rounded-full'
           alt={partnerUsername}
           sizes='(max-width: 640px) 50px, (max-width: 768px) 75px, 100px'
         />
-
       </div>
       <div className='pl-4 text-left'>
         <div className='flex items-center gap-2'>

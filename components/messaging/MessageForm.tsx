@@ -69,7 +69,6 @@ const MessageForm: React.FC<MessageFormProps> = ({
         className='h-[65px] w-5/6 resize-none overflow-hidden rounded-lg
           border-2 border-gray-300 bg-white px-4 py-2 pt-5 text-black shadow-inner'
         value={message}
-        name='message-input'
         ref={textareaRef}
         onChange={onChangeHandler}
         onKeyDown={onKeydownHandler}
@@ -77,7 +76,6 @@ const MessageForm: React.FC<MessageFormProps> = ({
       />
       <button
         type='submit'
-        name='message-submit-button'
         disabled={isDisabled}
         className={`flex items-center justify-center rounded-full border-2 
           border-solid border-primaryGreen p-3 ${isDisabled ? 'opacity-40' : 'opacity-100'}`}

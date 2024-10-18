@@ -16,9 +16,7 @@ export class BasePage {
   }
 
   profileIcon() {
-    return cy
-      .get('a[href="/profile"]', { timeout: 10000 })
-      .should('be.visible');
+    return cy.get('a[href="/profile"]').should('be.visible');
   }
 }
 

@@ -7,14 +7,6 @@
   height: calc(100vh - 165px);
 }
 
-.conversation-card {
-  @apply relative flex items-center bg-gray-300 p-4 lg:max-w-[500px] lg:rounded-lg lg:shadow-md lg:hover:bg-secondaryGray
-}
-
-.notification-dot {
-  @apply relative left-12 z-50 h-4 w-4 rounded-full border-2 border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black
-}
-
 .conversation-height {
   height: calc(100vh - 65px);
 }

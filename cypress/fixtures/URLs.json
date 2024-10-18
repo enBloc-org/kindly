@@ -5,10 +5,7 @@
   "about": "/about",
   "search": "/search",
   "addItem": "/add-item",
-  "conversations": "/conversations",
+  "message": "/conversations",
   "profile": "/profile",
-  "item": "/item/",
-  "forgotPassword": "/login/forgot-password",
-  "resetPassword": "/login/reset-password?code=valid-code",
-  "login-confirm": "/login/confirm"
+  "item": "/item/"
 }

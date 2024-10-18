@@ -41,9 +41,6 @@ export default function Login({
           <span className='text-primaryGreen'>here</span>
         </Link>
       </p>
-      <Link href='/login/forgot-password'>
-        <span className='mt-2 text-sm text-primaryGreen'>Forgot Password</span>
-      </Link>
     </div>
   );
 }

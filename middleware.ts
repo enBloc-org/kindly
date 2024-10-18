@@ -21,8 +21,17 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(
       new URL('/login?message=Please login to use this feature', request.url)
     );
+    return NextResponse.redirect(
+      new URL('/login?message=Please login to use this feature', request.url)
+    );
   } catch (error) {
     console.error(error);
+    return NextResponse.redirect(
+      new URL(
+        '/login?message=Something has gone wrong. Please try again later.',
+        request.url
+      )
+    );
     return NextResponse.redirect(
       new URL(
         '/login?message=Something has gone wrong. Please try again later.',

@@ -11,9 +11,6 @@ import { updateRequestToReserve } from '@/supabase/models/updateRequestToReserve
 import { PartialItem } from '@/types/supabaseTypes';
 import { useState } from 'react';
 
-import startNewConversation from '@/supabase/models/messaging/startNewConversation';
-import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
-
 type ItemDetailsPageProps = {
   item: PartialItem;
   user: { id: string };
@@ -35,17 +32,6 @@ const ItemDetailsPage: React.FC<ItemDetailsPageProps> = ({
     try {
       const message = await updateRequestToReserve(item.id!, user.id!);
       setMessage(message);
-      const conversation = await startNewConversation(
-        user.id,
-        item.donated_by!,
-        item.id!
-      );
-      if (conversation) {
-        await insertSystemMessage(
-          conversation.conversation_id,
-          'A request to reserve this item has been made.'
-        );
-      }
     } catch (error) {
       setMessage('Failed to send request to reserve the item.');
       console.error('Error reserving item:', error);
