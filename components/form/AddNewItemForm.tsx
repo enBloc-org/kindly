@@ -16,7 +16,7 @@ export default function AddNewItemForm({
   onSubmit: (data: PartialItem) => void;
 }) {
   const [imageSource, setImageSource] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);<
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const router = useRouter();
 
@@ -233,25 +233,24 @@ export default function AddNewItemForm({
 
           {(categoryValue === 'clothing' || categoryValue === 'shoes') && (
             <div className='flex items-center justify-center gap-5'>
-             <SizeSelector category={categoryValue} register={register}/>
-             
-                <label
-                  htmlFor='item_type'
-                  className='flex flex-col items-center gap-1 font-light'
-                >
-                  Gender
-                  <select {...register('item_subtype')} className='input-text'>
-                    <option value='' disabled hidden>
-                      Select one
-                    </option>
-                    <option value={'women'}>Women</option>
-                    <option value={'men'}>Men</option>
-                    <option value={'girls'}>Girls</option>
-                    <option value={'boys'}>Boys</option>
-                    <option value={'unisex'}>Unisex</option>
-                  </select>
-                </label>
-              
+              <SizeSelector category={categoryValue} register={register} />
+
+              <label
+                htmlFor='item_type'
+                className='flex flex-col items-center gap-1 font-light'
+              >
+                Gender
+                <select {...register('item_subtype')} className='input-text'>
+                  <option value='' disabled hidden>
+                    Select one
+                  </option>
+                  <option value={'women'}>Women</option>
+                  <option value={'men'}>Men</option>
+                  <option value={'girls'}>Girls</option>
+                  <option value={'boys'}>Boys</option>
+                  <option value={'unisex'}>Unisex</option>
+                </select>
+              </label>
             </div>
           )}
           {categoryValue === 'books' && (
