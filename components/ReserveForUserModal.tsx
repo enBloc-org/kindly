@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 interface ModalProps {
   name: string;
   itemId: number;
-  onReserveStatusChange: () => void;
+  onReserveStatusChange: (itemId: number, reservedBy: string) => void;
   requestedToReserveUserIds?: string[];
 }
 
@@ -43,15 +43,15 @@ const ReserveForUserModal = ({
     fetchUsers();
   }, []);
 
-  const handleConfirmReserve = async (userId: String) => {
+  const handleConfirmReserve = async (userId: string) => {
     try {
       await upsertRow('items', {
         id: itemId,
         is_reserved: true,
-        reserved_by: userId as string,
+        reserved_by: userId,
       });
       toggleModal();
-      onReserveStatusChange();
+      onReserveStatusChange(itemId, userId);
     } catch (error) {
       console.error(error);
     }
@@ -78,7 +78,7 @@ const ReserveForUserModal = ({
                 <p className='font-light'>{user.username}</p>
                 <button
                   className='button button-rounded'
-                  onClick={() => handleConfirmReserve(user.id)}
+                  onClick={() => handleConfirmReserve(user.id as string)}
                 >
                   Confirm
                 </button>
