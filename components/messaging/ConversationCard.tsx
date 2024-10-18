@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import ConversationCardModal from './ConversationCardModal';
+import defaultProfileImage from '../../public/default-profile.png';
 import useMediaQuery from '../hooks/useMediaQuery';
-import { useState } from 'react';
 
 export type ConversationCardProps = {
   messageTimestamp: string;
@@ -39,10 +39,6 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   currentConversationId,
 }) => {
   const isBreakpoint = useMediaQuery(1000);
-  const [imgSrc, setImgSrc] = useState(partnerAvatar);
-  const handleError = () => {
-    setImgSrc('/default-profile.png');
-  };
 
   return (
     <div
@@ -53,24 +49,27 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
       onClick={clickHandler}
       data-testid='card-wrapper'
     >
-      <div className='relative h-[65px] w-[65px] flex-shrink-0'>
+      <div className='relative h-[65px] w-[65px]'>
         {notificationList.some(
           (conversation) => conversation === conversationId
-        ) && (
-          <div
-            className='relative left-12 z-50 h-4 w-4 rounded-full 
-              border-2 border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black'
-          ></div>
+        ) && <div className='notification-dot'></div>}
+        {partnerAvatar ? (
+          <Image
+            src={partnerAvatar}
+            fill
+            className='flex-shrink-0 rounded-full'
+            alt={partnerUsername}
+            sizes='(max-width: 640px) 50px, (max-width: 768px) 75px, 100px'
+          />
+        ) : (
+          <Image
+            src={defaultProfileImage}
+            fill
+            className='flex-shrink-0 rounded-full'
+            alt={partnerUsername}
+            sizes='(max-width: 640px) 50px, (max-width: 768px) 75px, 100px'
+          />
         )}
-
-        <Image
-          src={imgSrc}
-          onError={handleError}
-          fill
-          className='flex-shrink-0 rounded-full'
-          alt={partnerUsername}
-          sizes='(max-width: 640px) 50px, (max-width: 768px) 75px, 100px'
-        />
       </div>
       <div className='pl-4 text-left'>
         <div className='flex items-center gap-2'>
