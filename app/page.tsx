@@ -15,7 +15,7 @@ export default async function Index() {
     <Providers>
       <FullHeightContainer>
         <Header />
-        <main className='flex flex-grow flex-col'>
+        <main className='mb-24 flex flex-grow flex-col'>
           <div className='m-auto max-w-lg'>
             <Image
               alt='give kindly image'

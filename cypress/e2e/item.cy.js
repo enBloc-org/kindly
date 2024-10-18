@@ -31,8 +31,38 @@ describe('Create and Delete item positive test Suite', () => {
 
   it('User can delete the item', () => {
     cy.visit(page.profile, { failOnStatusCode: false });
+
+    cy.intercept('DELETE', '**').as('deleteItem');
+
+    cy.log('Clicking delete button');
     ProfilePage.deleteItemButton(uniqueItemName).click();
+
+    cy.log('Clicking confirm delete button');
     ProfilePage.ConfirmDeleteItemButton(uniqueItemName).click();
+
+    cy.log('Waiting for DELETE request');
+    cy.wait('@deleteItem').then((interception) => {
+      cy.log(`DELETE request intercepted: ${interception.request.url}`);
+      expect(interception.response.statusCode).to.eq(204);
+    });
+
+    const waitForItemRemoval = (itemName, maxAttempts = 20) => {
+      let attempts = 0;
+      const checkForItem = () => {
+        attempts++;
+        return cy.get('body').then(($body) => {
+          if (!$body.text().includes(itemName) || attempts >= maxAttempts) {
+            return;
+          }
+          cy.wait(500); // Wait 500ms between checks
+          checkForItem();
+        });
+      };
+      checkForItem();
+    };
+
+    waitForItemRemoval(uniqueItemName);
+
     ProfilePage.itemCard(uniqueItemName).should('not.exist');
   });
 });
