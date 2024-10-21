@@ -10,9 +10,9 @@ describe('messaging feature', () => {
     refugeeLogIn();
     cy.visit(page.conversations);
     ConversationsPage.notificationDot().should('have.length', 2);
-    ConversationsPage.conversationCard(/unread to refugee/i).click();
+    ConversationsPage.conversationCard(/Sorry it's deleted/i).click();
     ConversationsPage.notificationDot().should('have.length', 1);
-    ConversationsPage.conversationCard(/unread to refugee/i)
+    ConversationsPage.conversationCard(/Sorry it's deleted/i)
       .parents('.conversation-card')
       .find('[name="ellipsis-button"]')
       .click();
