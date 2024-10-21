@@ -12,7 +12,6 @@ export default async function getAdditionalConversationDetails(
       .eq('user_id', user_id)
       .eq('conversation_id', conversation_id)
       .single();
-    console.log(data);
     return data;
   } else {
     console.error('userID or Conversation ID undefined');

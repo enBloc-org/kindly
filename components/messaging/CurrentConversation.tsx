@@ -86,28 +86,13 @@ const CurrentConversation: React.FC = () => {
           filter: `user_id=eq.${currentConversation?.user_id}`,
         },
         (payload) => {
-          console.log('ran effect');
-          if (payload) {
-            console.log('payload');
-            console.dir(payload, { depth: null });
-          } else {
-            console.log('Payload is undefined or null');
-          }
-          console.log('payload');
-
-          console.log('payload.old');
-          console.log(payload.old);
-          console.log('payload.new');
-          console.log(payload.new);
           if (payload.new.partner_has_deleted) {
             setDeletedList((prevState) => {
               if (!prevState.includes(payload.new.conversation_id)) {
                 return [...prevState, payload.new.conversation_id];
               }
-              console.log('Updated deletedList', prevState);
               return prevState;
             });
-            console.log(deletedList);
           }
         }
       )
