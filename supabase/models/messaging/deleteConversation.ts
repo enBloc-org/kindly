@@ -11,6 +11,11 @@ export default async function deleteConversation(
       .delete()
       .match({ conversation_id: conversationId, user_id: userId });
 
+    await supabase
+      .from('user_conversations')
+      .update({ partner_has_deleted: true })
+      .match({ conversation_id: conversationId, partner_id: userId });
+
     if (error) throw error;
   } catch (error) {
     console.error('Error deleting conversation:', error);
