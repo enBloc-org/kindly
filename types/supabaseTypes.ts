@@ -17,6 +17,7 @@ export type item = {
   postage_covered: boolean;
   imageSrc: string;
   username: string;
+  given_away_to: string | null;
 };
 
 export type profile = {
