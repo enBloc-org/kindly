@@ -9,8 +9,8 @@ import getAdditionalConversationDetails from '@/supabase/models/messaging/getAdd
 import restoreDeletedConversation from '@/supabase/models/messaging/restoreDeletedConversation';
 
 type MessageFormProps = {
-  user_id: string | undefined;
-  conversation_id: number | undefined;
+  user_id: string;
+  conversation_id: number;
   deletedList: number[] | [];
   partner_has_deleted: boolean | undefined;
   setDeletedList: React.Dispatch<React.SetStateAction<number[]>>;

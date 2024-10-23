@@ -2,7 +2,7 @@ import newClient from '@/supabase/utils/newClient';
 
 export default async function getAdditionalConversationDetails(
   user_id: string,
-  conversation_id: undefined
+  conversation_id: number
 ) {
   const supabase = newClient();
   const { data } = await supabase
