@@ -182,12 +182,12 @@ INSERT INTO "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "r
 -- Data for Name: conversations; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "public"."conversations" ("id", "created_at") VALUES
-	(1, '2024-06-16 13:44:29.042856+00'),
-	(2, '2024-06-16 13:46:10.25272+00'),
-	(3, '2024-06-16 13:47:48.353521+00'),
-	(4, '2024-06-16 13:49:04.157526+00'),
-	(5, '2024-06-16 13:51:15.83193+00');
+INSERT INTO "public"."conversations" ("id", "created_at", "member_has_deleted") VALUES
+	(1, '2024-06-16 13:44:29.042856+00', false),
+	(2, '2024-06-16 13:46:10.25272+00', false),
+	(3, '2024-06-16 13:47:48.353521+00', false),
+	(4, '2024-06-16 13:49:04.157526+00', false),
+	(5, '2024-06-16 13:51:15.83193+00', false);
 
 
 --

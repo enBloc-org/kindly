@@ -11,7 +11,7 @@ import restoreDeletedConversation from '@/supabase/models/messaging/restoreDelet
 type MessageFormProps = {
   user_id: string | undefined;
   conversation_id: number | undefined;
-  deletedList: number[] | undefined;
+  deletedList: number[] | [];
   partner_has_deleted: boolean | undefined;
   setDeletedList: React.Dispatch<React.SetStateAction<number[]>>;
 };
@@ -32,8 +32,8 @@ const MessageForm: React.FC<MessageFormProps> = ({
     e.preventDefault();
     if (
       deletedList?.some(
-        (deltetedConversationId) =>
-          deltetedConversationId == conversation_id ||
+        (deletedConversationId) =>
+          deletedConversationId == conversation_id ||
           (partner_has_deleted !== undefined && partner_has_deleted === true)
       )
     ) {
@@ -49,7 +49,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
         );
 
         const updatedDeletedList = deletedList.filter(
-          (deltedId) => deltedId !== conversation_id
+          (deletedId) => deletedId !== conversation_id
         );
         setDeletedList(updatedDeletedList);
       } catch (error) {
