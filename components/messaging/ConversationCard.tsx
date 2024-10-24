@@ -56,9 +56,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
       <div className='relative h-[65px] w-[65px] flex-shrink-0'>
         {notificationList.some(
           (conversation) => conversation === conversationId
-
-        ) && <div className='notification-dot' />}
-
+        ) && <div className='notification-dot'></div>}
         <Image
           src={imgSrc}
           onError={handleError}
@@ -67,7 +65,6 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           alt={partnerUsername}
           sizes='(max-width: 640px) 50px, (max-width: 768px) 75px, 100px'
         />
-
       </div>
       <div className='pl-4 text-left'>
         <div className='flex items-center gap-2'>

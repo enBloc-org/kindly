@@ -5,15 +5,23 @@ import { FormEvent, useState, useRef, KeyboardEvent } from 'react';
 import insertMessage from '@/supabase/models/messaging/insertMessage';
 import PaperPlaneIcon from '../icons/PaperPlaneIcon';
 import useMediaQuery from '../hooks/useMediaQuery';
+import getAdditionalConversationDetails from '@/supabase/models/messaging/getAdditionalConversationDetails';
+import restoreDeletedConversation from '@/supabase/models/messaging/restoreDeletedConversation';
 
 type MessageFormProps = {
-  user_id: string | undefined;
-  conversation_id: number | undefined;
+  user_id: string;
+  conversation_id: number;
+  deletedList: number[] | [];
+  partner_has_deleted: boolean | undefined;
+  setDeletedList: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 const MessageForm: React.FC<MessageFormProps> = ({
   user_id,
   conversation_id,
+  deletedList,
+  partner_has_deleted,
+  setDeletedList,
 }) => {
   const [message, setMessage] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState(true);
@@ -22,9 +30,36 @@ const MessageForm: React.FC<MessageFormProps> = ({
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (
+      deletedList?.some(
+        (deletedConversationId) =>
+          deletedConversationId == conversation_id ||
+          (partner_has_deleted !== undefined && partner_has_deleted === true)
+      )
+    ) {
+      try {
+        const additionalConversationData =
+          await getAdditionalConversationDetails(user_id, conversation_id);
 
+        await restoreDeletedConversation(
+          user_id,
+          additionalConversationData?.partner_id,
+          additionalConversationData?.item_id,
+          conversation_id
+        );
+
+        const updatedDeletedList = deletedList.filter(
+          (deletedId) => deletedId !== conversation_id
+        );
+        setDeletedList(updatedDeletedList);
+      } catch (error) {
+        throw new Error(
+          'conversation form failed during conversation restart: ' +
+            (error as Error).message
+        );
+      }
+    }
     const trimmedMessage = message.trim();
-
     try {
       await insertMessage(user_id, conversation_id, trimmedMessage);
       setMessage('');
