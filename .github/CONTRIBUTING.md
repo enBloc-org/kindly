@@ -18,14 +18,14 @@ Include a clear example of the current behaviour with (as much as possible):
 
 ### In case of a breaking issue in Production
 
-Our first priority is to guarantee a stable version in Production (deployed from `main` in our case) at all times, but issues can always come about and in case they do, we have a Rollback Plan!
+Our first priority is to guarantee a stable version in Production (deployed from `main` in our case) at all times, but we also have a Rollback plan to follow in the event of a bug that would stop users from interacting with our Production code.
 
 A rollback can only be performed by a member of the core team since they will have the necessary permissions on the repository and will be prepared to make the call to trigger a callback or attempt a different solution. This plan has been set up only as a last resort, in case of a major issue stopping users from interacting with the deployed platform - it should not be used if there is the potential for a bug fix (or hot fix).
 
 - **If you spot** a breaking issue in production, please raise it with the core team as soon as possible. The simplest way is probably to reach out on discord. Follow that up with [submitting an issue](.github/CONTRIBUTING.md#how-to-submit-an-issue) so others in the community can see that it is being addressed.
 
-- **If you are performing a rollback** you need to create a pull request from the branch `#360/rollback-v1` to `main`. This branch is a still copy of version 1 when it was completed, so any changes that might have happened since *will be lost*.
-As per our branch protection rules, this PR will need the explicit approval of two other members of the core team.
+- **If you are performing a rollback** you need to create a pull request from the branch `#360/rollback-v1` to `main`. This branch is a still copy of version 1 when it was completed, so any changes that might have happened since _will be lost_.
+  As per our branch protection rules, this PR will need the explicit approval of two other members of the core team.
 
 <hr>
 
