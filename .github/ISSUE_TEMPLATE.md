@@ -15,6 +15,14 @@ Please describe the behaviour you are expecting:
  - add screenshots if the behaviour targeted affects the UI
  - outline any necessary setup to reproduce the behaviour you expect
 ```
+# Acceptance Criteria
+
+```
+Please provide clear criteria that must be met for this issue to be considered resolved:
+- [ ] Criteria 1 (e.g., "The page loads within 2 seconds on mobile devices.")
+- [ ] Criteria 2 (e.g., "The input field retains values after a page refresh.")
+- [ ] Criteria 3 (e.g., "All text matches the provided UI design specifications.")
+```
 
 # Current Behaviour
 
