@@ -1,9 +1,10 @@
+import { PartialItem } from '@/types/supabaseTypes';
 import React, { useEffect, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 
 interface SizeSelectorProps {
   category: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<PartialItem>;
 }
 
 const SizeSelector: React.FC<SizeSelectorProps> = ({ category, register }) => {

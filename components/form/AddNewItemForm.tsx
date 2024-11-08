@@ -30,7 +30,7 @@ export default function AddNewItemForm({
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const router = useRouter();
 
-  const methods = useForm({
+  const methods = useForm<PartialItem>({
     defaultValues: formDefaults,
   });
 
