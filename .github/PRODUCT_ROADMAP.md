@@ -10,29 +10,27 @@ We encourage new contributors to work on any aspect of the project that feels ap
 If you submit a new Issue (whether it's a bug or new feature request) please indicate the most adequate Milestone based on the current Roadmap.
 
 ## User Stories
+
 The following User Stories follow the projected Roadmap shown above.
 When working on any Issue collaborators are encouraged to look for additional improvement opportunities that will fullfil these stories.
 Similarly, new Issue submissions are always welcomed but may be prioritized for fulfillment if they conform to any of the stories below.
 
 ### User Account Milestone 🗝️
-- As a User I want to have an option to reset my password from the login page
-- As a User I want to be able to suspend my account
-- As a User I want to be able to delete my account
-- As a User I want to be able to browse through Kindly before I need to create an account in order to interact with Donations
-- As a User I want to be able to sign up and login to Kindly with my login from social platforms such as Google or Facebook
-- As a User I want to be able to keep my account logged in between visits to Kindly 
+
+- As a User I want to be able to block interactions with other accounts
+- As a User I want to be able to keep my account logged in for when I return to the page in future
+- As a User I want to be able to review Terms and Conditions of the platform
 
 ### Donations Milestone 🤝
-- As a Donor I want to be able to mark any of my items as 'Reserved'
-- As a Donor I want to prevent new Inquiries about any Items I have marked as 'Reserved'
-- As a Refugee I want to receive confirmation what an Item has been reserved for me upon request
-- As a Refugee I want to be able to view all details of an Item without having to navigate into a new page
-- As a System Admin I want to guarantee that irrelevant data, such as Items that are no longer available, is removed from the database at periodic intervals
-- As a Volunteer I want to guarantee that the availability of Donations is distributed through the community by limiting the number of donations that can be received in one week 
+
+- As a Refugee I want to be able to reach donors about items I need without fearing over-active users of the platform reserving a hight number of donations before I have a chance to request them
+- As a User I want to know that all items I view on the platform are currently available without fear of spending my time trying to reach unavailable Donors to reserve 'stale' donations
 
 ### Browsing Milestone 🔎
-- As a Refugee I want to be able to easily consult the list of Items donated by a User specific user of the app
-- As a Refugee I want to be able to filter all Items by different categories and categories so I can easily find the Items most relevant to my needs
+
+- As a Refugee I want to be able to review the profile of Donors on the platform and easily find other items they are offering at any time
 
 ### Messaging Milestone 📩
-- As a User I want to receive notifications when there are updates to my conversations in Kindly
+
+- As a User I want to be able to receive updates about any updates on my donations/enquiries when I am not logged into my account
+- As a User I want my `conversations` tab to be kept free of clutter by having old and inactive conversations disappear
