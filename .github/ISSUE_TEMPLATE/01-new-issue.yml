@@ -16,7 +16,7 @@ body:
     id: expected
     attributes:
       label: Expected Behavior
-      description: Explain in a few lines how the code should be behaving once this issue is closed and list the acceptance criteria to validate it.
+      description: Explain in a few lines how the code should be behaving once this issue is closed.
       placeholder: The codebase should ...
     validations:
       required: true
@@ -25,9 +25,9 @@ body:
     id: acceptance-criteria
     attributes:
       label: Acceptance Criteria
-      description: Define the criteria that must be met to consider this issue resolved. List each criterion clearly.
-      placeholder: - [ ] Criterion 1
-                   - [ ] Criterion 2
+      description: Define the criteria that should be met to consider this issue resolved.
+      placeholder: -[x] Criteria 1
+                   -[x] Criteria 2
     validations:
       required: true
 
