@@ -5,6 +5,11 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontFamily: {
+      header: ['Bricolage Grotesque', 'sans-serif'],
+      supplement: [],
+      body: ['Inter', 'sans-serif'],
+    },
     extend: {
       colors: {
         background: '#F0EFED',
@@ -12,16 +17,17 @@ module.exports = {
         primaryGreen: '#54BB89',
         hoverGreen: '#4EA37A',
         secondaryGreen: '#B6DFB6',
+        //New colors
+        primaryWhite: '#FFFFFF',
+        primaryBlack: '#333333',
         primaryGray: '#57666D',
         secondaryGray: '#DCDCDC',
-        primaryOrange: '#FF9E5E',
+        primaryOrange: '#FF8D3C',
+        primaryBlue: '#1461D1',
+        primaryRed: '#ED0131',
       },
       boxShadow: {
         '3xl': '5px 10px 10px -5px #57666D',
-      },
-      fontFamily: {
-        barlow: ['Barlow Semi Condensed', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
       },
     },
   },
