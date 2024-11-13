@@ -8,31 +8,30 @@ import UploadImageInput from './UploadImageInput';
 import { PartialItem } from '@/types/supabaseTypes';
 import insertRow from '@/supabase/models/insertRow';
 
+const formDefaults = {
+  item_name: '',
+  item_description: '',
+  postcode: '',
+  condition: '',
+  item_type: '',
+  size: '',
+  item_subtype: '',
+  postable: false,
+  collectible: false,
+  postage_covered: false,
+};
 export default function AddNewItemForm({
-  onSubmit,
   userId,
 }: {
   userId: string | undefined;
-  onSubmit: (data: PartialItem) => void;
 }) {
   const [imageSource, setImageSource] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const router = useRouter();
 
-  const methods = useForm({
-    defaultValues: {
-      item_name: '',
-      item_description: '',
-      postcode: '',
-      condition: '',
-      item_type: '',
-      size: '',
-      item_subtype: '',
-      postable: false,
-      collectible: false,
-      postage_covered: false,
-    },
+  const methods = useForm<PartialItem>({
+    defaultValues: formDefaults,
   });
 
   const {
@@ -58,6 +57,7 @@ export default function AddNewItemForm({
     }
 
     setIsSubmitting(true);
+
     try {
       const itemDataWithoutImage = Object.fromEntries(
         Object.entries(data).filter(([key]) => key !== 'image')
@@ -69,21 +69,15 @@ export default function AddNewItemForm({
         ...itemDataWithoutImage,
       };
 
-      try {
-        const addedItem = await insertRow('items', itemData);
-        if (!addedItem || addedItem.length === 0) {
-          throw new Error('Failed to add the new item');
-        }
-        const itemId = addedItem[0].id;
-        reset();
-        router.push(`/add-item/success/${itemId}`);
-      } catch (error) {
-        router.push(`/add-item?message=${error}`);
-      }
-
-      await onSubmit(itemData);
+      const addedItem = await insertRow('items', itemData);
+      if (!addedItem || addedItem.length === 0)
+        throw new Error('Failed to add the new item');
+      const itemId = addedItem[0].id;
+      reset();
+      router.push(`/add-item/success/${itemId}`);
       setSubmitSuccess(true);
     } catch (error) {
+      router.push(`/add-item?message=${error}`);
     } finally {
       setIsSubmitting(false);
     }
