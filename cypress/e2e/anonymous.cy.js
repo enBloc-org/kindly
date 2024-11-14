@@ -13,6 +13,24 @@ Cypress.on(
 const redirectTimeout = 10000;
 
 describe('Anonymous Navigation', () => {
+  it('Can see recently added items', () => {
+    // go to home page
+    cy.visit(page.home, { failOnStatusCode: false });
+    // wait for loading to complete
+    cy.get('.lastItems', { timeout: redirectTimeout }).should(
+      'not.contain',
+      'Loading...'
+    );
+    // check if items are displayed or if there is a message for no items
+    cy.get('.lastItems').then((lastItems) => {
+      if (lastItems.find('li').length > 0) {
+        cy.get('.lastItems').find('li').should('be.visible');
+      } else {
+        cy.contains('.lastItems', 'No added items').should('be.visible');
+      }
+    });
+  });
+
   it('Can browse items', () => {
     // go to home page
     cy.visit(page.home, { failOnStatusCode: false });
