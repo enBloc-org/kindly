@@ -6,13 +6,31 @@
   font-family: 'Bricolage Grotesque';
   src: url('/fonts/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf');
 }
-
 @font-face {
   font-family: 'Inter';
   src: url('/fonts/Inter-VariableFont_opsz,wght.ttf');
 }
 
-/* Global Styles */
+/**
+ * CONTENTS
+ *
+ * BASE
+ * Base element defaults...........Basic styles for any html element.
+ *
+ * UNIVERSAL
+ * Buttons..............Button elements and active states.
+ * Error message............Error message styles.
+ *
+ * COMPONENTS
+ * Form classes............Form input styles.
+ * Cards..............Card styles.
+ * Menus..............Menu styles.
+ */
+
+/*------------------------------------*\
+    BASE
+\*------------------------------------*/
+
 h1,
 h2,
 h3,
@@ -33,7 +51,9 @@ body {
   outline: 2px solid #ff8d3c;
 }
 
-/* Universal component classes*/
+/*------------------------------------*\
+    UNIVERSAL
+\*------------------------------------*/
 
 .button {
   @apply relative max-w-xs cursor-pointer bg-primaryGreen
@@ -67,6 +87,10 @@ body {
 .error-message {
   @apply text-lg font-bold italic text-primaryOrange;
 }
+
+/*------------------------------------*\
+    COMPONENTS
+\*------------------------------------*/
 
 /* Form classes*/
 
