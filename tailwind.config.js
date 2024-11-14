@@ -21,7 +21,7 @@ module.exports = {
         primaryWhite: '#FFFFFF',
         primaryBlack: '#333333',
         primaryGray: '#57666D',
-        secondaryGray: '#DCDCDC',
+        secondaryGray: '#F3F3F3',
         primaryOrange: '#FF8D3C',
         primaryBlue: '#1461D1',
         primaryRed: '#ED0131',
