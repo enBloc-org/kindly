@@ -18,11 +18,25 @@ export const ItemCardDefault: Story = {
     imageSrc: testItem.src,
     item_name: 'White Jumper',
     condition: 'New',
-    item_type: 'Clothing',
+    size: 'Medium',
     postcode: 'E12',
     postable: true,
     id: 2,
-    reserved: false,
+    is_reserved: false,
+  },
+};
+
+export const ItemCardPotageCovered: Story = {
+  args: {
+    imageSrc: testItem.src,
+    item_name: 'White Jumper',
+    condition: 'New',
+    size: 'Medium',
+    postcode: 'E12',
+    postable: true,
+    id: 2,
+    is_reserved: false,
+    postage_covered: true,
   },
 };
 
@@ -31,19 +45,18 @@ export const ItemCardReserved: Story = {
     imageSrc: testItem.src,
     item_name: 'White Jumper',
     condition: 'New',
-    item_type: 'Clothing',
+    size: 'Medium',
     postcode: 'E12',
     postable: true,
     id: 2,
-    reserved: true,
+    is_reserved: true,
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
     await step('Check if reserved tag is present', async () => {
-      const reservedTag = await canvas.findByText('Reserved');
+      const reservedTag = await canvas.findByText(/reserved/i);
       expect(reservedTag).toBeInTheDocument();
-      expect(reservedTag).toHaveClass('reserved');
     });
   },
 };

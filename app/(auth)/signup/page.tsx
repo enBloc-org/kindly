@@ -2,7 +2,6 @@ import AuthForm from '@/components/AuthForm';
 import insertRow from '@/supabase/models/insertRow';
 import newServerClient from '@/supabase/utils/newServerClient';
 import { PartialProfile } from '@/types/supabaseTypes';
-import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export default function SignUp({
@@ -18,7 +17,6 @@ export default function SignUp({
     const { data, error } = await supabase.auth.signUp({
       email: formData.get('email') as string,
       password: formData.get('password') as string,
-      options: { emailRedirectTo: `${headers().get('origin')}/login` },
     });
 
     if (error) {
@@ -28,7 +26,13 @@ export default function SignUp({
         );
       }
 
-      return redirect(`/signup?message=${error.code?.replaceAll(/_/g, ' ')}.`);
+      if (error.code === 'weak_password') {
+        return redirect(
+          `/signup?message=Your password must include at lease one uppercase character, one number and one special character`
+        );
+      }
+
+      return redirect(`/signup?message=${error.code?.replaceAll(/_/g, ' ')}`);
     }
 
     // Get userId and insert it as ID in Profiles table

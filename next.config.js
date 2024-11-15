@@ -10,6 +10,11 @@ const nextConfig = {
         hostname: 'undfcbmldjkujposixvn\\.supabase\\.co',
         pathname: '/storage/v1/object/public/images/**',
       },
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        pathname: '/storage/v1/object/public/images/**',
+      },
     ],
   },
 };

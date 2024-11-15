@@ -1,6 +1,6 @@
 export type item = {
   id: number;
-  reserved: boolean;
+  is_reserved: boolean;
   size: string;
   brand: string;
   condition: string;
@@ -10,13 +10,14 @@ export type item = {
   item_description: string;
   postcode: string;
   donated_by: string;
-  reserved_by: string;
+  reserved_by: string | null;
   postable: boolean;
   collectible: boolean;
   requestedToReserve: string[];
   postage_covered: boolean;
   imageSrc: string;
   username: string;
+  given_away_to: string | null;
 };
 
 export type profile = {
@@ -37,7 +38,7 @@ export type editProfile = {
   username: string | undefined;
 };
 export type updateReserved = {
-  reserved: boolean;
+  is_reserved: boolean;
   reserved_by: string;
 };
 

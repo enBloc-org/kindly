@@ -36,6 +36,7 @@ const ItemDisplayContainer: React.FC<ItemDisplayContainerProps> = ({
               postcode={result.postcode}
               postage_covered={result.postage_covered}
               id={result.id}
+              is_reserved={result.is_reserved}
             />
           ))
         ) : (

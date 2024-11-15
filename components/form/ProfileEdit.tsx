@@ -3,10 +3,11 @@ import editRow from '@/supabase/models/editRow';
 import { PartialItem, editProfile } from '@/types/supabaseTypes';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import ButtonPill from '../buttons/ButtonPill';
 import ButtonRounded from '../buttons/ButtonRounded';
 import UploadImageInput from './UploadImageInput';
+import { useRouter } from 'next/navigation';
 
 export const ProfileEdit = ({
   userId,
@@ -20,13 +21,21 @@ export const ProfileEdit = ({
   const [isEditMode, setIsEditMode] = useState(false);
   const [imgAvatar, setImgAvatar] = useState('');
 
+  const router = useRouter();
+
+  const methods = useForm({
+    defaultValues: {
+      username: '',
+      avatar: '',
+    },
+  });
   const {
     register,
     handleSubmit,
     setValue,
     setError,
     formState: { errors },
-  } = useForm();
+  } = methods;
 
   const onSubmit = async (data: PartialItem) => {
     try {
@@ -58,6 +67,7 @@ export const ProfileEdit = ({
         'id',
         userId
       );
+      router.refresh();
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -80,38 +90,46 @@ export const ProfileEdit = ({
         </ButtonPill>
       </div>
       {isEditMode && (
-        <form
-          className='flex flex-col items-center gap-2'
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <label
-            htmlFor='username'
-            className='flex flex-col items-center font-light'
+        <FormProvider {...methods}>
+          <form
+            className='flex flex-col items-center gap-2'
+            onSubmit={handleSubmit(onSubmit)}
           >
-            Username
-            <input
-              type='text'
-              className='input-text mb-4 mt-2'
-              {...register('username', {
-                required: 'Username is required',
-                maxLength: {
-                  value: 25,
-                  message: 'Username cannot exceed 25 characters',
-                },
-              })}
+            <label
+              htmlFor='username'
+              className='flex flex-col items-center font-light'
+            >
+              Username
+              <input
+                type='text'
+                className='input-text mb-4 mt-2'
+                {...register('username', {
+                  required: 'Username is required',
+                  maxLength: {
+                    value: 25,
+                    message: 'Username cannot exceed 25 characters',
+                  },
+                })}
+              />
+            </label>
+            <p className='error-message'>
+              {errors.username?.message as string}
+            </p>
+            <UploadImageInput
+              isRequired={false}
+              setImageSrc={setImgAvatar}
+              imageType={'profile'}
             />
-          </label>
-          <p className='error-message'>{errors.username?.message as string}</p>
-          <UploadImageInput setImageSrc={setImgAvatar} />
-          <div className='mt-4'>
-            <ButtonRounded type='submit'>EDIT PROFILE</ButtonRounded>
-          </div>
-          <p className='text-md mt-5'>
-            <Link href='/delete-account'>
-              <ButtonRounded type='button'>DELETE ACCOUNT</ButtonRounded>
-            </Link>
-          </p>
-        </form>
+            <div className='mt-4'>
+              <ButtonRounded type='submit'>EDIT PROFILE</ButtonRounded>
+            </div>
+            <p className='text-md mt-5'>
+              <Link href='/delete-account'>
+                <ButtonRounded type='button'>DELETE ACCOUNT</ButtonRounded>
+              </Link>
+            </p>
+          </form>
+        </FormProvider>
       )}
     </div>
   );
