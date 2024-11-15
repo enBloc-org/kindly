@@ -22,6 +22,7 @@ export type UserConversationType = {
   user_id: string;
   item_id: number;
   has_unread_messages: boolean;
+  partner_has_deleted: boolean;
 };
 
 export type ItemType = {
