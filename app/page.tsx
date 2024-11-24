@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable react/no-unescaped-entities */
 import Providers from '@/context/Providers';
 import FullHeightContainer from '@/components/layout/FullHeightComponent';
@@ -7,12 +9,9 @@ import Image from 'next/image';
 import giveKindly from '@/public/giveKindly.png';
 import Link from 'next/link';
 import React from 'react';
-import LoadingModal from '@/components/LoadingModal';
-import getRecentItems from '@/supabase/models/getRecentItems';
 import DisplayRecentlyAddedItems from '@/components/DisplayRecentlyAddedItems';
 
-export default async function Index() {
-  const recentItems = await getRecentItems();
+export default function Index() {
   return (
     <Providers>
       <FullHeightContainer>
@@ -52,12 +51,7 @@ export default async function Index() {
                 Added this week
               </h2>
               <div className='lastItems'>
-                <LoadingModal
-                  data={recentItems}
-                  message='No recently added items'
-                >
-                  <DisplayRecentlyAddedItems recentItems={recentItems} />
-                </LoadingModal>
+                <DisplayRecentlyAddedItems />
               </div>
             </div>
 
