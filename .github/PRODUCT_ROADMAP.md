@@ -1,7 +1,7 @@
 # Product Roadmap
 
 The following is the planned Roadmap for the development of Kindly:  
-![Product Roadmap - updated Summer of 2024](./documentation_images/roadmap.png)
+![Product Roadmap - updated Summer of 2024](./documentation_images/roadmap_v2.png)
 
 All active Milestones in the Kindly project will follow this Roadmap and new feature suggestions will be considered for future releases. The project is currently on `Release v2` in this roadmap.
 
