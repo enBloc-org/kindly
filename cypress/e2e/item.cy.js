@@ -29,6 +29,12 @@ describe('Create and Delete item positive test Suite', () => {
     ProfilePage.itemCard(uniqueItemName).should('be.visible');
   });
 
+  it.only('User can edit an existing item', () => {
+    cy.visit(page.profile, { failOnStatusCode: false });
+    ProfilePage.editItemButton(data.itemName).click();
+    cy.url().should('include', '/edit-item/');
+  });
+
   it('User can delete the item', () => {
     cy.visit(page.profile, { failOnStatusCode: false });
 
