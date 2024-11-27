@@ -1,16 +1,17 @@
+'use client';
+
 /* eslint-disable react/no-unescaped-entities */
 import Providers from '@/context/Providers';
 import FullHeightContainer from '@/components/layout/FullHeightComponent';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getRecentItems } from '@/supabase/models/getRecentItems';
 import Image from 'next/image';
 import giveKindly from '@/public/giveKindly.png';
 import Link from 'next/link';
 import React from 'react';
+import DisplayRecentlyAddedItems from '@/components/DisplayRecentlyAddedItems';
 
-export default async function Index() {
-  const lastItems = await getRecentItems();
+export default function Index() {
   return (
     <Providers>
       <FullHeightContainer>
@@ -50,29 +51,7 @@ export default async function Index() {
                 Added this week
               </h2>
               <div className='lastItems'>
-                {lastItems && (
-                  <ul className='flex flex-wrap items-center justify-center gap-10'>
-                    {' '}
-                    {lastItems.map((item) => (
-                      <li key={item.id}>
-                        <Link href={`/item/${item.id}`}>
-                          <div
-                            data-testid='item-div'
-                            className='relative h-36 w-28 shadow-md'
-                          >
-                            <Image
-                              alt={`Image of ${item.item_name}`}
-                              src={item.imageSrc}
-                              fill={true}
-                              objectFit='cover'
-                              className='rounded-lg'
-                            />
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <DisplayRecentlyAddedItems />
               </div>
             </div>
 

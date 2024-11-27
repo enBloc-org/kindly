@@ -15,7 +15,7 @@ jobs:
         with:
           trigger: '!request'
           assigned_label: 🧑‍💻 assigned
-          pin_label: 🧑‍💻 assigned
+          pin_label: 'in review'
           assigned_comment: |
             🤖 meep morp!
 
