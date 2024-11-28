@@ -183,11 +183,11 @@ INSERT INTO "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "r
 --
 
 INSERT INTO "public"."conversations" ("id", "created_at") VALUES
-	(1, '2024-06-16 13:44:29.042856+00' ),
-	(2, '2024-06-16 13:46:10.25272+00' ),
-	(3, '2024-06-16 13:47:48.353521+00' ),
-	(4, '2024-06-16 13:49:04.157526+00' ),
-	(5, '2024-06-16 13:51:15.83193+00' );
+	(1, '2024-06-16 13:44:29.042856+00'),
+	(2, '2024-06-16 13:46:10.25272+00'),
+	(3, '2024-06-16 13:47:48.353521+00'),
+	(4, '2024-06-16 13:49:04.157526+00'),
+	(5, '2024-06-16 13:51:15.83193+00');
 
 
 --
@@ -237,17 +237,17 @@ INSERT INTO "public"."messages" ("id", "created_at", "conversation_id", "sender_
 -- Data for Name: user_conversations; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "public"."user_conversations" ("id", "joined_at", "conversation_id", "user_id", "item_id", "partner_id", "has_unread_messages") VALUES
-	(1, '2024-06-16 13:44:29.054643+00', 1, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 1, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false),
-	(2, '2024-06-16 13:44:29.054643+00', 1, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 1, '48f9db70-05f7-4a04-a34d-75ae8267c90b', true),
-	(5, '2024-06-16 13:47:48.359931+00', 3, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 3, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', true),
-	(6, '2024-06-16 13:47:48.359931+00', 3, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 3, '48f9db70-05f7-4a04-a34d-75ae8267c90b', false),
-	(9, '2024-06-16 13:51:15.838551+00', 5, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 5, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false),
-	(10, '2024-06-16 13:51:15.838551+00', 5, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 5, '48f9db70-05f7-4a04-a34d-75ae8267c90b', false),
-	(7, '2024-06-16 13:49:04.164005+00', 4, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 4, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false),
-	(8, '2024-06-16 13:49:04.164005+00', 4, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 4, '48f9db70-05f7-4a04-a34d-75ae8267c90b', false),
-	(4, '2024-06-16 13:46:10.259984+00', 2, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 2, '48f9db70-05f7-4a04-a34d-75ae8267c90b', true),
-	(3, '2024-06-16 13:46:10.259984+00', 2, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 2, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', true);
+INSERT INTO "public"."user_conversations" ("id", "joined_at", "conversation_id", "user_id", "item_id", "partner_id", "has_unread_messages", "partner_has_deleted") VALUES
+	(1, '2024-06-16 13:44:29.054643+00', 1, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 1, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false, false),
+	(2, '2024-06-16 13:44:29.054643+00', 1, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 1, '48f9db70-05f7-4a04-a34d-75ae8267c90b', true, false),
+	(5, '2024-06-16 13:47:48.359931+00', 3, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 3, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', true, false),
+	(6, '2024-06-16 13:47:48.359931+00', 3, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 3, '48f9db70-05f7-4a04-a34d-75ae8267c90b', false, false),
+	(9, '2024-06-16 13:51:15.838551+00', 5, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 5, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false, false),
+	(10, '2024-06-16 13:51:15.838551+00', 5, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 5, '48f9db70-05f7-4a04-a34d-75ae8267c90b', false, false),
+	(7, '2024-06-16 13:49:04.164005+00', 4, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 4, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', false, false),
+	(8, '2024-06-16 13:49:04.164005+00', 4, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 4, '48f9db70-05f7-4a04-a34d-75ae8267c90b', false, false),
+	(4, '2024-06-16 13:46:10.259984+00', 2, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', 2, '48f9db70-05f7-4a04-a34d-75ae8267c90b', true, false),
+	(3, '2024-06-16 13:46:10.259984+00', 2, '48f9db70-05f7-4a04-a34d-75ae8267c90b', 2, 'cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', true, false);
 
 
 --
