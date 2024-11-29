@@ -63,11 +63,13 @@ const EditItemPage = ({ params }: { params: { id: number } }) => {
     fetchItemData();
   }, []);
 
-  const onSubmit = async (data: PartialItem) => {
+  const onSubmit = async (data: PartialItem & { image?: object }) => {
+    const partialItem = Object.assign({}, data);
+    delete partialItem.image;
     const itemData: PartialItem = {
       id: params.id,
       imageSrc: imgSrc,
-      ...data,
+      ...partialItem,
     };
     try {
       const response = await upsertRow('items', itemData);
