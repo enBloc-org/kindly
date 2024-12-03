@@ -1,1 +1,0 @@
-ALTER TABLE items ADD COLUMN given_away_to uuid;
