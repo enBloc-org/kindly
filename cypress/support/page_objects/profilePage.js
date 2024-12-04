@@ -13,6 +13,16 @@ export class ProfilePage extends BasePage {
     return cy.contains('.card', itemName);
   }
 
+  editItemButton(itemName) {
+    return cy
+      .get('.card')
+      .contains(itemName)
+      .parents('li')
+      .find('a')
+      .contains(/edit item/gi)
+      .should('be.visible');
+  }
+
   deleteItemButton(itemName) {
     return cy
       .get('.card')
