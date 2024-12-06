@@ -10,9 +10,14 @@ export default async function ForgotPassword({
 }) {
   const supabase = newServerClient();
 
-  let origin = headers().get('origin');
+  const headersList = await headers();
+  let origin: string | null = headersList.get('origin') || null;
+
   if (!origin) {
-    origin = 'http://localhost:3000/';
+    origin =
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000'
+        : process.env.NEXT_PUBLIC_SITE_URL || null;
   }
 
   const {
@@ -44,10 +49,10 @@ export default async function ForgotPassword({
   };
 
   return (
-    <div className='flex flex-col  items-center  px-8'>
+    <div className='flex flex-col items-center px-8'>
       <h1 className='text-center text-4xl font-extrabold'>Forgot password</h1>
       <form
-        className='text-foreground flex flex-1  flex-col  items-center justify-center gap-4'
+        className='text-foreground flex flex-1 flex-col items-center justify-center gap-4'
         action={confirmReset}
       >
         <label
