@@ -34,7 +34,6 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
       });
 
       onFilesSelected(uploadedFiles);
-
     } catch (error) {
       onUploadError(error as Error);
     }
@@ -46,7 +45,7 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
 
   const removeThumbnail = (index: number) => {
     setThumbnailsUrl((prev) => prev.filter((_, i) => i !== index));
-  }
+  };
 
   return (
     <div>
@@ -54,13 +53,13 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
         {thumbnailsUrl &&
           thumbnailsUrl.map((url, index) => (
             <div key={index} className='relative'>
-              <button className='absolute bold text-white bg-slate-300 p-1'
-              onClick={() => removeThumbnail(index)}>X</button>
-              <img
-                src={url}
-                alt={`Thumbnail ${index}`}
-                className='h-28 w-28'
-              />
+              <button
+                className='bold absolute bg-slate-300 p-1 text-white'
+                onClick={() => removeThumbnail(index)}
+              >
+                X
+              </button>
+              <img src={url} alt={`Thumbnail ${index}`} className='h-28 w-28' />
             </div>
           ))}
       </div>
