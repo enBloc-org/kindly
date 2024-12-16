@@ -16,6 +16,7 @@ export type item = {
   requestedToReserve: string[];
   postage_covered: boolean;
   imageSrc: string;
+  image_sources: string[];
   username: string;
 };
 
