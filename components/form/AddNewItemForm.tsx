@@ -67,21 +67,20 @@ export default function AddNewItemForm({
     'UK26',
   ];
 
-  const uploadImage = async (files: FileList) => {
-    if (!userId) return;
-
-    const filesArray = Array.from(files);
-    const urlArray = await insertImagesToStorage(filesArray, 'item', userId);
-    console.log(urlArray);
-    return ['https://example.com/dummy-image.jpg'];
-  };
-
   const submitHandler = async (data: PartialItem) => {
     if (selectedFiles) {
       try {
-        const uploadedImageUrls = await uploadImage(selectedFiles);
+        if (!userId) return;
+
+        const filesArray = Array.from(selectedFiles);
+        const { data: uploadedImageUrls } = await insertImagesToStorage(
+          filesArray,
+          'item',
+          userId
+        );
+
         const itemData: PartialItem = {
-          imageSrc: uploadedImageUrls?.[0] ?? '',
+          image_sources: uploadedImageUrls ? uploadedImageUrls : [],
           donated_by: userId,
           ...data,
         };
