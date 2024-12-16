@@ -267,11 +267,11 @@ export default function AddNewItemForm({
 
         <ImageUploadComponent
           onUploadError={(error) => setGeneralError(error.message)}
+          onFilesSelected={setSelectedFiles}
           isRequired={true}
           imageType='item'
           accept='image/*'
           allowMultiple={true}
-          onFilesSelected={setSelectedFiles}
         />
         {generalError && <p className='error-message'>{generalError}</p>}
 
