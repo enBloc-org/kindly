@@ -2,17 +2,15 @@ import React, { useState, useRef } from 'react';
 import ButtonRounded from '../buttons/ButtonRounded';
 
 interface UploadImageComponentProps {
-  onFilesChange?: (files: FileList) => void;
-  onUploadError?: (error: Error) => void;
+  onFilesSelected: (files: FileList) => void;
+  onUploadError: (error: Error) => void;
   isRequired?: boolean;
   accept?: string;
   allowMultiple?: boolean;
   imageType?: 'item' | 'profile';
-  onFilesSelected: (files: FileList) => void;
 }
 
 const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
-  onFilesChange,
   onUploadError,
   onFilesSelected,
   isRequired = false,
@@ -25,7 +23,7 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
   const handleFileChange = () => {
     const uploadedFiles = inputRef.current?.files;
     if (!uploadedFiles) {
-      onUploadError && onUploadError(new Error('No files selected.'));
+      onUploadError(new Error('No files selected.'));
       return;
     }
 
@@ -35,10 +33,10 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
         setThumbnailsUrl((prevUrls) => [...prevUrls, fileUrl]);
       });
 
-      onFilesChange && onFilesChange(uploadedFiles);
       onFilesSelected(uploadedFiles);
+
     } catch (error) {
-      onUploadError && onUploadError(error as Error);
+      onUploadError(error as Error);
     }
   };
 
@@ -46,17 +44,24 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
     inputRef.current?.click();
   };
 
+  const removeThumbnail = (index: number) => {
+    setThumbnailsUrl((prev) => prev.filter((_, i) => i !== index));
+  }
+
   return (
     <div>
       <div className='flex flex-wrap gap-2'>
         {thumbnailsUrl &&
           thumbnailsUrl.map((url, index) => (
-            <img
-              key={index}
-              src={url}
-              alt={`Thumbnail ${index}`}
-              className='h-20 w-20'
-            />
+            <div key={index} className='relative'>
+              <button className='absolute bold text-white bg-slate-300 p-1'
+              onClick={() => removeThumbnail(index)}>X</button>
+              <img
+                src={url}
+                alt={`Thumbnail ${index}`}
+                className='h-28 w-28'
+              />
+            </div>
           ))}
       </div>
       <input
