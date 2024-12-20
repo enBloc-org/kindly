@@ -39,7 +39,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   currentConversationId,
 }) => {
   const isBreakpoint = useMediaQuery(1000);
-  const [imgSrc, setImgSrc] = useState(partnerAvatar);
+  const [imgSrc, setImgSrc] = useState(partnerAvatar || '/default-profile.png');
   const handleError = () => {
     setImgSrc('/default-profile.png');
   };
