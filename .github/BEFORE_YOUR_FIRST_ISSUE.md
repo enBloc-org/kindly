@@ -67,7 +67,11 @@ We have added to the repo a migration file and a seed file for the database, so 
 npx supabase login
 ```
 
-This will take you to the browser to complete a login. Then you will need to start your container with the following command:
+Follow the instructions in the terminal. This will redirect you to your browser, where you will be provided with a verification code.
+
+Copy the verification code from the browser, return to your terminal, and paste it when prompted by the Supabase CLI to complete the login process.
+
+After logging in, start your container using the following command:
 
 ```bash
 npx supabase start
