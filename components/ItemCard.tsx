@@ -16,6 +16,7 @@ const ItemCard: React.FC<
     | 'postable'
     | 'collectible'
     | 'postage_covered'
+    | 'created_at'
   >
 > = ({
   id,
@@ -26,6 +27,7 @@ const ItemCard: React.FC<
   postable,
   collectible,
   postage_covered,
+  created_at,
 }) => {
   const displayDeliveryOptions = () => {
     switch (true) {
@@ -62,18 +64,29 @@ const ItemCard: React.FC<
           />
         </div>
         <div className='flex flex-col text-start'>
+          <p className='text-sm text-primaryGray'>
+            Date added:{' '}
+            <span>
+              {created_at
+                .slice(0, 10)
+                .split('-')
+                .toReversed()
+                .join()
+                .replaceAll(',', '-')}
+            </span>
+          </p>
           <h2 className='text-xl'>
             <b>{item_name}</b>
           </h2>
-          <p>
+          <p className='text-sm '>
             <b>Size:</b>
             {size}
           </p>
-          <p>
+          <p className='text-sm'>
             <b>Postcode:</b>
             {postcode}
           </p>
-          <p>
+          <p className='text-sm'>
             <b>Delivery Preferences:</b>
             <span className='text-primaryOrange'>
               {displayDeliveryOptions()}
