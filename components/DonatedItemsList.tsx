@@ -163,15 +163,15 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
             .map((item) => (
               <li key={item.id}>
                 <ItemCard
-                  imageSrc={item.imageSrc}
-                  item_name={item.item_name}
-                  condition={item.condition}
-                  item_type={item.item_type}
-                  postcode={item.postcode}
-                  postable={item.postable}
-                  id={item.id}
-                  is_reserved={item.is_reserved}
-                  given_away_to={item.given_away_to}
+                  id={item.id!}
+                  item_name={item.item_name!}
+                  size={item.size!}
+                  postcode={item.postcode!}
+                  imageSrc={item.imageSrc!}
+                  postable={item.postable!}
+                  collectible={item.collectible!}
+                  postage_covered={item.postage_covered!}
+                  created_at={item.created_at!}
                 />
                 <div className='flex flex-row gap-2'>
                   <Link href={`/edit-item/${item.id}`}>

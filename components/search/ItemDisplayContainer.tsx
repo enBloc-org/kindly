@@ -29,14 +29,15 @@ const ItemDisplayContainer: React.FC<ItemDisplayContainerProps> = ({
           searchResults.map((result) => (
             <ItemCard
               key={result.id}
-              imageSrc={result.imageSrc}
-              item_name={result.item_name}
-              condition={result.condition}
-              item_type={result.item_type}
-              postcode={result.postcode}
-              postage_covered={result.postage_covered}
-              id={result.id}
-              is_reserved={result.is_reserved}
+              imageSrc={result.imageSrc!}
+              item_name={result.item_name!}
+              postcode={result.postcode!}
+              size={result.size!}
+              postable={result.postable!}
+              collectible={result.collectible!}
+              postage_covered={result.postage_covered!}
+              id={result.id!}
+              created_at={result.created_at!}
             />
           ))
         ) : (
