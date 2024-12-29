@@ -37,7 +37,7 @@ const ItemCard: React.FC<
       case collectible && !postable && !postage_covered:
         return 'Pick-up only';
         break;
-      case postage_covered && !collectible:
+      case postage_covered && !collectible && postable:
         return 'Posting (postage covered)';
         break;
       case postable && collectible && !postage_covered:
@@ -67,18 +67,13 @@ const ItemCard: React.FC<
           <p className='text-sm text-primaryGray'>
             Date added:{' '}
             <span>
-              {created_at
-                .slice(0, 10)
-                .split('-')
-                .toReversed()
-                .join()
-                .replaceAll(',', '-')}
+              {created_at.slice(0, 10).split('-').toReversed().join('-')}
             </span>
           </p>
           <h2 className='text-xl'>
             <b>{item_name}</b>
           </h2>
-          <p className='text-sm '>
+          <p className='text-sm'>
             <b>Size:</b>
             {size}
           </p>
