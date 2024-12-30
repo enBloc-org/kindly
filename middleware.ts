@@ -39,5 +39,6 @@ export const config = {
     '/profile',
     '/add-item',
     '/delete-account',
+    '/search',
   ],
 };
