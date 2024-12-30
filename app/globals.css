@@ -44,7 +44,7 @@ label {
 }
 
 body {
-  @apply font-body bg-primaryWhite text-primaryBlack;
+  @apply bg-primaryWhite font-body text-primaryBlack;
 }
 
 :focus-visible {
@@ -56,7 +56,7 @@ body {
 \*------------------------------------*/
 
 .button {
-  @apply relative max-w-xs cursor-pointer bg-primaryGreen
+  @apply relative cursor-pointer bg-primaryGreen
   px-4 py-1.5 text-sm  font-semibold  tracking-wider text-background
   shadow-md;
 }
