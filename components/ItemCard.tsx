@@ -7,6 +7,7 @@ import newClient from '@/supabase/utils/newClient';
 import { item } from '@/types/supabaseTypes';
 import startNewConversation from '@/supabase/models/messaging/startNewConversation';
 import { useConversationContext } from '@/context/conversationContext';
+import Link from 'next/link';
 
 const ItemCard: React.FC<
   Pick<
@@ -92,59 +93,61 @@ const ItemCard: React.FC<
   };
 
   return (
-    <div
-      className='card m-auto mt-8
-        grid h-[568px] w-[350px] grid-cols-1 grid-rows-[334.54px_137px_49px] gap-[24px] p-0'
-    >
-      <div className='relative h-[334.53px] w-[350px]'>
-        <Image
-          src={imageSrc ? `${imageSrc}` : '/default-item-img.png'}
-          alt={`Image of ${item_name}`}
-          fill
-          sizes='(max-width: 768px) 100vw, 50vw'
-        />
-      </div>
-
-      <div className='flex h-[137px] w-[350px] flex-col justify-between text-start'>
-        <section className='flex h-[58px] flex-col justify-between'>
-          <p className='text-sm text-primaryGray'>
-            Date added:{' '}
-            <span>
-              {created_at.slice(0, 10).split('-').toReversed().join('.')}
-            </span>
-          </p>
-          <p className='text-[2rem]'>
-            <b>{item_name}</b>
-          </p>
-        </section>
-
-        <section className='flex h-[67px] flex-col justify-between'>
-          <p className='text-sm'>
-            <b>Size: </b>
-            {size}
-          </p>
-          <p className='text-sm'>
-            <b>Postcode: </b>
-            {postcode}
-          </p>
-          <p className='text-sm'>
-            <b>Delivery Preferences: </b>
-            <span className='font-semibold text-primaryOrange'>
-              {displayDeliveryOptions()}
-            </span>
-          </p>
-        </section>
-      </div>
-
-      {message.length > 0 && <p className='error-message'>{message}</p>}
-
-      <button
-        className='button col-span-1 rounded'
-        onClick={(event) => messageButtonHandler(event)}
+    <Link href={`/item/${id}`}>
+      <div
+        className='card m-auto mt-8
+      grid h-[568px] w-[350px] grid-cols-1 grid-rows-[334.54px_137px_49px] gap-[24px] p-0'
       >
-        MESSAGE
-      </button>
-    </div>
+        <div className='relative h-[334.53px] w-[350px]'>
+          <Image
+            src={imageSrc ? `${imageSrc}` : '/default-item-img.png'}
+            alt={`Image of ${item_name}`}
+            fill
+            sizes='(max-width: 768px) 100vw, 50vw'
+          />
+        </div>
+
+        <div className='flex h-[137px] w-[350px] flex-col justify-between text-start'>
+          <section className='flex h-[58px] flex-col justify-between'>
+            <p className='text-sm text-primaryGray'>
+              Date added:{' '}
+              <span>
+                {created_at.slice(0, 10).split('-').toReversed().join('.')}
+              </span>
+            </p>
+            <p className='text-[2rem]'>
+              <b>{item_name}</b>
+            </p>
+          </section>
+
+          <section className='flex h-[67px] flex-col justify-between'>
+            <p className='text-sm'>
+              <b>Size: </b>
+              {size}
+            </p>
+            <p className='text-sm'>
+              <b>Postcode: </b>
+              {postcode}
+            </p>
+            <p className='text-sm'>
+              <b>Delivery Preferences: </b>
+              <span className='font-semibold text-primaryOrange'>
+                {displayDeliveryOptions()}
+              </span>
+            </p>
+          </section>
+        </div>
+
+        {message.length > 0 && <p className='error-message'>{message}</p>}
+
+        <button
+          className='button col-span-1 rounded'
+          onClick={(event) => messageButtonHandler(event)}
+        >
+          MESSAGE
+        </button>
+      </div>
+    </Link>
   );
 };
 
