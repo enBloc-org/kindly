@@ -141,7 +141,7 @@ const ItemCard: React.FC<
         {message.length > 0 && <p className='error-message'>{message}</p>}
 
         <button
-          className='button col-span-1 rounded'
+          className='button-rounded col-span-1 rounded bg-primaryOrange text-primaryWhite'
           onClick={(event) => messageButtonHandler(event)}
         >
           MESSAGE
