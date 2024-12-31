@@ -7,7 +7,6 @@ import newClient from '@/supabase/utils/newClient';
 import { item } from '@/types/supabaseTypes';
 import startNewConversation from '@/supabase/models/messaging/startNewConversation';
 import { useConversationContext } from '@/context/conversationContext';
-import Link from 'next/link';
 
 const ItemCard: React.FC<
   Pick<
@@ -93,7 +92,7 @@ const ItemCard: React.FC<
   };
 
   return (
-    <Link href={`/item/${id}`}>
+    <div onClick={() => router.push(`/item/${id}`)}>
       <div
         className='card m-auto mt-8
       grid h-[568px] w-[350px] grid-cols-1 grid-rows-[334.54px_137px_49px] gap-[24px] p-0'
@@ -147,7 +146,7 @@ const ItemCard: React.FC<
           MESSAGE
         </button>
       </div>
-    </Link>
+    </div>
   );
 };
 
