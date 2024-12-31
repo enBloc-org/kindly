@@ -19,11 +19,7 @@ const initialSearchParams: SearchParamsType = {
   cursor: '',
 };
 
-export default function SearchPageDisplay({
-  userId,
-}: {
-  userId: string | null;
-}) {
+export default function SearchPageDisplay() {
   const [searchParams, setSearchParams] = useState(initialSearchParams);
   const [searchResults, setSearchResults] = useState<PartialItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -81,7 +77,6 @@ export default function SearchPageDisplay({
                   id={result.id!}
                   created_at={result.created_at!}
                   donated_by={result.donated_by!}
-                  userId={userId}
                 />
               ))
             ) : (
