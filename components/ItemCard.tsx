@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import newClient from '@/supabase/utils/newClient';
 
 //Types
 import { item } from '@/types/supabaseTypes';
@@ -20,7 +21,7 @@ const ItemCard: React.FC<
     | 'postage_covered'
     | 'created_at'
     | 'donated_by'
-  > & { userId: string | null }
+  >
 > = ({
   id,
   item_name,
@@ -32,11 +33,11 @@ const ItemCard: React.FC<
   postage_covered,
   created_at,
   donated_by,
-  userId,
 }) => {
   const router = useRouter();
   const [message, setMessage] = useState<string>('');
   const { dispatch } = useConversationContext();
+  const supabase = newClient();
 
   const displayDeliveryOptions = () => {
     switch (true) {
@@ -57,14 +58,17 @@ const ItemCard: React.FC<
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.stopPropagation();
-    if (userId === null) {
-      console.log(userId);
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (session === null) {
       return router.push('/login?message="Please log in to use this feature."');
     }
 
     try {
       const newConversation = await startNewConversation(
-        userId,
+        session.user.id,
         donated_by,
         id
       );
