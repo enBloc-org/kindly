@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import newClient from '@/supabase/utils/newClient';
+import Link from 'next/link';
 
 //Types
 import { item } from '@/types/supabaseTypes';
-import startNewConversation from '@/supabase/models/messaging/startNewConversation';
-import { useConversationContext } from '@/context/conversationContext';
 
 const ItemCard: React.FC<
   Pick<
@@ -20,8 +17,7 @@ const ItemCard: React.FC<
     | 'collectible'
     | 'postage_covered'
     | 'created_at'
-    | 'donated_by'
-  >
+  > & { buttonHandler: (event: React.MouseEvent<HTMLButtonElement>) => void }
 > = ({
   id,
   item_name,
@@ -32,13 +28,8 @@ const ItemCard: React.FC<
   collectible,
   postage_covered,
   created_at,
-  donated_by,
+  buttonHandler,
 }) => {
-  const router = useRouter();
-  const [message, setMessage] = useState<string>('');
-  const { dispatch } = useConversationContext();
-  const supabase = newClient();
-
   const displayDeliveryOptions = () => {
     switch (true) {
       case postable && !collectible && !postage_covered:
@@ -54,45 +45,8 @@ const ItemCard: React.FC<
     }
   };
 
-  const messageButtonHandler = async (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.stopPropagation();
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (session === null) {
-      return router.push('/login?message="Please log in to use this feature."');
-    }
-
-    try {
-      const newConversation = await startNewConversation(
-        session.user.id,
-        donated_by,
-        id
-      );
-
-      if (newConversation) {
-        dispatch({
-          type: 'SET_CURRENT_CONVERSATION',
-          payload: newConversation,
-        });
-        dispatch({
-          type: 'SET_SHOW_CONVERSATIONS_LIST',
-          payload: false,
-        });
-      }
-
-      router.push('/conversations');
-    } catch (error) {
-      setMessage('Something went wrong. Please try again later.');
-      console.error(error);
-    }
-  };
-
   return (
-    <div onClick={() => router.push(`/item/${id}`)}>
+    <Link href={`item/${id}`}>
       <div
         className='card m-auto mt-8
       grid h-[568px] w-[350px] grid-cols-1 grid-rows-[334.54px_137px_49px] gap-[24px] p-0'
@@ -137,16 +91,14 @@ const ItemCard: React.FC<
           </section>
         </div>
 
-        {message.length > 0 && <p className='error-message'>{message}</p>}
-
         <button
           className='button-rounded col-span-1 rounded bg-primaryOrange text-primaryWhite'
-          onClick={(event) => messageButtonHandler(event)}
+          onClick={(event) => buttonHandler(event)}
         >
           MESSAGE
         </button>
       </div>
-    </div>
+    </Link>
   );
 };
 

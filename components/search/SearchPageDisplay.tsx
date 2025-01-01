@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { SearchParamsType } from '@/types/searchPageTypes';
 import { PartialItem } from '@/types/supabaseTypes';
+import useMessaging from '../ItemCard.Hooks';
 
 //Components
 import { SearchBar } from '@/components/search/SearchBar';
@@ -64,21 +65,28 @@ export default function SearchPageDisplay() {
         <div className='lg-px-20 m-auto mt-5 lg:w-5/6'>
           <div className='mt-10 flex flex-col items-center gap-5'>
             {searchResults.length > 0 ? (
-              searchResults.map((result) => (
-                <ItemCard
-                  key={result.id}
-                  imageSrc={result.imageSrc!}
-                  item_name={result.item_name!}
-                  postcode={result.postcode!}
-                  size={result.size!}
-                  postable={result.postable!}
-                  collectible={result.collectible!}
-                  postage_covered={result.postage_covered!}
-                  id={result.id!}
-                  created_at={result.created_at!}
-                  donated_by={result.donated_by!}
-                />
-              ))
+              searchResults.map((result) => {
+                const messageButtonHandler = useMessaging(
+                  result.donated_by!,
+                  result.id!
+                );
+
+                return (
+                  <ItemCard
+                    key={result.id}
+                    imageSrc={result.imageSrc!}
+                    item_name={result.item_name!}
+                    postcode={result.postcode!}
+                    size={result.size!}
+                    postable={result.postable!}
+                    collectible={result.collectible!}
+                    postage_covered={result.postage_covered!}
+                    id={result.id!}
+                    created_at={result.created_at!}
+                    buttonHandler={messageButtonHandler}
+                  />
+                );
+              })
             ) : (
               <p className='text-center'>No results found.</p>
             )}
