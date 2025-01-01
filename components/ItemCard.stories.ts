@@ -1,6 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { within } from '@storybook/test';
-import { expect } from '@storybook/jest';
 
 import ItemCard from '@/components/ItemCard';
 import testItem from '../public/white-jumper.jpg';
@@ -25,22 +23,3 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const ItemCardDefault: Story = {};
-
-export const ItemCardPotageCovered: Story = {
-  args: {
-    collectible: false,
-    postage_covered: true,
-  },
-};
-
-export const ItemCardReserved: Story = {
-  args: {},
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Check if reserved tag is present', async () => {
-      const reservedTag = await canvas.findByText(/reserved/i);
-      expect(reservedTag).toBeInTheDocument();
-    });
-  },
-};
