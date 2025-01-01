@@ -4,7 +4,7 @@ import { useConversationContext } from '@/context/conversationContext';
 import newClient from '@/supabase/utils/newClient';
 import startNewConversation from '@/supabase/models/messaging/startNewConversation';
 
-export default function useMessaging(donatedBy: string, itemId: number) {
+export default function useStartNewMessage(donatedBy: string, itemId: number) {
   const router = useRouter();
   const { dispatch } = useConversationContext();
   const supabase = newClient();
@@ -13,6 +13,7 @@ export default function useMessaging(donatedBy: string, itemId: number) {
     event: React.MouseEvent<HTMLButtonElement>
   ) {
     event.preventDefault();
+
     const {
       data: { session },
     } = await supabase.auth.getSession();

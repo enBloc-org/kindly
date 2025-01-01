@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { SearchParamsType } from '@/types/searchPageTypes';
 import { PartialItem } from '@/types/supabaseTypes';
-import useMessaging from '../ItemCard.Hooks';
+import useStartNewMessage from '@/app/hooks/useStartNewMessage';
 
 //Components
 import { SearchBar } from '@/components/search/SearchBar';
@@ -66,7 +66,7 @@ export default function SearchPageDisplay() {
           <div className='mt-10 flex flex-col items-center gap-5'>
             {searchResults.length > 0 ? (
               searchResults.map((result) => {
-                const messageButtonHandler = useMessaging(
+                const messageButtonHandler = useStartNewMessage(
                   result.donated_by!,
                   result.id!
                 );
