@@ -44,7 +44,7 @@ label {
 }
 
 body {
-  @apply bg-primaryWhite font-body text-primaryBlack;
+  @apply font-body bg-primaryWhite text-primaryBlack;
 }
 
 :focus-visible {
