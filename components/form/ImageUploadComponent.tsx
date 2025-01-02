@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import ButtonRounded from '../buttons/ButtonRounded';
 
 interface UploadImageComponentProps {
-  onFilesSelected: (files: FileList) => void;
+  setSelectedFiles: (files: FileList) => void;
   onUploadError: (error: Error) => void;
   isRequired?: boolean;
   accept?: string;
@@ -12,8 +12,8 @@ interface UploadImageComponentProps {
 
 const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
   onUploadError,
-  onFilesSelected,
-  isRequired = false,
+  setSelectedFiles,
+  isRequired = true,
   accept = 'image/*',
   allowMultiple = false,
 }) => {
@@ -33,7 +33,7 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
         setThumbnailsUrl((prevUrls) => [...prevUrls, fileUrl]);
       });
 
-      onFilesSelected(uploadedFiles);
+      setSelectedFiles(uploadedFiles);
     } catch (error) {
       onUploadError(error as Error);
     }
@@ -45,6 +45,15 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
 
   const removeThumbnail = (index: number) => {
     setThumbnailsUrl((prev) => prev.filter((_, i) => i !== index));
+
+    if (inputRef.current?.files) {
+      const dt = new DataTransfer();
+      const files = Array.from(inputRef.current.files);
+      files.forEach((file, i) => {
+        if (i !== index) dt.items.add(file);
+      });
+      setSelectedFiles(dt.files);
+    }
   };
 
   return (
