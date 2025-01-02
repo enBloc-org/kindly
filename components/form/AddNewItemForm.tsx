@@ -2,21 +2,23 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import insertImagesToStorage from '@/supabase/models/storage/insertImagesToStorage';
+import { allSizes, shoeSizes } from '@/utils/sizes';
+import { useRouter } from 'next/navigation';
+import insertRow from '@/supabase/models/insertRow';
 //Components
 import ButtonRounded from '../buttons/ButtonRounded';
 import ImageUploadComponent from './ImageUploadComponent';
 //Types
-import { PartialItem } from '@/types/supabaseTypes';
+import type { PartialItem } from '@/types/supabaseTypes';
 
 export default function AddNewItemForm({
   userId,
-  onSubmit,
 }: {
   userId: string | undefined;
-  onSubmit: (itemData: PartialItem) => void;
 }) {
   const [generalError, setGeneralError] = useState('');
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
+  const router = useRouter();
 
   const {
     register,
@@ -42,30 +44,20 @@ export default function AddNewItemForm({
   const isWillingToPostChecked = watch('postable');
   const isPickUpChecked = watch('collectible');
 
-  const shoeSizes = ['UK3', 'UK4', 'UK5', 'UK6', 'UK7', 'UK8', 'UK10'];
-  const allSizes = [
-    'XXS',
-    'XS',
-    'S',
-    'M',
-    'L',
-    'XL',
-    'XXL',
-    'XXXL',
-    'UK4',
-    'UK5',
-    'UK6',
-    'UK8',
-    'UK10',
-    'UK12',
-    'UK14',
-    'UK16',
-    'UK18',
-    'UK20',
-    'UK22',
-    'UK24',
-    'UK26',
-  ];
+  const formSubmitHandler = async (itemData: PartialItem) => {
+    try {
+      const addedItem = await insertRow('items', itemData);
+      if (!addedItem || addedItem.length === 0) {
+        throw new Error('Failed to add the new item');
+      }
+      const itemId = addedItem[0].id;
+
+      router.push(`/add-item/success/${itemId}`);
+    } catch (error) {
+      console.error('Error adding item:', error);
+      throw error;
+    }
+  };
 
   const submitHandler = async (data: PartialItem) => {
     if (selectedFiles) {
@@ -84,7 +76,7 @@ export default function AddNewItemForm({
           donated_by: userId,
           ...data,
         };
-        onSubmit(itemData);
+        formSubmitHandler(itemData);
       } catch (error) {
         setGeneralError('Failed to upload image. Please try again.');
       }
@@ -266,7 +258,7 @@ export default function AddNewItemForm({
 
         <ImageUploadComponent
           onUploadError={(error) => setGeneralError(error.message)}
-          onFilesSelected={setSelectedFiles}
+          setSelectedFiles={setSelectedFiles}
           isRequired={true}
           imageType='item'
           accept='image/*'
