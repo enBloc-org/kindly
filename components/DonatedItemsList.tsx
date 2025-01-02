@@ -15,6 +15,7 @@ import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage
 import deleteItems from '@/supabase/models/deleteItems';
 import upsertRow from '@/supabase/models/upsertRow';
 import ButtonRounded from './buttons/ButtonRounded';
+import useStartNewMessage from '@/app/hooks/useStartNewMessage';
 
 type DisplayDonatedItemsProps = {
   userId: string;
@@ -160,64 +161,71 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
           {storeItems
             .slice()
             .reverse()
-            .map((item) => (
-              <li key={item.id}>
-                <ItemCard
-                  id={item.id!}
-                  item_name={item.item_name!}
-                  size={item.size!}
-                  postcode={item.postcode!}
-                  imageSrc={item.imageSrc!}
-                  postable={item.postable!}
-                  collectible={item.collectible!}
-                  postage_covered={item.postage_covered!}
-                  created_at={item.created_at!}
-                />
-                <div className='flex flex-row gap-2'>
-                  <Link href={`/edit-item/${item.id}`}>
-                    <p className='button button-rounded my-2'>Edit item</p>
-                  </Link>
-                  <Modal
-                    name='Delete Item'
-                    targetId={item.id}
-                    message='By pressing "Confirm" you will delete this item permanently.'
-                    onAction={() => handleDeleteSuccess(item.id!)}
+            .map((item) => {
+              const buttonHandler = useStartNewMessage(
+                item.donated_by!,
+                item.id!
+              );
+              return (
+                <li key={item.id}>
+                  <ItemCard
+                    id={item.id!}
+                    item_name={item.item_name!}
+                    size={item.size!}
+                    postcode={item.postcode!}
+                    imageSrc={item.imageSrc!}
+                    postable={item.postable!}
+                    collectible={item.collectible!}
+                    postage_covered={item.postage_covered!}
+                    created_at={item.created_at!}
+                    buttonHandler={buttonHandler}
                   />
-                  {!item.given_away_to && (
-                    <>
-                      {item.is_reserved && item.reserved_by ? (
-                        <>
-                          <ButtonRounded
-                            clickHandler={() => unreserveHandler(item.id!)}
-                            type='button'
-                          >
-                            Unreserve
-                          </ButtonRounded>
-                          <Modal
-                            name='Give Away'
-                            targetId={item.id!}
-                            message={`Are you sure you want to give away  "${item.item_name || 'Unnamed item'}"? Once confirmed, a message will be sent to the recipient informing them the item has been given away.`}
-                            onAction={() => {
-                              markAsGivenAway(item.id!, item.reserved_by!);
-                            }}
+                  <div className='flex flex-row gap-2'>
+                    <Link href={`/edit-item/${item.id}`}>
+                      <p className='button button-rounded my-2'>Edit item</p>
+                    </Link>
+                    <Modal
+                      name='Delete Item'
+                      targetId={item.id}
+                      message='By pressing "Confirm" you will delete this item permanently.'
+                      onAction={() => handleDeleteSuccess(item.id!)}
+                    />
+                    {!item.given_away_to && (
+                      <>
+                        {item.is_reserved && item.reserved_by ? (
+                          <>
+                            <ButtonRounded
+                              clickHandler={() => unreserveHandler(item.id!)}
+                              type='button'
+                            >
+                              Unreserve
+                            </ButtonRounded>
+                            <Modal
+                              name='Give Away'
+                              targetId={item.id!}
+                              message={`Are you sure you want to give away  "${item.item_name || 'Unnamed item'}"? Once confirmed, a message will be sent to the recipient informing them the item has been given away.`}
+                              onAction={() => {
+                                markAsGivenAway(item.id!, item.reserved_by!);
+                              }}
+                            />
+                          </>
+                        ) : (
+                          <ReserveForUserModal
+                            name='Mark as Reserved'
+                            itemId={item.id!}
+                            onReserveStatusChange={(
+                              itemId: number,
+                              reservedBy: string
+                            ) => onReserveStatusChange(item.id!, reservedBy)}
+                            requestedToReserveUserIds={item.requestedToReserve}
                           />
-                        </>
-                      ) : (
-                        <ReserveForUserModal
-                          name='Mark as Reserved'
-                          itemId={item.id!}
-                          onReserveStatusChange={(
-                            itemId: number,
-                            reservedBy: string
-                          ) => onReserveStatusChange(item.id!, reservedBy)}
-                          requestedToReserveUserIds={item.requestedToReserve}
-                        />
-                      )}
-                    </>
-                  )}
-                </div>
-              </li>
-            ))}
+                        )}
+                      </>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
         </ul>
       ) : (
         <h2 className='m-5 text-lg font-thin md:pl-20 lg:pl-40'>{error}</h2>
