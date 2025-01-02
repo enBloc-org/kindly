@@ -3,7 +3,7 @@
 import insertImagesToStorage from '@/supabase/models/storage/insertImagesToStorage';
 import insertRow from '@/supabase/models/insertRow';
 import { useForm, FormProvider } from 'react-hook-form';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 //Components
 import ButtonRounded from '../buttons/ButtonRounded';
@@ -27,11 +27,11 @@ const formDefaults = {
 export default function AddNewItemForm({ userId }: { userId: string }) {
   const [generalError, setGeneralError] = useState('');
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
   const router = useRouter();
 
   const methods = useForm<PartialItem>({
     defaultValues: formDefaults,
+    mode: 'onSubmit',
   });
 
   const {
@@ -39,17 +39,10 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
     handleSubmit,
     watch,
     reset,
-    formState: { isSubmitted },
+    formState: { errors },
   } = methods;
 
   const categoryValue = watch('item_type');
-  const isWillingToPostChecked = watch('postable');
-  const isPickUpChecked = watch('collectible');
-  const isPostageCoveredChecked = watch('postage_covered');
-  const postcodeValue = watch('postcode');
-  const itemNameValue = watch('item_name');
-  const itemDescriptionValue = watch('item_description');
-  const conditionValue = watch('condition');
 
   const formSubmitHandler = async (itemData: PartialItem) => {
     try {
@@ -81,7 +74,8 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
           donated_by: userId,
           ...data,
         };
-        formSubmitHandler(itemData);
+        await formSubmitHandler(itemData);
+        reset();
       } catch (error) {
         setGeneralError('Failed to upload image. Please try again.');
       }
@@ -89,13 +83,6 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
       setGeneralError('Please select an image before submitting.');
     }
   };
-
-  useEffect(() => {
-    if (submitSuccess) {
-      reset();
-      setSubmitSuccess(false);
-    }
-  }, [submitSuccess, reset]);
 
   return (
     <FormProvider {...methods}>
@@ -105,6 +92,7 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
         <form
           onSubmit={handleSubmit(submitHandler)}
           className='flex flex-col items-center gap-5'
+          noValidate
         >
           <label
             htmlFor='item_name'
@@ -120,7 +108,7 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
               {...register('item_name', { required: 'This field is required' })}
             />
           </label>
-          {isSubmitted && !itemNameValue && (
+          {errors.item_name && (
             <p className='error-message'>This field is required</p>
           )}
 
@@ -141,7 +129,7 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
             />
           </label>
 
-          {isSubmitted && !itemDescriptionValue && (
+          {errors.item_description && (
             <p className='error-message'>This field is required</p>
           )}
 
@@ -167,7 +155,7 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
               className='input-text w-24 text-center'
             />
           </label>
-          {isSubmitted && !postcodeValue && (
+          {errors.postcode && (
             <p className='error-message'>This field is required</p>
           )}
 
@@ -195,7 +183,7 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
                 </select>
               </label>
               <div className='h-6'>
-                {isSubmitted && !conditionValue && (
+                {errors.condition && (
                   <p className='error-message'>This field is required</p>
                 )}
               </div>
@@ -224,7 +212,7 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
                 </select>
               </label>
               <div className='h-6'>
-                {isSubmitted && !categoryValue && (
+                {errors.item_type && (
                   <p className='error-message'>This field is required</p>
                 )}
               </div>
@@ -302,10 +290,9 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
             </div>
           </div>
           <div className='h-6'>
-            {isSubmitted &&
-              !isPickUpChecked &&
-              !isWillingToPostChecked &&
-              !isPostageCoveredChecked && (
+            {errors.collectible &&
+              errors.postable &&
+              errors.postage_covered && (
                 <p className='error-message'>Select at least one option</p>
               )}
           </div>
