@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { useState } from 'react';
-import DeleteButton from './DeleteButton';
+import ActionButton from './ActionButton';
 
 interface ModalProps {
   name: string;
   targetId?: number | string;
   message: string;
-  onDeleteSuccess: () => void;
+  onAction: () => void;
   isDisabled?: boolean;
 }
 
@@ -16,7 +16,7 @@ const Modal = ({
   name,
   targetId,
   message,
-  onDeleteSuccess,
+  onAction,
   isDisabled = false,
 }: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,10 +40,10 @@ const Modal = ({
             <h1 className='font-semibold text-primaryOrange'>Warning!</h1>
             <p className='font-light italic'>{message}</p>
             <div className='mt-2 flex gap-6'>
-              <DeleteButton
+              <ActionButton
                 targetId={targetId}
                 title='Confirm'
-                onDeleteSuccess={onDeleteSuccess}
+                onAction={onAction}
               />
               <button className='button button-rounded' onClick={toggleModal}>
                 Cancel

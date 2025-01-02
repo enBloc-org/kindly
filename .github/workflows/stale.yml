@@ -17,6 +17,9 @@ jobs:
           days-before-close: -1 # this value will keep issues and prs from being closed
           include-only-assigned: true # issues in the backlog will not become stale
 
+          # exempt issues
+          exempt-issue-labels: 'in review'
+
           # stale and delete issues
           stale-issue-message: |
             🤖 meep morp! 

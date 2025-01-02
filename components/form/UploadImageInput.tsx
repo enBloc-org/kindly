@@ -3,6 +3,7 @@
 import newClient from '@/supabase/utils/newClient';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useFormContext } from 'react-hook-form';
 
 type UploadImageProps = {
   setImageSrc: (src: string) => void;
@@ -24,12 +25,17 @@ const CDN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/im
 const UploadImageInput: React.FC<UploadImageProps> = ({
   setImageSrc,
   setError,
-  isRequired: isRequired = false,
+  isRequired = false,
   imageType,
 }) => {
+  const {
+    register,
+    formState: { isSubmitted, errors },
+  } = useFormContext();
   const supabase = newClient();
   const [userId, setUserId] = useState('');
-  const [isImageUploaded, setIsImageUploaded] = useState(false);
+  const [, setIsImageUploaded] = useState(false);
+  const [isUploading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,60 +60,55 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
   }, []);
 
   const imageFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
+    if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
 
-      if (file) {
-        try {
-          if (imageType === 'profile') {
-            const { data: listData, error: listError } = await supabase.storage
-              .from('images')
-              .list(userId);
-
-            if (listError) {
-              console.error('Error fetching old images:', listError);
-              return;
-            }
-
-            if (!listData) {
-              throw new Error('Failed to fetch images');
-            }
-
-            const profileImages = listData
-              .filter((image) => image.name.startsWith('profile_'))
-              .map((image) => userId + '/' + image.name);
-
-            if (profileImages.length > 0) {
-              const { error: deleteError } = await supabase.storage
-                .from('images')
-                .remove(profileImages);
-
-              if (deleteError) {
-                console.error('Error deleting old images:', deleteError);
-                return;
-              }
-            }
-          }
-
-          const prefix = imageType === 'profile' ? 'profile_' : 'item_';
-          const imageName = prefix + uuidv4();
-
-          const { data, error: uploadError } = await supabase.storage
+      try {
+        if (imageType === 'profile') {
+          const { data: listData, error: listError } = await supabase.storage
             .from('images')
-            .upload(userId + '/' + imageName, file);
+            .list(userId);
 
-          if (uploadError) {
-            console.error('Error uploading new image:', uploadError);
+          if (listError) {
+            console.error('Error fetching old images:', listError);
             return;
           }
-          setImageSrc(CDN + data.path);
-          setIsImageUploaded(true);
-          setError?.('');
-        } catch (error) {
-          console.error('Error handling image upload:', error);
+
+          if (!listData) {
+            throw new Error('Failed to fetch images');
+          }
+
+          const profileImages = listData
+            .filter((image) => image.name.startsWith('profile_'))
+            .map((image) => userId + '/' + image.name);
+
+          if (profileImages.length > 0) {
+            const { error: deleteError } = await supabase.storage
+              .from('images')
+              .remove(profileImages);
+
+            if (deleteError) {
+              return;
+            }
+          }
         }
-      } else {
-        console.error('No file selected');
+
+        const prefix = imageType === 'profile' ? 'profile_' : 'item_';
+        const imageName = prefix + uuidv4();
+
+        const { data, error: uploadError } = await supabase.storage
+          .from('images')
+          .upload(userId + '/' + imageName, file);
+
+        if (uploadError) {
+          return;
+        }
+        const fullImageUrl = CDN + data.path;
+        setImageSrc(fullImageUrl);
+        setIsImageUploaded(true);
+        setError?.('');
+      } catch (error) {
+        setError?.('Failed to upload image. Please try again.');
       }
     }
   };
@@ -118,14 +119,14 @@ const UploadImageInput: React.FC<UploadImageProps> = ({
       <input
         className='pl-14'
         type='file'
-        name='image'
-        onChange={(e) => imageFileUpload(e)}
-        required={isRequired}
+        disabled={isUploading}
+        {...register('image', {
+          required: isRequired ? 'Image is required' : false,
+          onChange: imageFileUpload,
+        })}
       />
-      {!isImageUploaded && (
-        <p className='font-extralight italic text-primaryOrange'>
-          Image is required
-        </p>
+      {isSubmitted && errors.image && (
+        <p className='error-message'>{errors.image.message as string}</p>
       )}
     </div>
   );

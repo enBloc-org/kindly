@@ -51,7 +51,6 @@ export default function NewConversationButton({
           console.error(error);
         }
       };
-      console.log('effect ran');
       sendMail();
     }
   }, [isDisabled]);

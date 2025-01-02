@@ -2,6 +2,7 @@ import AddItemPage from '../support/page_objects/addItemPage';
 import ProfilePage from '../support/page_objects/profilePage';
 import * as page from '../fixtures/URLs.json';
 import * as data from '../fixtures/inputData.json';
+import EditItemPage from '../support/page_objects/editItemPage';
 
 describe('Create and Delete item positive test Suite', () => {
   const uniqueItemName = `${data.itemName}_${Date.now()}`;
@@ -29,10 +30,33 @@ describe('Create and Delete item positive test Suite', () => {
     ProfilePage.itemCard(uniqueItemName).should('be.visible');
   });
 
+  it('User can edit an existing item', () => {
+    cy.visit(page.profile, { failOnStatusCode: false });
+    ProfilePage.editItemButton(uniqueItemName).click();
+    cy.url().should('include', '/edit-item/');
+    EditItemPage.nameInput().should('have.value', uniqueItemName);
+    EditItemPage.descriptionInput()
+      .should('have.value', data.itemDescription)
+      .clear()
+      .type('new test value');
+    EditItemPage.editItemButton().click();
+    cy.url().should('include', '/edit-item/success');
+  });
+
   it('User can delete the item', () => {
     cy.visit(page.profile, { failOnStatusCode: false });
+
+    cy.intercept('DELETE', '**').as('deleteItem');
+
+    cy.log('Clicking delete button');
     ProfilePage.deleteItemButton(uniqueItemName).click();
+
+    cy.log('Clicking confirm delete button');
     ProfilePage.ConfirmDeleteItemButton(uniqueItemName).click();
-    ProfilePage.itemCard(uniqueItemName).should('not.exist');
+
+    cy.url().should('include', '/profile');
+    cy.get('h2')
+      .contains(/successfully deleted/gi)
+      .should('be.visible');
   });
 });

@@ -1,26 +1,20 @@
+import { headers } from 'next/headers';
+
 import AccountDeleteFormContainer from '@/components/AccountDeleteFormContainer';
 import { getProfile } from '@/supabase/models/getProfile';
-import newServerClient from '@/supabase/utils/newServerClient';
 
 export default async function DeleteAccountPage() {
-  const supabase = newServerClient();
+  const headersList = headers();
+  const userId = headersList.get('k-active-user');
+
   try {
     const {
-      data: { user },
+      data: { username },
       error,
-    } = await supabase.auth.getUser();
+    } = await getProfile(userId!);
     if (error) throw error;
-    if (user) {
-      const {
-        data: { username },
-        error,
-      } = await getProfile(user.id);
-      if (error) throw error;
 
-      return (
-        <AccountDeleteFormContainer userName={username} userId={user.id} />
-      );
-    }
+    return <AccountDeleteFormContainer userName={username} userId={userId!} />;
   } catch (error) {
     throw error;
   }

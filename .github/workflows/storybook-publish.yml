@@ -1,0 +1,19 @@
+name: Storybook
+on:
+  push:
+    branches:
+      - dev
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  publish:
+    name: Publish to GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        with:
+          path: storybook-static
+          # ensure the built storybook ends up in /kindly/storybook
+          build_command: npx storybook build -o storybook-static/storybook

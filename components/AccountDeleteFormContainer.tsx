@@ -44,7 +44,7 @@ export default function AccountDeleteFormContainer({
         name='Delete Profile'
         message='Confirming will delete your profile permanently. Are you sure you want to continue?'
         targetId={userId}
-        onDeleteSuccess={accountDeleteHandler}
+        onAction={accountDeleteHandler}
         isDisabled={!isConfirmed}
       />
     </div>

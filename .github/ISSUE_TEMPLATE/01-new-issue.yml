@@ -1,0 +1,60 @@
+name: new issue
+description: Create a new standard issue for the backlog.
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Prerequisites
+        Please guarantee that you have completed the following steps as this helps us manage the number of Issues in our backlog.
+
+        - [x] I have checked the existing Issues for a duplicate of this ticket
+        - [x] I have checked the roadmap in the documentation and am convinced this Issue fits the plans for future releases
+        - [x] This Issue will help us achieve at least one of the existing User Stories for the product (directly or indirectly)
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: Explain in a few lines how the code should be behaving once this issue is closed.
+      placeholder: The codebase should ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Define the criteria that should be met to consider this issue resolved.
+      placeholder: -[x] Criteria 1
+                   -[x] Criteria 2
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Current Behavior
+      description: Show us how the code is behaving right now instead.
+      placeholder: Right now, what happens is ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: aon
+    attributes:
+      label: Any other notes
+      description: Share any other relevant notes on this Issue.
+      placeholder: It's important to make note that ...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: self-assign
+    attributes:
+      label: Assignment
+      description: Let us know if you would like to be assigned this Issue
+      options:
+        - This issue is free for anyone to take
+        - I'd like to work on this Issue myself
+      default: 0

@@ -31,7 +31,10 @@ Kindly is an open source project and we welcome anyone looking to get involved. 
 - [Best practice](https://github.com/enBloc-org/kindly/blob/dev/.github/BEST_PRACTICE.md)
 - [Testing](https://github.com/enBloc-org/kindly/blob/dev/.github/TESTING.md)
 - [Privacy](https://github.com/enBloc-org/kindly/blob/dev/PRIVACY.md)
-- [For details on the different roles you can take on](https://github.com/enBloc-org/kindly/blob/dev/GOVERNANCE.md)
+- [For details on the different roles you can take on](https://github.com/enBloc-org/kindly/blob/dev/.github/GOVERNANCE.md)
+
+### Storybook
+Checkout [Storybook](https://enbloc-org.github.io/kindly/storybook) to see the most recent version of the UI components in action
 
 ### Governance
 For details on different ways you can help maintaining Kindly please see our documentation on [governance](./.github/GOVERNANCE.md)

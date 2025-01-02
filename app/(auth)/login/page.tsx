@@ -20,7 +20,11 @@ export default function Login({
       password,
     });
 
-    return redirect(error ? '/login?message=Could not authenticate user' : '/');
+    redirect(
+      error
+        ? '/login?message=Something has gone wrong. Please try again later.'
+        : '/'
+    );
   };
 
   return (
@@ -37,6 +41,9 @@ export default function Login({
           <span className='text-primaryGreen'>here</span>
         </Link>
       </p>
+      <Link href='/login/forgot-password'>
+        <span className='mt-2 text-sm text-primaryGreen'>Forgot Password</span>
+      </Link>
     </div>
   );
 }

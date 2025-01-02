@@ -22,6 +22,7 @@ export type UserConversationType = {
   user_id: string;
   item_id: number;
   has_unread_messages: boolean;
+  partner_has_deleted: boolean;
 };
 
 export type ItemType = {
@@ -47,4 +48,5 @@ export type ConversationCardType = {
   created_at: string;
   item_name: string;
   item_image: string;
+  partner_has_deleted: boolean;
 };
