@@ -65,7 +65,7 @@ const ItemCard: React.FC<
             <p className='text-sm text-primaryGray'>
               Date added:{' '}
               <span>
-                {created_at.slice(0, 10).split('-').toReversed().join('.')}
+                {created_at.slice(0, 10).split('-').reverse().join('.')}
               </span>
             </p>
             <p className='text-[2rem]'>
