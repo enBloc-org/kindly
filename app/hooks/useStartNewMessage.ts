@@ -4,6 +4,14 @@ import { useConversationContext } from '@/context/conversationContext';
 import newClient from '@/supabase/utils/newClient';
 import startNewConversation from '@/supabase/models/messaging/startNewConversation';
 
+/**
+ *
+ * @description this hook retrieves the current session from the frontend and curries the User Id in it's return function to be used by the ItemCard component
+ * @param donatedBy expects the 'donated_by' value of the target Item
+ * @param itemId expects the 'id' value of the target Item
+ * @returns an async handler function to handle the onClick event of our ItemCard component
+ * @example const buttonHandler = useStartNewMessage(thisItem.donated_by, thisItem.Number)
+ */
 export default function useStartNewMessage(donatedBy: string, itemId: number) {
   const router = useRouter();
   const { dispatch } = useConversationContext();
