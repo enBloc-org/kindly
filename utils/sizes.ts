@@ -1,0 +1,25 @@
+export const shoeSizes = ['UK3', 'UK4', 'UK5', 'UK6', 'UK7', 'UK8', 'UK10'];
+
+export const allSizes = [
+  'XXS',
+  'XS',
+  'S',
+  'M',
+  'L',
+  'XL',
+  'XXL',
+  'XXXL',
+  'UK4',
+  'UK5',
+  'UK6',
+  'UK8',
+  'UK10',
+  'UK12',
+  'UK14',
+  'UK16',
+  'UK18',
+  'UK20',
+  'UK22',
+  'UK24',
+  'UK26',
+];
