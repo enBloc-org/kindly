@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import ItemDetails from '@/components/ItemDetails';
 import PostageOptionDisplay from '@/components/PostageOptionDisplay';
 import NewConversationButton from '@/components/buttons/NewConversationButton';
@@ -13,6 +12,7 @@ import { useState } from 'react';
 
 import startNewConversation from '@/supabase/models/messaging/startNewConversation';
 import insertSystemMessage from '@/supabase/models/messaging/insertSystemMessage';
+import ImageCarousel from './ImageCarousel/ImageCarousel';
 
 type ItemDetailsPageProps = {
   item: PartialItem;
@@ -57,13 +57,7 @@ const ItemDetailsPage: React.FC<ItemDetailsPageProps> = ({
       <BackButton />
       <div className='mb-10 mt-2 flex flex-col items-center gap-14'>
         <div className='relative h-52 w-72 md:h-72 md:w-96'>
-          <Image
-            src={`${item.imageSrc}`}
-            alt={`${item.item_name}`}
-            layout='fill'
-            objectFit='cover'
-            className='shadow-md'
-          />
+          <ImageCarousel images={item.image_sources as string[]} />
         </div>
         <PostageOptionDisplay
           collectible={item.collectible}
