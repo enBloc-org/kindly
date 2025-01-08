@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import ButtonRounded from '../buttons/ButtonRounded';
 
 interface UploadImageComponentProps {
-  setSelectedFiles: (files: FileList) => void;
+  setSelectedFiles: (files: FileList | null) => void;
   onUploadError: (error: Error) => void;
   isRequired?: boolean;
   accept?: string;
@@ -21,19 +21,20 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
   const [thumbnailsUrl, setThumbnailsUrl] = useState<string[]>([]);
 
   const handleFileChange = () => {
-    const uploadedFiles = inputRef.current?.files;
-    if (!uploadedFiles) {
+    const selectedFilesRef = inputRef.current?.files;
+    if (!selectedFilesRef) {
       onUploadError(new Error('No files selected.'));
       return;
     }
 
     try {
-      Array.from(uploadedFiles).forEach((file) => {
+      Array.from(selectedFilesRef).forEach((file) => {
         const fileUrl = URL.createObjectURL(file);
         setThumbnailsUrl((prevUrls) => [...prevUrls, fileUrl]);
       });
 
-      setSelectedFiles(uploadedFiles);
+      setSelectedFiles(selectedFilesRef);
+      onUploadError(new Error(''));
     } catch (error) {
       onUploadError(error as Error);
     }
@@ -52,7 +53,14 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
       files.forEach((file, i) => {
         if (i !== index) dt.items.add(file);
       });
-      setSelectedFiles(dt.files);
+
+      if (dt.files.length === 0) {
+        setSelectedFiles(null);
+        inputRef.current.value = '';
+        onUploadError(new Error('Please add at least one image'));
+      } else {
+        setSelectedFiles(dt.files);
+      }
     }
   };
 

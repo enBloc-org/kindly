@@ -83,7 +83,7 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
         setGeneralError('Failed to upload image. Please try again.');
       }
     } else {
-      setGeneralError('Please select an image before submitting.');
+      setGeneralError('Please add at least one image.');
     }
   };
 
