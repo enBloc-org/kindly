@@ -26,6 +26,7 @@ const formDefaults = {
 };
 export default function AddNewItemForm({ userId }: { userId: string }) {
   const [generalError, setGeneralError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
   const router = useRouter();
 
@@ -46,6 +47,7 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
 
   const formSubmitHandler = async (itemData: PartialItem) => {
     try {
+      setIsSubmitting(true);
       const addedItem = await insertRow('items', itemData);
       if (!addedItem || addedItem.length === 0) {
         throw new Error('Failed to add the new item');
@@ -53,6 +55,8 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
       const itemId = addedItem[0].id;
 
       router.push(`/add-item/success/${itemId}`);
+      reset();
+      setIsSubmitting(false);
     } catch (error) {
       console.error('Error adding item:', error);
       throw error;
@@ -75,7 +79,6 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
           ...data,
         };
         await formSubmitHandler(itemData);
-        reset();
       } catch (error) {
         setGeneralError('Failed to upload image. Please try again.');
       }
@@ -307,7 +310,9 @@ export default function AddNewItemForm({ userId }: { userId: string }) {
           />
           {generalError && <p className='error-message'>{generalError}</p>}
 
-          <ButtonRounded type='submit'>ADD YOUR ITEM</ButtonRounded>
+          <ButtonRounded type='submit' isDisabled={isSubmitting}>
+            ADD YOUR ITEM
+          </ButtonRounded>
         </form>
       </div>
     </FormProvider>
