@@ -18,6 +18,7 @@ export type item = {
   imageSrc: string;
   username: string;
   given_away_to: string | null;
+  created_at: string;
 };
 
 export type profile = {

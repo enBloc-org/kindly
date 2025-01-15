@@ -3,46 +3,55 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 //Types
-import { PartialItem } from '@/types/supabaseTypes';
+import { item } from '@/types/supabaseTypes';
 
-//Components
-import ItemDetails from './ItemDetails';
-
-const ItemCard: React.FC<PartialItem> = ({
-  imageSrc,
-  item_name,
-  condition,
-  postcode,
-  size,
-  postage_covered,
+const ItemCard: React.FC<
+  Pick<
+    item,
+    | 'id'
+    | 'item_name'
+    | 'size'
+    | 'postcode'
+    | 'imageSrc'
+    | 'postable'
+    | 'collectible'
+    | 'postage_covered'
+    | 'created_at'
+  > & { buttonHandler: (event: React.MouseEvent<HTMLButtonElement>) => void }
+> = ({
   id,
-  is_reserved,
-  given_away_to,
+  item_name,
+  size,
+  postcode,
+  imageSrc,
+  postable,
+  collectible,
+  postage_covered,
+  created_at,
+  buttonHandler,
 }) => {
+  const displayDeliveryOptions = () => {
+    switch (true) {
+      case postable && !collectible && !postage_covered:
+        return 'Posting';
+      case collectible && !postable && !postage_covered:
+        return 'Pick-up only';
+      case postage_covered && !collectible && postable:
+        return 'Posting (postage covered)';
+      case postable && collectible && !postage_covered:
+        return 'Pick-up or posting';
+      case postable && collectible && postage_covered:
+        return 'Pick-up or posting (postage covered)';
+    }
+  };
+
   return (
-    <Link href={`/item/${id}`}>
+    <Link href={`item/${id}`}>
       <div
-        className='card relative m-auto mt-8
-        flex h-[400px] w-[176px] flex-col gap-3 sm:w-[200px] md:h-[450px] md:w-[256px]'
+        className='card m-auto mt-8
+      grid h-[568px] w-[350px] grid-cols-1 grid-rows-[334.54px_137px_49px] gap-[24px] p-0'
       >
-        {given_away_to ? (
-          <div
-            className='absolute left-0 right-0 top-14 z-10 m-auto w-[175px] rounded-lg border border-primaryGreen
-            bg-background p-2 text-center opacity-70 md:w-[200px]'
-          >
-            <p className='text-lg text-primaryGreen'>GIVEN AWAY</p>
-          </div>
-        ) : (
-          is_reserved && (
-            <div
-              className='absolute left-0 right-0 top-14 z-10 m-auto w-[175px] rounded-lg border border-primaryGreen
-            bg-background p-2 text-center opacity-70 md:w-[200px]'
-            >
-              <p className='text-lg text-primaryGreen'>RESERVED</p>
-            </div>
-          )
-        )}
-        <div className='relative h-[176px] w-[176px] sm:w-[200px] md:h-52 md:w-64'>
+        <div className='relative h-[334.53px] w-[350px]'>
           <Image
             src={imageSrc ? `${imageSrc}` : '/default-item-img.png'}
             alt={`Image of ${item_name}`}
@@ -50,16 +59,44 @@ const ItemCard: React.FC<PartialItem> = ({
             sizes='(max-width: 768px) 100vw, 50vw'
           />
         </div>
-        <h2 className='p-4 text-center font-semibold md:text-xl'>
-          {item_name}
-        </h2>
-        <ItemDetails
-          condition={condition}
-          size={size}
-          postcode={postcode}
-          postage_covered={postage_covered}
-          fontSize='text-md'
-        />
+
+        <div className='flex h-[137px] w-[350px] flex-col justify-between text-start'>
+          <section className='flex h-[58px] flex-col justify-between'>
+            <p className='text-sm text-primaryGray'>
+              Date added:{' '}
+              <span>
+                {created_at.slice(0, 10).split('-').reverse().join('.')}
+              </span>
+            </p>
+            <p className='text-[2rem]'>
+              <b>{item_name}</b>
+            </p>
+          </section>
+
+          <section className='flex h-[67px] flex-col justify-between'>
+            <p className='text-sm'>
+              <b>Size: </b>
+              {size}
+            </p>
+            <p className='text-sm'>
+              <b>Postcode: </b>
+              {postcode}
+            </p>
+            <p className='text-sm'>
+              <b>Delivery Preferences: </b>
+              <span className='font-semibold text-primaryOrange'>
+                {displayDeliveryOptions()}
+              </span>
+            </p>
+          </section>
+        </div>
+
+        <button
+          className='button-rounded col-span-1 rounded bg-primaryOrange text-primaryWhite'
+          onClick={(event) => buttonHandler(event)}
+        >
+          MESSAGE
+        </button>
       </div>
     </Link>
   );
