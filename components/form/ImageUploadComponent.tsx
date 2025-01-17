@@ -19,25 +19,21 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [thumbnailsUrl, setThumbnailsUrl] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = () => {
     const selectedFilesRef = inputRef.current?.files;
     if (!selectedFilesRef) {
-      onUploadError(new Error('No files selected.'));
+      setError('No files selected.');
       return;
     }
+    Array.from(selectedFilesRef).forEach((file) => {
+      const fileUrl = URL.createObjectURL(file);
+      setThumbnailsUrl((prevUrls) => [...prevUrls, fileUrl]);
+    });
 
-    try {
-      Array.from(selectedFilesRef).forEach((file) => {
-        const fileUrl = URL.createObjectURL(file);
-        setThumbnailsUrl((prevUrls) => [...prevUrls, fileUrl]);
-      });
-
-      setSelectedFiles(selectedFilesRef);
-      onUploadError(new Error(''));
-    } catch (error) {
-      onUploadError(error as Error);
-    }
+    setSelectedFiles(selectedFilesRef);
+    setError('');
   };
 
   const handleClick = () => {
@@ -92,6 +88,7 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
       <ButtonRounded clickHandler={handleClick} type='button'>
         Upload Image
       </ButtonRounded>
+      {error && <p className='error-message'>{error}</p>}
     </div>
   );
 };
