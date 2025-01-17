@@ -10,16 +10,6 @@ export default async function ForgotPassword({
 }) {
   const supabase = newServerClient();
 
-  const headersList = await headers();
-  let origin: string | null = headersList.get('origin') || null;
-
-  if (!origin) {
-    origin =
-      process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000'
-        : process.env.NEXT_PUBLIC_SITE_URL || null;
-  }
-
   const {
     data: { session },
   } = await supabase.auth.getSession();
@@ -27,6 +17,9 @@ export default async function ForgotPassword({
   if (session) {
     return redirect('/');
   }
+
+  const headerData = await headers();
+  const origin = headerData.get('origin');
 
   const confirmReset = async (formData: FormData) => {
     'use server';
