@@ -12,16 +12,6 @@ const meta: Meta<typeof MainButton> = {
     type: 'button',
     disabled: false,
   },
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button');
-
-    expect(button).toBeInTheDocument();
-    expect(button).not.toBeDisabled();
-
-    await userEvent.click(button);
-    expect(args.clickHandler).toHaveBeenCalled();
-  },
   argTypes: {
     variant: {
       description: 'The display variant of the button',
@@ -99,10 +89,21 @@ export const MainButtonDefault: Story = {
     colour: 'primary',
     lightMode: false,
   },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button');
+
+    expect(button).toBeInTheDocument();
+    expect(button).not.toBeDisabled();
+
+    await userEvent.click(button);
+    expect(args.clickHandler).toHaveBeenCalled();
+  },
 };
 
 export const LargeDesktopButton: Story = {
   args: {
+    ...MainButtonDefault.args,
     size: 'large',
     variant: 'desktop',
     children: 'Large Button',
@@ -111,6 +112,7 @@ export const LargeDesktopButton: Story = {
 
 export const SmallDesktopButton: Story = {
   args: {
+    ...MainButtonDefault.args,
     size: 'small',
     variant: 'desktop',
     children: 'Small Button',
@@ -128,6 +130,7 @@ export const MobileSmallButton: Story = {
 
 export const MobileLargeButton: Story = {
   args: {
+    ...MainButtonDefault.args,
     size: 'large',
     variant: 'mobile',
     children: 'Large Button',
@@ -163,5 +166,12 @@ export const DisabledButton: Story = {
     ...MainButtonDefault.args,
     disabled: true,
     children: 'Disabled Button',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button');
+
+    expect(button).toBeInTheDocument();
+    expect(button).toBeDisabled();
   },
 };
