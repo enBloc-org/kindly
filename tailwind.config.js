@@ -23,6 +23,8 @@ module.exports = {
         primaryGray: '#57666D',
         secondaryGray: '#F3F3F3',
         primaryOrange: '#FF8D3C',
+        secondaryOrange: '#FDEDD4',
+        tertiaryOrange: '#FF6F08',
         primaryBlue: '#1461D1',
         primaryRed: '#ED0131',
       },
