@@ -22,9 +22,9 @@ interface MainButtonProps {
  *   variant="desktop"
  *   size="small"
  *   colour="primary"
- * disabled={isLoading}
- * type="submit"
- * ariaLabel="Submit button"
+ *   disabled={isLoading}
+ *   type="submit"
+ *   ariaLabel="Submit button"
  *   clickHandler={() => console.log('clicked')}
  * >
  *   Click Me
