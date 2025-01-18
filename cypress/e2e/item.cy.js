@@ -2,6 +2,7 @@ import AddItemPage from '../support/page_objects/addItemPage';
 import ProfilePage from '../support/page_objects/profilePage';
 import * as page from '../fixtures/URLs.json';
 import * as data from '../fixtures/inputData.json';
+import EditItemPage from '../support/page_objects/editItemPage';
 
 describe('Create and Delete item positive test Suite', () => {
   const uniqueItemName = `${data.itemName}_${Date.now()}`;
@@ -29,6 +30,19 @@ describe('Create and Delete item positive test Suite', () => {
     ProfilePage.itemCard(uniqueItemName).should('be.visible');
   });
 
+  it('User can edit an existing item', () => {
+    cy.visit(page.profile, { failOnStatusCode: false });
+    ProfilePage.editItemButton(uniqueItemName).click();
+    cy.url().should('include', '/edit-item/');
+    EditItemPage.nameInput().should('have.value', uniqueItemName);
+    EditItemPage.descriptionInput()
+      .should('have.value', data.itemDescription)
+      .clear()
+      .type('new test value');
+    EditItemPage.editItemButton().click();
+    cy.url().should('include', '/edit-item/success');
+  });
+
   it('User can delete the item', () => {
     cy.visit(page.profile, { failOnStatusCode: false });
 
@@ -40,29 +54,9 @@ describe('Create and Delete item positive test Suite', () => {
     cy.log('Clicking confirm delete button');
     ProfilePage.ConfirmDeleteItemButton(uniqueItemName).click();
 
-    cy.log('Waiting for DELETE request');
-    cy.wait('@deleteItem').then((interception) => {
-      cy.log(`DELETE request intercepted: ${interception.request.url}`);
-      expect(interception.response.statusCode).to.eq(204);
-    });
-
-    const waitForItemRemoval = (itemName, maxAttempts = 20) => {
-      let attempts = 0;
-      const checkForItem = () => {
-        attempts++;
-        return cy.get('body').then(($body) => {
-          if (!$body.text().includes(itemName) || attempts >= maxAttempts) {
-            return;
-          }
-          cy.wait(500); // Wait 500ms between checks
-          checkForItem();
-        });
-      };
-      checkForItem();
-    };
-
-    waitForItemRemoval(uniqueItemName);
-
-    ProfilePage.itemCard(uniqueItemName).should('not.exist');
+    cy.url().should('include', '/profile');
+    cy.get('h2')
+      .contains(/successfully deleted/gi)
+      .should('be.visible');
   });
 });

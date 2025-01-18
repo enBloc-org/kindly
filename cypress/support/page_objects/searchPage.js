@@ -14,7 +14,11 @@ export class SearchPage extends BasePage {
   }
 
   firstSearchResult() {
-    return cy.get('div.flex.gap-3').first().should('be.visible');
+    return cy.get('div.card').first().should('be.visible');
+  }
+
+  selectItemCard(itemName) {
+    return cy.get('div.card').contains(itemName);
   }
 }
 
