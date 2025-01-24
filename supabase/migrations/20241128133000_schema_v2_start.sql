@@ -307,6 +307,9 @@ CREATE TABLE IF NOT EXISTS "public"."profiles" (
 
 ALTER TABLE "public"."profiles" OWNER TO "postgres";
 
+ALTER TABLE "public"."profiles"
+ALTER COLUMN "avatar" SET DEFAULT '/default-profile.png';
+
 COMMENT ON COLUMN "public"."profiles"."items_added" IS 'items the user has added';
 
 COMMENT ON COLUMN "public"."profiles"."reserved_items" IS 'items reserved by the user';
