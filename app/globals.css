@@ -44,11 +44,11 @@ label {
 }
 
 body {
-  @apply font-body bg-primaryWhite text-primaryBlack;
+  @apply bg-monoY font-body text-base-120;
 }
 
 :focus-visible {
-  outline: 2px solid #ff8d3c;
+  outline: 2px solid #ff6f08;
   outline-offset: 2px;
 }
 
