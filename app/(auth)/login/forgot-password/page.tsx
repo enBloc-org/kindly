@@ -10,11 +10,6 @@ export default async function ForgotPassword({
 }) {
   const supabase = newServerClient();
 
-  let origin = headers().get('origin');
-  if (!origin) {
-    origin = 'http://localhost:3000/';
-  }
-
   const {
     data: { session },
   } = await supabase.auth.getSession();
@@ -22,6 +17,9 @@ export default async function ForgotPassword({
   if (session) {
     return redirect('/');
   }
+
+  const headerData = await headers();
+  const origin = headerData.get('origin');
 
   const confirmReset = async (formData: FormData) => {
     'use server';
@@ -44,10 +42,10 @@ export default async function ForgotPassword({
   };
 
   return (
-    <div className='flex flex-col  items-center  px-8'>
+    <div className='flex flex-col items-center px-8'>
       <h1 className='text-center text-4xl font-extrabold'>Forgot password</h1>
       <form
-        className='text-foreground flex flex-1  flex-col  items-center justify-center gap-4'
+        className='text-foreground flex flex-1 flex-col items-center justify-center gap-4'
         action={confirmReset}
       >
         <label

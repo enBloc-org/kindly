@@ -10,7 +10,7 @@ describe('search page', () => {
   afterEach('items not matching the search filters are not displayed', () => {
     if (Cypress.currentTest.title === 'clear filters on when button is pressed')
       return;
-  cy.get('div.card').contains(/shoes/gi).should('not.exist');
+    cy.get('div.card').contains(/shoes/gi).should('not.exist');
   });
 
   it('search for an item by query', () => {
