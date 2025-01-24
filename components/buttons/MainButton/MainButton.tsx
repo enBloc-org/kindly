@@ -4,10 +4,9 @@ import { ReactNode } from 'react';
 interface MainButtonProps {
   children: ReactNode;
   clickHandler: () => void;
-  variant: 'mobile' | 'desktop';
+  layout: 'mobile' | 'desktop';
   size: 'small' | 'large';
-  colour: 'primary' | 'secondary' | 'tertiary';
-  lightMode: boolean;
+  variant: 'primary' | 'secondary';
   type: 'button' | 'submit' | 'reset';
   disabled: boolean;
   ariaLabel?: string;
@@ -19,7 +18,7 @@ interface MainButtonProps {
  * @component
  * @example
  * <KindlyButton
- *   variant="desktop"
+ *   layout="desktop"
  *   size="small"
  *   colour="primary"
  *   disabled={isLoading}
@@ -34,10 +33,9 @@ interface MainButtonProps {
 const MainButton: React.FC<MainButtonProps> = ({
   children,
   clickHandler,
-  variant = 'desktop',
+  layout = 'desktop',
   size = 'small',
-  colour = 'primary',
-  lightMode = false,
+  variant = 'primary',
   type = 'button',
   disabled,
   ariaLabel,
@@ -45,7 +43,7 @@ const MainButton: React.FC<MainButtonProps> = ({
   const baseStyles =
     'flex items-center justify-center font-medium py-3 min-h-[44px] min-w-[44px] rounded-md';
 
-  const variantStyles = {
+  const layoutStyles = {
     mobile: 'text-xl',
     desktop: 'text-md',
   };
@@ -56,24 +54,19 @@ const MainButton: React.FC<MainButtonProps> = ({
   };
 
   const colourStyles = {
-    primary: lightMode
-      ? 'border border-primaryBlack'
-      : 'bg-primaryOrange text-primaryWhite',
-    secondary: lightMode
-      ? 'border border-primaryBlack text-primaryGrey'
-      : 'bg-secondaryOrange text-primaryBlack',
-    tertiary: lightMode
-      ? 'border border-primaryBlack text-primaryOrange'
-      : 'bg-tertiaryOrange text-primaryWhite',
+    primary:
+      'bg-brand-100 text-monoY hover:bg-secondaryOrange hover:text-primaryBlack focus:bg-brand-110 focus:text-monoY',
+    secondary: 'border border-base-120 hover:border-brand-100',
   };
 
-  const disabledStyles = 'opacity-70 cursor-not-allowed';
+  const disabledStyles =
+    'bg-base-80 text-base-100 cursor-not-allowed hover:bg-base-80 hover:text-base-100';
 
   const className = `
     ${baseStyles}
-    ${variantStyles[variant]}
+    ${layoutStyles[layout]}
     ${sizeStyles[size]}
-    ${colourStyles[colour]}
+    ${colourStyles[variant]}
     ${disabled ? disabledStyles : ''}`;
 
   return (
