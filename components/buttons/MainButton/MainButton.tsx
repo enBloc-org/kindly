@@ -8,7 +8,7 @@ interface MainButtonProps {
   size: 'small' | 'large';
   variant: 'primary' | 'secondary';
   type: 'button' | 'submit' | 'reset';
-  disabled: boolean;
+  disabled?: boolean;
   ariaLabel?: string;
 }
 
