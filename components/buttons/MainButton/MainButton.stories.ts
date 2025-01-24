@@ -13,8 +13,8 @@ const meta: Meta<typeof MainButton> = {
     disabled: false,
   },
   argTypes: {
-    variant: {
-      description: 'The display variant of the button',
+    layout: {
+      description: 'The display layout of the button',
       options: ['desktop', 'mobile'],
       control: { type: 'radio' },
       table: {
@@ -31,18 +31,10 @@ const meta: Meta<typeof MainButton> = {
         defaultValue: { summary: 'small' },
       },
     },
-    colour: {
-      description: 'The color scheme of the button',
-      options: ['primary', 'secondary', 'tertiary'],
-      control: { type: 'radio' },
-      table: {
-        type: { summary: '"primary" | "secondary" | "tertiary"' },
-        defaultValue: { summary: 'primary' },
-      },
-    },
-    lightMode: {
+    variant: {
       description: 'Whether to use light mode styling',
-      control: 'boolean',
+      control: { type: 'radio' },
+      options: ['primary', 'secondary'],
       table: {
         type: { summary: 'boolean' },
       },
@@ -84,10 +76,9 @@ type Story = StoryObj<typeof meta>;
 
 export const MainButtonDefault: Story = {
   args: {
-    variant: 'desktop',
+    layout: 'desktop',
     size: 'small',
-    colour: 'primary',
-    lightMode: false,
+    variant: 'primary',
   },
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
@@ -105,7 +96,7 @@ export const LargeDesktopButton: Story = {
   args: {
     ...MainButtonDefault.args,
     size: 'large',
-    variant: 'desktop',
+    layout: 'desktop',
     children: 'Large Button',
   },
 };
@@ -114,7 +105,7 @@ export const SmallDesktopButton: Story = {
   args: {
     ...MainButtonDefault.args,
     size: 'small',
-    variant: 'desktop',
+    layout: 'desktop',
     children: 'Small Button',
   },
 };
@@ -122,7 +113,7 @@ export const SmallDesktopButton: Story = {
 export const MobileSmallButton: Story = {
   args: {
     ...MainButtonDefault.args,
-    variant: 'mobile',
+    layout: 'mobile',
     size: 'small',
     children: 'Mobile Button',
   },
@@ -132,7 +123,7 @@ export const MobileLargeButton: Story = {
   args: {
     ...MainButtonDefault.args,
     size: 'large',
-    variant: 'mobile',
+    layout: 'mobile',
     children: 'Large Button',
   },
 };
@@ -140,24 +131,8 @@ export const MobileLargeButton: Story = {
 export const SecondaryButton: Story = {
   args: {
     ...MainButtonDefault.args,
-    colour: 'secondary',
+    variant: 'secondary',
     children: 'Secondary Button',
-  },
-};
-
-export const TertiaryButton: Story = {
-  args: {
-    ...MainButtonDefault.args,
-    colour: 'tertiary',
-    children: 'Tertiary Button',
-  },
-};
-
-export const LightModeButton: Story = {
-  args: {
-    ...MainButtonDefault.args,
-    lightMode: true,
-    children: 'Light Mode',
   },
 };
 
