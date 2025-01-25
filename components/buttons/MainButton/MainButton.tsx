@@ -17,7 +17,7 @@ interface MainButtonProps {
  *
  * @component
  * @example
- * <KindlyButton
+ * <MainButton
  *   layout="desktop"
  *   size="small"
  *   colour="primary"
@@ -27,7 +27,7 @@ interface MainButtonProps {
  *   clickHandler={() => console.log('clicked')}
  * >
  *   Click Me
- * </KindlyButton>
+ * </MainButton>
  */
 
 const MainButton: React.FC<MainButtonProps> = ({
