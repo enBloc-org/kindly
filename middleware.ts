@@ -7,20 +7,29 @@ export async function middleware(request: NextRequest) {
     const {
       data: { user },
     } = await supabase.auth.getUser();
+    const newHeaders = new Headers(request.headers);
 
     if (user) {
-      const newHeaders = new Headers(request.headers);
-      newHeaders.set('k-active-user', user!.id);
-
-      return NextResponse.next({
-        request: {
-          headers: newHeaders,
-        },
-      });
+      newHeaders.set('k-active-user', user.id);
     }
-    return NextResponse.redirect(
-      new URL('/login?message=Please login to use this feature', request.url)
-    );
+
+    const isProtectedRoute = config.matcher.some((route) => {
+      if (route.includes(':id')) {
+        const regex = new RegExp('^' + route.replace(':id*', '.*') + '$');
+        return regex.test(request.nextUrl.pathname);
+      }
+      return route === request.nextUrl.pathname;
+    });
+    if (isProtectedRoute && !user) {
+      return NextResponse.redirect(
+        new URL('/login?message=Please login to use this feature', request.url)
+      );
+    }
+    return NextResponse.next({
+      request: {
+        headers: newHeaders,
+      },
+    });
   } catch (error) {
     console.error(error);
     return NextResponse.redirect(
