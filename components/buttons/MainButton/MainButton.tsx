@@ -4,7 +4,6 @@ import { ReactNode } from 'react';
 interface MainButtonProps {
   children: ReactNode;
   clickHandler: () => void;
-  layout: 'mobile' | 'desktop';
   size: 'small' | 'large';
   variant: 'primary' | 'secondary';
   type: 'button' | 'submit' | 'reset';
@@ -33,7 +32,6 @@ interface MainButtonProps {
 const MainButton: React.FC<MainButtonProps> = ({
   children,
   clickHandler,
-  layout = 'desktop',
   size = 'small',
   variant = 'primary',
   type = 'button',
@@ -43,14 +41,9 @@ const MainButton: React.FC<MainButtonProps> = ({
   const baseStyles =
     'flex items-center justify-center font-medium py-3 min-h-[44px] min-w-[44px] rounded-md';
 
-  const layoutStyles = {
-    mobile: 'text-xl',
-    desktop: 'text-md',
-  };
-
   const sizeStyles = {
-    small: 'w-[163px]',
-    large: 'w-[255px]',
+    small: 'w-[163px] text-md',
+    large: 'w-[255px] text-xl',
   };
 
   const colourStyles = {
@@ -64,7 +57,6 @@ const MainButton: React.FC<MainButtonProps> = ({
 
   const className = `
     ${baseStyles}
-    ${layoutStyles[layout]}
     ${sizeStyles[size]}
     ${colourStyles[variant]}
     ${disabled ? disabledStyles : ''}`;
