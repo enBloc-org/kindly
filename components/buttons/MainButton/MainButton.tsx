@@ -1,7 +1,8 @@
 'use client';
 import { ReactNode } from 'react';
 
-interface MainButtonProps {
+interface MainButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   clickHandler: () => void;
   size: 'small' | 'large';
@@ -37,6 +38,7 @@ const MainButton: React.FC<MainButtonProps> = ({
   type = 'button',
   disabled,
   ariaLabel,
+  ...restProps
 }) => {
   const baseStyles =
     'flex items-center justify-center font-medium py-3 min-h-[44px] min-w-[44px] rounded-md';
@@ -69,6 +71,7 @@ const MainButton: React.FC<MainButtonProps> = ({
       disabled={disabled}
       aria-disabled={disabled}
       aria-label={ariaLabel}
+      {...restProps}
     >
       {children}
     </button>
