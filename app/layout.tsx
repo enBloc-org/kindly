@@ -1,5 +1,7 @@
 import React from 'react';
 import './globals.css';
+import Header from '@/components/Header';
+import { headers } from 'next/headers';
 
 const defaultUrl = process.env.AWS_AMPLIFY
   ? process.env.AWS_AMPLIFY
@@ -22,9 +24,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const headersList = headers();
+  const userId = headersList.get('k-active-user');
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body>
+        <Header userId={userId} />
+        {children}
+      </body>
     </html>
   );
 }
