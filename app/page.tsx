@@ -3,7 +3,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Providers from '@/context/Providers';
 import FullHeightContainer from '@/components/layout/FullHeightComponent';
-import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
 import giveKindly from '@/public/giveKindly.png';
@@ -15,7 +14,6 @@ export default function Index() {
   return (
     <Providers>
       <FullHeightContainer>
-        <Header />
         <main className='mb-24 flex flex-grow flex-col'>
           <div className='m-auto max-w-lg'>
             <Image
