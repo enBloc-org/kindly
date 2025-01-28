@@ -1,6 +1,14 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { createClient } from '@/supabase/utils/middleware';
 
+const protectedRoutes = [
+  '/conversations',
+  '/item/:id*',
+  '/profile',
+  '/add-item',
+  '/delete-account',
+];
+
 export async function middleware(request: NextRequest) {
   try {
     const { supabase } = createClient(request);
@@ -9,11 +17,13 @@ export async function middleware(request: NextRequest) {
     } = await supabase.auth.getUser();
     const newHeaders = new Headers(request.headers);
 
+    newHeaders.delete('k-active-user');
+
     if (user) {
       newHeaders.set('k-active-user', user.id);
     }
 
-    const isProtectedRoute = config.matcher.some((route) => {
+    const isProtectedRoute = protectedRoutes.some((route) => {
       if (route.includes(':id')) {
         const regex = new RegExp('^' + route.replace(':id*', '.*') + '$');
         return regex.test(request.nextUrl.pathname);
@@ -42,11 +52,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    '/conversations',
-    '/item/:id*',
-    '/profile',
-    '/add-item',
-    '/delete-account',
-  ],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };
