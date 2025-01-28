@@ -2,108 +2,77 @@
 
 // Components
 import NavigationLinkContainer from './NavigationLinkContainer';
-import HomeRouteIcon from '../icons/navigation/HomeRouteIcon';
 import SearchRouteIcon from '../icons/navigation/SearchRouteIcon';
-import AboutRouteIcon from '../icons/navigation/AboutRouteIcon';
 import AddItemRouteIcon from '../icons/navigation/AddItemRouteIcon';
 import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 import NotificationDot from '../NotificationDot';
+import KindlyLogoLink from './KindlyLogoLink';
 
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import selectUserUnreadConversations from '@/supabase/models/messaging/selectUserUnreadConversations';
-import selectLoggedUserId from '@/supabase/utils/selectLoggedUserId';
-import notificationWatcher from '@/supabase/channels/notificationsWatcher';
-
-const MobileNavbar = () => {
-  const pathname = usePathname();
-  const [userId, setUserId] = useState<string>('');
-  const [hasNotification, setHasNotification] = useState<boolean>(false);
-
-  useEffect(() => {
-    const getUserId = async () => {
-      try {
-        const data = await selectLoggedUserId();
-        if (!data) return;
-        setUserId(data);
-      } catch (error) {
-        console.error('Error fetching user Id:', error);
-      }
-    };
-    getUserId();
-  }, []);
-
-  useEffect(() => {
-    const getUnreadConversations = async () => {
-      if (!userId || pathname === '/conversations') {
-        setHasNotification(false);
-        return;
-      }
-
-      try {
-        const unreadConversations = await selectUserUnreadConversations(userId);
-        if (unreadConversations.length > 0) {
-          setHasNotification(true);
-        }
-      } catch (error) {
-        console.error('Failed to fetch unread conversations :', error);
-      }
-    };
-    getUnreadConversations();
-  }, [userId, pathname]);
-
-  useEffect(() => {
-    notificationWatcher(userId, pathname, setHasNotification);
-  }, [hasNotification, pathname, userId]);
-
+const MobileNavbar = ({
+  userId,
+  hasNotification,
+}: {
+  userId: string | null;
+  hasNotification: boolean;
+}) => {
   return (
-    <nav className='flex items-center justify-around' role='navigation'>
-      <NavigationLinkContainer
-        href='/'
-        ariaLabel='Home page'
-        pathName={pathname}
-        size='mobile'
-      >
-        <HomeRouteIcon pathName={pathname} height={28} width={28} />
-      </NavigationLinkContainer>
-      <NavigationLinkContainer
-        href='/search'
-        ariaLabel='Search page'
-        pathName={pathname}
-        size='mobile'
-      >
-        <SearchRouteIcon pathName={pathname} height={28} width={28} />
-      </NavigationLinkContainer>
-      <NavigationLinkContainer
-        href='/add-item'
-        ariaLabel='Add an item'
-        pathName={pathname}
-        size='mobile'
-      >
-        <AddItemRouteIcon pathName={pathname} height={45} width={45} />
-      </NavigationLinkContainer>
-      <NavigationLinkContainer
-        href='/about'
-        ariaLabel='About page'
-        pathName={pathname}
-        size='mobile'
-      >
-        <AboutRouteIcon pathName={pathname} height={28} width={28} />
-      </NavigationLinkContainer>
-      <NavigationLinkContainer
-        href='/conversations'
-        ariaLabel='My messages'
-        pathName={pathname}
-        size='mobile'
-      >
-        <MessageRouteIcon pathName={pathname} height={28} width={28} />
-        <NotificationDot
-          hasNotification={hasNotification}
-          top={0.35}
-          left={1.25}
-        />
-      </NavigationLinkContainer>
-    </nav>
+    <div className='flex w-full items-center justify-between'>
+      <nav className='flex items-center' role='menu'>
+        <button className='p-[.1rem]'>
+          <svg
+            width='42'
+            height='42'
+            viewBox='0 0 42 42'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'
+          >
+            <path
+              d='M13 15H29'
+              stroke='#333333'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+            />
+            <path
+              d='M13 21H29'
+              stroke='#333333'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+            />
+            <path
+              d='M13 27H29'
+              stroke='#333333'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+            />
+          </svg>
+        </button>
+        <KindlyLogoLink />
+      </nav>
+      <nav className='flex items-center gap-1' role='navigation'>
+        <NavigationLinkContainer href='/search' ariaLabel='Search page'>
+          <SearchRouteIcon height={42} width={42} />
+        </NavigationLinkContainer>
+        <NavigationLinkContainer href='/add-item' ariaLabel='Add an item'>
+          <AddItemRouteIcon height={42} width={42} />
+        </NavigationLinkContainer>
+        {userId && (
+          <NavigationLinkContainer
+            href='/conversations'
+            ariaLabel='My messages'
+          >
+            <MessageRouteIcon height={42} width={42} />
+            <NotificationDot
+              hasNotification={hasNotification}
+              top={0.35}
+              left={1.25}
+            />
+          </NavigationLinkContainer>
+        )}
+      </nav>
+    </div>
   );
 };
 
