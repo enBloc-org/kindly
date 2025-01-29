@@ -7,6 +7,7 @@ import AddItemRouteIcon from '../icons/navigation/AddItemRouteIcon';
 import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 import NotificationDot from '../NotificationDot';
 import KindlyLogoLink from './KindlyLogoLink';
+import HamburgerMenu from '@/components/menus/HamburgerMenu';
 
 const MobileNavbar = ({
   userId,
@@ -17,40 +18,10 @@ const MobileNavbar = ({
 }) => {
   return (
     <div className='flex w-full items-center justify-between'>
-      <nav className='flex items-center' role='menu'>
-        <button className='p-[.1rem]'>
-          <svg
-            width='42'
-            height='42'
-            viewBox='0 0 42 42'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <path
-              d='M13 15H29'
-              stroke='#333333'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            />
-            <path
-              d='M13 21H29'
-              stroke='#333333'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            />
-            <path
-              d='M13 27H29'
-              stroke='#333333'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            />
-          </svg>
-        </button>
+      <div className='flex items-center'>
+        <HamburgerMenu />
         <KindlyLogoLink />
-      </nav>
+      </div>
       <nav className='flex items-center gap-1' role='navigation'>
         <NavigationLinkContainer href='/search' ariaLabel='Search page'>
           <SearchRouteIcon height={42} width={42} />
