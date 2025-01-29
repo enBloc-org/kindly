@@ -1,20 +1,27 @@
-import { useState } from 'react';
 import Link from 'next/link';
 import HomeRouteIcon from '../icons/navigation/HomeRouteIcon';
 import SearchRouteIcon from '../icons/navigation/SearchRouteIcon';
 import AddItemRouteIcon from '../icons/navigation/AddItemRouteIcon';
 import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 import ProfileRouteIcon from '../icons/navigation/ProfileRouteIcon';
+import { Dispatch, SetStateAction } from 'react';
 
-const HamburgerMenu = () => {
-  const [menuOpen, setMennuOpen] = useState(false);
+type HamburgerMenuProps = {
+  menuOpen: boolean;
+  setMenuOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
+  menuOpen,
+  setMenuOpen,
+}) => {
   return (
     <>
       <nav className='relative' role='menu'>
         <button
           className='p-[.1rem]'
           aria-label='Menu button'
-          onClick={() => setMennuOpen((prev) => !prev)}
+          onClick={() => setMenuOpen((prev) => !prev)}
         >
           <svg
             width='42'
