@@ -22,7 +22,11 @@ const MobileNavbar = ({
   return (
     <div className='flex w-full items-center justify-between'>
       <div className='flex items-center'>
-        <HamburgerMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        <HamburgerMenu
+          menuOpen={menuOpen}
+          setMenuOpen={setMenuOpen}
+          userId={userId}
+        />
         <KindlyLogoLink />
       </div>
       <nav className='flex items-center gap-1' role='navigation'>
