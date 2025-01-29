@@ -1,6 +1,6 @@
 import { NavigationIconType } from './NavigationIconType';
 
-const HomeRouteIcon: React.FC<NavigationIconType> = ({ width, height }) => {
+const MessageRouteIcon: React.FC<NavigationIconType> = ({ width, height }) => {
   return (
     <svg
       width={width}
@@ -41,4 +41,4 @@ const HomeRouteIcon: React.FC<NavigationIconType> = ({ width, height }) => {
   );
 };
 
-export default HomeRouteIcon;
+export default MessageRouteIcon;
