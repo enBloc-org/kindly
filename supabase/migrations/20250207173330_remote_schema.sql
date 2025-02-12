@@ -14,11 +14,7 @@ CREATE SCHEMA IF NOT EXISTS "Test";
 
 ALTER SCHEMA "Test" OWNER TO "postgres";
 
-CREATE EXTENSION IF NOT EXISTS "pg_net" WITH SCHEMA "extensions";
-
 CREATE EXTENSION IF NOT EXISTS "pgsodium" WITH SCHEMA "pgsodium";
-
-COMMENT ON SCHEMA "public" IS 'standard public schema';
 
 CREATE SCHEMA IF NOT EXISTS "test";
 
@@ -452,6 +448,10 @@ CREATE POLICY "Enable all actions for users based on user_id" ON "public"."user_
 CREATE POLICY "Enable read access for all users" ON "public"."user_conversations" FOR SELECT USING (true);
 
 ALTER PUBLICATION "supabase_realtime" OWNER TO "postgres";
+
+CREATE PUBLICATION "supabase_realtime_messages_publication" WITH (publish = 'insert, update, delete, truncate');
+
+-- ALTER PUBLICATION "supabase_realtime_messages_publication" OWNER TO "supabase_admin";
 
 ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "public"."conversations";
 
