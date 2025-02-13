@@ -1,19 +1,11 @@
 type FacebookIconProps = {
-  width: number;
-  height: number;
   className: string;
 };
 
-const FacebookIcon: React.FC<FacebookIconProps> = ({
-  width = 24,
-  height = 25,
-  className,
-}) => {
+const FacebookIcon: React.FC<FacebookIconProps> = ({ className }) => {
   return (
     <svg
-      width={width}
-      height={height}
-      viewBox='0 0 24 25'
+      viewBox='0 0 24 24'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
       className={className}
@@ -41,16 +33,6 @@ const FacebookIcon: React.FC<FacebookIconProps> = ({
           strokeLinejoin='round'
         />
       </g>
-      <defs>
-        <clipPath id='clip0_376_2733'>
-          <rect
-            width={width}
-            height={height}
-            fill='white'
-            transform='translate(0 0.333252)'
-          />
-        </clipPath>
-      </defs>
     </svg>
   );
 };
