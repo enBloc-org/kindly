@@ -88,13 +88,13 @@ const Footer: React.FC<FooterProps> = ({
             <h3 className='mb-4 font-bold'>Pages</h3>
             <ul className='space-y-2 text-sm'>
               <li>
-                <Link href='/browse'>Browse Items</Link>
+                <Link href='/search'>Browse Items</Link>
               </li>
               <li>
-                <Link href='/post'>Post an Item</Link>
+                <Link href='/add-item'>Post an Item</Link>
               </li>
               <li>
-                <Link href='/messages'>Messages</Link>
+                <Link href='/conversations'>Messages</Link>
               </li>
               <li>
                 <Link href='/profile'>Profile</Link>
