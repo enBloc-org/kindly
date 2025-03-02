@@ -30,7 +30,7 @@ const Footer: React.FC<FooterProps> = ({
   },
 }) => {
   return (
-    <footer className='w-full bg-[#FDEDD4] text-gray-800'>
+    <footer className='bg-brand-80 w-full text-gray-800'>
       <div className='mx-auto max-w-7xl  px-4 py-8'>
         <div className='hidden md:grid md:grid-cols-4 md:gap-8'>
           <div>
@@ -159,7 +159,7 @@ const Footer: React.FC<FooterProps> = ({
           </div>
         </div>
       </div>
-      <div className='h-8 border-t border-gray-200 bg-orange-400 py-2'>
+      <div className='h-8 border-t border-gray-200 bg-primaryOrange py-2'>
         <div className='mx-auto max-w-7xl px-4'>
           <p className='text-center text-sm leading-[14px] text-white'>
             ©2024 {companyInfo.name}
