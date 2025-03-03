@@ -17,21 +17,21 @@ const MobileNavbar = ({
   userId: string | null;
   hasNotification: boolean;
 }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className='flex w-full items-center justify-between'>
       <div className='flex items-center'>
         <HamburgerMenu
-          menuOpen={menuOpen}
-          setMenuOpen={setMenuOpen}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
           userId={userId}
         />
         <KindlyLogoLink />
       </div>
       <nav className='flex items-center gap-1' role='navigation'>
-        {menuOpen ? (
-          <button onClick={() => setMenuOpen(false)}>
+        {isMenuOpen ? (
+          <button onClick={() => setIsMenuOpen(false)}>
             <svg
               width='42'
               height='42'
