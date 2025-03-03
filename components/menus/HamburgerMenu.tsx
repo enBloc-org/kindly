@@ -7,17 +7,20 @@ import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 import ProfileRouteIcon from '../icons/navigation/ProfileRouteIcon';
 import MainButton from '../buttons/MainButton/MainButton';
 import HamburgerIcon from '../icons/navigation/HamburgerIcon';
+import NotificationDot from '../NotificationDot';
 
 type HamburgerMenuProps = {
   isMenuOpen: boolean;
   setIsMenuOpen: Dispatch<SetStateAction<boolean>>;
   userId: string | null;
+  hasNotification: boolean;
 };
 
 const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
   isMenuOpen,
   setIsMenuOpen,
   userId,
+  hasNotification,
 }) => {
   const clickHandler = () => setIsMenuOpen(false);
 
@@ -74,9 +77,14 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
           </Link>
           <Link
             href='/conversations'
-            className='menu-link'
+            className='menu-link relative'
             onClick={clickHandler}
           >
+            <NotificationDot
+              hasNotification={hasNotification}
+              top={1}
+              left={1.2}
+            />
             <MessageRouteIcon height={42} width={42} />
             Messages
           </Link>

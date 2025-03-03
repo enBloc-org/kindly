@@ -26,6 +26,7 @@ const MobileNavbar = ({
           isMenuOpen={isMenuOpen}
           setIsMenuOpen={setIsMenuOpen}
           userId={userId}
+          hasNotification={hasNotification}
         />
         <KindlyLogoLink />
       </div>
@@ -64,12 +65,16 @@ const MobileNavbar = ({
               <AddItemRouteIcon height={42} width={42} />
             </Link>
             {userId && (
-              <Link href='/conversations' aria-label='My messages'>
+              <Link
+                href='/conversations'
+                aria-label='My messages'
+                className='relative'
+              >
                 <MessageRouteIcon height={42} width={42} />
                 <NotificationDot
                   hasNotification={hasNotification}
                   top={0.35}
-                  left={1.25}
+                  left={1.45}
                 />
               </Link>
             )}
