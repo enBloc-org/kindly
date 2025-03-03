@@ -13,15 +13,6 @@ const meta: Meta<typeof MainButton> = {
     disabled: false,
   },
   argTypes: {
-    layout: {
-      description: 'The display layout of the button',
-      options: ['desktop', 'mobile'],
-      control: { type: 'radio' },
-      table: {
-        type: { summary: '"desktop" | "mobile"' },
-        defaultValue: { summary: 'desktop' },
-      },
-    },
     size: {
       description: 'The size of the button',
       options: ['small', 'large'],
@@ -76,7 +67,6 @@ type Story = StoryObj<typeof meta>;
 
 export const MainButtonDefault: Story = {
   args: {
-    layout: 'desktop',
     size: 'small',
     variant: 'primary',
   },
@@ -92,39 +82,19 @@ export const MainButtonDefault: Story = {
   },
 };
 
-export const LargeDesktopButton: Story = {
+export const LargeButton: Story = {
   args: {
     ...MainButtonDefault.args,
     size: 'large',
-    layout: 'desktop',
     children: 'Large Button',
   },
 };
 
-export const SmallDesktopButton: Story = {
+export const SmallButton: Story = {
   args: {
     ...MainButtonDefault.args,
     size: 'small',
-    layout: 'desktop',
     children: 'Small Button',
-  },
-};
-
-export const MobileSmallButton: Story = {
-  args: {
-    ...MainButtonDefault.args,
-    layout: 'mobile',
-    size: 'small',
-    children: 'Mobile Button',
-  },
-};
-
-export const MobileLargeButton: Story = {
-  args: {
-    ...MainButtonDefault.args,
-    size: 'large',
-    layout: 'mobile',
-    children: 'Large Button',
   },
 };
 

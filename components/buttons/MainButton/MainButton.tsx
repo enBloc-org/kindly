@@ -1,13 +1,15 @@
 'use client';
 import { ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-interface MainButtonProps {
+interface MainButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   clickHandler: () => void;
-  layout: 'mobile' | 'desktop';
   size: 'small' | 'large';
   variant: 'primary' | 'secondary';
   type: 'button' | 'submit' | 'reset';
+  styling?: string;
   disabled?: boolean;
   ariaLabel?: string;
 }
@@ -17,40 +19,36 @@ interface MainButtonProps {
  *
  * @component
  * @example
- * <KindlyButton
- *   layout="desktop"
+ * <MainButton
  *   size="small"
  *   colour="primary"
+ *   styling="bg-brand-100 text-monoY"
  *   disabled={isLoading}
  *   type="submit"
  *   ariaLabel="Submit button"
  *   clickHandler={() => console.log('clicked')}
  * >
  *   Click Me
- * </KindlyButton>
+ * </MainButton>
  */
 
 const MainButton: React.FC<MainButtonProps> = ({
   children,
   clickHandler,
-  layout = 'desktop',
   size = 'small',
   variant = 'primary',
   type = 'button',
+  styling,
   disabled,
   ariaLabel,
+  ...restProps
 }) => {
   const baseStyles =
-    'flex items-center justify-center font-medium py-3 min-h-[44px] min-w-[44px] rounded-md';
-
-  const layoutStyles = {
-    mobile: 'text-xl',
-    desktop: 'text-md',
-  };
+    'flex items-center justify-center font-medium py-3 min-h-[44px] rounded-md';
 
   const sizeStyles = {
-    small: 'w-[163px]',
-    large: 'w-[255px]',
+    small: 'min-w-[163px] text-md',
+    large: 'min-w-[255px] text-xl',
   };
 
   const colourStyles = {
@@ -64,7 +62,6 @@ const MainButton: React.FC<MainButtonProps> = ({
 
   const className = `
     ${baseStyles}
-    ${layoutStyles[layout]}
     ${sizeStyles[size]}
     ${colourStyles[variant]}
     ${disabled ? disabledStyles : ''}`;
@@ -72,11 +69,12 @@ const MainButton: React.FC<MainButtonProps> = ({
   return (
     <button
       onClick={clickHandler}
-      className={className}
+      className={twMerge(`${className}, ${styling}`)}
       type={type}
       disabled={disabled}
       aria-disabled={disabled}
       aria-label={ariaLabel}
+      {...restProps}
     >
       {children}
     </button>

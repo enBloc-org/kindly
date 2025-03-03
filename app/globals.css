@@ -120,3 +120,25 @@ body {
   align-items: center;
   z-index: 100;
 }
+
+.menu-link {
+  @apply relative flex items-center px-4 py-2 text-lg;
+}
+
+.menu-link:before {
+  content: '';
+  position: absolute;
+  transform: translateY(-1.8rem);
+  width: 90%;
+  height: 2px;
+  background-color: #cdcdcd;
+}
+
+.last-link::after {
+  content: '';
+  position: absolute;
+  transform: translateY(1.8rem);
+  width: 90%;
+  height: 2px;
+  background-color: #cdcdcd;
+}
