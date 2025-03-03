@@ -129,10 +129,6 @@ body:has(.menu-open) {
   @apply relative flex items-center px-4 py-2 text-lg;
 }
 
-.menu-open {
-  @apply absolute left-0 top-[64px] z-50 h-full w-full translate-y-0 bg-monoY px-2 py-6;
-}
-
 .menu-link:before {
   content: '';
   position: absolute;
