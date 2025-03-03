@@ -47,6 +47,10 @@ body {
   @apply bg-monoY font-body text-base-120;
 }
 
+body:has(.menu-open) {
+  overflow-y: hidden;
+}
+
 :focus-visible {
   outline: 2px solid #ff6f08;
   outline-offset: 2px;
@@ -123,6 +127,10 @@ body {
 
 .menu-link {
   @apply relative flex items-center px-4 py-2 text-lg;
+}
+
+.menu-open {
+  @apply absolute left-0 top-[64px] z-50 h-full w-full translate-y-0 bg-monoY px-2 py-6;
 }
 
 .menu-link:before {
