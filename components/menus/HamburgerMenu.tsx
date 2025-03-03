@@ -6,7 +6,6 @@ import AddItemRouteIcon from '../icons/navigation/AddItemRouteIcon';
 import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 import ProfileRouteIcon from '../icons/navigation/ProfileRouteIcon';
 import MainButton from '../buttons/MainButton/MainButton';
-import HamburgerIcon from '../icons/navigation/HamburgerIcon';
 import NotificationDot from '../NotificationDot';
 
 type HamburgerMenuProps = {
@@ -28,87 +27,112 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
     <>
       <nav className='relative' role='menu'>
         <button
-          className='p-[.1rem]'
+          className='ml-2 mr-4 flex flex-col items-center justify-center gap-1'
           aria-label='Menu button'
           aria-expanded={isMenuOpen}
           onClick={() => setIsMenuOpen((prev) => !prev)}
         >
-          <HamburgerIcon width={42} height={42} />
+          <span
+            className={`block h-[0.2rem] w-5 rounded-full
+                          bg-base-110 transition-all duration-300 ease-out ${
+                            isMenuOpen
+                              ? 'translate-y-1 rotate-45 lg:translate-y-4'
+                              : '-translate-y-0.0'
+                          }`}
+          ></span>
+          <span
+            className={`block h-[0.2rem] w-5 rounded-full bg-base-110
+                          transition-all duration-300 ease-out ${
+                            isMenuOpen ? 'opacity-0' : 'opacity-100'
+                          }`}
+          ></span>
+          <span
+            className={`block h-[0.2rem] w-5 rounded-full bg-base-110
+                          transition-all duration-300 ease-out ${
+                            isMenuOpen
+                              ? '-translate-y-3 -rotate-45 lg:-translate-y-4'
+                              : 'translate-y-0'
+                          }`}
+          ></span>{' '}
         </button>
       </nav>
-      {isMenuOpen && (
-        <div className={isMenuOpen ? 'menu-open' : 'menu-close'}>
-          {!userId && (
-            <div className='mb-4 flex w-full flex-col items-center justify-center gap-4'>
-              <Link href='/signup'>
-                <MainButton
-                  size='large'
-                  type='button'
-                  styling='w-full min-w-[325px]'
-                  clickHandler={clickHandler}
-                >
-                  Sign up
-                </MainButton>
-              </Link>
-              <Link href='/login'>
-                <MainButton
-                  size='large'
-                  type='button'
-                  variant='secondary'
-                  styling='w-full min-w-[325px]'
-                  clickHandler={clickHandler}
-                >
-                  Log in
-                </MainButton>
-              </Link>
-            </div>
-          )}
-          <Link href='/' className='menu-link' onClick={clickHandler}>
-            <HomeRouteIcon height={42} width={42} />
-            Home
-          </Link>
-          <Link href='/search' className='menu-link' onClick={clickHandler}>
-            <SearchRouteIcon height={42} width={42} />
-            Search Items
-          </Link>
-          <Link href='/add-item' className='menu-link' onClick={clickHandler}>
-            <AddItemRouteIcon height={42} width={42} />
-            Post an Item
-          </Link>
-          <Link
-            href='/conversations'
-            className='menu-link relative'
-            onClick={clickHandler}
-          >
-            <NotificationDot
-              hasNotification={hasNotification}
-              top={1}
-              left={1.2}
-            />
-            <MessageRouteIcon height={42} width={42} />
-            Messages
-          </Link>
-          <Link
-            href='/profile'
-            className='menu-link last-link'
-            onClick={clickHandler}
-          >
-            <ProfileRouteIcon height={42} width={42} />
-            Profile
-          </Link>
-          <div className='mt-4 flex flex-col gap-4 px-4'>
-            <Link href='/about' onClick={clickHandler}>
-              About Kyndly
+      <div
+        className={`absolute left-0 top-[64px] z-50 h-full w-full transform bg-monoY px-2 py-6 transition-all duration-500 ease-in-out ${
+          isMenuOpen
+            ? 'visible translate-y-0 opacity-100'
+            : 'invisible -translate-y-16 opacity-0'
+        }`}
+      >
+        {!userId && (
+          <div className='mb-4 flex w-full flex-col items-center justify-center gap-4'>
+            <Link href='/signup'>
+              <MainButton
+                size='large'
+                type='button'
+                styling='w-full min-w-[325px]'
+                clickHandler={clickHandler}
+              >
+                Sign up
+              </MainButton>
             </Link>
-            <Link href='/about' onClick={clickHandler}>
-              Frequently Asked Questions
-            </Link>
-            <Link href='/about' onClick={clickHandler}>
-              Contacts
+            <Link href='/login'>
+              <MainButton
+                size='large'
+                type='button'
+                variant='secondary'
+                styling='w-full min-w-[325px]'
+                clickHandler={clickHandler}
+              >
+                Log in
+              </MainButton>
             </Link>
           </div>
+        )}
+        <Link href='/' className='menu-link' onClick={clickHandler}>
+          <HomeRouteIcon height={42} width={42} />
+          Home
+        </Link>
+        <Link href='/search' className='menu-link' onClick={clickHandler}>
+          <SearchRouteIcon height={42} width={42} />
+          Search Items
+        </Link>
+        <Link href='/add-item' className='menu-link' onClick={clickHandler}>
+          <AddItemRouteIcon height={42} width={42} />
+          Post an Item
+        </Link>
+        <Link
+          href='/conversations'
+          className='menu-link relative'
+          onClick={clickHandler}
+        >
+          <NotificationDot
+            hasNotification={hasNotification}
+            top={1}
+            left={1.2}
+          />
+          <MessageRouteIcon height={42} width={42} />
+          Messages
+        </Link>
+        <Link
+          href='/profile'
+          className='menu-link last-link'
+          onClick={clickHandler}
+        >
+          <ProfileRouteIcon height={42} width={42} />
+          Profile
+        </Link>
+        <div className='mt-4 flex flex-col gap-4 px-4'>
+          <Link href='/about' onClick={clickHandler}>
+            About Kyndly
+          </Link>
+          <Link href='/about' onClick={clickHandler}>
+            Frequently Asked Questions
+          </Link>
+          <Link href='/about' onClick={clickHandler}>
+            Contacts
+          </Link>
         </div>
-      )}
+      </div>
     </>
   );
 };

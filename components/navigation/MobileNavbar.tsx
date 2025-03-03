@@ -31,32 +31,7 @@ const MobileNavbar = ({
         <KindlyLogoLink />
       </div>
       <nav className='flex items-center gap-1' role='navigation'>
-        {isMenuOpen ? (
-          <button onClick={() => setIsMenuOpen(false)}>
-            <svg
-              width='42'
-              height='42'
-              viewBox='0 0 42 42'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path
-                d='M28.4117 13.5883L13.5881 28.4118'
-                stroke='#333333'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-              />
-              <path
-                d='M13.5881 13.5883L28.4117 28.4118'
-                stroke='#333333'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-              />
-            </svg>
-          </button>
-        ) : (
+        {!isMenuOpen && (
           <>
             <Link href='/search' aria-label='Search page'>
               <SearchRouteIcon height={42} width={42} />
