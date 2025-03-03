@@ -7,7 +7,7 @@ interface MainButtonProps
   children: ReactNode;
   clickHandler: () => void;
   size: 'small' | 'large';
-  variant: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary';
   type: 'button' | 'submit' | 'reset';
   styling?: string;
   disabled?: boolean;
