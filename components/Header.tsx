@@ -38,12 +38,8 @@ export default function Header({ userId }: { userId: string | null }) {
 
   return (
     <header className='flex min-h-[4rem] flex-shrink-0 items-center justify-between bg-monoY px-4 py-2'>
-      <div className='block w-full md:hidden'>
-        <MobileNavbar userId={userId} hasNotification={hasNotification} />
-      </div>
-      <div className='hidden w-full md:block'>
-        <DesktopNav />
-      </div>
+      <MobileNavbar userId={userId} hasNotification={hasNotification} />
+      <DesktopNav userId={userId} hasNotification={hasNotification} />
     </header>
   );
 }
