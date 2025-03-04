@@ -23,7 +23,7 @@ const DesktopNav = ({
       className='hidden w-full items-center justify-between gap-4 px-24 py-6 text-center text-sm font-light lg:flex'
       role='navigation'
     >
-      <KyndlyLogoLink />
+      <KyndlyLogoLink width={100} />
       <div className='flex gap-5'>
         <Link
           href='/search'

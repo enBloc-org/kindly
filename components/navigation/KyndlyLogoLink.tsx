@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
-const KyndlyLogoLink = ({ width = 80, height = 28 }) => {
+const KyndlyLogoLink = ({ width = 80 }) => {
   return (
     <div className='flex items-center'>
       <Link href='/' aria-label='Home page'>
         <svg
           width={width}
-          height={height}
+          height='auto'
           viewBox='0 0 80 28'
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
