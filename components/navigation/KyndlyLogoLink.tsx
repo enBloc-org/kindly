@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const KindlyLogoLink = ({ width = 80, height = 28 }) => {
+const KyndlyLogoLink = ({ width = 80, height = 28 }) => {
   return (
     <div className='flex items-center'>
       <Link href='/' aria-label='Home page'>
@@ -33,4 +33,4 @@ const KindlyLogoLink = ({ width = 80, height = 28 }) => {
   );
 };
 
-export default KindlyLogoLink;
+export default KyndlyLogoLink;
