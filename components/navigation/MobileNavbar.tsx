@@ -7,7 +7,7 @@ import SearchRouteIcon from '../icons/navigation/SearchRouteIcon';
 import AddItemRouteIcon from '../icons/navigation/AddItemRouteIcon';
 import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 import NotificationDot from '../NotificationDot';
-import KindlyLogoLink from './KindlyLogoLink';
+import KyndlyLogoLink from './KyndlyLogoLink';
 import HamburgerMenu from '@/components/menus/HamburgerMenu';
 
 const MobileNavbar = ({
@@ -20,7 +20,7 @@ const MobileNavbar = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className='flex w-full items-center justify-between'>
+    <div className='flex w-full items-center justify-between lg:hidden'>
       <div className='flex items-center'>
         <HamburgerMenu
           isMenuOpen={isMenuOpen}
@@ -28,7 +28,7 @@ const MobileNavbar = ({
           userId={userId}
           hasNotification={hasNotification}
         />
-        <KindlyLogoLink />
+        <KyndlyLogoLink />
       </div>
       <nav className='flex items-center gap-1' role='navigation'>
         {!isMenuOpen && (
