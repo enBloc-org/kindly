@@ -5,7 +5,7 @@ export const defaultCompanyInfo = {
 };
 
 export const defaultSocialLinks = {
-  facebook: 'https://facebook.com',
-  instagram: 'https://instagram.com',
-  threads: 'https://threads.net',
+  facebook: 'https://shorturl.at/8LLCp',
+  instagram: 'https://www.instagram.com/trafalgargirls',
+  threads: 'https://www.threads.net/@trafalgargirls',
 };
