@@ -11,7 +11,7 @@ const Footer: React.FC<FooterProps> = ({
   socialLinks = defaultSocialLinks,
 }) => {
   return (
-    <footer className='bg-brand-80 w-full text-gray-800'>
+    <footer className='mt-auto w-full bg-brand-80 text-gray-800'>
       <div className='mx-auto max-w-7xl  px-4 py-8'>
         <div className='hidden md:grid md:grid-cols-4 md:gap-8'>
           <div>
