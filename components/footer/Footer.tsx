@@ -3,31 +3,12 @@ import Link from 'next/link';
 import FacebookIcon from '@/components/icons/FacebookIcon';
 import InstagramIcon from '@/components/icons/InstagramIcon';
 import ThreadsIcon from '@/components/icons/ThreadsIcon';
-
-type FooterProps = {
-  companyInfo?: {
-    name: string;
-    registrationNumber: string;
-    address: string;
-  };
-  socialLinks?: {
-    facebook?: string;
-    instagram?: string;
-    threads?: string;
-  };
-};
+import { defaultCompanyInfo, defaultSocialLinks } from '@/constants/footer';
+import { FooterProps } from '@/types/footer';
 
 const Footer: React.FC<FooterProps> = ({
-  companyInfo = {
-    name: 'KYNDLY CIC',
-    registrationNumber: '16077388',
-    address: '7 Bell Yard, London, WC2A 2JR',
-  },
-  socialLinks = {
-    facebook: 'https://facebook.com',
-    instagram: 'https://instagram.com',
-    threads: 'https://threads.net',
-  },
+  companyInfo = defaultCompanyInfo,
+  socialLinks = defaultSocialLinks,
 }) => {
   return (
     <footer className='bg-brand-80 w-full text-gray-800'>
