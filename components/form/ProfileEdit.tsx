@@ -11,12 +11,12 @@ import { useRouter } from 'next/navigation';
 
 export const ProfileEdit = ({
   userId,
-  userName,
-  userAvatar,
+  userName = '',
+  userAvatar = '',
 }: {
   userId: string;
-  userName: string;
-  userAvatar: string;
+  userName?: string;
+  userAvatar?: string;
 }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [imgAvatar, setImgAvatar] = useState('');
