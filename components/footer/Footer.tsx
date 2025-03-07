@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import FacebookIcon from '@/components/icons/FacebookIcon';
-import InstagramIcon from '@/components/icons/InstagramIcon';
-import ThreadsIcon from '@/components/icons/ThreadsIcon';
+import FacebookIcon from '@/components/icons/social-icons/FacebookIcon';
+import InstagramIcon from '@/components/icons/social-icons/InstagramIcon';
+import ThreadsIcon from '@/components/icons/social-icons/ThreadsIcon';
 import { defaultCompanyInfo, defaultSocialLinks } from '@/constants/footer';
 import { FooterProps } from '@/types/footer';
 
