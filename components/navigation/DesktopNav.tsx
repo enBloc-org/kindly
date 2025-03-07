@@ -10,6 +10,7 @@ import ProfileRouteIcon from '../icons/navigation/ProfileRouteIcon';
 import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 import NotificationDot from '../NotificationDot';
 import KyndlyLogoLink from './KyndlyLogoLink';
+import { useUser } from '@/context/UserProvider';
 
 const DesktopNav = ({
   userId,
@@ -18,6 +19,7 @@ const DesktopNav = ({
   userId: string | null;
   hasNotification: boolean;
 }) => {
+  const { user } = useUser();
   return (
     <nav
       className='hidden w-full items-center justify-between gap-4 px-24 py-6 text-center text-sm font-light lg:flex'
@@ -30,7 +32,7 @@ const DesktopNav = ({
           aria-label='Search page'
           className='flex items-center'
         >
-          <SearchRouteIcon width={38} height={38} />
+          <SearchRouteIcon width={30} height={30} />
           Search Items
         </Link>
         <Link
@@ -38,7 +40,7 @@ const DesktopNav = ({
           aria-label='Add an item'
           className='flex items-center'
         >
-          <AddItemRouteIcon width={38} height={38} />
+          <AddItemRouteIcon width={30} height={30} />
           Post an Item
         </Link>
         {userId && (
@@ -47,7 +49,7 @@ const DesktopNav = ({
             aria-label='My messages'
             className='relative flex items-center'
           >
-            <MessageRouteIcon width={38} height={38} />
+            <MessageRouteIcon width={30} height={30} />
             Messages
             <NotificationDot
               hasNotification={hasNotification}
@@ -61,7 +63,7 @@ const DesktopNav = ({
           aria-label='About page'
           className='flex items-center'
         >
-          <AboutRouteIcon width={38} height={38} />
+          <AboutRouteIcon width={25} height={25} />
           FAQ
         </Link>
       </div>
@@ -70,8 +72,8 @@ const DesktopNav = ({
         aria-label='My profile'
         className='flex items-center'
       >
-        <ProfileRouteIcon width={38} height={38} />
-        Profile
+        <ProfileRouteIcon width={25} height={25} />
+        {user ? (user.username ? user.username : 'Profile') : 'Profile'}
       </Link>
     </nav>
   );
