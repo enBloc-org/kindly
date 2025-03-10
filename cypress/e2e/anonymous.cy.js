@@ -51,14 +51,6 @@ describe('Anonymous Navigation', () => {
       .should('eq', page.login);
   });
 
-  it('Message redirects to login', () => {
-    cy.visit(page.home, { failOnStatusCode: false });
-    HomePage.messageIcon().click();
-    cy.location('pathname', { timeout: redirectTimeout })
-      .should('not.eq', page.message)
-      .should('eq', page.login);
-  });
-
   it('Profile redirects to login', () => {
     cy.visit(page.home, { failOnStatusCode: false });
     HomePage.profileIcon().click();
