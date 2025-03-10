@@ -1,5 +1,5 @@
 'use client';
-// import useMediaQuery from './hooks/useMediaQuery';
+import useMediaQuery from './hooks/useMediaQuery';
 import { useConversationContext } from '@/context/conversationContext';
 
 const Footer = () => {
