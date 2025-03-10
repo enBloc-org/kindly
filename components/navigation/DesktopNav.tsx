@@ -53,8 +53,8 @@ const DesktopNav = ({
             Messages
             <NotificationDot
               hasNotification={hasNotification}
-              top={0.25}
-              left={1.25}
+              top={0.1}
+              left={1}
             />
           </Link>
         )}
