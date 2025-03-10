@@ -197,7 +197,7 @@ INSERT INTO "public"."conversations" ("id", "created_at") VALUES
 INSERT INTO "public"."profiles" ("id", "created_at", "email", "items_added", "reserved_items", "refugee", "image", "postcode", "username", "avatar") VALUES
 	('48f9db70-05f7-4a04-a34d-75ae8267c90b', '2024-06-16 13:26:37.960648+00', 'refugee+test.reshetniak@gmail.com', NULL, NULL, true, NULL, NULL, 'Test Refugee', 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/48f9db70-05f7-4a04-a34d-75ae8267c90b/07995dac-6352-48fb-a061-c85b07560554'),
 	('cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85', '2024-06-16 13:26:05.319866+00', 'donor+test.reshetniak@gmail.com', NULL, NULL, false, NULL, NULL, 'Test Donor', 'https://undfcbmldjkujposixvn.supabase.co/storage/v1/object/public/images/cab97c8e-6704-4bb2-b3e8-a9cdaaf1be85/04852b2e-da05-429e-acca-35eeb61d0b5f'),
-	('1dc06b29-0b93-46d8-a33b-fb6f80ee5263', '2024-07-08 10:36:10.438915+00', 'trafalgargirls@gmail.com', NULL, NULL, false, NULL, NULL, 'trafalgargirls', NULL);
+	('1dc06b29-0b93-46d8-a33b-fb6f80ee5263', '2024-07-08 10:36:10.438915+00', 'trafalgargirls@gmail.com', NULL, NULL, false, NULL, NULL, 'trafalgargirls', '/default-profile.png');
 
 
 --
