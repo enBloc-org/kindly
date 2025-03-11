@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FacebookIcon from '@/components/icons/social-icons/FacebookIcon';
 import InstagramIcon from '@/components/icons/social-icons/InstagramIcon';
 import ThreadsIcon from '@/components/icons/social-icons/ThreadsIcon';
+import LinkedInIcon from '@/components/icons/social-icons/LinkedInIcon';
 import { defaultCompanyInfo, defaultSocialLinks } from '@/constants/footer';
 import { FooterProps } from '@/types/footer';
 
@@ -39,6 +40,14 @@ const Footer: React.FC<FooterProps> = ({
                   className='text-gray-600 hover:text-gray-900'
                 >
                   <ThreadsIcon className='h-6 w-6' />
+                </Link>
+              )}
+              {socialLinks.linkedin && (
+                <Link
+                  href={socialLinks.linkedin}
+                  className='text-gray-600 hover:text-gray-900'
+                >
+                  <LinkedInIcon className='h-6 w-6 ' />
                 </Link>
               )}
             </div>

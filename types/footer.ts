@@ -8,5 +8,6 @@ export type FooterProps = {
     facebook?: string;
     instagram?: string;
     threads?: string;
+    linkedin?: string;
   };
 };

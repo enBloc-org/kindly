@@ -8,4 +8,6 @@ export const defaultSocialLinks = {
   facebook: 'https://shorturl.at/8LLCp',
   instagram: 'https://www.instagram.com/trafalgargirls',
   threads: 'https://www.threads.net/@trafalgargirls',
+  linkedin:
+    'https://www.linkedin.com/company/trafalgargirls/posts/?feedView=all',
 };
