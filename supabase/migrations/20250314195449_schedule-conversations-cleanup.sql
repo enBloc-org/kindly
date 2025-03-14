@@ -1,10 +1,14 @@
 CREATE OR REPLACE FUNCTION cleanup_old_conversations()
-RETURNS bigint LANGUAGE plpgsql AS $$
-DECLARE 
-  total_count bigint;
+RETURNS void LANGUAGE plpgsql AS $$
 BEGIN
-  SELECT COUNT(*) INTO total_count FROM conversations;
-  RETURN total_count;
+  DELETE FROM conversations WHERE created_at < CURRENT_DATE - interval '6 month';
 END;
 $$;
 
+SELECT cron.schedule(
+  'delete_old_conversation',
+  '0 0 1 1-12 *', -- will run on the first of every month at midnight
+  $$
+  CALL cleanup_old_conversations();
+  $$
+)
