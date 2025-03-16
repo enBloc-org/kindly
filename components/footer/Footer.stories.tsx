@@ -24,4 +24,5 @@ Default.args = {};
 Default.play = async ({ canvasElement }) => {
   const canvas = await within(canvasElement);
   expect(canvas.getByRole('contentinfo')).toBeInTheDocument();
+  expect(canvas.getByText('Follow us at:')).toBeInTheDocument();
 };
