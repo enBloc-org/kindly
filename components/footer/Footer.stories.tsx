@@ -26,4 +26,7 @@ Default.play = async ({ canvasElement }) => {
   expect(canvas.getByRole('contentinfo')).toBeInTheDocument();
   expect(canvas.getByText('Follow us at:')).toBeInTheDocument();
   expect(canvas.getByText('Company Info')).toBeInTheDocument();
+  expect(
+    canvas.getByText((content) => content.includes('©2024'))
+  ).toBeInTheDocument();
 };
