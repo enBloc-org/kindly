@@ -120,3 +120,8 @@ body {
   align-items: center;
   z-index: 100;
 }
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #f3f3f3 inset !important; /* Маскує autofill-бекграунд */
+  -webkit-text-fill-color: #929292 !important; /* Колір тексту */
+}
