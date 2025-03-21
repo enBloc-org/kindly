@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -69,7 +70,10 @@ const Input: React.FC<InputProps> = ({
       <div className='relative'>
         <input
           id={generatedId}
-          className={`${baseStyles} ${sizeStyles} ${stateStyles} ${errorStyles} ${className}`}
+          className={twMerge(
+            `${baseStyles} ${sizeStyles} ${stateStyles} ${errorStyles}`,
+            className
+          )}
           {...props}
           type={type === 'password' && isPasswordVisible ? 'text' : type}
         />
