@@ -45,7 +45,9 @@ export default function SignUp({
       refugee: formData.get('refugee') === 'true',
     } as PartialProfile);
 
-    return redirect('/login?message=Check email to continue sign in process');
+    return redirect(
+      '/login?confirm=Please verify your email by clicking the link sent to your inbox'
+    );
   };
 
   return (

@@ -2,11 +2,13 @@ import { redirect } from 'next/navigation';
 import AuthForm from '../../../components/AuthForm';
 import Link from 'next/link';
 import newServerClient from '@/supabase/utils/newServerClient';
+import PopupWrapper from '@/components/PopupWrapper';
+import ButtonRounded from '@/components/buttons/ButtonRounded';
 
 export default function Login({
   searchParams,
 }: {
-  searchParams: { message: string };
+  searchParams: { message: string; confirm: string };
 }) {
   const signIn = async (formData: FormData) => {
     'use server';
@@ -29,6 +31,13 @@ export default function Login({
 
   return (
     <div className='flex flex-col  items-center  px-8'>
+      {searchParams.confirm && (
+        <PopupWrapper>
+          <h3>Verify your email</h3>
+          <p>{searchParams.confirm}</p>
+          <ButtonRounded type='button'>Resend verification email</ButtonRounded>
+        </PopupWrapper>
+      )}
       <AuthForm
         onSubmit={signIn}
         buttonText='LOG IN'
