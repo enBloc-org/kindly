@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import PopupWrapper from './PopupWrapper';
-import ButtonRounded from './buttons/ButtonRounded';
 
 const meta: Meta<typeof PopupWrapper> = {
   title: 'General/PopupWrapper',
@@ -10,20 +9,48 @@ const meta: Meta<typeof PopupWrapper> = {
 export default meta;
 type story = StoryObj<typeof meta>;
 
-export const PopupWrapperWithEmailConfirmation: story = {
+export const PopupWrapperWithChildren: story = {
+  args: {
+    children: 'confirmEmail',
+  },
+
   argTypes: {
     children: {
-      options: ['confirmEmail'],
+      options: ['confirmEmail', 'resetPassword'],
       mapping: {
         confirmEmail: (
           <>
             <h3 className='font-bold'>Verify your email</h3>
             <p>
-              Please verify your email by clicking the link set to @gmail.com
+              Please verify your email by clicking the link set to{' '}
+              <span className='text-primaryOrange'>@gmail.com</span>
             </p>
-            <ButtonRounded type='button'>
+            <button
+              type='button'
+              className='rounded-md bg-primaryOrange p-[5px] text-monoY'
+            >
               Resend verification email
-            </ButtonRounded>
+            </button>
+          </>
+        ),
+        resetPassword: (
+          <>
+            <h3 className='font-bold'>Reset your password</h3>
+            <p>
+              Enter your email address and we will send you the reset password
+              link
+            </p>
+            <input
+              type='email'
+              className='rounded-md bg-secondaryGray p-[4px]'
+              placeholder='Email'
+            ></input>
+            <button
+              type='button'
+              className='rounded-md bg-primaryOrange p-[5px] text-monoY'
+            >
+              Confirm
+            </button>
           </>
         ),
       },
