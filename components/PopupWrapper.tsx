@@ -24,6 +24,11 @@ export default function PopupWrapper({ children }: { children: ReactNode }) {
     place-items-between
     [&>*]:col-span-full
     [&>*]:row-span-1
+    absolute
+    left-[50%]
+    -translate-x-[50%]
+    top-[50%]
+    -translate-y-[50%]
   `;
 
   return (
