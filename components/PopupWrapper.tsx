@@ -1,3 +1,5 @@
+'use client';
+import { useState } from 'react';
 import { ReactNode } from 'react';
 
 /**
@@ -8,6 +10,8 @@ import { ReactNode } from 'react';
  * @returns
  */
 export default function PopupWrapper({ children }: { children: ReactNode }) {
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+
   const wrapperStyling: string = `
     grid-col-1 
     grid 
@@ -32,6 +36,8 @@ export default function PopupWrapper({ children }: { children: ReactNode }) {
     z-30
   `;
 
+  if (!isOpen) return null;
+
   return (
     <>
       <div className='absolute left-0 top-0 z-20 m-0 h-screen w-screen bg-primaryGray opacity-[75%]' />
@@ -39,6 +45,7 @@ export default function PopupWrapper({ children }: { children: ReactNode }) {
         <button
           type='button'
           className='close-button h-10px w-10px z-30 col-[2] row-[1] -m-3 cursor-pointer'
+          onClick={() => setIsOpen((current) => !current)}
         >
           <svg
             width='15'
