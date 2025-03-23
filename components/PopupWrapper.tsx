@@ -5,9 +5,10 @@ import { ReactNode } from 'react';
 /**
  *
  * @summary This component will wrap any children in a single column grid at evenly spaced intervals.
+ * 
  * The wrapper will be displayed absolutely on the page.
- * @param children - accepts any components or html elements to be rendered in a popup
- * @returns
+
+ * Clicking the close button will unmount the component entirely.
  */
 export default function PopupWrapper({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState<boolean>(true);
