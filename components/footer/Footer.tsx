@@ -13,8 +13,8 @@ const Footer: React.FC<FooterProps> = ({
 }) => {
   return (
     <footer className='mt-auto w-full bg-brand-80 text-gray-800'>
-      <div className='mx-auto max-w-7xl px-4 py-8 md:px-20 lg:px-24'>
-        <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 md:gap-8 lg:grid-cols-4 lg:gap-6'>
+      <div className='mx-auto max-w-7xl px-4 py-8 md:px-12 lg:px-24'>
+        <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 md:gap-4 lg:grid-cols-4 lg:gap-6'>
           <div>
             <h3 className='mb-4 font-bold'>Follow us at:</h3>
             <div className='flex space-x-4'>
@@ -60,7 +60,7 @@ const Footer: React.FC<FooterProps> = ({
               <p>{companyInfo.address}</p>
             </div>
           </div>
-          <div className='hidden md:block md:pl-8 lg:pl-20'>
+          <div className='hidden md:block  md:pl-8 lg:pl-20'>
             <h3 className='mb-4 font-bold'>Company Info</h3>
             <ul className='space-y-2 text-sm'>
               <li>
@@ -74,7 +74,7 @@ const Footer: React.FC<FooterProps> = ({
               </li>
             </ul>
           </div>
-          <div className='hidden md:block md:pl-8 lg:pl-24'>
+          <div className='hidden md:block  md:pl-10 lg:pl-24'>
             <h3 className='mb-4  font-bold'>Pages</h3>
             <ul className='space-y-2 text-sm'>
               <li>
@@ -91,7 +91,7 @@ const Footer: React.FC<FooterProps> = ({
               </li>
             </ul>
           </div>
-          <div className='hidden md:block md:pl-3 lg:pl-12'>
+          <div className='hidden md:block  md:pl-6 lg:pl-12'>
             <h3 className='mb-4 font-bold'>Additional</h3>
             <ul className='space-y-2 text-sm'>
               <li>
