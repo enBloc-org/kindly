@@ -13,7 +13,7 @@ const Footer: React.FC<FooterProps> = ({
 }) => {
   return (
     <footer className='mt-auto w-full bg-brand-80 text-gray-800'>
-      <div className='mx-auto max-w-7xl px-4 py-8 md:px-8'>
+      <div className='mx-auto max-w-7xl px-4 py-8 md:px-20 lg:px-24'>
         <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 md:gap-8 lg:grid-cols-4 lg:gap-6'>
           <div>
             <h3 className='mb-4 font-bold'>Follow us at:</h3>
