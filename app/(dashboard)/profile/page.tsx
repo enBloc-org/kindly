@@ -4,7 +4,7 @@ import { ProfileEdit } from '@/components/form/ProfileEdit';
 import DonatedItemsList from '@/components/DonatedItemsList';
 import { useUser } from '@/context/UserProvider';
 
-const ProfilePage = async () => {
+const ProfilePage = () => {
   const { user } = useUser();
   if (!user) {
     return <div>Error User profile not found or username is missing</div>;
