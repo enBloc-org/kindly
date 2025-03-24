@@ -10,12 +10,14 @@ import giveKindly from '@/public/giveKindly.png';
 import Link from 'next/link';
 import React from 'react';
 import DisplayRecentlyAddedItems from '@/components/DisplayRecentlyAddedItems';
+import InfoCards from '@/components/InfoCard/InfoCards';
 
 export default function Index() {
   return (
     <Providers>
       <FullHeightContainer>
         <Header />
+        <InfoCards />
         <main className='mb-24 flex flex-grow flex-col'>
           <div className='m-auto max-w-lg'>
             <Image
