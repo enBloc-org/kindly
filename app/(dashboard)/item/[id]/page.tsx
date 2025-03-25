@@ -9,7 +9,7 @@ const DisplayItemDetails = async ({ params }: { params: { id: string } }) => {
 
   const supabase = newServerClient();
 
-  const userProfile = await getProfile(userId);
+  const { data: userProfile } = await getProfile(userId);
   let canMessage: boolean = true;
 
   try {

@@ -2,7 +2,9 @@
 import { profile } from '@/types/supabaseTypes';
 import newServerClient from '../utils/newServerClient';
 
-export async function getProfile(id: string | undefined): Promise<profile> {
+export async function getProfile(
+  id: string | undefined
+): Promise<{ data: profile }> {
   const supabase = newServerClient();
 
   try {
@@ -14,7 +16,7 @@ export async function getProfile(id: string | undefined): Promise<profile> {
     if (error)
       throw new Error(`Error updating user_conversations: ${error.message}`);
 
-    return data;
+    return { data: data };
   } catch (error) {
     console.error(`Failed to fetch conversations from database: ${error}`);
     throw error;

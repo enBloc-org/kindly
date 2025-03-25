@@ -30,7 +30,8 @@ export default async function RootLayout({
   const userId = headersList.get('k-active-user');
   let user = null;
   if (userId) {
-    user = await getProfile(userId);
+    const { data } = await getProfile(userId);
+    user = data;
   }
   return (
     <html lang='en'>
