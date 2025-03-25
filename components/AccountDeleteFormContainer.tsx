@@ -5,16 +5,12 @@ import { useRouter } from 'next/navigation';
 import AccountDeleteForm from './AccountDeleteForm';
 import Modal from './Modal';
 import deleteProfile from '@/supabase/models/deleteProfile';
+import { useUser } from '@/context/UserProvider';
 
-export default function AccountDeleteFormContainer({
-  userName,
-  userId,
-}: {
-  userName: string;
-  userId: string;
-}) {
+export default function AccountDeleteFormContainer() {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const router = useRouter();
+  const { userId, user } = useUser();
 
   const formSubmitHandler = () => {
     setIsConfirmed(true);
@@ -23,7 +19,7 @@ export default function AccountDeleteFormContainer({
   const accountDeleteHandler = () => {
     const deleteUser = async () => {
       try {
-        await deleteProfile(userId);
+        await deleteProfile(userId as string);
         router.push('/');
       } catch (error) {
         throw error;
@@ -33,10 +29,11 @@ export default function AccountDeleteFormContainer({
     deleteUser();
   };
 
+  if (!user || !userId) return <div>User not found, please log in.</div>;
   return (
     <div className='flex flex-col  items-center  px-8'>
       <AccountDeleteForm
-        currentUserName={userName}
+        currentUserName={user.username || ''}
         submitHandler={formSubmitHandler}
       />
 
