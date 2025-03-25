@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 type AuthFormProps = {
-  onSubmit: (formData: FormData) => Promise<profile>;
+  onSubmit: (formData: FormData) => Promise<profile | undefined>;
   buttonText: string;
   searchParams?: { message: string };
   isSignUp: boolean;
@@ -47,6 +47,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
     try {
       setErrorMessage(null);
       const userProfile = await onSubmit(formData);
+      if (!userProfile) throw new Error('Cannot find user profile');
       setUser(userProfile);
       router.push('/');
     } catch (error) {
