@@ -1,5 +1,6 @@
 import React from 'react';
 import './globals.css';
+import DynamicFooter from '@/components/footer/DynamicFooter';
 
 const defaultUrl = process.env.AWS_AMPLIFY
   ? process.env.AWS_AMPLIFY
@@ -24,7 +25,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body>
+        {children}
+        <DynamicFooter />
+      </body>
     </html>
   );
 }
