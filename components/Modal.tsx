@@ -6,7 +6,7 @@ import ActionButton from './ActionButton';
 
 interface ModalProps {
   name: string;
-  targetId: string;
+  targetId: string | number;
   message: string;
   onAction: () => void;
   isDisabled?: boolean;

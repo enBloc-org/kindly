@@ -186,7 +186,7 @@ const DonatedItemsList: React.FC<DisplayDonatedItemsProps> = ({
                     </Link>
                     <Modal
                       name='Delete Item'
-                      targetId={item.id}
+                      targetId={item.id!}
                       message='By pressing "Confirm" you will delete this item permanently.'
                       onAction={() => handleDeleteSuccess(item.id!)}
                     />
