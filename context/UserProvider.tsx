@@ -1,6 +1,13 @@
 'use client';
 import type { profile } from '@/types/supabaseTypes';
-import { ReactNode, createContext, useContext } from 'react';
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useContext,
+  useState,
+} from 'react';
 
 type UserProviderProps = {
   userData: profile | null;
@@ -9,16 +16,21 @@ type UserProviderProps = {
 
 type UserContextType = {
   user: profile | null;
+  userId: string | null;
+  setUser: Dispatch<SetStateAction<profile | null>>;
 };
 
-const UserContext = createContext<UserContextType>({ user: null });
+const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<UserProviderProps> = ({
-  userData,
   children,
+  userData,
 }) => {
+  const [user, setUser] = useState<profile | null>(userData);
+  const userId = user?.id || null;
+
   return (
-    <UserContext.Provider value={{ user: userData }}>
+    <UserContext.Provider value={{ user, setUser, userId }}>
       {children}
     </UserContext.Provider>
   );
@@ -27,7 +39,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({
 export function useUser() {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error('Context must be used within a provider.');
+    throw new Error('useUser must be used within a UserProvider');
   }
   return context;
 }
