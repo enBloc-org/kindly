@@ -9,16 +9,11 @@ import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 import NotificationDot from '../NotificationDot';
 import KyndlyLogoLink from './KyndlyLogoLink';
 import HamburgerMenu from '@/components/menus/HamburgerMenu';
+import { useUser } from '@/context/UserProvider';
 
-const MobileNavbar = ({
-  userId,
-  hasNotification,
-}: {
-  userId: string | null;
-  hasNotification: boolean;
-}) => {
+const MobileNavbar = ({ hasNotification }: { hasNotification: boolean }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { userId } = useUser();
   return (
     <div className='flex w-full items-center justify-between lg:hidden'>
       <div className='flex items-center'>

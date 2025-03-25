@@ -7,10 +7,12 @@ import selectUserUnreadConversations from '@/supabase/models/messaging/selectUse
 // Components
 import DesktopNav from './navigation/DesktopNav';
 import MobileNavbar from './navigation/MobileNavbar';
+import { useUser } from '@/context/UserProvider';
 
-export default function Header({ userId }: { userId: string | null }) {
+export default function Header() {
   const pathname = usePathname();
   const [hasNotification, setHasNotification] = useState<boolean>(false);
+  const { userId } = useUser();
 
   useEffect(() => {
     const getUnreadConversations = async () => {
@@ -38,8 +40,8 @@ export default function Header({ userId }: { userId: string | null }) {
 
   return (
     <header className='flex min-h-[4rem] flex-shrink-0 items-center justify-between bg-monoY px-4 py-2'>
-      <MobileNavbar userId={userId} hasNotification={hasNotification} />
-      <DesktopNav userId={userId} hasNotification={hasNotification} />
+      <MobileNavbar hasNotification={hasNotification} />
+      <DesktopNav hasNotification={hasNotification} />
     </header>
   );
 }

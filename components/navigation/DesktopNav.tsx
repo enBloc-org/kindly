@@ -12,13 +12,7 @@ import NotificationDot from '../NotificationDot';
 import KyndlyLogoLink from './KyndlyLogoLink';
 import { useUser } from '@/context/UserProvider';
 
-const DesktopNav = ({
-  userId,
-  hasNotification,
-}: {
-  userId: string | null;
-  hasNotification: boolean;
-}) => {
+const DesktopNav = ({ hasNotification }: { hasNotification: boolean }) => {
   const { user } = useUser();
   return (
     <nav
@@ -43,7 +37,7 @@ const DesktopNav = ({
           <AddItemRouteIcon width={30} height={30} />
           Post an Item
         </Link>
-        {userId && (
+        {user && (
           <Link
             href='/conversations'
             aria-label='My messages'

@@ -36,7 +36,7 @@ export default async function RootLayout({
     <html lang='en'>
       <body>
         <Providers userData={user}>
-          <Header userId={userId} />
+          <Header />
           {children}
         </Providers>
       </body>
