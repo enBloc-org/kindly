@@ -37,9 +37,12 @@ export const ConversationPartner: React.FC<ConversationPartnerProps> = ({
         conversation_id,
         currentUserId
       );
-      const partnerProfile = await getProfile(partnerId);
+      const { data: partnerProfile } = await getProfile(partnerId);
 
-      setConversationPartner(partnerProfile.data);
+      setConversationPartner({
+        username: partnerProfile.username || '',
+        avatar: partnerProfile.imageSrc,
+      });
     };
 
     getPartnerProfile();
