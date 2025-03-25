@@ -28,8 +28,8 @@ export default function Login({
 
     const userId = data.user?.id;
     if (userId) {
-      const profile = await getProfile(userId);
-      return profile;
+      const { data } = await getProfile(userId);
+      return data;
     }
   };
 
