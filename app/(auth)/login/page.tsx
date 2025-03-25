@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 import AuthForm from '../../../components/AuthForm';
 import Link from 'next/link';
 import newServerClient from '@/supabase/utils/newServerClient';
+import { getProfile } from '@/supabase/models/getProfile';
 
 export default function Login({
   searchParams,
@@ -15,16 +16,21 @@ export default function Login({
     const password = formData.get('password') as string;
     const supabase = newServerClient();
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
-    redirect(
-      error
-        ? '/login?message=Something has gone wrong. Please try again later.'
-        : '/'
-    );
+    if (error)
+      redirect(
+        '/login?message=Something has gone wrong. Please try again later.'
+      );
+
+    const userId = data.user?.id;
+    if (userId) {
+      const profile = await getProfile(userId);
+      return profile;
+    }
   };
 
   return (
