@@ -36,7 +36,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
             className={`block h-[0.2rem] w-5 rounded-full
                           bg-base-110 transition-all duration-300 ease-out ${
                             isMenuOpen
-                              ? 'translate-y-[0.135rem] rotate-45 lg:translate-y-4'
+                              ? 'translate-y-[0.145rem] rotate-45 lg:translate-y-4'
                               : '-translate-y-0.0'
                           }`}
           ></span>
