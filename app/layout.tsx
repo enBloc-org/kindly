@@ -1,9 +1,9 @@
-import React from 'react';
 import './globals.css';
 import Header from '@/components/Header';
 import { headers } from 'next/headers';
 import Providers from '@/context/Providers';
 import { getProfile } from '@/supabase/models/getProfile';
+import DynamicFooter from '@/components/footer/DynamicFooter';
 
 const defaultUrl = process.env.AWS_AMPLIFY
   ? process.env.AWS_AMPLIFY
@@ -39,6 +39,7 @@ export default async function RootLayout({
         <Providers userData={user}>
           <Header />
           {children}
+          <DynamicFooter />
         </Providers>
       </body>
     </html>

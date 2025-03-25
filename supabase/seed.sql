@@ -183,11 +183,12 @@ INSERT INTO "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "r
 --
 
 INSERT INTO "public"."conversations" ("id", "created_at") VALUES
-	(1, '2024-06-16 13:44:29.042856+00'),
-	(2, '2024-06-16 13:46:10.25272+00'),
-	(3, '2024-06-16 13:47:48.353521+00'),
-	(4, '2024-06-16 13:49:04.157526+00'),
-	(5, '2024-06-16 13:51:15.83193+00');
+	(1, CURRENT_DATE - interval '5 month'),
+	(2, CURRENT_DATE - interval '4 month'),
+	(3, CURRENT_DATE - interval '5 month'),
+	(4, CURRENT_DATE - interval '3 month'),
+	(5, CURRENT_DATE - interval '2 month'),
+	(6, CURRENT_DATE - interval '7 month');
 
 
 --
