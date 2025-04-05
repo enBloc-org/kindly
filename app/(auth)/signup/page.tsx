@@ -3,11 +3,12 @@ import insertRow from '@/supabase/models/insertRow';
 import newServerClient from '@/supabase/utils/newServerClient';
 import { PartialProfile } from '@/types/supabaseTypes';
 import { redirect } from 'next/navigation';
+import SignupConfirmationPopup from '@/components/popups/SignupConfirmationPopup';
 
 export default function SignUp({
   searchParams,
 }: {
-  searchParams: { message: string };
+  searchParams: { message: string; confirm: string };
 }) {
   const signUp = async (formData: FormData) => {
     'use server';
@@ -46,12 +47,15 @@ export default function SignUp({
     } as PartialProfile);
 
     return redirect(
-      '/login?confirm=Please verify your email by clicking the link sent to your inbox'
+      `/signup?confirm=${encodeURIComponent(formData.get('email') as string)}`
     );
   };
 
   return (
     <div className=' flex flex-col  items-center  px-8  '>
+      {searchParams.confirm && (
+        <SignupConfirmationPopup targetEmail={searchParams.confirm} />
+      )}
       <AuthForm
         onSubmit={signUp}
         buttonText='REGISTER'
