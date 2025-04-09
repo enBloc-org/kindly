@@ -4,7 +4,6 @@
 import Providers from '@/context/Providers';
 import FullHeightContainer from '@/components/layout/FullHeightComponent';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import Image from 'next/image';
 import giveKindly from '@/public/giveKindly.png';
 import Link from 'next/link';
@@ -95,7 +94,6 @@ export default function Index() {
             </div>
           </div>
         </main>
-        <Footer />
       </FullHeightContainer>
     </Providers>
   );
