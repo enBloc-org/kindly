@@ -26,7 +26,7 @@ export default function GetStartedSection() {
             Donate Item
           </MainButton>
           <MainButton
-            clickHandler={() => console.log('Browse item')}
+            clickHandler={() => router.push('/search')}
             size='small'
             variant='secondary'
             type='button'
