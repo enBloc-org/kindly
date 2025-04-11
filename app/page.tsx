@@ -8,7 +8,7 @@ import giveKindly from '@/public/giveKindly.png';
 import Link from 'next/link';
 import React from 'react';
 import DisplayRecentlyAddedItems from '@/components/DisplayRecentlyAddedItems';
-import InfoCards from '@/components/InfoCard/InfoCards';
+import InfoCards from '@/components/welcomeSection/InfoCards';
 
 export default function Index() {
   return (
