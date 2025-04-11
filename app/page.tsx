@@ -9,6 +9,7 @@ import Link from 'next/link';
 import React from 'react';
 import DisplayRecentlyAddedItems from '@/components/DisplayRecentlyAddedItems';
 import InfoCards from '@/components/welcomeSection/InfoCards';
+import GetStartedSection from '@/components/getStartedSection/GetStartedSection';
 
 export default function Index() {
   return (
@@ -16,6 +17,7 @@ export default function Index() {
       <Header />
 
       <InfoCards />
+      <GetStartedSection />
       <main className='mb-24 flex flex-grow flex-col'>
         <div className='m-auto max-w-lg'>
           <Image
