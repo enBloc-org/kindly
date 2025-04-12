@@ -15,9 +15,9 @@ export default function Index() {
   return (
     <Providers>
       <Header />
-
       <InfoCards />
       <GetStartedSection />
+      <DisplayRecentlyAddedItems />
       <main className='mb-24 flex flex-grow flex-col'>
         <div className='m-auto max-w-lg'>
           <Image
