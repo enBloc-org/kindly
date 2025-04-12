@@ -8,6 +8,7 @@ import React from 'react';
 import DisplayRecentlyAddedItems from '@/components/DisplayRecentlyAddedItems';
 import InfoCards from '@/components/welcomeSection/InfoCards';
 import GetStartedSection from '@/components/getStartedSection/GetStartedSection';
+import DonateBrowseButtons from '@/components/getStartedSection/DonateBrowseButtons';
 
 export default function Index() {
   return (
@@ -61,6 +62,7 @@ export default function Index() {
             <p className='px-4 text-[16px] font-[400] text-gray-700 md:text-[18px] lg:text-[20px] lg:font-[700]'>
               Thank you KYNDLY.
             </p>
+            <DonateBrowseButtons />
           </div>
         </div>
       </div>
