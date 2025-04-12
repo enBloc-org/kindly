@@ -1,9 +1,8 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import MainButton from '../buttons/MainButton/MainButton';
+
+import DonateBrowseButtons from './DonateBrowseButtons';
 
 export default function GetStartedSection() {
-  const router = useRouter();
   return (
     <div className='mx-auto flex  w-[90%] justify-center  lg:max-w-[1080px]'>
       <div className='my-[40px] flex w-full flex-col items-center lg:my-[96px]'>
@@ -15,24 +14,7 @@ export default function GetStartedSection() {
             Join the KINDLY revolution today: share what you can spare, find
             what you need!
           </h5>
-        </div>
-        <div className='flex  w-full flex-wrap  justify-center gap-[10px] md:gap-[20px] lg:gap-[20px]  '>
-          <MainButton
-            clickHandler={() => router.push('/add-item')}
-            size='small'
-            variant='primary'
-            type='button'
-          >
-            Donate Item
-          </MainButton>
-          <MainButton
-            clickHandler={() => router.push('/search')}
-            size='small'
-            variant='secondary'
-            type='button'
-          >
-            Browse Button
-          </MainButton>
+          <DonateBrowseButtons />
         </div>
       </div>
     </div>
