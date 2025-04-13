@@ -1,8 +1,6 @@
+'use client';
+import { useState } from 'react';
 import AuthForm from '@/components/AuthForm';
-import insertRow from '@/supabase/models/insertRow';
-import newServerClient from '@/supabase/utils/newServerClient';
-import { PartialProfile } from '@/types/supabaseTypes';
-import { redirect } from 'next/navigation';
 import SignupConfirmationPopup from '@/components/popups/SignupConfirmationPopup';
 
 export default function SignUp({
@@ -10,52 +8,27 @@ export default function SignUp({
 }: {
   searchParams: { message: string; confirm: string };
 }) {
+  const [email, setEmail] = useState<string>('');
+
   const signUp = async (formData: FormData) => {
-    'use server';
-
-    const supabase = newServerClient();
-
-    const { data, error } = await supabase.auth.signUp({
-      email: formData.get('email') as string,
-      password: formData.get('password') as string,
+    await fetch('api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: formData.get('email'),
+        password: formData.get('password'),
+        username: formData.get('user_name'),
+        isRefugee: formData.get('refugee') === 'true',
+      }),
     });
-
-    if (error) {
-      if (error.code === 'user_already_exists') {
-        return redirect(
-          '/login?message=User already registered. Please try logging in instead.'
-        );
-      }
-
-      if (error.code === 'weak_password') {
-        return redirect(
-          `/signup?message=Your password must include at lease one uppercase character, one number and one special character`
-        );
-      }
-
-      return redirect(`/signup?message=${error.code?.replaceAll(/_/g, ' ')}`);
-    }
-
-    // Get userId and insert it as ID in Profiles table
-    const userId = data && data.user?.id;
-    insertRow('profiles', {
-      id: userId,
-      email: formData.get('email'),
-      postcode: formData.get('postcode'),
-      username: formData.get('user_name'),
-      refugee: formData.get('refugee') === 'true',
-    } as PartialProfile);
-
-    return redirect(
-      `/signup?confirm=${encodeURIComponent(formData.get('email') as string)}`
-    );
+    setEmail(formData.get('email') as string);
   };
 
   return (
     <div className=' flex flex-col  items-center  px-8  '>
-      {searchParams.confirm && (
-        <SignupConfirmationPopup targetEmail={searchParams.confirm} />
-      )}
+      {email !== '' && <SignupConfirmationPopup targetEmail={email} />}
       <AuthForm
         onSubmit={signUp}
         buttonText='REGISTER'
