@@ -2,11 +2,9 @@ import newServerClient from '@/supabase/utils/newServerClient';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
-  console.log('IS ANYBODY LISTENING?');
   const baseURL = request.nextUrl;
   const body = await request.json();
   const { email, password, username, isRefugee } = body;
-  console.dir(body);
   const supabase = newServerClient();
 
   const { data, error } = await supabase.auth.signUp({
