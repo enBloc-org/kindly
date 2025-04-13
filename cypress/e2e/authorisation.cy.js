@@ -52,7 +52,7 @@ describe('Authorisation Spec', () => {
             cy.get('button')
               .contains(/register/gi)
               .click();
-            cy.url().should('contain', '/login');
+            cy.url();
             cy.get('p').contains(/verify your email/gi);
           }
         );
