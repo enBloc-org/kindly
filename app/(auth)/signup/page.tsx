@@ -11,19 +11,28 @@ export default function SignUp({
   const [email, setEmail] = useState<string>('');
 
   const signUp = async (formData: FormData) => {
-    await fetch('api/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: formData.get('email'),
-        password: formData.get('password'),
-        username: formData.get('user_name'),
-        isRefugee: formData.get('refugee') === 'true',
-      }),
-    });
-    setEmail(formData.get('email') as string);
+    try {
+      const response = await fetch('api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.get('email'),
+          password: formData.get('password'),
+          username: formData.get('user_name'),
+          isRefugee: formData.get('refugee') === 'true',
+        }),
+      });
+
+      if (response.redirected) {
+        window.location.href = response.url;
+      }
+
+      setEmail(formData.get('email') as string);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
