@@ -27,7 +27,7 @@ module.exports = {
         },
         brand: {
           80: '#FDEDD4',
-          90: '##FFC48A',
+          90: '#FFC48A',
           100: '#FF8D3C',
           110: '#FF6F08',
           120: '#CC5706',
@@ -37,7 +37,7 @@ module.exports = {
           100: '#FFC107',
           110: '#F0CD0E',
         },
-        sucess: {
+        success: {
           90: '#52CC8E',
           100: '#008944',
           110: '#0A6638',
