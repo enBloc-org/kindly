@@ -24,10 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <body>
-        {children}
-        <DynamicFooter />
+    <html lang='en' className='h-full'>
+      <body className='h-full'>
+        <div className='flex min-h-screen flex-col'>
+          <div className='flex-grow'>{children}</div>
+          <DynamicFooter />
+        </div>
       </body>
     </html>
   );
