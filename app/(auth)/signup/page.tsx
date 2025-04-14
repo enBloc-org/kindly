@@ -49,10 +49,11 @@ export default function SignUp({
   };
 
   return (
-    <div className=' flex flex-col  items-center  px-8  '>
+    <div className='flex flex-col items-center py-12'>
+      <h2 className='text-5xl font-medium text-base-110'>Sing up</h2>
       <AuthForm
         onSubmit={signUp}
-        buttonText='REGISTER'
+        buttonText='Sing up'
         searchParams={searchParams}
         isSignUp={true}
       />
