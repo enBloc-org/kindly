@@ -7,6 +7,13 @@ const meta: Meta<typeof Input> = {
   title: 'components/Input',
   component: Input,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <div className='mx-auto max-w-[1200px] bg-white p-4'>
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     label: {
       description: 'Text label shown above the input',
@@ -127,7 +134,7 @@ export const DisabledInput: Story = {
 export const WithCustomClass: Story = {
   args: {
     label: 'Styled Input',
-    placeholder: 'With border + bg',
-    className: 'bg-brand-80 border-brand-100',
+    placeholder: 'With border + bg + 412px width',
+    className: 'bg-brand-80 border-brand-100 w-[412px]',
   },
 };
