@@ -13,10 +13,24 @@ export const SearchBar: React.FC<SearchBarPropType> = ({
   handleSubmit,
 }) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchParams((prevState) => ({
-      ...prevState,
-      query: e.target.value,
-    }));
+    setSearchParams(
+      (prevState) => (
+        console.log(e.target.value.length),
+        {
+          ...prevState,
+          query: e.target.value,
+        }
+      )
+    );
+  };
+
+  const clearSearchBar = () => {
+    if (searchParams.query.length > 0) {
+      setSearchParams((prevState) => ({
+        ...prevState,
+        query: '',
+      }));
+    }
   };
 
   return (
@@ -24,15 +38,24 @@ export const SearchBar: React.FC<SearchBarPropType> = ({
       onSubmit={handleSubmit}
       className='flex items-center justify-center focus-within:opacity-90'
     >
-      <div className='relative rounded-lg shadow-custom'>
+      <div className='relative flex items-center rounded-lg shadow-custom'>
         <input
           value={searchParams.query}
-          className='max-h-10 w-[350px] rounded-lg bg-primaryWhite p-3 outline-none'
+          className='max-h-10 w-[350px] rounded-lg bg-primaryWhite p-3 font-body outline-none sm:min-w-[600px] md:min-w-[712px] xl:w-[1080px]'
           type='text'
           placeholder='Search...'
           required
           onChange={handleInputChange}
         />
+
+        {searchParams.query.length > 0 && (
+          <button
+            className='absolute right-10 pr-3 font-body text-xs'
+            onClick={clearSearchBar}
+          >
+            Clear
+          </button>
+        )}
 
         <button
           className='absolute right-0 h-full w-[40px] flex-shrink-0 flex-grow-0 rounded-lg bg-brand-80 px-3 py-2 '

@@ -50,7 +50,7 @@ export default function SearchPageDisplay() {
         setSearchParams={setSearchParams}
         handleSubmit={handleSubmit}
       />
-      {/* temporarily placed filters under the search bar */}
+
       <div className='m-auto mt-8 flex max-w-[450px] flex-wrap justify-center gap-3'>
         <FilterOptions
           searchParams={searchParams}
