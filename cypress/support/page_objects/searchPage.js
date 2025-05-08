@@ -6,7 +6,7 @@ export class SearchPage extends BasePage {
   }
 
   searchInput() {
-    return cy.get('input[placeholder*="Find an item"]').should('be.visible');
+    return cy.get('input[placeholder*="Search..."]').should('be.visible');
   }
 
   submitButton() {

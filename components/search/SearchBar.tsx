@@ -13,15 +13,10 @@ export const SearchBar: React.FC<SearchBarPropType> = ({
   handleSubmit,
 }) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchParams(
-      (prevState) => (
-        console.log(e.target.value.length),
-        {
-          ...prevState,
-          query: e.target.value,
-        }
-      )
-    );
+    setSearchParams((prevState) => ({
+      ...prevState,
+      query: e.target.value,
+    }));
   };
 
   const clearSearchBar = () => {
