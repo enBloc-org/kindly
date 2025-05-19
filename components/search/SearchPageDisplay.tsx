@@ -45,18 +45,20 @@ export default function SearchPageDisplay() {
 
   return (
     <div className='mb-28 mt-8'>
-      <div className='m-auto flex max-w-[450px] flex-wrap justify-center gap-3'>
-        <SearchBar
-          searchParams={searchParams}
-          setSearchParams={setSearchParams}
-          handleSubmit={handleSubmit}
-        />
+      <SearchBar
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
+        handleSubmit={handleSubmit}
+      />
+      {/* temporarily placed filters under the search bar */}
+      <div className='m-auto mt-8 flex max-w-[450px] flex-wrap justify-center gap-3'>
         <FilterOptions
           searchParams={searchParams}
           setSearchParams={setSearchParams}
           setHasFilters={setHasFilters}
         />
       </div>
+
       {isLoading ? (
         <div className='mt-8 flex justify-center'>
           <h2>Loading....</h2>

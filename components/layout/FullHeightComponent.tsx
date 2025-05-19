@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 const FullHeightContainer = ({ children }: { children: ReactNode }) => {
   return (
-    <div className='h-min-[100dvh] grid grid-rows-[auto-1fr-auto]'>
+    <div className='grid min-h-[100dvh] grid-rows-[auto-1fr-auto]'>
       {children}
     </div>
   );
