@@ -25,7 +25,10 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
 
   return (
     <>
-      <nav className='relative' role='menu'>
+      <nav
+        className={`relative ${isMenuOpen ? 'menu-open' : ''} '}`}
+        role='menu'
+      >
         <button
           className='ml-2 mr-4 flex flex-col items-center justify-center gap-1'
           aria-label='Menu button'
