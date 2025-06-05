@@ -60,7 +60,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
         </button>
       </nav>
       <div
-        className={`absolute left-0 top-[64px] z-50 h-full w-full transform bg-monoY px-2 py-6 transition-all duration-500 ease-in-out ${
+        className={`absolute left-0 top-[64px] z-50 h-screen w-full transform overflow-y-auto bg-monoY px-2 py-6 transition-all duration-500 ease-in-out ${
           isMenuOpen
             ? 'visible translate-y-0 opacity-100'
             : 'invisible -translate-y-16 opacity-0'
