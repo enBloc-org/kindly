@@ -4,6 +4,7 @@ import { headers } from 'next/headers';
 import Providers from '@/context/Providers';
 import { getProfile } from '@/supabase/models/getProfile';
 import DynamicFooter from '@/components/footer/DynamicFooter';
+import FullHeightContainer from '@/components/layout/FullHeightComponent';
 
 const defaultUrl = process.env.AWS_AMPLIFY
   ? process.env.AWS_AMPLIFY
@@ -37,9 +38,11 @@ export default async function RootLayout({
     <html lang='en'>
       <body>
         <Providers userData={user}>
-          <Header />
-          {children}
-          <DynamicFooter />
+          <FullHeightContainer>
+            <Header />
+            {children}
+            <DynamicFooter />
+          </FullHeightContainer>
         </Providers>
       </body>
     </html>

@@ -1,5 +1,3 @@
-import FullHeightContainer from '@/components/layout/FullHeightComponent';
-
 export default async function DashBoardLayout({
   children,
 }: {
@@ -7,9 +5,7 @@ export default async function DashBoardLayout({
 }) {
   return (
     <>
-      <FullHeightContainer>
-        <main className='flex flex-col'>{children}</main>
-      </FullHeightContainer>
+      <main className='flex flex-col'>{children}</main>
     </>
   );
 }
