@@ -5,3 +5,4 @@ package.json
 .prettierignore
 .eslintignore
 README.md
+types/types.gen.ts
