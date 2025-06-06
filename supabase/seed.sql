@@ -313,7 +313,7 @@ SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 20, true);
 DO $$
 BEGIN
   SELECT pg_catalog.setval('"pgsodium"."key_key_id_seq"', 1, false);
-EXCEPTION WHEN undefined_table OR undefined_schema THEN
+EXCEPTION WHEN OTHERS THEN
   RAISE NOTICE 'pgsodium schema or sequence not available, skipping';
 END $$;
 
