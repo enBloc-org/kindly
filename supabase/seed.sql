@@ -1,5 +1,5 @@
 SET session_replication_role = replica;
-
+CREATE SCHEMA IF NOT EXISTS pgsodium;
 --
 -- PostgreSQL database dump
 --
@@ -310,8 +310,12 @@ SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 20, true);
 -- Name: key_key_id_seq; Type: SEQUENCE SET; Schema: pgsodium; Owner: supabase_admin
 --
 
-SELECT pg_catalog.setval('"pgsodium"."key_key_id_seq"', 1, false);
-
+DO $$
+BEGIN
+  SELECT pg_catalog.setval('"pgsodium"."key_key_id_seq"', 1, false);
+EXCEPTION WHEN undefined_table OR undefined_schema THEN
+  RAISE NOTICE 'pgsodium schema or sequence not available, skipping';
+END $$;
 
 --
 -- Name: conversations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
