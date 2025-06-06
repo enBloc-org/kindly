@@ -163,7 +163,7 @@ vector_port = 54328
 # Configure one of the supported backends: `postgres`, `bigquery`.
 backend = "postgres"
 
-[extensions]
+[db.extensions]
 pgsodium = false
 
 # Experimental features may be deprecated any time
