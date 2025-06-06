@@ -1,6 +1,6 @@
 import { NavigationIconType } from './NavigationIconType';
 
-const SearchRouteIcon: React.FC<NavigationIconType> = ({ width, height }) => {
+const HamburgerIcon: React.FC<NavigationIconType> = ({ width, height }) => {
   return (
     <svg
       width={width}
@@ -10,14 +10,21 @@ const SearchRouteIcon: React.FC<NavigationIconType> = ({ width, height }) => {
       xmlns='http://www.w3.org/2000/svg'
     >
       <path
-        d='M19 26C22.866 26 26 22.866 26 19C26 15.134 22.866 12 19 12C15.134 12 12 15.134 12 19C12 22.866 15.134 26 19 26Z'
+        d='M13 15H29'
         stroke='#333333'
         strokeWidth='2'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
-        d='M30 30L24 24'
+        d='M13 21H29'
+        stroke='#333333'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M13 27H29'
         stroke='#333333'
         strokeWidth='2'
         strokeLinecap='round'
@@ -27,4 +34,4 @@ const SearchRouteIcon: React.FC<NavigationIconType> = ({ width, height }) => {
   );
 };
 
-export default SearchRouteIcon;
+export default HamburgerIcon;

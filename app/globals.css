@@ -47,6 +47,10 @@ body {
   @apply bg-monoY font-body text-base-120;
 }
 
+body:has(.menu-open) {
+  overflow-y: hidden;
+}
+
 :focus-visible {
   outline: 2px solid #ff6f08;
   outline-offset: 2px;
@@ -121,7 +125,29 @@ body {
   z-index: 100;
 }
 
+.menu-link {
+  @apply relative flex items-center px-4 py-2 text-lg;
+}
+
+.menu-link:before {
+  content: '';
+  position: absolute;
+  transform: translateY(-1.8rem);
+  width: 90%;
+  height: 2px;
+  background-color: #cdcdcd;
+}
+
+.last-link::after {
+  content: '';
+  position: absolute;
+  transform: translateY(1.8rem);
+  width: 90%;
+  height: 2px;
+  background-color: #cdcdcd;
+}
+
 input:-webkit-autofill {
-  box-shadow: 0 0 0px 1000px #f3f3f3 inset !important; /* Маскує autofill-бекграунд */
-  -webkit-text-fill-color: #929292 !important; /* Колір тексту */
+  box-shadow: 0 0 0px 1000px #f3f3f3 inset !important;
+  -webkit-text-fill-color: #929292 !important;
 }

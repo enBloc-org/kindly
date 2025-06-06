@@ -1,116 +1,74 @@
 'use client';
 
+import Link from 'next/link';
+
 // Components
-import NavigationLinkContainer from './NavigationLinkContainer';
 import AboutRouteIcon from '../icons/navigation/AboutRouteIcon';
 import AddItemRouteIcon from '../icons/navigation/AddItemRouteIcon';
 import SearchRouteIcon from '../icons/navigation/SearchRouteIcon';
 import ProfileRouteIcon from '../icons/navigation/ProfileRouteIcon';
 import MessageRouteIcon from '../icons/navigation/MessageRouteIcon';
 import NotificationDot from '../NotificationDot';
+import KyndlyLogoLink from './KyndlyLogoLink';
+import { useUser } from '@/context/UserProvider';
 
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import selectUserUnreadConversations from '@/supabase/models/messaging/selectUserUnreadConversations';
-import selectLoggedUserId from '@/supabase/utils/selectLoggedUserId';
-import notificationWatcher from '@/supabase/channels/notificationsWatcher';
-
-const DesktopNav = () => {
-  const pathname = usePathname();
-  const [userId, setUserId] = useState<string>('');
-  const [hasNotification, setHasNotification] = useState<boolean>(false);
-
-  useEffect(() => {
-    const getUserId = async () => {
-      try {
-        const data = await selectLoggedUserId();
-        if (!data) return;
-        setUserId(data);
-      } catch (error) {
-        console.error('Error fetching user Id:', error);
-      }
-    };
-    getUserId();
-  }, []);
-
-  useEffect(() => {
-    const getUnreadConversations = async () => {
-      if (!userId || pathname === '/conversations') {
-        setHasNotification(false);
-        return;
-      }
-
-      try {
-        const unreadConversations = await selectUserUnreadConversations(userId);
-        if (unreadConversations.length > 0) {
-          setHasNotification(true);
-        }
-      } catch (error) {
-        console.error('Failed to fetch unread conversations :', error);
-      }
-    };
-    getUnreadConversations();
-  }, [userId, pathname]);
-
-  useEffect(() => {
-    notificationWatcher(userId, pathname, setHasNotification);
-  }, [hasNotification, pathname, userId]);
-
+const DesktopNav = ({ hasNotification }: { hasNotification: boolean }) => {
+  const { user } = useUser();
   return (
     <nav
-      className='flex items-center justify-center gap-4 px-1 text-center text-xs font-light'
+      className='hidden w-full items-center justify-between gap-4 px-24 py-6 text-center text-sm font-light lg:flex'
       role='navigation'
     >
-      <NavigationLinkContainer
-        href='/search'
-        ariaLabel='Search page'
-        pathName={pathname}
-        size='desktop'
-      >
-        <SearchRouteIcon width={38} height={38} pathName={pathname} />
-        Search
-      </NavigationLinkContainer>
-      <NavigationLinkContainer
-        href='/about'
-        ariaLabel='About page'
-        pathName={pathname}
-        size='desktop'
-      >
-        <AboutRouteIcon width={38} height={38} pathName={pathname} />
-        About
-      </NavigationLinkContainer>
-      <NavigationLinkContainer
-        href='/add-item'
-        ariaLabel='Add an item'
-        pathName={pathname}
-        size='desktop'
-      >
-        <AddItemRouteIcon width={38} height={38} pathName={pathname} />
-        Add item
-      </NavigationLinkContainer>
-      <NavigationLinkContainer
-        href='/conversations'
-        ariaLabel='My messages'
-        pathName={pathname}
-        size='desktop'
-      >
-        <MessageRouteIcon width={38} height={38} pathName={pathname} />
-        Message
-        <NotificationDot
-          hasNotification={hasNotification}
-          top={0.75}
-          left={2.25}
-        />
-      </NavigationLinkContainer>
-      <NavigationLinkContainer
+      <KyndlyLogoLink width={100} />
+      <div className='flex gap-5'>
+        <Link
+          href='/search'
+          aria-label='Search page'
+          className='flex items-center'
+        >
+          <SearchRouteIcon width={30} height={30} />
+          Search Items
+        </Link>
+        <Link
+          href='/add-item'
+          aria-label='Add an item'
+          className='flex items-center'
+        >
+          <AddItemRouteIcon width={30} height={30} />
+          Post an Item
+        </Link>
+        {user && (
+          <Link
+            href='/conversations'
+            aria-label='My messages'
+            className='relative flex items-center'
+          >
+            <MessageRouteIcon width={30} height={30} />
+            Messages
+            <NotificationDot
+              hasNotification={hasNotification}
+              top={0.1}
+              left={1}
+            />
+          </Link>
+        )}
+        <Link
+          href='/about'
+          aria-label='About page'
+          className='flex items-center'
+        >
+          <AboutRouteIcon width={25} height={25} />
+          FAQ
+        </Link>
+      </div>
+      <Link
         href='/profile'
-        ariaLabel='My profile'
-        pathName={pathname}
-        size='desktop'
+        aria-label='My profile'
+        className='flex items-center'
       >
-        <ProfileRouteIcon width={38} height={38} pathName={pathname} />
-        Profile
-      </NavigationLinkContainer>
+        <ProfileRouteIcon width={25} height={25} />
+        {user ? (user.username ? user.username : 'Profile') : 'Profile'}
+      </Link>
     </nav>
   );
 };

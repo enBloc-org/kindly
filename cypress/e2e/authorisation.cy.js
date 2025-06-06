@@ -10,13 +10,14 @@ describe('Authorisation Spec', () => {
     LoginPage.emailInput().type(Cypress.env('loginEmail'));
     LoginPage.passwordInput().type(Cypress.env('loginPassword'));
     LoginPage.loginButton().click();
-    HomePage.profileIcon().should('be.visible');
+    HomePage.messageIcon().should('be.visible');
   });
 
   it('User can log out', () => {
     cy.login(Cypress.env('loginEmail'), Cypress.env('loginPassword'));
     cy.visit(page.profile, { failOnStatusCode: false });
     ProfilePage.logoutButton().click();
+    cy.wait(2000);
     LoginPage.loginButton().should('be.visible');
   });
 
