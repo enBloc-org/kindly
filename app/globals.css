@@ -146,3 +146,8 @@ body:has(.menu-open) {
   height: 2px;
   background-color: #cdcdcd;
 }
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #f3f3f3 inset !important;
+  -webkit-text-fill-color: #929292 !important;
+}
