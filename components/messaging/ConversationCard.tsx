@@ -7,7 +7,7 @@ export type ConversationCardProps = {
   messageTimestamp: string;
   messageText: string;
   partnerUsername: string;
-  partnerAvatar: string;
+  itemImage: string;
   conversationId: number;
   itemName: string;
   clickHandler: () => void;
@@ -31,7 +31,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   messageTimestamp,
   messageText,
   partnerUsername,
-  partnerAvatar,
+  itemImage,
   conversationId,
   itemName,
   clickHandler,
@@ -39,7 +39,7 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   currentConversationId,
 }) => {
   const isBreakpoint = useMediaQuery(1000);
-  const [imgSrc, setImgSrc] = useState(partnerAvatar ?? '/default-profile.png');
+  const [imgSrc, setImgSrc] = useState(itemImage ?? '/default-profile.png');
   const handleError = () => {
     setImgSrc('/default-profile.png');
   };

@@ -121,7 +121,7 @@ const ConversationsList: React.FC = () => {
               messageTimestamp={conversation.created_at}
               messageText={conversation.message_text}
               partnerUsername={conversation.partner_username}
-              partnerAvatar={conversation.partner_avatar}
+              itemImage={conversation.item_image}
               itemName={conversation.item_name}
               clickHandler={() =>
                 updateOpenConversation(conversation.conversation_id)
