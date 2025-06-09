@@ -2,6 +2,7 @@ import Image from 'next/image';
 import useMediaQuery from '../hooks/useMediaQuery';
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+import NotificationCard from './NotificationCard';
 
 export type ConversationCardProps = {
   messageTimestamp: string;
@@ -46,15 +47,12 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
     <button
       className={twMerge(
         'conversation-card',
-        `${currentConversationId === conversationId ? 'bg-base-80' : 'bg-monoY'}`
+        `${currentConversationId === conversationId ? 'lg:bg-base-80' : ''}`
       )}
       data-testid='card-wrapper'
       onClick={clickHandler}
     >
       <div className='relative h-[65px] w-[65px] flex-shrink-0'>
-        {notificationList.some(
-          (conversation) => conversation === conversationId
-        ) && <div className='notification-dot'></div>}
         <Image
           src={imgSrc}
           onError={handleError}
@@ -65,15 +63,18 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
         />
       </div>
       <div className='pl-4 text-left'>
-        <div className='flex items-center'>
+        <div className='flex items-center gap-2'>
           <h2 className='font-bold'>
             {partnerUsername ? formatString(partnerUsername) : 'Kindly User'}
           </h2>
+          {notificationList.some(
+            (conversation) => conversation === conversationId
+          ) && <NotificationCard />}
         </div>
         <p className='mt-1 text-sm'>
           {isBreakpoint
-            ? cappedStringLength(messageText, 70)
-            : cappedStringLength(messageText, 40)}
+            ? cappedStringLength(messageText, 50)
+            : cappedStringLength(messageText, 65)}
         </p>
       </div>
       <div className='ml-auto self-start'>
