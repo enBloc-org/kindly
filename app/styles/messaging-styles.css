@@ -8,10 +8,7 @@
 }
 
 .conversation-card {
-  @apply relative flex w-full items-center p-4 ring-1 ring-base-80 lg:max-w-[500px];
-  margin-bottom: -2px;
-  position: relative;
-  z-index: 1;
+  @apply relative z-10 mb-[-2px] flex max-h-[97px] w-full items-center p-4 ring-1 ring-base-80 lg:max-w-[500px];
 }
 
 .conversation-card:first-of-type {
@@ -19,13 +16,7 @@
 }
 
 .conversation-card:focus-visible {
-  outline: none;
-  @apply ring-2 ring-[#ff6f08];
-  z-index: 2;
-}
-
-.notification-dot {
-  @apply relative left-12 z-50 h-4 w-4 rounded-full border-2 border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black;
+  @apply z-20 outline-0 ring-2 ring-[#ff6f08];
 }
 
 .conversation-height {
