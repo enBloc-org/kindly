@@ -112,7 +112,7 @@ const ConversationsList: React.FC = () => {
   }, [allConversations]);
 
   return (
-    <div className='flex flex-col gap-[2px] overflow-y-auto bg-gray-200 shadow-inner lg:w-[400px] lg:gap-2 lg:p-2'>
+    <div className='mt-10 flex flex-col overflow-y-auto border-t-2 border-base-80 bg-monoY lg:w-[400px] lg:gap-2 lg:p-2'>
       {allConversations.length > 0 ? (
         allConversations.map((conversation) => (
           <div key={`${conversation.id}`}>
@@ -122,7 +122,6 @@ const ConversationsList: React.FC = () => {
               messageText={conversation.message_text}
               partnerUsername={conversation.partner_username}
               itemImage={conversation.item_image}
-              itemName={conversation.item_name}
               clickHandler={() =>
                 updateOpenConversation(conversation.conversation_id)
               }

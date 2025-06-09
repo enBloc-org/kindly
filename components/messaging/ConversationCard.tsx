@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import ConversationCardModal from './ConversationCardModal';
 import useMediaQuery from '../hooks/useMediaQuery';
 import { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export type ConversationCardProps = {
   messageTimestamp: string;
@@ -9,7 +9,6 @@ export type ConversationCardProps = {
   partnerUsername: string;
   itemImage: string;
   conversationId: number;
-  itemName: string;
   clickHandler: () => void;
   notificationList: number[];
   currentConversationId: number;
@@ -33,7 +32,6 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   partnerUsername,
   itemImage,
   conversationId,
-  itemName,
   clickHandler,
   notificationList,
   currentConversationId,
@@ -45,11 +43,11 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
   };
 
   return (
-    <div
-      className={`conversation-card
-          ${currentConversationId === conversationId ? 'lg: border-2 lg:border-primaryGreen' : ''}`}
-      tabIndex={0}
-      aria-label='button'
+    <button
+      className={twMerge(
+        'conversation-card',
+        `${currentConversationId === conversationId ? 'bg-base-80' : 'bg-monoY'}`
+      )}
       data-testid='card-wrapper'
       onClick={clickHandler}
     >
@@ -61,32 +59,27 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           src={imgSrc}
           onError={handleError}
           fill
-          className='rounded-full'
+          className='rounded-full border-[1px] border-base-80 object-cover'
           alt={partnerUsername}
           sizes='(max-width: 640px) 50px, (max-width: 768px) 75px, 100px'
         />
       </div>
       <div className='pl-4 text-left'>
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center'>
           <h2 className='font-bold'>
             {partnerUsername ? formatString(partnerUsername) : 'Kindly User'}
           </h2>
-          <p className='text-xs italic'>{formatString(itemName)}</p>
         </div>
-        <p className='mt-1 text-sm font-light italic'>
+        <p className='mt-1 text-sm'>
           {isBreakpoint
-            ? cappedStringLength(messageText, 25)
+            ? cappedStringLength(messageText, 70)
             : cappedStringLength(messageText, 40)}
         </p>
       </div>
-      <div className='ml-auto flex flex-col items-center gap-4 pl-8 pr-2'>
-        <ConversationCardModal
-          conversationId={conversationId}
-          message='Are you sure you want to delete this conversation?'
-        />
-        <p className='font-light italic'>{messageTimestamp?.slice(11, 16)}</p>
+      <div className='ml-auto self-start'>
+        <p className='bold text-base-100'>{messageTimestamp?.slice(11, 16)}</p>
       </div>
-    </div>
+    </button>
   );
 };
 
