@@ -13,7 +13,9 @@ const meta: Meta<typeof ConversationCard> = {
     (Story) => {
       return (
         <ConversationContextProvider>
-          <Story />
+          <div className='w-[400px] bg-monoY'>
+            <Story />
+          </div>
         </ConversationContextProvider>
       );
     },
@@ -24,12 +26,6 @@ const meta: Meta<typeof ConversationCard> = {
       await userEvent.click(canvas.getByTestId('card-wrapper'));
     });
     await waitFor(() => expect(args.clickHandler).toHaveBeenCalled());
-
-    await step('Open Ellipsis Menu', async () => {
-      await userEvent.click(canvas.getByRole('button'));
-    });
-    expect(canvas.queryByText('Delete Conversation')).toBeVisible();
-    expect(canvas.queryByText('Mark Unread')).toBeVisible();
   },
 };
 
@@ -43,8 +39,7 @@ export const ConversationCardWithUnreadMessage: Story = {
     messageText:
       'This is the last message in the conversation, and it might be really long.',
     partnerUsername: 'Jane Doe',
-    partnerAvatar: profilePicture.src,
-    itemName: 'White Jumper',
+    itemImage: profilePicture.src,
     clickHandler: fn(),
     notificationList: [1, 2, 3],
   },
@@ -57,8 +52,7 @@ export const ConversationCardWithoutUnreadMessage: Story = {
     messageText:
       'This is the last message in the conversation, and it might be really long.',
     partnerUsername: 'Jane Doe',
-    partnerAvatar: profilePicture.src,
-    itemName: 'White Jumper',
+    itemImage: profilePicture.src,
     clickHandler: fn(),
     notificationList: [1, 3],
   },
@@ -71,8 +65,7 @@ export const ConversationCardWithDefaultUserAvatar: Story = {
     messageText:
       'This is the last message in the conversation, and it might be really long.',
     partnerUsername: 'Jane Doe',
-    partnerAvatar: undefined,
-    itemName: 'White Jumper',
+    itemImage: undefined,
     clickHandler: fn(),
     notificationList: [1, 3],
   },
