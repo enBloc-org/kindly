@@ -112,7 +112,7 @@ const ConversationsList: React.FC = () => {
   }, [allConversations]);
 
   return (
-    <div className='mt-10 flex flex-col overflow-y-auto border-t-2 border-base-80 bg-monoY lg:w-[400px] lg:gap-2 lg:p-2'>
+    <div className='mt-10 flex flex-col overflow-y-auto border-b-2 border-base-80 bg-monoY lg:w-[400px]'>
       {allConversations.length > 0 ? (
         allConversations.map((conversation) => (
           <div key={`${conversation.id}`}>
