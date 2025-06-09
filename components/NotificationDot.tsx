@@ -1,7 +1,5 @@
 'use client';
 
-import '../app/styles/messaging-styles.css';
-
 type NotificationDotProps = {
   hasNotification: boolean;
   top: number;
