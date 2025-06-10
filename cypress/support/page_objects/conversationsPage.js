@@ -13,7 +13,7 @@ class ConversationsPage extends BasePage {
       .should('be.visible');
   }
 
-  notificationDot() {
+  notificationCard() {
     return cy.get('.notification-dot').should('be.visible');
   }
 
