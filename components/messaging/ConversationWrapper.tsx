@@ -8,7 +8,8 @@ import selectUserConversations from '@/supabase/models/messaging/selectUserConve
 import { useConversationContext } from '@/context/conversationContext';
 
 const ConversationWrapper = ({ userId }: { userId: string }) => {
-  const isBreakpoint = useMediaQuery(1024);
+  const isMobile = useMediaQuery(1024);
+  const isLargeScreen = useMediaQuery(1200);
   const {
     conversationState: { showConversationsList },
     dispatch,
@@ -29,7 +30,7 @@ const ConversationWrapper = ({ userId }: { userId: string }) => {
 
   return (
     <div className='conversation-height w-full'>
-      {isBreakpoint ? (
+      {isMobile ? (
         <div className='flex h-full flex-col'>
           {showConversationsList ? (
             <ConversationsList />
@@ -40,7 +41,9 @@ const ConversationWrapper = ({ userId }: { userId: string }) => {
           )}
         </div>
       ) : (
-        <div className='p2 flex h-full flex-row justify-between'>
+        <div
+          className={`flex h-full flex-row justify-between ${isLargeScreen ? '' : 'px-24'}`}
+        >
           <ConversationsList />
           <CurrentConversation />
         </div>
