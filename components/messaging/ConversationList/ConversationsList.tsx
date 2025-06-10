@@ -77,7 +77,9 @@ const ConversationsList: React.FC = () => {
           </div>
         ))
       ) : (
-        <p className='font-light italic'>You have no active conversations...</p>
+        <p className='pb-4 text-center font-light italic'>
+          You have no active conversations.
+        </p>
       )}
     </div>
   );
