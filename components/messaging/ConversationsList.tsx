@@ -1,14 +1,17 @@
 'use client';
-import ConversationCard from './ConversationCard';
 import { useEffect, useState } from 'react';
 import {
-  ConversationCardType,
-  UserConversationType,
+  type ConversationCardType,
+  type ConversationFilterType,
+  type UserConversationType,
+  ConversationFilters,
 } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
 import newClient from '@/supabase/utils/newClient';
 import selectConversationCardDetails from '@/supabase/models/messaging/selectConversationCardDetails';
 import updateConversationReadStatus from '@/supabase/models/messaging/updateConversationReadStatus';
+import ConversationCard from './ConversationCard';
+import ConversationFilter from './ConversationFilter/ConversationFilter';
 
 const ConversationsList: React.FC = () => {
   const {
@@ -17,6 +20,9 @@ const ConversationsList: React.FC = () => {
   } = useConversationContext();
 
   const [notificationList, setNotificationList] = useState<number[]>([]);
+  const [selectedFilter, setSelectedFilter] = useState<ConversationFilterType>(
+    ConversationFilters.GIVER
+  );
   const supabase = newClient();
 
   const updateOpenConversation = async (givenId: number) => {
@@ -112,7 +118,11 @@ const ConversationsList: React.FC = () => {
   }, [allConversations]);
 
   return (
-    <div className='mt-10 flex flex-col overflow-y-auto border-b-2 border-base-80 bg-monoY lg:w-[400px]'>
+    <div className='flex flex-col overflow-y-auto border-b-2 border-base-80 bg-monoY lg:w-[400px]'>
+      <ConversationFilter
+        selectedFilter={selectedFilter}
+        setSelectedFilter={setSelectedFilter}
+      />
       {allConversations.length > 0 ? (
         allConversations.map((conversation) => (
           <div key={`${conversation.id}`}>

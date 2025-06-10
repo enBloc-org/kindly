@@ -8,7 +8,7 @@ import selectUserConversations from '@/supabase/models/messaging/selectUserConve
 import { useConversationContext } from '@/context/conversationContext';
 
 const ConversationWrapper = ({ userId }: { userId: string }) => {
-  const isBreakpoint = useMediaQuery(1000);
+  const isBreakpoint = useMediaQuery(1024);
   const {
     conversationState: { showConversationsList },
     dispatch,
