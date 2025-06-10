@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import useMediaQuery from '../hooks/useMediaQuery';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import NotificationCard from './NotificationCard';
+import NotificationCard from '../NotificationCard';
 
 export type ConversationCardProps = {
   messageTimestamp: string;

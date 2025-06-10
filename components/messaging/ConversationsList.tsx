@@ -7,7 +7,7 @@ import {
 } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
 import updateConversationReadStatus from '@/supabase/models/messaging/updateConversationReadStatus';
-import ConversationCard from './ConversationCard';
+import ConversationCard from './ConversationCard/ConversationCard';
 import ConversationFilter from './ConversationFilter/ConversationFilter';
 import conversationWatcher from '@/supabase/channels/conversationListWatcher';
 

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within, waitFor, fn } from '@storybook/test';
 import { expect } from '@storybook/jest';
 
-import ConversationCard from '@/components/messaging/ConversationCard';
+import ConversationCard from '@/components/messaging/ConversationCard/ConversationCard';
 import ConversationContextProvider from '@/context/conversationContext';
 import profilePicture from 'public/clothing-donation.jpg';
 
