@@ -26,7 +26,6 @@ const ConversationFilter: React.FC<ConversationFilterProps> = ({
     <div
       className={`relative mx-auto flex min-w-[358px] items-center rounded-full bg-base-80 p-1 text-sm font-bold ${isBreakPoint ? 'my-4' : 'mb-8'}`}
     >
-      {/* Sliding background element */}
       <div
         className={`absolute h-[30px] w-1/2 rounded-full bg-monoY transition-all duration-300 ease-in-out ${
           selectedFilter === ConversationFilters.GIVER
