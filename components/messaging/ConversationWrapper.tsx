@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import ConversationsList from './ConversationsList';
+import ConversationsList from './ConversationList/ConversationsList';
 import CurrentConversation from './CurrentConversation';
 import useMediaQuery from '../hooks/useMediaQuery';
 import selectUserConversations from '@/supabase/models/messaging/selectUserConversations';
