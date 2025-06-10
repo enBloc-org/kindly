@@ -1,17 +1,15 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import {
   type ConversationCardType,
   type ConversationFilterType,
-  type UserConversationType,
   ConversationFilters,
 } from '@/types/messagingTypes';
 import { useConversationContext } from '@/context/conversationContext';
-import newClient from '@/supabase/utils/newClient';
-import selectConversationCardDetails from '@/supabase/models/messaging/selectConversationCardDetails';
 import updateConversationReadStatus from '@/supabase/models/messaging/updateConversationReadStatus';
 import ConversationCard from './ConversationCard';
 import ConversationFilter from './ConversationFilter/ConversationFilter';
+import conversationWatcher from '@/supabase/channels/conversationListWatcher';
 
 const ConversationsList: React.FC = () => {
   const {
@@ -23,21 +21,23 @@ const ConversationsList: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<ConversationFilterType>(
     ConversationFilters.GIVER
   );
-  const supabase = newClient();
 
-  const updateOpenConversation = async (givenId: number) => {
-    const newCurrentConversation = allConversations?.filter(
-      (conversation: ConversationCardType) =>
-        conversation.conversation_id === givenId
-    )[0];
+  const updateOpenConversation = useCallback(
+    async (givenId: number) => {
+      const newCurrentConversation = allConversations?.filter(
+        (conversation: ConversationCardType) =>
+          conversation.conversation_id === givenId
+      )[0];
 
-    dispatch({
-      type: 'SET_CURRENT_CONVERSATION',
-      payload: newCurrentConversation,
-    });
-    updateConversationReadStatus(givenId, currentUserId, false);
-    dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: false });
-  };
+      dispatch({
+        type: 'SET_CURRENT_CONVERSATION',
+        payload: newCurrentConversation,
+      });
+      updateConversationReadStatus(givenId, currentUserId, false);
+      dispatch({ type: 'SET_SHOW_CONVERSATIONS_LIST', payload: false });
+    },
+    [allConversations, dispatch, currentUserId]
+  );
 
   useEffect(() => {
     setNotificationList(
@@ -48,73 +48,7 @@ const ConversationsList: React.FC = () => {
   }, [allConversations]);
 
   useEffect(() => {
-    const channel = supabase
-      .channel('realtime conversations')
-      .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'user_conversations',
-          filter: `user_id=eq.${currentUserId}`,
-        },
-        async (payload) => {
-          if (payload.new.user_id === currentUserId) {
-            const newConversation = await selectConversationCardDetails(
-              payload.new as UserConversationType
-            );
-
-            dispatch({
-              type: 'ADD_NEW_CONVERSATION',
-              payload: newConversation,
-            });
-          }
-        }
-      )
-      .on(
-        'postgres_changes',
-        {
-          event: 'UPDATE',
-          schema: 'public',
-          table: 'user_conversations',
-          filter: `user_id=eq.${currentUserId}`,
-        },
-        (payload) => {
-          if (payload.new.has_unread_messages) {
-            setNotificationList((prevState) => {
-              if (!prevState.includes(payload.new.conversation_id)) {
-                return [...prevState, payload.new.conversation_id];
-              }
-              return prevState;
-            });
-          }
-          if (!payload.new.has_unread_messages) {
-            setNotificationList((prevState) => {
-              return prevState.filter(
-                (conversationId) =>
-                  conversationId !== payload.new.conversation_id
-              );
-            });
-          }
-        }
-      )
-      .on(
-        'postgres_changes',
-        {
-          event: 'DELETE',
-          schema: 'public',
-          table: 'user_conversations',
-          filter: `user_id=eq.${currentUserId}`,
-        },
-        (payload) => {
-          dispatch({ type: 'DELETE_CONVERSATION', payload: payload.old.id });
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
+    conversationWatcher(currentUserId, setNotificationList, dispatch);
   }, [allConversations]);
 
   return (
