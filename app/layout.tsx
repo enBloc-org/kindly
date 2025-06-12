@@ -1,6 +1,10 @@
-import React from 'react';
 import './globals.css';
+import Header from '@/components/Header';
+import { headers } from 'next/headers';
+import Providers from '@/context/Providers';
+import { getProfile } from '@/supabase/models/getProfile';
 import DynamicFooter from '@/components/footer/DynamicFooter';
+import FullHeightContainer from '@/components/layout/FullHeightComponent';
 
 const defaultUrl = process.env.AWS_AMPLIFY
   ? process.env.AWS_AMPLIFY
@@ -18,18 +22,28 @@ export const metadata = {
   manifest: '/site.webmanifest',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headersList = headers();
+  const userId = headersList.get('k-active-user');
+  let user = null;
+  if (userId) {
+    const { data } = await getProfile(userId);
+    user = data;
+  }
   return (
-    <html lang='en' className='h-full'>
-      <body className='h-full'>
-        <div className='flex min-h-screen flex-col'>
-          <div className='flex-grow'>{children}</div>
-          <DynamicFooter />
-        </div>
+    <html lang='en'>
+      <body>
+        <Providers userData={user}>
+          <FullHeightContainer>
+            <Header />
+            {children}
+            <DynamicFooter />
+          </FullHeightContainer>
+        </Providers>
       </body>
     </html>
   );

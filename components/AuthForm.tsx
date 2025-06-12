@@ -1,4 +1,7 @@
 'use client';
+import { useUser } from '@/context/UserProvider';
+import { profile } from '@/types/supabaseTypes';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import Input from '@/components/form/Input';
@@ -6,7 +9,7 @@ import Link from 'next/link';
 import MainButton from './buttons/MainButton/MainButton';
 
 type AuthFormProps = {
-  onSubmit: (formData: FormData) => Promise<void>;
+  onSubmit: (formData: FormData) => Promise<profile | undefined>;
   buttonText: string;
   searchParams?: { message: string };
   isSignUp: boolean;
@@ -25,6 +28,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
   const [email, setEmail] = useState('');
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [isRefugee, setIsRefugee] = useState(false);
+  const { setUser } = useUser();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -69,7 +74,10 @@ const AuthForm: React.FC<AuthFormProps> = ({
     setErrorMessage(null);
 
     try {
-      await onSubmit(formData);
+      const userProfile = await onSubmit(formData);
+      if (!userProfile) throw new Error('Cannot find user profile');
+      setUser(userProfile);
+      router.push('/');
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
