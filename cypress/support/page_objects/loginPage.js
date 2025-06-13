@@ -16,10 +16,6 @@ export class LoginPage extends BasePage {
   signUpLink() {
     return cy.get('a[href="/signup"]').should('be.visible');
   }
-
-  backButton() {
-    return cy.get('button[aria-label="back button"]').should('be.visible');
-  }
 }
 
 export default new LoginPage();
