@@ -62,23 +62,23 @@ const ConversationCard: React.FC<ConversationCardProps> = ({
           sizes='(max-width: 640px) 50px, (max-width: 768px) 75px, 100px'
         />
       </div>
-      <div className='pl-4 text-left'>
-        <div className='flex items-center gap-2'>
+      <div className='flex-grow pl-4 text-left'>
+        <div className='flex w-full items-center gap-2'>
           <h2 className='font-bold'>
             {partnerUsername ? formatString(partnerUsername) : 'Kindly User'}
           </h2>
           {notificationList.some(
             (conversation) => conversation === conversationId
           ) && <NotificationCard />}
+          <p className='bold  ml-auto text-xs text-base-100'>
+            {messageTimestamp?.slice(11, 16)}
+          </p>
         </div>
         <p className='mt-1 text-sm'>
           {isBreakpoint
             ? cappedStringLength(messageText, 50)
             : cappedStringLength(messageText, 65)}
         </p>
-      </div>
-      <div className='ml-auto self-start'>
-        <p className='bold text-base-100'>{messageTimestamp?.slice(11, 16)}</p>
       </div>
     </button>
   );
