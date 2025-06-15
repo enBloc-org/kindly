@@ -36,13 +36,13 @@ const MessageCard: React.FC<MessageCardProps> = ({
     >
       <div className='flex w-full items-center justify-center'>
         <p
-          className={`px-0 text-sm ${messageText.length > 50 && 'md:px-4'} w-full whitespace-pre-wrap text-start lg:ml-10`}
+          className={`px-0 text-sm ${messageText.length > 50 && 'md:px-4'} w-full whitespace-pre-wrap text-left lg:ml-10`}
         >
           {messageText}
         </p>
       </div>
       <div
-        className={`${isCurrentUser && 'lg:mr-24'} align-center flex w-full flex-row justify-between`}
+        className={`${isCurrentUser ? 'flex-row lg:mr-24' : 'flex-row-reverse'} align-center flex w-full justify-between`}
       >
         <p className='text-sm font-bold'>{`${isCurrentUser ? 'You' : currentUser}`}</p>
         <p className='text-sm font-light lg:text-base'>{createdAt}</p>
