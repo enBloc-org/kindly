@@ -31,7 +31,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
   return (
     <div
       dir={`${isCurrentUser ? 'ltr' : 'rtl'}`}
-      className={`message-card ${isCurrentUser ? 'float-right bg-secondaryGray lg:left-24' : 'float-left bg-secondaryGreen lg:right-10'} justify-content my-2 flex flex-col-reverse`}
+      className={`message-card ${isCurrentUser ? 'float-right bg-brand-80 lg:left-24' : 'float-left bg-secondaryGray lg:right-10'} justify-content my-2 flex flex-col-reverse`}
       ref={messageRef}
     >
       <div className='flex w-full items-center justify-center'>
