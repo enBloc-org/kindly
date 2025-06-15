@@ -1,6 +1,6 @@
 .message-card {
   @apply relative mx-4 my-6 flex w-5/6 items-stretch justify-between 
-  rounded-2xl px-6 py-4 shadow-md;
+  rounded-s-2xl rounded-se-2xl px-6 py-4 shadow-md;
 }
 
 .message-card-container {
@@ -8,11 +8,11 @@
 }
 
 .conversation-card {
-  @apply relative flex items-center bg-gray-300 p-4 lg:max-w-[500px] lg:rounded-lg lg:shadow-md lg:hover:bg-secondaryGray
+  @apply relative flex items-center bg-gray-300 p-4 lg:max-w-[500px] lg:rounded-lg lg:shadow-md lg:hover:bg-secondaryGray;
 }
 
 .notification-dot {
-  @apply relative left-12 z-50 h-4 w-4 rounded-full border-2 border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black
+  @apply relative left-12 z-50 h-4 w-4 rounded-full border-2 border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black;
 }
 
 .conversation-height {
