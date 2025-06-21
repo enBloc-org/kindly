@@ -114,8 +114,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
         type='submit'
         name='message-submit-button'
         disabled={isDisabled}
-        className={`flex items-center justify-center rounded-full border-2 
-          border-solid border-primaryGreen p-3 ${isDisabled ? 'opacity-40' : 'opacity-100'}`}
+        className={`flex items-center justify-center rounded-full p-3 ${isDisabled ? 'opacity-40' : 'opacity-100'}`}
       >
         <PaperPlaneIcon width={30} height={30} />
       </button>
