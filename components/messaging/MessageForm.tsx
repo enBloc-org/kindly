@@ -100,24 +100,26 @@ const MessageForm: React.FC<MessageFormProps> = ({
       onSubmit={handleSubmit}
       className='z-50 flex items-center justify-center gap-6 p-4'
     >
-      <textarea
-        className='h-[65px] w-5/6 resize-none overflow-hidden rounded-lg
-          bg-secondaryGray px-4 py-2 pt-5 text-black shadow-inner'
-        value={message}
-        name='message-input'
-        ref={textareaRef}
-        onChange={onChangeHandler}
-        onKeyDown={onKeydownHandler}
-        placeholder='Type your message...'
-      />
-      <button
-        type='submit'
-        name='message-submit-button'
-        disabled={isDisabled}
-        className={`flex items-center justify-center rounded-full p-3 ${isDisabled ? 'opacity-40' : 'opacity-100'}`}
-      >
-        <PaperPlaneIcon width={30} height={30} />
-      </button>
+      <div className='relative h-[65px] w-5/6'>
+        <textarea
+          className='h-full w-full resize-none overflow-hidden rounded-lg
+        bg-secondaryGray px-4 py-2 pt-5 text-black'
+          value={message}
+          name='message-input'
+          ref={textareaRef}
+          onChange={onChangeHandler}
+          onKeyDown={onKeydownHandler}
+          placeholder='Type your message...'
+        />
+        <button
+          type='submit'
+          name='message-submit-button'
+          disabled={isDisabled}
+          className={`absolute right-[5px] top-[5px] flex items-center justify-center rounded-full p-3 ${isDisabled ? 'opacity-40' : 'opacity-100'}`}
+        >
+          <PaperPlaneIcon width={30} height={30} />
+        </button>
+      </div>
     </form>
   );
 };
