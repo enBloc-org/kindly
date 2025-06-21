@@ -98,17 +98,17 @@ const MessageForm: React.FC<MessageFormProps> = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className='z-50 flex items-center justify-center gap-6 border-t-2 border-gray-300 bg-gray-200 p-4'
+      className='z-50 flex items-center justify-center gap-6 p-4'
     >
       <textarea
         className='h-[65px] w-5/6 resize-none overflow-hidden rounded-lg
-          border-2 border-gray-300 bg-white px-4 py-2 pt-5 text-black shadow-inner'
+          bg-secondaryGray px-4 py-2 pt-5 text-black shadow-inner'
         value={message}
         name='message-input'
         ref={textareaRef}
         onChange={onChangeHandler}
         onKeyDown={onKeydownHandler}
-        placeholder='Type your message here'
+        placeholder='Type your message...'
       />
       <button
         type='submit'
