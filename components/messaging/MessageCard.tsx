@@ -1,7 +1,8 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../../app/styles/messaging-styles.css';
 import markMessageAsRead from '@/supabase/models/messaging/markMessageAsRead';
+import ReadReceiptIcon from '../icons/messaging/ReadReceiptIcon';
 
 type MessageCardProps = {
   senderId: string;
@@ -18,12 +19,14 @@ const MessageCard: React.FC<MessageCardProps> = ({
   currentUser,
   messageId,
 }) => {
+  const [isRead, setIsRead] = useState<boolean>(false);
   const isCurrentUser = senderId === currentUser;
   const messageRef = useRef(null);
 
   useEffect(() => {
     const OnRead = async () => {
       currentUser && (await markMessageAsRead(messageId, currentUser));
+      setIsRead(true);
     };
     OnRead();
   }, []);
@@ -45,7 +48,10 @@ const MessageCard: React.FC<MessageCardProps> = ({
         className={`${isCurrentUser ? 'flex-row lg:mr-24' : 'flex-row-reverse'} align-center flex w-full justify-between`}
       >
         <p className='text-sm font-bold'>{`${isCurrentUser ? 'You' : currentUser}`}</p>
-        <p className='text-sm font-light lg:text-base'>{createdAt}</p>
+        <div className='align-center flex w-[10%] justify-between'>
+          <p className='text-sm font-light lg:text-base'>{createdAt}</p>
+          {isCurrentUser && <ReadReceiptIcon isRead={isRead} />}
+        </div>
       </div>
     </div>
   );
