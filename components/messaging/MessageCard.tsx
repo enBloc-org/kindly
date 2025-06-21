@@ -10,6 +10,7 @@ type MessageCardProps = {
   messageText: string;
   currentUser: string | undefined;
   messageId: number;
+  isRead: boolean;
 };
 
 const MessageCard: React.FC<MessageCardProps> = ({
@@ -18,6 +19,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
   messageText,
   currentUser,
   messageId,
+  isRead,
 }) => {
   const isCurrentUser = senderId === currentUser;
   const messageRef = useRef(null);
@@ -48,7 +50,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
         <p className='text-sm font-bold'>{`${isCurrentUser ? 'You' : currentUser}`}</p>
         <div className='align-center flex justify-between'>
           <p className='mr-1 text-sm font-light lg:text-base'>{createdAt}</p>
-          {isCurrentUser && <ReadReceiptIcon isRead={false} />}
+          {isCurrentUser && <ReadReceiptIcon isRead={isRead} />}
         </div>
       </div>
     </div>

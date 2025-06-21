@@ -159,6 +159,7 @@ const CurrentConversation: React.FC = () => {
                     messageText={message.message_text}
                     currentUser={currentConversation?.user_id}
                     messageId={message.id}
+                    isRead={message.is_read}
                   />
                 )}
               </div>
