@@ -1,0 +1,38 @@
+.message-card {
+  @apply relative mx-4 my-6 flex w-5/6 items-stretch justify-between
+  rounded-s-2xl px-6 py-4 shadow-md;
+}
+
+.message-card-container {
+  height: calc(100vh - 165px);
+}
+
+.conversation-card {
+  @apply relative z-10 mb-[-2px] flex max-h-[97px] w-full items-center p-4 ring-1 ring-base-80 lg:max-w-[500px];
+}
+
+.conversation-card:first-of-type {
+  margin-top: 2px;
+}
+
+.conversation-card:focus-visible {
+  @apply z-20 outline-0 ring-2 ring-[#ff6f08];
+}
+
+.conversation-height {
+  height: calc(100vh - 65px);
+}
+
+/*------- Media Queries ---------*/
+
+@media screen and (min-width: 1000px) {
+  .message-card-container {
+    height: calc(100vh - 85px);
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .message-card {
+    @apply w-4/6;
+  }
+}
