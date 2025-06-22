@@ -34,7 +34,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
   return (
     <div
       dir={`${isCurrentUser ? 'ltr' : 'rtl'}`}
-      className={`message-card ${isCurrentUser ? 'float-right bg-brand-80 lg:left-24' : 'float-left bg-secondaryGray lg:right-10'} justify-content my-2 flex flex-col-reverse`}
+      className={`message-card ${isCurrentUser ? 'float-right bg-brand-80' : 'float-left bg-secondaryGray lg:right-2'} justify-content my-2 flex flex-col-reverse`}
       ref={messageRef}
     >
       <div className='flex w-full items-center justify-center'>
@@ -45,10 +45,10 @@ const MessageCard: React.FC<MessageCardProps> = ({
         </p>
       </div>
       <div
-        className={`${isCurrentUser ? 'flex-row lg:mr-24' : 'flex-row-reverse'} align-center flex w-full justify-between`}
+        className={`${isCurrentUser ? 'flex-row lg:mr-24' : 'flex-row-reverse text-end'} align-center flex w-full justify-between`}
       >
         <p className='text-sm font-bold'>{`${isCurrentUser ? 'You' : currentUser}`}</p>
-        <div className='align-center flex justify-between'>
+        <div className='align-center flex w-fit justify-between'>
           <p className='mr-1 text-sm font-light lg:text-base'>{createdAt}</p>
           {isCurrentUser && <ReadReceiptIcon isRead={isRead} />}
         </div>
