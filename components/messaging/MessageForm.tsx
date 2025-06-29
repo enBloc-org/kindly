@@ -103,7 +103,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
       <div className='relative mb-[10px] h-[65px] w-full'>
         <textarea
           className='h-full w-full resize-none overflow-hidden rounded-lg
-        bg-secondaryGray px-4 py-2 pt-5 text-black'
+        bg-secondaryGray px-4 py-2 pr-12 pt-5 text-black'
           value={message}
           name='message-input'
           ref={textareaRef}
