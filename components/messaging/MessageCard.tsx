@@ -1,8 +1,9 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './styles/messaging-styles.css';
 import markMessageAsRead from '@/supabase/models/messaging/markMessageAsRead';
 import ReadReceiptIcon from '../icons/messaging/ReadReceiptIcon';
+import { getProfile } from '@/supabase/models/getProfile';
 
 type MessageCardProps = {
   senderId: string;
@@ -23,12 +24,21 @@ const MessageCard: React.FC<MessageCardProps> = ({
 }) => {
   const isCurrentUser = senderId === currentUser;
   const messageRef = useRef(null);
+  const [userName, setUserName] = useState<string>('');
 
   useEffect(() => {
     const OnRead = async () => {
       currentUser && (await markMessageAsRead(messageId, currentUser));
     };
     OnRead();
+
+    const getUserName = async () => {
+      const {
+        data: { username },
+      } = await getProfile(currentUser);
+      setUserName(username as string);
+    };
+    getUserName();
   }, []);
 
   return (
@@ -47,7 +57,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
       <div
         className={`${isCurrentUser ? 'flex-row lg:mr-24' : 'flex-row-reverse text-end'} align-center flex w-full justify-between`}
       >
-        <p className='text-sm font-bold'>{`${isCurrentUser ? 'You' : currentUser}`}</p>
+        <p className='text-sm font-bold'>{`${isCurrentUser ? 'You' : userName}`}</p>
         <div className='align-center flex w-fit justify-between'>
           <p className='mr-1 text-sm font-light lg:text-base'>{createdAt}</p>
           {isCurrentUser && <ReadReceiptIcon isRead={isRead} />}
