@@ -100,7 +100,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
       onSubmit={handleSubmit}
       className='z-50 flex items-center justify-center gap-6 p-4'
     >
-      <div className='relative mb-[10px] h-[65px] w-full'>
+      <div className='h-min-[65px] relative mb-[10px] w-full'>
         <textarea
           className='h-full w-full resize-none overflow-hidden rounded-lg
         bg-secondaryGray px-4 py-2 pr-12 pt-5 text-black'
