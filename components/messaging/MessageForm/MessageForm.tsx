@@ -3,8 +3,8 @@ import { FormEvent, useState, useRef, KeyboardEvent } from 'react';
 
 // Components
 import insertMessage from '@/supabase/models/messaging/insertMessage';
-import PaperPlaneIcon from '../icons/PaperPlaneIcon';
-import useMediaQuery from '../hooks/useMediaQuery';
+import PaperPlaneIcon from '../../icons/PaperPlaneIcon';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import getAdditionalConversationDetails from '@/supabase/models/messaging/getAdditionalConversationDetails';
 import restoreDeletedConversation from '@/supabase/models/messaging/restoreDeletedConversation';
 

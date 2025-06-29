@@ -1,8 +1,8 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import './styles/messaging-styles.css';
+import '../styles/messaging-styles.css';
 import markMessageAsRead from '@/supabase/models/messaging/markMessageAsRead';
-import ReadReceiptIcon from '../icons/messaging/ReadReceiptIcon';
+import ReadReceiptIcon from '../../icons/messaging/ReadReceiptIcon';
 import { getProfile } from '@/supabase/models/getProfile';
 
 type MessageCardProps = {
