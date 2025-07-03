@@ -22,14 +22,14 @@ export type item = {
 };
 
 export type profile = {
-  id: String;
-  email: String;
+  id: string;
+  email: string;
   items_added: number[];
   reserved_items: number[];
   refugee: boolean;
-  image: String;
-  username: String | undefined;
-  postcode: String;
+  image: string;
+  username: string | undefined;
+  postcode: string;
   imageSrc: string;
   avatar: string | undefined;
 };

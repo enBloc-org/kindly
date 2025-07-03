@@ -16,10 +16,20 @@ import * as page from '../fixtures/URLs.json';
 //
 // -- This is a parent command --
 Cypress.Commands.add('login', (username, password) => {
+  cy.intercept('POST', '/login').as('loginRequest');
+
   cy.visit(page.login);
   LoginPage.emailInput().type(username);
   LoginPage.passwordInput().type(password);
   LoginPage.loginButton().click();
+
+  cy.wait('@loginRequest').then((interception) => {
+    if (interception.response?.statusCode !== 303) {
+      cy.log('Login failed with status:', interception.response?.statusCode);
+      cy.log('Response body:', interception.response?.body);
+    }
+  });
+
   HomePage.profileIcon().should('be.visible');
 });
 //

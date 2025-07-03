@@ -1,8 +1,11 @@
 'use client';
+import { useUser } from '@/context/UserProvider';
+import { profile } from '@/types/supabaseTypes';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 type AuthFormProps = {
-  onSubmit: (formData: FormData) => Promise<void>;
+  onSubmit: (formData: FormData) => Promise<profile | undefined>;
   buttonText: string;
   searchParams?: { message: string };
   isSignUp: boolean;
@@ -19,6 +22,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const { setUser } = useUser();
+  const router = useRouter();
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -41,7 +46,10 @@ const AuthForm: React.FC<AuthFormProps> = ({
 
     try {
       setErrorMessage(null);
-      await onSubmit(formData);
+      const userProfile = await onSubmit(formData);
+      if (!userProfile) throw new Error('Cannot find user profile');
+      setUser(userProfile);
+      router.push('/');
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);

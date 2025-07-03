@@ -14,7 +14,8 @@ CREATE SCHEMA IF NOT EXISTS "Test";
 
 ALTER SCHEMA "Test" OWNER TO "postgres";
 
-CREATE EXTENSION IF NOT EXISTS "pgsodium" WITH SCHEMA "pgsodium";
+-- https://github.com/supabase/cli/issues/3358
+-- CREATE EXTENSION IF NOT EXISTS "pgsodium" WITH SCHEMA "pgsodium";
 
 CREATE SCHEMA IF NOT EXISTS "test";
 
@@ -28,7 +29,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto" WITH SCHEMA "extensions";
 
 CREATE EXTENSION IF NOT EXISTS "pgjwt" WITH SCHEMA "extensions";
 
-CREATE EXTENSION IF NOT EXISTS "supabase_vault" WITH SCHEMA "vault";
+CREATE EXTENSION IF NOT EXISTS "supabase_vault" CASCADE;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA "extensions";
 
@@ -72,19 +73,19 @@ ALTER FUNCTION "public"."fetch_profile_message_and_item"("uc_conversation_id" bi
 CREATE OR REPLACE FUNCTION "public"."fetch_recently_added_items"() RETURNS TABLE("id" bigint, "created_at" timestamp with time zone, "item_name" "text", "imageSrc" "text")
     LANGUAGE "plpgsql"
     AS $$BEGIN
-    RETURN QUERY 
-    SELECT  
-        items.id, 
-        items.created_at, 
-        items.item_name, 
+    RETURN QUERY
+    SELECT
+        items.id,
+        items.created_at,
+        items.item_name,
         items."imageSrc"
-    FROM 
+    FROM
         items
     WHERE
         items.given_away_to IS NULL
     AND
         items.is_reserved IS false
-    ORDER BY 
+    ORDER BY
         items.created_at DESC
     LIMIT 4;
 END;$$;

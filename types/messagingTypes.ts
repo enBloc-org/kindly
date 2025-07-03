@@ -50,3 +50,11 @@ export type ConversationCardType = {
   item_image: string;
   partner_has_deleted: boolean;
 };
+
+export const ConversationFilters = {
+  RECEIVER: 'RECEIVER',
+  GIVER: 'GIVER',
+} as const;
+
+export type ConversationFilterType =
+  (typeof ConversationFilters)[keyof typeof ConversationFilters];

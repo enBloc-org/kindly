@@ -1,7 +1,5 @@
 'use client';
 
-import '../app/styles/messaging-styles.css';
-
 type NotificationDotProps = {
   hasNotification: boolean;
   top: number;
@@ -22,7 +20,7 @@ const NotificationDot = ({
   return (
     hasNotification && (
       <div
-        className='absolute z-50 h-3 w-3 rounded-full border-2 border-green-700 bg-[#54BB89] shadow-lg outline-4 outline-black'
+        className='absolute z-50 h-3 w-3 rounded-full border-2 border-interactive-110 bg-interactive-90 shadow-lg outline-4 outline-black'
         style={{
           top: `${top}rem`,
           left: `${left}rem`,
