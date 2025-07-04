@@ -40,11 +40,11 @@ h6,
 button,
 a,
 label {
-  @apply font-header;
+  @apply font-body leading-[120%];
 }
 
 body {
-  @apply bg-monoY font-body text-base-120;
+  @apply bg-monoY font-body leading-[120%] text-base-120;
 }
 
 :focus-visible {

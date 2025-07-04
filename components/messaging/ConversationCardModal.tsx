@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useState } from 'react';
-import '../../app/styles/messaging-styles.css';
+import './styles/messaging-styles.css';
 import deleteConversation from '../../supabase/models/messaging/deleteConversation';
 
 //Components

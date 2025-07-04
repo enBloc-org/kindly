@@ -1,14 +1,15 @@
 'use client';
 
 import { useEffect } from 'react';
-import ConversationsList from './ConversationsList';
+import ConversationsList from './ConversationList/ConversationsList';
 import CurrentConversation from './CurrentConversation';
 import useMediaQuery from '../hooks/useMediaQuery';
 import selectUserConversations from '@/supabase/models/messaging/selectUserConversations';
 import { useConversationContext } from '@/context/conversationContext';
 
 const ConversationWrapper = ({ userId }: { userId: string }) => {
-  const isBreakpoint = useMediaQuery(1000);
+  const isMobile = useMediaQuery(1024);
+  const isLargeScreen = useMediaQuery(1200);
   const {
     conversationState: { showConversationsList },
     dispatch,
@@ -29,7 +30,7 @@ const ConversationWrapper = ({ userId }: { userId: string }) => {
 
   return (
     <div className='conversation-height w-full'>
-      {isBreakpoint ? (
+      {isMobile ? (
         <div className='flex h-full flex-col'>
           {showConversationsList ? (
             <ConversationsList />
@@ -40,7 +41,9 @@ const ConversationWrapper = ({ userId }: { userId: string }) => {
           )}
         </div>
       ) : (
-        <div className='p2 flex h-full flex-row justify-between'>
+        <div
+          className={`flex h-full flex-row justify-between ${isLargeScreen ? '' : 'px-24'}`}
+        >
           <ConversationsList />
           <CurrentConversation />
         </div>

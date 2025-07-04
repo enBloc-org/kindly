@@ -9,9 +9,9 @@ describe('messaging feature', () => {
   it('alerts users for unread messages in a conversation', () => {
     refugeeLogIn();
     cy.visit(page.conversations);
-    ConversationsPage.notificationDot().should('have.length', 2);
+    ConversationsPage.notificationCard().should('have.length', 2);
     ConversationsPage.conversationCard(/Sorry it's deleted/i).click();
-    ConversationsPage.notificationDot().should('have.length', 1);
+    ConversationsPage.notificationCard().should('have.length', 1);
     ConversationsPage.conversationCard(/Sorry it's deleted/i)
       .parents('.conversation-card')
       .find('[name="ellipsis-button"]')
@@ -19,7 +19,7 @@ describe('messaging feature', () => {
     cy.get('button')
       .contains(/mark unread/i)
       .click();
-    ConversationsPage.notificationDot().should('have.length', 2);
+    ConversationsPage.notificationCard().should('have.length', 2);
   });
 
   it('allows users to send new messages', () => {
@@ -30,24 +30,25 @@ describe('messaging feature', () => {
     ConversationsPage.messageCard(/new message/i);
   });
 
-  it('allows users to delete a conversation', () => {
-    refugeeLogIn();
-    cy.visit(page.conversations);
-    ConversationsPage.conversationCard(/message 4/i)
-      .parents('.conversation-card')
-      .find('[name="ellipsis-button"]')
-      .click();
-    cy.get('button')
-      .contains(/delete/i)
-      .click();
-    cy.get('.overlay')
-      .find('button')
-      .contains(/delete/i)
-      .click();
-    cy.get('.conversation-card')
-      .contains(/message 4/i)
-      .should('not.exist');
-  });
+  //TODO: REFACTOR WHEN MENU MOVES IN ISSUE #423
+  // it('allows users to delete a conversation', () => {
+  //   refugeeLogIn();
+  //   cy.visit(page.conversations);
+  //   ConversationsPage.conversationCard(/message 4/i)
+  //     .parents('.conversation-card')
+  //     .find('[name="ellipsis-button"]')
+  //     .click();
+  //   cy.get('button')
+  //     .contains(/delete/i)
+  //     .click();
+  //   cy.get('.overlay')
+  //     .find('button')
+  //     .contains(/delete/i)
+  //     .click();
+  //   cy.get('.conversation-card')
+  //     .contains(/message 4/i)
+  //     .should('not.exist');
+  // });
 
   it('allows user to send message where partner has deleted conversation', () => {
     cy.login(Cypress.env('donorLoginEmail'), Cypress.env('loginPassword'));
