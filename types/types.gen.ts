@@ -330,6 +330,7 @@ export type Database = {
           created_at: string
           item_name: string
           item_image: string
+          is_donation_by_user: boolean
         }[]
       }
     }
