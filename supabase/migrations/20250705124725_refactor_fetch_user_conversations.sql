@@ -1,18 +1,19 @@
-CREATE or REPLACE function fetch_user_conversations()
+DROP FUNCTION IF EXISTS fetch_user_conversations(uuid);
+CREATE or REPLACE function fetch_user_conversations(p_user_id uuid)
 RETURNS TABLE (
-  id UUID,
-  conversation_id UUID,
+  id BIGINT,
+  conversation_id BIGINT,
   user_id UUID,
   partner_id UUID,
   has_unread_messages BOOLEAN,
   partner_has_deleted BOOLEAN,
   partner_username TEXT,
   partner_avatar TEXT,
-  message_text TEXT,
-  created_at TIMESTAMP,
+  message_text VARCHAR,
+  created_at TIMESTAMPTZ,
   item_name TEXT,
   item_image TEXT,
-  isDonatedByUser BOOLEAN
+  is_donation_by_user BOOLEAN
 ) LANGUAGE plpgsql AS $$
 
 BEGIN
@@ -32,7 +33,7 @@ BEGIN
       m.created_at AS created_at,
       i.item_name AS item_name,
       i."imageSrc" AS item_image,
-      (i.donated_by = uc.user_id) AS isDonatedByUSer
+      (i.donated_by = uc.user_id) AS is_donation_by_user
     FROM
       user_conversations uc
     LEFT JOIN profiles p ON p.id = uc.partner_id
