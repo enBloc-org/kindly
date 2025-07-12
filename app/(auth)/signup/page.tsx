@@ -30,6 +30,8 @@ export default function SignUp({
       }
 
       setEmail(formData.get('email') as string);
+      const { profile } = await response.json();
+      return profile;
     } catch (error) {
       console.error(error);
     }

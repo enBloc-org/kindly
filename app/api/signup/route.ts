@@ -35,14 +35,17 @@ export async function POST(request: NextRequest) {
   }
 
   const userId = data && data.user?.id;
-  const { error: profileError } = await supabase.from('profiles').insert({
-    id: userId,
-    email: email,
-    username: username,
-    refugee: isRefugee,
-  });
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .insert({
+      id: userId,
+      email: email,
+      username: username,
+      refugee: isRefugee,
+    })
+    .select('*');
 
   if (profileError) console.error(profileError);
 
-  return NextResponse.next();
+  return NextResponse.json({ profile });
 }
