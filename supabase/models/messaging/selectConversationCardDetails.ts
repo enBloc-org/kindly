@@ -35,6 +35,7 @@ const selectConversationCardDetails = async (
       created_at: info.created_at,
       item_name: info.item_name,
       item_image: info.item_image,
+      is_donation_by_user: info.is_donation_by_user,
     };
 
     return singleConversation;

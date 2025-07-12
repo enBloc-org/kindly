@@ -50,7 +50,6 @@ export type ConversationCardType = {
   item_image: string;
   partner_has_deleted: boolean;
   is_donation_by_user: boolean;
-  item_donated_by: string;
 };
 
 export const ConversationFilters = {
