@@ -1,8 +1,8 @@
 'use client';
 
 import { MessageType } from '@/types/messagingTypes';
-import MessageCard from './MessageCard';
-import MessageForm from './MessageForm';
+import MessageCard from './MessageCard/MessageCard';
+import MessageForm from './MessageForm/MessageForm';
 import { useEffect, useState, useRef } from 'react';
 import { useConversationContext } from '../../context/conversationContext';
 import selectMessagesByConversationId from '@/supabase/models/messaging/selectMessagesByConversationId';
@@ -159,6 +159,7 @@ const CurrentConversation: React.FC = () => {
                     messageText={message.message_text}
                     currentUser={currentConversation?.user_id}
                     messageId={message.id}
+                    isRead={message.is_read}
                   />
                 )}
               </div>

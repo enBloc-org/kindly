@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import MessageCard from '@/components/messaging/MessageCard';
+import MessageCard from '@/components/messaging/MessageCard/MessageCard';
 
 const meta: Meta<typeof MessageCard> = {
   title: 'Messaging/MessageCard',
