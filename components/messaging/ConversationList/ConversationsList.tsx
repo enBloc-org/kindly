@@ -84,7 +84,7 @@ const ConversationsList: React.FC = () => {
           ))
       ) : (
         <p className='pb-4 text-center font-light italic'>
-          You have no active conversations matching your selected filter.
+          {`You have no conversations as the ${selectedFilter.toLowerCase()}`}
         </p>
       )}
     </div>
