@@ -58,27 +58,33 @@ const ConversationsList: React.FC = () => {
         setSelectedFilter={setSelectedFilter}
       />
       {allConversations.length > 0 ? (
-        allConversations.map((conversation) => (
-          <div key={`${conversation.id}`}>
-            <ConversationCard
-              conversationId={conversation.conversation_id}
-              messageTimestamp={conversation.created_at}
-              messageText={conversation.message_text}
-              partnerUsername={conversation.partner_username}
-              itemImage={conversation.item_image}
-              clickHandler={() =>
-                updateOpenConversation(conversation.conversation_id)
-              }
-              notificationList={notificationList}
-              currentConversationId={
-                currentConversation?.conversation_id as number
-              }
-            />
-          </div>
-        ))
+        allConversations
+          .filter((conversation) =>
+            selectedFilter === ConversationFilters.GIVER
+              ? conversation.is_donation_by_user
+              : !conversation.is_donation_by_user
+          )
+          .map((conversation) => (
+            <div key={`${conversation.id}`}>
+              <ConversationCard
+                conversationId={conversation.conversation_id}
+                messageTimestamp={conversation.created_at}
+                messageText={conversation.message_text}
+                partnerUsername={conversation.partner_username}
+                itemImage={conversation.item_image}
+                clickHandler={() =>
+                  updateOpenConversation(conversation.conversation_id)
+                }
+                notificationList={notificationList}
+                currentConversationId={
+                  currentConversation?.conversation_id as number
+                }
+              />
+            </div>
+          ))
       ) : (
         <p className='pb-4 text-center font-light italic'>
-          You have no active conversations.
+          {`You have no conversations as the ${selectedFilter.toLowerCase()}`}
         </p>
       )}
     </div>

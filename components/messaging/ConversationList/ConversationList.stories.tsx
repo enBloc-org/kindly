@@ -19,6 +19,8 @@ const dummyConversations = [
     item_name: 'Vintage Lamp',
     item_image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c',
     partner_has_deleted: false,
+    is_donation_by_user: false,
+    item_donated_by: 'JaneDoe',
   },
   {
     id: 2,
@@ -34,6 +36,8 @@ const dummyConversations = [
     item_name: 'Wooden Chair',
     item_image: 'https://images.unsplash.com/photo-1503602642458-232111445657',
     partner_has_deleted: false,
+    is_donation_by_user: true,
+    item_donated_by: 'user123',
   },
   {
     id: 3,
@@ -49,6 +53,8 @@ const dummyConversations = [
     item_name: 'Ceramic Planter',
     item_image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411',
     partner_has_deleted: false,
+    is_donation_by_user: true,
+    item_donated_by: 'user123',
   },
   {
     id: 4,
@@ -64,6 +70,8 @@ const dummyConversations = [
     item_name: 'Vintage Record Player',
     item_image: 'https://images.unsplash.com/photo-1461360228754-6e81c478b882',
     partner_has_deleted: false,
+    is_donation_by_user: false,
+    item_donated_by: 'MichaelBrown',
   },
 ];
 

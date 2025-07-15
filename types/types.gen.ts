@@ -304,6 +304,7 @@ export type Database = {
           message_text: string
           created_at: string
           item_name: string
+          is_donation_by_user: boolean
         }[]
       }
       fetch_recently_added_items: {
@@ -330,6 +331,7 @@ export type Database = {
           created_at: string
           item_name: string
           item_image: string
+          is_donation_by_user: boolean
         }[]
       }
     }
