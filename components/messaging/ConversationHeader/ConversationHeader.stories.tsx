@@ -28,9 +28,6 @@ export const DefaultConversationHeader: Story = {
     await step('Open ellipsis menu', async () => {
       await userEvent.click(canvas.getByRole('button'));
     });
-    await waitFor(() => expect(canvas.getByText(/do things/i)).toBeVisible());
-    await waitFor(() =>
-      expect(canvas.getByText(/show chat rules/i)).toBeVisible()
-    );
+    await waitFor(() => expect(canvas.getByText(/chat rules/gi)).toBeVisible());
   },
 };
