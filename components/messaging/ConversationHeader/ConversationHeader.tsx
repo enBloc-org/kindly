@@ -12,12 +12,17 @@ export default function ConversationHeader({
 
   const conversationOptions = [
     {
-      buttonMessage: 'do things',
+      buttonMessage: 'Chat rules',
       clickHandler: (e: React.MouseEvent<HTMLButtonElement>) =>
         console.log(`clicked at ${e.timeStamp}`),
     },
     {
-      buttonMessage: 'show chat rules',
+      buttonMessage: 'Report user',
+      clickHandler: (e: React.MouseEvent<HTMLButtonElement>) =>
+        console.log(`clicked at ${e.timeStamp}`),
+    },
+    {
+      buttonMessage: 'Delete chat',
       clickHandler: (e: React.MouseEvent<HTMLButtonElement>) =>
         console.log(`clicked at ${e.timeStamp}`),
     },
