@@ -2,10 +2,18 @@ import type { Meta, StoryObj } from '@storybook/react';
 import ConversationHeader from './ConversationHeader';
 import { within, userEvent, waitFor } from '@storybook/test';
 import { expect } from '@storybook/jest';
+import ConversationContextProvider from '@/context/conversationContext';
 
 const meta: Meta<typeof ConversationHeader> = {
   title: 'Messaging/ConversationHeader',
   component: ConversationHeader,
+  decorators: [
+    (Story) => (
+      <ConversationContextProvider>
+        <Story />
+      </ConversationContextProvider>
+    ),
+  ],
 };
 
 export default meta;
