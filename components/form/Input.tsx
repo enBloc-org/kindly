@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+import EyeIcon from '@/components/icons/input/EyeIcon';
+import EyeOffIcon from '@/components/icons/input/EyeOffIcon';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -84,10 +86,11 @@ const Input: React.FC<InputProps> = ({
             className='absolute right-3 top-1/2 -translate-y-1/2'
             onClick={() => setIsPasswordVisible((prev) => !prev)}
           >
-            <img
-              src={isPasswordVisible ? '/icons/eye-off.png' : '/icons/eye.png'}
-              alt='Toggle password visibility'
-            />
+            {isPasswordVisible ? (
+              <EyeIcon height={24} width={24} />
+            ) : (
+              <EyeOffIcon height={24} width={24} />
+            )}
           </button>
         )}
       </div>
