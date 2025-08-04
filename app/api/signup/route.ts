@@ -2,7 +2,6 @@ import newServerClient from '@/supabase/utils/newServerClient';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
-  const baseURL = request.nextUrl;
   const body = await request.json();
   const { email, password, username, isRefugee } = body;
   const supabase = newServerClient();
@@ -13,28 +12,27 @@ export async function POST(request: NextRequest) {
   });
 
   if (error) {
-    if (error.code === 'user_already_exists')
-      return NextResponse.redirect(
-        new URL(
-          '/login?message=User already registered. Please try logging in instead.',
-          baseURL
-        )
-      );
+    let message = 'Signup failed';
 
-    if (error.code === 'weak password')
-      return NextResponse.redirect(
-        new URL(
-          '/signup?message=Your password must include at least one uppercase character, one number and one special character.',
-          baseURL
-        )
-      );
+    if (error.code === 'user_already_exists') {
+      message = 'User already registered. Please try logging in instead.';
+    } else if (error.code === 'weak_password') {
+      message =
+        'Password must include at least one uppercase character, one number, and one special character.';
+    } else {
+      message = error.message || error.code?.replaceAll(/_/g, ' ') || message;
+    }
 
-    return NextResponse.redirect(
-      new URL(`/signup?message=${error.code?.replaceAll(/_/g, ' ')}`, baseURL)
-    );
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 
   const userId = data && data.user?.id;
+  if (!userId) {
+    return NextResponse.json(
+      { error: 'User ID not found after signup.' },
+      { status: 500 }
+    );
+  }
   const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .insert({
@@ -43,9 +41,16 @@ export async function POST(request: NextRequest) {
       username: username,
       refugee: isRefugee,
     })
-    .select('*');
+    .select('*')
+    .single();
 
-  if (profileError) console.error(profileError);
+  if (profileError) {
+    console.error('Profile insert error:', profileError);
+    return NextResponse.json(
+      { error: 'Failed to create user profile.' },
+      { status: 500 }
+    );
+  }
 
   return NextResponse.json({ profile });
 }

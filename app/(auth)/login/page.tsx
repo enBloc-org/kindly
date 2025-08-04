@@ -1,6 +1,5 @@
 import { redirect } from 'next/navigation';
 import AuthForm from '../../../components/AuthForm';
-import Link from 'next/link';
 import newServerClient from '@/supabase/utils/newServerClient';
 import { getProfile } from '@/supabase/models/getProfile';
 
@@ -34,22 +33,14 @@ export default function Login({
   };
 
   return (
-    <div className='flex flex-col  items-center  px-8'>
+    <div className='flex flex-col items-center py-12 '>
+      <h2 className='text-5xl font-medium text-base-110'>Log in</h2>
       <AuthForm
         onSubmit={signIn}
-        buttonText='LOG IN'
+        buttonText='Log in'
         searchParams={searchParams}
         isSignUp={false}
       />
-      <p className='text-md mt-5'>
-        Not a member yet sign up{' '}
-        <Link href='/signup'>
-          <span className='text-primaryGreen'>here</span>
-        </Link>
-      </p>
-      <Link href='/login/forgot-password'>
-        <span className='mt-2 text-sm text-primaryGreen'>Forgot Password</span>
-      </Link>
     </div>
   );
 }
