@@ -13,6 +13,8 @@ import {
 } from '../../utils/formatTimeStamp';
 import newClient from '@/supabase/utils/newClient';
 import SystemMessageCard from './SystemMessageCard';
+import ConversationHeader from './ConversationHeader/ConversationHeader';
+import useMediaQuery from '../hooks/useMediaQuery';
 
 const CurrentConversation: React.FC = () => {
   const {
@@ -25,6 +27,7 @@ const CurrentConversation: React.FC = () => {
   const [systemUser, setSystemUser] = useState<string | undefined>(undefined);
   const chatWindowRef = useRef<HTMLDivElement>(null);
   const supabase = newClient();
+  const isBreakPoint = useMediaQuery(1024);
 
   useEffect(() => {
     const getSystemUser = async () => {
@@ -130,6 +133,11 @@ const CurrentConversation: React.FC = () => {
 
   return (
     <div className='message-card-container flex flex-1 flex-col justify-between bg-[#fafaf9] shadow-inner'>
+      {isBreakPoint && (
+        <ConversationHeader
+          partnerName={currentConversation?.partner_username as string}
+        />
+      )}
       <div
         className='relative flex h-full flex-col-reverse overflow-y-auto overflow-x-hidden'
         ref={chatWindowRef}

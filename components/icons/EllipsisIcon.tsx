@@ -17,9 +17,9 @@ const EllipsisIcon: React.FC<EllipsisIconProps> = ({ width, height }) => {
         strokeLinejoin='round'
         strokeWidth='1.5'
       >
-        <circle cx='2.5' cy='8' r='.75' />
+        <circle cx='8' cy='2.5' r='.75' />
         <circle cx='8' cy='8' r='.75' />
-        <circle cx='13.5' cy='8' r='.75' />
+        <circle cx='8' cy='13.5' r='.75' />
       </g>
     </svg>
   );
