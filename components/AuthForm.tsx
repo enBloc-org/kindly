@@ -90,8 +90,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
         return;
       }
       setUser(userProfile);
-      console.log('User profile:-------->', userProfile);
-
       if (!isSignUp) {
         router.push('/');
       }
