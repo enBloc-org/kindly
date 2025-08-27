@@ -9,8 +9,10 @@ export default function SignUp({
   searchParams: { message: string; confirm: string };
 }) {
   const [email, setEmail] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const signUp = async (formData: FormData) => {
+    setErrorMessage(null);
     try {
       const response = await fetch('api/signup', {
         method: 'POST',
@@ -25,25 +27,31 @@ export default function SignUp({
         }),
       });
 
-      if (response.redirected) {
-        window.location.href = response.url;
+      const result = await response.json();
+
+      if (!response.ok) {
+        setErrorMessage(result.error || 'Unexpected error occurred');
+        return undefined;
       }
 
-      setEmail(formData.get('email') as string);
-      const { profile } = await response.json();
-      return profile;
+      setEmail(result.profile?.email);
+      return result.profile;
     } catch (error) {
-      console.error(error);
+      console.error('Signup error:', error);
+      setErrorMessage('An error occurred during sign up. Please try again.');
+      return undefined;
     }
   };
 
   return (
-    <div className=' flex flex-col  items-center  px-8  '>
-      {email !== '' && <SignupConfirmationPopup targetEmail={email} />}
+    <div className='flex flex-col items-center py-12'>
+      <h2 className='text-5xl font-medium text-base-110'>Sign up</h2>
+      {email && <SignupConfirmationPopup targetEmail={email} />}
       <AuthForm
         onSubmit={signUp}
-        buttonText='REGISTER'
-        searchParams={searchParams}
+        buttonText='Sign up'
+        searchParams={{ ...searchParams, message: errorMessage ?? '' }}
+        externalErrorMessage={errorMessage}
         isSignUp={true}
       />
     </div>

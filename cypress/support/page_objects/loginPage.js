@@ -2,7 +2,7 @@ import BasePage from './basePage';
 
 export class LoginPage extends BasePage {
   loginButton() {
-    return cy.get('button').contains('LOG IN').should('be.visible');
+    return cy.get('button').contains('Log in').should('be.visible');
   }
 
   emailInput() {
